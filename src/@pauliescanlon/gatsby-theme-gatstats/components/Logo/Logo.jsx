@@ -31,7 +31,7 @@ export const Logo = () => (
         }}
         cx="23"
         cy="24.5"
-        r="8"
+        r="7"
       />
     </svg>
   </Link>
