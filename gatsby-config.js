@@ -15,7 +15,7 @@ module.exports = {
       "Node.js",
     ],
     siteURL: "https://paulie.dev",
-    siteImage: "gatstats_1080x608.jpg",
+    siteImage: "images/gatstats_1080x608.jpg",
     config: {
       headerHeight: 64,
       sideBarWidth: 240,
@@ -23,9 +23,5 @@ module.exports = {
       github: "pauliescanlon",
     },
   },
-  plugins: [
-    {
-      resolve: `@pauliescanlon/gatsby-theme-gatstats`,
-    },
-  ],
+  plugins: [`@pauliescanlon/gatsby-theme-gatstats`],
 }

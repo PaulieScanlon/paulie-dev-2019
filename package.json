@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "develop": "gatsby develop",
+    "clean": "gatsby clean",
     "start": "gatsby develop",
     "build": "gatsby build"
   },
   "dependencies": {
-    "@pauliescanlon/gatsby-theme-gatstats": "^0.0.31",
+    "@pauliescanlon/gatsby-theme-gatstats": "^0.0.34",
     "gatsby": "^2.18.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
