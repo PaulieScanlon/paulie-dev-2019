@@ -1,0 +1,28 @@
+---
+title: Embedded Image example
+tags: ["Embedded Images"]
+date: 2019-12-20
+featuredImage: nasa-CpHNKNRwXps-unsplash.jpg
+embeddedImages:
+  - nicolagypsicola-tW_-BwcVzM0-unsplash.jpg
+  - niketh-vellanki-QkSN_8XcXwQ-unsplash.jpg
+---
+
+import { EmbeddedImage } from "@pauliescanlon/gatsby-theme-gatstats/src/components/EmbeddedImage"
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac nunc semper.
+
+<EmbeddedImage
+  src={props.embedded.image1}
+  width={["100%", "75%", "50%", "25%"]}
+/>
+
+Pretium nibh id, porttitor nisl. Integer vitae metus arcu. Etiam ante nisl, ultrices non rutrum eu, porttitor eget diam. Ut venenatis purus ac sapien posuere fermentum. Praesent at lectus venenatis, lacinia tortor in, dignissim mi. Vestibulum mollis purus eu vehicula convallis. Donec ipsum arcu, accumsan vel quam quis, pretium volutpat sapien
+
+<EmbeddedImage
+  src={props.embedded.image2}
+  width="25%"
+  justifyContent="center"
+/>
+
+Pretium nibh id, porttitor nisl. Integer vitae metus arcu. Etiam ante nisl, ultrices non rutrum eu, porttitor eget diam. Ut venenatis purus ac sapien posuere fermentum. Praesent at lectus venenatis, lacinia tortor in, dignissim mi. Vestibulum mollis purus eu vehicula convallis. Donec ipsum arcu, accumsan vel quam quis, pretium volutpat sapien
