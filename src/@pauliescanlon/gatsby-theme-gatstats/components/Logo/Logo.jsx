@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 
 export const Logo = () => (
   <Link to="/">
-    <svg id="demo-logo" x="0px" y="0px" viewBox="0 0 48 48" width="48px">
+    <svg id="demo-logo" x="0px" y="0px" viewBox="0 0 48 48" width="42px">
       <path
         sx={{
           fill: "primary",
