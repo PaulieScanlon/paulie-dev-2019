@@ -9,7 +9,7 @@ export const ProfilePic = () => (
     sx={{
       width: "200px",
       height: "200px",
-      borderWidth: "3px",
+      borderWidth: "4px",
       borderStyle: "solid",
       borderColor: "primary",
       borderRadius: "50%",
