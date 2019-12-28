@@ -1463,10 +1463,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@pauliescanlon/gatsby-theme-gatstats@^0.0.47":
-  version "0.0.47"
-  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-gatstats/-/gatsby-theme-gatstats-0.0.47.tgz#95d599741486874a8a878aa9f49cf5e9ce6004b5"
-  integrity sha512-P/YbbDNB7oJNbTC9Rim79998uQmNe7FA/Q5Iu45ZpESCpK6F8CTEtX/0t+hk9p0PSKQ1Lk0XLRHWXZ8PpzC7oQ==
+"@pauliescanlon/gatsby-theme-gatstats@^0.0.48":
+  version "0.0.48"
+  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-gatstats/-/gatsby-theme-gatstats-0.0.48.tgz#87d82e9f5ec962aa24e2ac99f4b477e9a6c47db2"
+  integrity sha512-pPcsjs0kmO9VQoodB/D5ATrTYXnOf5eHS4dykhyZrixPVIcgNrVq2R9mEj5Oh53tfO1wSjPdBpE3f9hKRtpe0Q==
   dependencies:
     "@emotion/core" "^10.0.27"
     "@mdx-js/mdx" "^1.5.1"
