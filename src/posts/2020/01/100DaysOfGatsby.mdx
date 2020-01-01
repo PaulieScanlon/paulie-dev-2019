@@ -1,0 +1,38 @@
+---
+title: 100DaysOfGatsby
+tags: ["gatsbyJs"]
+date: 2020-01-01
+featuredImage: 100DaysOfGatsby.jpg
+---
+
+# 1
+
+#### Jan 1 2020
+
+Today is the first day of [#100DaysOfGatsby](https://twitter.com/hashtag/100DaysOfGatsby) and since i already have a blog in place i think i'm gonna just continue working on my various Gatsby projects and try to write a bit each day and then see where i'm at in 100 days.
+
+I currently have a number of Gatsby plugin projects all on npm but all in various states of completeness, these are:
+
+- [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats)
+- [gatsby-remark-sticky-table](https://github.com/PaulieScanlon/gatsby-remark-sticky-table)
+- [gatsby-remark-grid-system](https://github.com/PaulieScanlon/gatsby-remark-grid-system)
+- [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes)
+- [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed)
+
+Today i've pushed a fairly stable commit to [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) which i think pretty much solves the twitter, instagram and flickr embed problem. I'm not gonna release this to npm just yet as i've done with previous plugins because i'd like to get this properly tested and converted to TypeScript first.
+
+[gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) is first and foremost an `MdxProvider` and when used in a Gatsby project along side `.mdx` it'll allow for media embed codes to be used without import by using the `MdxProvider` and it's `component` prop.
+
+So far so good and i have the first 8 components in and working, although the instagram one seems a little flakey on iOS.
+
+Lessons learned today are similar to issues i've experienced before regarding `gatsby-ssr` and `gatsby-browser`. Or more specifically the problems when attempting to use both together to accomplish similar things.
+
+ie. if `gatsby-browser` relies on something that `gatsby-ssr` is gonna do which might not run synchronously it was worth trying to get `gatsby-browser` to all the heavy lifting.
+
+In the case of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) it was because i was using `gatsby-ssr` to inject the relevent provider scripts into the `<head>` and then using `gatsby-browser` to invoke them. This wasn't really working so making the `<script>` tags and apending them to `<head>` AND then invoking them from `gatsby-browser` proved more solid.
+
+I'd really like to solve the instagram problem before moving on much further but getting the project converted to Typescript and then installing [Storybook](https://storybook.js.org/) sounds like it's gonna be way more fun.
+
+I plan to open up and document a load of props to make each component more useful, adding widths to videos and or aspect ratios etc would be really cool. I haven't set up a TypeScript / Storybook repo for a while so this should be fun!
+
+Once i'm happy [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) is pretty solid i'm gonna switch out the temporary `Tweet` and `YouTube` components i hacked together in my theme [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats)
