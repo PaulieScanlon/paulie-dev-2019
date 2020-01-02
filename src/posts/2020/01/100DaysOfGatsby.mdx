@@ -5,6 +5,16 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+# 2
+
+#### Jan 2 2020
+
+Started this morning by fixing a bug with [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats). Part of the [dashboard](https://gatsby-theme-gatstats.netlify.com/) has a **Posts** chart displaying information gathered from the previous year and current years posts. I wasn't correctly checking that the chart would render correctly if there were no posts for the current year.
+
+I've also noticed another bug which is the chart max range needs to be calculated from grabbing the highest count value from both of the year data arrays. I was previously only checking the current year data and creating the range from the hightest count value in that year but it's quite possible that the previous year will have a higher count meaning the line chart will get cut off.
+
+I also need to investigate anchor tags in the theme so that they don't always take on the styling for `<a>` if nested within an `<h1>` This will come in handy should i want to add anchor tags to each heading from this 100DaysOfGatsby post.
+
 # 1
 
 #### Jan 1 2020
@@ -36,3 +46,5 @@ I'd really like to solve the instagram problem before moving on much further but
 I plan to open up and document a load of props to make each component more useful, adding widths to videos and or aspect ratios etc would be really cool. I haven't set up a TypeScript / Storybook repo for a while so this should be fun!
 
 Once i'm happy [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) is pretty solid i'm gonna switch out the temporary `Tweet` and `YouTube` components i hacked together in my theme [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats)
+
+I'm gonna use this post as a kind of journal and update each day with things i'm working on of things i'm thinking about and would like to create more in depth posts for topics that warrant further explanation.
