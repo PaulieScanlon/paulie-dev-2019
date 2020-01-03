@@ -5,6 +5,67 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 3](#day-3)
+
+##### Jan 3 2020
+
+This post is starting to feel like an agile standup so perhaps i'll treat it like one.
+
+###### Yesterday
+
+After writing yesterdays blog post i had a think about how i was gonna handle the headings with nested `<a>` styling in [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) which was actually pretty easy. I'm using [theme-ui](https://theme-ui.com/) for everything so a little update to my headings object to style the child `<a>` was all that was needed.
+
+```js
+const headings = {
+  ...
+  a: {
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
+    color: 'inherit'
+  }
+}
+```
+
+Next i looked at how these `#` achors should work. Typically in a site the browser jumps to where the `#` starts when clicked and if a link is shared with a `#` as part of the url when the page loads it'll move the page so the `#` link is at the top.
+
+For this to work in my theme i needed to look at the `gatsby-browser` api. There's two methods that were required to make this to work.
+
+- [onRouteUpdate](https://www.gatsbyjs.org/docs/browser-apis/#onRouteUpdate) which is called when a user changes routes, and also called when an `<a>` is clicked (if it has a `#`)
+- [shouldUpdateScroll](https://www.gatsbyjs.org/docs/browser-apis/#shouldUpdateScroll) which allows us to influence the scroll position of the browser on load and also it would seem between route changes.
+
+The main guts of this functionality is wrapped up in a little function i created in `gatsby-browser` which is called by both of the above methods.
+
+```js
+const anchorScroll = location => {
+  if (location && location.hash) {
+    const item = document.querySelectorAll(`a[href^="${location.hash}"]`)[0]
+      .offsetTop
+    const mainNavHeight = document.querySelector(`header`).offsetHeight
+    setTimeout(() => {
+      window.scrollTo({
+        top: item - mainNavHeight,
+        behavior: "smooth",
+      })
+    }, 50)
+  }
+}
+```
+
+In short all this is doing is finding the `<a>` element that contains the `#` which is found from the url / `location.hash` then scrolls to it. There's an offset in there because [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) has a position fixed header so i needed to calculate the top postion minus the height of the header so the selected `#` isn't under the header when the browser scrolls to it.
+
+This all works well but i'm a little worried about my choice to use the native `window.scrollTo` method with `behaviour: "smooth"` as some older browsers don't support this so if you're using IE 11 (🤢) can you let me know if it still works as intended?
+
+I also had a little bit of twitter activity yesterday from a new user of [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) who tweeted to ask me how to do something. He said he didn't want to raise as issue as he thought it was more him not knowing how to do it rather than it being a bug. My reply "was go ahead, raise an issue" Reason being is that if he's had problems with this particular "thing" then perhaps i should explain it better in the README so others don't have the same question.
+
+I'm pretty new to open source and [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) is the first real project i've had where users are getting in touch and / or rasing issues on GitHub. I think it's fantastic to be honest as it's quite difficult to know how your project will be used and whilst i tried to think of everything i know i've missed things so having other users point this out and let me know means i get to change and improve the project ... it's a win, win!
+
+###### Today
+
+Today i really want to focus on [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and get this converted to TypeScript and perhaps get Storybook setup.. but i do like the idea of using a Gatsby project to use as a documentation site so i'll probably have google around and see what's out there.
+
+I'm also thinking in the background about the subjects i'm covering on this "standup" style post and which ones should be promoted to their own blog posts. The `<a>` `#` thing i did yesterday could be a good one to write up but i'm not sure i'll have time. For now at least my main focus is on getting [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) stable and released.
+
 ## [Day 2](#day-2)
 
 ##### Jan 2 2020
