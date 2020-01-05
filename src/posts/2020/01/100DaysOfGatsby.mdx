@@ -5,6 +5,20 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 4](#day-4)
+
+##### Jan 4 2020
+
+Yesterday i spent the morning getting lost in a `docs` rabit hole. I tried numerous documentation themes but all were tripping me up one way or another so i decided to shelve the docs part of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and just get something looking half decent... which led me down another rabbit hole. I had real trouble getting theme-ui and typography treaments to works. I also discovered that behind theme-ui typography is Kyle Mathews who has been creating a ton of them. I kept having the same issue though and that was the body font wasn't being set so i resorted to using emotion core global and css to just set it... again i'll come back to this.
+
+What i was able to do on [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) though was to understand how to create a method for the provider so that once the plugin is installed that's all a user would have to do. It's similar to how `gatsby-plugin-theme-ui` works buy using `gatsby-browser` and `gatsby-ssr` and using the `wrapRootElement` method to inject the MdxProvider.
+
+This i discovered needs to be done in both files and in different ways. in `gatsby-browser` es6 imports work in `gatsby-ssr` you have to use require and node modules exports.
+
+..both are required so that in dev and prod the MdxEmbedProvider wraps the root element. With this now working i'm almost ready for an early release.
+
+...
+
 ## [Day 3](#day-3)
 
 ##### Jan 3 2020
