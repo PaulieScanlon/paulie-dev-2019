@@ -5,6 +5,60 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 5](#day-5)
+
+##### Jan 5 2020
+
+Today i decided to focus on the documention site as i need a `playground` setup so i can test props for each of the `MdxEmbed` components.
+
+Usually in my professional life i'd use [Storybook](https://storybook.js.org/) but since part of [#100DaysOfGatsby](https://twitter.com/hashtag/100DaysOfGatsby) is to learn new things i've gone for using [docz.site](https://www.docz.site/)
+
+It was a bit tricky to setup as i wanted to use [gatsby-theme-docz](https://github.com/doczjs/docz/tree/master/core/gatsby-theme-docz) and i found the documention regarding setup a bit confusing.
+
+None the less it's all looking pretty good now. I might have found a bug with how the plugin options are passed or perhaps in some cases they have to be set in the `doczrc.js` file... who knows, maybe i'll have to live without dark mode on ths one!
+
+The problem i'm currently experiencing is with the `<Props>` component which is one of the [built-in-components](https://www.docz.site/docs/built-in-components) which can create prop tables for my components. What's not initially made clear is that it'll only work if the component in question is local to the `.mdx`. For example `docz` will generate a prop table for `<MyComponent>` it it's in the same **things** folder as `MyMdx.mdx`
+
+```
+ - things
+    MyComponent.js
+    MyMdx.mdx
+
+```
+
+... But it wont work if i move `<MyComponent>` to somehwere else, for example...
+
+```
+- components
+  MyComponent.js
+
+- pages
+  MyMdx.mdx
+
+```
+
+If you want to be able to source files from somehere else you have to set the `src` value in `doczrc.js`
+
+```js
+export default {
+  ...
+  src: './components',
+}
+```
+
+But my docs site and my MdxEmbed project are two different repos linked together by yarn workspaces so i think i need to tell docz to jump up a level to find my components.
+
+```js
+export default {
+  ...
+  src: '../@pauliescanlon/gatsby-mdx-embed/src/components',
+}
+```
+
+Which causes GraphQL to error, presumabley because it can't find what it needs?
+
+I'm currently trying to work out where node thinks the root is and from there i need to refresh my memory about `path.resolve` and `process.cwd` but that sounds like a job for tomorrow!
+
 ## [Day 4](#day-4)
 
 ##### Jan 4 2020
