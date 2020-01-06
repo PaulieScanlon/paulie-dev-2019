@@ -5,6 +5,49 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 6](#day-6)
+
+##### Jan 6 2020
+
+Back to my day job today so i got up early and cracked on with the `docz.site`... and pleased to report i got the `<Props>` component working.
+
+I was on the right track with what i thought the problem was and `docz` can be configured to source files from outside the root directory but this hasn't been documented anywhere.
+
+The problem was twofold.
+
+1. What did node think the root was and what is the correct path to pass to `docz`
+2. How the WT Flip do you pass a path to `docz`
+
+The way to do point 2 is to add `docgenConfig.searchPath` to `doczrc.js` which tells `docz` where to look for component props. You won't find this in their docs but i did find it amongst the [examples](https://github.com/doczjs/docz/blob/master/examples/monorepo-separate-docs/packages/docs/doczrc.js)
+
+```js
+// doczrc.js
+export default {
+  docgenConfig: {
+    searchPath: directoryPath,
+  },
+}
+```
+
+and `directoryPath` is as follows;
+
+```js
+const directoryPath = path.join(
+  process.cwd(),
+  "../@pauliescanlon/gatsby-mdx-embed/src/components"
+)
+```
+
+First i'm using `path.join` to make sure i don't end up with un-wanted `/`'s, then i'm using `process.cwd` which is the node.js method for working out the **C**urrent **W**orking **D**irectory then finallay i go up a level `"../"` and into the yarn workspace where i'm writing my `MdxComponents`
+
+This now means from the `.mdx` file where i'm writing the documentation about the component i can also have a nicely formatted prop table which are the real props defined by `propTypes` in the component file.
+
+You can see the example for the CodePen component [here](https://gatsby-mdx-embed.netlify.com/src-components-code-pen)
+
+Later tonight or early tomorow i'd like to tweak the `docz` theme styles a bit then finally i can crack on with developing the `MdxComponents`
+
+Oh and dark mode now works! 🎉
+
 ## [Day 5](#day-5)
 
 ##### Jan 5 2020
@@ -37,7 +80,7 @@ The problem i'm currently experiencing is with the `<Props>` component which is 
 
 ```
 
-If you want to be able to source files from somehere else you have to set the `src` value in `doczrc.js`
+If you want to be able to source files from somewhere else you have to set the `src` value in `doczrc.js`
 
 ```js
 export default {
