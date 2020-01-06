@@ -23,5 +23,13 @@ module.exports = {
       github: "pauliescanlon",
     },
   },
-  plugins: [`@pauliescanlon/gatsby-theme-gatstats`],
+  plugins: [
+    `@pauliescanlon/gatsby-theme-gatstats`,
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-76055934-4",
+      },
+    },
+  ],
 }
