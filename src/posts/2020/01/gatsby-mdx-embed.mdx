@@ -1,0 +1,34 @@
+---
+title: gatsby-mdx-embed
+tags: ["gatsbyJs", "gatsby-plugin", "gatsby-plugin-mdx"]
+featuredImage: gatsby-mdx-embed.jpg
+date: 2020-01-06
+---
+
+This plugin was inspired by [gatsby-remark-oembed](https://github.com/raae/gatsby-remark-oembed) and similarly provides an easy way to embed media from providers like YouTube, Twitter, etc into your blog **without import**
+
+## [demo](https://gatsby-mdx-embed.netlify.com/)
+
+I'd been playing around with remark parsers for a while but it does seem pertinent that given the rise of `.mdx` **which really does live up to the hype** that some of these remark plugins might soon become redundent since `.mdx` handles the parsing so well.
+
+It also exposes some really cool ways to hook into what's being parsed so we can now almost just think of blog post / markdown the same as we do `.jsx`
+
+Everything is still there from the markdown writing experience but with added React stuff thrown in on top... it's soooo sweet!
+
+The plugin eco-system in Gatsby is really cool, there's a load of things that you can just add to your `gatsby-config.js` that just work!
+
+[gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.com/) aims to do the same. By adding the plugin to your `gatsby-config.js` you're good to go.
+
+It works by wrapping the root element of your site/blog with a custom `MdxProvider` which makes it possible for everything to know what to do should it come across e.g `<YouTube id='123'/>` in your `.mdx`
+
+Most of the providers e.g YouTube make embed-able iFrame type shortcodes and they were quite easy to add to the plugin, the tricky ones where Twitter, Instgram and Flickr.
+
+These providers require you to add some JavaScript to your page. This is all fine but to keep the plugin as easy to install as possible i didn't want to thave to ask users to do too much setup.
+
+So, enter `gatsby-ssr.js` and `gatsby-browser.js` these two files are responsible for doing things behind the scenes if you like which is a perfect place for me to add my little include scripts.
+
+There's also an extra trick i've used which is to search the dom for elements that will require the provder scripts and if they aren't found the provider scripts are injected. So if you're not using embeded Tweets the twitter provider script won't be added to the dom... keeping your site blazing fast!
+
+I'm still very much in development but an early version has been lauched so i'll be keeping an eye on [GitHub](https://github.com/PaulieScanlon/gatsby-mdx-embed) issues and aim to continue working on this plugin.
+
+Happy embedding!
