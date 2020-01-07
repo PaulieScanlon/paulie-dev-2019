@@ -13,7 +13,7 @@ It's a grid system, it's like when you use the [Bootstrap](https://getbootstrap.
 
 ## [demo 🍱](https://gatsby-remark-grid-system.netlify.com/)
 
-As far as i know when writing in markdown this isn't possible as each element, be it a `<p>`, `<img />` etc will always be `display: block` and if thats the case the default behavoir of `html` and `css` means that all elements will most likely be positioned one after the other.
+As far as i know when writing in markdown this isn't possible as each element, be it a `<p>`, `<img />` etc will always be `display: block` and if thats the case the default behavior of `html` and `css` means that all elements will most likely be positioned one after the other.
 
 This is great in a mobile-first world as you don't always have the horizontal space to position elements side by side, but what happens when you do? what happens if you're writing a blog post and have an image and next to it you'd like to write something cool.
 
@@ -21,7 +21,7 @@ This is where having a grid system in markdown can really help.
 
 I looked around for solutions and had in my mind that i'd like the developer experience to be as similar to the `html` way as possible.
 
-For those not familar with Bootstrap, this is what i'm talking about.
+For those not familiar with Bootstrap, this is what i'm talking about.
 
 ```html
 <div class="row">
@@ -36,7 +36,7 @@ The 'children' / the `div` elements inside the row are where we need to apply a 
 
 In the above example we say at the **xs** breakpoint we should be 12 columns wide and at the **sm** breakpoint we should be 6 columns wide.
 
-This only really makes sense if you are familar with a 12 coloum grid system... i'll try and explain.
+This only really makes sense if you are familiar with a 12 column grid system... i'll try and explain.
 
 If 12 = 100%, 6 (which is half of 12 and therefore half of 100) is 50%. This works all the way from 1 to 12.
 
@@ -63,7 +63,7 @@ The x3 colons come from [remark-containers](https://github.com/nevenall/remark-c
 
 In my case i want to catch the first `div` element and add my own class of `row` then catch it's children and add some `col` specific classes.
 
-In the above example you'll see `col|12|6` where col is the class name followed by numbers seperated by the pipe. These are what's used to add the Bootstrap inspired class names.
+In the above example you'll see `col|12|6` where col is the class name followed by numbers separated by the pipe. These are what's used to add the Bootstrap inspired class names.
 
 The above translates to
 

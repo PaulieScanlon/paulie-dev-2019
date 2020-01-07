@@ -9,7 +9,7 @@ featuredImage: 100DaysOfGatsby.jpg
 
 ##### Jan 7 2020
 
-Yesterday was a pretty good day, i was relieved to finally get `docz` setup the way i wanted. I also lauched a very early version of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed). A fellow Gatsby enthusiast who i met at Gatsby Days London [Scott Spence](https://twitter.com/spences10) was keen to try it out... so, here ya go Scott!
+Yesterday was a pretty good day, i was relieved to finally get `docz` setup the way i wanted. I also launched a very early version of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed). A fellow Gatsby enthusiast who i met at Gatsby Days London [Scott Spence](https://twitter.com/spences10) was keen to try it out... so, here ya go Scott!
 
 <Tweet id="PaulieScanlon/status/1214241819397103618" />
 
@@ -48,13 +48,13 @@ const directoryPath = path.join(
 )
 ```
 
-First i'm using `path.join` to make sure i don't end up with un-wanted `/`'s, then i'm using `process.cwd` which is the node.js method for working out the **C**urrent **W**orking **D**irectory then finallay i go up a level `"../"` and into the yarn workspace where i'm writing my `MdxComponents`
+First i'm using `path.join` to make sure i don't end up with un-wanted `/`'s, then i'm using `process.cwd` which is the node.js method for working out the **C**urrent **W**orking **D**irectory then finally i go up a level `"../"` and into the yarn workspace where i'm writing my `MdxComponents`
 
 This now means from the `.mdx` file where i'm writing the documentation about the component i can also have a nicely formatted prop table which are the real props defined by `propTypes` in the component file.
 
 You can see the example for the CodePen component [here](https://gatsby-mdx-embed.netlify.com/src-components-code-pen)
 
-Later tonight or early tomorow i'd like to tweak the `docz` theme styles a bit then finally i can crack on with developing the `MdxComponents`
+Later tonight or early tomorrow i'd like to tweak the `docz` theme styles a bit then finally i can crack on with developing the `MdxComponents`
 
 Oh and dark mode now works! 🎉
 
@@ -62,11 +62,11 @@ Oh and dark mode now works! 🎉
 
 ##### Jan 5 2020
 
-Today i decided to focus on the documention site as i need a `playground` setup so i can test props for each of the `MdxEmbed` components.
+Today i decided to focus on the documentation site as i need a `playground` setup so i can test props for each of the `MdxEmbed` components.
 
 Usually in my professional life i'd use [Storybook](https://storybook.js.org/) but since part of [#100DaysOfGatsby](https://twitter.com/hashtag/100DaysOfGatsby) is to learn new things i've gone for using [docz.site](https://www.docz.site/)
 
-It was a bit tricky to setup as i wanted to use [gatsby-theme-docz](https://github.com/doczjs/docz/tree/master/core/gatsby-theme-docz) and i found the documention regarding setup a bit confusing.
+It was a bit tricky to setup as i wanted to use [gatsby-theme-docz](https://github.com/doczjs/docz/tree/master/core/gatsby-theme-docz) and i found the documentation regarding setup a bit confusing.
 
 None the less it's all looking pretty good now. I might have found a bug with how the plugin options are passed or perhaps in some cases they have to be set in the `doczrc.js` file... who knows, maybe i'll have to live without dark mode on ths one!
 
@@ -79,7 +79,7 @@ The problem i'm currently experiencing is with the `<Props>` component which is 
 
 ```
 
-... But it wont work if i move `<MyComponent>` to somehwere else, for example...
+... But it wont work if i move `<MyComponent>` to somewhere else, for example...
 
 ```
 - components
@@ -108,7 +108,7 @@ export default {
 }
 ```
 
-Which causes GraphQL to error, presumabley because it can't find what it needs?
+Which causes GraphQL to error, presumably because it can't find what it needs?
 
 I'm currently trying to work out where node thinks the root is and from there i need to refresh my memory about `path.resolve` and `process.cwd` but that sounds like a job for tomorrow!
 
@@ -116,9 +116,9 @@ I'm currently trying to work out where node thinks the root is and from there i 
 
 ##### Jan 4 2020
 
-Yesterday i spent the morning getting lost in a `docs` rabit hole. I tried numerous documentation themes but all were tripping me up one way or another so i decided to shelve the docs part of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and just get something looking half decent... which led me down another rabbit hole. I had real trouble getting theme-ui and typography treaments to works. I also discovered that behind theme-ui typography is Kyle Mathews who has been creating a ton of them. I kept having the same issue though and that was the body font wasn't being set so i resorted to using emotion core global and css to just set it... again i'll come back to this.
+Yesterday i spent the morning getting lost in a `docs` rabbit hole. I tried numerous documentation themes but all were tripping me up one way or another so i decided to shelve the docs part of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and just get something looking half decent... which led me down another rabbit hole. I had real trouble getting theme-ui and typography treatments to works. I also discovered that behind theme-ui typography is Kyle Mathews who has been creating a ton of them. I kept having the same issue though and that was the body font wasn't being set so i resorted to using emotion core global and css to just set it... again i'll come back to this.
 
-What i was able to do on [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) though was to understand how to create a method for the provider so that once the plugin is installed that's all a user would have to do. It's similar to how `gatsby-plugin-theme-ui` works buy using `gatsby-browser` and `gatsby-ssr` and using the `wrapRootElement` method to inject the MdxProvider.
+What i was able to do on [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) though was to understand how to create a method for the provider so that once the plugin is installed that's all a user would have to do. It's similar to how `gatsby-plugin-theme-ui` works by using `gatsby-browser` and `gatsby-ssr` and using the `wrapRootElement` method to inject the MdxProvider.
 
 This i discovered needs to be done in both files and in different ways. in `gatsby-browser` es6 imports work in `gatsby-ssr` you have to use require and node modules exports.
 
@@ -148,7 +148,7 @@ const headings = {
 }
 ```
 
-Next i looked at how these `#` achors should work. Typically in a site the browser jumps to where the `#` starts when clicked and if a link is shared with a `#` as part of the url when the page loads it'll move the page so the `#` link is at the top.
+Next i looked at how these `#` anchors should work. Typically in a site the browser jumps to where the `#` starts when clicked and if a link is shared with a `#` as part of the url when the page loads it'll move the page so the `#` link is at the top.
 
 For this to work in my theme i needed to look at the `gatsby-browser` api. There's two methods that were required to make this to work.
 
@@ -173,9 +173,9 @@ const anchorScroll = location => {
 }
 ```
 
-In short all this is doing is finding the `<a>` element that contains the `#` which is found from the url / `location.hash` then scrolls to it. There's an offset in there because [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) has a position fixed header so i needed to calculate the top postion minus the height of the header so the selected `#` isn't under the header when the browser scrolls to it.
+In short all this is doing is finding the `<a>` element that contains the `#` which is found from the url / `location.hash` then scrolls to it. There's an offset in there because [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) has a position fixed header so i needed to calculate the top position minus the height of the header so the selected `#` isn't under the header when the browser scrolls to it.
 
-This all works well but i'm a little worried about my choice to use the native `window.scrollTo` method with `behaviour: "smooth"` as some older browsers don't support this so if you're using IE 11 (🤢) can you let me know if it still works as intended?
+This all works well but i'm a little worried about my choice to use the native `window.scrollTo` method with `behavior: "smooth"` as some older browsers don't support this so if you're using IE 11 (🤢) can you let me know if it still works as intended?
 
 I also had a little bit of twitter activity yesterday from a new user of [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) who tweeted to ask me how to do something. He said he didn't want to raise as issue as he thought it was more him not knowing how to do it rather than it being a bug. My reply "was go ahead, raise an issue" Reason being is that if he's had problems with this particular "thing" then perhaps i should explain it better in the README so others don't have the same question.
 
@@ -219,9 +219,9 @@ So far so good and i have the first 8 components in and working, although the in
 
 Lessons learned today are similar to issues i've experienced before regarding `gatsby-ssr` and `gatsby-browser`. Or more specifically the problems when attempting to use both together to accomplish similar things.
 
-ie. if `gatsby-browser` relies on something that `gatsby-ssr` is gonna do which might not run synchronously it was worth trying to get `gatsby-browser` to all the heavy lifting.
+ie. if `gatsby-browser` relies on something that `gatsby-ssr` is gonna do which might not run synchronously. I made a change and it was worth the effort now `gatsby-browser` does all the heavy lifting things are working much better.
 
-In the case of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) it was because i was using `gatsby-ssr` to inject the relevent provider scripts into the `<head>` and then using `gatsby-browser` to invoke them. This wasn't really working so making the `<script>` tags and apending them to `<head>` AND then invoking them from `gatsby-browser` proved more solid.
+In the case of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) it was because i was using `gatsby-ssr` to inject the relevant provider scripts into the `<head>` and then using `gatsby-browser` to invoke them. This wasn't really working so making the `<script>` tags and appending them to `<head>` AND then invoking them from `gatsby-browser` proved more solid.
 
 I'd really like to solve the instagram problem before moving on much further but getting the project converted to Typescript and then installing [Storybook](https://storybook.js.org/) sounds like it's gonna be way more fun.
 
