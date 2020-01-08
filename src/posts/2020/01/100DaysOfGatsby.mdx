@@ -5,6 +5,54 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 8](#day-8)
+
+##### Jan 8 2020
+
+Last night i carried on working on [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed), made some tweaks to the `docz` theme and found a list of "providers" that are supported by oEmbed.
+
+There where two that caught my eye, _SoundCloud_ and _Gist_. SoundCloud was pretty straight forward as it's a very similar method to how _YouTube_ and _Vimeo_ so that was no problem.
+
+This morning i moved on to Gists.
+
+I Googled around to see if there were any existing React repos and found these two... so thanks [Christian Korndörfer](https://github.com/schnubor) and [Miroslav Saračević](https://github.com/msaracevic)
+
+The main bit that i didn't initially understand was how to handle the `JSON` callback.
+
+If we start with a typical Gist URL and run it, you'll hit the [https://gist.github.com/](https://gist.github.com/)
+
+```js
+https://gist.github.com/PaulieScanlon/ca0cc9239176066492cb2aba435edbf7
+```
+
+To provide a callback we can add on `gist_callback` i Googled around for how to add the callback for ages and found no official docs, just examples of how others have done this.
+
+```js
+?gist_callback_ca0cc9239176066492cb2aba435edbf7
+```
+
+This is now the complete URL.
+
+```js
+https://gist.github.com/PaulieScanlon/ca0cc9239176066492cb2aba435edbf7?callback=gist_callback_ca0cc9239176066492cb2aba435edbf7
+```
+
+The last step was to inject a `<script>` tag with the URL in a `useEffect` life-cycle method, create a function on the window object called `gist_callback_ca0cc9239176066492cb2aba435edbf7` then investigate the response.
+
+The response comes back with a `div` object which contains all the HTML for the Gist which can be handled by `dangerouslySetInnerHTML`
+
+```js
+<div dangerouslySetInnerHTML={{ __html: response.div }} />
+```
+
+...and a `stylesheet` object which in turn needs to be injected into the page in a `<link>` tag.
+
+With both of those things done Gists are now embedd-able!
+
+I need to do a bit more work on handling errors but i've bundled it up and Gists are now part of `v0.0.4`
+
+Happy Embedding! 🧼
+
 ## [Day 7](#day-7)
 
 ##### Jan 7 2020
