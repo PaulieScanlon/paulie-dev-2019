@@ -5,6 +5,54 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 9](#day-9)
+
+##### Jan 9 2020
+
+I had a productive morning this morning and have added _Twitch_ to the list of components [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) supports.
+
+While i was digging around the Twitch embed code i noticed the **skip to** option which allows you to embed a video and start it a certain point. This seems like a pretty useful thing to include so i added it as an optional prop along with auto play.
+
+The way Twitch handles the time code is by having the following parameters as part of the URL.
+
+```js
+&t=0h21m14s
+```
+
+`t` is the time parameter which accepts a numerical value followed by the time digit `h` for hours, `m` for minutes and `s` for seconds. I've exposed a `skipTo` prop on the Twitch component so you can pass through a time-code.
+
+```js
+skipTo={{ h: 0, m: 21, s: 14 }}
+```
+
+I then thought i'd add this to the _YouTube_ component, but YouTube do the time-code a different way.
+
+The URL parameter looks like this
+
+```js
+&start=1274
+```
+
+After doing a bit of maths i realized the time-code is the total minutes from the start of the video. I wanted to keep the props the same as i've done with Twitch so i needed to calculate the total time before i pass it on to the URL.
+
+```js
+const { h, m, s } = skipTo
+
+const tH = h * 60
+const tM = m * 60
+
+const startTime = tH + tM + s
+// startTime = 1274
+```
+
+First i de-structure the `h`, `m` and `s` from the `skipTo` object then multiply `h` by 60 and also `m` by 60, you don't need to do it for seconds as the `start` time is in minutes.
+
+Then the last step is to add these all together to create something the YouTube URL understands.
+
+I've also added the same prop to Vimeo, and luckily it handles the time-code in a very similar way to Twitch so not much work needed to be done on that.
+
+This is now available in `v0.0.6` of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed)
+
 ## [Day 8](#day-8)
 
 ##### Jan 8 2020
