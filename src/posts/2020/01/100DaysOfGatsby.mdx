@@ -5,6 +5,22 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 11](#day-11)
+
+##### Jan 11 2020
+
+It's Saturday and i didn't have a lot of time today. I did continue working on the Dropbox _Chooser_ component but i think i need to shelve development on this for the time being.
+
+After making good progress i noticed that in order to get it hooked up i'd need to inject the script for each and every _Chooser_ button.
+
+The repercussions are that this could really affect page load speed and that really goes against what i'm trying to achieve with this plugin
+
+I've pushed a branch so i can keep my work but for now i'm going to move on to something else.
+
+I've since gone back to my list of oEmbed providers and have decided to focus on a _Wikipedia_ component. It feels like it could be useful and the [api](https://en.wikipedia.org/w/api.php) looks to be well documented.
+
+Upon initial inspection i think the best course of action is to `fetch` the "page" from the Wiki api, then render the response using `dangerouslySetInnerHTML`. I'll see how it goes and no doubt report back tomorrow.
+
 ## [Day 10](#day-10)
 
 ##### Jan 10 2020
@@ -105,7 +121,7 @@ The response comes back with a `div` object which contains all the HTML for the 
 
 ...and a `stylesheet` object which in turn needs to be injected into the page in a `<link>` tag.
 
-With both of those things done Gists are now embedd-able!
+With both of those things done Gists are now embed-able!
 
 I need to do a bit more work on handling errors but i've bundled it up and Gists are now part of `v0.0.4`
 
