@@ -5,6 +5,43 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 12](#day-12)
+
+##### Jan 12 2020
+
+Today i continued to work on the _Wikipedia_ component and have a new method in place for querying the Wiki api. The new method uses the fetch api which has cleaned things up a lot and means there's less JavaScript being injected into the page but the thing that's stumped me now is that the response i'm getting using this approach no longer returns a stylesheet.
+
+I can render the page data but the content picks up the styles from the `docz` site rather than the usual Times New Roman style from Wikipedia that we are familiar with.
+
+There are alternative methods documented in the Wikipedia api for fetching the css but i'm having trouble getting both the stylesheet and the data in the same response. I'll just have to keep digging!
+
+The other issue i encountered was that the api response returns _All_ links as relative. For instance for my test page i'm querying "The_Jimi_Hendrix_Experience" and the `href`'s that are returned look like this
+
+```html
+wiki/The_Jimi_Hendrix_Experience
+```
+
+when in fact they need to be prefixed with `https://en.wikipedia.org/`
+
+```html
+https://en.wikipedia.org/wiki/The_Jimi_Hendrix_Experience
+```
+
+using a regex pattern i'm replacing everything that has `wiki` in the href with the url.
+
+I've never really understood regex but i did spend some time reading, watching and learning about the bits i needed.
+
+Here's the final regex pattern `/<a href="\/w/g` which when used in the response looks like this
+
+```js
+text["*"].replace(
+  /<a href="\/w/g,
+  '<a target="_blank" href="//en.wikipedia.org/w'
+)
+```
+
+I added the `target="_blank"` as it feels like a better option for users, perhaps i'll turn this into a prop but it works like a charm so i'm happy to move forward.
+
 ## [Day 11](#day-11)
 
 ##### Jan 11 2020
