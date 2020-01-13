@@ -5,6 +5,22 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 13](#day-13)
+
+##### Jan 13 2020
+
+This morning i continued to work on the _Wikipedia_ component and switched to using the wikipedia [rest_v1](https://en.wikipedia.org/api/rest_v1/) api
+
+I had a little trouble with the response, i was parsing `response.json()` but i needed `response.text()`
+
+This can now be injected into the `srcDoc` of an `iframe` which retains all the wikipedia styles but has created a new problem.
+
+The `iframe` now needs some dimensions. By default i'm setting the width as 100% and i'm allowing for a height prop which means control of the height is handed over to whoever is using this component in their `.mdx`
+
+I think this will be enough for now and should i get any issues on [GitHub](https://github.com/PaulieScanlon/gatsby-mdx-embed/issues) i'll deal with them when they arise.
+
+oh, and here's a [demo](https://gatsby-mdx-embed.netlify.com/src-components-wikipedia) of the finished component.
+
 ## [Day 12](#day-12)
 
 ##### Jan 12 2020
