@@ -5,13 +5,31 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 15](#day-15)
+
+##### Jan 15 2020
+
+I spent some of the morning updating prop names and continued to work on two new components, `<TwitterTimeline />` and `<TwitterList />` and i really like the Twitter method for handling embeds!
+
+The method i've used to inject the Twitter embed script remains in tact and all the other Twitter embeds work without any additional _injecting_, which leaves me time to just develop the components and ponder about what to name the props.
+
+At this point i was really regretting not implementing TypeScript 😞. I use TypeScript for my day job and in my bigger projects like [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) and developing without it feels like being nude and leaving the house.
+
+As development continued i'd been wondering if [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) was going to need TypeScript because `PropTypes` kinda has my back but i'm now feeling really un-easy with working towards a stable release without it so implementing it now is an absolute must.
+
+This evening i've refactored everything and [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) is now TypeScript enabled 🎉🥳.
+
+It feels like a massive relief to know that's sorted and it wasn't too much of pain to setup. `docz` did give me a few headaches with it not generating the prop table from the TypeScript interface... until i discovered that i needed to set `typescript: true` in the `doczrc.js`
+
+With TypeScript now in place i'm more comfortable with continuing to develop components and perhaps `1.0.0` will happen sooner than expected.
+
 ## [Day 14](#day-14)
 
 ##### Jan 14 2020
 
-Last night i started to implement Twitter buttons and hit a naming issue. I'd previously named the components after the provider they represent. In the case of a Tweet this is fine because a Tweet is a unique _thing_ but what do i do with a hashtag button?
+Last night i started to implement Twitter buttons and hit a naming issue. I'd previously named the components after the provider they represent. In the case of a Tweet this is fine because a Tweet is a unique _thing_ but, what do i do with a hashtag button?
 
-Twitter isn't the only provider tha uses the hashtag paradigm and so I've had to start thinking about prefixing names to allow for this plugin to scale. Maybe at some point i'll be able to introduce an Instagram hashtag button. 🤷‍♂️
+Twitter isn't the only provider tha uses the hashtag paradigm and so i've had to start thinking about prefixing names to allow for this plugin to scale. Maybe at some point i'll be able to introduce an Instagram hashtag button. 🤷‍♂️
 
 This led me on to the next problem. Props!
 
@@ -25,7 +43,7 @@ I was trying with [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx
 
 On some components like YouTube the `id` is the video id and that's how YouTube refer to it but, in a Tweet for instance i need the prop to be less ambiguous.
 
-I had some interesting Tweets back and forth with [@AskGatsbyJS](https://twitter.com/AskGatsbyJS) and [John Otander](https://twitter.com/4lpine) and the general consensus was in Open Source Libraries it pays to be clear and it doesn't matter that names or prop names are long. I think there's a post or tweet out there by Dan Abramov about how the function names at Facebook are really long, but the upside is it's clear what they do.
+I had some interesting Tweets back and forth with [@AskGatsbyJS](https://twitter.com/AskGatsbyJS) and [John Otander](https://twitter.com/4lpine) and the general consensus was in Open Source Libraries it pays to be clear and it doesn't matter that names or prop names are long. I think there's a post or Tweet out there by Dan Abramov about how the function names at Facebook are really long, but the upside is it's clear what they do.
 
 <Tweet id="4lpine/status/1216821698600681472" />
 
@@ -33,11 +51,11 @@ I've tried to keep some consistency and the `id` paradigm is still in use but no
 
 For components that require more than an `id`, Spotify and Gist for instance where the prop includes a word `tracks` or `album` AND an `id` i've gone with `...Link`. I thought about using `URL` in the prop name but the prop doesn't contain `http` etc so it's not really a URL.
 
-Interestingly though when i have `username` as a prop i don't feel i need to change this to; e.g `twitterUsername`, same thing with the `hashtag` prop. If you're using a component that has the provider in the name like `<TwitterHashtagButton />` i hope it's clear that the `hashtag` prop refers to a Twitter hashtag... naming things is hard 😩
+Interestingly though when i have `username` as a prop i don't feel i need to change this to, e.g `twitterUsername`, same thing with the `hashtag` prop. If you're using a component that has the provider in the name like `<TwitterHashtagButton />` i hope it's clear that the `hashtag` prop refers to a Twitter hashtag... naming things is hard 😩
 
-A note on [sem-ver](https://semver.org/spec/v2.0.0.html) strictly speaking these are breaking changes but i feel i can justify not bumping the plugin to a major release version of `1.0.0` because in my mind when a library is only a `0.x.x` to start with it's still a pre-release... even though i have already released it. 🤯
+A note on [sem-ver](https://semver.org/spec/v2.0.0.html). Strictly speaking these are breaking changes but i feel i can justify not bumping the plugin to a major release version of `1.0.0` because in my mind when a library is only at `0.x.x` to start with it's still a pre-release... even though i have already released it. 🤯
 
-I'm not sure if this is a bad thing to do but i feel i'm going to encounter a lot more of these kinds of naming issues before i'm happy to release a stable `1.0.0`.
+I'm not sure if this is a bad thing to do but i suspect i'm going to encounter a lot more of these kinds of naming issues before i'm happy to release a stable `1.0.0`.
 
 I have started a [CHANGELOG](https://github.com/PaulieScanlon/gatsby-mdx-embed/blob/master/%40pauliescanlon/gatsby-mdx-embed/CHANGELOG.md) which should help you fix any issues, and of course the [docz](https://gatsby-mdx-embed.netlify.com/) will always reflect the actual state of the library.
 
