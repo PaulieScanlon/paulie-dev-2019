@@ -5,6 +5,22 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 16](#day-16)
+
+##### Jan 16 2020
+
+This morning i was having a google around and out the corner of my eye i saw a Pinterest logo... _ooh_ i thought, i wonder if Pinterest have embed-able widgets?
+
+They do! so that was me for the next few hours!
+
+[gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) now has three new components for Pinterest.
+
+The standard `<Pin />` where you can embed an image from Pinterest, a `<PinterestFollowButton />` and a `<PinterestBoard />` with an optional prop so you can create a board from a user or a board from a board, if that makes sense.
+
+The inject script works very similarly to Twitter, Instagram and Flickr but i did need to do a little digging into the window object to find the `build()` function. This needs to be called on route change so that any components on the page will execute and display as expected.
+
+This evening i'll be looking at how to make a change to the `docz` theme so i can have nested menus. I have a feeling my old enemy `array.reduce()` may be required and it doesn't matter how many times i read or write an `array.reduce()` i always struggle!
+
 ## [Day 15](#day-15)
 
 ##### Jan 15 2020
