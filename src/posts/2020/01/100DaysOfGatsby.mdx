@@ -5,6 +5,26 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 17](#day-17)
+
+##### Jan 17 2020
+
+This morning i was attempting to work on a recursive submenu solution for the navigation in the `docz` site used by [gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.com/) and as i worked through a solution i thought about how this might make a good blog post.
+
+I then thought, if i start to write the post in this blog the next time i commit and publish that post will also get published.
+
+This blog uses my theme [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) which currently has no way to set a post as draft which would exclude it from being published.
+
+I then worked on my theme and have included a new property in the frontmatter called `status`. If `status` is set to _draft_ the post won't be displayed and none of the charts will attempt to reference it as a data source, thus not skewing your metrics 😎
+
+That issue was raised on GitHub [#26](https://github.com/PaulieScanlon/gatsby-theme-gatstats/issues/26) and now felt like a good time to address it.
+
+I've had another issue raised today too, this time with [gatsby-remark-sticky-table](https://github.com/PaulieScanlon/gatsby-remark-sticky-table) A user wanted to put images in a table cell.
+
+There's probably something funky going on with the way i'm parsing the node to the new markup so i suggested this [solution](https://github.com/PaulieScanlon/gatsby-remark-sticky-table/issues/2) and might investigate this another time.
+
+Right... back to the recursive submenu problem!
+
 ## [Day 16](#day-16)
 
 ##### Jan 16 2020

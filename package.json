@@ -9,7 +9,7 @@
     "build": "gatsby build"
   },
   "dependencies": {
-    "@pauliescanlon/gatsby-theme-gatstats": "^0.0.53",
+    "@pauliescanlon/gatsby-theme-gatstats": "^0.0.54",
     "@theme-ui/components": "^0.2.50",
     "gatsby": "^2.18.5",
     "gatsby-plugin-google-analytics": "^2.1.31",
