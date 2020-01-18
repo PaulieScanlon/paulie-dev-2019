@@ -5,6 +5,22 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 18](#day-18)
+
+##### Jan 18 2020
+
+I did a bit of work this morning on recursive functions to make the navigation in `docz` work for me. Luckily since `docz` is also a Gatsby theme i'm able to tap in to component shadowing. I started by looking at `gatsby-theme-docz/src/components/Sidebar` and investigated the `menu` object.
+
+This, as it stands doesn't have a way to group by submenu but the theme does allow you to add an additional fields to frontmatter.
+
+This is quite key given i need a way to determine if a file is part of a menu as well as part of a submenu.
+
+I've since added a sumbmenu property to the `.mdx` files that i will use to "group by" and have set to work on altering the menu object created by `docz` core and recursively looping over any object that contains a submenu.
+
+Now i have an object that i can use to drive the UI.
+
+I've also been working on another blog post explaining recursive functions and will continue to update it documenting the problem i'm facing and how i intend to solve the `docz` theme submenu problem.
+
 ## [Day 17](#day-17)
 
 ##### Jan 17 2020

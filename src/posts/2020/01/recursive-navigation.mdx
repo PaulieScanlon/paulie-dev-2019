@@ -5,4 +5,107 @@ date: 2020-01-18
 status: "draft"
 ---
 
+import { Flex, Box } from "@theme-ui/components"
+
 # Recursive Navigation
+
+I'm writing this because i hit a problem with the navigation in [gatsby-theme-docz](https://github.com/doczjs/docz/tree/master/core/gatsby-theme-docz). Before i go any further i would just like to say that [gatsby-theme-docz](https://github.com/doczjs/docz/tree/master/core/gatsby-theme-docz) is super brill brills and if you're looking for a way to document your component library `docz` is brilliant.
+
+The only shortcoming i encountered was submenu support... i'll explain. `docz` currently only supports single level nesting, or one level deep on navigation elements in the side bar.
+
+What i really need is multi level nesting. You'll see below in the multi level nesting that *Tweet*, *Timeline* and *TwitterFollowButton* are all nested inside a **Twitter** menu which is itself nested inside the **Components** menu. To achieve this we need to create a recursive function that will understand that when it encounters an object that has more than a single child then it must create a *menu* with child *menu items* and not a child *menu item*
+
+<Flex
+  sx={{flexWrap: 'wrap'}}
+>
+  <Box
+    sx={{
+      width:['100%', '50%' ]
+    }}
+  >
+    <h5>Single level nesting</h5>
+    <ul>
+        <li>Getting Started</li>
+        <li><strong>Components</strong></li>
+        <ul>
+            <li>CodePen</li>
+            <li>CodeSandbox</li>
+            <li>Tweet</li>
+            <li>Timeline</li>
+            <li>TwitterFollowButton</li>
+        </ul>
+        <li>Help</li>
+    </ul>
+  </Box>
+
+  <Box
+    sx={{
+      width:['100%', '50%' ]
+    }}
+  >
+    <h5>Multi level nesting</h5>
+    <ul>
+        <li>Getting Started</li>
+        <li><strong>Components</strong></li>
+        <ul>
+            <li>CodePen</li>
+            <li>CodeSandbox</li>
+            <li><strong>Twitter</strong></li>
+            <ul>
+                <li>Tweet</li>
+                <li>Timeline</li>
+                <li>TwitterFollowButton</li>
+            </ul>
+        </ul>
+        <li>Help</li>
+    </ul>
+  </Box> 
+</Flex>
+
+
+The first part of this is job getting the data in to the correct shape. Currently the data provided by `docz` for my navigation looks like this 👇
+
+
+```js
+{ name: 'Getting Started' },
+{
+    name: 'Components',
+    menu: [
+    { name: 'CodePen' },
+    { name: 'CodeSandbox' },
+    { name: 'Tweet', submenu: 'Twitter' },
+    { name: 'Timeline', submenu: 'Twitter' },
+    { name: 'TwitterFollowButton', submenu: 'Twitter' }
+    ]
+},
+{ name: 'Help' }
+```
+
+By using the `submenu` key i'm able to determine which elements should *grouped* together and can make it look more like this 👇
+
+```js
+{ name: 'Getting Started' },
+{
+    name: 'Components',
+    menu: [
+    { name: 'CodePen' },
+    { name: 'CodeSandbox' },
+    {
+        name: 'Twitter',
+        menu: [
+        { name: 'Tweet', submenu: 'Twitter' },
+        { name: 'Timeline', submenu: 'Twitter' },
+        { name: 'TwitterFollowButton', submenu: 'Twitter' }
+        ]
+    }
+    ]
+},
+{ name: 'Help' }
+
+```
+
+
+To do this i used `array.map()` and `array.reduce()`
+
+This is how we are able to determine when to be recursive. As mentioned earlier when looking at each object we can check to see if it contains an array of children, and if it does then do something different to create another menu.
+
