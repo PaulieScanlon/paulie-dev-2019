@@ -5,6 +5,54 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 21](#day-21)
+
+##### Jan 21 2020
+
+Recursive functions continue once more. I mentioned yesterday about an issue that had been raised with [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes) and after a little digging it think one of the problems can be solved with a recursive function.
+
+There's more on the issue [here](https://github.com/PaulieScanlon/gatsby-mdx-routes/issues/3)
+
+Actually let me start again. [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes) is a little plugin that creates routes and generates navigation labels from `frontmatter` and originally i thought the issue was related to how could routes be grouped into menu headings as per the work i've been doing on the `docz` site but after asking that question it was communicated that wasn't the issue.
+
+While i waited for a response i cracked on with a little enhancement to the `MdxRoutes` component by creating a prop to allow re-ordering of navigation routes.
+
+For instance if you had **Home** , **About** and **Contact** you'd probably want **Home** to be the first route returned but because i wasn't sorting the results they were just returned in alphabetical order.
+
+I thought about having an `ASC` and `DESC` option but that doesn't really solve the problem so i decided upon the reference array option.
+
+Suppose you had a graphQL response that looked a little bit like this 👇
+
+```js
+graphQlData = ["About", "Contact", "Home"]
+```
+
+By providing a `navigationOrder` you can sort like this 👇
+
+```js
+const navigationOrder = ["Home", "About", "Contact"]
+
+graphQlData.sort(
+  (a, b) =>
+    navigationOrder.indexOf(a.navigationLabel) -
+    navigationOrder.indexOf(b.navigationLabel)
+)
+```
+
+Unlike the default method of sorting instead of simply determining if `a - b` we can use the `indexOf` from the `navigationOrder` array which is provided via a prop.
+
+Great i thought, that's that issue closed and released `0.0.5`
+
+But nope. I was notified they'd been a new comment on the issue and it was mentioned again that a new property in `frontmatter` was required to sort the navigation items... "WT Flip" i thought, i've just provided a solution for that.
+
+A few comments later and we have now established that it's both a grouping and an ordering issue.
+
+In the first instance grouping the menus should be managed by a recursive function and not via a property in `frontmatter` and then once they're grouped we can order them before returning.
+
+This does mean however, i'm back in to recursive hell! This time i'm planning on using the `slug` to determine how many levels deep a menu should be grouped.
+
+My initial thoughts are to take the slug. eg `some-folder/some-sub-folder/some-file` and split the string to create an array and then remove any empty space. I hope to use the array length as the condition to stop the recursive function by removing the slug segment on each loop before calling it again... we'll see how it goes!
+
 ## [Day 20](#day-20)
 
 ##### Jan 20 2020
