@@ -5,6 +5,106 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 22](#day-22)
+
+##### Jan 22 2020
+
+Had a pretty sweet day today, i continued working on [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes) and focused on the on the issue i described yesterday which was to enable a way to create a dynamic recursively created navigation object based on slugs... what a mouthful!
+
+Taking a step back for a second i'll describe the problem as i see it.
+
+When creating navigation in any website you need to think about the depths a route might be at.
+
+Example, a top depth navigation might look like this
+
+<!-- prettier-ignore -->
+```
+|-- home
+|-- services
+|-- contact
+```
+
+...which is pretty easy to display an an html list, but then you get to a navigation element that might have a second or third depth, eg;
+
+<!-- prettier-ignore -->
+```
+|-- home
+|-- services
+   |--- web design
+      |-- user interface
+   |--- web development
+      |-- front end
+         |-- mobile first
+      |-- backend
+|-- contact
+```
+
+At this point you need a way to have nested navigation elements within headings, and since you don't know how many levels deep an element might be you need a solution that will cater for an element that could be 10 levels deep.
+
+I've seen a lot of examples of this problem 'solved' by suggesting the use of a frontmatter property that can be used to group menu items together by a parent heading.
+
+If you're creating this in your own project then that's fine, you're in charge of both the frontmatter and the graphQL query that fetches the data... but what if you're not?
+
+You may or may not know that if you add a property to a graphQL static query and that property is not found in at least one file in your file system you get an error.
+
+This is the problem i faced with [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes), if i add a property called `menu` for example, then at least one file in the project must contain it, but if you don't want to group your navigation elements you'd still need to add this property to frontmatter to avoid getting an error.
+
+There are a couple of solutions to this.
+
+- I could create a hidden file somewhere in the plugin that can be used as a place where all frontmatter properties exist but the file is never rendered... 🤢...
+- Set a default using `createSchemaCustomization` in gatsby-node.js ... again 🤢
+
+Until Gatsby resolve what i understand to be a really complicated problem of allowing the graphQL static query to fail gracefully if no frontmatter is found then i'm sticking by my original thoughts.
+
+> "I don't think the answer is to add any additional properties to frontmatter"
+
+Which leaves me with one other option to determine how a navigation element should be grouped... `slugs`
+
+You'll have probably seen when you inspect `slugs` that they represent a location on your file system, the chances are you've put all your blog posts in a `posts` directory in your project, you might have even created sub directories for year and month.
+
+All this information is contained within the `slug` and in effect all we're trying to do in the browser is mirror what your file system is doing.
+
+A visual example....
+
+<!-- prettier-ignore -->
+```
+|-- home
+|-- services
+   |--- web design
+```
+
+Given the above directory structure the `slug`(s) would be as follows;
+
+- home = "/"
+- services = "/services/"
+- web design = "/services/web-design/"
+
+This is all the information we need to determine how many levels deep any given navigation element is... but getting at it was a real challenge for me.
+
+My approach was to split the `slug` using `slug.split("/")`
+
+```js
+;["", ""]
+```
+
+```js
+;["", "services", ""]
+```
+
+```js
+;["", "services", "web-design", ""]
+```
+
+Then i remove the empty strings so i'm just left with what is effectively an array of parents and children.
+
+There is a bit more to it, but the code can be see [here](https://github.com/PaulieScanlon/gatsby-mdx-routes/blob/master/%40pauliescanlon/gatsby-mdx-routes/src/components/MdxRoutes/recursiveMenu.js) if you're interested.
+
+Using this `slug` approach i don't need anyone using this plugin to do anything to their frontmatter, meaning i think this could easily be implemented into a blog / site that had loads of pages just as easily as it could be to a brand new project.
+
+There's more info about how to use this plugin in the [README](https://github.com/PaulieScanlon/gatsby-mdx-routes#gatsby-mdx-routes) and here's a very _computer science_ looking [demo](https://gatsby-mdx-routes.netlify.com/)
+
+Happy routing! 🚌
+
 ## [Day 21](#day-21)
 
 ##### Jan 21 2020
