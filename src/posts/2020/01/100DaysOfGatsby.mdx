@@ -5,6 +5,40 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 23](#day-23)
+
+##### Jan 23 2020
+
+Hmmmm TypeScript! I thought i'd sorted this already but after my old chum [Scott](https://twitter.com/spences10) started using [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) he noticed that he was seeing some TypeScript related issues.
+
+This plugin is written in TypeScript but it should transpile back down to commonjs so you can use it in both TypeScript and JavaScript projects. This wasn't quite the case!
+
+I've since been using [babel](https://babeljs.io/docs/en/v7-migration) and gooooood lord is it great! I've done TypeScript setup in the past and it was always a combination of mashing tsconfig, babel and webpack together until you had a config that worked.
+
+This was always a ball ache because you'd have to maintain both babel and webpack but now i've discovered babel 7 it's got so much easier!
+
+The tsconfig is still a little bit of a mystery to me but the new babel presets make sense, even if you just read them by name it's pretty clear what they do.
+
+```json
+"@babel/preset-env"
+"@babel/preset-react"
+"@babel/preset-typescript"
+```
+
+This is pretty much all that's needed to covert back to browser compatible JavaScript and with only a few settings in tsconfig setup it's just a case of setting the input and output for babel and it goes off and builds out .js modules!
+
+```json
+"build:js": "babel src --out-dir lib --extensions \".js,.ts,.tsx\" --source-maps inline",
+```
+
+This was all going really well until i ran into that `docz` site issue again with it not populating prop tables... gonna come back to that, the more pressing issue is i think i've got some weird Gatsby thing going on.
+
+Babel now coverts all `.ts` to `.js` and moves it in to a lib directory, my package.json has a "main" key which points to this lib directory but for some reason `gatsby-browser.js` and `gatsby-ssr.js` never seem to run.
+
+I've put the word out so hopefully i'll get this resolved soon!
+
+<Tweet id="PaulieScanlon/status/1220394346593296384" />
+
 ## [Day 22](#day-22)
 
 ##### Jan 22 2020
