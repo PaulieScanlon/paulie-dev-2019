@@ -5,6 +5,32 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 24](#day-24)
+
+##### Jan 24 2020
+
+Tricky day today.
+
+On one had it was great, i've got babel and tsconfig playing together nicely and the two combined take my `.tsx` files and output browser friendly .`js`
+
+This is perfect, and now i feel like i have a much better understanding of both tsconfig and babel.
+
+I've also learned that no matter what your "main" key in package.json is doing Gatsby ignores it and _always_ looks to the root of your project for`gatsby-browser`,`gatsby-ssr`and`gatsby-config`. I suspected this was the case but thought that i might be able to work round it.
+
+I've also got both the plugin and demo dev processes working together.
+
+The demo site for [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and the plugin code exist in a monorepo controlled via yarn workspaces.
+
+In order to develop the plugin code i need babel running in `--watch` mode so that when i start the Gatsby develop process both projects hot reload when i make a code change. I was able to accomplish this with `npm-run-all`.
+
+Things were going well until i had to address the docz site propTable issue again and i've spent nearly 8 hours trying to find a way to make it work.
+
+docz site can read props from components in a monorepo if you tell it where to look, naturally it works with React PropTypes and using a boolean in the docz config it can also read TypeScript interfaces and populate propTables.... but no matter what i did today i couldn't get it to work.
+
+I'd all but given up hope until i posted a message on [Spectrum](https://spectrum.chat/docz/general/prop-tables~4956b08a-2ae1-4a35-8d58-645c69f81b40) and watta ya know [Rakan Nimer](https://twitter.com/rakannimer) one of the maintainers has replied.
+
+If you read along that thread he's suggested changing the repo setup. This might mean dropping Yarn workspaces but if that's gonna make these bloody PropsTables work i'm all for it!
+
 ## [Day 23](#day-23)
 
 ##### Jan 23 2020
