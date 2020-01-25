@@ -5,6 +5,30 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 25](#day-25)
+
+Had another day of wins and loses. I got `docz` site prop tables finally working and it's able to read props and prop descriptions from my TypeScript files
+
+but...
+
+only when running in dev.
+
+This is both mad and extremely frustrating!
+
+When i run `gatsby develop` all is well, when i run `gatsby build` then `gatsby serve` i get a flash of prop tables, then nothing.
+
+My current course of investigation is to shadow the `Props` component, work out what it's doing and try and find what feeds it the `props` prop.
+
+I think at the moment this comes from the `docz` core which is not part of the theme so there's nothing i can really do from my end 😢
+
+but...
+
+i've had an idea which involves using the `useDbQuery` hook and passing the props on to the `Props` component manually.
+
+This so far is proving very difficult but using a lot of console logs and a number of JavaScript array methods i think i can manipulate the data into a shape that will work in both dev and prod.
+
+##### Jan 25 2020
+
 ## [Day 24](#day-24)
 
 ##### Jan 24 2020
