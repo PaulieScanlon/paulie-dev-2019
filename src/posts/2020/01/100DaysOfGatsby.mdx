@@ -5,13 +5,90 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 26](#day-26)
+
+##### Jan 26 2020
+
+Pleased to report i had an excellent start to the day!
+
+My investigation into how to solve this `docz` site TypeScript prop tables issue went really well and i found that by shadowing the `Props` component from `gatsby-theme-docz` i was able to re-wire the props to enable correct and full population of the prop table.
+
+This his how i did it.
+
+1. Shadow the `Prop` component by creating a new one in my demo site at `demo/src/gatsby-theme-docz/Props/index.js`
+
+2. Remove the `prop` prop from the component, which i think is actually the `of` prop
+
+3. Create a new prop called `name`
+
+4. import and use the `useDbQuery` hook 🎣
+
+5. Filter the `useDbQuery` by the new `name` prop
+
+6. Pass the result on to the `Prop` component
+
+The new component now looks like this:
+
+```js
+...
+import { useDbQuery } from "gatsby-theme-docz/src/hooks/useDbQuery"
+
+
+export const Props = ({ name, getPropType, isToggle }) => {
+  const db = useDbQuery()
+  const entries = Object.entries(
+    db.props.filter(
+      prop => prop.value.length > 0 && prop.value[0].displayName === name
+    )[0].value[0].props
+  )
+
+  return (
+    <div sx={styles.container} data-testid="props">
+      {entries.map(([key, prop]) => {
+        return (
+          <Prop
+            key={key}
+            propName={key}
+            prop={prop}
+            getPropType={getPropType}
+            isToggle={isToggle}
+          />
+        )
+      })}
+    </div>
+  )
+}
+```
+
+...and to use it i now do this,
+
+```js
+<Props name="Gist" />
+```
+
+instead of this
+
+```js
+<Props of={Gist} />
+```
+
+I'm not sure if this is the best way to make this work but i think until `docz` have a more solid way of creating prop tables for TypeScript components it'll have to do.
+
+I've tested this in `dev` and in `prod` and it works!
+
+So, as of this morning i released `0.0.15` of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) which is fully working with TypeScript and populated prop tables in the [demo site](https://gatsby-mdx-embed.netlify.com/)
+
+🥳
+
 ## [Day 25](#day-25)
+
+##### Jan 25 2020
 
 Had another day of wins and loses. I got `docz` site prop tables finally working and it's able to read props and prop descriptions from my TypeScript files
 
 but...
 
-only when running in dev.
+only when running in `dev` not `prod`!
 
 This is both mad and extremely frustrating!
 
@@ -26,8 +103,6 @@ but...
 i've had an idea which involves using the `useDbQuery` hook and passing the props on to the `Props` component manually.
 
 This so far is proving very difficult but using a lot of console logs and a number of JavaScript array methods i think i can manipulate the data into a shape that will work in both dev and prod.
-
-##### Jan 25 2020
 
 ## [Day 24](#day-24)
 
