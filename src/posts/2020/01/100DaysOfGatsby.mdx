@@ -5,6 +5,26 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 27](#day-27)
+
+##### Jan 27 2020
+
+Another sweet ass day today!
+
+I've refactored [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes) to use TypeScript and now it follows the same yarn workspace pattern as [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) which is important to me as i'm working across multiple projects and just prefer it if they can all be developed the same way.
+
+I did have some problems though. First off i'm not using `babel/preset-env` because Gatsby's static query can't be compiled by in a plugin like i'm doing so i have to just convert my `.ts` to `.js` as ES6.
+
+I imagine when the plugin is used by another Gatsby project the compiling to browser friendly code will be taken care of by the Gatsby project using the plugin. 🤷‍♂️
+
+Once the `.ts` was compiled to `.js` as EE6 i started to see a "multiple graphql query" error, this was because i had named the graphql query and it can't exist in both `.ts` and the compiled `.js` in the same project.
+
+Removing the name of the query cleared this error... not sure if there's a more complicated issue i'm yet to find about using unnamed graphql queries? time will tell.
+
+I also found that using `staticQuery` in `gatsby dev` was fine but when i ran `gatsby build` and `gatsby serve` i was seeing **gatsby Loading (StaticQuery)** instead of the graphql response. I did have a read of some GitHub issues but couldn't find anything solid so just decided i'd just give the new `useStaticQuery` hook a go! and boom 💥 it worked.
+
+[gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes) is now fully converted to TypeScript! ... i've just gotta go back over my code and correctly type everything 😫
+
 ## [Day 26](#day-26)
 
 ##### Jan 26 2020
