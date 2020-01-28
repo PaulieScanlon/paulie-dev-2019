@@ -5,6 +5,38 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 28](#day-28)
+
+##### Jan 28 2020
+
+Today has been pretty chilled. I've solved a lot of the problems with the two main projects i've been working on and i'm happy for them to be used and i'll be keeping an eye out for issues or feature requests which i'll continue to work on as and when.
+
+I'm pretty new to open source and i've gotta say it's pretty cool that people like my stuff enough to use it and to raise issues and contact me on [twitter](https://twitter.com/PaulieScanlon).
+
+I'm enjoying hearing about use cases and in quite a lot of cases i feel these issues are actually really nice improvements... so a big thanks to anyone who i've spoken with lately!
+
+Since there's no fires to put out i decided to kick start another project that's been in the back of my mind for a while. It's quite pertinent to my day job of **developing custom React component libraries - for companies that make bazillions**, and for almost 4 years now my go to, must have tool has been [Storybook](https://storybook.js.org/)
+
+If you've never used Storybook, you should, it's amazing! It's ideal for Component Driven Development as it allows you to just focus in on the one thing you're working on and not worry about the larger application... well some times you might have to consider where the component will end up but usually i aim to solve for the 80% of use cases... but....
+
+One thing missing from Storybook is a method to provide an holistic view of all the props, not just the ones in the component you're developing on that day. The prop tables in Storybook are second to none, don't get me wrong! but you can't easily see the props and prop descriptions you wrote for a similar component four sprints back. To see these i usually open another browser and put the windows / stories side by side, or use the split view option in VS Code.
+
+But this sometimes still isn't good enough.
+
+> #### One important factor in the creation of Component Libraries is api consistency"
+
+By that i mean it's really not good having a prop called `CardHeader` on a `<Card />` component and then having a `PanelHeading` prop on a `<Panel />` component, or worse, a prop that is actually a header / heading but called something completely different.
+
+So i've started to think about writing a plugin that will provide me with a single view of all my props and their descriptions, i'd hope to be able to filter / search, sort and perhaps even spell check all in one place.
+
+The method for delivering this i think at the moment will work very similarly to how Jest create their coverage reports. You run a build on it and it creates a _static_ site right there in your repo, you can of course `.gitignore` the directory or deploy it.
+
+Given that creating static sites is kinda the Gatsby thang, it seems like an obvious choice, but i have run in to one or two problems with it today. Mainly how to create the static build bundle and move it to somewhere more useful... all from the plugin.
+
+I think i'm on the right track and i'm sure i'll have more to say tomorrow.
+
+Toodle-pip!
+
 ## [Day 27](#day-27)
 
 ##### Jan 27 2020
