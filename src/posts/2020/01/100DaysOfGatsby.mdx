@@ -5,6 +5,20 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 33](#day-33)
+
+##### Feb 2 2020
+
+Kind of productive day today. I'm continuing to bug fix [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed).
+
+At this point however i'm not entirely sure there is a bug with my plugin. I've spun up a minimal repo and installed all the relevant peer dependencies and have installed one of the "problem" plugins that was reported to have been causing issues.
+
+So far i can't re-create the problem. Which leads me to believe it's not a problem with my plugin but might be related to having a project that uses multiple `MDXProviders`
+
+I did update the [README](https://github.com/PaulieScanlon/gatsby-mdx-embed/blob/master/README.md) and have explained how to manually wrap the `MDXRenderer` with the `MdxEmbedProvider` which is effectively what the plugin is doing but it does appeat that importing and wrapping manually solves all the problems.
+
+I'll continue to investigate this tomorrow.
+
 ## [Day 32](#day-32)
 
 ##### Feb 1 2020
