@@ -5,6 +5,38 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 32](#day-32)
+
+##### Feb 1 2020
+
+Today was a bug investigation day. I've had two issues raised now relating to [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and what appears to be a "clash of the providers".
+
+The plugin works by wrapping a sites `MDXRenderer` with it's own `MDXProvider`. This provider is called `MdxEmbedProvider`, and is handled by a `gatsby-ssr` method called `wrapRootElement`
+
+This is the core of the plugin and means that by adding `@pauliescanlon/gatsby-mdx-embed` to your `gatsby-config` the plugin can catch any components referenced in `.mdx` files and converts them into the components defined by the plugin.
+
+Unfortunately when other gatsby plugins are used in a site that also use this method it prevents the custom `MdxEmbedProvider` from working correctly.
+
+There is one work around that seems to do the trick and that's to manually wrap the `MDXRenderer` with the custom `MdxEmbedProvider`.
+
+eg:
+
+```js
+// layout.js
+
+<MdxEmbedProvider>
+  <MDXRenderer>{body}</MDXRenderer>
+</MdxEmbedProvider>
+```
+
+This indeed solves the problem but i'm still not sure why when you have multiple plugins that use the `wrapRootElement` you experience these bugs.
+
+While developing the plugin i asked [@chrisbiscardi](https://twitter.com/chrisbiscardi) if he knew of any reason why multiple providers couldn't be used. This was his response.
+
+> Multiple providers will merge the components object. Last provider wins
+
+I'll continue to investigate this bug and hopefully be able to release a new version with a fix in the coming days.
+
 ## [Day 31](#day-31)
 
 ##### Jan 31 2020
