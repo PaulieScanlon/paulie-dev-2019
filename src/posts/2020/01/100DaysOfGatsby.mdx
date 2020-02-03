@@ -5,6 +5,90 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 34](#day-34)
+
+##### Feb 3 2020
+
+A fantastic day today! I've been continuing to problem solve an issue with [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) and i'm pleased to report, it's fixed!
+
+The way the plugin works is by using the `wrapRootElement` api in both `gatsby-browser.js` and `gatsby-ssr.js` which does what it says on the tin and wraps the root element of the site with a component from the plugin.
+
+In the case of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) it's wrapping the root element with the `MdxEmbedProvider`, this in turn wraps the root element with an `MDXProvider` which handles the passing of React components from `.mdx` and executes them so they render in the dom.
+
+In all cases when running `gatsby develop` this "wrapping" was working as expected but users were seeing issues when running `gatsby build`.
+
+I started my bug fixing investigation by adding a `div` with a border around the `MdxEmbedProvider` and found that when i ran `gatsby develop` it was there but not when running `gatsby build`
+
+This explains why users were seeing the problems with the components not rendering as expected but it took a little more investigation to work out why.
+
+It turned out in my case to be the method i was using to export the `MdxEmbedProvider` in `gatsby-browser.js` and `gatsby-ssr.js`
+
+see below
+
+```js
+// gatsby-browser.js
+export { wrapRootElement } from "./wrapRootElement"
+```
+
+```js
+// gatsby-ssr.js
+export { wrapRootElement } from "./wrapRootElement"
+```
+
+and wrapRootElement looks like this
+
+```js
+// wrapRootElement.tsx
+import React, { FunctionComponent } from "react"
+import { MdxEmbedProvider } from "./components/MdxEmbedProvider"
+
+interface IWrapRootElement {
+  element: React.ReactNode;
+}
+
+export const wrapRootElement: FunctionComponent<IWrapRootElement> = ({
+  element,
+}) => <MdxEmbedProvider>{element}</MdxEmbedProvider>
+```
+
+The first thing i changed was the name of this "component" because `wrapRootElement` is part of the gatsby api and i wasn't sure if something was getting screwed up due to a clash in names. I've since changed the name of this file to `provider.tsx`
+
+The second thing i looked at was the method of exporting the module, this now looks like the below
+
+```js
+// gatsby-browser.js
+exports.wrapRootElement = require(`./provider`)
+```
+
+```js
+// gatsby-ssr.js
+exports.wrapRootElement = require(`./provider`)
+```
+
+and the provider now looks like this
+
+```js
+// provider.tsx
+import React from "react"
+import { MdxEmbedProvider } from "./components/MdxEmbedProvider"
+
+interface IProviderProps {
+  element: React.ReactNode;
+}
+
+module.exports = ({ element }: IProviderProps) => (
+  <MdxEmbedProvider>{element}</MdxEmbedProvider>
+)
+```
+
+Whilst i think i could have kept the ES6 method for exporting in `gatsby-browser.js` it wasn't working in `gatsby-ssr.js`.
+
+Changing the method in both files seems to have done the trick.
+
+At this point i released `0.0.16` but then due to some weirdness with re-naming the file from *P*rovider.tsx to *p*rovider.tsx i had to release `0.0.17` but either way this is now fixed! Here's the full run down [#11](https://github.com/PaulieScanlon/gatsby-mdx-embed/issues/11)
+
+Boogy time!
+
 ## [Day 33](#day-33)
 
 ##### Feb 2 2020
