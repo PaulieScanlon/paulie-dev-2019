@@ -5,6 +5,28 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 36](#day-36)
+
+##### Feb 5 2020
+
+i didn't have an opportunity today to actually right any code but i did do some thinking about a conversation i had on Twitter last night.
+
+It started because it dawned on my that i've not actually completed any of the task set out by [#100DaysOfGatsby](https://twitter.com/hashtag/100DaysOfGatsby), this is largely due to having spent some months working with Gatsby and i feel i've already accomplished the first few tasks in one way or another...
+
+...until now!
+
+I noticed the challenge for week 6 was to integrate a serverless form solution, this is something that might be useful in my theme [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) as currently there's nothing in the demo relating to a "contact me" page.
+
+I had a look over the links in the challenge email and there's a mention of using Netlify's built-in [form service](https://www.netlify.com/products/forms/) and at first glance it appears to be really straight forward and all you really need to do is add an attribute to a form element and Netlify does the rest.
+
+Now, this sounds great if you're building you're own blog or developing a site for someone else but i did wonder how it would work within a theme.
+
+I've come to the conclusion that the theme doesn't really need to expose this functionality as it then limits the themes users to only using Netlify forms. Instead i think what the theme can do is provide some UI components that will work if they're dropped in to an `.mdx` file... yesssss the joy of `.mdx`
+
+So that's what i'm gonna do, i'll probably create two new components, an input field that will spread the props for an html input element and a text area component, probably the same deal with the props. The theme is written in TypeScript so i might need to explicitly define the "netlify" attribute and perhaps i'll create a "contact" page in the demo site, plus add some documentation to the README and because i'm using Storybook to develop the components i can also add some notes in there about how to use the form components.
+
+I think that's the theory done, now i just need to write some code.
+
 ## [Day 35](#day-35)
 
 ##### Feb 4 2020
