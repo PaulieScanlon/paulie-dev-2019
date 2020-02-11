@@ -5,6 +5,28 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 42](#day-42)
+
+##### Feb 11 2020
+
+Another good day today! 😃 I did have to do some traveling so lost a few hours of sweet sweet developing time but i think i've made up for it.
+
+After yesterdays progress with the design of "Project Prop" i've moved back to development and have implemented all the new styles apart from some small data visualizations which i might try and attempt in pure css. I think i have a repo for an old project where i created some css only donut charts.
+
+One thing that continues to play on mind is that i'll really need to test this plugin against multiple Gatsby projects.
+
+Whilst i'm confident in the JavaScript because i'm using [react-docgen](https://github.com/reactjs/react-docgen) to generate all the data to fill the prop table i'm unsure how the styles will cascade.
+
+To give you some context "Project Prop" is a plugin but it works like a theme.
+
+When you install it and spin up your project you can visit eg `http://localhost:8000/project-prop/`. The plugin has already generated the page that will appear on this route as it gets bundled in with your site or blog build as part of the `gatsby build` / `gatsby develop` process... but so too will the styles.
+
+I've tried to name tokens in my theme-ui config in such a way they won't clash by pre-fixing them with a "pp" but given that this is a theme and themes are supposed to provide all the styles for the project i'm worried they'll try and overwrite styles defined by the user.
+
+I'm currently developing a demo using the Gatsby starter blog and it works ok but it doesn't implement theme-ui so i'm not sure if they'll be complications further down the line.
+
+I think what i'll do is release a `0.0.0-alpha` version then perhaps pull some ready made Gatsby themes and see what happens when i add this plugin... should be fun!
+
 ## [Day 41](#day-41)
 
 ##### Feb 10 2020
