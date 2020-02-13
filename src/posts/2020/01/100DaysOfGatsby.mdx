@@ -5,6 +5,32 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 44](#day-44)
+
+##### Feb 13 2020
+
+🚨 We have an alpha release of PropShop!
+
+Yup, Yup, Yup. Today i've released an alpha version of my new Gatsby plugin [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop)
+
+As you can see it's been renamed from "Project Prop" to PropShop... watta you think?
+
+I started the day by forking a couple of repos from trusted Gatsby dev pals, [Scott Spence](https://twitter.com/spences10) and [Eric Howey](https://twitter.com/erchwy) and added the plugin to their `gatsby-config`.
+
+Problem No.1 was i'd set the path for `gatsby-source-file-system` to `path.resolve(`src/...`)` which will resolve to the demo running the plugin not the theme where it's installed. In most cases theme developers will want to inspect PropTypes for components in their theme not in the demo running the theme.
+
+That's now changed to accept a full path of where to find `.js` files containing PropTypes.
+
+Problem No.2 was as suspected style related. I was using `gatsby-plugin-theme-ui` for the styles but when running the plugin in a theme or, demo of a theme that was also using `gatsby-plugin-theme-ui` the theme object was getting overwriting and i was losing all my styles because the theme or demo theme wins out.
+
+The resolve was to still use `theme-ui` but not the Gatsby plugin version which meant i needed to wrap the `prop-shop.js` page in a `<ThemeProvider />` ... no big deal there.
+
+I have seen a few other issues where some of my styles pick up the theme styles, things like global typography rules do affect my typography rules if i've left a css value unset. I think i can sort this by being more strict with my styles and setting things that i was taking for granted as browser defaults.
+
+So there ya go. If you're into PropTypes and documenting components PropShop can give you a helping hand!
+
+Enjoy!
+
 ## [Day 43](#day-43)
 
 ##### Feb 12 2020
