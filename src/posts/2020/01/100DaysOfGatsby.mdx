@@ -5,6 +5,22 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 45](#day-45)
+
+##### 💖 Feb 14 2020
+
+Today was a bit of a maintenance day on [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) there were a few things i'd noticed as part of my alpha tests as mentioned yesterday with styles not quite being as i wanted them so i've been over all the css and tidied up a few things.
+
+I also took another stab at the filtering, previously if you start to type you can filter out files containing props that don't match your search term but props from the same file still appeared in the list. The new filtering system hides any prop from any file that doesn't match the search term which makes using PropShop a much better experience.
+
+I've still got a bit more tidying up to do before i release `0.0.1` and ideally i'd be able to see both PR's i created for [Scott Spence](https://twitter.com/spences10) and [Eric Howey](https://twitter.com/erchwy) on their respective projects completed.
+
+On that note however, when speaking with Eric he mentioned he'd not really used PropTypes that much and looking at his project i can see why. A lot of the components use a hook to grab the data so in theory all the components manage their own data source internally and don't require props to be passed in. It's a pretty sweet approach and i might "borrow" it for [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats)
+
+I've also been thinking about how PropTypes are kinda optional in straight `.js` world so perhaps a lot of people developing Gatsby projects won't even use them if they're developing in `.js`... `.ts` however you have to have props defined in an "interface" or as a "type" or you get IDE errors left, right and center so i think this will be the next thing i investigate.
+
+It looks like from the [react-docgen](https://github.com/reactjs/react-docgen#flow-and-typescript-support) docs that TypeScript "type" is supported... not sure about "interface" so i'll look into it and see what's what.
+
 ## [Day 44](#day-44)
 
 ##### Feb 13 2020
