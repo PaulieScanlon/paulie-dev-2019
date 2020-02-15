@@ -5,6 +5,34 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 46](#day-46)
+
+##### Feb 15 2020
+
+It's been an absolute belter of a day today!
+
+I started the day by refactoring some quite gross 🤢 functional programming i'd done in [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) and i think second time round i've made the "totals" object a lot neater and streamlined the amount of times the GraphQL array needs to be looped over.
+
+There's probably a significant performance increase but i'm not too worried about testing that at the moment.
+
+Next up was to find a Gatsby theme written in TypeScript so i could test PropShop with `.tsx` files or more specifically `interfaces`
+
+Fellow Gatsby fan [Rich Haines](https://twitter.com/studio_hungry) has a sweet little theme for adding `SEO` data to your blog, you can see it [here](https://github.com/molebox/gatsby-theme-seo).
+
+So i forked that repo and added [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) ⚡
+
+There are some differences between the way react-docgen returns data from PropTypes vs interface(s), the main one being with PropTypes all data objects are returned with an `id`, with TypeScript they don't, which was throwing my table header out of whack.
+
+To resolve this instead of trying to get data from the GraphQL query i just manually created an array of table headers and that was that sorted.
+
+I then forked [theme-ui](https://github.com/system-ui/theme-ui) 😬 and set about adding PropShop to the docs so that i could see PropTypes for [theme-ui/components](https://github.com/system-ui/theme-ui/tree/master/packages/components). It worked first time amazingly even though the components directory is in a different package!
+
+I did have an odd style issue so i've set the `prop-shop` page wrapper to be `position: absolute` so no matter which site or blog PropShop is used in that page will always cover anything else defined in a default layout.
+
+I've also written a blog post about PropShop, which if you're interested you can read [here](https://paulie.dev/posts/2020/02/prop-shop/)
+
+I'm still very much in the alpha phases of development and i now have x4 PR's open and am looking for feedback before i'm ready to release a first version of the plugin so if you're reading this and want to help, tweet me [@pauliescanlon](https://twitter.com/PaulieScanlon)
+
 ## [Day 45](#day-45)
 
 ##### 💖 Feb 14 2020
