@@ -5,6 +5,43 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 47](#day-47)
+
+##### Feb 16 2020
+
+Sad times today. I've released a first version of [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop).
+
+but... i wasn't anticipating failure, alpha tests have kind of suggested that PropShop is a bit useless 😂
+
+When i built it i was thinking, this is great, i know i've needed functionality like this on many a project... but that's because i develop component libraries for my day job.
+
+It would appear as though if you're developing your own blog or a theme, PropTypes and descriptions aren't really a priority.
+I somewhat disagree if you're building a theme because you'll want your users to know what each prop does in case they shadow the component and documenting the props would be very helpful in this instance.
+
+However, what i learned from my alpha tests are that not a lot of people bother with PropTypes 😥.
+
+I can understand this if you're developing in `.js` because there's no real reason other than for completeness to spend time writing out types and descriptions, if you're using TypeScript it's of course an absolute must! But from the alpha test PR's i created i noticed not a lot of Gatsby developers are using TypeScript.
+
+All of this was an oversight to be honest because i was just thinking about what stack i use and how i approach a build.
+
+I'm a huge proponent of [Component Drive Development](https://whatjackhasmade.co.uk/component-driven-development/) and correctly typing props and documenting them is a big part of this.
+
+The other oversight is a pattern i've noticed where GraphQL queries are created using the new-ish Gatsby `useStaticQuery` method and then abstracted away in to a utils directory and then imported as and when required.
+
+When using this method passing props around needn't occur at all as everything is returned within the component where the query is being used. I suspect in TypeScript you'd need to type the return but in `.js` land everything is so loose you can leave this un-typed and pass the data straight onto the `.jsx` no questions asked. 😬
+
+So with that said, i've released a `0.0.1` anyway and tweeted a few people and rather than get hung up on failures, i've dusted myself off and come up with a new plan.
+
+I'm going to build another theme!
+
+I have for a while now been wanting to transfer my current commercial portfolio from Next.js to Gatsby and i had intended to use [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) for both my portfolio and my blog.
+
+but...
+
+After digging around in the GatStats repo after having learned a lot from my recent work i think GatsStats needs a bit of an overhaul... i'm not sure when i'll tackle this and attempting to rip out methods to replace them with some new things i've learned might become messy so i've decided to start a new theme and i'll try out some new methods and see how it goes.
+
+I'm not too disappointed with GatStats, it was my first theme after all, in fact it was the first thing i built using Gatsby so there were mistakes made along the way but that's just all part of the process ay!
+
 ## [Day 46](#day-46)
 
 ##### Feb 15 2020
