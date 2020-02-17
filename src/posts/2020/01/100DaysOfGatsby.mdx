@@ -5,6 +5,62 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 48](#day-48)
+
+##### Feb 17 2020
+
+Today was a travel day so i've only done a few hours work... but. I've continued to work on my new theme and it's coming together nicely. I mentioned before about learning from the mistakes i made with GatStats and this time around i've gone all out with the develop experience. I'm going to try and keep custom components and config to an absolute minium in favor of exposing as much as i can though `.mdx`
+
+Reason being is that with GatStats the only viable option for customization is component shadowing, and this as good as it is feels like a lot of un-doing of what a theme is supposed to provide.
+
+I want this new theme to be as easy to customize as it is to write markdown.
+
+To give you an example, on the home page rather than asking the user to whack a load of stuff in the config so i can query it and pass it down to a a component in `.js` to then fit it into a grid/column layout, i'm going to provide functionality through the `MDXProvider` `components` prop and pass`theme-ui/components` straight though the`.mdx`. There will of course be a little styling to manage so when these components are used they'll still feel like part of the theme but the difference will be the user can decide what goes where and how it's laid out.
+
+eg:
+
+```js
+<Flex sx={{ flexWrap: "wrap" }}>
+  <Box
+    sx={{
+      width: ["100%", "50%", "33%"],
+    }}
+  >
+    <Heading variant="styles.h1">contact</Heading>
+
+    <Heading variant="styles.h2">Email</Heading>
+    <Link href="mailto:pauliescanlon@gmail.com" variant="styles.a">
+      pauliescanlon@gmail.com
+    </Link>
+    <Divider />
+
+    <Heading variant="styles.h2">Twitter</Heading>
+    <Link href="https://twitter.com/PaulieScanlon/" variant="styles.a">
+      https://twitter.com/PaulieScanlon/
+    </Link>
+    <Divider />
+
+    <Heading variant="styles.h2">GitHub</Heading>
+    <Link href="https://github.com/PaulieScanlon/" variant="styles.a">
+      https://github.com/PaulieScanlon/
+    </Link>
+    <Divider />
+
+    <Heading variant="styles.h2">GitHub</Heading>
+    <Link href="https://www.linkedin.com/in/pauliescanlon/" variant="styles.a">
+      https://www.linkedin.com/in/pauliescanlon/
+    </Link>
+    <Divider />
+  </Box>
+</Flex>
+```
+
+using `<Flex />` and `<Box />` you can create any colum layout you like, straight from the `.mdx`. 🤯
+
+You'll also see above the use of `<Heading />` etc, these are `theme-ui/components` and will be styled in accordance with my theme design the same way a `# heading` would if used in markdown.
+
+I think it's gonna be a sweet theme and i will definitely be using it for my commercial portfolio once it's released!
+
 ## [Day 47](#day-47)
 
 ##### Feb 16 2020
