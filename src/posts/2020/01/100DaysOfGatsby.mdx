@@ -5,11 +5,172 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 49](#day-49)
+
+##### Feb 18 2020
+
+I've had a very productive day today!
+
+I really wanted to nail down how to manage dynamic `.mdx` sources.
+
+To explain this a bit more, i need to reference GatStats again. In GatStats to use the theme you have to put all of your `.mdx` blog posts in a directory located at `src/posts` and the resulting URL will be
+
+```
+http://www.your-site/posts/some-post
+```
+
+However, what if you wanted to have a posts and a projects or maybe a talks directory as well?
+
+You can't because in the theme i've configured it to only source `.mdx` from `src/posts`... which sucks!
+
+In my new theme i'm exposing a tiny bit of config in `gatsby-config.js` and allowing the user to tell the theme where to `source` `.mdx` from, in the example below the theme will look in both `posts` and `projects`
+
+```js
+module.exports = {
+  ...
+  plugins: [
+    {
+      resolve: `@pauliescanlon/my-new-theme`,
+      options: {
+        source: [`posts`, `projects`],
+      },
+    },
+  ],
+}
+```
+
+This can be passed onto the `gatsby-config.js` in the theme.
+
+```js
+
+module.exports = themeOptions => {
+ const { source } = themeOptions
+ ...
+}
+```
+
+From here i'm able to first test if `source` is a single string or an array of strings, and then dynamically create a `gatsby-source-filesystem` config in the `plugins` array.
+
+```js
+
+module.exports = themeOptions => {
+  const { source } = themeOptions
+
+  let filesystemSources = []
+
+  const sourceFilesystemOption = name => {
+    if (source) {
+      return {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          name: `${name}`,
+          path: path.resolve(`src/${name}`),
+        },
+      }
+    }
+  }
+
+  if (Array.isArray(source)) {
+    for (let item of source) {
+      filesystemSources.push(sourceFilesystemOption(item))
+    }
+  } else {
+    filesystemSources.push(sourceFilesystemOption(source))
+  }
+
+  return {
+    ...
+    plugins: [
+      ...
+      ...filesystemSources,
+    ],
+  }
+}
+
+```
+
+That's the first part sorted, the next part was a bit tricky.
+
+Because you're sourcing `.mdx` from outside `src/pages` you have to use the `createPage` api to create a page for each file found.
+
+Over to `gatsby-node.js`
+
+First i needed to create a `slug` on each node, this can be done using `createNodeField` but... i only need to this on nodes that don't already have a `slug`
+
+Any `.mdx` sourced from `src/pages` will have this field already because i'm using my plugin [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes) 😎
+
+so in the `if` i check both that the `node.internal.type` is in fact `.mdx` and then i check that it's not a file that's already had a slug created.
+
+```js
+exports.onCreateNode = ({ node, actions, getNode }, themeOptions) => {
+  const { source } = themeOptions
+
+  const { createNodeField } = actions
+
+  if (node.internal.type === "Mdx" && !node.internal.fieldOwners) {
+    let path = source
+    const value = createFilePath({ node, getNode })
+
+    if (Array.isArray(source)) {
+      path = node.fileAbsolutePath
+        .split("/")
+        .filter(str => source.includes(str))
+        .toString()
+    }
+    createNodeField({
+      node,
+      name: `slug`,
+      value: `/${path}${value}`,
+    })
+  }
+}
+```
+
+The bit that took me a while to work out was what to use as the `path`.
+
+What i want to happen is any `.mdx` sourced from `src/posts` would have a URL of,
+
+```
+http://www.your-site/posts/some-post
+```
+
+and if it's sourced from `src/projects` it would have a URL of,
+
+```
+http://www.your-site/projects/some-project
+
+```
+
+If the `source` is single string that's pretty straight forward and i can use it as is.
+
+```js
+  let path = source
+  ...
+  createNodeField({
+    node,
+    name: `slug`,
+    value: `/${path}${value}`,
+  })
+
+```
+
+... but if the `source` is an array i need to be able to determine which `source` the file has been sourced from so the correct `path` can be added to the `createNodeField` `value` field.
+
+I did try and loop over the array and the call `onCreateNodeField` from inside the loop but this won't work because `onCreateNode` is itself called on a loop.
+
+The only other part of the node that is exposed which i can use to perform this kind of logic is `node.fileAbsolutePath` and by using `split` together with `filter` i'm able to get at the bit i want, the `posts` or `projects` which can then be added to the `createNodeField` `value` field as before with the string.
+
+Once that's all sorted you can continue to follow the Gatsby docs [creating-pages](https://www.gatsbyjs.org/docs/creating-and-modifying-pages/#creating-pages-in-gatsby-nodejs)
+
+I'm fairly confident this is a solid enough way to query `.mdx` files from **any** directory in the `src` directory, i might need to re-think this if i want to allow the theme to be able to `source` from anywhere...
+
+Using a **content** directory seems to be a popular pattern... but it's my theme and i think `src` is a good enough place to put your **source files**
+
 ## [Day 48](#day-48)
 
 ##### Feb 17 2020
 
-Today was a travel day so i've only done a few hours work... but. I've continued to work on my new theme and it's coming together nicely. I mentioned before about learning from the mistakes i made with GatStats and this time around i've gone all out with the develop experience. I'm going to try and keep custom components and config to an absolute minium in favor of exposing as much as i can though `.mdx`
+Today was a travel day so i've only done a few hours work... but. I've continued to work on my new theme and it's coming together nicely. I mentioned before about learning from the mistakes i made with GatStats and this time around i've gone all out with the developer experience. I'm going to try and keep custom components and config to an absolute minium in favor of exposing as much as i can though `.mdx`
 
 Reason being is that with GatStats the only viable option for customization is component shadowing, and this as good as it is feels like a lot of un-doing of what a theme is supposed to provide.
 
