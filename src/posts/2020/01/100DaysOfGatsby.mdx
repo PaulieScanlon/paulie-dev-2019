@@ -5,6 +5,66 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 51](#day-51)
+
+##### Feb 20 2020
+
+Today i've continued to work on my new theme and it's getting a bit tricky in places.
+
+I'm using `theme-ui` but i have encountered a couple of things that are causing me to scratch my head.
+
+If you're using `markdown` that's all well and good, you can use the `styles.h1` object in `theme-ui` and set your styles for eg; `h1`
+
+But..
+
+In `.mdx` where of course i can still use `# h1` but only if it's _not_ wrapped by a `theme-ui` component.
+
+Let me explain...
+
+In markdown i might wanna do this.
+
+```
+# Hey, i'm a header
+
+and i'm some body copy.
+
+![Some Image](/images/some-image.png)
+
+```
+
+But with `.mdx` you're able to position the body copy and the image next to each other using a combination of `<Flex />` and `<Box />`
+
+For example
+
+```js
+<Flex sx={{ flexWrap: "wrap" }}>
+  <Box
+    sx={{width: ['100%', '50%']}}
+  >
+  # Hey, i'm a header and i'm some body copy.
+  <Box>
+  <Box
+    sx={{width: ['100%', '50%']}}
+  >
+  ![Some Image](/images/some-image.png)
+  <Box>
+</Flex>
+```
+
+But because both `<Flex />` and `<Box />` are technically React components the `markdown` contained within them won't render.
+
+Instead of using `# h1` you can use the `theme-ui/components` `<Heading as='h1' />` component...
+
+but... it won't by default pick up the same styles from `styles.h1`, instead it's default place to look for styles is `styles.headings`
+
+Which means to get the same styles applied you have to define a `const` elsewhere in the theme, then spread the styles into both of the style objects.
+
+Furthermore... and i might be wrong on this but `styles.headings.h1` doesn't do anything.
+
+One way round this is to use the heading component like this `<Heading as='h1' variant='styles.h1' />` which is a bit of a faff when what you really want from a writing experience is to quickly style your content.
+
+If i'm barking up the wrong tree on this, my apologies or if you know where i've gone wrong please do tweet me [@pauliescanlon](https://twitter.com/PaulieScanlon)
+
 ## [Day 50](#day-50)
 
 ##### 🎉 Feb 19 2020
