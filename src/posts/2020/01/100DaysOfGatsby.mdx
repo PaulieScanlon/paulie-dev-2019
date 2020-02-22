@@ -5,6 +5,156 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 53](#day-53)
+
+##### Feb 22 2020
+
+Today has been spent mainly thinking about stuff. I did some code and have now sorted the navigation problem i was having with my new theme.
+
+The things i've been thinking about today may only apply to very specific circumstances but perhaps if you're reading this and have had similar thoughts, lets talk; [@pauliescanlon](https://twitter.com/PaulieScanlon)
+
+To give some context what i'm attempting to do with my new theme is provide everything that [theme-ui/components](https://theme-ui.com/components) offers via the use of the `components` prop on the `MDXProvider`
+
+Here's the setup in `.js`
+
+```js
+// some-layout.js
+
+import { MDXProvider } from "@mdx-js/react"
+import * as themeUiComponents from "@theme-ui/components"
+
+  <MDXProvider components={....themeUiComponents}>
+    {children}
+  </MDXProvider>
+
+```
+
+... and here's the usage in `.mdx` (where `<Button />` is the theme-ui/components button component)
+
+```
+// some-page.mdx
+
+# Hey
+
+Some other text
+
+<Button>Click me</Button>
+
+```
+
+Using this approach i hope to make a **zero component theme** and what i mean by that is there won't be any presentational components provided by the theme itself.
+
+The theme will only expose what i'm currently calling **data components** which allow for a better level of abstraction in a theme as they only concern themselves with data, not UI.
+
+Using this approach the theme author only needs to provide a set of **data components** that manage querying GraphQL and it's up to the theme user to decide what to render.
+
+The cool bit is all of the "things" they'll likely want to render will have already been styled either by `theme.styles` or `components`
+
+Here's any example usage of a `<TagList />` **data component** i'm developing.
+
+```js
+<TagList>
+  {source => (
+    <Flex
+    sx={{flexDirection: 'column'}}
+    >
+      {
+        source.map((tag, index) => {
+          const { name, count, percent } = tag
+          return (<Box  key={index}>
+            {`${name}  x${count}`}
+            <Box mb={2}  bg='muted' sx={{width: `${percent}%`, height: 4}} />
+          </Box>
+        })
+      }
+    </Flex>
+  )}
+</TagList>
+```
+
+Inside the `<TagList />` component is where i query GraphQL and also do a bit of functional JavaScript to return a nice object with the `name`, `count` and `percent` of each tag found in `frontmatter`
+
+In this example i'm rendering a `<Box />` which displays the `name` the `count` and a kind of horizontal bar chart. All of this is made using `theme-ui/components` **NOT** components provided by the theme.
+
+The bit i'm currently stuck on is how to manage the styles for both `markdown` nodes and `theme-ui/components`
+
+eg:
+
+In your theme you probably have something like this
+
+```js
+// gatsby-plugin-theme-ui/index.js
+
+export default {
+  ...
+  styles: {
+    p : {
+      ...
+    }
+  }
+
+}
+```
+
+But when you introduce `theme-ui/components` you also need
+
+```js
+// gatsby-plugin-theme-ui/index.js
+
+export default {
+  ...
+  styles: {
+    p : {
+      ...
+    }
+  },
+  ...
+  text : {
+    ...
+  }
+
+}
+```
+
+The reason behind this is if your theme users write body copy it'll get translated to a `p` and if they choose to use the `<Text />` component it will by default render as a `div` unless they tell it it's a `p`, `<Text as='p'/>` ... in either case the `<Text />` component will look only to the `text` object in the theme, not the `p` object in the `theme.styles`.
+
+So if like me you're planning on supporting both `markdown` and `theme-ui/components` in `.mdx` you'll need to spread styles across both of those objects.
+
+eg:
+
+```js
+// gatsby-plugin-theme-ui/index.js
+
+const textStyles = {
+  fontFamily: 'body'
+  fontSize: 1
+}
+
+export default {
+  ...
+  styles: {
+    p : {
+      ...textStyles
+    }
+  },
+  ...
+  text : {
+    ...textStyles
+  }
+
+}
+```
+
+So step one of this process for me will be to comb over the [theme-ui/components](https://theme-ui.com/components) docs and construct a list of all the theme object keys the `theme-ui/components` look for by default.
+
+This above `<Text />` example refers to [this](https://theme-ui.com/components/text#variants) or more specically this
+
+> Text style variants can be defined in the `theme.text` object.
+
+Once i have the full list of default object keys i can begin to work out where the spreads need to occour to ensure consistent styling between `markdown` and `.mdx`
+
+Wish me luck!
+
 ## [Day 52](#day-52)
 
 ##### Feb 21 2020
