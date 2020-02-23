@@ -5,6 +5,24 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 54](#day-54)
+
+##### Feb 23 2020
+
+Today was a travel day so i haven't been able to do much. However, i have made a start on creating a list of all the theme-ui/components and their default objects. I think once again i'm either doing something wrong on there's some issues with theme-ui/components.
+
+For example in the [docs](https://theme-ui.com/components/badge#variants) for the `<Badge />` component it says it's default variant is `primary`, so you should be able to use it like the below and it "should" pick up styles defined in `theme.badges.primary`
+
+```js
+<Badge>I'm a badge</Badge>
+```
+
+... but no matter what i do if i attempt to use a badge without the variant prop it defaults to the theme-ui built in styles
+
+I'll continue to work on this as it's a big part of my new theme and i want the full set of components to work so i need to work out where all these components grab their styles from to make sure i've got them all covered.
+
+Tomorrow is a new day, i'll tackle it then!
+
 ## [Day 53](#day-53)
 
 ##### Feb 22 2020
