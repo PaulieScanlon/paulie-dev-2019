@@ -5,6 +5,34 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 55](#day-55)
+
+##### Feb 24 2020
+
+A much better day today! I've finished off the list of style objects for all [theme-ui/components](https://theme-ui.com/components) ... there are one or two that i can't seem to style but i'm not sure if it's me or a problem with `theme-ui`.
+
+I know the package is undergoing some changes so i'll wait for a bit in case the issue is raised and or fixed with the next release.
+
+Other bits i've done today include tidying up styles, further reducing the amount of theme specific components, i'm basically down to six now.
+
+These are;
+
+- Logo: Which is just a placeholder ready to be "shadowed
+- Main: Which is really just a place to compose the `<Nav />` and the `<MDXProvider />` + all the [theme-ui/components](https://theme-ui.com/components) supplied via the `components` prop
+- Nav... you know what a Nav is right... it does compose one of my other plugins though [gatsby-mdx-routes](https://github.com/PaulieScanlon/gatsby-mdx-routes)
+- Seo: Just handles the meta stuff...
+- And x2 layouts, one for Pages and one for content sourced from outside `src/pages`, the latter requires the `<MDXRenderer />`
+
+And thats pretty much it!
+
+The footprint of my new theme is gonna be really small and there's very little to maintain and i really hope, very little that can go wrong.
+
+I've also implemented anchor scroll to hash and [theme-ui.com/packages/prism/](https://theme-ui.com/packages/prism) which if you haven't used .... is absolutely brilliant
+
+I'm aware i'm a little behind the actual challenges so i think the next few days ought to be investigating what they are and if i can shoe horn them into my new theme.
+
+If all goes to plan i might be able to release the theme this week!
+
 ## [Day 54](#day-54)
 
 ##### Feb 23 2020
