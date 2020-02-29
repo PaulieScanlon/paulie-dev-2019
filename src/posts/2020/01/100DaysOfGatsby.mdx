@@ -5,6 +5,18 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 60](#day-60)
+
+##### Feb 29 2020
+
+I've had a very functional day today. I've been looking over the data visualization i created for [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) and if i strip back the presentation layer (the bar charts, donut charts, etc) what i was actually doing was abstracting the data from all `.mdx` that had been sourced and working out some nice percentage and count values for the date fields pulled from `frontmatter`.
+
+I'd like to expose this same data in [gatsby-theme-terminal](https://paulie.dev/posts/2020/02/gatsby-theme-terminal/) and have got a new component called `<SourceDays />` which you can see [here](https://gatsby-theme-terminal.netlify.com/components/#source-days) it's like the other data components in this theme whereby it just returns values which you can then use to create the visual presentation layer. In the demo i'm just using the theme-ui components but i guess if you wanted to install your own charting library you could use these same values to drive any kind of data visualization.
+
+I've released `<SourceDays />` in `0.0.7` and started working on a component called `<SourceMonths />` but realized it would probably be really handy if you could not only `filter` by source eg: "posts", "projects" but also by year, this would then allow you to create a comparison chart for posts, tags used etc for multiple years.
+
+I'm gonna keep working on this as it's a good opportunity to work on some functional programming skills which i always struggle with but do quite enjoy!
+
 ## [Day 59](#day-59)
 
 ##### Feb 28 2020
