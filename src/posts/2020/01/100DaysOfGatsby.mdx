@@ -5,6 +5,83 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 65](#day-65)
+
+##### Mar 5 2020
+
+What a cracking day! Woke up annoyingly early but have now cracked the CodeMirror string issue.
+
+[CodeMirror](https://codemirror.net/) if you're not aware is the code editor that drives the likes of CodePen et al and provides code editor like behavior in the browser.
+
+I'm using the React version by [Jed Watson](https://github.com/JedWatson) but it works in the same way.
+
+The issue was for CodeMirror to display anything it needs to be provided as a string via the `value` prop... `JSON.stringify()` to the rescue!
+
+```JavaScript
+  <CodeMirror
+    value={JSON.stringify(themeObject, null, 2)}
+  />
+```
+
+but...
+
+This will pass the the object as JSON meaning the output in CodeMirror will also be JSON and look something like this.
+
+```json
+  "colors": {
+    "primary": "#E91E63",
+    "secondary": "#2196F3",
+    "success": "#8BC34A",
+    "warning": "#FF9800",
+    "error": "#F44336",
+  }
+
+```
+
+and yeap you're right, that's not JavaScript, and doesn't actually represent what a theme-ui object would look like.
+
+So we need to strip out the `""` marks... but only on keys not on values and only if those values are _not_ of type `string` ... regex to the rescue!
+
+```javascript
+JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")
+```
+
+but...
+
+Now we need to pass the object back up to `useState` whenever a change occurs so it can be passed onto the `<ThemeProvider />`
+
+I know what you're thinking.... `JSON.parse()` to the rescue!
+
+... wrong!
+
+```javascript
+<CodeMirror
+  value={JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")}
+  onChange={event => JSON.parse(event)}
+/>
+```
+
+The above **won't** work because `JSON.parse()` can't parse this as JSON because we've removed the quote marks and these are what make it valid JSON...
+
+Ahh!! so now we need to put the quotes back in ... regex to the rescue again!
+
+```javascript
+<CodeMirror
+  value={JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")}
+  onChange={event =>
+    JSON.parse(event.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": '))
+  }
+/>
+```
+
+Only now can we display a JavaScript object in the "editor" view and parse an object back to `useState` to drive theme-ui.
+
+It was a challenge but regex really is a wonderful thing ... top tip [https://regex101.com/](https://regex101.com/) is awesome!
+
+Now that the editor / theme object / parsing issues are resolved i've set about adding the relevant key value pairs to the "example" object and have added the full list of markdown and theme-ui components to the preview so you can see the changes you're making in the editor in real time.
+
+Pretty sweet day i'd say!
+
 ## [Day 64](#day-64)
 
 ##### Mar 4 2020
