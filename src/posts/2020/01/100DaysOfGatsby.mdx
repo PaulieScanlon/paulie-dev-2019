@@ -5,6 +5,28 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 68](#day-68)
+
+##### Mar 8 2020
+
+Today was a game of two halves.
+
+I'm still working on nude-ui and spent the morning implementing the remaining app functionality, this includes the ability to collapse the code editor panel and switch between the markdown / mdx preview and the source.
+
+I did have a bit of a ball ache with parsing the mdx directly onto CodeMirror but [chrisbiscardi](https://twitter.com/chrisbiscardi) came to my aid with a sweet little webpack trick.
+
+```javascript
+import mdxString from "!!raw-loader!./thing.mdx"
+```
+
+This allows me to bypass the webpack loader for `.mdx` file types and import it as "raw" then finally pass it on to CodeMirror as a string.
+
+I've also done a bit of design work today. I've got what i think is a pretty sweet looking hero / open graph image and have chosen a "tasteful" nude background image for the landing page.
+
+Tomorrow i'll focus on building out the landing page and i'll probably start thinking about re-pointing the DNS records and setting up a Netlify build pipeline.
+
+At some point this week i think i'll be ready to launch!
+
 ## [Day 67](#day-67)
 
 ##### Mar 7 2020
