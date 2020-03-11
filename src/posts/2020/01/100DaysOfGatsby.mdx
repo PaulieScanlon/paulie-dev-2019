@@ -5,6 +5,32 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 71](#day-71)
+
+##### Mar 11 2020
+
+Today has been quite varied. Aside from trying to find a job i've still got stuck in and made some enhancements to [www.skin-ui.com](https://www.skin-ui.com)
+
+First up i worked on a little bug i noticed when using the "Copy" button. It was indeed copying the theme object you see in the code editor panel but because it's imported and rendered as a string before it's passed on to CodeMirror when you paste it in to your own code editor it was missing the default export.
+
+By adding `export default { ${codeEditorData} }` i'm able to correctly copy the actual theme object including the export default and surrounding curly braces from browser back to a code editor like VS Code.
+
+I've also done some work on the string that is passed to the markdown source view. I'm importing the actual `.mdx` file that's used in the app using the raw webpack loader and passing it straight on to CodeMirror but because it contains a bit of React and a Theme UI Box component they too appear in the "source view". I tried to write my own regex to strip out the various parts of the string but ran out of skill so posted this on stackoverflow: [Advanced RegEx Help required](https://stackoverflow.com/questions/60634044/advanced-regex-help-required/60636025#60636025)
+
+I used a similar regex approach to remove the first 3 lines in that `.mdx` file which are importing the layout component. Now when you view the source using the little "eye" icon button you get something that's easier to copy and past into your own project.
+
+I've also added a new section to my commercial portfolio: [side hussle](https://www.pauliescanlon.io/#side-hussle) which is an area for me to showcase things i've built that aren't GitHub repos or Gatsby plugins... naturally [www.skin-ui.com](https://www.skin-ui.com) is on there.
+
+It was really easy to add another source directory to the project and render the data as UI elements, and it kinda proves how flexible [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com/) is which makes all the hard work i did on the theme worth it!
+
+I then came back [www.skin-ui.com](https://www.skin-ui.com) and have implemented [Netlify Identity](https://docs.netlify.com/visitor-access/identity/#enable-identity-in-the-ui) which, if you haven't used is absolutely super brill brills!
+
+I've done auth a few times before in React applications and it's always such a ball ache, with [Netlify Identity](https://docs.netlify.com/visitor-access/identity/#enable-identity-in-the-ui) it was so easy and it even comes with third party auth providers like login with GitHub and Google etc... it's mad how good Netlify are... i love it!
+
+That's all for today, tomorrow i need to investigate Fauna and see if i can spin up a database, this is all you can save your theme on [www.skin-ui.com](https://www.skin-ui.com) and is the first step towards building out a kind of user showcase gallery kinda feature.
+
+Catch ya later!
+
 ## [Day 70](#day-70)
 
 ##### Mar 10 2020
