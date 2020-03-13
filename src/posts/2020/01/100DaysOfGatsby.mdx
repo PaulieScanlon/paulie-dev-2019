@@ -5,6 +5,28 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 73](#day-73)
+
+##### Mar 13 2020
+
+Mooooore context 😫
+
+Yeap, today i've continued to refactor [www.skin-ui.com](https://www.skin-ui.com) and now, wherever possible state is managed by React context. There's only two very small parts that remain as local state and the app seems so much more responsive. Prop drilling can really mess with an application and passing props through components to reach deeply nested components does really affect performance. It's been a bit of a chore shifting everything over to use Context but i think it's worth it as the the end result is an application that feels alive rather than an application that is noticeably putting the browser under a lot of pressure.
+
+I've also found there's other positives to undertaking work like this and because it's quite repetitive and mind numbingly boring my mind has wandered... which is good because i've continued to think about what else [skin-ui](https://www.skin-ui.com) could be.
+
+Today's thoughts have mainly been around what i'm calling _Cloud Themes_ ... allow me to explain.
+
+If i can get [skin-ui](https://www.skin-ui.com) to a point where user auth / teams auth are a thing you could have a designer using the browser UI and making and saving changes to the theme object... but then imagine rather than manually copying and pasting that theme object in to the code base it could just be in the code base and capture changes after they're saved from the web editor.
+
+I totally think this is possible if i were to write a _build time_ Gatsby plugin that once configured via `gatsby-config.js` using an id or something would connect to a (yet to be developed) skin-api and pull down the theme object and then continue to compile the app/site/blog with that theme object.
+
+This might allow yet another abstraction of "web design" and "web development"... i'm thinking at the moment i could make the [skin-ui](https://www.skin-ui.com) UI more focussed on designers needs and provide easy to understand ways to modify the theme object along with an easy way to preview the changes then, once they hit save all that _design_ work could be pulled in to the application and, et voilà you'd have styles for anything and everything the _engineers_ could need to build out application functionality... this of course is dependant on Gatsby becoming the _go to_ tool for larger builds.. but as i stated yesterday
+
+> Gatsby is just React
+
+..so why wouldn't you use it to build more than just blogs?
+
 ## [Day 72](#day-72)
 
 ##### Mar 12 2020
