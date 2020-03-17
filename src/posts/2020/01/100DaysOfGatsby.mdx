@@ -5,6 +5,34 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 77](#day-77)
+
+##### Mar 17 2020
+
+At what point can i claim to be full stack?
+
+I've had such a belter of a day and got the first half of the Apollo / GraphQL / Funa / Netlify Identity work done.
+
+I'm not even sure if i can fully recount what i've done today so i'll try putting it in a list.
+
+- Shift Context Provider, Netlify Identity and Apollo Provider in to `wrapRootElement`
+- Use `gatsby-browser` as import for `gatsy-ssr` so the above works in prod and dev
+- Connect Apollo server to Fauna
+- Setup multiple resolvers to query Fauna via GraphQL
+- Implement initial functionality to query Fauna served theme object and re-hyrdrate CodeMirror instance / Theme UI Provider.
+
+Actually on that note, the version of CodeMirror i'm using doesn't like to be controlled via state, it appears that once it loads a `string` to use as a starting point for the code no state changes to that string will cause a re-render. There is another version of CodeMirror out there called [react-codemirror2](https://www.npmjs.com/package/react-codemirror2) which can be setup to handle changes in state but i played with this a little while back and there was an issue but i can't remember what the problem was so that's a job for tomorrow.
+
+There are a few user journey / functionality things i'm trying to solve. These are all based around user sign up / sign in and how i'll handle public / private themes... i might not initially provide the option to make a theme private but i will of course need to restrict saving updates to a theme unless you were the user that created it.
+
+There's also quite a bit of work to do around showcasing all the themes that are saved to the database by all users. I'd like a kind of gallery where you can view them or maybe _fork_ them and save them to your own account.
+
+It's difficult to think in MVP terms because as soon as you introduce user sign up / sign in you've got a ton of work to do around, sign up verification journeys, forgot password journeys and of course everything to cover CRUD functionality.
+
+Currently i'm aiming to have all this finished by the final day of 100DaysOfGatsby but... eeek i've still got a lot of problems to solve and still have a lot of things to learn so it's a pipe dream at the moment!
+
+I'm still enjoying myself though and it's pretty dope building the full stack... not sure when i'll get the opportunity to create an Apollo / GraphQL / Fauna / Netlify Identity stack again!
+
 ## [Day 76](#day-76)
 
 ##### Mar 16 2020
