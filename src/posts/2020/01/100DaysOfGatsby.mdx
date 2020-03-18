@@ -5,6 +5,22 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 78](#day-78)
+
+##### Mar 18 2020
+
+[react-codemirror2](https://www.npmjs.com/package/react-codemirror2) saves the day!
+
+I can now pass a theme object from my new Apollo / GraphQL server straight to the code editor and it'll style the markdown as it did before. You can still update the theme using the editor and once i get the U of CRUD sorted out you'll be able to save your theme to the Fauna database.
+
+I'm still thinking about some of the UX issues i'll face with this application. For instance if you where to share a link with someone they could view it but they might also want to _fork_ it and continue to develop it under a different id. In this case the new _Drawer_ component which houses the save button would first need to display a fork button. I think i can do this by checking if the `user_id` of the theme matches the logged in `user_id` if it does then it's safe to assume that a _save_ button is needed in the UI and if it doesn't it'll be a _fork_ button in the UI.
+
+This _Drawer_ will also house a delete button and all the fields required to re-name the theme and or update the description and a pair of radio buttons to identify if the theme is a light or dark theme... this i hope will come in handy later in the gallery for filtering purposes.
+
+I'm still wondering what to do about _private_ themes, i had thought about a premium pricing model but the thought of hooking up a payment system at this point is a bit too much to take on. I'll leave this field in the db but probably won't use it for a while.
+
+I'm posting a bit early today because i've got some _life admin_ to take care off so this is pretty much me for today.
+
 ## [Day 77](#day-77)
 
 ##### Mar 17 2020
