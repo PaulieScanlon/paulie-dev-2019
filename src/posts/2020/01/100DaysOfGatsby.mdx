@@ -5,6 +5,24 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 79](#day-79)
+
+##### Mar 19 2020
+
+Today hasn't been all that productive.
+
+It started off well and i've worked out some of the _is the logged in user the theme owner_ and therefore should the primary call to action be to _save_ the theme or to _fork_ the theme.... but then i got caught up in a [react-codemirror2](https://www.npmjs.com/package/react-codemirror2) bug chasing nightmare.
+
+I think i mentioned this before regarding some mega `regex` that i've implemented that converts an object to a string and removes the quotes and then there's some more `regex` to parse the string and re-insert the quotes, which is still required but i struggled to work out at which point in this transformation should the object be pushed to the database.
+
+I've also run in to a few problems with Theme UI components, it appears Buttons error if an invalid string is passed as a hex. This causes the whole app to break so i've temporarily removed the `<Button />` from the `.mdx` preview.
+
+I've also got a few issues with how to manage `try` / `catch` on the actual object before i save it to state and there's also some debounce-ing issue going on which i've implemented since the switched to a controlled version of CodeMirror.
+
+I think they're all resolvable it's just today i've un-earthed multiple issues and need to pick which one to tackle first.
+
+Either way these all jobs for tomorrow now.
+
 ## [Day 78](#day-78)
 
 ##### Mar 18 2020
