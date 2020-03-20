@@ -5,6 +5,20 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 80](#day-80)
+
+##### Mar 20 2020
+
+I'm still sloggin a way on [www.skin-ui.com](https://www.skin-ui.com) and think i've resolved the [react-codemirror2](https://www.npmjs.com/package/react-codemirror2) syntax `try` / `catch` bug. If a syntax error occurs while editing the Theme UI object i'm catching it before it hits the application state and blows up. I've had to implement a 2nd part of local state to manage this but the application doesn't appear any slower when using it so that all good.
+
+I've now moved on to managing `mutations` with Apollo and GraphQL and have come a bit unstuck. As with any new technology you learn from your mistakes and i think i've over complicated the way context and database state work, and i think i'm gonna run in to a problem with the database callback when an update is issued. Somewhere along the line i'll need to re-fetch the newly saved data, my current thinking is to update context which will causes all the right parts of the app to re-render.
+
+But first things first and i need to get to grips with `useMutation`, once that's done i think i'll be in a better place to solve some of the UX issues.
+
+I also experimented with [Formik](https://jaredpalmer.com/formik/) which i've used on a few projects but i don't think it's really required since i have little to no validation requirements and the value of my inputs all come from the backend.
+
+It's all part of the process so whilst today has been a challenge i'm still making progress.
+
 ## [Day 79](#day-79)
 
 ##### Mar 19 2020
