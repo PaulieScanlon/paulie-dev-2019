@@ -5,6 +5,29 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 81](#day-81)
+
+##### Mar 21 2020
+
+Only a few hours work this morning, i've got plans that require me to leave the house so i'm a bit short on time.
+
+What i have managed to accomplish this morning is cracking how to use `useMutation` / `@apollo/react-hooks` and can now pass values from my form back to the Fauna Database via my Apollo / GraphQL api.
+
+This however has un-earthed another problem which i need to un-pick a bit but in short it's related to the transformation i'm performing on the Theme UI object. Here's a list of data types the object currently exists in and where
+
+- Local State : string (modified with regex to remove quotes)
+- Application State : object (modified with regex to add quotes)
+- Database : string has quotes
+- Return type from Database : string has quotes
+
+I think i need to workout how to keep the type the same in Application state and in the Database and leave the local state to manage the funky transformations as they are only required so the object displays nicely in CodeMirror.
+
+I'm not even sure at this stage if i could type the Theme UI object as an object because GraphQL would want the full blown list of all object keys and their types. Unfortunately it doesn't look like GraphQL has an `any` type like TypeScript does so it's probably better to type the Theme UI object as string when i'm passing it around. It has to be a string in Fauna anyway so i think that's pretty much how it'll have to be.
+
+This is quite the ball ache but i suppose it makes sense to keep the type the same in and around the application and in the database and only mutate it where i absolutely have to.
+
+Probably a job for tomorrow now but i'm pleased i've made some progress albeit small.
+
 ## [Day 80](#day-80)
 
 ##### Mar 20 2020
