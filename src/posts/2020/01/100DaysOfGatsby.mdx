@@ -5,6 +5,38 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 83](#day-83)
+
+##### Mar 23 2020
+
+This morning i was up early... and for good reason. I started a new contract today 🎉.
+
+They're a US based firm and are cool with me being fully remote... The stack?..... Gatsby and Theme UI, how cool is that!
+
+In fact it's through the [#100DaysOfGatsby](https://twitter.com/search?q=%23100DaysOfGatsby&src=typed_query) challenge that [Alex Luong](https://twitter.com/alex__luong) found me and very kindly put me forward to work on a project with him.
+
+It's so cool that it's happened this way and really makes it all worth while. I've been absolutely slogging a way of this stuff for the past 83 days and and it's finally paid off.
+
+Right ho, that's the business stuff outta the way, back to my early start.
+
+From around 5.30 this morning until 9.00 am when i started work i was investigating this pesky Object to String issue i was having.
+
+The theme object is stored in Fauna as an object but i can't type the response required by GraphQL as an object at this stage as there's too many key value pairs. Instead i've typed it as a string which is what GraphQL is expecting.
+
+Once i have the theme object as a string i'm storing it in application state and passing it on the preview which has a Theme Provider and uses `JSON.parse` which is how the styles get applied to the markdown and mdx.
+
+In the Editor however i need to keep it as a string so it can be passed on to CodeMirror but i need to remove some of the quote marks around the key value pairs so it appears as `JavaScript` and not `JSON`... but, when CodeMirror passes this back via the `onChange` i intercept it and pop the quote marks back in before storing back in application state.
+
+This means that each of those special requirements are handled in the places they are needed and won't affect how the data is stored in application or in Fauna... bit of ball ache but it's working now.
+
+I've checked that saving to Fauna still works and everything is looking pretty sweet. With my test logins i can edit the object and save it back to my _account_
+
+The next step is for new users to be able to _Fork_ the default theme and to save it to their own account... i also need to think about some kind of _users themes_ pages so you can browse and edit your own themes.
+
+I think i've got everything in place to get this going but at the moment i'm not really sure what extra or temporary things i'll have to add to allow the _Fork_ to really work. I might need to auto generate a temporary made up name just so if you save it before you've re-named it you'll see it in your _users themes_ area.
+
+It's a bit of a head scratcher but i think i've got a plan... just need some time to get it all up and running.
+
 ## [Day 82](#day-82)
 
 ##### Mar 22 2020
