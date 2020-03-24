@@ -5,6 +5,79 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 84](#day-84)
+
+##### Mar 24 2020
+
+Second day on the job and all is still going ok.
+
+My task for today was to implement storybook. I love [Storybook](https://storybook.js.org/) and it plays a huge part in my day to day work when developing component libraries but i've only ever implemented it with a Gatsby project once before and that was for my first theme [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/storybook/?path=/story/*)
+
+Like [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) the project i'm working on also uses Theme UI and there's a couple of little tricks one needs to implement to ensure all Theme UI styles get passed on to the component when viewed in Storybook.
+
+The below is how you set up Theme UI in Storybook 5.3
+
+```javascript
+// .storybook/preview.js
+import React from "react"
+import { addDecorator } from "@storybook/react"
+import { ThemeProvider } from "theme-ui"
+
+import yourTheme from "../src/gatsby-plugin-theme-ui"
+
+addDecorator(storyFn => (
+  <ThemeProvider theme={yourTheme}>{storyFn()}</ThemeProvider>
+))
+```
+
+The `addDecorator` works a bit like `wrapRootElement` does in Gatsby and provides a nice way to _wrap_ all Storybook stories with anything you like.
+
+Adding fonts is, according to the Storybook docs pretty straight forward however, nothing i did today using the `preview-head.html` seemed to work so i opted for using the `<Global />` component from `@emotion/core`
+
+```javascript
+// .storybook/preview.js
+...
+import { Global, css } from "@emotion/core";
+
+addDecorator(storyFn => (
+    <Fragment>
+      <Global
+        styles={css`
+          @font-face {
+            font-family: "Some Font";
+            font-weight: 400;
+            src: url("/fonts/Some-Font.woff2") format("woff2");
+          }
+        `}
+      />
+      <ThemeProvider theme={yourTheme}>{storyFn()}</ThemeProvider>
+    </Fragment>
+));
+```
+
+This is assuming you have the fonts located at `public/fonts` and have the `-s` flag in `package.json` pointing at `./public`
+
+```json
+  "scripts": {
+    "storybook": "start-storybook -s ./public -p 6006",
+    "build-storybook": "build-storybook"
+  }
+```
+
+After i'd sorted that out i could now start creating stories for all the components in the code base.
+
+I've done this a lot in the past but did want to experiment with pure `.mdx` based stories and whilst they work just fine they require you to import a number of things to get stories to display with props and previews.
+
+Using the `.js` method or [CSF](https://storybook.js.org/docs/formats/component-story-format/) _Component Story Format_ in my option is just better and leaves less to get wrong. After all the whole point of having Storybook manage the documentation is so any engineer coming to the code base can quickly and easily discover how a component works, what props it needs etc and if you start to be a bit slack with the documentation the whole system breaks down.
+
+I then moved on to unit tests and [Alex](https://twitter.com/alex__luong) has already started to implement [@testing-library/react](https://testing-library.com/).
+
+I'm gonna reserve judgement on this for the moment, but not because i don't believe it's every bit as good as everyone says it is but because it's new to me and i need to work out if my battle hardened component testing pattern and CSF strategy works as well with [Testing Library](https://testing-library.com/) as it used to with [Enzyme](https://enzymejs.github.io/enzyme/)
+
+So far today i've only written a handful of tests and they were pretty straight forward. I should imagine in time once i'm a bit more familiar with the methods i'll get rolling but i still gotta learn and get my head round it.
+
+That's all for today team... keep it Gatsby! 🍺
+
 ## [Day 83](#day-83)
 
 ##### Mar 23 2020
