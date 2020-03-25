@@ -5,6 +5,36 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 85](#day-85)
+
+##### Mar 25 2020
+
+The first part of this is an update from last night. I just about had the brain power to tackle the _Fork_ functionality i needed in [www.skin-ui.com](https://www.skin-ui.com) and am pleased to report that step one is done. I can now hit the _Fork_ button and copy the default theme, give it a random name and push it up to Fauna. From here you can amend as normal.
+
+I have been a bit of a hack monster in the process and now have loads of GraphQL types floating around. There's currently only three operations that a user can perform in the application and all, _i think_ should post and return the exact same data shape so i need to have a bit of a tidy up and work out if i can just have one _type_ for all operations.
+
+I also got up early this morning to tackle the delete functionality and.. _wallop_ that's now done too!
+
+I now have **C**reate **R**ead **U**pdate and **D**elete!
+
+The issue i have at the moment is that in my haste to ship i've neglected to write tests...
+
+not even one! 🙀
+
+For UI stuff i'm pretty ok and have confidence in my ability to have visually covered off all _states_ the application could be in, but for the data i'm not so sure.
+
+Apollo and Fauna are all totally new to me and whilst every thing appears to be working there's a chance that it's not, and when you start allowing users to push to a database i'm worried that it i've messed something up i'm gonna end up with data in Fauna that's incorrect... then what do i do, delete it and piss off my users?
+
+I might ask for some help here peeps. I could use Netlify's preview deploy link and give it to a handful of people to test out and can ask for feedback but anything they do is still gonna end up in the database and as mentioned i might need to delete it later.
+
+I'm gonna sit on this for a while as i have other areas i need to focus on.
+
+I need to build a kind of users themes page and a global themes page and still need to check the sign up process works smoothly.
+
+I have 15 days before the [#100DaysOfGatsby](https://twitter.com/search?q=%23100DaysOfGatsby&src=typed_query) challenge is up and i'm starting to feel the pressure. I'm really diggin my new job and not sure how much time i can commit to [skin-ui.com](https://www.skin-ui.com) over the next few weeks.
+
+I'm also really getting in to drinking at home which is a major distraction!
+
 ## [Day 84](#day-84)
 
 ##### Mar 24 2020
