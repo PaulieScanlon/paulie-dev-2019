@@ -5,6 +5,86 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 86](#day-86)
+
+##### Mar 26 2020
+
+It's been a day of many halves!
+
+I got up early and tried to implement a _user_ dropdown kind of menu thing on [skin-ui.com](https://www.skin-ui.com) using [@reach/menu-button](https://reacttraining.com/reach-ui/menu-button/) which kinda worked but i did get some weird "Cannot read property 'ownerDocument' of null" error so i gave up and decided to plan my work today.
+
+My main tasks on the new job are to refactor the UI and make a few decisions regarding the following.
+
+- What to name things
+- Where to save things
+- How to export things / named or default
+- How to create stories for things
+- How to test things
+- How to work round the Gatsby 'pages' issue - more on this later
+
+I'll start with how to name things. This is my preferred approach.
+
+directory: `components/SomeComponent`
+
+```javascript
+// components/SomeComponent/SomeComponent.js
+import { React } from "react"
+
+export const SomeComponent = () => <div>SomeComponent</div>
+```
+
+A few notes on the above; The component is a named export, it's named the same as the directory it's within and wherever possible it uses an implicit return.
+
+```javascript
+// components/SomeComponent/index.js
+export { SomeComponent } form './SomeComponent'
+```
+
+This is a _named export_ of a _named export_ but from an `index.js` in the same directory.
+
+The usage then becomes;
+
+```javascript
+// some other file
+import { SomeComponent } from "../components/SomeComponent"
+```
+
+Then at some point you might have Storybook so you'll probably want `SomeComponent.stories.js` and really there should be tests, `SomeComponent.test.js` and maybe even `_snapshots_`
+
+All of that together might look something like this:
+
+```
+|-- src
+    |-- components
+        |-- SomeComponent
+            _snapshots_
+            SomeComponent.js
+            SomeComponent.stories.js
+            SomeComponent.test.js
+            index.js
+
+```
+
+In my opinion it's kind of crucial to get this locked down early on in a project.
+
+I'm not sure why i care so much about these small details. I think it might be because when i first started doing this, Agile didn't exist and yet we still got shit done... _weird_
+
+I think it might also come from my family of tradesman where they will strictly employ a
+
+> Measure twice, cut once
+
+approach to work. And just because on computers you and _edit undo_ doesn't mean you should.
+
+I've re-imagined this phrase as;
+
+> Do it nice, not twice!
+
+You can have that for free team!
+
+Tomorrow i've got more of the same but am really looking forward to developing a rock solid testing strategy using React Testing Library, once i have my tests in place i'll feel a bit more confident refactoring the UI.
+
+I reckon with good tests you can re-build anything!
+
 ## [Day 85](#day-85)
 
 ##### Mar 25 2020
