@@ -5,6 +5,35 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 87](#day-87)
+
+##### Mar 27 2020
+
+My morning started well, i got up early to look at my UX / Dropdown issue with [www.skin-ui.com](https://www.skin-ui.com) and i tried the [reach/menu-button](https://reacttraining.com/reach-ui/menu-button) again and got the same "Cannot read property 'ownerDocument' of null" error so i gave up and wrote my own Dropdown component. It was quite an interesting process as i discovered something new about `useEffect`, maybe i'll write that up at some point.
+
+Now with this UX / navigation issue ironed out i can navigate around the app and login / out easily.
+
+I'm gonna spend the weekend working on the gallery pages which gets me very close to the finish line.
+
+The working day wasn't entirely Gatsby based today but i did run in to a small problem with Jest, React Testing Library and the Theme UI provider... oh and Storybook was giving me a lot of problems with Gatsby links and GraphQL queries... here's some comments on an open PR [Docs/visual testing with storybook updates](https://github.com/gatsbyjs/gatsby/pull/21378)
+
+But today's main battle has been with massive api responses.
+
+I've seen this on every single project i've worked on but i don't know why it always happens.
+
+Imagine this scenario: You hit an api end point and it returns an absolute ton of data, probably 2% of it useful to drive the UI.
+
+Do you...
+
+- A. Reduce it / format it once the response comes back, and only then pass it on to your UI / Context.
+- B. Just pass the entire object on to your UI.
+
+If B, do you find that a number of smaller components need to run their own operations to wrangle the data in to a format that is actually helpful, do you find theres a performance impact when doing this?
+
+My preference is to look at what we're trying to build, inspect the data and either strip out or re-format before passing it on down the line... it's usually quite clear that an object key called `node_type: '___Aadhfd` probably won't be required so maybe let's get rid of it to avoid confusion. 🤷‍♂️
+
+Have your say... tweet me [@pauliescanlon](https://twitter.com/PaulieScanlon)
+
 ## [Day 86](#day-86)
 
 ##### Mar 26 2020
