@@ -19,8 +19,6 @@ The working day wasn't entirely Gatsby based today but i did run in to a small p
 
 But today's main battle has been with massive api responses.
 
-I've seen this on every single project i've worked on but i don't know why it always happens.
-
 Imagine this scenario: You hit an api end point and it returns an absolute ton of data, probably 2% of it useful to drive the UI.
 
 Do you...
@@ -28,9 +26,11 @@ Do you...
 - A. Reduce it / format it once the response comes back, and only then pass it on to your UI / Context.
 - B. Just pass the entire object on to your UI.
 
-If B, do you find that a number of smaller components need to run their own operations to wrangle the data in to a format that is actually helpful, do you find theres a performance impact when doing this?
+If A, do you find it speeds up development as data is clean and easier to type with fewer obscure areas that require conversations.
 
-My preference is to look at what we're trying to build, inspect the data and either strip out or re-format before passing it on down the line... it's usually quite clear that an object key called `node_type: '___Aadhfd` probably won't be required so maybe let's get rid of it to avoid confusion. 🤷‍♂️
+If B, do you find that a number of smaller components need to run their own operations to wrangle the data in to a format that is helpful, do you find theres a performance impact when doing this?
+
+My preference is A, i think it's more prudent to think ahead rather than re-factor after.
 
 Have your say... tweet me [@pauliescanlon](https://twitter.com/PaulieScanlon)
 
