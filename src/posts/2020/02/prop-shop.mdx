@@ -45,13 +45,13 @@ So that's why i've created [gatsby-plugin-prop-shop](https://github.com/PaulieSc
 
 If i've peeked your interest and you're keen to seel all your prop information and you've built a Gatsby blog/site or theme follow along and i'll show you how to set it up.
 
-```js
+```javascript
 npm install @pauliescanlon/gatsby-plugin-prop-shop --save
 ```
 
 and then install the peer dependencies
 
-```js
+```javascript
 npm install gatsby-source-filesystem prop-types --save
 ```
 
@@ -59,7 +59,7 @@ You might also need to upgrade `gatsby` depending on when you're reading this, y
 
 Once you have the necessary things installed open up `gatsby-config.js` and add `@pauliescanlon/gatsby-plugin-prop-shop` to the plugins array
 
-```js
+```javascript
 // gatsby-config.js
 module.exports = {
   ...
@@ -79,7 +79,7 @@ The above example will look into the **local** `src/components` directory and fi
 
 If you're adding the plugin to your theme you'll need to provide a slightly more specific path of where to find things.
 
-```js
+```javascript
 // gatsby-config.js
 module.exports = {
   ...
@@ -99,7 +99,7 @@ In this example the `${__dirName}` tells the plugin you want the root of the fil
 
 You can add as many paths as you like to the `source` array eg:
 
-```js
+```javascript
 source: [`src/pages`, `src/layouts`, `src/components`],
 
 ```

@@ -7,7 +7,7 @@ featuredImage: gatsby-mdx-routes.jpg
 
 This little plugin was as a result of seeing this tweet
 
-<Tweet id="FezVrasta/status/1205904176171147268" />
+<Tweet tweetLink="FezVrasta/status/1205904176171147268" />
 
 where Federico Zivolo was asking how to create a menu for `.mdx` files used in a project.
 
@@ -19,12 +19,12 @@ This little plugin aims to provide a quick way to query your file system and ret
 
 To use it i recommend popping it in the defaultLayout file defined by `gatsby-plugin-mdx`
 
-```js
+```javascript
 // defaultLayout.js
-import React, { Fragment } from "react"
-import { Link } from "gatsby"
+import React, { Fragment } from "react";
+import { Link } from "gatsby";
 
-import { MdxRoutes } from "@pauliescanlon/gatsby-mdx-routes"
+import { MdxRoutes } from "@pauliescanlon/gatsby-mdx-routes";
 
 export default ({ children }) => (
   <Fragment>
@@ -43,12 +43,12 @@ export default ({ children }) => (
     </nav>
     <main>{children}</main>
   </Fragment>
-)
+);
 ```
 
 `MdxRoutes` returns it's children and sends back data for the `slug` and a `navigationLabel` which you define in the frontmatter of each of you `.mdx` files
 
-```
+```javascript
 ---
 navigationLabel: Page Title
 ---

@@ -159,9 +159,9 @@ directory: `components/SomeComponent`
 
 ```javascript
 // components/SomeComponent/SomeComponent.js
-import { React } from "react"
+import { React } from "react";
 
-export const SomeComponent = () => <div>SomeComponent</div>
+export const SomeComponent = () => <div>SomeComponent</div>;
 ```
 
 A few notes on the above; The component is a named export, it's named the same as the directory it's within and wherever possible it uses an implicit return.
@@ -177,14 +177,14 @@ The usage then becomes;
 
 ```javascript
 // some other file
-import { SomeComponent } from "../components/SomeComponent"
+import { SomeComponent } from "../components/SomeComponent";
 ```
 
 Then at some point you might have Storybook so you'll probably want `SomeComponent.stories.js` and really there should be tests, `SomeComponent.test.js` and maybe even `_snapshots_`
 
 All of that together might look something like this:
 
-```
+```javascript
 |-- src
     |-- components
         |-- SomeComponent
@@ -260,15 +260,15 @@ The below is how you set up Theme UI in Storybook 5.3
 
 ```javascript
 // .storybook/preview.js
-import React from "react"
-import { addDecorator } from "@storybook/react"
-import { ThemeProvider } from "theme-ui"
+import React from "react";
+import { addDecorator } from "@storybook/react";
+import { ThemeProvider } from "theme-ui";
 
-import yourTheme from "../src/gatsby-plugin-theme-ui"
+import yourTheme from "../src/gatsby-plugin-theme-ui";
 
 addDecorator(storyFn => (
   <ThemeProvider theme={yourTheme}>{storyFn()}</ThemeProvider>
-))
+));
 ```
 
 The `addDecorator` works a bit like `wrapRootElement` does in Gatsby and provides a nice way to _wrap_ all Storybook stories with anything you like.
@@ -625,7 +625,7 @@ I'm still working on nude-ui and spent the morning implementing the remaining ap
 I did have a bit of a ball ache with parsing the mdx directly onto CodeMirror but [chrisbiscardi](https://twitter.com/chrisbiscardi) came to my aid with a sweet little webpack trick.
 
 ```javascript
-import mdxString from "!!raw-loader!./thing.mdx"
+import mdxString from "!!raw-loader!./thing.mdx";
 ```
 
 This allows me to bypass the webpack loader for `.mdx` file types and import it as "raw" then finally pass it on to CodeMirror as a string.
@@ -674,10 +674,8 @@ I'm using the React version by [Jed Watson](https://github.com/JedWatson) but it
 
 The issue was for CodeMirror to display anything it needs to be provided as a string via the `value` prop... `JSON.stringify()` to the rescue!
 
-```JavaScript
-  <CodeMirror
-    value={JSON.stringify(themeObject, null, 2)}
-  />
+```javascript
+<CodeMirror value={JSON.stringify(themeObject, null, 2)} />
 ```
 
 but...
@@ -700,7 +698,7 @@ and yeap you're right, that's not JavaScript, and doesn't actually represent wha
 So we need to strip out the `""` marks... but only on keys not on values and only if those values are _not_ of type `string` ... regex to the rescue!
 
 ```javascript
-JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")
+JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:");
 ```
 
 but...
@@ -771,7 +769,7 @@ If you're using markdown and `.mdx` in your blog or site _and_ chose to expose t
 
 ... and here's my proposed "solution" I've decided to create a kind of object editor with live preview split screen so you can play around with the values for theme-ui and see the markdown and or components update right before your eyes.
 
-<Tweet id="PaulieScanlon/status/1234434804885655554" />
+<Tweet tweetLink="PaulieScanlon/status/1234434804885655554" />
 
 The plan is to use local storage to "save" your work as you go and to provide a "copy" button so when you're finished you can just copy the code and drop it straight into you project. Other ideas i've had are to be able to save your theme so others can use it. It could become a kind of marketplace resource for [theme-ui](https://theme-ui.com/) but i gotta walk before i can run ay!
 
@@ -930,7 +928,7 @@ Today was a travel day so i haven't been able to do much. However, i have made a
 
 For example in the [docs](https://theme-ui.com/components/badge#variants) for the `<Badge />` component it says it's default variant is `primary`, so you should be able to use it like the below and it "should" pick up styles defined in `theme.badges.primary`
 
-```js
+```javascript
 <Badge>I'm a badge</Badge>
 ```
 
@@ -952,7 +950,7 @@ To give some context what i'm attempting to do with my new theme is provide ever
 
 Here's the setup in `.js`
 
-```js
+```javascript
 // some-layout.js
 
 import { MDXProvider } from "@mdx-js/react"
@@ -966,7 +964,7 @@ import * as themeUiComponents from "@theme-ui/components"
 
 ... and here's the usage in `.mdx` (where `<Button />` is the theme-ui/components button component)
 
-```
+```javascript
 // some-page.mdx
 
 # Hey
@@ -987,7 +985,7 @@ The cool bit is all of the "things" they'll likely want to render will have alre
 
 Here's any example usage of a `<TagList />` **data component** i'm developing.
 
-```js
+```javascript
 <TagList>
   {source => (
     <Flex
@@ -1017,7 +1015,7 @@ eg:
 
 In your theme you probably have something like this
 
-```js
+```javascript
 // gatsby-plugin-theme-ui/index.js
 
 export default {
@@ -1033,7 +1031,7 @@ export default {
 
 But when you introduce `theme-ui/components` you also need
 
-```js
+```javascript
 // gatsby-plugin-theme-ui/index.js
 
 export default {
@@ -1057,7 +1055,7 @@ So if like me you're planning on supporting both `markdown` and `theme-ui/compon
 
 eg:
 
-```js
+```javascript
 // gatsby-plugin-theme-ui/index.js
 
 const textStyles = {
@@ -1122,7 +1120,7 @@ Let me explain...
 
 In markdown i might wanna do this.
 
-```
+```javascript
 # Hey, i'm a header
 
 and i'm some body copy.
@@ -1135,7 +1133,7 @@ But with `.mdx` you're able to position the body copy and the image next to each
 
 For example
 
-```js
+```javascript
 <Flex sx={{ flexWrap: "wrap" }}>
   <Box
     sx={{width: ['100%', '50%']}}
@@ -1196,7 +1194,7 @@ I really wanted to nail down how to manage dynamic `.mdx` sources.
 
 To explain this a bit more, i need to reference GatStats again. In GatStats to use the theme you have to put all of your `.mdx` blog posts in a directory located at `src/posts` and the resulting URL will be
 
-```
+```javascript
 http://www.your-site/posts/some-post
 ```
 
@@ -1206,7 +1204,7 @@ You can't because in the theme i've configured it to only source `.mdx` from `sr
 
 In my new theme i'm exposing a tiny bit of config in `gatsby-config.js` and allowing the user to tell the theme where to `source` `.mdx` from, in the example below the theme will look in both `posts` and `projects`
 
-```js
+```javascript
 module.exports = {
   ...
   plugins: [
@@ -1222,7 +1220,7 @@ module.exports = {
 
 This can be passed onto the `gatsby-config.js` in the theme.
 
-```js
+```javascript
 
 module.exports = themeOptions => {
  const { source } = themeOptions
@@ -1232,7 +1230,7 @@ module.exports = themeOptions => {
 
 From here i'm able to first test if `source` is a single string or an array of strings, and then dynamically create a `gatsby-source-filesystem` config in the `plugins` array.
 
-```js
+```javascript
 
 module.exports = themeOptions => {
   const { source } = themeOptions
@@ -1282,49 +1280,49 @@ Any `.mdx` sourced from `src/pages` will have this field already because i'm usi
 
 so in the `if` i check both that the `node.internal.type` is in fact `.mdx` and then i check that it's not a file that's already had a slug created.
 
-```js
+```javascript
 exports.onCreateNode = ({ node, actions, getNode }, themeOptions) => {
-  const { source } = themeOptions
+  const { source } = themeOptions;
 
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
 
   if (node.internal.type === "Mdx" && !node.internal.fieldOwners) {
-    let path = source
-    const value = createFilePath({ node, getNode })
+    let path = source;
+    const value = createFilePath({ node, getNode });
 
     if (Array.isArray(source)) {
       path = node.fileAbsolutePath
         .split("/")
         .filter(str => source.includes(str))
-        .toString()
+        .toString();
     }
     createNodeField({
       node,
       name: `slug`,
-      value: `/${path}${value}`,
-    })
+      value: `/${path}${value}`
+    });
   }
-}
+};
 ```
 
 The bit that took me a while to work out was what to use as the `path`.
 
 What i want to happen is any `.mdx` sourced from `src/posts` would have a URL of,
 
-```
+```javascript
 http://www.your-site/posts/some-post
 ```
 
 and if it's sourced from `src/projects` it would have a URL of,
 
-```
+```javascript
 http://www.your-site/projects/some-project
 
 ```
 
 If the `source` is single string that's pretty straight forward and i can use it as is.
 
-```js
+```javascript
   let path = source
   ...
   createNodeField({
@@ -1361,11 +1359,11 @@ To give you an example, on the home page rather than asking the user to whack a 
 
 eg:
 
-```js
+```javascript
 <Flex sx={{ flexWrap: "wrap" }}>
   <Box
     sx={{
-      width: ["100%", "50%", "33%"],
+      width: ["100%", "50%", "33%"]
     }}
   >
     <Heading variant="styles.h1">contact</Heading>
@@ -1688,52 +1686,52 @@ It turned out in my case to be the method i was using to export the `MdxEmbedPro
 
 see below
 
-```js
+```javascript
 // gatsby-browser.js
-export { wrapRootElement } from "./wrapRootElement"
+export { wrapRootElement } from "./wrapRootElement";
 ```
 
-```js
+```javascript
 // gatsby-ssr.js
-export { wrapRootElement } from "./wrapRootElement"
+export { wrapRootElement } from "./wrapRootElement";
 ```
 
 and wrapRootElement looks like this
 
-```js
+```javascript
 // wrapRootElement.tsx
-import React, { FunctionComponent } from "react"
-import { MdxEmbedProvider } from "./components/MdxEmbedProvider"
+import React, { FunctionComponent } from "react";
+import { MdxEmbedProvider } from "./components/MdxEmbedProvider";
 
 interface IWrapRootElement {
   element: React.ReactNode;
 }
 
 export const wrapRootElement: FunctionComponent<IWrapRootElement> = ({
-  element,
-}) => <MdxEmbedProvider>{element}</MdxEmbedProvider>
+  element
+}) => <MdxEmbedProvider>{element}</MdxEmbedProvider>;
 ```
 
 The first thing i changed was the name of this "component" because `wrapRootElement` is part of the gatsby api and i wasn't sure if something was getting screwed up due to a clash in names. I've since changed the name of this file to `provider.tsx`
 
 The second thing i looked at was the method of exporting the module, this now looks like the below
 
-```js
+```javascript
 // gatsby-browser.js
-exports.wrapRootElement = require(`./provider`)
+exports.wrapRootElement = require(`./provider`);
 ```
 
-```js
+```javascript
 // gatsby-ssr.js
-exports.wrapRootElement = require(`./provider`)
+exports.wrapRootElement = require(`./provider`);
 ```
 
 and the provider now looks like this
 
-```js
+```javascript
 // provider.tsx
-import React from "react"
-import { MdxEmbedProvider } from "./components/MdxEmbedProvider"
+import React from "react";
+import { MdxEmbedProvider } from "./components/MdxEmbedProvider";
 
 interface IProviderProps {
   element: React.ReactNode;
@@ -1741,7 +1739,7 @@ interface IProviderProps {
 
 module.exports = ({ element }: IProviderProps) => (
   <MdxEmbedProvider>{element}</MdxEmbedProvider>
-)
+);
 ```
 
 Whilst i think i could have kept the ES6 method for exporting in `gatsby-browser.js` it wasn't working in `gatsby-ssr.js`.
@@ -1782,7 +1780,7 @@ There is one work around that seems to do the trick and that's to manually wrap 
 
 eg:
 
-```js
+```javascript
 // layout.js
 
 <MdxEmbedProvider>
@@ -1916,7 +1914,7 @@ This his how i did it.
 
 The new component now looks like this:
 
-```js
+```javascript
 ...
 import { useDbQuery } from "gatsby-theme-docz/src/hooks/useDbQuery"
 
@@ -1949,13 +1947,13 @@ export const Props = ({ name, getPropType, isToggle }) => {
 
 ...and to use it i now do this,
 
-```js
+```javascript
 <Props name="Gist" />
 ```
 
 instead of this
 
-```js
+```javascript
 <Props of={Gist} />
 ```
 
@@ -2049,7 +2047,7 @@ Babel now coverts all `.ts` to `.js` and moves it in to a lib directory, my pack
 
 I've put the word out so hopefully i'll get this resolved soon!
 
-<Tweet id="PaulieScanlon/status/1220394346593296384" />
+<Tweet tweetLink="PaulieScanlon/status/1220394346593296384" />
 
 ## [Day 22](#day-22)
 
@@ -2064,7 +2062,7 @@ When creating navigation in any website you need to think about the depths a rou
 Example, a top depth navigation might look like this
 
 <!-- prettier-ignore -->
-```
+```javascript
 |-- home
 |-- services
 |-- contact
@@ -2073,7 +2071,7 @@ Example, a top depth navigation might look like this
 ...which is pretty easy to display an an html list, but then you get to a navigation element that might have a second or third depth, eg;
 
 <!-- prettier-ignore -->
-```
+```javascript
 |-- home
 |-- services
    |--- web design
@@ -2113,7 +2111,7 @@ All this information is contained within the `slug` and in effect all we're tryi
 A visual example....
 
 <!-- prettier-ignore -->
-```
+```javascript
 |-- home
 |-- services
    |--- web design
@@ -2129,16 +2127,16 @@ This is all the information we need to determine how many levels deep any given 
 
 My approach was to split the `slug` using `slug.split("/")`
 
-```js
-;["", ""]
+```javascript
+["", ""];
 ```
 
-```js
-;["", "services", ""]
+```javascript
+["", "services", ""];
 ```
 
-```js
-;["", "services", "web-design", ""]
+```javascript
+["", "services", "web-design", ""];
 ```
 
 Then i remove the empty strings so i'm just left with what is effectively an array of parents and children.
@@ -2169,20 +2167,20 @@ I thought about having an `ASC` and `DESC` option but that doesn't really solve 
 
 Suppose you had a graphQL response that looked a little bit like this 👇
 
-```js
-graphQlData = ["About", "Contact", "Home"]
+```javascript
+graphQlData = ["About", "Contact", "Home"];
 ```
 
 By providing a `navigationOrder` you can sort like this 👇
 
-```js
-const navigationOrder = ["Home", "About", "Contact"]
+```javascript
+const navigationOrder = ["Home", "About", "Contact"];
 
 graphQlData.sort(
   (a, b) =>
     navigationOrder.indexOf(a.navigationLabel) -
     navigationOrder.indexOf(b.navigationLabel)
-)
+);
 ```
 
 Unlike the default method of sorting instead of simply determining if `a - b` we can use the `indexOf` from the `navigationOrder` array which is provided via a prop.
@@ -2240,7 +2238,7 @@ This, as it stands doesn't have a way to group by submenu but the theme does all
 
 This is quite key given i need a way to determine if a file is part of a menu as well as part of a submenu.
 
-I've since added a sumbmenu property to the `.mdx` files that i will use to "group by" and have set to work on altering the menu object created by `docz` core and recursively looping over any object that contains a submenu.
+I've since added a submenu property to the `.mdx` files that i will use to "group by" and have set to work on altering the menu object created by `docz` core and recursively looping over any object that contains a submenu.
 
 Now i have an object that i can use to drive the UI.
 
@@ -2322,7 +2320,7 @@ On some components like YouTube the `id` is the video id and that's how YouTube 
 
 I had some interesting Tweets back and forth with [@AskGatsbyJS](https://twitter.com/AskGatsbyJS) and [John Otander](https://twitter.com/4lpine) and the general consensus was in Open Source Libraries it pays to be clear and it doesn't matter that names or prop names are long. I think there's a post or Tweet out there by Dan Abramov about how the function names at Facebook are really long, but the upside is it's clear what they do.
 
-<Tweet id="4lpine/status/1216821698600681472" />
+<Tweet tweetLink="4lpine/status/1216821698600681472" />
 
 I've tried to keep some consistency and the `id` paradigm is still in use but now it's more explicit `youTubeId`.
 
@@ -2386,11 +2384,11 @@ I've never really understood regex but i did spend some time reading, watching a
 
 Here's the final regex pattern `/<a href="\/w/g` which when used in the response looks like this
 
-```js
+```javascript
 text["*"].replace(
   /<a href="\/w/g,
   '<a target="_blank" href="//en.wikipedia.org/w'
-)
+);
 ```
 
 I added the `target="_blank"` as it feels like a better option for users, perhaps i'll turn this into a prop but it works like a charm so i'm happy to move forward.
@@ -2431,13 +2429,13 @@ While i was digging around the Twitch embed code i noticed the **skip to** optio
 
 The way Twitch handles the time code is by having the following parameters as part of the URL.
 
-```js
+```javascript
 &t=0h21m14s
 ```
 
 `t` is the time parameter which accepts a numerical value followed by the time digit `h` for hours, `m` for minutes and `s` for seconds. I've exposed a `skipTo` prop on the Twitch component so you can pass through a time-code.
 
-```js
+```javascript
 skipTo={{ h: 0, m: 21, s: 14 }}
 ```
 
@@ -2445,19 +2443,19 @@ I then thought i'd add this to the _YouTube_ component, but YouTube do the time-
 
 The URL parameter looks like this
 
-```js
+```javascript
 &start=1274
 ```
 
 After doing a bit of maths i realized the time-code is the total minutes from the start of the video. I wanted to keep the props the same as i've done with Twitch so i needed to calculate the total time before i pass it on to the URL.
 
-```js
-const { h, m, s } = skipTo
+```javascript
+const { h, m, s } = skipTo;
 
-const tH = h * 60
-const tM = m * 60
+const tH = h * 60;
+const tM = m * 60;
 
-const startTime = tH + tM + s
+const startTime = tH + tM + s;
 // startTime = 1274
 ```
 
@@ -2485,19 +2483,19 @@ The main bit that i didn't initially understand was how to handle the `JSON` cal
 
 If we start with a typical Gist URL and run it, you'll hit the [https://gist.github.com/](https://gist.github.com/)
 
-```js
+```javascript
 https://gist.github.com/PaulieScanlon/ca0cc9239176066492cb2aba435edbf7
 ```
 
 To provide a callback we can add on `gist_callback` i Googled around for how to add the callback for ages and found no official docs, just examples of how others have done this.
 
-```js
+```javascript
 ?gist_callback_ca0cc9239176066492cb2aba435edbf7
 ```
 
 This is now the complete URL.
 
-```js
+```javascript
 https://gist.github.com/PaulieScanlon/ca0cc9239176066492cb2aba435edbf7?callback=gist_callback_ca0cc9239176066492cb2aba435edbf7
 ```
 
@@ -2505,7 +2503,7 @@ The last step was to inject a `<script>` tag with the URL in a `useEffect` life-
 
 The response comes back with a `div` object which contains all the HTML for the Gist which can be handled by `dangerouslySetInnerHTML`
 
-```js
+```javascript
 <div dangerouslySetInnerHTML={{ __html: response.div }} />
 ```
 
@@ -2523,7 +2521,7 @@ Happy Embedding! 🧼
 
 Yesterday was a pretty good day, i was relieved to finally get `docz` setup the way i wanted. I also launched a very early version of [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed). A fellow Gatsby enthusiast who i met at Gatsby Days London [Scott Spence](https://twitter.com/spences10) was keen to try it out... so, here ya go Scott!
 
-<Tweet id="PaulieScanlon/status/1214241819397103618" />
+<Tweet tweetLink="PaulieScanlon/status/1214241819397103618" />
 
 This evening i'll mostly be focussing on documenting and testing the props for each component and perhaps if there's time i'll investigate what other providers i can include. [dev.to](https://dev.to/) would be sweet but i had a quick google and there's an open issue on [GitHub](https://github.com/thepracticaldev/dev.to/issues/1445) regarding this so i don't know if it's possible yet... stay tuned 📺
 
@@ -2542,22 +2540,22 @@ The problem was twofold.
 
 The way to do point 2 is to add `docgenConfig.searchPath` to `doczrc.js` which tells `docz` where to look for component props. You won't find this in their docs but i did find it amongst the [examples](https://github.com/doczjs/docz/blob/master/examples/monorepo-separate-docs/packages/docs/doczrc.js)
 
-```js
+```javascript
 // doczrc.js
 export default {
   docgenConfig: {
-    searchPath: directoryPath,
-  },
-}
+    searchPath: directoryPath
+  }
+};
 ```
 
 and `directoryPath` is as follows;
 
-```js
+```javascript
 const directoryPath = path.join(
   process.cwd(),
   "../@pauliescanlon/gatsby-mdx-embed/src/components"
-)
+);
 ```
 
 First i'm using `path.join` to make sure i don't end up with un-wanted `/`'s, then i'm using `process.cwd` which is the node.js method for working out the **C**urrent **W**orking **D**irectory then finally i go up a level `"../"` and into the yarn workspace where i'm writing my `MdxComponents`
@@ -2584,27 +2582,23 @@ None the less it's all looking pretty good now. I might have found a bug with ho
 
 The problem i'm currently experiencing is with the `<Props>` component which is one of the [built-in-components](https://www.docz.site/docs/built-in-components) which can create prop tables for my components. What's not initially made clear is that it'll only work if the component in question is local to the `.mdx`. For example `docz` will generate a prop table for `<MyComponent>` it it's in the same **things** folder as `MyMdx.mdx`
 
-```
- - things
-    MyComponent.js
-    MyMdx.mdx
-
+```javascript
+-things;
+MyComponent.js;
+MyMdx.mdx;
 ```
 
 ... But it wont work if i move `<MyComponent>` to somewhere else, for example...
 
-```
-- components
-  MyComponent.js
-
-- pages
-  MyMdx.mdx
-
+```javascript
+-components;
+MyComponent.js - pages;
+MyMdx.mdx;
 ```
 
 If you want to be able to source files from somewhere else you have to set the `src` value in `doczrc.js`
 
-```js
+```javascript
 export default {
   ...
   src: './components',
@@ -2613,7 +2607,7 @@ export default {
 
 But my docs site and my MdxEmbed project are two different repos linked together by yarn workspaces so i think i need to tell docz to jump up a level to find my components.
 
-```js
+```javascript
 export default {
   ...
   src: '../@pauliescanlon/gatsby-mdx-embed/src/components',
@@ -2648,7 +2642,7 @@ This post is starting to feel like an agile standup so perhaps i'll treat it lik
 
 After writing yesterdays blog post i had a think about how i was gonna handle the headings with nested `<a>` styling in [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) which was actually pretty easy. I'm using [theme-ui](https://theme-ui.com/) for everything so a little update to my headings object to style the child `<a>` was all that was needed.
 
-```js
+```javascript
 const headings = {
   ...
   a: {
@@ -2669,20 +2663,20 @@ For this to work in my theme i needed to look at the `gatsby-browser` api. There
 
 The main guts of this functionality is wrapped up in a little function i created in `gatsby-browser` which is called by both of the above methods.
 
-```js
+```javascript
 const anchorScroll = location => {
   if (location && location.hash) {
     const item = document.querySelectorAll(`a[href^="${location.hash}"]`)[0]
-      .offsetTop
-    const mainNavHeight = document.querySelector(`header`).offsetHeight
+      .offsetTop;
+    const mainNavHeight = document.querySelector(`header`).offsetHeight;
     setTimeout(() => {
       window.scrollTo({
         top: item - mainNavHeight,
-        behavior: "smooth",
-      })
-    }, 50)
+        behavior: "smooth"
+      });
+    }, 50);
   }
-}
+};
 ```
 
 In short all this is doing is finding the `<a>` element that contains the `#` which is found from the url / `location.hash` then scrolls to it. There's an offset in there because [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) has a position fixed header so i needed to calculate the top position minus the height of the header so the selected `#` isn't under the header when the browser scrolls to it.

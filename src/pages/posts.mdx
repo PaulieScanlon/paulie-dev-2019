@@ -1,0 +1,66 @@
+---
+navigationLabel: Posts
+---
+
+import { format } from 'date-fns'
+
+# posts
+
+<SourceList filter="posts">
+  {posts => (
+    <Flex
+      sx={{
+        flexWrap: "wrap",
+        ml: theme => `-${theme.space[2]}px`,
+        mr: theme => `-${theme.space[2]}px`,
+      }}
+    >
+      {posts
+      .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date))
+      .map((edge, index) => {
+        const {
+          frontmatter: { title, featuredImage, tags, date },
+          excerpt,
+          fields: { slug },
+        } = edge.node
+        return (
+          <Box
+            key={index}
+            sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', mb: 3, 
+            maxWidth: ["100%", "100%", "50%", "50%"],
+            width: ["100%", "100%", "50%", "50%"] }}
+          >
+             <Link href={slug} sx={{ textDecoration: "none", display: 'flex', flex: '1 1 auto', flexDirection: 'column', m: theme => `0px ${theme.space[2]}px`, minHeight: '1px' }}>
+    
+               <Card sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', minHeight: '1px' }}>
+                {featuredImage && featuredImage.childImageSharp && (
+                  <Box sx={{ minHeight: '1px'}}>
+                    <Image
+                      src={featuredImage.childImageSharp.fluid.src}
+                      alt={featuredImage.childImageSharp.fluid.originalName}
+                    />
+                  </Box>
+                )}
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flex: '1 1 auto', 
+                    flexDirection: 'column', 
+                    p: 3}}>
+                  <Heading variant="styles.h4" sx={{ color: "text" }}>
+                    {title}
+                  </Heading>
+                   <Text sx={{mb: 1, color: 'success'}}>{format(new Date(date), 'd-MMM-u')}</Text>
+                   <Text sx={{mb: 1, color: 'text', wordBreak: 'break-word'}}>{excerpt}</Text>
+                  </Box>
+                  <Box sx={{p: 3}}>
+                  <Text sx={{color: 'primary'}}>View Post</Text>
+                  </Box>
+              </Card>
+   
+            </Link> 
+          </Box>
+        )
+      })}
+    </Flex>
+  )}
+</SourceList>
