@@ -5,6 +5,78 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 90](#day-90)
+
+##### Mar 30 2020
+
+Back to work!
+
+Early start this morning and i made a few changes to [skin-ui.com](https://www.skin-ui.com) and exposed a little more theme information on the _your themes_ section. I exposed the `user.id` and the `theme.id`. Not huge changes but if i need to manually delete something from the database if a user emails me i'll be able to find the entry more easily if they provide one or the other id.
+
+Next up, the day job. Todays task mainly centered around how to build a UI with Theme UI and the code base i'm working on has the maddest looking theme object i've ever seen. It looks like all the styles from Tailwind but in a Theme UI shape.
+
+This is not to say Tailwind isn't hugely powerful but Tailwind and Theme UI are two very different beasts.
+
+I'll try and explain, first with _one_ example key from the Theme UI spec.
+
+```javascript
+export default {
+...
+  space: [4, 8, 16, 24, 32, 48],
+}
+```
+
+You can see from the `space` key that there are only six different sizes, this is so when developing a UI if you need to add a margin or padding to an element you can use one of these options. Most likely in a good design system it'll be `space[2]` or `space[3]` which gives you a nice amount of space of `16px` or `24px` depending on which one you choose.
+
+If you have a theme that has something like this;
+
+```javascript
+export default {
+...
+  space: {
+    px: "1px",
+    "0": "0",
+    "1": "0.25rem",
+    "2": "0.5rem",
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.25rem",
+    "6": "1.5rem",
+    "8": "2rem",
+    "10": "2.5rem",
+    "12": "3rem",
+    "16": "4rem",
+    "20": "5rem",
+    "24": "6rem",
+    "32": "8rem",
+    "40": "10rem",
+    "48": "12rem",
+    "56": "14rem",
+    "64": "16rem",
+  },
+}
+```
+
+What you've done is ignore any kind of design system and are saying "use any padding or spacing you like because there's loads to choose from", which completely defeats the point of a theme.
+
+If you're going to take this approach you might as well not have any options in the _theme_ and allow anyone developing the UI to just hard code `px` or `rem` values wherever they like.
+
+The point, in my opinion of a _theme_ is to restrict css properties to only a few options. The less time you spend thinking about how much padding or margin you need the more time you get actually developing features.
+
+Also, think about how much time you'll spend on PR's, how on earth are you going to know what all those values are and how will you know from looking at the code if something has the correct amount of padding or margin.
+
+To note, this is one of the smaller keys. The `sizes` key has **58** possible options and colors has **93**!
+
+**What could you possibly need 93 colors for?!?!?**
+
+My main point being, if you're exposing that many options in a _theme_ which is supposed to reduce the css complexity you might as well ditch Theme UI altogether
+
+Madness i tell thee, absolute madness!
+
+Next up was _forms_ i used to hate forms in React... but then [Formik](https://jaredpalmer.com/formik/) came along and boom! everything changed. Combine this with [Yup](https://github.com/jquense/yup) and you've rock solid forms which manage their own state and really powerful validation without having to really think about anything.
+
+I believe that like Theme UI, Formik's approach is to remove those lower level problems so that you can start exploring higher level abstractions, and in both cases if you use the technologies for the purpose they're were intended you can dramatically speed up UI development. Sadly i've seen this misunderstanding all to often and it always ends badly.
+
 ## [Day 89](#day-89)
 
 ##### Mar 29 2020
