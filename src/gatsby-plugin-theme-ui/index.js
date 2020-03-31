@@ -17,18 +17,6 @@ export default {
 
   styles: {
     ...baseTheme.styles,
-    // h1: {
-    //   ...baseTheme.styles.h1,
-    //   fontSize: `40px !important`
-    // },
-    h2: {
-      ...baseTheme.styles.h2,
-      fontSize: 24
-    },
-    h5: {
-      ...baseTheme.styles.h5,
-      fontSize: 14
-    },
     p: {
       a: {
         ...baseTheme.styles.p.a,

@@ -5,6 +5,32 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 91](#day-91)
+
+##### Mar 31 2020
+
+I've become a night owl! 🦉
+
+After i posted yesterday, and i don't know why but i decided to switch this blog over to using my other theme [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com/), it was a pretty easy switch but i wanna make a couple more changes before i deploy so we're stuck with [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) for the time being.
+
+Then i went to bed and couldn't sleep because i kept thinking about an enhancement i wanted to make to [skin-ui.com](https://www.skin-ui.com)
+
+There's a [showcase](https://www.skin-ui.com/showcase/) section and it wasn't really _showcasing_ the themes because i wasn't able to pull the `theme_object` down from Fauna using an `indexes` lookup.
+
+I did some investigation and `theme_object` was returning `null` which i found very odd because if you're on the Editor page it pulls the `theme_object` down ok.
+
+I'm not sure if i'm doing something wrong with the query but if i query all themes using an `indexes` lookup rather than by a specific `id` i get `null`
+
+I found that if i save the data as a `string` rather than an `object` in both queries `theme_object` comes back ok... so that's what i've done.
+
+No there's some pretty sweet looking _Empty States_ when you visit the [showcase](https://www.skin-ui.com/showcase/) section and they represent the colours used in each of the themes that users have saved.
+
+On to the day job.
+
+Today i've been building out a customers reviews section, nothing new here, just more Formik and using Theme UI to style stuff.
+
+Tomorrow i've gone a bit more to do but so far so good. Once the UI part is done i hope to be investigating a source plugin which will be great as it's not something i've done with Gatsby plugins yet so i'm excited about that.
+
 ## [Day 90](#day-90)
 
 ##### Mar 30 2020
