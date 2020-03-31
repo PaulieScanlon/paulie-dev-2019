@@ -1,35 +1,56 @@
 module.exports = {
   siteMetadata: {
-    title: "Paul Scanlon",
+    name: "Paul Scanlon",
     description:
-      "I'm a React UI developer / UX Engineer (contract). React, GatsbyJs, JavaScript, TypeScript/Flow, StyledComponents, Storybook, TDD (Jest/Enzyme) and a tiny bit of Node.js.",
+      "I'm a React UI developer / UX Engineer (contract). React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Storybook, TDD (Jest/Enzyme) and a tiny bit of Node.js.",
     keywords: [
       "React",
-      "GatsbyJs",
+      "Gatsby.js",
       "JavaScript",
       "TypeScript",
       "Flow",
       "StyledComponents",
+      "Theme UI",
       "Jest",
       "Enzyme",
       "Node.js",
+      "Component Library"
     ],
-    siteURL: "https://paulie.dev",
-    siteImage: "images/gatstats_1080x608.jpg",
+    siteUrl: "https://paulie.dev",
+    siteImage: "images/paulie-open-graph-image.jpg",
+    profileImage: ``,
+    lang: `en`,
     config: {
-      headerHeight: 64,
-      sideBarWidth: 240,
-      twitter: "pauliescanlon",
-      github: "pauliescanlon",
-    },
+      sidebarWidth: 200
+    }
   },
   plugins: [
-    `@pauliescanlon/gatsby-theme-gatstats`,
+    `@pauliescanlon/gatsby-mdx-embed`,
+    {
+      resolve: "@pauliescanlon/gatsby-theme-terminal",
+      options: {
+        source: ["posts"]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Paul Scanlon`,
+        short_name: `Ps`,
+        start_url: `/`,
+        lang: `en`,
+        background_color: `#282a36`,
+        theme_color: `#ff79c6`,
+        display: `standalone`,
+        icon: `src/manifesticon-512x512.png`
+      }
+    },
+    `gatsby-plugin-offline`,
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "UA-76055934-4",
-      },
-    },
-  ],
-}
+        trackingId: "UA-76055934-4"
+      }
+    }
+  ]
+};

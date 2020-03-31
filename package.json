@@ -6,15 +6,24 @@
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "start": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "serve": "gatsby serve"
   },
   "dependencies": {
-    "@pauliescanlon/gatsby-theme-gatstats": "^0.0.57",
-    "@theme-ui/components": "^0.2.50",
-    "gatsby": "^2.18.5",
+    "@mdx-js/mdx": "^1.5.7",
+    "@mdx-js/react": "^1.5.7",
+    "@pauliescanlon/gatsby-mdx-embed": "^0.0.17",
+    "@pauliescanlon/gatsby-theme-terminal": "^0.0.8",
+    "@theme-ui/color": "^0.3.1",
+    "@theme-ui/prism": "^0.3.0",
+    "date-fns": "^2.11.1",
+    "gatsby": "^2.19.22",
     "gatsby-plugin-google-analytics": "^2.1.31",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "theme-ui": "^0.2.52"
+    "gatsby-plugin-manifest": "^2.2.42",
+    "gatsby-plugin-mdx": "^1.0.74",
+    "gatsby-plugin-offline": "^3.0.35",
+    "gatsby-source-filesystem": "^2.1.48",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   }
 }

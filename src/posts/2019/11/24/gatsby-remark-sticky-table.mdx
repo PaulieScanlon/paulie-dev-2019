@@ -1,6 +1,6 @@
 ---
 title: gatsby-remark-sticky-table
-tags: ["gatsbyJs", "gatsby-plugin", "gatsby-transformer-remark"]
+tags: ["gatsby.js", "gatsby-plugin", "gatsby-transformer-remark"]
 date: 2019-12-14
 featuredImage: gatsby-remark-sticky-table.jpg
 ---
@@ -21,27 +21,27 @@ Well that's what i thought at first, until i started reading about [remark](http
 
 I then stumbled upon this great little tutorial [https://www.gatsbyjs.org/docs/remark-plugin-tutorial/](https://www.gatsbyjs.org/docs/remark-plugin-tutorial/) in short what it shows is how to grab references to nodes from markdown and then modify them before passing them back as html
 
-```js
-const visit = require("unist-util-visit")
-const toString = require("mdast-util-to-string")
+```javascript
+const visit = require("unist-util-visit");
+const toString = require("mdast-util-to-string");
 
 module.exports = ({ markdownAST }, pluginOptions) => {
   visit(markdownAST, "heading", node => {
-    let { depth } = node
-    if (depth !== 1) return
-    let text = toString(node)
+    let { depth } = node;
+    if (depth !== 1) return;
+    let text = toString(node);
     const html = `
         <h1 style="color: rebeccapurple">
           ${text}
         </h1>
-      `
-    node.type = "html"
-    node.children = undefined
-    node.value = html
-  })
+      `;
+    node.type = "html";
+    node.children = undefined;
+    node.value = html;
+  });
 
-  return markdownAST
-}
+  return markdownAST;
+};
 ```
 
 In the above code snippet we can "visit" the markdownAST and look for the "heading" node, later on we check to see if the node has a depth of 1, this is an html `<h1>` if we wanted to visit the `<h2>` element we could look for a depth of 2 ... you get the idea.
