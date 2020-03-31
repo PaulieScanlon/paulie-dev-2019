@@ -20,7 +20,7 @@ export default {
     p: {
       a: {
         ...baseTheme.styles.p.a,
-        color: "primary"
+        color: "secondary"
       },
       code: {
         ...baseTheme.styles.p.code,
@@ -33,7 +33,7 @@ export default {
     },
     a: {
       ...baseTheme.styles.a,
-      color: "primary"
+      color: "secondary"
     }
   }
 };
