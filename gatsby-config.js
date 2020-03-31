@@ -21,7 +21,7 @@ module.exports = {
     profileImage: ``,
     lang: `en`,
     config: {
-      sidebarWidth: 280
+      sidebarWidth: 200
     }
   },
   plugins: [
