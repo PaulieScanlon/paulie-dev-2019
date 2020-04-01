@@ -25,7 +25,15 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
 
 ## contact
 
-<Divider/>
+<Text>Email</Text>
+<Link
+  href="mailto:pauliescanlon@gmail.com"
+  target="_blank"
+  variant="styles.a"
+>
+  pauliescanlon@gmail.com
+</Link>
+<Divider />
 
 <Text>Twitter</Text>
 <Link
@@ -55,7 +63,8 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
 >
   pauliescanlon.io
 </Link>
-
+<Divider />
+<Divider />
 </Box>
 
 <Box
@@ -65,65 +74,32 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
   }}
 >
 
-## blog topics
-
-<Divider/>
-
-<TagList>
-  {tags => (
-      <Box>
-        {tags
-          .sort((a, b) => b.percent - a.percent)
-          .map((tag, index) => {
-            const { name, count, percent } = tag
-            return (
-              <Badge
-                key={index}
-                variant="primary"
-                sx={{
-                  mr: 2,
-                  mb: 2,
-                  color: mix("secondary", "primary", `${index / tags.length}`),
-                  borderColor: mix(
-                    "secondary",
-                    "primary",
-                    `${index / tags.length}`
-                  ),
-                }}
-              >
-                {name}
-              </Badge>
-            )
-          }
-        )}
-      </Box>
-    )}
-</TagList>
-
-</Box>
-</Flex>  
-
-<Divider />
-<Divider />
-
-<Flex 
-  sx={{ flexWrap: 'wrap' }}
->
-<Box
-  sx={{ 
-    pr: [0, 2], 
-    width: ['100%', '50%']
-  }}
->
 
 ## posts by day
 
-<Divider/>
-
+<Flex
+  sx={{ flexWrap: "wrap" }}
+>
+<Box
+  sx={{
+    width: '50%',
+  }}
+>
 <SourceDays filter='posts'>
   {sourceDays => {
     const currentYear = sourceDays[sourceDays.length - 1]
     return (
+       <Box
+        sx={{
+          pr: 2
+        }}
+       >
+         <Text
+          sx={{
+            color: "primary",
+            mb: 2
+          }}
+         >{currentYear[0].year}</Text>
        <Box>
         {currentYear.map((day, index) => {
           const { name, count, percent } = day
@@ -161,10 +137,156 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
           )
         })}
       </Box>
+      </Box>
     )
   }}
 </SourceDays>
 </Box>
+<Box
+  sx={{
+    width: '50%'
+  }}
+>
+<SourceDays filter='posts'>
+  {sourceDays => {
+    const currentYear = sourceDays[sourceDays.length - 2]
+    return (
+       <Box
+        sx={{
+          pl: 2
+        }}
+       >
+         <Text
+          sx={{
+            color: "secondary",
+            mb: 2
+          }}
+         >{currentYear[0].year}</Text>
+       <Box>
+        {currentYear.map((day, index) => {
+          const { name, count, percent } = day
+          return (
+            <Flex
+              key={index}
+              sx={{
+                backgroundColor: 'surface',
+                flexDirection: 'column',
+                mb: 2,
+                position: 'relative',
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: 'secondary',
+                  height: '100%',
+                  position: 'absolute',
+                  width: `${percent}%`,
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'relative',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text sx={{ textTransform: 'capitalize', pl: 2 }}>
+                  {name}
+                </Text>
+                <Text sx={{ pr: 2 }}>{`x${count}`}</Text>
+              </Box>
+            </Flex>
+          )
+        })}
+      </Box>
+      </Box>
+    )
+  }}
+</SourceDays>
+<Divider />
+<Divider />
+</Box>
+</Flex>
+
+</Box>
+</Flex>  
+
+<Box>
+
+## posts by month
+
+<Divider/>
+
+<Flex 
+  sx={{ flexWrap: 'wrap' }}
+>
+<Box
+  sx={{ 
+    pr: [0, 2], 
+    width: ['100%', '50%']
+  }}
+>
+
+<SourceMonths>
+  {sourceMonths => {
+    const currentYear = sourceMonths[sourceMonths.length - 1]
+    return (
+      <Box sx={{ backgroundColor: 'surface', p: 3 }}>
+        <Heading variant="styles.h4" sx={{ color: "primary" }}>{currentYear[0].year}</Heading>
+        <Box sx={{ display: 'flex', flex: '1 1 auto', height: 181 }}>
+          <Flex sx={{ flexWrap: 'wrap', width: '100%' }}>
+            {currentYear.map((month, index) => {
+              const { initial, count, percent } = month
+              return (
+                
+                <Box
+                  key={index}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    pl: 1,
+                    pr: 1,
+                    width: `${100 / currentYear.length}%`,
+                  }}
+                >
+                 <Text
+                    sx={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    {`x${count}`}
+                  </Text>
+                  <Box
+                    sx={{
+                      backgroundColor: 'primary',
+                      height: `${percent}%`,
+                      p: 1,
+                    }}
+                  />
+                  <Text
+                    sx={{
+                      textTransform: 'uppercase',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {initial}
+                  </Text>
+                </Box>
+              )
+            })}
+          </Flex>
+        </Box>
+      </Box>
+    )
+  }}
+</SourceMonths>
+
+<Divider />
+<Divider />
+
+</Box>
+
 <Box
   sx={{ 
     pl: [0, 2], 
@@ -172,21 +294,18 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
   }}
 >
 
-## posts by month
-
-<Divider/>
-
 <SourceMonths>
   {sourceMonths => {
-    const currentYear = sourceMonths[sourceMonths.length - 1]
+    const currentYear = sourceMonths[sourceMonths.length - 2]
     return (
       <Box sx={{ backgroundColor: 'surface', p: 3 }}>
-        <Heading variant="styles.h4">{currentYear[0].year}</Heading>
-        <Box sx={{ display: 'flex', flex: '1 1 auto', height: 148 }}>
+        <Heading variant="styles.h4" sx={{ color: "secondary" }}>{currentYear[0].year}</Heading>
+        <Box sx={{ display: 'flex', flex: '1 1 auto', height: 181 }}>
           <Flex sx={{ flexWrap: 'wrap', width: '100%' }}>
             {currentYear.map((month, index) => {
               const { initial, count, percent } = month
               return (
+                
                 <Box
                   key={index}
                   sx={{
@@ -230,15 +349,53 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
   }}
 </SourceMonths>
 
+<Divider />
+<Divider />
+
 </Box>
 </Flex>
+</Box>
 
+## blog topics
 
+<Divider/>
+
+<TagList>
+  {tags => (
+      <Box>
+        {tags
+          .sort((a, b) => b.percent - a.percent)
+          .map((tag, index) => {
+            const { name, count, percent } = tag
+            return (
+              <Badge
+                key={index}
+                variant="primary"
+                sx={{
+                  mr: 2,
+                  mb: 2,
+                  color: mix("secondary", "primary", `${index / tags.length}`),
+                  borderColor: mix(
+                    "secondary",
+                    "primary",
+                    `${index / tags.length}`
+                  ),
+                }}
+              >
+                {name}
+              </Badge>
+            )
+          }
+        )}
+      </Box>
+    )}
+</TagList>
 
 <Divider/>
 <Divider/>
 
 ## latest posts
+
 <Divider/>
 
 <SourceList filter="posts">
