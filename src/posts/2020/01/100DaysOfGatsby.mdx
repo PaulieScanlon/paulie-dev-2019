@@ -5,6 +5,41 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 93](#day-93)
+
+##### Apr 2 2020
+
+Never deploy in a hurry!
+
+That's the main take away for today. I was working on two new features for [skin-ui.com](https://www.skin-ui.com) these were:
+
+- Allow the admin user write access to all themes
+- Add a _save_ icon button to the editor toolbar
+
+Admin user access was a carry over from yesterday and i still can't really work out why my environment variables in Netlify are undefined when i deploy but in any case if i run locally and log in as admin i can perform admin operations, one being write access to other users themes. This functionality is possible because i conditionally render the settings icon button if the "logged in" user id matches the user id from the theme saved in the database OR if it matches the user id of my admin login.
+
+```javascript
+state.isUserOwner || (state.user.id === process.env.SKIN_UI_USER_ID && ( // render UI)
+```
+
+Once this was working i set about adding a _save_ icon button to the editor toolbar, this is to improve the UX. Before this you had to open the settings panel to get at the _save_ button which i thought was a bit shitty.
+
+but...
+
+in my haste to add the _save_ icon button i forgot to add the condition, and deployed. It wasn't until a bit later when i noticed the default theme had changed... i thought ah! i've been hacked!
+
+but nope, i logged in with my regular user details and viewed the default theme and sure enough the _save_ icon button was there meaning anyone could just save over the top of the default theme!
+
+I was in such a hurry to deploy this new feature this morning before i started work that i hadn't fully tested the functionality... a mistake i won't make again!
+
+Also... if i'd actually had unit tests this would have probably been caught before i even committed the changes.
+
+A lesson learned.
+
+On to the day job.
+
+Nothing really new to report, just carrying on with a customer review feature, got all the main UI parts built and am now moving on to improving my tests.
+
 ## [Day 92](#day-92)
 
 ##### Apr 1 2020
