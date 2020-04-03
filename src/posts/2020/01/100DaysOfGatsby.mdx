@@ -5,6 +5,30 @@ date: 2020-01-01
 featuredImage: 100DaysOfGatsby.jpg
 ---
 
+## [Day 94](#day-94)
+
+##### Apr 3 2020
+
+Challenge accepted... challenge failed 😔
+
+Today was a good opportunity to catch up on the actual [#100DaysOfGatsby](https://twitter.com/search?q=%23100DaysOfGatsby&src=typed_query) challenges and the headless CMS one seemed quite pertinent given my recent shift over to one theme two sites. Both my commercial portfolio and blog have the same intro header, and it would be nice if they both pulled that content from a CMS so as and when i update it i only have to do it the once.
+
+The recent challenge to use `gatsby-source-contentful` fits my needs so this morning i set about adding the source plugin to this blog... but sadly ran in to issues immediately. There seems to be some kind of clash going on with my use of `onCreateNode` in the theme. I got as far as console logging out a few values to see if i could work out what's going on but i feel like it's a job for the weekend now.
+
+The day job was pretty intense today. I've recently completed quite a large feature which involves a number of form elements and some odd / complicated interactivity that results in conditional rendering.
+
+I did think during development that it would be hard to test.. and i was right.
+
+For example, in one part of the feature there's a form that you can't submit until all five text inputs have a value, but the last three inputs are only revealed if one of the first two has been touched and has an input value.
+
+The test for this is mad... i've had to use async and await to first fireEvent from one of the first two inputs and only then can i assert if the remaining three are visible.
+
+I'm still not quite there with the test as i then need to assert that the button is disabled until the last three and the first one that wasn't originally touched also have input values.
+
+Just writing this out is complicated, imagine how odd this form will be to use, those poor users!
+
+Anyway i've learned a lot about React Testing Library today and am quite liking working with it. I'm still not quite ready to ditch the Enzyme love but maybe i can just like both equally and leave it at that.
+
 ## [Day 93](#day-93)
 
 ##### Apr 2 2020
@@ -355,7 +379,7 @@ import { ThemeProvider } from "theme-ui";
 
 import yourTheme from "../src/gatsby-plugin-theme-ui";
 
-addDecorator(storyFn => (
+addDecorator((storyFn) => (
   <ThemeProvider theme={yourTheme}>{storyFn()}</ThemeProvider>
 ));
 ```
@@ -801,7 +825,7 @@ I know what you're thinking.... `JSON.parse()` to the rescue!
 ```javascript
 <CodeMirror
   value={JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")}
-  onChange={event => JSON.parse(event)}
+  onChange={(event) => JSON.parse(event)}
 />
 ```
 
@@ -812,7 +836,7 @@ Ahh!! so now we need to put the quotes back in ... regex to the rescue again!
 ```javascript
 <CodeMirror
   value={JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")}
-  onChange={event =>
+  onChange={(event) =>
     JSON.parse(event.replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2": '))
   }
 />
@@ -1382,13 +1406,13 @@ exports.onCreateNode = ({ node, actions, getNode }, themeOptions) => {
     if (Array.isArray(source)) {
       path = node.fileAbsolutePath
         .split("/")
-        .filter(str => source.includes(str))
+        .filter((str) => source.includes(str))
         .toString();
     }
     createNodeField({
       node,
       name: `slug`,
-      value: `/${path}${value}`
+      value: `/${path}${value}`,
     });
   }
 };
@@ -1452,7 +1476,7 @@ eg:
 <Flex sx={{ flexWrap: "wrap" }}>
   <Box
     sx={{
-      width: ["100%", "50%", "33%"]
+      width: ["100%", "50%", "33%"],
     }}
   >
     <Heading variant="styles.h1">contact</Heading>
@@ -1797,7 +1821,7 @@ interface IWrapRootElement {
 }
 
 export const wrapRootElement: FunctionComponent<IWrapRootElement> = ({
-  element
+  element,
 }) => <MdxEmbedProvider>{element}</MdxEmbedProvider>;
 ```
 
@@ -2633,8 +2657,8 @@ The way to do point 2 is to add `docgenConfig.searchPath` to `doczrc.js` which t
 // doczrc.js
 export default {
   docgenConfig: {
-    searchPath: directoryPath
-  }
+    searchPath: directoryPath,
+  },
 };
 ```
 
@@ -2753,7 +2777,7 @@ For this to work in my theme i needed to look at the `gatsby-browser` api. There
 The main guts of this functionality is wrapped up in a little function i created in `gatsby-browser` which is called by both of the above methods.
 
 ```javascript
-const anchorScroll = location => {
+const anchorScroll = (location) => {
   if (location && location.hash) {
     const item = document.querySelectorAll(`a[href^="${location.hash}"]`)[0]
       .offsetTop;
@@ -2761,7 +2785,7 @@ const anchorScroll = location => {
     setTimeout(() => {
       window.scrollTo({
         top: item - mainNavHeight,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }, 50);
   }
