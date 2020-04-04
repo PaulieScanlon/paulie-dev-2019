@@ -21,10 +21,12 @@ export default {
       a: {
         ...baseTheme.styles.p.a,
         color: "secondary",
+        wordBreak: "break-word",
       },
       code: {
         ...baseTheme.styles.p.code,
         color: "inherit",
+        wordBreak: "break-word",
       },
     },
     pre: {
