@@ -2,6 +2,7 @@
 title: gatsby-mdx-routes
 tags: ["gatsby.js", "gatsby-plugin", "gatsby-plugin-mdx"]
 date: 2019-12-24
+author: Paul Scanlon
 featuredImage: gatsby-mdx-routes.jpg
 ---
 
@@ -30,7 +31,7 @@ export default ({ children }) => (
   <Fragment>
     <nav>
       <MdxRoutes>
-        {routes => (
+        {(routes) => (
           <ul>
             {routes.map((route, index) => (
               <li key={index}>

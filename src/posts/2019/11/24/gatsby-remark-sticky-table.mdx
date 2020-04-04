@@ -2,6 +2,7 @@
 title: gatsby-remark-sticky-table
 tags: ["gatsby.js", "gatsby-plugin", "gatsby-transformer-remark"]
 date: 2019-12-14
+author: Paul Scanlon
 featuredImage: gatsby-remark-sticky-table.jpg
 ---
 
@@ -26,7 +27,7 @@ const visit = require("unist-util-visit");
 const toString = require("mdast-util-to-string");
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  visit(markdownAST, "heading", node => {
+  visit(markdownAST, "heading", (node) => {
     let { depth } = node;
     if (depth !== 1) return;
     let text = toString(node);
