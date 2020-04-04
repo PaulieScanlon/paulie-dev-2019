@@ -14,23 +14,23 @@ module.exports = {
       "Jest",
       "Enzyme",
       "Node.js",
-      "Component Library"
+      "Component Library",
     ],
     siteUrl: "https://paulie.dev",
     siteImage: "images/paulie-open-graph-image.jpg",
     profileImage: ``,
     lang: `en`,
     config: {
-      sidebarWidth: 200
-    }
+      sidebarWidth: 200,
+    },
   },
   plugins: [
     `@pauliescanlon/gatsby-mdx-embed`,
     {
       resolve: "@pauliescanlon/gatsby-theme-terminal",
       options: {
-        source: ["posts"]
-      }
+        source: ["posts"],
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -42,15 +42,15 @@ module.exports = {
         background_color: `#282a36`,
         theme_color: `#ff79c6`,
         display: `standalone`,
-        icon: `src/manifesticon-512x512.png`
-      }
+        icon: `src/manifesticon-512x512.png`,
+      },
     },
     `gatsby-plugin-offline`,
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "UA-76055934-4"
-      }
-    }
-  ]
+        trackingId: "UA-76055934-4",
+      },
+    },
+  ],
 };

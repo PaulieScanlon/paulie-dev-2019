@@ -6,13 +6,13 @@ export default {
   colors: {
     ...baseTheme.colors,
     text: "#ffffff",
-    muted: "#4b4882",
+    muted: "#615ea0",
     primary: "#a92aeb",
     secondary: "#688ce0",
     error: "#da456f",
     success: "#2bc3f1",
     background: "#131127",
-    surface: "#1a1832"
+    surface: "#1a1832",
   },
 
   styles: {
@@ -20,20 +20,20 @@ export default {
     p: {
       a: {
         ...baseTheme.styles.p.a,
-        color: "secondary"
+        color: "secondary",
       },
       code: {
         ...baseTheme.styles.p.code,
-        color: "inherit"
-      }
+        color: "inherit",
+      },
     },
     pre: {
       ...baseTheme.styles.pre,
-      ...codeTheme
+      ...codeTheme,
     },
     a: {
       ...baseTheme.styles.a,
-      color: "secondary"
-    }
-  }
+      color: "secondary",
+    },
+  },
 };
