@@ -2,6 +2,7 @@
 title: 100DaysOfGatsby
 tags: ["gatsby.js"]
 date: 2020-01-01
+dateModified: 2020-04-04
 author: Paul Scanlon
 featuredImage: 100DaysOfGatsby.jpg
 ---
@@ -10,19 +11,43 @@ featuredImage: 100DaysOfGatsby.jpg
 
 ##### Apr 4 2020
 
-I spend the morning investigating why `gatsby-source-contentful` was throwing errors with my blog but after a few hours i took step back and thought about if i really need a CMS in my blog.
+I spent the morning investigating why `gatsby-source-contentful` was throwing errors with my blog but after a few hours i took a step back and thought about if i really need a CMS in my blog.
 
-My motivation for looking into `gatsby-source-contentful` because it was one of the challenges and i suppose i do have a requirement for both my blog and my site to share the some of the same content but since this is a source plugin i'd still need to build and deploy both in order ot keep them in sync... and if i need to do that it's probably the same amount of work involved in just copy and pasting the one part of thing that they share.
+My motivation for looking into `gatsby-source-contentful` was because it's one of the challenges and i suppose i do have a requirement for both my blog and my site to share _some_ of the same content, but since this is a source plugin i'd still need to build and deploy both in order to keep them in sync... and if i need to do that it's probably the same amount of effort involved in just copy and pasting the content they share.
 
-I did then look in to perhaps making a REST-ful request to contentful which would remove the static part and probably have a negative effect SEO but i was just curious... i got all the way through the docs, set up a nice component that will make a request with the correct space id and bearer token and then moved on to work out what the GraphQL query would be... i then discovered that on the free plan you can't make GraphQL queries so that was the morning pretty much wasted 😂
+I did then look in to perhaps making a REST-ful request to contentful which would remove the need to re-build and deploy but it would also remove the static data which would probably have a negative effect on SEO but i was curious...
 
-So instead of messing around with things i can't control i've messed around with some things i can. There were a few issues with my theme [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) which i wanted to look at.
+I got all the way through the docs, set up a nice component that will make a request with the correct `space` id and `bearer token` and then moved on to work out what the GraphQL query would be... i then discovered that on the free plan you can't make GraphQL queries so that was the morning pretty much wasted 😂
 
-The first relates to the `prev` and `next` links that "were" at the bottom of each "post" page but.... This theme has the ability to query from any local data source and although in "your site" you can filter and sort however you want the GraphQL query that's inside the theme is still in charge of source the nodes and deciding what in fact is `prev` or `next` if you have two sources and filter out one in your MDX the underlying nodes won't know about that and might try to link to a `prev` or `next` page/post that isn;t relevant ... so i've removed this functionality ... sorry abou that.
+So, instead of messing around with things i don't really need i've messed around with some things i do.
 
-There was also an issue with the `<SourceDays />` component where i'm performing some calculations based on what `date` is found in the front matter `new Date(item.node.frontmatter.date).getDay()` unfortunately i'd forgotten that arrays start at `0` so all days where shifted forward by one change that line to `new Date(item.node.frontmatter.date).getDay() -1` fixes the problem.
+There were a few issues with my theme [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) which i wanted to look at.
 
-I also added a _word count_, _time to read_ and _author_ to the post layout template. These fields were already there in frontmatter i just forget to add them to the UI.
+The first relates to the `prev` and `next` links that _were_ at the bottom of each "source" page but....
+
+[gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) has the ability to query from any local data source and although in "your site" you can filter and sort however you want the GraphQL query that's inside the theme is still in charge of the source nodes and is what's deciding what in fact is `prev` or `next`.
+
+For example if you have two sources and filter out one in your MDX the underlying nodes won't know about the filter and might try to link to a `prev` or `next` "source" that isn't relevant ... so i've removed this functionality ... sorry about that.
+
+There was also an issue with the `<SourceDays />` component where i'm performing some calculations based on what `date` is found in the frontmatter eg.
+
+```javascript
+new Date(item.node.frontmatter.date).getDay();
+```
+
+Unfortunately i'd forgotten that arrays start at `0` so all days where shifted forward by one! changing the above line to the below fixes that problem.
+
+```javascript
+new Date(item.node.frontmatter.date).getDay() - 1;
+```
+
+I also added a _word count_, _time to read_ and _author_ to the post layout template. These fields were already there in the frontmatter i just forget to add them to the UI.
+
+I've had another scan over the [challenges](https://www.gatsbyjs.org/blog/tags/100-days-of-gatsby/) and there's not really anything that i haven't covered in one form or another so i'm hoping i'm still on track. I appreciate these are just pointers to help you get started with Gatsby but based on the work i've done with my themes, plugins and more recently with [skin-ui.com](https://www.skin-ui.com) i feel i've got a solid understanding on what you can achieve with Gatsby.
+
+It's not long until the end now and i gotta be honest i'm feeling a little burned out. I don't regret committing to writing a post every day, it's kept me motivated but it has been a challenge. Every day i have to think about something to do so that i have a reason to update this post which means i've actually got to do at least one thing every day.
+
+I'm quite looking forward to a day off!
 
 ## [Day 94](#day-94)
 

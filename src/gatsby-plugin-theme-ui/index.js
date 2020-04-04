@@ -6,13 +6,13 @@ export default {
   colors: {
     ...baseTheme.colors,
     text: "#ffffff",
-    muted: "#615ea0",
+    muted: "#8b87ea",
     primary: "#a92aeb",
     secondary: "#688ce0",
     error: "#da456f",
     success: "#2bc3f1",
     background: "#131127",
-    surface: "#1a1832",
+    surface: "#2f2d4e",
   },
 
   styles: {
@@ -26,7 +26,9 @@ export default {
       code: {
         ...baseTheme.styles.p.code,
         color: "inherit",
+        fontSize: "14px",
         wordBreak: "break-word",
+        backgroundColor: "surface",
       },
     },
     pre: {
