@@ -2,10 +2,76 @@
 title: 100DaysOfGatsby
 tags: ["gatsby.js"]
 date: 2020-01-01
-dateModified: 2020-04-04
+dateModified: 2020-04-05
 author: Paul Scanlon
 featuredImage: 100DaysOfGatsby.jpg
 ---
+
+## [Day 96](#day-96)
+
+##### Apr 5 2020
+
+Keep it simple stupid.
+
+That's how i'm planning on winding up this challenge, there's no point in starting anything new if i'm not going to be able to finish it off and so close to Day 100 i'm just combing over the work i've done over the last 3 months and tweaking where needed.
+
+Today i've released a new patch for [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) which now includes a `<SourceWords />` component.
+
+You can see a demo of it [here](https://gatsby-theme-terminal.netlify.com/components/#source-words).
+
+It works in much the same way as the other _data_ components by only being responsible for returning data, it's up to you the theme user to determine what UI element you'd like to render.
+
+And for my next trick... because this blog is built on [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) i can use the `<SourceWords />` component right here in the `.mdx`
+
+```javascript
+<SourceWords>
+  {(source) => {
+    const {
+      wordCountTotal,
+      wordCountAverage,
+      wordCountHighest,
+      wordCountLowest,
+      timeToReadTotal,
+      timeToReadAverage,
+    } = source;
+    return (
+      <ul>
+        <li>{`wordCountTotal: ${wordCountTotal}`}</li>
+        <li>{`wordCountAverage: ${wordCountAverage}`}</li>
+        <li>{`wordCountHighest: ${wordCountHighest}`}</li>
+        <li>{`wordCountLowest: ${wordCountLowest}`}</li>
+        <li>{`timeToReadTotal: ${timeToReadTotal}`}</li>
+        <li>{`timeToReadAverage: ${timeToReadAverage}`}</li>
+      </ul>
+    );
+  }}
+</SourceWords>
+```
+
+<SourceWords>
+  {(source) => {
+    const {
+      wordCountTotal,
+      wordCountAverage,
+      wordCountHighest,
+      wordCountLowest,
+      timeToReadTotal,
+      timeToReadAverage,
+    } = source;
+    return (
+      <ul>
+        <li>{`wordCountTotal: ${wordCountTotal}`}</li>
+        <li>{`wordCountAverage: ${wordCountAverage}`}</li>
+        <li>{`wordCountHighest: ${wordCountHighest}`}</li>
+        <li>{`wordCountLowest: ${wordCountLowest}`}</li>
+        <li>{`timeToReadTotal: ${timeToReadTotal}`}</li>
+        <li>{`timeToReadAverage: ${timeToReadAverage}`}</li>
+      </ul>
+    );
+  }}
+</SourceWords>
+
+Pretty lame list right, but if you like donut charts checkout the [demo](https://gatsby-theme-terminal.netlify.com/components/#source-words)
 
 ## [Day 95](#day-95)
 
@@ -1140,10 +1206,10 @@ Using this approach the theme author only needs to provide a set of **data compo
 
 The cool bit is all of the "things" they'll likely want to render will have already been styled either by `theme.styles` or `components`
 
-Here's any example usage of a `<TagList />` **data component** i'm developing.
+Here's any example usage of a `<SourceTags />` **data component** i'm developing.
 
 ```javascript
-<TagList>
+<SourceTags>
   {source => (
     <Flex
     sx={{flexDirection: 'column'}}
@@ -1159,10 +1225,10 @@ Here's any example usage of a `<TagList />` **data component** i'm developing.
       }
     </Flex>
   )}
-</TagList>
+</SourceTags>
 ```
 
-Inside the `<TagList />` component is where i query GraphQL and also do a bit of functional JavaScript to return a nice object with the `name`, `count` and `percent` of each tag found in `frontmatter`
+Inside the `<SourceTags />` component is where i query GraphQL and also do a bit of functional JavaScript to return a nice object with the `name`, `count` and `percent` of each tag found in `frontmatter`
 
 In this example i'm rendering a `<Box />` which displays the `name` the `count` and a kind of horizontal bar chart. All of this is made using `theme-ui/components` **NOT** components provided by the theme.
 
