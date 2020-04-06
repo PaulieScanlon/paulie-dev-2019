@@ -2,10 +2,68 @@
 title: 100DaysOfGatsby
 tags: ["gatsby.js"]
 date: 2020-01-01
-dateModified: 2020-04-05
+dateModified: 2020-04-06
 author: Paul Scanlon
 featuredImage: 100DaysOfGatsby.jpg
 ---
+
+## [Day 97](#day-97)
+
+##### Apr 6 2020
+
+Another day of data!
+
+This morning i had another crack at the `<SourceWords />` component in [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) and have exposed a new array of data, it's called `wordCountByMonth` and yeap it does what it says on the tin.
+
+It's very similar to `sourceMonths` and provides a nice way to visualize how many words have been written in any given month.
+
+Here's another lame demo.
+
+```javascript
+<SourceWords>
+  {(sourceWords) => {
+    const currentYear =
+      sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1];
+    return (
+      <Box>
+        {currentYear.map((month, index) => {
+          const { name, words } = month;
+          return (
+            <Box key={index}>
+              <Text>{`${name} | ${words}`}</Text>
+            </Box>
+          );
+        })}
+      </Box>
+    );
+  }}
+</SourceWords>
+```
+
+<SourceWords>
+  {(sourceWords) => {
+    const currentYear =
+      sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1];
+    return (
+      <Box>
+        {currentYear.map((month, index) => {
+          const { name, words } = month;
+          return (
+            <Box key={index}>
+              <Text>{`${name} | ${words}`}</Text>
+            </Box>
+          );
+        })}
+      </Box>
+    );
+  }}
+</SourceWords>
+
+There's a better looking bar chart version of this on the [demo site](https://gatsby-theme-terminal.netlify.com/components/#source-words) if you're interested.
+
+Day job wise i've been really getting stuck in to Testing Library.
+
+Now that i'm over the whole needing to add a `data-testid` to dom elements it is pretty cool to work with, i expect i'll have a few more things to learn before i really suss it out and i haven't written any tests that require mocked api responses so that'll be fun when i get to it!
 
 ## [Day 96](#day-96)
 
