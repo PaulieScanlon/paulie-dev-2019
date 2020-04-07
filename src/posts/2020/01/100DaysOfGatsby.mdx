@@ -2,10 +2,32 @@
 title: 100DaysOfGatsby
 tags: ["gatsby.js"]
 date: 2020-01-01
-dateModified: 2020-04-06
+dateModified: 2020-04-07
 author: Paul Scanlon
 featuredImage: 100DaysOfGatsby.jpg
 ---
+
+## [Day 98](#day-98)
+
+##### Apr 7 2020
+
+This morning i was doing a bit of house keeping on this blog.
+
+Previously i'd been dumping all manner of @theme-ui/components in my `.mdx` so i could give the data components a test drive with some of my real data but unfortunately this led to a lot of duplication.
+
+I've now abstracted some of the charts and the card component from raw @theme-ui/components in `.mdx` to composed React components in `.js`
+
+It makes it much easier to see what's going on in the `.mdx` files and means i can re-use those components in any pages, or posts since everything within them is now encapsulated.
+
+The home page of this blog is a bit gross so i might create a separate dashboard or statistics page to showcase all the data related stuff and leave the home page to just display some intro text and the latest blog posts.
+
+I noticed this tweet today from [@AskGatsbyJS](https://twitter.com/AskGatsbyJS)
+
+<Tweet tweetLink="AskGatsbyJS/status/1247540635575267347" />
+
+...and whilst _Component Shadowing_ is an important concept with Gatsby themes i feel my theme [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) side steps the whole requirement to shadow components because there are no components to shadow.
+
+Everything you see in [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal) is something from @theme-ui/components and since the only "components" that exist in the theme are data components you can render your UI in any way or style you like... maybe i should write a blog post about what i'm calling _Zero Component Themes_
 
 ## [Day 97](#day-97)
 
