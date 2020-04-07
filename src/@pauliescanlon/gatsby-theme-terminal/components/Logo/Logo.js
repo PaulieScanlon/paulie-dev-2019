@@ -2,15 +2,6 @@
 import { jsx } from "theme-ui";
 import { Link } from "gatsby";
 
-// {
-//   currentYear.map((month, index) => {
-//   const { name, words } = month
-//     return (
-
-//       )
-// })
-// }
-
 export const Logo = () => (
   <Link to="/">
     <div sx={{ height: "25px", overflow: "hidden" }}>

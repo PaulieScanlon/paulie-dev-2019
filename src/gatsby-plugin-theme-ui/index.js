@@ -12,7 +12,7 @@ export default {
     error: "#da456f",
     success: "#2bc3f1",
     background: "#131127",
-    surface: "#2f2d4e",
+    surface: "#232140",
   },
 
   styles: {

@@ -1,0 +1,77 @@
+import React from "react";
+import { format } from "date-fns";
+import { Box, Link, Card, Image, Heading, Text } from "@theme-ui/components";
+
+export const PostCard = ({
+  title,
+  featuredImage,
+  tags,
+  date,
+  excerpt,
+  slug,
+}) => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flex: "1 1 auto",
+        flexDirection: "column",
+        mb: 3,
+        maxWidth: ["100%", "100%", "50%", "50%"],
+        width: ["100%", "100%", "50%", "50%"],
+      }}
+    >
+      <Link
+        href={slug}
+        sx={{
+          display: "flex",
+          flex: "1 1 auto",
+          flexDirection: "column",
+          m: (theme) => `0px ${theme.space[2]}px`,
+          minHeight: "1px",
+          textDecoration: "none",
+        }}
+      >
+        <Card
+          sx={{
+            backgroundColor: "surface",
+            display: "flex",
+            flex: "1 1 auto",
+            flexDirection: "column",
+            minHeight: "1px",
+          }}
+        >
+          {featuredImage && featuredImage.childImageSharp && (
+            <Box sx={{ minHeight: "1px" }}>
+              <Image
+                src={featuredImage.childImageSharp.fluid.src}
+                alt={featuredImage.childImageSharp.fluid.originalName}
+              />
+            </Box>
+          )}
+          <Box
+            sx={{
+              display: "flex",
+              flex: "1 1 auto",
+              flexDirection: "column",
+              p: 3,
+            }}
+          >
+            <Heading variant="styles.h4" sx={{ color: "text" }}>
+              {title}
+            </Heading>
+            <Text sx={{ mb: 1, color: "success" }}>
+              {format(new Date(date), "d-MMM-u")}
+            </Text>
+            <Text sx={{ mb: 1, color: "text", wordBreak: "break-word" }}>
+              {excerpt}
+            </Text>
+          </Box>
+          <Box sx={{ p: 3 }}>
+            <Text sx={{ color: "secondary" }}>View Post</Text>
+          </Box>
+        </Card>
+      </Link>
+    </Box>
+  );
+};

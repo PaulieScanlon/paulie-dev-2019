@@ -15,6 +15,7 @@
     "@pauliescanlon/gatsby-mdx-embed": "^0.0.17",
     "@pauliescanlon/gatsby-theme-terminal": "^0.0.13",
     "@theme-ui/color": "^0.3.1",
+    "@theme-ui/components": "^0.3.1",
     "@theme-ui/prism": "^0.3.0",
     "date-fns": "^2.11.1",
     "gatsby": "^2.19.22",
