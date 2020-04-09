@@ -38,6 +38,9 @@ export default {
     a: {
       ...baseTheme.styles.a,
       color: "secondary",
+      button: {
+        cursor: "pointer",
+      },
     },
   },
 };
