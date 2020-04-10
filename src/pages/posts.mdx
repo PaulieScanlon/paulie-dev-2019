@@ -1,8 +1,8 @@
 ---
-navigationLabel: Posts
+navigationLabel: posts
 ---
 
-import { PostCard } from "../components/PostCard";
+import { PostCard } from "../components/PostCard"
 
 # posts
 
@@ -20,7 +20,7 @@ import { PostCard } from "../components/PostCard";
           frontmatter: { title, featuredImage, tags, date },
           excerpt,
           fields: { slug },
-        } = edge.node;
+        } = edge.node
         return (
           <PostCard
             key={index}
@@ -31,7 +31,7 @@ import { PostCard } from "../components/PostCard";
             excerpt={excerpt}
             slug={slug}
           />
-        );
+        )
       })}
     </Flex>
   )}

@@ -2,10 +2,8 @@
 navigationLabel: home
 ---
 
-import { mix } from "@theme-ui/color";
-import { PostsByMonthChart } from "../components/PostsByMonthChart";
-import { PostsByDayChart } from "../components/PostsByDayChart";
-import { PostCard } from "../components/PostCard";
+import { mix } from "@theme-ui/color"
+import { PostCard } from "../components/PostCard"
 
 # [paul-scanlon](#paul-scanlon)
 
@@ -19,9 +17,10 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
   sx={{ flexWrap: 'wrap'}}
 >
 <Box
-  sx={{ 
-    pr: [0, 2], 
-    width: ['100%', '30%']
+  sx={{
+    width: ["100%", "100%", "55%"],
+    mb: 3,
+    pr: [0,0, 4],
   }}
 >
 
@@ -39,17 +38,17 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
   target="_blank"
   variant="styles.a"
 >
-  @PaulieScanlon
+  https://twitter.com/PaulieScanlon/
 </Link>
 <Divider />
 
 <Text>GitHub</Text>
 <Link
-  href="https://github.com/PaulieScanlon/"
+  href="https://twitter.com/PaulieScanlon/"
   target="_blank"
   variant="styles.a"
 >
-  PaulieScanlon
+  https://twitter.com/PaulieScanlon/
 </Link>
 <Divider />
 
@@ -59,100 +58,18 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
   target="_blank"
   variant="styles.a"
 >
-  pauliescanlon.io
+  http://www.pauliescanlon.io/
 </Link>
 <Divider />
 <Divider />
 </Box>
 
 <Box
-  sx={{ 
-    pl: [0, 2], 
-    width: ['100%', '70%'] 
+  sx={{
+    width: ["100%", "100%", "45%"],
+    mb: 3
   }}
 >
-
-## posts by day
-
-<Flex sx={{ flexWrap: "wrap" }}>
-  <Box
-    sx={{
-      width: "50%",
-    }}
-  >
-    <PostsByDayChart
-      config={{
-        year: 0,
-        filter: "posts",
-        color: "primary",
-      }}
-    />
-  </Box>
-  <Box
-    sx={{
-      width: "50%",
-    }}
-  >
-    <PostsByDayChart
-      config={{
-        year: -1,
-        filter: "posts",
-        color: "secondary",
-      }}
-    />
-  </Box>
-</Flex>
-<Divider />
-<Divider />
-
-</Box>
-</Flex>
-
-<Box>
-
-## posts by month
-
-<Divider />
-
-<Flex 
-  sx={{ flexWrap: 'wrap' }}
->
-<Box
-  sx={{ 
-    pr: [0, 2], 
-    width: ['100%', '50%']
-  }}
->
-<PostsByMonthChart
-  config={{
-    year: 0,
-    filter:'posts',
-    color: "primary",
-  }}
-/>
-<Divider />
-<Divider />
-
-</Box>
-<Box
-  sx={{ 
-    pl: [0, 2], 
-    width: ['100%', '50%'] 
-  }}
->
-<PostsByMonthChart
-  config={{
-    year: -1,
-    filter:'posts',
-    color: "secondary",
-  }}
-/>
-<Divider />
-<Divider />
-
-</Box>
-</Flex>
-</Box>
 
 ## blog topics
 
@@ -164,7 +81,7 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
       {tags
         .sort((a, b) => b.percent - a.percent)
         .map((tag, index) => {
-          const { name, count, percent } = tag;
+          const { name, count, percent } = tag
           return (
             <Badge
               key={index}
@@ -182,7 +99,7 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
             >
               {name}
             </Badge>
-          );
+          )
         })}
     </Box>
   )}
@@ -190,6 +107,9 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
 
 <Divider />
 <Divider />
+
+</Box>
+</Flex>
 
 ## latest posts
 
@@ -216,7 +136,7 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
             frontmatter: { title, featuredImage, tags, date },
             excerpt,
             fields: { slug },
-          } = edge.node;
+          } = edge.node
           return (
             <PostCard
               key={index}
@@ -227,7 +147,7 @@ React, Gatsby.js, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Story
               excerpt={excerpt}
               slug={slug}
             />
-          );
+          )
         })}
     </Flex>
   )}

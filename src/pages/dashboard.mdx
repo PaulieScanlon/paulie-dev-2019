@@ -1,0 +1,165 @@
+---
+navigationLabel: dashboard
+---
+
+import { PostsByMonthChart } from "../components/PostsByMonthChart"
+import { PostsByDayChart } from "../components/PostsByDayChart"
+import { WordsByMonthChart } from "../components/WordsByMonthChart"
+import { DonutChart } from "../components/DonutChart"
+
+<Box>
+
+## statistics
+
+<Flex sx={{ flexWrap: "wrap" }}>
+
+<Box
+  sx={{
+    pr: 1,
+    width: ["100%", "50%"],
+  }}
+>
+  <DonutChart
+    title="Average word count"
+    dimension="words"
+    config={{ calculation: "averageWords", color: "primary" }}
+  />
+  <Divider />
+</Box>
+
+<Box
+  sx={{
+    pl: 1,
+    width: ["100%", "50%"],
+  }}
+>
+  <DonutChart
+    title="Average time to read"
+    dimension="minutes"
+    config={{ calculation: "averageTime", color: "secondary" }}
+  />
+  <Divider />
+</Box>
+
+</Flex>   
+</Box>
+
+<Divider />
+
+<Box>
+
+## posts by day
+
+<Flex sx={{ flexWrap: "wrap" }}>
+  <Box
+    sx={{
+      pr: 1,
+      width: "50%",
+    }}
+  >
+    <PostsByDayChart
+      config={{
+        year: 0,
+        filter: "posts",
+        color: "primary",
+      }}
+    />
+  </Box>
+  <Box
+    sx={{
+      pl: 1,
+      width: "50%",
+    }}
+  >
+    <PostsByDayChart
+      config={{
+        year: -1,
+        filter: "posts",
+        color: "secondary",
+      }}
+    />
+  </Box>
+</Flex>
+</Box>
+
+<Box>
+
+<Divider />
+
+## posts by month
+
+<Divider />
+
+<Flex 
+  sx={{ flexWrap: 'wrap' }}
+>
+<Box
+  sx={{ 
+    pr: [0, 1], 
+    width: ['100%', '50%']
+  }}
+>
+<PostsByMonthChart
+  config={{
+    year: 0,
+    filter:'posts',
+    color: "primary",
+  }}
+/>
+<Divider />
+</Box>
+<Box
+  sx={{ 
+    pl: [0, 1],
+    width: ['100%', '50%'] 
+  }}
+>
+<PostsByMonthChart
+  config={{
+    year: -1,
+    filter:'posts',
+    color: "secondary",
+  }}
+/>
+<Divider />
+</Box>
+</Flex>
+</Box>
+
+<Divider />
+
+<Box>
+
+## words by month
+
+<Flex sx={{ flexWrap: "wrap" }}>
+  <Box
+    sx={{
+      pr: 1,
+      width: "50%",
+    }}
+  >
+    <WordsByMonthChart
+      config={{
+        year: 0,
+        filter: "posts",
+        color: "primary",
+      }}
+    />
+  </Box>
+  <Box
+    sx={{
+      pl: 1,  
+      width: "50%",
+    }}
+  >
+    <WordsByMonthChart
+      config={{
+        year: -1,
+        filter: "posts",
+        color: "secondary",
+      }}
+    />
+  </Box>
+</Flex>
+</Box>

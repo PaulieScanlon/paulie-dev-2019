@@ -1,23 +1,30 @@
 import React from "react"
 import { Flex, Box, Heading, Text } from "@theme-ui/components"
+import { SourceWords } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceWords"
 
-import { SourceDays } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceDays"
+import { formatNumber } from "../../utils/formatNumber"
 
-export const PostsByDayChart = ({ config }) => {
+export const WordsByMonthChart = ({ config }) => {
   const { color, year, filter } = config
 
   return (
-    <SourceDays filter={filter}>
-      {(sourceDays) => {
-        const currentYear = sourceDays[sourceDays.length - (1 - year)]
+    <SourceWords filter={filter}>
+      {(sourceWords) => {
+        const currentYear =
+          sourceWords.wordCountByMonth[
+            sourceWords.wordCountByMonth.length - (1 - year)
+          ]
+        const { wordCountTotal } = sourceWords
         return (
           <Box>
             <Heading variant="styles.h4" sx={{ color: color }}>
               {currentYear[0].year}
             </Heading>
             <Box>
-              {currentYear.map((day, index) => {
-                const { name, count, percent } = day
+              {currentYear.map((month, index) => {
+                const { name, words } = month
+                const percent = Math.round((words / wordCountTotal) * 100)
+
                 return (
                   <Flex
                     key={index}
@@ -46,7 +53,7 @@ export const PostsByDayChart = ({ config }) => {
                       <Text sx={{ textTransform: "capitalize", pl: 2 }}>
                         {name}
                       </Text>
-                      <Text sx={{ pr: 2 }}>{`x${count}`}</Text>
+                      <Text sx={{ pr: 2 }}>{formatNumber(words)}</Text>
                     </Box>
                   </Flex>
                 )
@@ -55,6 +62,6 @@ export const PostsByDayChart = ({ config }) => {
           </Box>
         )
       }}
-    </SourceDays>
+    </SourceWords>
   )
 }
