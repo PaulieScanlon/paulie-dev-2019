@@ -1,11 +1,11 @@
-import codeTheme from "@theme-ui/prism/presets/shades-of-purple.json";
-import baseTheme from "@pauliescanlon/gatsby-theme-terminal/src/gatsby-plugin-theme-ui";
+import codeTheme from "@theme-ui/prism/presets/shades-of-purple.json"
+import baseTheme from "@pauliescanlon/gatsby-theme-terminal/src/gatsby-plugin-theme-ui"
 
 export default {
   ...baseTheme,
   colors: {
     ...baseTheme.colors,
-    text: "#ffffff",
+    text: "#dcdbf9",
     muted: "#8b87ea",
     primary: "#a92aeb",
     secondary: "#688ce0",
@@ -43,4 +43,4 @@ export default {
       },
     },
   },
-};
+}
