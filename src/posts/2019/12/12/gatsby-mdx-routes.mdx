@@ -1,6 +1,6 @@
 ---
 title: gatsby-mdx-routes
-tags: ["gatsby.js", "gatsby-plugin", "gatsby-plugin-mdx"]
+tags: ["Gatsby', "gatsby-plugin", "gatsby-plugin-mdx"]
 date: 2019-12-24
 author: Paul Scanlon
 featuredImage: gatsby-mdx-routes.jpg
@@ -22,10 +22,10 @@ To use it i recommend popping it in the defaultLayout file defined by `gatsby-pl
 
 ```javascript
 // defaultLayout.js
-import React, { Fragment } from "react";
-import { Link } from "gatsby";
+import React, { Fragment } from "react"
+import { Link } from "gatsby"
 
-import { MdxRoutes } from "@pauliescanlon/gatsby-mdx-routes";
+import { MdxRoutes } from "@pauliescanlon/gatsby-mdx-routes"
 
 export default ({ children }) => (
   <Fragment>
@@ -44,7 +44,7 @@ export default ({ children }) => (
     </nav>
     <main>{children}</main>
   </Fragment>
-);
+)
 ```
 
 `MdxRoutes` returns it's children and sends back data for the `slug` and a `navigationLabel` which you define in the frontmatter of each of you `.mdx` files

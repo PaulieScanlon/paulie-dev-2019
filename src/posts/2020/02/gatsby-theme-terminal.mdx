@@ -1,6 +1,6 @@
 ---
 title: gatsby-theme-terminal
-tags: ["gatsby.js", "gatsby-theme", "gatsby-plugin-theme-terminal"]
+tags: ["Gatsby', "gatsby-theme", "gatsby-plugin-theme-terminal"]
 date: 2020-02-28
 author: Paul Scanlon
 featuredImage: gatsby-theme-terminal.jpg
@@ -54,8 +54,8 @@ Let's start with data and by looking at the [`<SourceList />`](https://gatsby-th
       {source.map((edge, index) => {
         const {
           frontmatter: { title },
-        } = edge.node;
-        return <li key={index}>{title}</li>;
+        } = edge.node
+        return <li key={index}>{title}</li>
       })}
     </ul>
   )}
@@ -102,7 +102,7 @@ const {
   frontmatter: { title, featuredImage, tags, date },
   fields: { slug },
   excerpt,
-} = edge.node;
+} = edge.node
 ```
 
 ...and then use some of the [theme-ui/components](https://theme-ui.com/components) which are provided by the theme to create something a bit more eye catching.
@@ -116,7 +116,7 @@ const {
           frontmatter: { title, featuredImage, tags, date },
           fields: { slug },
           excerpt,
-        } = edge.node;
+        } = edge.node
         return (
           <Box
             key={index}
@@ -175,7 +175,7 @@ const {
               </Card>
             </Link>
           </Box>
-        );
+        )
       })}
     </Flex>
   )}
@@ -250,7 +250,7 @@ In order to use the `<Card />` component in `.mdx` you would either have to impo
 like this
 
 ```javascript
-import { Card } from "@theme-ui/components";
+import { Card } from "@theme-ui/components"
 ```
 
 Or continue on with the "power" approach and provide all of these components via the `MDXProvider`

@@ -1,6 +1,6 @@
 ---
 title: 100DaysOfGatsby
-tags: ["gatsby.js"]
+tags: ["Gatsby']
 date: 2020-01-01
 dateModified: 2020-04-09
 author: Paul Scanlon
@@ -91,19 +91,19 @@ Here's another lame demo.
 <SourceWords>
   {(sourceWords) => {
     const currentYear =
-      sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1];
+      sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1]
     return (
       <Box>
         {currentYear.map((month, index) => {
-          const { name, words } = month;
+          const { name, words } = month
           return (
             <Box key={index}>
               <Text>{`${name} | ${words}`}</Text>
             </Box>
-          );
+          )
         })}
       </Box>
-    );
+    )
   }}
 </SourceWords>
 ```
@@ -111,19 +111,19 @@ Here's another lame demo.
 <SourceWords>
   {(sourceWords) => {
     const currentYear =
-      sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1];
+      sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1]
     return (
       <Box>
         {currentYear.map((month, index) => {
-          const { name, words } = month;
+          const { name, words } = month
           return (
             <Box key={index}>
               <Text>{`${name} | ${words}`}</Text>
             </Box>
-          );
+          )
         })}
       </Box>
-    );
+    )
   }}
 </SourceWords>
 
@@ -159,7 +159,7 @@ And for my next trick... because this blog is built on [gatsby-theme-terminal](h
       wordCountLowest,
       timeToReadTotal,
       timeToReadAverage,
-    } = source;
+    } = source
     return (
       <ul>
         <li>{`wordCountTotal: ${wordCountTotal}`}</li>
@@ -169,7 +169,7 @@ And for my next trick... because this blog is built on [gatsby-theme-terminal](h
         <li>{`timeToReadTotal: ${timeToReadTotal}`}</li>
         <li>{`timeToReadAverage: ${timeToReadAverage}`}</li>
       </ul>
-    );
+    )
   }}
 </SourceWords>
 ```
@@ -183,7 +183,7 @@ And for my next trick... because this blog is built on [gatsby-theme-terminal](h
       wordCountLowest,
       timeToReadTotal,
       timeToReadAverage,
-    } = source;
+    } = source
     return (
       <ul>
         <li>{`wordCountTotal: ${wordCountTotal}`}</li>
@@ -193,7 +193,7 @@ And for my next trick... because this blog is built on [gatsby-theme-terminal](h
         <li>{`timeToReadTotal: ${timeToReadTotal}`}</li>
         <li>{`timeToReadAverage: ${timeToReadAverage}`}</li>
       </ul>
-    );
+    )
   }}
 </SourceWords>
 
@@ -224,13 +224,13 @@ For example if you have two sources and filter out one in your MDX the underlyin
 There was also an issue with the `<SourceDays />` component where i'm performing some calculations based on what `date` is found in the frontmatter eg.
 
 ```javascript
-new Date(item.node.frontmatter.date).getDay();
+new Date(item.node.frontmatter.date).getDay()
 ```
 
 Unfortunately i'd forgotten that arrays start at `0` so all days where shifted forward by one! changing the above line to the below fixes that problem.
 
 ```javascript
-new Date(item.node.frontmatter.date).getDay() - 1;
+new Date(item.node.frontmatter.date).getDay() - 1
 ```
 
 I also added a _word count_, _time to read_ and _author_ to the post layout template. These fields were already there in the frontmatter i just forget to add them to the UI.
@@ -508,9 +508,9 @@ directory: `components/SomeComponent`
 
 ```javascript
 // components/SomeComponent/SomeComponent.js
-import { React } from "react";
+import { React } from "react"
 
-export const SomeComponent = () => <div>SomeComponent</div>;
+export const SomeComponent = () => <div>SomeComponent</div>
 ```
 
 A few notes on the above; The component is a named export, it's named the same as the directory it's within and wherever possible it uses an implicit return.
@@ -526,7 +526,7 @@ The usage then becomes;
 
 ```javascript
 // some other file
-import { SomeComponent } from "../components/SomeComponent";
+import { SomeComponent } from "../components/SomeComponent"
 ```
 
 Then at some point you might have Storybook so you'll probably want `SomeComponent.stories.js` and really there should be tests, `SomeComponent.test.js` and maybe even `_snapshots_`
@@ -609,15 +609,15 @@ The below is how you set up Theme UI in Storybook 5.3
 
 ```javascript
 // .storybook/preview.js
-import React from "react";
-import { addDecorator } from "@storybook/react";
-import { ThemeProvider } from "theme-ui";
+import React from "react"
+import { addDecorator } from "@storybook/react"
+import { ThemeProvider } from "theme-ui"
 
-import yourTheme from "../src/gatsby-plugin-theme-ui";
+import yourTheme from "../src/gatsby-plugin-theme-ui"
 
 addDecorator((storyFn) => (
   <ThemeProvider theme={yourTheme}>{storyFn()}</ThemeProvider>
-));
+))
 ```
 
 The `addDecorator` works a bit like `wrapRootElement` does in Gatsby and provides a nice way to _wrap_ all Storybook stories with anything you like.
@@ -974,7 +974,7 @@ I'm still working on nude-ui and spent the morning implementing the remaining ap
 I did have a bit of a ball ache with parsing the mdx directly onto CodeMirror but [chrisbiscardi](https://twitter.com/chrisbiscardi) came to my aid with a sweet little webpack trick.
 
 ```javascript
-import mdxString from "!!raw-loader!./thing.mdx";
+import mdxString from "!!raw-loader!./thing.mdx"
 ```
 
 This allows me to bypass the webpack loader for `.mdx` file types and import it as "raw" then finally pass it on to CodeMirror as a string.
@@ -1047,7 +1047,7 @@ and yeap you're right, that's not JavaScript, and doesn't actually represent wha
 So we need to strip out the `""` marks... but only on keys not on values and only if those values are _not_ of type `string` ... regex to the rescue!
 
 ```javascript
-JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:");
+JSON.stringify(themeObject, null, 2).replace(/"(\w+)"\s*:/g, "$1:")
 ```
 
 but...
@@ -1631,27 +1631,27 @@ so in the `if` i check both that the `node.internal.type` is in fact `.mdx` and 
 
 ```javascript
 exports.onCreateNode = ({ node, actions, getNode }, themeOptions) => {
-  const { source } = themeOptions;
+  const { source } = themeOptions
 
-  const { createNodeField } = actions;
+  const { createNodeField } = actions
 
   if (node.internal.type === "Mdx" && !node.internal.fieldOwners) {
-    let path = source;
-    const value = createFilePath({ node, getNode });
+    let path = source
+    const value = createFilePath({ node, getNode })
 
     if (Array.isArray(source)) {
       path = node.fileAbsolutePath
         .split("/")
         .filter((str) => source.includes(str))
-        .toString();
+        .toString()
     }
     createNodeField({
       node,
       name: `slug`,
       value: `/${path}${value}`,
-    });
+    })
   }
-};
+}
 ```
 
 The bit that took me a while to work out was what to use as the `path`.
@@ -2037,20 +2037,20 @@ see below
 
 ```javascript
 // gatsby-browser.js
-export { wrapRootElement } from "./wrapRootElement";
+export { wrapRootElement } from "./wrapRootElement"
 ```
 
 ```javascript
 // gatsby-ssr.js
-export { wrapRootElement } from "./wrapRootElement";
+export { wrapRootElement } from "./wrapRootElement"
 ```
 
 and wrapRootElement looks like this
 
 ```javascript
 // wrapRootElement.tsx
-import React, { FunctionComponent } from "react";
-import { MdxEmbedProvider } from "./components/MdxEmbedProvider";
+import React, { FunctionComponent } from "react"
+import { MdxEmbedProvider } from "./components/MdxEmbedProvider"
 
 interface IWrapRootElement {
   element: React.ReactNode;
@@ -2058,7 +2058,7 @@ interface IWrapRootElement {
 
 export const wrapRootElement: FunctionComponent<IWrapRootElement> = ({
   element,
-}) => <MdxEmbedProvider>{element}</MdxEmbedProvider>;
+}) => <MdxEmbedProvider>{element}</MdxEmbedProvider>
 ```
 
 The first thing i changed was the name of this "component" because `wrapRootElement` is part of the gatsby api and i wasn't sure if something was getting screwed up due to a clash in names. I've since changed the name of this file to `provider.tsx`
@@ -2067,20 +2067,20 @@ The second thing i looked at was the method of exporting the module, this now lo
 
 ```javascript
 // gatsby-browser.js
-exports.wrapRootElement = require(`./provider`);
+exports.wrapRootElement = require(`./provider`)
 ```
 
 ```javascript
 // gatsby-ssr.js
-exports.wrapRootElement = require(`./provider`);
+exports.wrapRootElement = require(`./provider`)
 ```
 
 and the provider now looks like this
 
 ```javascript
 // provider.tsx
-import React from "react";
-import { MdxEmbedProvider } from "./components/MdxEmbedProvider";
+import React from "react"
+import { MdxEmbedProvider } from "./components/MdxEmbedProvider"
 
 interface IProviderProps {
   element: React.ReactNode;
@@ -2088,7 +2088,7 @@ interface IProviderProps {
 
 module.exports = ({ element }: IProviderProps) => (
   <MdxEmbedProvider>{element}</MdxEmbedProvider>
-);
+)
 ```
 
 Whilst i think i could have kept the ES6 method for exporting in `gatsby-browser.js` it wasn't working in `gatsby-ssr.js`.
@@ -2477,15 +2477,15 @@ This is all the information we need to determine how many levels deep any given 
 My approach was to split the `slug` using `slug.split("/")`
 
 ```javascript
-["", ""];
+;["", ""]
 ```
 
 ```javascript
-["", "services", ""];
+;["", "services", ""]
 ```
 
 ```javascript
-["", "services", "web-design", ""];
+;["", "services", "web-design", ""]
 ```
 
 Then i remove the empty strings so i'm just left with what is effectively an array of parents and children.
@@ -2517,19 +2517,19 @@ I thought about having an `ASC` and `DESC` option but that doesn't really solve 
 Suppose you had a graphQL response that looked a little bit like this 👇
 
 ```javascript
-graphQlData = ["About", "Contact", "Home"];
+graphQlData = ["About", "Contact", "Home"]
 ```
 
 By providing a `navigationOrder` you can sort like this 👇
 
 ```javascript
-const navigationOrder = ["Home", "About", "Contact"];
+const navigationOrder = ["Home", "About", "Contact"]
 
 graphQlData.sort(
   (a, b) =>
     navigationOrder.indexOf(a.navigationLabel) -
     navigationOrder.indexOf(b.navigationLabel)
-);
+)
 ```
 
 Unlike the default method of sorting instead of simply determining if `a - b` we can use the `indexOf` from the `navigationOrder` array which is provided via a prop.
@@ -2737,7 +2737,7 @@ Here's the final regex pattern `/<a href="\/w/g` which when used in the response
 text["*"].replace(
   /<a href="\/w/g,
   '<a target="_blank" href="//en.wikipedia.org/w'
-);
+)
 ```
 
 I added the `target="_blank"` as it feels like a better option for users, perhaps i'll turn this into a prop but it works like a charm so i'm happy to move forward.
@@ -2799,12 +2799,12 @@ The URL parameter looks like this
 After doing a bit of maths i realized the time-code is the total minutes from the start of the video. I wanted to keep the props the same as i've done with Twitch so i needed to calculate the total time before i pass it on to the URL.
 
 ```javascript
-const { h, m, s } = skipTo;
+const { h, m, s } = skipTo
 
-const tH = h * 60;
-const tM = m * 60;
+const tH = h * 60
+const tM = m * 60
 
-const startTime = tH + tM + s;
+const startTime = tH + tM + s
 // startTime = 1274
 ```
 
@@ -2895,7 +2895,7 @@ export default {
   docgenConfig: {
     searchPath: directoryPath,
   },
-};
+}
 ```
 
 and `directoryPath` is as follows;
@@ -2904,7 +2904,7 @@ and `directoryPath` is as follows;
 const directoryPath = path.join(
   process.cwd(),
   "../@pauliescanlon/gatsby-mdx-embed/src/components"
-);
+)
 ```
 
 First i'm using `path.join` to make sure i don't end up with un-wanted `/`'s, then i'm using `process.cwd` which is the node.js method for working out the **C**urrent **W**orking **D**irectory then finally i go up a level `"../"` and into the yarn workspace where i'm writing my `MdxComponents`
@@ -2932,17 +2932,17 @@ None the less it's all looking pretty good now. I might have found a bug with ho
 The problem i'm currently experiencing is with the `<Props>` component which is one of the [built-in-components](https://www.docz.site/docs/built-in-components) which can create prop tables for my components. What's not initially made clear is that it'll only work if the component in question is local to the `.mdx`. For example `docz` will generate a prop table for `<MyComponent>` it it's in the same **things** folder as `MyMdx.mdx`
 
 ```javascript
--things;
-MyComponent.js;
-MyMdx.mdx;
+;-things
+MyComponent.js
+MyMdx.mdx
 ```
 
 ... But it wont work if i move `<MyComponent>` to somewhere else, for example...
 
 ```javascript
--components;
-MyComponent.js - pages;
-MyMdx.mdx;
+;-components
+MyComponent.js - pages
+MyMdx.mdx
 ```
 
 If you want to be able to source files from somewhere else you have to set the `src` value in `doczrc.js`
@@ -3016,16 +3016,16 @@ The main guts of this functionality is wrapped up in a little function i created
 const anchorScroll = (location) => {
   if (location && location.hash) {
     const item = document.querySelectorAll(`a[href^="${location.hash}"]`)[0]
-      .offsetTop;
-    const mainNavHeight = document.querySelector(`header`).offsetHeight;
+      .offsetTop
+    const mainNavHeight = document.querySelector(`header`).offsetHeight
     setTimeout(() => {
       window.scrollTo({
         top: item - mainNavHeight,
         behavior: "smooth",
-      });
-    }, 50);
+      })
+    }, 50)
   }
-};
+}
 ```
 
 In short all this is doing is finding the `<a>` element that contains the `#` which is found from the url / `location.hash` then scrolls to it. There's an offset in there because [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats) has a position fixed header so i needed to calculate the top position minus the height of the header so the selected `#` isn't under the header when the browser scrolls to it.
