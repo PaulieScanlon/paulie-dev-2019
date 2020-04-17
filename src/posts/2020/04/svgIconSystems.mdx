@@ -14,27 +14,27 @@ If you're doing this in your React project... just stop it! 🛑
 
 ```javascript
 // some-file.js
-import myIcon from "./icons/icon-a.svg"
-import myIcon from "./icons/icon-b.svg"
-import myIcon from "./icons/icon-c.svg"
-import myIcon from "./icons/icon-d.svg"
+import iconA from "./icons/icon-a.svg"
+import iconB from "./icons/icon-b.svg"
+import iconC from "./icons/icon-c.svg"
+import iconD from "./icons/icon-d.svg"
 ```
 
 <Divider />
 
 ```javascript
 // some-other-file.js
-import myIcon from "./icons/icon-a.svg"
-import myIcon from "./icons/icon-b.svg"
-import myIcon from "./icons/icon-c.svg"
-import myIcon from "./icons/icon-d.svg"
+import iconA from "./icons/icon-a.svg"
+import iconB from "./icons/icon-b.svg"
+import iconC from "./icons/icon-c.svg"
+import iconD from "./icons/icon-d.svg"
 ```
 
 <Divider />
 
 But why is that bad?
 
-As you're probably aware "design systems" are a current trend and more or less they attempt to reduce the amount of "one off" styles in any code base in favour of a more general re-usable set of styles that work in a number of places around the code base. This approach makes the code base easier to maintain, usually results in fewer bugs and if a design system is created and used correctly it can **dramatically** speed up development and cut down on development costs.
+As you're probably aware "design systems" are a current trend and more or less they attempt to reduce the amount of "one off" styles in any code base in favour of a more general re-usable set of styles that work in a number of places around the code base. This approach makes the code base easier to maintain, usually results in fewer bugs and if a design system is created and used correctly it can **dramatically** speed up development time and cut down on development costs.
 
 ... and my thoughts are, why should Svg icons be any different?
 
@@ -50,7 +50,7 @@ Now that's out of the way lets pick up on that point i just made...
 
 > it doesn't matter what size the icons are designed at
 
-Whilst this is true it **does** matter if some icons are designed at 24x24 and some are designed at 48x48.
+Whilst this is true it **does** matter if some icons are designed at 24x24 and some are designed at for example 48x48.
 
 We're going to build an icon _system_ and one of the requirements of our system is that **ALL** the icons are designed using the same specification.
 
@@ -61,7 +61,7 @@ The specification is as follows and _could_ be used as Acceptance Criteria if yo
 - It must have one single designed icon path
 - It must be black
 
-That last point doesn't actually matter but why design it in white and on a white artboard?
+That last point doesn't actually matter but if you design the icon in white and put it on a white artboard it makes it harder to see in your OS preview and when you open the file up in Illustrator.
 
 To explain a bit more i'm going to use an icon from [material icons](https://material.io/resources/icons/?style=baseline). This is `settings-24px.svg` and on the left is what it looks like in Illustrator and on the right is what it looks like in VS Code.
 
@@ -69,7 +69,7 @@ To explain a bit more i'm going to use an icon from [material icons](https://mat
 
 In Illustrator you'll notice there's two paths nested in a layer. The first path is the settings icon, the second path is a 24x24 transparent path.
 
-We're mostly interested in the settings icon, notice how it doesn't touch the edges of the artboard this is fine, not all icons need to be the same and fill the artboard... wait, what.. isn't that a "one off" rule that breaks the system?
+We're mostly interested in the settings icon, notice how it doesn't touch the edges of the artboard, this is fine! not all icons need to be the same and fill the artboard... wait, what.. isn't that a "one off" rule that breaks the system?
 
 Nope! ⛔
 
@@ -83,7 +83,7 @@ If you download any of the icons in the [material icons](https://material.io/res
 
 If you can get your designers to follow this consistently you will have all the things you need for a solid and re-usable Svg icon System.
 
-We're now going to create a utils file to store our icon "paths" and build a React `SvgIcon` component in React
+We're now going to create a utils file to store our icon "paths" and build an `SvgIcon` component in React
 
 <Divider />
 
@@ -102,7 +102,15 @@ export const FOLDER =
 
 <Divider />
 
-To extract the paths from an Svg open it up in VS Code and copy the string. Using material icons it's easy to identify which path is the icon and which is the 24x24 transparent rectangle as it's usually the longer one. To help you identify which path is which, the 24x24 transparent rectangle looks like this `<path d="M0 0h24v24H0z" fill="none" />`
+To extract the paths from an Svg open it up in VS Code and copy the string. Using material icons it's easy to identify which path is the icon and which is the 24x24 transparent rectangle as it's usually the longer one. To help you identify which path is which, the 24x24 transparent rectangle looks like this 👇
+
+<Divider />
+
+```javascript
+<path d="M0 0h24v24H0z" fill="none" />
+```
+
+<Divider />
 
 Now lets create a component that has props for `iconName`, `size` and `color`. We are using the second path with `fill="none"` just in the component and this is the 24x24 transparent rectangle as mentioned earlier.
 
@@ -118,7 +126,7 @@ const SvgIcon = ({ iconName, size, color }) => {
       width={size}
       height="100%"
       color={color}
-      fill={"currentcolor"}
+      fill="currentcolor"
       viewBox="0 0 24 24"
       preserveAspectRatio="xMidYMid meet"
       x="0"
@@ -136,7 +144,7 @@ SvgIcon.defaultProps = {
 }
 
 SvgIcon.propTypes = {
-  /** The name of the key in icon-paths.js */
+  /** The name of const in icon-paths.js */
   iconName: PropTypes.string.isRequired,
   /** The size to act as the width of the icon */
   size: PropTypes.number,
@@ -171,4 +179,4 @@ Naturally you can add more props as per your requirements and you can change the
 
 I've used this method a lot and it's never let me down.
 
-The only watch outs are getting the design team on board. If you go down this road and then later icons are provided with different viewbox sizes you can't just make a "one off" change.
+The only watch outs are getting the design team on board. If you go down this road and then later icons are designed with different viewbox sizes or on different sized artboards you can't just make a "one off" change to fix just one icon, that said if the Svg's themselves follow the rules of our _system_ you shouldn't have any issues.
