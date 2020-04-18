@@ -3,88 +3,82 @@ import { Flex, Box, Heading, Text, Donut } from "@theme-ui/components"
 import { SourceWords } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceWords"
 
 import { formatNumber } from "../../utils/formatNumber"
-// wordCountHighest,
-// wordCountLowest,
-// timeToReadTotal,
-// timeToReadAverage,
 
 export const DonutChart = ({ title, dimension, config }) => {
-  const { color, calculation } = config
+  const { color, year } = config
 
-  const getCalculation = (type, source) => {
-    const config = {
-      averageWords: {
-        average: source.wordCountAverage,
-        value: source.wordCountAverage / 100,
-        total: source.wordCountTotal,
-      },
-      averageTime: {
-        average: source.timeToReadAverage,
-        value: source.timeToReadAverage / 100,
-        total: source.timeToReadTotal,
-      },
-    }
+  const totalWordsByYear = (currentYear) =>
+    currentYear.reduce((years, year) => (years += year.words), 0)
 
-    return config[type]
-  }
+  const averageWordsByYear = (currentYear) =>
+    Math.round(totalWordsByYear(currentYear) / currentYear.length)
 
   return (
     <SourceWords>
-      {(source) => {
+      {(sourceWords) => {
+        const yearNow = new Date().getFullYear()
+        const yearCalc = yearNow + year
+        const currentYear = sourceWords.wordCountByMonth[yearCalc]
+
         return (
-          <Box
-            sx={{
-              display: "flex",
-              flex: "1 1 auto",
-              flexDirection: "column",
-            }}
-          >
-            <Flex
+          <Box>
+            <Heading variant="styles.h4" sx={{ color: color }}>
+              {yearCalc}
+            </Heading>
+            <Box
               sx={{
-                alignItems: "center",
-                backgroundColor: "surface",
+                display: "flex",
                 flex: "1 1 auto",
                 flexDirection: "column",
-                justifyContent: "center",
-                p: 3,
-                position: "relative",
               }}
             >
-              <Heading as="h4" variant="styles.h4">
-                {title}
-              </Heading>
-              <Donut
-                sx={{ mx: 3, mb: 2, color: color }}
-                value={formatNumber(getCalculation(calculation, source).value)}
-              />
-              <Box sx={{ position: "absolute" }}>
-                <Text
-                  sx={{
-                    textAlign: "center",
-                    color: color,
-                    fontSize: "22px",
-                    fontWeight: "bold",
-                    lineHeight: "1",
-                  }}
-                >
-                  {formatNumber(getCalculation(calculation, source).average)}
+              <Flex
+                sx={{
+                  alignItems: "center",
+                  backgroundColor: "surface",
+                  flex: "1 1 auto",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  p: 3,
+                  position: "relative",
+                }}
+              >
+                <Heading as="h4" variant="styles.h4">
+                  {title}
+                </Heading>
+                <Donut
+                  sx={{ mx: 3, mb: 2, color: color }}
+                  value={averageWordsByYear(currentYear) / 100}
+                />
+                <Box sx={{ position: "absolute" }}>
+                  <Text
+                    sx={{
+                      textAlign: "center",
+                      color: color,
+                      fontSize: "22px",
+                      fontWeight: "bold",
+                      lineHeight: "1",
+                    }}
+                  >
+                    {formatNumber(averageWordsByYear(currentYear))}
+                  </Text>
+                  <Text
+                    sx={{
+                      textAlign: "center",
+                      color: color,
+                      lineHeight: "1",
+                    }}
+                  >
+                    {dimension}
+                  </Text>
+                </Box>
+                <Text sx={{ textAlign: "center" }}>
+                  {`Total ${dimension}: ${formatNumber(
+                    totalWordsByYear(currentYear)
+                  )}`}
                 </Text>
-                <Text
-                  sx={{
-                    textAlign: "center",
-                    color: color,
-                    lineHeight: "1",
-                  }}
-                >
-                  {dimension}
-                </Text>
-              </Box>
-              <Text sx={{ textAlign: "center" }}>
-                {`Total ${dimension}: ${formatNumber(
-                  getCalculation(calculation, source).total
-                )}`}
-              </Text>
-            </Flex>
+              </Flex>
+            </Box>
           </Box>
         )
       }}

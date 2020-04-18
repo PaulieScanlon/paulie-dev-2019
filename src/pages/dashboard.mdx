@@ -22,7 +22,7 @@ import { DonutChart } from "../components/DonutChart"
   <DonutChart
     title="Average word count"
     dimension="words"
-    config={{ calculation: "averageWords", color: "primary" }}
+    config={{ year: 0, color: "primary" }}
   />
   <Divider />
 </Box>
@@ -34,9 +34,9 @@ import { DonutChart } from "../components/DonutChart"
   }}
 >
   <DonutChart
-    title="Average time to read"
-    dimension="minutes"
-    config={{ calculation: "averageTime", color: "secondary" }}
+    title="Average word count"
+    dimension="words"
+    config={{ year: -1, color: "secondary" }}
   />
   <Divider />
 </Box>

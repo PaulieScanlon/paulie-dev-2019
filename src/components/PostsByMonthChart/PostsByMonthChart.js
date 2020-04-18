@@ -11,11 +11,19 @@ export const PostsByMonthChart = ({ config }) => {
       {(sourceMonths) => {
         const currentYear = sourceMonths[sourceMonths.length - (1 - year)]
         return (
-          <Box sx={{ backgroundColor: "surface", p: 1 }}>
+          <Box>
             <Heading variant="styles.h4" sx={{ color: color }}>
               {currentYear[0].year}
             </Heading>
-            <Box sx={{ display: "flex", flex: "1 1 auto", height: 181 }}>
+            <Box
+              sx={{
+                backgroundColor: "surface",
+                display: "flex",
+                flex: "1 1 auto",
+                p: 1,
+                height: 240,
+              }}
+            >
               <Flex sx={{ flexWrap: "wrap", width: "100%" }}>
                 {currentYear.map((month, index) => {
                   const { initial, count, percent } = month
