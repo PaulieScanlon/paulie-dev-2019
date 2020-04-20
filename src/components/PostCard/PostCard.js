@@ -1,6 +1,7 @@
-import React from "react";
-import { format } from "date-fns";
-import { Box, Link, Card, Image, Heading, Text } from "@theme-ui/components";
+import React from "react"
+import { format } from "date-fns"
+import { Box, Link, Card, Heading, Text } from "@theme-ui/components"
+import Img from "gatsby-image"
 
 export const PostCard = ({
   title,
@@ -43,8 +44,8 @@ export const PostCard = ({
         >
           {featuredImage && featuredImage.childImageSharp && (
             <Box sx={{ minHeight: "1px" }}>
-              <Image
-                src={featuredImage.childImageSharp.fluid.src}
+              <Img
+                fluid={featuredImage.childImageSharp.fluid}
                 alt={featuredImage.childImageSharp.fluid.originalName}
               />
             </Box>
@@ -73,5 +74,5 @@ export const PostCard = ({
         </Card>
       </Link>
     </Box>
-  );
-};
+  )
+}
