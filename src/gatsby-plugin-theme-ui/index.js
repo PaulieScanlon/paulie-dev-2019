@@ -42,5 +42,16 @@ export default {
         cursor: "pointer",
       },
     },
+    buttons: {
+      ghost: {
+        ...baseTheme.buttons.primary,
+        color: "muted",
+        backgroundColor: "background",
+        transition: ".2s linear background-color",
+        ":hover": {
+          backgroundColor: "surface",
+        },
+      },
+    },
   },
 }
