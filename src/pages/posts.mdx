@@ -15,24 +15,26 @@ import { PostCard } from "../components/PostCard"
         mr: (theme) => `-${theme.space[2]}px`,
       }}
     >
-      {posts.map((edge, index) => {
-        const {
-          frontmatter: { title, featuredImage, tags, date },
-          excerpt,
-          fields: { slug },
-        } = edge.node
-        return (
-          <PostCard
-            key={index}
-            title={title}
-            featuredImage={featuredImage}
-            tags={tags}
-            date={date}
-            excerpt={excerpt}
-            slug={slug}
-          />
-        )
-      })}
+      {posts
+        .filter((edge) => !edge.node.frontmatter.isPrivate)
+        .map((edge, index) => {
+          const {
+            frontmatter: { title, featuredImage, tags, date },
+            excerpt,
+            fields: { slug },
+          } = edge.node
+          return (
+            <PostCard
+              key={index}
+              title={title}
+              featuredImage={featuredImage}
+              tags={tags}
+              date={date}
+              excerpt={excerpt}
+              slug={slug}
+            />
+          )
+        })}
     </Flex>
   )}
 </SourceList>

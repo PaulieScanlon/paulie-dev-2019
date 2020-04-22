@@ -1,0 +1,146 @@
+---
+title: Theme UI Link | Gatsby Link | Reach Link - TypeScript (Storybook)
+tags: [Gatsby"]
+date: 2020-04-20
+status: draft
+author: Paul Scanlon
+---
+
+There are multiple issues when using Links, below are some examples of how to work with the Theme UI `<Link />` with some of the problems you might face.
+
+## JavaScript
+
+Using Theme UI Link cast as `GatsbyLink` to allow the use of `sx` prop. Totally acceptable but causes problems with Storybook
+
+<!-- prettier-ignore -->
+```javascript
+import { Link as GatsbyLink } from "gatsby"
+import { Link } from "@theme-ui/components"
+
+<Link as={GatsbyLink} to="/some-link" sx={{ color: "primary" }}>
+  Some Link
+</Link>
+```
+
+## Storybook
+
+Instead you an use `@reach/router` and switch the `to` prop to the `path` prop, now Storybook is fine.
+
+<!-- prettier-ignore -->
+```javascript
+...
+import { Link as ReachLink } from "@reach/router"
+import { Link } from "@theme-ui/components"
+
+<Link as={ReachLink} path="/some-link" sx={{ color: "primary" }}>
+  Some Link
+</Link>
+```
+
+## TypeScript
+
+Using Theme UI Link cast as `GatsbyLink`
+or
+Using Theme UI Link cast as `ReachLink`
+
+Will both produce TypeScript errors as neither `to` or `path` are recognized props for Theme UI `<Link />`
+
+```javascript
+...
+import { Link as GatsbyLink } from 'gatsby'
+import { Link as ReachLink } from '@reach/router'
+import { Link } from '@theme-ui/components'
+
+<Link as={GatsbyLink} to="/some-link" sx={{ color: "primary" }}>Some Link</Link>
+<Link as={ReachLink} path='/some-link' sx={{ color: "primary" }}>Some Link</Link>
+```
+
+How to solve this? Here's one solution but it involves creating a new component `<TestLink />` which isn't ideal
+
+```javascript
+import React, { FunctionComponent } from 'react'
+import { Link as ReachLink, RouteComponentProps } from "@reach/router";
+import { Link } from '@theme-ui/components'
+
+interface TestLinkProps extends RouteComponentProps {
+  /** Theme UI sx pragma */
+  sx?: any;
+}
+
+const TestLink: FunctionComponent<TestLinkProps> = ({ children, sx, ...props }) => {
+  return (
+    <Link as={ReachLink} sx={sx} {...props}>
+      {children}
+    </Link>
+  );
+};
+
+
+// usage
+<TestLink path="/">Test</TestLink>
+<TestLink to="/">Test</TestLink>
+```
+
+... and we still gets errors on the `to` prop because the interface only extends `RouteComponentProps`
+
+```javascript
+import React, { FunctionComponent } from 'react'
+import { Link as GatsbyLink, GatsbyLinkProps } from "gatsby";
+import { Link } from '@theme-ui/components'
+
+interface TestLinkProps extends GatsbyLinkProps<any> {
+  /** Theme UI sx pragma */
+  sx?: any;
+}
+
+const TestLink: FunctionComponent<TestLinkProps> = ({ children, sx, ...props }) => {
+  return (
+    <Link as={GatsbyLink} sx={sx} {...props}>
+      {children}
+    </Link>
+  );
+};
+
+
+// usage
+<TestLink path="/">Test</TestLink>
+<TestLink to="/">Test</TestLink>
+```
+
+... now we get errors on the `path` prop because the interface extends `GatsbyLinkProps` and we get an error on `<Link />` itself... something about refAttributes
+
+The below still requires a new component _and_ requires we manually type either/or `to` and `path` depending on which convention you'd prefer to maintain.
+
+This seems to work ok.. need to test it in Storybook
+
+```javascript
+import React, { FunctionComponent, AnchorHTMLAttributes } from 'react'
+import { Link as ReachLink } from "@reach/router";
+import { Link } from '@theme-ui/components'
+
+interface TestLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** Theme UI sx pragma */
+  sx?: any;
+  /** The URL you want to link to */
+  to?: string;
+  /** The URL you want to link to */
+  path?: string;
+}
+
+const TestLink: FunctionComponent<TestLinkProps> = ({ children, sx, ...props }) => {
+  return (
+    <Link as={ReachLink} sx={sx} {...props}>
+      {children}
+    </Link>
+  );
+};
+
+
+// usage
+<TestLink path="/">Test</TestLink>
+<TestLink to="/">Test</TestLink>
+```
+
+Or
+
+... need to investigate adding something to type roots so that `Link` from Theme UI can be cast as `ReachLink` and not throw errors on the use of the `path` prop

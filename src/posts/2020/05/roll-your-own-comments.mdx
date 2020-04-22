@@ -1,0 +1,286 @@
+---
+title: Roll Your Comments with Gatsby and Fauna
+tags: [Gatsby"]
+date: 2020-05-01
+author: Paul Scanlon
+isPrivate: true
+embeddedImages:
+  - new-database.jpg
+  - server-key.jpg
+  - comment-in-document.jpg
+  - get-all-comments.jpg
+---
+
+## Roll your own blog comments with Gatsby and Fauna
+
+This tutorial will focus on the operations we need to use Fauna to power a comment system for a Gatsby blog.
+
+The repo below is a fully built Gatsby application and the steps to build this are not covered in this tutorial but we will be using it to demo how to use Fauna.
+
+You can see the finished application [here](https://fauna-gatsby-comments.netlify.app/)
+
+To get started clone the repo at `https://github.com/PaulieScanlon/fauna-gatsby-comments`
+
+or git clone `https://github.com/PaulieScanlon/fauna-gatsby-comments.git`
+
+Then install all the dependencies
+
+<Divider />
+```sh npm install ```
+<Divider />
+
+Also cd in to `functions/apollo-graphql` and install the dependencies for the Netlify function.
+
+<Divider />
+```sh npm install ```
+<Divider />
+
+This is a separate package and has its own dependencies, we’ll be using this later.
+
+We also need to install the Netlify CLI as we’ll also use this later
+
+<Divider />
+```sh npm install netlify-cli -g ```
+<Divider />
+
+Now lets add three new files that aren’t part of the repo.
+
+At the root of the project create a `.env` .env.development`and`.env.production`
+
+Add the following to .env
+
+<Divider />
+```sh GATSBY_FAUNA_DB = ```
+<Divider />
+
+Add the following to `.env.development`
+
+<Divider />
+```sh GATSBY_ADMIN_ID = GATSBY_SHOW_SIGN_UP = true GATSBY_FAUNA_DB = ```
+<Divider />
+
+Add the following to `.env.production`
+
+<Divider />
+```sh GATSBY_ADMIN_ID = GATSBY_SHOW_SIGN_UP = false GATSBY_FAUNA_DB = ```
+<Divider />
+
+We’ll come back to these later but in case you’re wondering
+
+<Divider />
+`GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for us `GATSBY_SHOW_SIGN_UP`
+is used to hide the Sign up button when the site is in production and when you’re
+running `yarn serve` locally. `GATSBY_FAUNA_DB` is the Fauna secret key for our database
+<Divider />
+
+If you’re curious you can run `yarn develop` and then navigate to http://localhost:8000 in your browser.
+
+Now we’re going to write some of the operations we need to use Fauna
+
+## Fauna
+
+Got to https://fauna.com/ and sign up
+
+<Divider />
+<Img fluid={props.embedded.image1.fluid} />
+<Divider />
+
+### Database and Collection
+
+- Create a new database by clicking **NEW DATABASE**
+- Name the database, i’ve called the demo database `fauna-gatsby-comments`
+- Create a new Collection by clicking **NEW COLLECTION**
+- Name the collection, i've called the demo collection `demo-blog-comments`
+
+Now we need to to set up a server key. Go to the **SECURITY**
+
+<Divider />
+<Img fluid={props.embedded.image2.fluid} />
+<Divider />
+
+### Server Key
+
+- Create a new key by **NEW KEY**
+- Select the database you want the key to apply to `fauna-gatsby-comments` for example
+- Set the _Role_ as **Admin**
+- Name the server key, i've called the demo key `demo-blog-server-key`
+
+### Environment
+
+Copy the server key and add it to `GATSBY_FAUNA_DB =` in `.env.development`,`.env.production` and `.env`
+
+Adding the key to `.env` is just so we can test our development functions which we’ll do next.
+
+### Development functions
+
+Find the file called `boop.js` and enter the name of the collection you just created for the `COLLECTION_NAME` constant
+
+<Divider />
+
+```javascript
+// boop.js
+const COLLECTION_NAME = "demo-blog-comments"
+```
+
+<Divider />
+
+We’ll start by creating a comment.
+
+```javascript
+// boop.js
+
+  createComment: async () => {
+    const slug = "/posts/some-post";
+    const name = "some name";
+    const comment = "some comment";
+
+    const results = await client.query(
+      q.Create(q.Collection(COLLECTION_NAME), {
+        data: {
+          isApproved: false,
+          slug: slug,
+          date: new Date().toString(),
+          name: name,
+          comment: comment,
+        },
+      })
+    );
+    console.log(JSON.stringify(results, null, 2));
+    return {
+      commentId: results.ref.id,
+    };
+  },
+
+```
+
+<Divider />
+
+The breakdown of this function is as follows;
+
+- `q` is our instance of `faunadb.query`
+- `Create`is the fauna method to create an entry within a collection
+- `Collection` is area in the database to store the data. It takes the name of the collection as the first argument and a data object as the second.
+
+The second argument is the shape of the data we need to drive our applications comment system.
+
+For now we’re going to hard-code `slug`, `name` and `comment` but in the final application these values are captured from the input form and passed in via args
+
+The breakdown for the shape is as follows;
+
+`isApproved` is the status of the comment and by default it’s false until we approve it in our admin page
+`slug` is the path to the post where the comment was written
+`date` is the time stamp the comment was written
+`name` is the name the user entered from the comments from
+`comment` is the comment the user entered from the comment form
+
+When we create a comment we’re not really interested in dealing with the result because as far as the user is concerned all they'll see is either a success or error message.
+
+After a user has posted a comment it will go in to our Admin queue until we approve it but we did want to return something we could surface that in the UI
+
+#### Create a comment
+
+run the following in your CLI
+
+<Divider />
+
+```sh
+node boop createComment
+```
+
+<Divider />
+
+If everything worked correctly you should see a log in your terminal of the new comment.
+
+<Divider />
+
+```sh
+{
+   "ref": {
+     "@ref": {
+       "id": "263413122555970050",
+       "collection": {
+         "@ref": {
+           "id": "demo-blog-comments",
+           "collection": {
+             "@ref": {
+               "id": "collections"
+             }
+           }
+         }
+       }
+     }
+   },
+   "ts": 1587469179600000,
+   "data": {
+     "isApproved": false,
+     "slug": "/posts/some-post",
+     "date": "Tue Apr 21 2020 12:39:39 GMT+0100 (British Summer Time)",
+     "name": "some name",
+     "comment": "some comment"
+   }
+ }
+ { commentId: '263413122555970050' }
+
+```
+
+<Divider />
+
+If you head over to **COLLECTIONS** in Fauna you should see your new entry in the _Document_
+
+<Divider />
+<Img fluid={props.embedded.image3.fluid} />
+<Divider />
+
+Change the hard coded values in the `createComment` function and run
+
+<Divider />
+
+```sh
+node boop createComment
+
+```
+
+<Divider />
+
+Do this a few times so we end up with at least three new comments stored in the database, we’ll use these in a moment.
+
+_It’s a good idea whilst testing to give each comment a unique slug_
+
+### Indexes
+
+Next we need to create an **INDEX** in Fauna, an **INDEX** allows us to query the data base with a specific term
+
+Go to **INDEX** and click **NEW INDEX**
+
+<Divider />
+<Img fluid={props.embedded.image4.fluid} />
+<Divider />
+
+- Create a new index by clicking **NEW INDEX**
+- Name the index, i’ve called this first one `get-all-comments`
+
+When we query the database using this index we can tell Fauna which parts of the entry we want to return.
+
+You can do this by adding values but be careful to enter the values exactly as they appear above because (on the Fauna free tier) on you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again.
+
+#### Get all Comments
+
+```javascript
+// boop.js
+
+getAllComments: async () => {
+   const results = await client.query(
+     q.Paginate(q.Match(q.Index("get-all-comments")))
+   );
+   console.log(JSON.stringify(results, null, 2));
+   return results.data.map(([ref, isApproved, slug, date, name, comment]) => ({
+     commentId: ref.id,
+     isApproved,
+     slug,
+     date,
+     name,
+     comment,
+   }));
+ },
+
+```
