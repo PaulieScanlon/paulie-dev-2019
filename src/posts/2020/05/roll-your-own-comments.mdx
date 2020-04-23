@@ -9,6 +9,7 @@ embeddedImages:
   - server-key.jpg
   - comment-in-document.jpg
   - get-all-comments.jpg
+  - get-comments-by-slug.jpg
 ---
 
 ## Roll your own blog comments with Gatsby and Fauna
@@ -26,13 +27,21 @@ or git clone `https://github.com/PaulieScanlon/fauna-gatsby-comments.git`
 Then install all the dependencies
 
 <Divider />
-```sh npm install ```
+
+```sh
+npm install
+```
+
 <Divider />
 
 Also cd in to `functions/apollo-graphql` and install the dependencies for the Netlify function.
 
 <Divider />
-```sh npm install ```
+
+```sh
+npm install
+```
+
 <Divider />
 
 This is a separate package and has its own dependencies, we’ll be using this later.
@@ -40,7 +49,11 @@ This is a separate package and has its own dependencies, we’ll be using this l
 We also need to install the Netlify CLI as we’ll also use this later
 
 <Divider />
-```sh npm install netlify-cli -g ```
+
+```sh
+npm install netlify-cli -g
+```
+
 <Divider />
 
 Now lets add three new files that aren’t part of the repo.
@@ -50,27 +63,47 @@ At the root of the project create a `.env` .env.development`and`.env.production`
 Add the following to .env
 
 <Divider />
-```sh GATSBY_FAUNA_DB = ```
+
+```sh
+GATSBY_FAUNA_DB =
+```
+
 <Divider />
 
 Add the following to `.env.development`
 
 <Divider />
-```sh GATSBY_ADMIN_ID = GATSBY_SHOW_SIGN_UP = true GATSBY_FAUNA_DB = ```
+
+```sh
+GATSBY_ADMIN_ID =
+GATSBY_SHOW_SIGN_UP = true
+GATSBY_FAUNA_DB =
+
+```
+
 <Divider />
 
 Add the following to `.env.production`
 
 <Divider />
-```sh GATSBY_ADMIN_ID = GATSBY_SHOW_SIGN_UP = false GATSBY_FAUNA_DB = ```
+
+```sh
+GATSBY_ADMIN_ID =
+GATSBY_SHOW_SIGN_UP = false
+GATSBY_FAUNA_DB =
+```
+
 <Divider />
 
 We’ll come back to these later but in case you’re wondering
 
 <Divider />
-`GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for us `GATSBY_SHOW_SIGN_UP`
-is used to hide the Sign up button when the site is in production and when you’re
-running `yarn serve` locally. `GATSBY_FAUNA_DB` is the Fauna secret key for our database
+
+- `GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for us
+- `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production and when you’re
+  running `yarn serve` locally.
+- `GATSBY_FAUNA_DB` is the Fauna secret key for our database
+
 <Divider />
 
 If you’re curious you can run `yarn develop` and then navigate to http://localhost:8000 in your browser.
@@ -81,10 +114,6 @@ Now we’re going to write some of the operations we need to use Fauna
 
 Got to https://fauna.com/ and sign up
 
-<Divider />
-<Img fluid={props.embedded.image1.fluid} />
-<Divider />
-
 ### Database and Collection
 
 - Create a new database by clicking **NEW DATABASE**
@@ -92,18 +121,22 @@ Got to https://fauna.com/ and sign up
 - Create a new Collection by clicking **NEW COLLECTION**
 - Name the collection, i've called the demo collection `demo-blog-comments`
 
-Now we need to to set up a server key. Go to the **SECURITY**
-
 <Divider />
-<Img fluid={props.embedded.image2.fluid} />
+<Img fluid={props.embedded.image1.fluid} />
 <Divider />
 
 ### Server Key
+
+Now we need to to set up a server key. Go to the **SECURITY**
 
 - Create a new key by **NEW KEY**
 - Select the database you want the key to apply to `fauna-gatsby-comments` for example
 - Set the _Role_ as **Admin**
 - Name the server key, i've called the demo key `demo-blog-server-key`
+
+<Divider />
+<Img fluid={props.embedded.image2.fluid} />
+<Divider />
 
 ### Environment
 
@@ -126,13 +159,16 @@ const COLLECTION_NAME = "demo-blog-comments"
 
 We’ll start by creating a comment.
 
+<Divider />
+
 ```javascript
 // boop.js
 
+  // CREATE COMMENT
   createComment: async () => {
-    const slug = "/posts/some-post";
-    const name = "some name";
-    const comment = "some comment";
+    const slug = "/posts/some-post"
+    const name = "some name"
+    const comment = "some comment"
 
     const results = await client.query(
       q.Create(q.Collection(COLLECTION_NAME), {
@@ -144,11 +180,11 @@ We’ll start by creating a comment.
           comment: comment,
         },
       })
-    );
-    console.log(JSON.stringify(results, null, 2));
+    )
+    console.log(JSON.stringify(results, null, 2))
     return {
       commentId: results.ref.id,
-    };
+    }
   },
 
 ```
@@ -167,17 +203,17 @@ For now we’re going to hard-code `slug`, `name` and `comment` but in the final
 
 The breakdown for the shape is as follows;
 
-`isApproved` is the status of the comment and by default it’s false until we approve it in our admin page
-`slug` is the path to the post where the comment was written
-`date` is the time stamp the comment was written
-`name` is the name the user entered from the comments from
-`comment` is the comment the user entered from the comment form
+- `isApproved` is the status of the comment and by default it’s false until we approve it in our admin page
+- `slug` is the path to the post where the comment was written
+- `date` is the time stamp the comment was written
+- `name` is the name the user entered from the comments from
+- `comment` is the comment the user entered from the comment form
 
 When we create a comment we’re not really interested in dealing with the result because as far as the user is concerned all they'll see is either a success or error message.
 
-After a user has posted a comment it will go in to our Admin queue until we approve it but we did want to return something we could surface that in the UI
+After a user has posted a comment it will go in to our Admin queue until we approve it but if we did want to return something we could surface that in the UI
 
-#### Create a comment
+### Create a comment
 
 run the following in your CLI
 
@@ -225,13 +261,13 @@ If everything worked correctly you should see a log in your terminal of the new 
 
 <Divider />
 
-If you head over to **COLLECTIONS** in Fauna you should see your new entry in the _Document_
+If you head over to **COLLECTIONS** in Fauna you should see your new entry in the collection
 
 <Divider />
 <Img fluid={props.embedded.image3.fluid} />
 <Divider />
 
-Change the hard coded values in the `createComment` function and run
+We need to create a few more comments to while we're in development so change the hard-coded values for `name` and `comment` and run the following again.
 
 <Divider />
 
@@ -244,30 +280,54 @@ node boop createComment
 
 Do this a few times so we end up with at least three new comments stored in the database, we’ll use these in a moment.
 
-_It’s a good idea whilst testing to give each comment a unique slug_
+## Delete comment
+
+Now that we can create comments it's also required that we can delete a comment.
+
+By adding a `commentId` of one of the comments you created above you can delete it from the database.
+
+We're not really concerned with the return value here but if you wanted to surface this in the UI you could use the `commentId` return value
+
+```javascript
+// boop.js
+
+deleteCommentById: async () => {
+  const commentId = "263413122555970050";
+
+  const results = await client.query(
+    q.Delete(q.Ref(q.Collection(COLLECTION_NAME), commentId))
+  );
+  console.log(JSON.stringify(results, null, 2));
+  return {
+    commentId: results.ref.id,
+  };
+},
+
+```
 
 ### Indexes
 
-Next we need to create an **INDEX** in Fauna, an **INDEX** allows us to query the data base with a specific term
-
-Go to **INDEX** and click **NEW INDEX**
+Next we need to create an **INDEX** in Fauna, an **INDEX** allows us to query the database with a specific term
 
 <Divider />
 <Img fluid={props.embedded.image4.fluid} />
 <Divider />
 
+- Go to **INDEX** and click **NEW INDEX**
 - Create a new index by clicking **NEW INDEX**
-- Name the index, i’ve called this first one `get-all-comments`
+- Name the index, i’ve called this one `get-all-comments`
 
 When we query the database using this index we can tell Fauna which parts of the entry we want to return.
 
-You can do this by adding values but be careful to enter the values exactly as they appear above because (on the Fauna free tier) on you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again.
+You can do this by adding values but be careful to enter the values exactly as they appear above because (on the Fauna free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again.
 
-#### Get all Comments
+### Get all comments
+
+<Divider />
 
 ```javascript
 // boop.js
-
+...
 getAllComments: async () => {
    const results = await client.query(
      q.Paginate(q.Match(q.Index("get-all-comments")))
@@ -282,5 +342,87 @@ getAllComments: async () => {
      comment,
    }));
  },
-
+...
 ```
+
+<Divider />
+
+The breakdown of this function is as follows
+
+`client` is the Fauna client instance
+`query` is a method to get data from Fauna
+`q` is our instance of `faunadb.query`
+`Paginate` paginates the responses
+`Match` returns matched results
+`Index` is the name of the _Index_ we want to use
+
+The shape of the returned result here is an array of the same shpare we defined in the _Index_ values
+
+If you run the following you should see the list of all the comments you created earlier
+
+<Divider />
+
+```sh
+node boop getAllComments
+```
+
+<Divider />
+
+### Get comments by slug
+
+We're going to take a similar approach as above but this time create a new index that allows us to query Fauna in a different way.
+
+<Divider />
+<Img fluid={props.embedded.image5.fluid} />
+<Divider />
+
+- Go to **INDEX** and click **NEW INDEX**
+- Create a new index by clicking **NEW INDEX**
+- Name the index, i’ve called this one `get-comments-by-slug`
+
+<Divider />
+
+```javascript
+// boop.js
+...
+getCommentsBySlug: async () => {
+  const slug = "/posts/some-post";
+
+  const results = await client.query(
+    q.Paginate(q.Match(q.Index("get-comments-by-slug"), slug))
+  );
+  console.log(JSON.stringify(results, null, 2));
+  return results.data.map(([ref, isApproved, slug, date, name, comment]) => ({
+    commentId: ref.id,
+    isApproved,
+    slug,
+    date,
+    name,
+    comment,
+  }));
+},
+...
+```
+
+<Divider />
+
+The breakdown of this function is as follows
+
+`client` is the Fauna client instance
+`query` is a method to get data from Fauna
+`q` is our instance of `faunadb.query`
+`Paginate` paginates the responses
+`Match` returns matched results
+`Index` is the name of the _Index_ we want to use
+
+The shape of the returned result here is an array of the same shape we defined in the _Index_ values
+
+If you run the following you should see the list of all the comments you created earlier but for a specific `slug`
+
+<Divider />
+
+```sh
+node boop getCommentsBySlug
+```
+
+<Divider />
