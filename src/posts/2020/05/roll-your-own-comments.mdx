@@ -22,7 +22,11 @@ You can see the finished application [here](https://fauna-gatsby-comments.netlif
 
 To get started clone the repo at `https://github.com/PaulieScanlon/fauna-gatsby-comments`
 
-or git clone `https://github.com/PaulieScanlon/fauna-gatsby-comments.git`
+or
+
+```sh
+git clone `https://github.com/PaulieScanlon/fauna-gatsby-comments.git`
+```
 
 Then install all the dependencies
 
@@ -58,9 +62,9 @@ npm install netlify-cli -g
 
 Now lets add three new files that aren’t part of the repo.
 
-At the root of the project create a `.env` .env.development`and`.env.production`
+At the root of the project create a `.env` `.env.development` and `.env.production`
 
-Add the following to .env
+Add the following to `.env`
 
 <Divider />
 
@@ -100,8 +104,7 @@ We’ll come back to these later but in case you’re wondering
 <Divider />
 
 - `GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for us
-- `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production and when you’re
-  running `yarn serve` locally.
+- `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production
 - `GATSBY_FAUNA_DB` is the Fauna secret key for our database
 
 <Divider />
@@ -117,9 +120,9 @@ Got to https://fauna.com/ and sign up
 ### Database and Collection
 
 - Create a new database by clicking **NEW DATABASE**
-- Name the database, i’ve called the demo database `fauna-gatsby-comments`
+- Name the database: i’ve called the demo database `fauna-gatsby-comments`
 - Create a new Collection by clicking **NEW COLLECTION**
-- Name the collection, i've called the demo collection `demo-blog-comments`
+- Name the collection: i've called the demo collection `demo-blog-comments`
 
 <Divider />
 <Img fluid={props.embedded.image1.fluid} />
@@ -127,12 +130,12 @@ Got to https://fauna.com/ and sign up
 
 ### Server Key
 
-Now we need to to set up a server key. Go to the **SECURITY**
+Now we need to to set up a server key. Go to **SECURITY**
 
-- Create a new key by **NEW KEY**
+- Create a new key **NEW KEY**
 - Select the database you want the key to apply to `fauna-gatsby-comments` for example
 - Set the _Role_ as **Admin**
-- Name the server key, i've called the demo key `demo-blog-server-key`
+- Name the server key: i've called the demo key `demo-blog-server-key`
 
 <Divider />
 <Img fluid={props.embedded.image2.fluid} />
@@ -163,30 +166,30 @@ We’ll start by creating a comment.
 
 ```javascript
 // boop.js
+...
+// CREATE COMMENT
+createComment: async () => {
+  const slug = "/posts/some-post"
+  const name = "some name"
+  const comment = "some comment"
 
-  // CREATE COMMENT
-  createComment: async () => {
-    const slug = "/posts/some-post"
-    const name = "some name"
-    const comment = "some comment"
-
-    const results = await client.query(
-      q.Create(q.Collection(COLLECTION_NAME), {
-        data: {
-          isApproved: false,
-          slug: slug,
-          date: new Date().toString(),
-          name: name,
-          comment: comment,
-        },
-      })
-    )
-    console.log(JSON.stringify(results, null, 2))
-    return {
-      commentId: results.ref.id,
-    }
-  },
-
+  const results = await client.query(
+    q.Create(q.Collection(COLLECTION_NAME), {
+      data: {
+        isApproved: false,
+        slug: slug,
+        date: new Date().toString(),
+        name: name,
+        comment: comment,
+      },
+    })
+  )
+  console.log(JSON.stringify(results, null, 2))
+  return {
+    commentId: results.ref.id,
+  }
+},
+...
 ```
 
 <Divider />
@@ -194,7 +197,7 @@ We’ll start by creating a comment.
 The breakdown of this function is as follows;
 
 - `q` is our instance of `faunadb.query`
-- `Create`is the fauna method to create an entry within a collection
+- `Create` is the fauna method to create an entry within a collection
 - `Collection` is area in the database to store the data. It takes the name of the collection as the first argument and a data object as the second.
 
 The second argument is the shape of the data we need to drive our applications comment system.
@@ -267,7 +270,9 @@ If you head over to **COLLECTIONS** in Fauna you should see your new entry in th
 <Img fluid={props.embedded.image3.fluid} />
 <Divider />
 
-We need to create a few more comments to while we're in development so change the hard-coded values for `name` and `comment` and run the following again.
+We need to create a few more comments while we're in development so change the hard-coded values for `name` and `comment` and run the following again.
+
+Do this a few times so we end up with at least three new comments stored in the database, we’ll use these in a moment.
 
 <Divider />
 
@@ -278,19 +283,18 @@ node boop createComment
 
 <Divider />
 
-Do this a few times so we end up with at least three new comments stored in the database, we’ll use these in a moment.
-
 ## Delete comment
 
-Now that we can create comments it's also required that we can delete a comment.
+Now that we can create comments we also need to be able to delete a comment.
 
-By adding a `commentId` of one of the comments you created above you can delete it from the database.
+By adding the `commentId` of one of the comments you created above you can delete it from the database.
 
-We're not really concerned with the return value here but if you wanted to surface this in the UI you could use the `commentId` return value
+We're not really concerned with the return value here but if you wanted to surface this in the UI you could use the `commentId` as a return value
 
 ```javascript
 // boop.js
-
+...
+// DELETE COMMENT
 deleteCommentById: async () => {
   const commentId = "263413122555970050";
 
@@ -302,7 +306,7 @@ deleteCommentById: async () => {
     commentId: results.ref.id,
   };
 },
-
+...
 ```
 
 ### Indexes
@@ -315,7 +319,7 @@ Next we need to create an **INDEX** in Fauna, an **INDEX** allows us to query th
 
 - Go to **INDEX** and click **NEW INDEX**
 - Create a new index by clicking **NEW INDEX**
-- Name the index, i’ve called this one `get-all-comments`
+- Name the index: i’ve called this one `get-all-comments`
 
 When we query the database using this index we can tell Fauna which parts of the entry we want to return.
 
@@ -328,6 +332,7 @@ You can do this by adding values but be careful to enter the values exactly as t
 ```javascript
 // boop.js
 ...
+// GET ALL COMMENTS
 getAllComments: async () => {
    const results = await client.query(
      q.Paginate(q.Match(q.Index("get-all-comments")))
@@ -349,14 +354,14 @@ getAllComments: async () => {
 
 The breakdown of this function is as follows
 
-`client` is the Fauna client instance
-`query` is a method to get data from Fauna
-`q` is our instance of `faunadb.query`
-`Paginate` paginates the responses
-`Match` returns matched results
-`Index` is the name of the _Index_ we want to use
+- `client` is the Fauna client instance
+- `query` is a method to get data from Fauna
+- `q` is our instance of `faunadb.query`
+- `Paginate` paginates the responses
+- `Match` returns matched results
+- `Index` is the name of the _Index_ we want to use
 
-The shape of the returned result here is an array of the same shpare we defined in the _Index_ values
+The shape of the returned result here is an array of the same shape we defined in the _Index_ values
 
 If you run the following you should see the list of all the comments you created earlier
 
@@ -385,6 +390,7 @@ We're going to take a similar approach as above but this time create a new index
 ```javascript
 // boop.js
 ...
+// GET COMMENT BY SLUG
 getCommentsBySlug: async () => {
   const slug = "/posts/some-post";
 
@@ -408,12 +414,12 @@ getCommentsBySlug: async () => {
 
 The breakdown of this function is as follows
 
-`client` is the Fauna client instance
-`query` is a method to get data from Fauna
-`q` is our instance of `faunadb.query`
-`Paginate` paginates the responses
-`Match` returns matched results
-`Index` is the name of the _Index_ we want to use
+- `client` is the Fauna client instance
+- `query` is a method to get data from Fauna
+- `q` is our instance of `faunadb.query`
+- `Paginate` paginates the responses
+- `Match` returns matched results
+- `Index` is the name of the _Index_ we want to use
 
 The shape of the returned result here is an array of the same shape we defined in the _Index_ values
 
@@ -426,3 +432,39 @@ node boop getCommentsBySlug
 ```
 
 <Divider />
+
+## Approve comment
+
+When we create a comment we manually set the `isApproved` value to false. This prevents the comment from being shown in the application until we've approved it.
+
+Let's create a function to do this but we need to hard code a `commentId`. Use a `commentId` from one of the comments you created earlier
+
+<Divider />
+
+```javascript
+// boop.js
+...
+// APPROVE COMMENT BY ID
+approveCommentById: async () => {
+  const commentId = '263413122555970050'
+
+  const results = await client.query(
+    q.Update(q.Ref(q.Collection(COLLECTION_NAME), commentId), {
+      data: {
+        isApproved: true,
+      },
+    })
+  );
+  console.log(JSON.stringify(results, null, 2));
+  return {
+    isApproved: results.isApproved,
+  };
+},
+...
+```
+
+<Divider />
+
+These are all the operations required to manage data from our application.
+
+In the repo if you have a look at `apollo-graphql.js` which can be found in `functions/apollo-graphql` you'll see the above operations. As mentioned before our hard coded values are replaced by `args` values which are passed in from various parts of the application.
