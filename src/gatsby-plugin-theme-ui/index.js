@@ -42,12 +42,6 @@ export default {
         cursor: "pointer",
       },
     },
-    li: {
-      code: {
-        ...baseTheme.codeBlock,
-        fontSize: 14,
-      },
-    },
     buttons: {
       ghost: {
         ...baseTheme.buttons.primary,
