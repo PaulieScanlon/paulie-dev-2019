@@ -48,7 +48,11 @@ export const DonutChart = ({ title, dimension, config }) => {
                 </Heading>
                 <Donut
                   sx={{ mx: 3, mb: 2, color: color }}
-                  value={averageWordsByYear(currentYear) / 100}
+                  value={
+                    (totalWordsByYear(currentYear) /
+                      averageWordsByYear(currentYear)) *
+                    100
+                  }
                 />
                 <Box sx={{ position: "absolute" }}>
                   <Text
