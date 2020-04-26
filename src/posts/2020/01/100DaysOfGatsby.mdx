@@ -857,7 +857,7 @@ Today's thoughts have mainly been around what i'm calling _Cloud Themes_ ... all
 
 If i can get [skin-ui](https://www.skin-ui.com) to a point where user auth / teams auth are a thing you could have a designer using the browser UI and making and saving changes to the theme object... but then imagine rather than manually copying and pasting that theme object in to the code base it could just be in the code base and capture changes after they're saved from the web editor.
 
-I totally think this is possible if i were to write a _build time_ Gatsby plugin that once configured via `gatsby-config.js` using an id or something would connect to a (yet to be developed) skin-api and pull down the theme object and then continue to compile the app/site/blog with that theme object.
+I totally think this is possible if i were to write a _build time_ Gatsby Plugins that once configured via `gatsby-config.js` using an id or something would connect to a (yet to be developed) skin-api and pull down the theme object and then continue to compile the app/site/blog with that theme object.
 
 This might allow yet another abstraction of "web design" and "web development"... i'm thinking at the moment i could make the [skin-ui](https://www.skin-ui.com) UI more focussed on designers needs and provide easy to understand ways to modify the theme object along with an easy way to preview the changes then, once they hit save all that _design_ work could be pulled in to the application and, et voilà you'd have styles for anything and everything the _engineers_ could need to build out application functionality... this of course is dependant on Gatsby becoming the _go to_ tool for larger builds.. but as i stated yesterday
 
@@ -1837,7 +1837,7 @@ It looks like from the [react-docgen](https://github.com/reactjs/react-docgen#fl
 
 🚨 We have an alpha release of PropShop!
 
-Yup, Yup, Yup. Today i've released an alpha version of my new Gatsby plugin [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop)
+Yup, Yup, Yup. Today i've released an alpha version of my new Gatsby Plugins [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop)
 
 As you can see it's been renamed from "Project Prop" to PropShop... watta you think?
 
@@ -1849,7 +1849,7 @@ That's now changed to accept a full path of where to find `.js` files containing
 
 Problem No.2 was as suspected style related. I was using `gatsby-plugin-theme-ui` for the styles but when running the plugin in a theme or, demo of a theme that was also using `gatsby-plugin-theme-ui` the theme object was getting overwriting and i was losing all my styles because the theme or demo theme wins out.
 
-The resolve was to still use `theme-ui` but not the Gatsby plugin version which meant i needed to wrap the `prop-shop.js` page in a `<ThemeProvider />` ... no big deal there.
+The resolve was to still use `theme-ui` but not the Gatsby Plugins version which meant i needed to wrap the `prop-shop.js` page in a `<ThemeProvider />` ... no big deal there.
 
 I have seen a few other issues where some of my styles pick up the theme styles, things like global typography rules do affect my typography rules if i've left a css value unset. I think i can sort this by being more strict with my styles and setting things that i was taking for granted as browser defaults.
 
@@ -3058,7 +3058,7 @@ I also need to investigate anchor tags in the theme so that they don't always ta
 
 Today is the first day of [#100DaysOfGatsby](https://twitter.com/hashtag/100DaysOfGatsby) and since i already have a blog in place i think i'm gonna just continue working on my various Gatsby projects and try to write a bit each day and then see where i'm at in 100 days.
 
-I currently have a number of Gatsby plugin projects all on npm but all in various states of completeness, these are:
+I currently have a number of Gatsby Plugins projects all on npm but all in various states of completeness, these are:
 
 - [gatsby-theme-gatstats](https://github.com/PaulieScanlon/gatsby-theme-gatstats)
 - [gatsby-remark-sticky-table](https://github.com/PaulieScanlon/gatsby-remark-sticky-table)
