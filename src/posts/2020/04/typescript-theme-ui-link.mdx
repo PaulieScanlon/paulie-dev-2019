@@ -2,6 +2,7 @@
 title: TypeScript Theme UI Link
 tags: ["React", "Gatsby", "TypeScript", "Theme UI"]
 date: 2020-04-24
+dateModified: 2020-04-28
 author: Paul Scanlon
 featuredImage: typescript-theme-ui-link.jpg
 ---
@@ -156,6 +157,72 @@ And here you go, a new Link component that does all the things Link from `gatsby
 <MrLinky to='/some-internal-link/' activeClassName='some-active-class'>Sone internal link</Link>
 
 ```
+
+<Divider />
+
+### Start Warning ⚠️
+
+There is one caveat to using this method that i think you should know about. Theme UI also has a `variant` prop but since **MrLinky** is actually a Gatsby link we won't be able to use variant as a prop like this 👇
+
+```javascript
+<MrLinky variant="links.navigation" />
+```
+
+<Divider />
+
+...but we can still take advantage of the `variant` prop by passing it on via the `sx` prop e.g 👇
+
+```javascript
+<MrLinky
+  to="/some-internal-link/"
+  sx={{ color: "primary", variant: "links.navigation" }}
+>
+  Sone internal link
+</Link>
+```
+
+<Divider />
+
+You might also want to spread some default styles inside the component to ensure it points at `styles.a` by default.
+
+```javascript
+// MrLinky.tsx
+
+/** @jsx jsx */
+import { jsx, SxStyleProp } from "theme-ui";
+import { FunctionComponent, AnchorHTMLAttributes } from "react";
+import { Link, GatsbyLinkProps } from "gatsby";
+
+import theme from "../../gatsby-plugin-theme-ui"; /** => import the theme **/
+
+export interface MrLinkyProps
+  extends AnchorHTMLAttributes<HTMLAnchorElement>,
+    GatsbyLinkProps<{}> {
+  /** Theme UI JSX pragma */
+  sx?: SxStyleProp;
+}
+
+export const MrLinky: FunctionComponent<MrLinkyProps> = ({
+  children,
+  to,
+  sx,
+  ...rest
+}) => (
+  <Link
+    to={to}
+    sx={{ ...theme.styles.a, ...sx }} /** => Add default styles before the sx  **/
+    {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
+  >
+    {children}
+  </Link>
+);
+```
+
+<Divider />
+
+It's a small shortcoming in my opinion and keeping all the Gatsby Link super powers is well worth the _sacrifice_.
+
+### End Warning ⚠️
 
 <Divider />
 
