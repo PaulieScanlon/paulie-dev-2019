@@ -1,6 +1,6 @@
 ---
-title: Roll Your Comments with Gatsby and Fauna
-tags: [Gatsby"]
+title: Roll your own comments with Gatsby and FaunaDB
+tags: ["Gatsby", "FaunaDB"]
 date: 2020-05-01
 author: Paul Scanlon
 isPrivate: true
@@ -12,13 +12,13 @@ embeddedImages:
   - get-comments-by-slug.jpg
 ---
 
-## Roll your own blog comments with Gatsby and Fauna
+If you haven't used Gatsby before have a read about why it's [Fast in every way that matters](https://www.gatsbyjs.org/)
 
-This tutorial will focus on the operations we need to use Fauna to power a comment system for a Gatsby blog.
-
-The repo below is a fully built Gatsby application and the steps to build this are not covered in this tutorial but we will be using it to demo how to use Fauna.
+This tutorial will only focus on the operations we need to use [FaunaDB](https://fauna.com/) to power a comment system for a Gatsby blog. The finished article can be deployed to Netlify and takes advantage of Netlify Identity and Netlify's serverless functions. Just two things that make the JAM stack really powerful.
 
 You can see the finished application [here](https://fauna-gatsby-comments.netlify.app/)
+
+The repo below is a fully built Gatsby application and the steps to build this are _not_ covered in this tutorial but we will be using it to demo how to use FaunaDB.
 
 To get started clone the repo at `https://github.com/PaulieScanlon/fauna-gatsby-comments`
 
@@ -105,15 +105,15 @@ We’ll come back to these later but in case you’re wondering
 
 - `GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for us
 - `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production
-- `GATSBY_FAUNA_DB` is the Fauna secret key for our database
+- `GATSBY_FAUNA_DB` is the FaunaDB secret key for our database
 
 <Divider />
 
 If you’re curious you can run `yarn develop` and then navigate to http://localhost:8000 in your browser.
 
-Now we’re going to write some of the operations we need to use Fauna
+Now we’re going to write some of the operations we need to use FaunaDB
 
-## Fauna
+## FaunaDB
 
 Got to https://fauna.com/ and sign up
 
@@ -264,7 +264,7 @@ If everything worked correctly you should see a log in your terminal of the new 
 
 <Divider />
 
-If you head over to **COLLECTIONS** in Fauna you should see your new entry in the collection
+If you head over to **COLLECTIONS** in FaunaDB you should see your new entry in the collection
 
 <Divider />
 <Img fluid={props.embedded.image3.fluid} />
@@ -311,7 +311,7 @@ deleteCommentById: async () => {
 
 ### Indexes
 
-Next we need to create an **INDEX** in Fauna, an **INDEX** allows us to query the database with a specific term
+Next we need to create an **INDEX** in FaunaDB, an **INDEX** allows us to query the database with a specific term
 
 <Divider />
 <Img fluid={props.embedded.image4.fluid} />
@@ -321,9 +321,9 @@ Next we need to create an **INDEX** in Fauna, an **INDEX** allows us to query th
 - Create a new index by clicking **NEW INDEX**
 - Name the index: i’ve called this one `get-all-comments`
 
-When we query the database using this index we can tell Fauna which parts of the entry we want to return.
+When we query the database using this index we can tell FaunaDB which parts of the entry we want to return.
 
-You can do this by adding values but be careful to enter the values exactly as they appear above because (on the Fauna free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again.
+You can do this by adding values but be careful to enter the values exactly as they appear above because (on the FaunaDB free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again.
 
 ### Get all comments
 
@@ -354,8 +354,8 @@ getAllComments: async () => {
 
 The breakdown of this function is as follows
 
-- `client` is the Fauna client instance
-- `query` is a method to get data from Fauna
+- `client` is the FaunaDB client instance
+- `query` is a method to get data from FaunaDB
 - `q` is our instance of `faunadb.query`
 - `Paginate` paginates the responses
 - `Match` returns matched results
@@ -375,7 +375,7 @@ node boop getAllComments
 
 ### Get comments by slug
 
-We're going to take a similar approach as above but this time create a new index that allows us to query Fauna in a different way.
+We're going to take a similar approach as above but this time create a new index that allows us to query FaunaDB in a different way.
 
 <Divider />
 <Img fluid={props.embedded.image5.fluid} />
@@ -414,8 +414,8 @@ getCommentsBySlug: async () => {
 
 The breakdown of this function is as follows
 
-- `client` is the Fauna client instance
-- `query` is a method to get data from Fauna
+- `client` is the FaunaDB client instance
+- `query` is a method to get data from FaunaDB
 - `q` is our instance of `faunadb.query`
 - `Paginate` paginates the responses
 - `Match` returns matched results
