@@ -3,35 +3,96 @@ title: gatsby-mdx-embed
 tags: ["Gatsby", "Gatsby Plugins", "MDX"]
 featuredImage: gatsby-mdx-embed.jpg
 date: 2020-01-06
+dateModified: 2020-04-30
 author: Paul Scanlon
+embeddedImages:
+  - gatsby-mdx-embed-image1.jpg
 ---
 
-## [Early Release](#early-release)
+import { DonutChart } from "../../../components/DonutChart"
 
-This plugin was inspired by [gatsby-remark-oembed](https://github.com/raae/gatsby-remark-oembed) and similarly provides an easy way to embed media from providers like YouTube, Twitter, etc into your blog **without import**
+Let's back track for just a second... What is [MDX](https://mdxjs.com/)?
 
-## [demo 🧼](https://gatsby-mdx-embed.netlify.com/)
+To quote the creators;
 
-I'd been playing around with remark parsers for a while but it does seem pertinent that given the rise of `.mdx` **which really does live up to the hype** that some of these remark plugins might soon become redundant since `.mdx` handles the parsing so well.
+> MDX is an authorable format that lets you seamlessly use JSX in your markdown documents. You can import components, like interactive charts or notifications, and export metadata. This makes writing long-form content with components a blast.
 
-It also exposes some really cool ways to hook into what's being parsed so we can now almost just think of a blog post / markdown the same as we do `.jsx`
+To put that into context i've imported and used a React component in this post like this 👇
 
-Everything is still there from the markdown writing experience but with added React stuff thrown in on top... it's so sweet!
+<!-- prettier-ignore -->
+```javascript
+import { DonutChart } from "../../../components/DonutChart"
 
-The plugin eco-system in Gatsby is really cool, there's a load of things that you can just add to your `gatsby-config.js` that just work!
+<DonutChart
+  title="Average word count"
+  dimension="words"
+  config={{ year: 0, color: "primary" }}
+/>
+```
 
-[gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.com/) aims to do the same. By adding the plugin to your `gatsby-config.js` you're good to go.
+And thanks to MDX the React component magically renders. Like this 👇
 
-It works by wrapping the root element of your site / blog with a custom `MdxProvider` which makes it possible for embed codes e.g `<YouTube id='123'/>` to work should they be found in your `.mdx`
+<DonutChart
+  title="Average word count"
+  dimension="words"
+  config={{ year: 0, color: "primary" }}
+/>
 
-Most of the providers e.g YouTube make embed-able iFrame type shortcodes and they were quite easy to add to the plugin, the tricky ones where Twitter, Instagram and Flickr.
+<Divider />
 
-These providers require you to add some JavaScript to your page. This is all fine but to keep the plugin as easy to install as possible i didn't want the users to do too much setup.
+The one snag, and it's a tiny drawback is that to use React components in MDX you have to import them. This is fine for one off components but for common components adding an `import` to every post is a hassle. Fortunately using the `MDXProvider` you can provide your blog with a kind of "global" way to handle components without needing to import them every time you want to use them... which is very handy indeed. 😊
 
-To achieve this i've used `gatsby-ssr.js` and `gatsby-browser.js` these two files are responsible for doing things behind the scenes which is a perfect place for me to add the provider scripts.
+Setting up a "global" method is fine if you're adding your own components but it's a lot more work to do this if you want to "embed" media content from providers like Twitter, YouTube and Instagram
 
-There's also an extra trick i've used which is to search the dom for elements that will require the provider scripts and if they aren't found the provider scripts aren't injected. So if you're not using embedded Tweets the twitter provider script won't be injected... keeping your site blazing fast!
+## [Gatsby MDX Embed](#gatsby-mdx-embed)
 
-I'm still very much in development but an early version has been launched so i'll be keeping an eye on [GitHub](https://github.com/PaulieScanlon/gatsby-mdx-embed) issues and aim to continue working on this plugin.
+Luckily for you i've created [gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.com/)
 
-Happy embedding!
+[gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.com/) works by wrapping the root element of your site or blog with a custom `MdxProvider` which makes it possible for embed codes like this 👇
+
+```javascript
+<Tweet tweetLink="PaulieScanlon/status/1232993668690259968" />
+```
+
+<Divider />
+
+To be automatically rendered. Like this 👇
+
+<Tweet tweetLink="PaulieScanlon/status/1232993668690259968" />
+
+A lof of media providers e.g YouTube make embed-able iframe embed codes which i've turned in to custom components specifically designed to work with Gatsby and MDX.
+
+These media provider embed codes usually require you to add some kind of `JavaScript` to your page which can be really tricky to set up, but with this plugin all you need to do is [install](https://github.com/PaulieScanlon/gatsby-mdx-embed#-getting-started) it...
+
+```sh
+npm install @pauliescanlon/gatsby-mdx-embed --save
+
+```
+
+<Divider />
+
+... and then add it to `gatsby-config.js` and you're good to go.
+
+```javascript
+// gatsby.config.js
+
+module.exports = {
+  ...
+  plugins: [`@pauliescanlon/gatsby-mdx-embed`]
+  ...
+}
+```
+
+<Divider />
+
+## [There's more](#theres-more)
+
+An extra trick i've used is to search the DOM for short codes that will require the provider scripts and if they aren't found the provider scripts aren't injected.
+
+So if you're not using embedded Tweets the Twitter provider script won't be injected... keeping your site blazing fast ⚡
+
+There's currently 22 components to choose from and more are on the way so head on over to [gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.app/) and if you can please do give it a star ⭐ on [GitHub](https://github.com/PaulieScanlon/gatsby-mdx-embed)
+
+<Img fluid={props.embedded.image1.fluid} />
+
+This plugin was inspired by [gatsby-remark-oembed](https://github.com/raae/gatsby-remark-oembed) which similarly provides an easy way to embed media from providers like YouTube, Twitter, etc into your blog **without import**. However this plugin only works with markdown.
