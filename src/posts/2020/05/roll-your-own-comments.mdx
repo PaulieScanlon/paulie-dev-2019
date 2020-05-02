@@ -4,21 +4,30 @@ tags: ["Gatsby", "FaunaDB"]
 date: 2020-05-01
 author: Paul Scanlon
 isPrivate: true
+featuredImage: roll-your-own-comments.jpg
 embeddedImages:
   - new-database.jpg
   - server-key.jpg
   - comment-in-document.jpg
   - get-all-comments.jpg
   - get-comments-by-slug.jpg
+  - new-site-from-git.jpg
+  - netlify-identity.jpg
 ---
 
 If you haven't used Gatsby before have a read about why it's [Fast in every way that matters](https://www.gatsbyjs.org/)
 
-This tutorial will only focus on the operations we need to use [FaunaDB](https://fauna.com/) to power a comment system for a Gatsby blog. The finished article can be deployed to Netlify and takes advantage of Netlify Identity and Netlify's serverless functions. Just two things that make the JAM stack really powerful.
+This tutorial will only focus on the operations we need to use [FaunaDB](https://fauna.com/) to power a comment system for a Gatsby blog. The finished app can be deployed to Netlify and takes advantage of Netlify Identity and Netlify's serverless functions. Just two things that make the JAM stack really powerful.
 
-You can see the finished application [here](https://fauna-gatsby-comments.netlify.app/)
+You can see the finished comments app [here](https://fauna-gatsby-comments.netlify.app/)
 
-The repo below is a fully built Gatsby application and the steps to build this are _not_ covered in this tutorial but we will be using it to demo how to use FaunaDB.
+The repo below is a fully built Gatsby app and the steps to build this are _not_ covered in this tutorial but we will be using it to demo how to use FaunaDB.
+
+I chose FaunaDB for the database for a number of reasons. Firstly there's a very generous free tier! perfect for those small projects that need a back end, there's native support for GraphQL queries and it has some really powerful indexing features!
+
+...and to quote the creators;
+
+> No matter which stack you use, or where you’re deploying your app, FaunaDB gives you effortless, low-latency and reliable access to your data via APIs familiar to you
 
 To get started clone the repo at `https://github.com/PaulieScanlon/fauna-gatsby-comments`
 
@@ -62,7 +71,7 @@ npm install netlify-cli -g
 
 Now lets add three new files that aren’t part of the repo.
 
-At the root of the project create a `.env` `.env.development` and `.env.production`
+At the root of your project create a `.env` `.env.development` and `.env.production`
 
 Add the following to `.env`
 
@@ -105,17 +114,15 @@ We’ll come back to these later but in case you’re wondering
 
 - `GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for us
 - `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production
-- `GATSBY_FAUNA_DB` is the FaunaDB secret key for our database
+- `GATSBY_FAUNA_DB` is the FaunaDB secret key for your database
 
 <Divider />
 
-If you’re curious you can run `yarn develop` and then navigate to http://localhost:8000 in your browser.
-
-Now we’re going to write some of the operations we need to use FaunaDB
+If you’re the curious type you can get a taster of the app by running `yarn develop` and then navigate to http://localhost:8000 in your browser.
 
 ## FaunaDB
 
-Got to https://fauna.com/ and sign up
+So Let's get cracking, but before we write any operations head over to https://fauna.com/ and sign up!
 
 ### Database and Collection
 
@@ -132,8 +139,8 @@ Got to https://fauna.com/ and sign up
 
 Now we need to to set up a server key. Go to **SECURITY**
 
-- Create a new key **NEW KEY**
-- Select the database you want the key to apply to `fauna-gatsby-comments` for example
+- Create a new key by clicking **NEW KEY**
+- Select the database you want the key to apply to, `fauna-gatsby-comments` for example
 - Set the _Role_ as **Admin**
 - Name the server key: i've called the demo key `demo-blog-server-key`
 
@@ -196,29 +203,29 @@ createComment: async () => {
 
 The breakdown of this function is as follows;
 
-- `q` is our instance of `faunadb.query`
-- `Create` is the fauna method to create an entry within a collection
+- `q` is the instance of `faunadb.query`
+- `Create` is the FaunaDB method to create an entry within a collection
 - `Collection` is area in the database to store the data. It takes the name of the collection as the first argument and a data object as the second.
 
 The second argument is the shape of the data we need to drive our applications comment system.
 
-For now we’re going to hard-code `slug`, `name` and `comment` but in the final application these values are captured from the input form and passed in via args
+For now we’re going to hard-code `slug`, `name` and `comment` but in the final app these values are captured by the input form on the posts page and passed in via args
 
 The breakdown for the shape is as follows;
 
-- `isApproved` is the status of the comment and by default it’s false until we approve it in our admin page
+- `isApproved` is the status of the comment and by default it’s false until we approve it in the Admin page
 - `slug` is the path to the post where the comment was written
 - `date` is the time stamp the comment was written
-- `name` is the name the user entered from the comments from
-- `comment` is the comment the user entered from the comment form
+- `name` is the name the user entered in the comments from
+- `comment` is the comment the user entered in the comments form
 
-When we create a comment we’re not really interested in dealing with the result because as far as the user is concerned all they'll see is either a success or error message.
+When you (or a user creates) a comment you're not really interested in dealing with the response because as far as the user is concerned all they'll see is either a success or error message.
 
-After a user has posted a comment it will go in to our Admin queue until we approve it but if we did want to return something we could surface that in the UI
+After a user has posted a comment it will go in to your Admin queue until you approve it but if you did want to return something you could surface this in the UI by returning something from the `createComment` function
 
 ### Create a comment
 
-run the following in your CLI
+If you've hard coded a `slug`, `name` and `comment` you can now run the following in your CLI
 
 <Divider />
 
@@ -270,9 +277,7 @@ If you head over to **COLLECTIONS** in FaunaDB you should see your new entry in 
 <Img fluid={props.embedded.image3.fluid} />
 <Divider />
 
-We need to create a few more comments while we're in development so change the hard-coded values for `name` and `comment` and run the following again.
-
-Do this a few times so we end up with at least three new comments stored in the database, we’ll use these in a moment.
+You'll need to create a few more comments while in development so change the hard-coded values for `name` and `comment` and run the following again.
 
 <Divider />
 
@@ -283,13 +288,15 @@ node boop createComment
 
 <Divider />
 
+Do this a few times so you end up with at least three new comments stored in the database, you’ll use these in a moment.
+
 ## Delete comment
 
-Now that we can create comments we also need to be able to delete a comment.
+Now that you can create comments you'll also need to be able to delete a comment.
 
 By adding the `commentId` of one of the comments you created above you can delete it from the database.
 
-We're not really concerned with the return value here but if you wanted to surface this in the UI you could use the `commentId` as a return value
+Again you're not really concerned with the return value here but if you wanted to surface this in the UI you could do so by returning something from the `deleteCommentById` function
 
 ```javascript
 // boop.js
@@ -309,21 +316,35 @@ deleteCommentById: async () => {
 ...
 ```
 
+<Divider />
+
+The breakdown of this function is as follows
+
+- `client` is the FaunaDB client instance
+- `query` is a method to get data from FaunaDB
+- `q` is the instance of `faunadb.query`
+- `Delete` is the FaunaDB delete method to delete entries from a collection
+- `Ref` is the unique FaunaDB ref used to identify the entry
+- `Collection` is area in the database where the data is stored
+
 ### Indexes
 
-Next we need to create an **INDEX** in FaunaDB, an **INDEX** allows us to query the database with a specific term
+Next you're going to create an **INDEX** in FaunaDB.
+
+An **INDEX** allows you to query the database with a specific term and define a specific data shape to return.
+
+When working with GraphQL and / or TypeScript this is really powerful because you can use FaunaDB indexes to return _only_ the data you need and in a predictable shape. This makes data typing responses in GraphQL and / TypeScript a dream... i've worked on a number of applications that just return a massive object of useless values which will inevitably cause bugs in your app. blug!
 
 <Divider />
 <Img fluid={props.embedded.image4.fluid} />
 <Divider />
 
-- Go to **INDEX** and click **NEW INDEX**
-- Create a new index by clicking **NEW INDEX**
+- Go to **INDEXES** and click **NEW INDEX**
 - Name the index: i’ve called this one `get-all-comments`
 
-When we query the database using this index we can tell FaunaDB which parts of the entry we want to return.
+As mentioned above when you query the database using this index you can tell FaunaDB which parts of the entry you want to return.
 
-You can do this by adding values but be careful to enter the values exactly as they appear above because (on the FaunaDB free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again.
+You can do this by adding "values" but be careful to enter the values exactly as they appear above because (on the FaunaDB free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again... bummer!
 
 ### Get all comments
 
@@ -356,12 +377,12 @@ The breakdown of this function is as follows
 
 - `client` is the FaunaDB client instance
 - `query` is a method to get data from FaunaDB
-- `q` is our instance of `faunadb.query`
+- `q` is the instance of `faunadb.query`
 - `Paginate` paginates the responses
 - `Match` returns matched results
-- `Index` is the name of the _Index_ we want to use
+- `Index` is the name of the _Index_ you want to use
 
-The shape of the returned result here is an array of the same shape we defined in the _Index_ values
+The shape of the returned result here is an array of the same shape you defined in the _Index_ "values"
 
 If you run the following you should see the list of all the comments you created earlier
 
@@ -375,14 +396,13 @@ node boop getAllComments
 
 ### Get comments by slug
 
-We're going to take a similar approach as above but this time create a new index that allows us to query FaunaDB in a different way.
+You're going to take a similar approach as above but this time create a new _Index_ that allows you to query FaunaDB in a different way.
 
 <Divider />
 <Img fluid={props.embedded.image5.fluid} />
 <Divider />
 
 - Go to **INDEX** and click **NEW INDEX**
-- Create a new index by clicking **NEW INDEX**
 - Name the index, i’ve called this one `get-comments-by-slug`
 
 <Divider />
@@ -416,12 +436,12 @@ The breakdown of this function is as follows
 
 - `client` is the FaunaDB client instance
 - `query` is a method to get data from FaunaDB
-- `q` is our instance of `faunadb.query`
+- `q` is the instance of `faunadb.query`
 - `Paginate` paginates the responses
 - `Match` returns matched results
 - `Index` is the name of the _Index_ we want to use
 
-The shape of the returned result here is an array of the same shape we defined in the _Index_ values
+The shape of the returned result here is an array of the same shape we defined in the _Index_ "values" you can create this shape in the same way you did above but adding specific terms. Again be careful to enter these with care.
 
 If you run the following you should see the list of all the comments you created earlier but for a specific `slug`
 
@@ -435,9 +455,9 @@ node boop getCommentsBySlug
 
 ## Approve comment
 
-When we create a comment we manually set the `isApproved` value to false. This prevents the comment from being shown in the application until we've approved it.
+When you create a comment you manually set the `isApproved` value to false. This prevents the comment from being shown in the app until you approved it.
 
-Let's create a function to do this but we need to hard code a `commentId`. Use a `commentId` from one of the comments you created earlier
+Let's create a function to do this but you'll need to hard code a `commentId`. Use a `commentId` from one of the comments you created earlier
 
 <Divider />
 
@@ -465,6 +485,99 @@ approveCommentById: async () => {
 
 <Divider />
 
-These are all the operations required to manage data from our application.
+The breakdown of this function is as follows
 
-In the repo if you have a look at `apollo-graphql.js` which can be found in `functions/apollo-graphql` you'll see the above operations. As mentioned before our hard coded values are replaced by `args` values which are passed in from various parts of the application.
+- `client` is the FaunaDB client instance
+- `query` is a method to get data from FaunaDB
+- `q` is the instance of `faunadb.query`
+- `Update` is the FaundaDB method up update an entry
+- `Ref` is the unique FaunaDB ref used to identify the entry
+- `Collection` is area in the database where the data is stored
+
+These are all the operations required to manage data from the app.
+
+In the repo if you have a look at `apollo-graphql.js` which can be found in `functions/apollo-graphql` you'll see the above operations. As mentioned before the hard coded values are replaced by `args` / values which are passed in from various parts of the app.
+
+## Netlify
+
+Assuming you've completed the Netlify sign up process or have an account push the demo app to your GitHub account.
+You should now be able to link the repo up to Netlify's [Continuous Deployment](https://docs.netlify.com/configure-builds/get-started/).
+
+If you click the "New site from Git" button on the Netlify dashboard you can authorize access to your GitHub account and select the `gatsby-fauna-comments` repo to enable Netlify's Continuous Deployment. You'll need to have deployed at least once so that we have a pubic URL of your app. It'll look something like this `https://fauna-gatsby-comments.netlify.app` Make a note of that URL as you'll need it for the Netlify Identity step mentioned shortly
+
+<Divider />
+<Img fluid={props.embedded.image6.fluid} />
+<Divider />
+
+## Environment Variables
+
+In a previous step you added your admin user `id`, the FaunaDB database secret key and boolean to your `.env` files(s). You'll also need to do add the same to Netlify's **Environment variables**.
+
+- Navigate to Settings from the Netlify navigation
+- Click on **Build and deploy**
+- Either select **Environment** or scroll down until you see **Environment variables**
+- Click on **Edit variables**
+
+Proceed to add the following
+
+```javascript
+GATSBY_ADMIN_ID = your Netlify user id
+GATSBY_SHOW_SIGN_UP = false
+GATSBY_FAUNA_DB = you FaunaDB secret key
+
+```
+
+While you're here you'll also need to amend the **Sensitive variable policy** select _Deploy without restrictions_
+
+## Netlify Identity Widget
+
+I mentioned before that when a comment is created the `isApproved` value is set to `false`, this to prevent comments from appearing on blog posts until you (the admin) have approved them. In order to become admin you'll need to create an _identity_.
+
+You can achieve this by using the [Netlify Identity Widget](https://github.com/netlify/netlify-identity-widget).
+
+If you've completed the Continuous Deployment step above you can navigate to the Identity page from the Netlify navigation.
+
+<Divider />
+<Img fluid={props.embedded.image7.fluid} />
+<Divider />
+
+You wont see any users in here just yet so lets use the app to connect the dots.
+
+_Before you continue i just want to point out you'll be using `netlify dev` instead of `yarn develop` or `gatsby develop` this is because we're using some "special" Netlify methods in the app and staring the server using `netlify dev` is required to spin up various processes you'll be using._
+
+- Spin up the app using `netlify dev`
+- navigate to [http://localhost:8888/admin/](http://localhost:8888/admin/)
+- Click the **Sign Up** button in the header
+
+You can now complete the necessary sign up steps. You will also need to point the Netlify Identity widget to your newly deployed app URL. There will be a prompt in the pop up window to do this.
+
+After sign up you'll get an email asking you to confirm you identity and once that's completed refresh the Identity page in Netlify and you should see yourself as a user.
+
+It's now login time!
+
+- Restart your local server
+- Spin up the app again using `netlify dev`
+- Click the _Login_ button in the header
+
+If this all works you should be able to see a console log for `netlifyIdentity.currentUser:` find the `id` key and copy the value.
+
+Set this as the value for `GATSBY_ADMIN_ID =` in both `.env.production` and `.env.development` for example...
+
+```javascript
+GATSBY_ADMIN_ID = a124e557-08ec-4e93-9e68-4048d5201234
+```
+
+...and finally
+
+- Restart your local server
+- Spin up the app again using `netlify dev`
+
+<Divider />
+
+Now you should be able to login as "Admin"... hooray! ... navigate to [http://localhost:8888/admin/](http://localhost:8888/admin/) to and Login.
+
+If you have a play around with the app and enter a few comments on each of the posts then navigate back to Admin page you can choose to either **approve** or **delete** the comments.
+
+Naturally only approved comments will be displayed on the post and deleted ones are gone forever.
+
+If you've used this tutorial for your project i'd love to hear from you [@pauliescanlon](https://twitter.com/PaulieScanlon)
