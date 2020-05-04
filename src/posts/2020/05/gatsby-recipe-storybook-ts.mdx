@@ -37,11 +37,11 @@ gatsby recipes https://raw.githubusercontent.com/PaulieScanlon/gatsby-recipe-sto
 
 ## One small snag
 
-In the previous JavaScript recipe i talked about the Webpack config required for Storybook to transpile JavaScript files into ES5 / CommonJs and when i initially wrote this recipe i removed the JavaScript part of the config and focussed on the config to transpile TypeScript files to ES5 / CommonJs... i later discovered i need both.
+In the previous JavaScript recipe i talked about the Webpack config required for Storybook to transpile JavaScript code in to ES5 / CommonJs and when i initially wrote this recipe i removed the JavaScript part of the config and focussed on the config to transpile from TypeScript to ES5 / CommonJs... i later discovered i need both.
 
 The reason is, whilst this new Webpack config will transpile _your_ TypeScript code you'll also need to continue to transpile any JavaScript ES6 code. (Gatsby is ES6)
 
-In short regardless of if you're using JavaScript or TypeScript a Webpack config is required for both `js|jsx` and `ts|tsx`
+In short if you're using TypeScript a Webpack config is required to transpile both `js|jsx` and `ts|tsx`
 
 The repo can be found here on [GitHub](https://github.com/PaulieScanlon/gatsby-recipe-storybook-ts) and if you're interested in the Webpack config you can find that here in [main.js](https://github.com/PaulieScanlon/gatsby-recipe-storybook-ts/blob/master/recipe/main.js)
 

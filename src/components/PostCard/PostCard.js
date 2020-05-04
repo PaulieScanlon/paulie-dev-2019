@@ -58,7 +58,7 @@ export const PostCard = ({
               p: 3,
             }}
           >
-            <Heading variant="styles.h4" sx={{ color: "text" }}>
+            <Heading as="h3" variant="styles.h3" sx={{ color: "text", mt: 3 }}>
               {title}
             </Heading>
             <Text sx={{ mb: 1, color: "success" }}>
@@ -69,7 +69,7 @@ export const PostCard = ({
             </Text>
           </Box>
           <Box sx={{ p: 3 }}>
-            <Text sx={{ color: "secondary" }}>View Post</Text>
+            <Text sx={{ color: "error", textAlign: "right" }}>View Post</Text>
           </Box>
         </Card>
       </Link>
