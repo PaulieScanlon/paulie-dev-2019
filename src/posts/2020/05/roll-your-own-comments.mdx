@@ -15,21 +15,21 @@ embeddedImages:
   - netlify-identity.jpg
 ---
 
-If you haven't used Gatsby before have a read about why it's [Fast in every way that matters](https://www.gatsbyjs.org/)
+If you haven't used Gatsby before have a read about why it's [Fast in every way that matters](https://www.gatsbyjs.org/), and if you haven't used [FaunaDB](https://fauna.com/) before you're in for a treat. If you're looking to make your static sites full blown Jamstack applications this is the back end solution for you!
 
-This tutorial will only focus on the operations you need to use [FaunaDB](https://fauna.com/) to power a comment system for a Gatsby blog. The finished app can be deployed to Netlify and uses the Netlify Identity Widget and Netlify's serverless functions. Just two things that make the JAM stack really powerful.
+This tutorial will only focus on the operations you need to use [FaunaDB](https://fauna.com/) to power a comment system for a Gatsby blog. The [app](https://github.com/PaulieScanlon/fauna-gatsby-comments.git) comes complete with inputs fields that allow users to comment on your posts and an admin area for you to approve or delete comments before they appear on each post. Authentication is provided by Netlify's Identity widget and it's all sewn together using Netlify serverless functions and an Apollo/GraphQL API that pushes data up to a FaunaDB database collection.
 
-You can see the finished comments app [here](https://fauna-gatsby-comments.netlify.app/)
-
-The repo below is a fully built Gatsby app and the steps to build this are _not_ covered in this tutorial but you will be using it to demo how to use FaunaDB.
-
-I chose FaunaDB for the database for a number of reasons. Firstly there's a very generous free tier! perfect for those small projects that need a back end, there's native support for GraphQL queries and it has some really powerful indexing features!
+I chose [FaunaDB](https://fauna.com/) for the database for a number of reasons. Firstly there's a very generous free tier! perfect for those small projects that need a back end, there's native support for GraphQL queries and it has some really powerful indexing features!
 
 ...and to quote the creators;
 
 > No matter which stack you use, or where you’re deploying your app, FaunaDB gives you effortless, low-latency and reliable access to your data via APIs familiar to you
 
-To get started clone the repo at `https://github.com/PaulieScanlon/fauna-gatsby-comments`
+You can see the finished comments app [here](https://fauna-gatsby-comments.netlify.app/)
+
+## Get Started
+
+To get started clone the repo at [https://github.com/PaulieScanlon/fauna-gatsby-comments](https://github.com/PaulieScanlon/fauna-gatsby-comments)
 
 or
 
