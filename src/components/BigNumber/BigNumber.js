@@ -1,5 +1,5 @@
-import React from "react";
-import { Flex } from "@theme-ui/components";
+import React from "react"
+import { Flex } from "@theme-ui/components"
 
 export const BigNumber = ({ number }) => (
   <Flex
@@ -7,6 +7,7 @@ export const BigNumber = ({ number }) => (
       alignItems: "center",
       backgroundColor: "success",
       borderRadius: "100%",
+      color: "background",
       fontWeight: "bold",
       height: 60,
       justifyContent: "center",
@@ -17,4 +18,4 @@ export const BigNumber = ({ number }) => (
   >
     {number}
   </Flex>
-);
+)

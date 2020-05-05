@@ -69,7 +69,9 @@ export const PostCard = ({
             </Text>
           </Box>
           <Box sx={{ p: 3 }}>
-            <Text sx={{ color: "error", textAlign: "right" }}>View Post</Text>
+            <Text sx={{ color: "secondary", textAlign: "right" }}>
+              View Post
+            </Text>
           </Box>
         </Card>
       </Link>
