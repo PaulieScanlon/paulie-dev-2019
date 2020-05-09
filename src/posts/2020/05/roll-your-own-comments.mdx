@@ -27,14 +27,14 @@ I chose [FaunaDB](https://fauna.com/) for the database for a number of reasons. 
 
 You can see the finished comments app [here](https://fauna-gatsby-comments.netlify.app/)
 
-## Get Started
+## [Get Started](#get-started)
 
 To get started clone the repo at [https://github.com/PaulieScanlon/fauna-gatsby-comments](https://github.com/PaulieScanlon/fauna-gatsby-comments)
 
 or
 
 ```sh
-git clone `https://github.com/PaulieScanlon/fauna-gatsby-comments.git`
+git clone https://github.com/PaulieScanlon/fauna-gatsby-comments.git
 ```
 
 Then install all the dependencies
@@ -79,6 +79,7 @@ Add the following to `.env`
 
 ```sh
 GATSBY_FAUNA_DB =
+GATSBY_FAUNA_COLLECTION =
 ```
 
 <Divider />
@@ -88,9 +89,11 @@ Add the following to `.env.development`
 <Divider />
 
 ```sh
-GATSBY_ADMIN_ID =
-GATSBY_SHOW_SIGN_UP = true
 GATSBY_FAUNA_DB =
+GATSBY_FAUNA_COLLECTION =
+GATSBY_SHOW_SIGN_UP = true
+GATSBY_ADMIN_ID =
+
 
 ```
 
@@ -101,9 +104,10 @@ Add the following to `.env.production`
 <Divider />
 
 ```sh
-GATSBY_ADMIN_ID =
-GATSBY_SHOW_SIGN_UP = false
 GATSBY_FAUNA_DB =
+GATSBY_FAUNA_COLLECTION =
+GATSBY_SHOW_SIGN_UP = false
+GATSBY_ADMIN_ID =
 ```
 
 <Divider />
@@ -112,19 +116,20 @@ You’ll come back to these later but in case you’re wondering
 
 <Divider />
 
-- `GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for you
-- `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production
 - `GATSBY_FAUNA_DB` is the FaunaDB secret key for your database
+- `GATSBY_FAUNA_COLLECTION` is the FaunaDB collection name
+- `GATSBY_SHOW_SIGN_UP` is used to hide the Sign up button when the site is in production
+- `GATSBY_ADMIN_ID` is a user id that Netlify Identity will generate for you
 
 <Divider />
 
-If you’re the curious type you can get a taster of the app by running `yarn develop` and then navigate to http://localhost:8000 in your browser.
+If you’re the curious type you can get a taster of the app by running `gatsby develop` or `yarn develop` and then navigate to http://localhost:8000 in your browser.
 
-## FaunaDB
+## [FaunaDB](#fauna-db)
 
 So Let's get cracking, but before we write any operations head over to https://fauna.com/ and sign up!
 
-### Database and Collection
+## [Database and Collection](#database-and-collection)
 
 - Create a new database by clicking **NEW DATABASE**
 - Name the database: i’ve called the demo database `fauna-gatsby-comments`
@@ -135,7 +140,7 @@ So Let's get cracking, but before we write any operations head over to https://f
 <Img fluid={props.embedded.image1.fluid} />
 <Divider />
 
-### Server Key
+## [Server Key](#server-key)
 
 Now you'll need to to set up a server key. Go to **SECURITY**
 
@@ -148,26 +153,15 @@ Now you'll need to to set up a server key. Go to **SECURITY**
 <Img fluid={props.embedded.image2.fluid} />
 <Divider />
 
-### Environment
+## [Environment Variables Pt. 1](#environment-variables-part-1)
 
-Copy the server key and add it to `GATSBY_FAUNA_DB =` in `.env.development`,`.env.production` and `.env`
+Copy the server key and add it to `GATSBY_FAUNA_DB` in `.env.development`,`.env.production` and `.env`
 
-Adding the server key to `.env` is just so you can test your development FaunaDB operations, which you’ll do next.
+You'll also need to add the name of the collection to `GATSBY_FAUNA_COLLECTION` in `.env.development`, `.env.production` and `.env`
 
-### Development functions
+Adding these values to `.env` are just so you can test your development FaunaDB operations, which you’ll do next.
 
-Find the file called `boop.js` and enter the name of the collection you just created for the `COLLECTION_NAME` constant
-
-<Divider />
-
-```javascript
-// boop.js
-const COLLECTION_NAME = "demo-blog-comments"
-```
-
-<Divider />
-
-Let's start by creating a comment.
+Let's start by creating a comment so head back to `boop.js`
 
 <Divider />
 
@@ -223,7 +217,7 @@ When you (or a user creates) a comment you're not really interested in dealing w
 
 After a user has posted a comment it will go in to your Admin queue until you approve it but if you did want to return something you could surface this in the UI by returning something from the `createComment` function
 
-### Create a comment
+## [Create a comment](#create-a-comment)
 
 If you've hard coded a `slug`, `name` and `comment` you can now run the following in your CLI
 
@@ -290,11 +284,11 @@ node boop createComment
 
 Do this a few times so you end up with at least three new comments stored in the database, you’ll use these in a moment.
 
-## Delete comment
+## [Delete comment by id](#delete-comment-by-id)
 
 Now that you can create comments you'll also need to be able to delete a comment.
 
-By adding the `commentId` of one of the comments you created above you can delete it from the database.
+By adding the `commentId` of one of the comments you created above you can delete it from the database. The `commentId` is the `id` in the `ref.@ref` object
 
 Again you're not really concerned with the return value here but if you wanted to surface this in the UI you could do so by returning something from the `deleteCommentById` function
 
@@ -327,7 +321,19 @@ The breakdown of this function is as follows
 - `Ref` is the unique FaunaDB ref used to identify the entry
 - `Collection` is area in the database where the data is stored
 
-### Indexes
+If you've hard coded a `commentId` you can now run the following in your CLI
+
+<Divider />
+
+```sh
+node boop deleteCommentById
+```
+
+<Divider />
+
+If you head back over to **COLLECTIONS** in FaunaDB you should see that entry no longer exists in collection
+
+## [Indexes](#indexes)
 
 Next you're going to create an **INDEX** in FaunaDB.
 
@@ -341,12 +347,24 @@ When working with GraphQL and / or TypeScript this is really powerful because yo
 
 - Go to **INDEXES** and click **NEW INDEX**
 - Name the index: i’ve called this one `get-all-comments`
+- Set the **source collection** to the name of the collection you setup earlier
 
 As mentioned above when you query the database using this index you can tell FaunaDB which parts of the entry you want to return.
 
-You can do this by adding "values" but be careful to enter the values exactly as they appear above because (on the FaunaDB free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again... bummer!
+You can do this by adding "values" but be careful to enter the values exactly as they appear below because (on the FaunaDB free tier) you can’t amend these after you’ve created them so if there’s a mistake you’ll have to delete the index and start again... bummer!
 
-### Get all comments
+The values you need to add are as follows:
+
+- ref
+- data.isApproved
+- data.slug
+- data.date
+- data.name
+- data.comment
+
+After you've added all the values you can click **SAVE**
+
+## [Get all comments](#get-all-comments)
 
 <Divider />
 
@@ -380,7 +398,7 @@ The breakdown of this function is as follows
 - `q` is the instance of `faunadb.query`
 - `Paginate` paginates the responses
 - `Match` returns matched results
-- `Index` is the name of the _Index_ you want to use
+- `Index` is the name of the _Index_ you just created
 
 The shape of the returned result here is an array of the same shape you defined in the _Index_ "values"
 
@@ -394,9 +412,9 @@ node boop getAllComments
 
 <Divider />
 
-### Get comments by slug
+## [Get comments by slug](#get-comments-by-slug)
 
-You're going to take a similar approach as above but this time create a new _Index_ that allows you to query FaunaDB in a different way.
+You're going to take a similar approach as above but this time create a new _Index_ that allows you to query FaunaDB in a different way. The key difference here is that when you **get-comments-by-slug** you'll need to tell FaunaDB about this specific **term** and you can do this by adding `data.slug` to the _Terms_ field.
 
 <Divider />
 <Img fluid={props.embedded.image5.fluid} />
@@ -404,6 +422,19 @@ You're going to take a similar approach as above but this time create a new _Ind
 
 - Go to **INDEX** and click **NEW INDEX**
 - Name the index, i’ve called this one `get-comments-by-slug`
+- Set the **source collection** to the name of the collection you setup earlier
+- Add `data.slug` in the terms field
+
+The values you need to add are as follows:
+
+- ref
+- data.isApproved
+- data.slug
+- data.date
+- data.name
+- data.comment
+
+After you've added all the values you can click SAVE
 
 <Divider />
 
@@ -439,9 +470,9 @@ The breakdown of this function is as follows
 - `q` is the instance of `faunadb.query`
 - `Paginate` paginates the responses
 - `Match` returns matched results
-- `Index` is the name of the _Index_ we want to use
+- `Index` is the name of the _Index_ you just created
 
-The shape of the returned result here is an array of the same shape we defined in the _Index_ "values" you can create this shape in the same way you did above but adding specific terms. Again be careful to enter these with care.
+The shape of the returned result here is an array of the same shape you defined in the _Index_ "values" you can create this shape in the same way you did above and be sure to add a value for terms. Again be careful to enter these with care.
 
 If you run the following you should see the list of all the comments you created earlier but for a specific `slug`
 
@@ -453,11 +484,11 @@ node boop getCommentsBySlug
 
 <Divider />
 
-## Approve comment
+## [Approve comment by id](#approve-comment-by-id)
 
-When you create a comment you manually set the `isApproved` value to false. This prevents the comment from being shown in the app until you approved it.
+When you create a comment you manually set the `isApproved` value to false. This prevents the comment from being shown in the app until you approve it.
 
-Let's create a function to do this but you'll need to hard code a `commentId`. Use a `commentId` from one of the comments you created earlier
+You'll now need to create a function to do this but you'll need to hard-code a `commentId`. Use a `commentId` from one of the comments you created earlier
 
 <Divider />
 
@@ -494,24 +525,47 @@ The breakdown of this function is as follows
 - `Ref` is the unique FaunaDB ref used to identify the entry
 - `Collection` is area in the database where the data is stored
 
-These are all the operations required to manage data from the app.
+If you've hard coded a `commentId` you can now run the following in your CLI
 
-In the repo if you have a look at `apollo-graphql.js` which can be found in `functions/apollo-graphql` you'll see the above operations. As mentioned before the hard coded values are replaced by `args` / values which are passed in from various parts of the app.
+<Divider />
 
-## Netlify
+```sh
+node boop approveCommentById
+```
 
-Assuming you've completed the Netlify sign up process or have an account push the demo app to your GitHub account.
+If you run the `getCommentsBySlug` again you should now see the `isApproved` status of the entry you hard-coded the `commentId` for will have changed to `true`
+
+<Divider />
+
+```sh
+node boop getCommentsBySlug
+```
+
+<Divider />
+
+These are all the operations required to manage the data from the app.
+
+In the repo if you have a look at `apollo-graphql.js` which can be found in `functions/apollo-graphql` you'll see the all of the above operations. As mentioned before the hard-coded values are replaced by `args`, these are the values passed in from various parts of the app.
+
+## [Netlify](#netlify)
+
+Assuming you've completed the Netlify sign up process or already have an account with Netlify you can now push the demo app to your GitHub account.
+
+To do this you'll need to have initialize git locally, added a remote and have pushed the demo repo upstream before proceeding.
+
 You should now be able to link the repo up to Netlify's [Continuous Deployment](https://docs.netlify.com/configure-builds/get-started/).
 
-If you click the "New site from Git" button on the Netlify dashboard you can authorize access to your GitHub account and select the `gatsby-fauna-comments` repo to enable Netlify's Continuous Deployment. You'll need to have deployed at least once so that we have a pubic URL of your app. It'll look something like this `https://fauna-gatsby-comments.netlify.app` Make a note of that URL as you'll need it for the Netlify Identity step mentioned shortly
+If you click the "New site from Git" button on the Netlify dashboard you can authorize access to your GitHub account and select the `gatsby-fauna-comments` repo to enable Netlify's Continuous Deployment. You'll need to have deployed at least once so that we have a pubic URL of your app.
+
+The URL will look something like this `https://ecstatic-lewin-b1bd17.netlify.app` but feel free to rename it and make a note of the URL as you'll need it for the Netlify Identity step mentioned shortly
 
 <Divider />
 <Img fluid={props.embedded.image6.fluid} />
 <Divider />
 
-## Environment Variables
+## [Environment Variables Pt. 2](#environment-variables-part-2)
 
-In a previous step you added your admin user `id`, the FaunaDB database secret key and boolean to your `.env` files(s). You'll also need to do add the same to Netlify's **Environment variables**.
+In a previous step you added the FaunaDB database secret key and collection name to your `.env` files(s). You'll also need to add the same to Netlify's **Environment variables**.
 
 - Navigate to Settings from the Netlify navigation
 - Click on **Build and deploy**
@@ -521,17 +575,17 @@ In a previous step you added your admin user `id`, the FaunaDB database secret k
 Proceed to add the following
 
 ```javascript
-GATSBY_ADMIN_ID = your Netlify user id
 GATSBY_SHOW_SIGN_UP = false
 GATSBY_FAUNA_DB = you FaunaDB secret key
+GATSBY_FAUNA_COLLECTION = you FaunaDB collection name
 
 ```
 
-While you're here you'll also need to amend the **Sensitive variable policy** select _Deploy without restrictions_
+While you're here you'll also need to amend the **Sensitive variable policy**, select _Deploy without restrictions_
 
-## Netlify Identity Widget
+## [Netlify Identity Widget](#netlify-identity-width)
 
-I mentioned before that when a comment is created the `isApproved` value is set to `false`, this to prevent comments from appearing on blog posts until you (the admin) have approved them. In order to become admin you'll need to create an _identity_.
+I mentioned before that when a comment is created the `isApproved` value is set to `false`, this prevents comments from appearing on blog posts until you (the admin) have approved them. In order to become admin you'll need to create an _identity_.
 
 You can achieve this by using the [Netlify Identity Widget](https://github.com/netlify/netlify-identity-widget).
 
@@ -541,19 +595,21 @@ If you've completed the Continuous Deployment step above you can navigate to the
 <Img fluid={props.embedded.image7.fluid} />
 <Divider />
 
-You wont see any users in here just yet so lets use the app to connect the dots.
+You wont see any users in here just yet so lets use the app to connect the dots, but before you do that make sure you click **Enable Identity**
 
-_Before you continue i just want to point out you'll be using `netlify dev` instead of `yarn develop` or `gatsby develop` this is because we're using some "special" Netlify methods in the app and staring the server using `netlify dev` is required to spin up various processes you'll be using._
+_Before you continue i just want to point out you'll be using `netlify dev` instead of `gatsby develop` or `yarn develop` from now on. This is because you'll be using some "special" Netlify methods in the app and staring the server using `netlify dev` is required to spin up various processes you'll be using._
 
 - Spin up the app using `netlify dev`
 - navigate to [http://localhost:8888/admin/](http://localhost:8888/admin/)
 - Click the **Sign Up** button in the header
 
-You can now complete the necessary sign up steps. You will also need to point the Netlify Identity widget to your newly deployed app URL. There will be a prompt in the pop up window to do this.
+You will also need to point the Netlify Identity widget at your newly deployed app URL. This was the URL i mentioned you'll need to make a note of earlier, if you've not renamed your app it'll look something like this `https://ecstatic-lewin-b1bd17.netlify.app/` There will be a prompt in the pop up window to **Set site's URL**.
+
+You can now complete the necessary sign up steps.
 
 After sign up you'll get an email asking you to confirm you identity and once that's completed refresh the Identity page in Netlify and you should see yourself as a user.
 
-It's now login time!
+It's now login time, but before you do this find `Identity.js` in `src/components` and temporarily un-comment the `console.log()` on line 14. This will log the Netlify Identity user object to the console.
 
 - Restart your local server
 - Spin up the app again using `netlify dev`
@@ -561,10 +617,12 @@ It's now login time!
 
 If this all works you should be able to see a console log for `netlifyIdentity.currentUser:` find the `id` key and copy the value.
 
-Set this as the value for `GATSBY_ADMIN_ID =` in both `.env.production` and `.env.development` for example...
+Set this as the value for `GATSBY_ADMIN_ID =` in both `.env.production` and `.env.development`
+
+You can now safely remove the `console.log()` on line 14 in `Identity.js` or just comment it out again.
 
 ```javascript
-GATSBY_ADMIN_ID = a124e557-08ec-4e93-9e68-4048d5201234
+GATSBY_ADMIN_ID = your Netlify Identity user id
 ```
 
 ...and finally
@@ -574,7 +632,25 @@ GATSBY_ADMIN_ID = a124e557-08ec-4e93-9e68-4048d5201234
 
 <Divider />
 
-Now you should be able to login as "Admin"... hooray! ... navigate to [http://localhost:8888/admin/](http://localhost:8888/admin/) to and Login.
+Now you should be able to login as "Admin"... hooray!
+
+Navigate to [http://localhost:8888/admin/](http://localhost:8888/admin/) and Login.
+
+It's important to note here you'll be using **localhost:8888** for development now and NOT **localhost:8000** which is more common with Gatsby development
+
+Before you test this in the deployed environment make sure you go back to Netlify's **Environment variables** and add your Netlify Identity user `id` to the Environment variables!
+
+- Navigate to Settings from the Netlify navigation
+- Click on **Build and deploy**
+- Either select **Environment** or scroll down until you see **Environment variables**
+- Click on **Edit variables**
+
+Proceed to add the following
+
+```javascript
+GATSBY_ADMIN_ID = your Netlify Identity user id
+
+```
 
 If you have a play around with the app and enter a few comments on each of the posts then navigate back to Admin page you can choose to either **approve** or **delete** the comments.
 
