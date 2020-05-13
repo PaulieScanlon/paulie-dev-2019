@@ -1,6 +1,6 @@
 ---
 title: gatsby-plugin-prop-shop
-tags: ["Gatsby", "Gatsby Plugins"]
+tags: ["Gatsby", "Gatsby Plugins", "React", "JavaScript"]
 date: 2020-02-15
 author: Paul Scanlon
 featuredImage: prop-shop.jpg
@@ -8,17 +8,15 @@ embeddedImages:
   - prop-shop-demo.jpg
 ---
 
-## [Early Release](#early-release)
-
 [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) is my newest Gatsby Plugins and it's slightly different to my previous plugins. The reason for this is because of the way it works, and i'd probably liken it more to a Gatsby theme than a Gatsby Plugins.
 
 I'll try and explain...
 
-Originally i wanted to create a report not too dissimilar to how Jest creates their coverage report, and if you've not seen the Jest coverage report it's basically a statically generated html page detailing each test in your project together with some highlighted rows for code not covered and a nice set of statistics about how much of your codebase is covered by unit tests.
+Originally i wanted to create a report not too dissimilar to how Jest creates their coverage report, and if you've not seen the Jest coverage report it's basically a statically generated HTML page detailing each test in your project together with some highlighted rows for code not covered and a nice set of statistics about how much of your codebase is covered by unit tests.
 
-To create the report you run something like `npm run jest --coverage` and it creates a new directory in your project containing the static html.
+To create the report you run something like `npm run jest --coverage` and it creates a new directory in your project containing the static HTML.
 
-statically generated html i hear you say!... that's totally Gatsby territory... and you'd be right, that's exactly what Gatsby really nails so it seemed fitting to create PropShop using Gatsby... i've also totally got Gatsby fever 😊
+statically generated HTML i hear you say!... that's totally Gatsby territory... and you'd be right, that's exactly what Gatsby really nails so it seemed fitting to create [PropShop](https://gatsby-plugin-prop-shop.netlify.app/prop-shop/) using Gatsby... i've also totally got Gatsby fever 😊
 
 ... but with this came some alterations to the way i was thinking about PropShop, ideally i wanted a CLI command to run that would generate the report as Jest does it, but to run a build on a Gatsby site from another Gatsby site is pretty difficult and although i did get this working i had problems moving the build folder into the correct part of the project.
 
@@ -34,7 +32,7 @@ If you're a theme builder or a component library author like me you have probabl
 
 In Storybook you're only really able to see props for individual components one at a time.
 
-> #### "One important factor in the creation of Component Libraries is api consistency"
+> One important factor in the creation of Component Libraries is api consistency
 
 That's a quote from me 😊
 
