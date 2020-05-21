@@ -54,4 +54,15 @@ export default {
       },
     },
   },
+
+  cards: {
+    primary: {
+      ...baseTheme.cards.primary,
+      transition: ".2s linear box-shadow, .2s ease-in-out transform",
+      ":hover": {
+        transform: "translateY(-0.25rem)",
+        boxShadow: 2,
+      },
+    },
+  },
 }

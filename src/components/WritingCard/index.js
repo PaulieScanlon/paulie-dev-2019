@@ -1,0 +1,1 @@
+export { WritingCard } from "./WritingCard"

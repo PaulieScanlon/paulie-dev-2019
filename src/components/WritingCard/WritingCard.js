@@ -2,16 +2,8 @@ import React from "react"
 import { format } from "date-fns"
 import { Box, Badge, Link, Card, Heading, Text } from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
-import Img from "gatsby-image"
 
-export const PostCard = ({
-  title,
-  featuredImage,
-  tags,
-  date,
-  excerpt,
-  slug,
-}) => {
+export const WritingCard = ({ title, tags, date, excerpt, link }) => {
   return (
     <Box
       sx={{
@@ -19,12 +11,12 @@ export const PostCard = ({
         flex: "1 1 auto",
         flexDirection: "column",
         mb: 3,
-        maxWidth: ["100%", "100%", "50%", "50%"],
-        width: ["100%", "100%", "50%", "50%"],
+        width: "100%",
       }}
     >
       <Link
-        href={slug}
+        href={link}
+        target="_blank"
         sx={{
           display: "flex",
           flex: "1 1 auto",
@@ -42,14 +34,6 @@ export const PostCard = ({
             minHeight: "1px",
           }}
         >
-          {featuredImage && featuredImage.childImageSharp && (
-            <Box sx={{ minHeight: "1px" }}>
-              <Img
-                fluid={featuredImage.childImageSharp.fluid}
-                alt={featuredImage.childImageSharp.fluid.originalName}
-              />
-            </Box>
-          )}
           <Box
             sx={{
               display: "flex",
@@ -58,13 +42,13 @@ export const PostCard = ({
               p: 3,
             }}
           >
-            <Heading as="h3" variant="styles.h3" sx={{ color: "text", mt: 3 }}>
-              {title}
-            </Heading>
             <Text sx={{ mb: 1, color: "success" }}>
               {format(new Date(date), "d-MMM-u")}
             </Text>
-            <Text sx={{ mb: 1, color: "text", wordBreak: "break-word" }}>
+            <Heading as="h3" variant="styles.h3" sx={{ color: "text" }}>
+              {title}
+            </Heading>
+            <Text sx={{ color: "text", wordBreak: "break-word" }}>
               {excerpt}
             </Text>
           </Box>
@@ -94,10 +78,8 @@ export const PostCard = ({
               )
             })}
           </Box>
-          <Box sx={{ p: 3 }}>
-            <Text sx={{ color: "secondary", textAlign: "right" }}>
-              View Post
-            </Text>
+          <Box sx={{ px: 3, pb: 3 }}>
+            <Text sx={{ color: "secondary" }}>{link}</Text>
           </Box>
         </Card>
       </Link>

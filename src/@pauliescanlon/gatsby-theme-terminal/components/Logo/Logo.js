@@ -1,9 +1,18 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui";
-import { Link } from "gatsby";
+import { jsx } from "theme-ui"
+import { Link } from "gatsby"
 
 export const Logo = () => (
-  <Link to="/">
+  <Link
+    to="/"
+    sx={{
+      ":focus": {
+        outline: "none",
+        transition: ".2s linear box-shadow",
+        boxShadow: (theme) => `0 2px 0 0 ${theme.colors.primary}`,
+      },
+    }}
+  >
     <div sx={{ height: "25px", overflow: "hidden" }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -119,4 +128,4 @@ export const Logo = () => (
       </svg>
     </div>
   </Link>
-);
+)

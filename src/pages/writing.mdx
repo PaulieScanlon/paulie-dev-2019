@@ -1,0 +1,43 @@
+---
+navigationLabel: writing
+---
+
+import { WritingCard } from "../components/WritingCard"
+
+# writing
+
+Here's a collection of posts i've written that have been officially published ☺️
+
+<SourceList filter="writing">
+  {(writing) => (
+    <Flex
+      sx={{
+        flexWrap: "wrap",
+        ml: (theme) => `-${theme.space[2]}px`,
+        mr: (theme) => `-${theme.space[2]}px`,
+      }}
+    >
+      {writing
+        .filter((edge) => !edge.node.frontmatter.isPrivate)
+        .map((edge, index) => {
+          const {
+            frontmatter: { title, featuredImage, tags, date, author },
+            excerpt,
+      
+          } = edge.node
+          return (
+            <WritingCard
+              key={index}
+              title={title}
+              featuredImage={featuredImage}
+              tags={tags}
+              date={date}
+              excerpt={excerpt}
+              link={author}
+            />
+          )
+        })}
+    </Flex>
+)}
+
+</SourceList>
