@@ -10934,11 +10934,6 @@ react-side-effect@^1.1.0:
   dependencies:
     shallowequal "^1.0.1"
 
-react-svg-bubble-slider@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.4.tgz#257c166cc16468e83e6f5709a5dc2d3ccad39436"
-  integrity sha512-MVn8dCqLG5elvKAtm1Rx/scLPhJGjtpF1uIqhSqRNXVz5PwbvGDvYm8oIApnAPxuoUTXooIURaAeys0IJ3OtoQ==
-
 react@^16.12.0, react@^16.8.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"

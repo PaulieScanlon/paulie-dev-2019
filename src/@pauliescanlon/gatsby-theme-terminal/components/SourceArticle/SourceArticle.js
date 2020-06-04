@@ -14,7 +14,7 @@ import {
 import { mix } from "@theme-ui/color"
 import { format } from "date-fns"
 import Img from "gatsby-image"
-import { SvgBubbleSlider } from "react-svg-bubble-slider"
+// import { SvgBubbleSlider } from "react-svg-bubble-slider"
 
 import { Main } from "@pauliescanlon/gatsby-theme-terminal/src/components/Main"
 
