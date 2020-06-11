@@ -30,22 +30,47 @@ I contacted Chris and explained the idea and he was up for open-sourcing it. He 
 
 Here you can find the full [demo](https://react-svg-bubble-slider.netlify.app/) and here's the result 👇
 
-<Box sx={{ height: 100 }} />
+<Box sx={{ height: 125 }} />
 
 <Flex
   sx={{
-    justifyContent: "center",
+    flexDirection: "column",
     ".speech-bubble-text": {
       fontSize: "26px",
+      fontFamily: "body",
       fontWeight: "bold",
       textTransform: "capitalize",
     },
+    ".svg-bubble-action": {
+      height: "44px",
+      textAlign: "center",
+    },
   }}
 >
-  <SvgBubbleSlider />
+  <SvgBubbleSlider>
+    {({ reaction }) => (
+      <Fragment>
+        {reaction && (
+          <Button
+            sx={{
+              cursor: "pointer",
+              fontSize: "18px",
+              fontFamily: "body",
+              fontWeight: "bold",
+              mt: 3,
+              textTransform: "capitalize",
+              backgroundColor: "#ff69B4",
+            }}
+          >
+            Submit
+          </Button>
+        )}
+      </Fragment>
+    )}
+  </SvgBubbleSlider>
 </Flex>
 
-<Divider />
+<Box sx={{ height: 60 }} />
 
 The original [Svg Bubble Slider](https://codepen.io/chrisgannon/pen/GZNgLw/) isn't built in React and also uses [GSAP v2](https://greensock.com/docs/v2) so i had quite a bit of work to do to make this work in React and using [GSAP v3](https://greensock.com/docs/v3) but the biggest hurdle was how to work round the GreenSock members only plugin issue.
 
