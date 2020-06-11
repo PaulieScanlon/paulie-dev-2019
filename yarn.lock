@@ -10938,10 +10938,10 @@ react-side-effect@^1.1.0:
   dependencies:
     shallowequal "^1.0.1"
 
-react-svg-bubble-slider@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.16.tgz#5deafe88feec4934e425e65b838ec58db360fb1e"
-  integrity sha512-AD3jPbLwxWlT0rNPKqOP/CE/Ixt0HRv1CNmH9xFQxX62D271lVOZ9DfI0In4V/HF319zZRYacVLEyXrmhBIB1Q==
+react-svg-bubble-slider@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.18.tgz#044a88cdfe33dfd16e4587e51435c467a3716aac"
+  integrity sha512-hnyT5x4wJEGUR1yS3kePuu1/5gnahICZKn8f/bk0Ie+pFxtMIlGnfeBs2Z+ozyyLQW2ckBbOafsU3oQNLUpe7A==
   dependencies:
     gsap "./gsap-bonus.tgz"
 
