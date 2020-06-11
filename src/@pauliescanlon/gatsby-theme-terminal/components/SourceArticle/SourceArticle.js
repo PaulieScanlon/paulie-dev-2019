@@ -8,12 +8,14 @@ import {
   Text,
   Flex,
   Box,
+  // Button,
   Divider,
   Alert,
 } from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
 import { format } from "date-fns"
 import Img from "gatsby-image"
+
 // import { SvgBubbleSlider } from "react-svg-bubble-slider"
 
 import { Main } from "@pauliescanlon/gatsby-theme-terminal/src/components/Main"
@@ -128,8 +130,51 @@ export const SourceArticle = ({
       <MDXProvider>
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
-      {/* <Box>
-        <SvgBubbleSlider />
+      {/* <Box
+        sx={{
+          ".speech-bubble-stroke": {
+            stroke: "primary",
+          },
+          ".speech-bubble-fill": {
+            fill: "text",
+          },
+          ".speech-bubble-text": {
+            fill: "primary",
+            fontSize: "22px",
+            fontWeight: "bold",
+            textTransform: "capitalize",
+          },
+          ".speech-bubble-pop-line": {
+            stroke: "primary",
+          },
+          ".reaction-icon": {
+            fill: "text",
+          },
+          ".reaction-dot": {
+            fill: "primary",
+          },
+          ".svg-bubble-action": {
+            height: "36px",
+            textAlign: "center",
+          },
+        }}
+      >
+        <SvgBubbleSlider>
+          {({ reaction }) =>
+            reaction && (
+              <Button
+                sx={{
+                  cursor: "pointer",
+                  fontFamily: "body",
+                  textTransform: "capitalize",
+                  backgroundColor: "primary",
+                }}
+              >
+                {reaction}
+              </Button>
+            )
+          }
+        </SvgBubbleSlider>
       </Box> */}
     </Main>
   )

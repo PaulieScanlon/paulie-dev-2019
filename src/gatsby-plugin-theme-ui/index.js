@@ -42,6 +42,7 @@ export default {
         cursor: "pointer",
       },
     },
+
     buttons: {
       ghost: {
         ...baseTheme.buttons.primary,
