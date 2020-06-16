@@ -1,7 +1,7 @@
 ---
 title: React Svg Bubble Slider
 tags: ["React", "GSAP"]
-date: 2020-06-11
+date: 2020-06-16
 author: Paul Scanlon
 featuredImage: react-svg-bubble-slider.jpg
 ---
@@ -30,47 +30,56 @@ I contacted Chris and explained the idea and he was up for open-sourcing it. He 
 
 Here you can find the full [demo](https://react-svg-bubble-slider.netlify.app/) and here's the result 👇
 
-<Box sx={{ height: 125 }} />
-
-<Flex
+<Box sx={{ height: 150 }} />
+<Box
   sx={{
-    flexDirection: "column",
+    ".speech-bubble-stroke": {
+      stroke: "primary",
+    },
+    ".speech-bubble-fill": {
+      fill: "text",
+    },
     ".speech-bubble-text": {
-      fontSize: "26px",
-      fontFamily: "body",
+      fill: "primary",
+      fontSize: "22px",
       fontWeight: "bold",
       textTransform: "capitalize",
     },
+    ".speech-bubble-pop-line": {
+      stroke: "primary",
+    },
+    ".reaction-icon": {
+      fill: "text",
+    },
+    ".reaction-dot": {
+      fill: "primary",
+    },
     ".svg-bubble-action": {
-      height: "44px",
+      height: "60px",
       textAlign: "center",
+      paddingTop: "16px",
     },
   }}
 >
   <SvgBubbleSlider>
-    {({ reaction }) => (
-      <Fragment>
-        {reaction && (
-          <Button
-            sx={{
-              cursor: "pointer",
-              fontSize: "18px",
-              fontFamily: "body",
-              fontWeight: "bold",
-              mt: 3,
-              textTransform: "capitalize",
-              backgroundColor: "#ff69B4",
-            }}
-          >
-            Submit
-          </Button>
-        )}
-      </Fragment>
-    )}
+    {({ reaction }) =>
+      reaction && (
+        <Button
+          sx={{
+            cursor: "pointer",
+            fontFamily: "body",
+            textTransform: "capitalize",
+            backgroundColor: "primary",
+          }}
+        >
+          {reaction}
+        </Button>
+      )
+    }
   </SvgBubbleSlider>
-</Flex>
+</Box>
 
-<Box sx={{ height: 60 }} />
+<Box sx={{ height: 50 }} />
 
 The original [Svg Bubble Slider](https://codepen.io/chrisgannon/pen/GZNgLw/) isn't built in React and also uses [GSAP v2](https://greensock.com/docs/v2) so i had quite a bit of work to do to make this work in React and using [GSAP v3](https://greensock.com/docs/v3) but the biggest hurdle was how to work round the GreenSock members only plugin issue.
 
