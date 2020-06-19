@@ -7912,6 +7912,11 @@ gray-matter@^4.0.2:
     section-matter "^1.0.0"
     strip-bom-string "^1.0.0"
 
+gsap@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.3.3.tgz#20121971bf47858cb600798ba9fbf83e3acdc745"
+  integrity sha512-89D0Av+UIajcfzEUeZFl1h87dJc0xVIvbJ05+wVbH3ernHzZiupb7CxWXpxxo652jZfmsjwM3jyc8bh089dKUg==
+
 gud@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
@@ -12446,10 +12451,12 @@ react-style-singleton@^2.1.0:
     invariant "^2.2.4"
     tslib "^1.0.0"
 
-react-svg-bubble-slider@^0.0.32:
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.32.tgz#b2bb14484afd3333523701f6d1fe9dcdf9c14725"
-  integrity sha512-xrYuf7sgWhnWRZBeD+l6JdxLduAf5H62o+WJMyhTdP5vmykSF0D5rD16UOhpUMwqWYsHoF8dV5ycTbwt25s4Gw==
+react-svg-bubble-slider@^0.0.35:
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.35.tgz#90977e9bb52b374d3f51b3bd8414b612e78ff482"
+  integrity sha512-t7S2X0qCFCMAbXlwETJ9+BTSLnQDWXoEIyDh6DmVLXzm27y7xd8lfi6eWfp7Q7P0VqVEg/xHpKX9InS7pwnshA==
+  dependencies:
+    gsap "^3.3.3"
 
 react@^16.12.0, react@^16.8.0:
   version "16.13.1"
