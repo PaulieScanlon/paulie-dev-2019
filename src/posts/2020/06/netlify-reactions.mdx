@@ -10,7 +10,17 @@ embeddedImages:
 
 Well hey there 👋 I'm Paul, I'm a React UI Developer / UX Engineer from the UK and for the last two years or so I've been getting really stuck in to Gatsby. If you're not familiar with Gatsby have a read about why [it's fast in every way that matters](https://www.gatsbyjs.org/)
 
+You can see more of my work on my...
+
+- Blog [https://paulie.dev](https://paulie.dev)
+- Commerical Portfolio [https://pauliescanlon.io](https://pauliescanlon.io)
+- GitHub [https://github.com/PaulieScanlon](https://github.com/PaulieScanlon)
+
+... and feel free to come find me on Twitter, [@pauliescanlon](https://twitter.com/PaulieScanlon)
+
 In this blog post i'm going to discuss how to add user reactions to your Gatsby blogs posts using a fun React UI component that i've recently open-sourced, It's called [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) and looks like this 👇
+
+<Divider />
 
 <EmbeddedImage src={props.embedded.image1} />
 
@@ -81,8 +91,9 @@ Here's an example:
 ...
 import { SvgBubbleSlider } from "react-svg-bubble-slider"
 
+const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+
 const PostLayout = () => {
-  const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
 
   return (
     <div>
@@ -95,7 +106,7 @@ const PostLayout = () => {
 export default PostLayout
 ```
 
-There is a bit of snag when using the `icons` prop and i've included some warnings if you use the prop incorrectly. The snags are; the icons array must be an even number and yous must have a minimum of four icons in the array. This is mainly so that the `SvgBubbleSlider` still works when a you drag and slide the icons.
+There's a couple of "snags" to look out for when using the `icons` prop. Firstly you'll need at least three icons, this is to ensure there's icons to "slide" to and from, and secondly the icon names must be from the 14 icons included in the package, check the [docs](https://react-svg-bubble-slider.netlify.app/?path=/docs/icons--page) for available icon names.
 
 Now that you've got the icons configured you'll need to get the current reaction, show the reader the current reaction and then provide a way for the reader to post the current reaction to your back-end of choice.
 
@@ -106,8 +117,16 @@ You can access the current reaction via a render prop which you can pass on to a
 ...
 import { SvgBubbleSlider } from 'react-svg-bubble-slider'
 
+const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+
 const PostLayout = () => {
-  const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+
+  const [someReaction, setSomeReaction] = useState('')
+
+  handleReaction (reaction) => {
+    // some kind of api / database POST to pass the reaction and increment the count
+    setSomeReaction(reaction)
+  }
 
   return (
     <div>
@@ -116,7 +135,7 @@ const PostLayout = () => {
         {({ reaction }) => (
           <Fragment>
             {reaction && (
-              <button onClick={() => console.log(reaction)}>{reaction}</button>
+              <button onClick={() => handleReaction(reaction)}>{reaction}</button>
             )}
           </Fragment>
         )}
@@ -137,19 +156,22 @@ To do this you can use the `SvgIcon` component.
 ...
 import { SvgBubbleSlider } from "react-svg-bubble-slider"
 
-const PostLayout = () => {
-  const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
 
-  const [someData, setSomeData]
+const PostLayout = () => {
+
+  const [someReaction, setSomeReaction] = useState('')
+  const [someData, setSomeData] = useState([])
 
   handleReaction (reaction) => {
     // some kind of api / database POST to pass the reaction and increment the count
+    setSomeReaction(reaction)
   }
 
   useEffect(() => {
     // some kind of api / database GET request that returns the reaction counts
     setSomeData(...)
-  }, [])
+  }, [someReaction])
 
   return (
     <div>
@@ -178,6 +200,6 @@ const PostLayout = () => {
 export default PostLayout
 ```
 
-The `count` variable in this instance would come from your back-end and will have been stored in state using `setSomeData`
+The `count` variable in this instance would come from your back-end and the React state examples above are in no way complete, it's just to give you an idea of how to manage the data.
 
-Naturally there's a bit of work to do in POST-ing and GET-ing the data to and from your back-end but at least with [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) you now have a fun UI element to allows the readers of your blog to let you know what they really feel... within reason of course!
+Naturally there's a bit of work to do in POST-ing and GET-ing the data to and from your back-end but at least with [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) you now have a fun UI component to allow the readers of your blog to post reactions.
