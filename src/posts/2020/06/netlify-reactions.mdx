@@ -1,0 +1,183 @@
+---
+title: Netlify Reactions
+tags: ["React", "Gatsby", "GSAP"]
+date: 2020-06-19
+author: Paul Scanlon
+isPrivate: true
+embeddedImages:
+  - netlify-reactions-1.jpg
+---
+
+Well hey there 👋 I'm Paul, I'm a React UI Developer / UX Engineer from the UK and for the last two years or so I've been getting really stuck in to Gatsby. If you're not familiar with Gatsby have a read about why [it's fast in every way that matters](https://www.gatsbyjs.org/)
+
+In this blog post i'm going to discuss how to add user reactions to your Gatsby blogs posts using a fun React UI component that i've recently open-sourced, It's called [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) and looks like this 👇
+
+<EmbeddedImage src={props.embedded.image1} />
+
+<Divider />
+
+## Demo
+
+If you're a keen bean and would like to see a fully finished demo blog i've created an example of how [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) could be used to add reactions to a Gatsby blog, using [FaunaDB](https://fauna.com/) for the back-end and Netlify functions and apollo/graphql to handle the data requests.
+
+- Demo Blog [https://netlify-reactions.netlify.app/](https://netlify-reactions.netlify.app/)
+- Repo [https://github.com/PaulieScanlon/netlify-reactions](https://github.com/PaulieScanlon/netlify-reactions)
+
+## Why Reactions?
+
+You're probably familiar with reactions from social media platforms such as Twitter, Instagram et al but i rarely see reactions used in Blog posts. The more common approach in blog posts is to use a more traditional comments input field. I recently wrote a tutorial explaining how to [Roll Your Own Comments With Gatsby and FaunaDB](https://css-tricks.com/roll-your-own-comments-with-gatsby-and-faunadb/) but quite early on in the process i started to notice the additional complications involved when allowing users to write whatever they want and post it to your back-end.
+
+When you expose an input you're giving the reader the opportunity to write anything they like and it's only a matter of time before a tinker writes something rude. Naturally you don't want your blog posts peppered with expletives so the above tutorial also includes how to add moderation so you _the admin_ can approve or delete comments **before** they appear on your blog.
+
+Aside from the extra technical overhead involved in setting up an Admin user and a moderation queue you'll also need to periodically login, review comments left by readers and then either approve or delete them accordingly before they appear on your blog.
+
+Adding reactions removes all of this as you're only allowing readers to submit one of a given set of pre-approved reactions... nothing rude here, just the usual emotions one might feel after reading a post.
+
+When i started to think about reactions i was struggling to think of a fun and original way to present the options to the reader. I toyed around with the "heart", "thumbs up" / "thumbs down" approach for a while but wasn't really excited by it, until i saw [this tweet](https://twitter.com/ChrisGannon/status/1261209022662918144) by [Chris Gannon](https://twitter.com/ChrisGannon)
+
+As soon as i saw Chris's Svg Bubble Slider i thought it would make a perfect way to expose a pre-defined set of reactions to allow readers to leave their reactions on a blog post.
+
+I explained the idea to Chris and he was on board... so long as you don't use this open-source project for financial gain you're free to use it on your blog.
+
+This post will broadly explain the steps required to add [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) to a Gatsby blog but you could similarly add this to any React application.
+
+## Get Started
+
+To get started install the package via `npm` or `yarn`
+
+```sh
+npm install react-svg-bubble-slider
+```
+
+You'll then need to locate your "posts" layout. In a Gatsby project this is typically saved in `src/layouts/post-layout` but in short you'll need to import `SvgBubbleSlider` to the template or layout responsible for handling your posts.
+
+Once you've decided which layout you'll be amending import `SvgBubbleSlider` and add it to the render method.
+
+```javascript
+// post-layout.js
+...
+import { SvgBubbleSlider } from 'react-svg-bubble-slider'
+
+const PostLayout = () => {
+  return (
+    <div>
+      ...
+      <SvgBubbleSlider />
+    </div>
+  )
+}
+
+export default PostLayout
+```
+
+By default `SvgBubbleSlider` displays 14 reactions. This is because i wanted to honour Chris Gannon's original [Svg Bubble Slider](https://codepen.io/chrisgannon/pen/GZNgLw/) but in reality you'll likely only need restricted set of icons.
+
+To modify the icons your implementation of `SvgBubbleSlider` displays you can use the `icons` prop and pass in only the icons you wish to use.
+
+Here's an example:
+
+```javascript
+// post-layout.js
+...
+import { SvgBubbleSlider } from "react-svg-bubble-slider"
+
+const PostLayout = () => {
+  const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+
+  return (
+    <div>
+      ...
+      <SvgBubbleSlider icons={ICONS_TO_USE} />
+    </div>
+  )
+}
+
+export default PostLayout
+```
+
+There is a bit of snag when using the `icons` prop and i've included some warnings if you use the prop incorrectly. The snags are; the icons array must be an even number and yous must have a minimum of four icons in the array. This is mainly so that the `SvgBubbleSlider` still works when a you drag and slide the icons.
+
+Now that you've got the icons configured you'll need to get the current reaction, show the reader the current reaction and then provide a way for the reader to post the current reaction to your back-end of choice.
+
+You can access the current reaction via a render prop which you can pass on to a button.
+
+```javascript
+// post-layout.js
+...
+import { SvgBubbleSlider } from 'react-svg-bubble-slider'
+
+const PostLayout = () => {
+  const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+
+  return (
+    <div>
+      ...
+      <SvgBubbleSlider icons={ICONS_TO_USE}>
+        {({ reaction }) => (
+          <Fragment>
+            {reaction && (
+              <button onClick={() => console.log(reaction)}>{reaction}</button>
+            )}
+          </Fragment>
+        )}
+      </SvgBubbleSlider>
+    </div>
+  )
+}
+
+export default PostLayout
+```
+
+Now that you have a method to pass the current reaction on to your back-end you will probably want to surface the count of each reaction.
+
+To do this you can use the `SvgIcon` component.
+
+```javascript
+// post-layout.js
+...
+import { SvgBubbleSlider } from "react-svg-bubble-slider"
+
+const PostLayout = () => {
+  const ICONS_TO_USE = ["angry", "sad", "neutral", "smile", "happy", "cool"]
+
+  const [someData, setSomeData]
+
+  handleReaction (reaction) => {
+    // some kind of api / database POST to pass the reaction and increment the count
+  }
+
+  useEffect(() => {
+    // some kind of api / database GET request that returns the reaction counts
+    setSomeData(...)
+  }, [])
+
+  return (
+    <div>
+      ...
+      <SvgBubbleSlider icons={ICONS_TO_USE}>
+        {({ reaction }) => (
+          <Fragment>
+            {reaction && (
+              <button onClick={() => handleReaction(reaction)}>{reaction}</button>
+            )}
+          </Fragment>
+        )}
+      </SvgBubbleSlider>
+      <div>
+        {ICONS_TO_USE.map((name, index) => (
+          <div key={index}>
+            <SvgIcon name={name} />
+            {someData[index].count}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default PostLayout
+```
+
+The `count` variable in this instance would come from your back-end and will have been stored in state using `setSomeData`
+
+Naturally there's a bit of work to do in POST-ing and GET-ing the data to and from your back-end but at least with [react-svg-bubble-slider](https://react-svg-bubble-slider.netlify.app/) you now have a fun UI element to allows the readers of your blog to let you know what they really feel... within reason of course!
