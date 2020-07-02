@@ -42,16 +42,26 @@ export default {
         cursor: "pointer",
       },
     },
+  },
 
-    buttons: {
-      ghost: {
-        ...baseTheme.buttons.primary,
-        color: "muted",
-        backgroundColor: "background",
-        transition: ".2s linear background-color",
-        ":hover": {
-          backgroundColor: "surface",
-        },
+  buttons: {
+    success: {
+      ...baseTheme.buttons.success,
+    },
+    primary: {
+      ...baseTheme.buttons.primary,
+      ":disabled": {
+        cursor: "not-allowed",
+        backgroundColor: "surface",
+      },
+    },
+    ghost: {
+      ...baseTheme.buttons.primary,
+      color: "muted",
+      backgroundColor: "background",
+      transition: ".2s linear background-color",
+      ":hover": {
+        backgroundColor: "surface",
       },
     },
   },

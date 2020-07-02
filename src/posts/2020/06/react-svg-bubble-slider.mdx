@@ -32,6 +32,15 @@ Here you can find the full [demo](https://react-svg-bubble-slider.netlify.app/) 
 
 <Box
   sx={{
+    ".svg-timeline": {
+      ":focus": {
+        outlineStyle: "solid",
+        outlineColor: "surface",
+        outlineWidth: "4px",
+        boxShadow: "none",
+        borderColor: "transparent",
+      },
+    },
     ".speech-bubble-stroke": {
       stroke: "primary",
     },
@@ -61,20 +70,19 @@ Here you can find the full [demo](https://react-svg-bubble-slider.netlify.app/) 
   }}
 >
   <SvgBubbleSlider>
-    {({ reaction }) =>
-      reaction && (
-        <Button
-          sx={{
-            cursor: "pointer",
-            fontFamily: "body",
-            textTransform: "capitalize",
-            backgroundColor: "primary",
-          }}
-        >
-          {reaction}
-        </Button>
-      )
-    }
+    {({ reaction }) => (
+      <Button
+        disabled={!reaction ? true : false}
+        sx={{
+          cursor: "pointer",
+          fontFamily: "body",
+          textTransform: "capitalize",
+          backgroundColor: "primary",
+        }}
+      >
+        {reaction ? reaction : "?"}
+      </Button>
+    )}
   </SvgBubbleSlider>
 </Box>
 
