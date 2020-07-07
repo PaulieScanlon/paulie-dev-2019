@@ -13664,10 +13664,10 @@ react-style-singleton@^2.1.0:
     invariant "^2.2.4"
     tslib "^1.0.0"
 
-react-svg-bubble-slider@^0.0.49:
-  version "0.0.49"
-  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.49.tgz#b78f19d06e8782644c6a7d61f8ac79ba7efd1be1"
-  integrity sha512-h2WSAcqF/7rKHiRTTFVgsmAe8fPR5SG8vOFLPv9MkHlCFEo50kiue8iKoGSDGensxDG0qXfoe6LzeVSfUNwvVQ==
+react-svg-bubble-slider@^0.0.50:
+  version "0.0.50"
+  resolved "https://registry.yarnpkg.com/react-svg-bubble-slider/-/react-svg-bubble-slider-0.0.50.tgz#d376b0ee8b792d9979550e917819ef1365e791f6"
+  integrity sha512-yeCopUEgvdBAggAMK0LBPzAVE30oNn0lSDwCTkh84lkUxEHKHmErD6zq+ooYGg1Q6GktrG1mcAtLwdmcW9z6hg==
   dependencies:
     gsap "^3.3.3"
     jest "^26.1.0"
