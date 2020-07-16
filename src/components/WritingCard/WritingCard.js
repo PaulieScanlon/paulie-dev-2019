@@ -1,6 +1,14 @@
 import React from "react"
 import { format } from "date-fns"
-import { Box, Badge, Link, Card, Heading, Text } from "@theme-ui/components"
+import {
+  Box,
+  Badge,
+  Link,
+  Card,
+  Heading,
+  Text,
+  Divider,
+} from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
 
 export const WritingCard = ({ title, tags, date, excerpt, link }) => {
@@ -51,6 +59,8 @@ export const WritingCard = ({ title, tags, date, excerpt, link }) => {
             <Text sx={{ color: "text", wordBreak: "break-word" }}>
               {excerpt}
             </Text>
+            <Divider />
+            <Text sx={{ color: "secondary" }}>{link}</Text>
           </Box>
           <Box
             sx={{
@@ -77,9 +87,6 @@ export const WritingCard = ({ title, tags, date, excerpt, link }) => {
                 </Badge>
               )
             })}
-          </Box>
-          <Box sx={{ px: 3, pb: 3 }}>
-            <Text sx={{ color: "secondary" }}>{link}</Text>
           </Box>
         </Card>
       </Link>
