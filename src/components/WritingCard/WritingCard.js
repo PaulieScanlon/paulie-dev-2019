@@ -11,7 +11,15 @@ import {
 } from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
 
-export const WritingCard = ({ title, tags, date, excerpt, link }) => {
+export const WritingCard = ({
+  title,
+  tags,
+  date,
+  excerpt,
+  url,
+  mics,
+  author,
+}) => {
   return (
     <Box
       sx={{
@@ -23,7 +31,7 @@ export const WritingCard = ({ title, tags, date, excerpt, link }) => {
       }}
     >
       <Link
-        href={link}
+        href={url}
         target="_blank"
         sx={{
           display: "flex",
@@ -60,7 +68,8 @@ export const WritingCard = ({ title, tags, date, excerpt, link }) => {
               {excerpt}
             </Text>
             <Divider />
-            <Text sx={{ color: "secondary" }}>{link}</Text>
+            <Text sx={{ color: "secondary" }}>{author}</Text>
+            <Text sx={{ color: "secondary" }}>{url}</Text>
           </Box>
           <Box
             sx={{

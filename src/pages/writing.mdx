@@ -21,7 +21,7 @@ Here's a collection of posts i've written that have been officially published â˜
         .filter((edge) => !edge.node.frontmatter.isPrivate)
         .map((edge, index) => {
           const {
-            frontmatter: { title, featuredImage, tags, date, author },
+            frontmatter: { title, featuredImage, tags, date, url, misc, author },
             excerpt,
       
           } = edge.node
@@ -33,7 +33,9 @@ Here's a collection of posts i've written that have been officially published â˜
               tags={tags}
               date={date}
               excerpt={excerpt}
-              link={author}
+              url={url}
+              misc={misc}
+              author={author}
             />
           )
         })}
