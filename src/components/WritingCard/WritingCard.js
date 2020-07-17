@@ -1,6 +1,7 @@
 import React from "react"
 import { format } from "date-fns"
 import {
+  Flex,
   Box,
   Badge,
   Link,
@@ -8,8 +9,12 @@ import {
   Heading,
   Text,
   Divider,
+  Image,
+  Button,
 } from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
+
+import { useConfig } from "@pauliescanlon/gatsby-theme-terminal/src/data"
 
 export const WritingCard = ({
   title,
@@ -17,9 +22,15 @@ export const WritingCard = ({
   date,
   excerpt,
   url,
-  mics,
+  misc,
   author,
 }) => {
+  const {
+    site: {
+      siteMetadata: { siteUrl },
+    },
+  } = useConfig()
+
   return (
     <Box
       sx={{
@@ -48,32 +59,38 @@ export const WritingCard = ({
             flex: "1 1 auto",
             flexDirection: "column",
             minHeight: "1px",
+            p: 3,
           }}
         >
-          <Box
+          <Flex
             sx={{
-              display: "flex",
-              flex: "1 1 auto",
-              flexDirection: "column",
-              p: 3,
+              justifyContent: "space-between",
             }}
           >
-            <Text sx={{ mb: 1, color: "success" }}>
+            <Flex
+              sx={{
+                alignItems: "center",
+              }}
+            >
+              <Image
+                src={`${siteUrl}/images/${misc}-logo.png`}
+                sx={{ width: 16, height: 16 }}
+              />
+              <Text sx={{ color: "secondary", ml: 2 }}>{author}</Text>
+            </Flex>
+            <Text sx={{ color: "success" }}>
               {format(new Date(date), "d-MMM-u")}
             </Text>
-            <Heading as="h3" variant="styles.h3" sx={{ color: "text" }}>
-              {title}
-            </Heading>
-            <Text sx={{ color: "text", wordBreak: "break-word" }}>
-              {excerpt}
-            </Text>
-            <Divider />
-            <Text sx={{ color: "secondary" }}>{author}</Text>
-            <Text sx={{ color: "secondary" }}>{url}</Text>
-          </Box>
+          </Flex>
+          <Divider />
+          <Heading as="h3" variant="styles.h3" sx={{ color: "text" }}>
+            {title}
+          </Heading>
+          <Text sx={{ color: "text", wordBreak: "break-word" }}>{excerpt}</Text>
+          <Divider />
           <Box
             sx={{
-              p: 3,
+              ml: "2px",
             }}
           >
             {tags.map((tag, index) => {
@@ -97,6 +114,13 @@ export const WritingCard = ({
               )
             })}
           </Box>
+          <Divider />
+          <Button as="span" variant="ghost" sx={{ pointerEvents: "none" }}>
+            Read article {/* eslint-disable */}
+            <Box as="span" role="img" aria-label="pencil">
+              ✏️
+            </Box>
+          </Button>
         </Card>
       </Link>
     </Box>
