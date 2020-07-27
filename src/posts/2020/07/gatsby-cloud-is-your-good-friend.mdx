@@ -5,6 +5,10 @@ tags:
 date: 2020-07-25
 author: Paul Scanlon
 featuredImage: gatsby-cloud-is-your-good-friend.jpg
+embeddedImages:
+  - workflow-a.jpg
+  - workflow-b.jpg
+  - mono-repo.jpg
 ---
 
 If you're a Gatsby enthusiast, like me, you're probably aware of [Gatsby Cloud](https://www.gatsbyjs.org/blog/2019-11-14-announcing-gatsby-cloud/), but W T Flip actually is Gatsby Cloud and why would you choose to make it part of your workflow?
@@ -37,17 +41,20 @@ Below is a simple yet typical workflow highlighting where Gatsby Cloud fits in t
 
 #### Workflow A
 
-> Code -> GitHub || CMS -> Netlify -> Live Website
+<Img
+  fluid={props.embedded.image1.fluid}
+  alt="workflow a without Gatsby Cloud"
+/>
 
 In this scenario developers change the code, push the code to remote repository or CMS content changes which notifies Netlify which re-builds _everything_ before the static files are deployed and the website updates
 
 #### Workflow B
 
-> Code -> GitHub || CMS -> Gatsby Cloud -> Netlify -> Live website
+<Img fluid={props.embedded.image2.fluid} alt="workflow b with Gatsby Cloud" />
 
 In this scenario developers change the code, push the code to remote repository or CMS content changes which notifies Gatsby Cloud which re-builds _only_ the bits that have changed before pushing the static files on to Netlify to deploy and the website updates.
 
-As mentioned above I get 300 free minutes of Netlify build time and in Workflow B I'd use exactly 0 of those build minutes because Gatsby Cloud is now taking responsibly for building the site. Netlify is now only used to host the site.
+As mentioned above I get 300 free minutes of Netlify build time and in Workflow B I'd use exactly 0 of those build minutes because Gatsby Cloud is doing the lions share of the work. Netlify is now only used to host the site.
 
 Gatsby Cloud naturally comes at a cost but given it's main selling point is to reduce "time to build" I'm lead to believe the reoccurring cost comparison will be much more favorable.
 
@@ -75,11 +82,7 @@ You'll notice it's a [monorepo](https://en.wikipedia.org/wiki/Monorepo) which am
 
 I'll quickly explain this setup before elaborating on how I've used Gatsby Cloud to manage the builds and deployment of multiple sites all from the **one** monorepo.
 
-> apple-store-theme -> apple-store-core || gatsby-source-shopify -> apple-store-uk
-
-> apple-store-theme -> apple-store-core || gatsby-source-shopify -> apple-store-us
-
-> apple-store-theme -> style-guide
+<Img fluid={props.embedded.image3.fluid} alt="monorepo setup" />
 
 Both the Stores and the Style Guide are powered by a [Gatsby Theme](https://www.gatsbyjs.org/blog/2019-07-03-announcing-stable-release-gatsby-themes/), this can be located in the repo in `apple-store-theme`. The Theme is underpinned by [Theme UI](https://theme-ui.com/) which, if you haven't used before you really should because it's super brill brills. This Theme is responsible for how things look. Theme UI ships with a number of UI components which should pretty much allow you to compose anything you like. The Style Guide simply renders all the Theme UI components on one page along with presenting styles for Markdown should you wish to use it.
 
