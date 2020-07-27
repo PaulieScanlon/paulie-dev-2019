@@ -14,17 +14,17 @@ embeddedImages:
   - webhook.jpg
 ---
 
-If you're a Gatsby enthusiast, like me, you're probably aware of [Gatsby Cloud](https://www.gatsbyjs.org/blog/2019-11-14-announcing-gatsby-cloud/), but W T Flip actually is Gatsby Cloud and why would you choose to make it part of your workflow?
+If you're a Gatsby _enthusiast_ you're probably aware of [Gatsby Cloud](https://www.gatsbyjs.org/blog/2019-11-14-announcing-gatsby-cloud/), but W.T.Flip actually is Gatsby Cloud and why would you choose to make it part of your workflow?
 
-Well it depends. If like me you have a [blog](https://paulie.dev/) and each and every time you make changes (be it changes to the code or changes to the content), you push the changes to a remote repository and your hosting provider takes care of the rest. However, as my blog has grown I have been noticing an increase in time it takes to build.
+Well it depends. If like me you have a [blog](https://paulie.dev/) and each and every time you make changes (be it changes to the code or changes to the content), you push the changes to a remote repository and your hosting provider takes care of the rest. However, as my blog has grown I have been noticing an increase in the time it takes to build.
 
 I host my blog on Netlify and I get 300 free build minutes a month. Each time Netlify builds my site some of these free build minutes are used.
 
-This isn't so much of a problem for me, each build takes 2 or 3 minutes and I only update it every once in a while but if you're making changes more regularly, either to the code or to content via a Content Management System (CMS) it won't be long before you you've used up your free minutes and this is where things can become expense.
+This isn't so much of a problem for me, each build takes 2 or 3 minutes and I only update it every once in a while but if you're making changes more regularly, either to the code or to the content via a Content Management System (CMS) it won't be long before you you've used up your free minutes and this is where things can become expense.
 
 The "time to build" issue is an inherent problem with Server Side Rendering (SSR) and it's precisely here where Gatsby Cloud can help. If you're not familiar with the concepts of SSR here's a good article by [Log Rocket](https://logrocket.com/): [Why you should render React on the server side](https://blog.logrocket.com/why-you-should-render-react-on-the-server-side-a50507163b79/)
 
-Gatsby invented [incremental-builds](https://www.gatsbyjs.org/blog/2020-04-22-announcing-incremental-builds/) to solve this very problem and **only** Gatsby Cloud can re-build the parts of your Gatsby site that have changed since it was last updated (Michelle is that correct?) meaning you'll significantly reduce "time to build" and most likely significantly reduce hosting costs.
+Gatsby invented [incremental-builds](https://www.gatsbyjs.org/blog/2020-04-22-announcing-incremental-builds/) to solve this very problem and **only** Gatsby Cloud can re-build the parts of your Gatsby site that have changed since it was last updated (Michelle is that correct?) meaning you'll significantly reduce "time to build" which in turn reduces hosting costs.
 
 This is a little difficult to grasp at first so here's two fictional scenarios which might help you better understand the problem.
 
@@ -81,17 +81,17 @@ Here's some preview links
 
 - [GitHub Repo](https://github.com/PaulieScanlon/gatsby-apple-store)
 
-You'll notice it's a [monorepo](https://en.wikipedia.org/wiki/Monorepo) which among other reasons allows me to manage the code for both Stores and the Style Guide all from the same place.
+You'll notice it's a [monorepo](https://en.wikipedia.org/wiki/Monorepo) which among other reasons allows me to manage the code, styles and brand identity for both Stores and the Style Guide all from the same place.
 
 I'll quickly explain this setup before elaborating on how I've used Gatsby Cloud to manage the builds and deployment of multiple sites all from the **one** monorepo.
 
 <Img fluid={props.embedded.image3.fluid} alt="monorepo setup" />
 
-Both the Stores and the Style Guide are powered by a [Gatsby Theme](https://www.gatsbyjs.org/blog/2019-07-03-announcing-stable-release-gatsby-themes/), this can be located in the repo in `apple-store-theme`. The Theme is underpinned by [Theme UI](https://theme-ui.com/) which, if you haven't used before you really should because it's super brill brills. This Theme is responsible for how things look. Theme UI ships with a number of UI components which should pretty much allow you to compose anything you like. The Style Guide simply renders all the Theme UI components on one page along with presenting styles for Markdown should you wish to use it.
+Both the Stores and the Style Guide are styled by a [Gatsby Theme](https://www.gatsbyjs.org/blog/2019-07-03-announcing-stable-release-gatsby-themes/), this can be located in the repo in `apple-store-theme`. The Theme is underpinned by [Theme UI](https://theme-ui.com/) which, if you haven't used before you really should because it's super brill brills. This Theme is responsible for how things look. Theme UI ships with a number of UI components which should pretty much allow you to create any UI elements required. The Style Guide simply renders all the Theme UI components on one page along with presenting styles for Markdown should you wish to use it.
 
 The Stores also use another Theme, `apple-store-core`. This Theme is responsible for composing the styled Theme UI components to make the features used in the Stores and utilizes the [gatsby-source-shopify](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-shopify) plugin to fetch data from each of the Shopify storefront APIs at build time.
 
-As mentioned above, both the Stores, the Style Guide and the two Themes all live in the **one** repo, but we don't want to build and deploy everything in the repo. Luckily for us Gatsby has already thought about this and we can easily let Gatsby Cloud know which of these sub-repositories it should be responsible for.
+As mentioned above, both the Stores, the Style Guide and the two Themes all live in the **one** repo, but we don't want to build and deploy all of the sub-repository in the repo. Luckily for us Gatsby has already thought about this and we can easily let Gatsby Cloud know which of these sub-repositories it should be responsible for.
 
 When you start with Gatsby Cloud you'll be met with the familiar "Add a site" button, click it to get started.
 
@@ -99,11 +99,11 @@ You'll be prompted to select the main repository from your GitHub account. The n
 
 <Img fluid={props.embedded.image4.fluid} alt="gatsby cloud base repo" />
 
-If you repeat this step for each of the sub-repositories in your monorepo you'll have a cheeky looking setup up like this.
+If you repeat this step for each of the sub-repositories in your monorepo you want Gatsby Cloud to build you'll have a cheeky looking setup up like this.
 
 <Img fluid={props.embedded.image5.fluid} alt="gatsby cloud base repo" />
 
-With the sub-repositories or "base directory" configured Gatsby Cloud will re-build whenever a push is detected from GitHub.
+With the sub-repositories or "base directories" configured Gatsby Cloud will re-build whenever a push is detected from GitHub.
 
 ### But wait there's more.
 
@@ -111,10 +111,10 @@ Since both the Stores are powered by Shopify we'll also need to let Gatsby Cloud
 
 <Img fluid={props.embedded.image6.fluid} alt="gatsby cloud webhook" />
 
-In both cases when code is pushed by developers to GitHub or when anything in the Shopify storefront account changes, e.g a product is added, removed or when a quantity or price changes, Gatsby Cloud will _only_ re-build the site effected by the change **and** will _only_ re-build the parts of that site effected by the change. Blazing fast indeed!
+In both cases when code is pushed by a developer to GitHub or when anything in the Shopify storefront account changes, e.g a product is added, removed or when a quantity or price changes, Gatsby Cloud will _only_ re-build the site effected by the change **and** will _only_ re-build the parts of that site effected by the change. Blazing fast indeed!
 
-I've been developing Apple Store for the last two weeks and even during development I've noticed a big difference in "time to build", in some cases I'm seeing the store update in less than 20 seconds... which is mind blowing!
+I've been developing Apple Store for the last two weeks and during development I've noticed a big difference in the "time to build", in some cases I'm seeing the store update in less than 20 seconds... which is mind blowing!
 
-Naturally I don't know about every possible business model and their requirements but it's a fair assumption that build hooks and regular re-builds are required for all manner of business and if you're looking to create blazing fast sites using SSR Gatsby Cloud is the perfect accompaniment.
+Naturally I don't know about every possible business model and it's requirements but it's a fair assumption that web hooks and regular re-builds are required for all manner of business and if you're looking to create blazing fast sites using SSR, Gatsby Cloud is the perfect accompaniment.
 
 And that's it, see ya friends ✌️
