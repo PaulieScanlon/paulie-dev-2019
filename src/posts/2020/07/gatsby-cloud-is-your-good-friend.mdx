@@ -9,6 +9,9 @@ embeddedImages:
   - workflow-a.jpg
   - workflow-b.jpg
   - mono-repo.jpg
+  - base-repo.jpg
+  - gatsby-cloud.jpg
+  - webhook.jpg
 ---
 
 If you're a Gatsby enthusiast, like me, you're probably aware of [Gatsby Cloud](https://www.gatsbyjs.org/blog/2019-11-14-announcing-gatsby-cloud/), but W T Flip actually is Gatsby Cloud and why would you choose to make it part of your workflow?
@@ -88,39 +91,29 @@ Both the Stores and the Style Guide are powered by a [Gatsby Theme](https://www.
 
 The Stores also use another Theme, `apple-store-core`. This Theme is responsible for composing the styled Theme UI components to make the features used in the Stores and utilizes the [gatsby-source-shopify](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-shopify) plugin to fetch data from each of the Shopify storefront APIs at build time.
 
-As mentioned above, both the Stores, the Style Guide and the two Themes all live in the **one** repo, but we don't want to build and deploy everything in the repo. Luckily for us Gatsby has already thought about this and we can easily let Gatsby Cloud know which of these sub-repos it should be responsible for.
+As mentioned above, both the Stores, the Style Guide and the two Themes all live in the **one** repo, but we don't want to build and deploy everything in the repo. Luckily for us Gatsby has already thought about this and we can easily let Gatsby Cloud know which of these sub-repositories it should be responsible for.
 
-> Gatsby Cloud Base Repo -> apple-store-uk
+When you start with Gatsby Cloud you'll be met with the familiar "Add a site" button, click it to get started.
 
-> Gatsby Cloud Base Repo -> apple-store-us
+You'll be prompted to select the main repository from your GitHub account. The next step is to select which "base directory" you want Gatsby Cloud to build from.
 
-> Gatsby Cloud Base Repo -> style-guide
+<Img fluid={props.embedded.image4.fluid} alt="gatsby cloud base repo" />
 
-> Gatsby Cloud Ignore -> apple-store-theme
+If you repeat this step for each of the sub-repositories in your monorepo you'll have a cheeky looking setup up like this.
 
-> Gatsby Cloud Ignore -> apple-store-core
+<Img fluid={props.embedded.image5.fluid} alt="gatsby cloud base repo" />
 
-When you start with Gatsby Cloud you'll be met with the familiar "Add Site" button, this as it suggests allows you to add a site. When you've authorized and connected Gatsby Cloud with your GitHub account you'll be able to select a repo which Gatsby Cloud will build from.
-
-... needs a bit of work
-
-You'll also notice there's a "base repo" option. This is where you can select which subdirectory from your monorepo to build.
-
-If you repeat this step for each of the subdirectories in your monorepo you'll have a neat looking setup up like this.
-
-> image of my Gatsby Cloud
-
-With the sub-repos from the monorepo setup Gatsby Cloud will re-build whenever a push is detected from GitHub.
+With the sub-repositories or "base directory" configured Gatsby Cloud will re-build whenever a push is detected from GitHub.
 
 ### But wait there's more.
 
-Since both the Stores are powered by Shopify we'll also need to let Gatsby Cloud know that re-builds are required as and when a change occurs in the Stores Shopfiy storefront account. This can be achieved using a "build hook"
+Since both the Stores are powered by Shopify we'll also need to let Gatsby Cloud know that re-builds are required as and when a change occurs in the Stores Shopfiy storefront accounts. This can be achieved using a "webhook"
 
-> image of Gatsby Cloud site settings build hook
+<Img fluid={props.embedded.image6.fluid} alt="gatsby cloud webhook" />
 
-In both cases when code is pushed by developers to GitHub or when anything in the Shopify storefront account changes Gatsby Cloud will _only_ update the site that has changed **and** will _only_ update the parts of that site that have changed. Blazing fast indeed!
+In both cases when code is pushed by developers to GitHub or when anything in the Shopify storefront account changes, e.g a product is added, removed or when a quantity or price changes, Gatsby Cloud will _only_ re-build the site effected by the change **and** will _only_ re-build the parts of that site effected by the change. Blazing fast indeed!
 
-I've been developing Apple Store for the last two weeks and even during development I've noticed a big difference in "time to build", in some cases I'm seeing the store update in less than 10 seconds... which is mind blowing!
+I've been developing Apple Store for the last two weeks and even during development I've noticed a big difference in "time to build", in some cases I'm seeing the store update in less than 20 seconds... which is mind blowing!
 
 Naturally I don't know about every possible business model and their requirements but it's a fair assumption that build hooks and regular re-builds are required for all manner of business and if you're looking to create blazing fast sites using SSR Gatsby Cloud is the perfect accompaniment.
 
