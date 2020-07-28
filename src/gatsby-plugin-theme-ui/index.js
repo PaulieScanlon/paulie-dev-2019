@@ -45,6 +45,7 @@ export default {
   },
 
   buttons: {
+    ...baseTheme.buttons,
     success: {
       ...baseTheme.buttons.success,
     },
