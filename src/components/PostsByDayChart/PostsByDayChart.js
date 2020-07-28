@@ -4,10 +4,10 @@ import { Flex, Box, Heading, Text } from "@theme-ui/components"
 import { SourceDays } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceDays"
 
 export const PostsByDayChart = ({ config }) => {
-  const { color, year } = config
+  const { color, year, filter } = config
 
   return (
-    <SourceDays>
+    <SourceDays filter={filter}>
       {(sourceDays) => {
         const currentYear = sourceDays[sourceDays.length - (1 - year)]
         return (

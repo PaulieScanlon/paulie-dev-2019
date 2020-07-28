@@ -5,10 +5,10 @@ import { SourceWords } from "@pauliescanlon/gatsby-theme-terminal/src/components
 import { formatNumber } from "../../utils/formatNumber"
 
 export const WordsByMonthChart = ({ config }) => {
-  const { color, year } = config
+  const { color, year, filter } = config
 
   return (
-    <SourceWords>
+    <SourceWords filter={filter}>
       {(sourceWords) => {
         const currentYear =
           sourceWords.wordCountByMonth[

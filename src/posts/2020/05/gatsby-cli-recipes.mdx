@@ -3,10 +3,10 @@ title: Gatsby CLI Recipes
 tags: ["Gatsby", "Gatsby Recipes", "Storybook", "JavaScript", "TypeScript"]
 date: 2020-05-08
 author: Paul Scanlon
-featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915610/paulie.dev/2020/05/gatsby-cli-recipes_zxwzkd.jpg
-embeddedImageUrls:
-  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927856/paulie.dev/2020/05/gatsby-cli-recipes-js_sn3uuv.jpg
-  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927917/paulie.dev/2020/05/gatsby-cli-recipes-ts_nrgdck.jpg
+featuredImage: gatsby-cli-recipes.jpg
+embeddedImages:
+  - gatsby-cli-recipes-js.jpg
+  - gatsby-cli-recipes-ts.jpg
 ---
 
 I recently posted about two new Gatsby Recipes i was working on to help automate the sometimes quite tricky process of installing [Storybook](https://storybook.js.org/) in your Gatsby project
@@ -24,10 +24,10 @@ I've recently used both of these in a commercial project and they do indeed solv
 
 So that's what i did.
 
-<Image src={props.embedded.image1.url} />
+<Img fluid={props.embedded.image1.fluid} />
 <Divider />
 <Divider />
-<Image src={props.embedded.image2.url} />
+<Img fluid={props.embedded.image2.fluid} />
 
 ...and delight of delights once they were merged i upgraded to the latest version of the Gatsby CLI and boom! 💥 both recipes are now available from the list of "official" Recipes.
 

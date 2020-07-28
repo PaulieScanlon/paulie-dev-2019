@@ -8,8 +8,6 @@ import {
   Text,
   Flex,
   Box,
-  Link,
-  Image,
   // Button,
   Divider,
   Alert,
@@ -32,14 +30,11 @@ export const SourceArticle = ({
   author,
   isPrivate,
   featuredImage,
-  featuredImageUrl,
   embedded,
   body,
   timeToRead,
   wordCount,
 }) => {
-  console.log("featuredImageUrl: ", featuredImageUrl)
-
   return (
     <Main>
       {isPrivate && (
@@ -56,7 +51,6 @@ export const SourceArticle = ({
             alt={featuredImage.childImageSharp.fluid.originalName}
           />
         )}
-        {featuredImageUrl && <Image src={featuredImageUrl} />}
       </Box>
       <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
         {title}
@@ -136,18 +130,6 @@ export const SourceArticle = ({
       <MDXProvider>
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
-      <Divider />
-      <Divider />
-      <Text>
-        If you've enjoyed this post I'd love to hear from you{" "}
-        <Link href="https://twitter.com/PaulieScanlon" target="_blank">
-          @pauliescanlon
-        </Link>
-      </Text>
-      <Divider />
-      <Link href="https://ko-fi.com/P5P31B7G8" target="_blank">
-        <Image src="https://www.ko-fi.com/img/githubbutton_sm.svg" />
-      </Link>
       {/* <Box
         sx={{
           ".speech-bubble-stroke": {
@@ -213,8 +195,6 @@ SourceArticle.propTypes = {
   isPrivate: PropTypes.bool,
   /** FeaturedImage from frontmatter */
   featuredImage: PropTypes.any,
-  /** FeaturedImageUrl from frontmatter */
-  featuredImageUrl: PropTypes.string,
   /** embeddedImage array from SourceLayout */
   embedded: PropTypes.any,
   /** body from SourceLayout */
