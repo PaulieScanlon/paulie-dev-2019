@@ -13,7 +13,7 @@ import {
   // Button,
   Divider,
   Alert,
-} from "@theme-ui/components"
+} from "theme-ui"
 import { mix } from "@theme-ui/color"
 import { format } from "date-fns"
 import Img from "gatsby-image"

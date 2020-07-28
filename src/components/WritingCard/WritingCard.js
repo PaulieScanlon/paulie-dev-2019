@@ -11,7 +11,7 @@ import {
   Divider,
   Image,
   Button,
-} from "@theme-ui/components"
+} from "theme-ui"
 import { mix } from "@theme-ui/color"
 
 import { useConfig } from "@pauliescanlon/gatsby-theme-terminal/src/data"

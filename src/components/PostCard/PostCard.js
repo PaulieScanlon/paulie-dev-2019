@@ -1,14 +1,6 @@
 import React from "react"
 import { format } from "date-fns"
-import {
-  Box,
-  Badge,
-  Link,
-  Card,
-  Image,
-  Heading,
-  Text,
-} from "@theme-ui/components"
+import { Box, Badge, Link, Card, Image, Heading, Text } from "theme-ui"
 import { mix } from "@theme-ui/color"
 
 export const PostCard = ({
@@ -50,7 +42,7 @@ export const PostCard = ({
           }}
         >
           <Box sx={{ minHeight: "1px" }}>
-            {/* {featuredImageUrl && <Image src={featuredImageUrl} />} */}
+            {featuredImageUrl && <Image src={featuredImageUrl} />}
           </Box>
           <Box
             sx={{

@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Box, Heading, Text } from "@theme-ui/components"
+import { Flex, Box, Heading, Text } from "theme-ui"
 
 import { SourceDays } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceDays"
 

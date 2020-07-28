@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex } from "@theme-ui/components"
+import { Flex } from "theme-ui"
 
 export const BigNumber = ({ number }) => (
   <Flex

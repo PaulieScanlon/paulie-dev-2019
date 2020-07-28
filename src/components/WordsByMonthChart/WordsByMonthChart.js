@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Box, Heading, Text } from "@theme-ui/components"
+import { Flex, Box, Heading, Text } from "theme-ui"
 import { SourceWords } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceWords"
 
 import { formatNumber } from "../../utils/formatNumber"

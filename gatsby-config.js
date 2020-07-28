@@ -50,26 +50,10 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
-    // {
-    //   resolve: "gatsby-plugin-google-analytics",
-    //   options: {
-    //     trackingId: "UA-76055934-4",
-    //   },
-    // },
     {
-      resolve: `gatsby-plugin-csp`,
+      resolve: "gatsby-plugin-google-analytics",
       options: {
-        disableOnDev: false,
-        mergeScriptHashes: true, // you can disable scripts sha256 hashes
-        mergeStyleHashes: true, // you can disable styles sha256 hashes
-        directives: {
-          "default-src": `'self'`,
-          "script-src": `'self' 'unsafe-inline'`,
-          "style-src": `'self' 'unsafe-inline' https://fonts.googleapis.com`,
-          "font-src": `'self' fonts.gstatic.com`,
-          "connect-src": `'self'`,
-          "img-src": `'self' https://paulie.dev`,
-        },
+        trackingId: "UA-76055934-4",
       },
     },
   ],
