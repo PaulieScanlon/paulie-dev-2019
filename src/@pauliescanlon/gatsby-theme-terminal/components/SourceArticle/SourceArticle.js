@@ -138,6 +138,13 @@ export const SourceArticle = ({
       </MDXProvider>
       <Divider />
       <Divider />
+      <Text>
+        If you've enjoyed this post I'd love to hear from you{" "}
+        <Link href="https://twitter.com/PaulieScanlon" target="_blank">
+          @pauliescanlon
+        </Link>
+      </Text>
+      <Divider />
       <Link href="https://ko-fi.com/P5P31B7G8" target="_blank">
         <Image src="https://www.ko-fi.com/img/githubbutton_sm.svg" />
       </Link>
