@@ -50,21 +50,21 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: "UA-76055934-4",
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-google-analytics",
+    //   options: {
+    //     trackingId: "UA-76055934-4",
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-csp`,
       options: {
-        mergeScriptHashes: true,
-        mergeStyleHashes: true,
+        mergeScriptHashes: true, // you can disable scripts sha256 hashes
+        mergeStyleHashes: true, // you can disable styles sha256 hashes
         directives: {
-          "script-src": `'self' 'unsafe-inline' data: www.google-analytics.com`,
-          "style-src": `'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com`,
-          "img-src": `'self' data: www.google-analytics.com`,
+          // "script-src": `'self' 'unsafe-inline' data: www.google-analytics.com`,
+          // "style-src": `'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com`,
+          // "img-src": `'self' data: www.google-analytics.com`,
           "font-src": `'self' data: fonts.gstatic.com`,
         },
       },
