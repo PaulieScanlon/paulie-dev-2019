@@ -8,6 +8,7 @@ import {
   Text,
   Flex,
   Box,
+  Link,
   Image,
   // Button,
   Divider,
@@ -135,6 +136,11 @@ export const SourceArticle = ({
       <MDXProvider>
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
+      <Divider />
+      <Divider />
+      <Link href="https://ko-fi.com/P5P31B7G8" target="_blank">
+        <Image src="https://www.ko-fi.com/img/githubbutton_sm.svg" />
+      </Link>
       {/* <Box
         sx={{
           ".speech-bubble-stroke": {
