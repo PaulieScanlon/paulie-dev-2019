@@ -38,8 +38,6 @@ export const SourceArticle = ({
   timeToRead,
   wordCount,
 }) => {
-  console.log("featuredImageUrl: ", featuredImageUrl)
-
   return (
     <Main>
       {isPrivate && (
