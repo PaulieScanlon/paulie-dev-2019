@@ -8,6 +8,7 @@ import {
   Text,
   Flex,
   Box,
+  Image,
   // Button,
   Divider,
   Alert,
@@ -30,11 +31,14 @@ export const SourceArticle = ({
   author,
   isPrivate,
   featuredImage,
+  featuredImageUrl,
   embedded,
   body,
   timeToRead,
   wordCount,
 }) => {
+  console.log("featuredImageUrl: ", featuredImageUrl)
+
   return (
     <Main>
       {isPrivate && (
@@ -51,6 +55,7 @@ export const SourceArticle = ({
             alt={featuredImage.childImageSharp.fluid.originalName}
           />
         )}
+        {featuredImageUrl && <Image src={featuredImageUrl} />}
       </Box>
       <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
         {title}
@@ -195,6 +200,8 @@ SourceArticle.propTypes = {
   isPrivate: PropTypes.bool,
   /** FeaturedImage from frontmatter */
   featuredImage: PropTypes.any,
+  /** FeaturedImageUrl from frontmatter */
+  featuredImageUrl: PropTypes.string,
   /** embeddedImage array from SourceLayout */
   embedded: PropTypes.any,
   /** body from SourceLayout */

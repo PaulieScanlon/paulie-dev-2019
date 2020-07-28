@@ -1,12 +1,12 @@
 ---
 title: gatsby-mdx-embed
 tags: ["Gatsby", "Gatsby Plugins", "MDX"]
-featuredImage: gatsby-mdx-embed.jpg
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915604/paulie.dev/2020/01/gatsby-mdx-embed_oacgpn.jpg
 date: 2020-01-06
 dateModified: 2020-04-30
 author: Paul Scanlon
-embeddedImages:
-  - gatsby-mdx-embed-image1.jpg
+embeddedImageUrls:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915602/paulie.dev/2020/01/gatsby-mdx-embed-image1_oysd3m.jpg
 ---
 
 import { DonutChart } from "../../../components/DonutChart"
@@ -93,6 +93,6 @@ So if you're not using embedded Tweets the Twitter provider script won't be inje
 
 There's currently 22 components to choose from and more are on the way so head on over to [gatsby-mdx-embed](https://gatsby-mdx-embed.netlify.app/) and if you can please do give it a star ⭐ on [GitHub](https://github.com/PaulieScanlon/gatsby-mdx-embed)
 
-<Img fluid={props.embedded.image1.fluid} />
+<Image src={props.embedded.image1.url} />
 
 This plugin was inspired by [gatsby-remark-oembed](https://github.com/raae/gatsby-remark-oembed) which similarly provides an easy way to embed media from providers like YouTube, Twitter, etc into your blog **without import**. However this plugin only works with markdown.

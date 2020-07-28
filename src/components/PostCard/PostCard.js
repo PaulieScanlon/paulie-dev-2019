@@ -1,12 +1,21 @@
 import React from "react"
 import { format } from "date-fns"
-import { Box, Badge, Link, Card, Heading, Text } from "@theme-ui/components"
+import {
+  Box,
+  Badge,
+  Link,
+  Card,
+  Image,
+  Heading,
+  Text,
+} from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
 import Img from "gatsby-image"
 
 export const PostCard = ({
   title,
   featuredImage,
+  featuredImageUrl,
   tags,
   date,
   excerpt,
@@ -42,14 +51,15 @@ export const PostCard = ({
             minHeight: "1px",
           }}
         >
-          {featuredImage && featuredImage.childImageSharp && (
-            <Box sx={{ minHeight: "1px" }}>
+          <Box sx={{ minHeight: "1px" }}>
+            {featuredImageUrl && <Image src={featuredImageUrl} />}
+            {featuredImage && featuredImage.childImageSharp && (
               <Img
                 fluid={featuredImage.childImageSharp.fluid}
                 alt={featuredImage.childImageSharp.fluid.originalName}
               />
-            </Box>
-          )}
+            )}
+          </Box>
           <Box
             sx={{
               display: "flex",

@@ -3,9 +3,9 @@ title: gatsby-plugin-prop-shop
 tags: ["Gatsby", "Gatsby Plugins", "React", "JavaScript"]
 date: 2020-02-15
 author: Paul Scanlon
-featuredImage: prop-shop.jpg
-embeddedImages:
-  - prop-shop-demo.jpg
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915604/paulie.dev/2020/02/prop-shop_buykdi.jpg
+embeddedImageUrls:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915589/paulie.dev/2020/02/prop-shop-demo_e3x0tu.jpg
 ---
 
 [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) is my newest Gatsby Plugins and it's slightly different to my previous plugins. The reason for this is because of the way it works, and i'd probably liken it more to a Gatsby theme than a Gatsby Plugins.
@@ -107,7 +107,7 @@ You should now be able to run either `gatsby develop` or `gatsby build` and prov
 
 With PropShop up and running you can now see all the PropTypes defined in your project and using the search and filters you can inspect each prop name; it's type; if it's required; it's default value; and it's description.
 
-<Img fluid={props.embedded.image1.fluid} />
+<Image src={props.embedded.image1.url} />
 
 One big bonus of PropShop technically being a theme is that it'll hot reload along with your project so if you do spot a mistake of a mismatch in descriptions you can quickly find the file, make the change, hit save and PropShop will reload with the updated detail.
 
