@@ -3,9 +3,9 @@ title: Svg Icon Systems
 tags: ["React", "JavaScript", "SVG"]
 date: 2020-04-17
 author: Paul Scanlon
-featuredImage: svg-icon-systems.jpg
-embeddedImages:
-  - svg-icon-systems-image-1.jpg
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915556/paulie.dev/2020/04/svg-icon-systems_e23nav.jpg
+embeddedImageUrls:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927640/paulie.dev/2020/04/svg-icon-systems-image-1_jvtlpo.jpg
 ---
 
 If you're doing this in your React project... just stop it! 🛑
@@ -65,7 +65,7 @@ That last point doesn't actually matter but if you design the icon in white and 
 
 To explain a bit more i'm going to use an icon from [material icons](https://material.io/resources/icons/?style=baseline). This is `settings-24px.svg` and on the left is what it looks like in Illustrator and on the right is what it looks like in VS Code.
 
-<Img fluid={props.embedded.image1.fluid} />
+<Image src={props.embedded.image1.url} />
 
 In Illustrator you'll notice there's two paths nested in a layer. The first path is the settings icon, the second path is a 24x24 transparent path.
 

@@ -4,10 +4,10 @@ import { Flex, Box, Heading, Text } from "@theme-ui/components"
 import { SourceMonths } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceMonths"
 
 export const PostsByMonthChart = ({ config }) => {
-  const { color, year, filter } = config
+  const { color, year } = config
 
   return (
-    <SourceMonths filter={filter}>
+    <SourceMonths>
       {(sourceMonths) => {
         const currentYear = sourceMonths[sourceMonths.length - (1 - year)]
         return (
