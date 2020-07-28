@@ -106,7 +106,7 @@ export const PostCard = ({
           </Box>
           <Box sx={{ p: 3 }}>
             <Text sx={{ color: "secondary", textAlign: "right" }}>
-              View Post
+              View post
             </Text>
           </Box>
         </Card>
