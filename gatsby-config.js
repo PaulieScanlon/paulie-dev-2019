@@ -1,5 +1,3 @@
-require("dotenv").config()
-
 module.exports = {
   siteMetadata: {
     name: "Paul Scanlon",
@@ -61,13 +59,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-csp`,
       options: {
-        mergeScriptHashes: false,
-        mergeStyleHashes: false,
         directives: {
-          "script-src": `*`,
-          "style-src": `*`,
-          "img-src": `*`,
-          "font-src": `*`,
+          "script-src": `'*'`,
+          "style-src": `'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com`,
+          "img-src": `'self' data: www.google-analytics.com`,
+          "font-src": `'self' data: fonts.gstatic.com`,
         },
       },
     },
