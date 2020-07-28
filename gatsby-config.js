@@ -63,11 +63,12 @@ module.exports = {
         mergeScriptHashes: true, // you can disable scripts sha256 hashes
         mergeStyleHashes: true, // you can disable styles sha256 hashes
         directives: {
-          "connect-src": `'self'`,
+          "default-src": `'self'`,
           "script-src": `'self' 'unsafe-inline'`,
-          "img-src": `'self' https://paulie.dev`,
           "style-src": `'self' 'unsafe-inline' https://fonts.googleapis.com`,
           "font-src": `'self' fonts.gstatic.com`,
+          "connect-src": `'self'`,
+          "img-src": `'self' https://paulie.dev`,
         },
       },
     },
