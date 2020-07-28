@@ -10,11 +10,9 @@ import {
   Text,
 } from "@theme-ui/components"
 import { mix } from "@theme-ui/color"
-import Img from "gatsby-image"
 
 export const PostCard = ({
   title,
-  featuredImage,
   featuredImageUrl,
   tags,
   date,
@@ -52,13 +50,7 @@ export const PostCard = ({
           }}
         >
           <Box sx={{ minHeight: "1px" }}>
-            {featuredImageUrl && <Image src={featuredImageUrl} />}
-            {featuredImage && featuredImage.childImageSharp && (
-              <Img
-                fluid={featuredImage.childImageSharp.fluid}
-                alt={featuredImage.childImageSharp.fluid.originalName}
-              />
-            )}
+            {/* {featuredImageUrl && <Image src={featuredImageUrl} />} */}
           </Box>
           <Box
             sx={{
