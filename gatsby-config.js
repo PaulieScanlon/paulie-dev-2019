@@ -59,11 +59,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-csp`,
       options: {
+        disableOnDev: false,
         mergeScriptHashes: true, // you can disable scripts sha256 hashes
         mergeStyleHashes: true, // you can disable styles sha256 hashes
         directives: {
+          "connect-src": `'self'`,
           "script-src": `'self' 'unsafe-inline'`,
-          // "img-src": `'self' data: www.google-analytics.com`,
+          "img-src": `'self' https://paulie.dev`,
           "style-src": `'self' 'unsafe-inline' https://fonts.googleapis.com`,
           "font-src": `'self' fonts.gstatic.com`,
         },
