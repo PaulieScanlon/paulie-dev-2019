@@ -64,7 +64,7 @@ module.exports = {
         directives: {
           "script-src": `'self' 'unsafe-inline'`,
           // "img-src": `'self' data: www.google-analytics.com`,
-          "style-src": `'self' 'unsafe-inline' fonts.gstatic.com`,
+          "style-src": `'self' 'unsafe-inline' https://fonts.googleapis.com`,
           "font-src": `'self' fonts.gstatic.com`,
         },
       },
