@@ -7,3 +7,8 @@
 //     window.location.reload()
 //   }
 // }
+
+export const onServiceWorkerUpdateReady = () => {
+  console.log("onServiceWorkerUpdateReady")
+  return window.location.reload()
+}
