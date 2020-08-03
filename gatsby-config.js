@@ -49,7 +49,8 @@ module.exports = {
         icon: `src/manifesticon-512x512.png`,
       },
     },
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
+    `gatsby-plugin-remove-serviceworker`,
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
