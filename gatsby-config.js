@@ -36,38 +36,38 @@ module.exports = {
         source: ["posts", "writing"],
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `Paul Scanlon`,
-        short_name: `Ps`,
-        start_url: `/`,
-        lang: `en`,
-        background_color: `#282a36`,
-        theme_color: `#ff79c6`,
-        display: `standalone`,
-        icon: `src/manifesticon-512x512.png`,
-      },
-    },
-    `gatsby-plugin-offline`,
+    // {
+    //   resolve: `gatsby-plugin-manifest`,
+    //   options: {
+    //     name: `Paul Scanlon`,
+    //     short_name: `Ps`,
+    //     start_url: `/`,
+    //     lang: `en`,
+    //     background_color: `#282a36`,
+    //     theme_color: `#ff79c6`,
+    //     display: `standalone`,
+    //     icon: `src/manifesticon-512x512.png`,
+    //   },
+    // },
+    // `gatsby-plugin-offline`,
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "UA-76055934-4",
       },
     },
-    {
-      resolve: `gatsby-plugin-netlify`,
-      options: {
-        headers: {
-          "/public/**/*.html": [
-            "cache-control: public",
-            "cache-control:  max-age=0",
-            "cache-control: must-revalidate",
-          ],
-        },
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-netlify`,
+    //   options: {
+    //     headers: {
+    //       "/public/**/*.html": [
+    //         "cache-control: public",
+    //         "cache-control:  max-age=0",
+    //         "cache-control: must-revalidate",
+    //       ],
+    //     },
+    //   },
+    // },
   ],
 }
 
