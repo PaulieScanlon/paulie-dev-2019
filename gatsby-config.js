@@ -56,6 +56,7 @@ module.exports = {
         trackingId: "UA-76055934-4",
       },
     },
+    `gatsby-plugin-netlify`,
   ],
 }
 
