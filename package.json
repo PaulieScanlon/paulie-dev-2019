@@ -23,6 +23,7 @@
     "gatsby-plugin-mdx": "^1.0.74",
     "gatsby-plugin-offline": "^3.0.35",
     "gatsby-source-filesystem": "^2.1.48",
+    "matter-js": "^0.14.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-svg-bubble-slider": "^0.0.52",
