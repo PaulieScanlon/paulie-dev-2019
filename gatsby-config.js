@@ -56,18 +56,6 @@ module.exports = {
         trackingId: "UA-76055934-4",
       },
     },
-    {
-      resolve: `gatsby-plugin-netlify`,
-      options: {
-        allPageHeaders: {
-          "/public/**/*.html": [
-            "cache-control: public",
-            "cache-control:  max-age=0",
-            "cache-control: must-revalidate",
-          ],
-        },
-      },
-    },
   ],
 }
 
