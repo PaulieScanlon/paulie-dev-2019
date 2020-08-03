@@ -13,20 +13,22 @@ import {
   MatterStepThree,
 } from "./matter-js-demo"
 
-In a recent demo application I wanted to inject a bit of fun in to an otherwise quite boring UI element, The Checkout.
+Recently I was creating a Shopify demo application and became a little underwhelmed with the Checkout experience and so decided to inject a bit of "joy" into an otherwise quite dull UI component... it was my demo so why not ay? 🤷‍♂️
 
 My plan was to add a "particle" every time the quantity of a product in the _Order_ changed. I wanted this particle to have real world physics and I wanted each particle to have collision detection so that it would bounce off other particles.
 
-A few years ago I used a physics engined called [matter.js](https://brm.io/matter-js/) but matter.js pre-dates React so I was curious to see if I could create the same cool physics based _animations_ in React.
+Quite a few years ago I used a physics engined called [matter.js](https://brm.io/matter-js/) but matter.js pre-dates React so I was curious to see if I could create the same cool physics based _animations_ in React.
 
 Here's what I came up with, have a play around with the `Qty` input.
 
+<Divider />
 <Divider />
 
 <Checkout />
 
 <Divider />
-<Divider />{" "}
+<Divider />
+<Divider />
 
 If you'd like to start using [matter.js](https://brm.io/matter-js/) in your project I hope this will give you some indication of how to install it, use it, and the bit I really struggled with, how to make the "canvas" and "floor" responsive.
 
@@ -36,7 +38,7 @@ Start by installing [matter.js](https://brm.io/matter-js/)
 npm install matter-js
 ```
 
-Next create a component where you'll do all the "matter" setup, and here's an absolute minimal setup that will get you started. The src file for `MatterStepOne.js` can be found [here](...)
+Next create a component where you'll do all the "matter" setup, and here's an absolute minimal setup that will get you started. The src file for `MatterStepOne.js` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepOne.js)
 
 ## Step One - Setup
 
@@ -117,7 +119,7 @@ There's a couple of things going on here so I'll talk you through some React spe
 
 ### useEffect
 
-As you may know using `useEffect` with an empty dependencies array means the code will run only once and only when the component has mounted. Here you can set up the matter.js `Engine`, `Render`, `World` and `Bodies`
+As you may know using `useEffect` with an empty dependencies array means the code will only run once and only run when the component has mounted. It's in here where you can set up the matter.js `Engine`, `Render`, `World` and `Bodies`
 
 ## Step Two - Responsive
 
@@ -145,15 +147,15 @@ let render = Render.create({
 
 We could use `CSS` to make the `canvas` and containing `div` fill `100%` or to put it another way, make them responsive, but... matter.js would still think the canvas has a `width` and `height` of `300`
 
-To make the canvas really responsive we need to do update matter.js with some new values which will be used as the `width` and `height`. In addition to this the position and width of the floor also need to be updated.
+To make the canvas truly responsive we need to do update matter.js with some new values which will be used as the `width` and `height`. In addition to this the position and width of the floor also need to be updated.
 
-To achieve this I've added a `resize` listener to the `window`.
+To achieve this I've added a `resize` listener to the `window`
 
 When the `window` is resized `handleResize()` is called which uses `getBoundingClientRect()` to get the `width` and `height` of the `boxRef`.
 
 These values are then used to update the state value `constraints` which will cause a re-render then we can grab these new `width` and `height` values in a second `useEffect` which is triggered only when the new constraint values are set and use them to dynamically update both the floor and the canvas
 
-The src file for `MatterStepTwo.js` can be found [here](...)
+The src file for `MatterStepTwo.js` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepTwo.js)
 
 ```javascript
 //MatterStepTwo.js
@@ -310,6 +312,8 @@ Which should render something like this 👇
 ## Step Three - Triggers
 
 The final step is to trigger a re-render when an interaction happens. In the top example this is when the value of the inputs change but in this step I'll show how to do it from an `onClick` on the button. (it's just easier to explain)
+
+The src file for `MatterStepThree.js` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepThree.js)
 
 ```javascript
 // MatterStepThree.js
