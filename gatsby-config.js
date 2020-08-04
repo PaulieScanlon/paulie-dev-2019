@@ -21,7 +21,7 @@ module.exports = {
       "Component Library",
     ],
     siteUrl: "https://paulie.dev",
-    siteImage: "images/paulie-open-graph-image.jpg",
+    siteImage: "https://paulie.dev/images/paulie-open-graph-image.jpg",
     profileImage: ``,
     lang: `en`,
     config: {
