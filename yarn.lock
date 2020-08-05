@@ -2635,10 +2635,10 @@
   resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-mdx-routes/-/gatsby-mdx-routes-0.0.10.tgz#b9c3d62560e20d485e18c30385b72c111d04efda"
   integrity sha512-kkyipsUzFZW9E/AKj+/B936+fR353NL3EgiEp9v53wdFerq5JHeZ+Vdw3ZFMIKby/J73d03jUrHnPf2yl7lm5w==
 
-"@pauliescanlon/gatsby-theme-terminal@^0.0.35":
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.35.tgz#bc5ad60529b7e9200612a070ab5963c91a17da12"
-  integrity sha512-e7UyXY69la/m4RPY/LdirnE1z36QVCRTf9eRWRm90iQyTorfgviS1zv5GgUyNW/NqP1nxYw6np7jZD5D0k6qAQ==
+"@pauliescanlon/gatsby-theme-terminal@^0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.34.tgz#f17f23536ca5d76037994608a03dac1af48785b8"
+  integrity sha512-FkfF3bPXoJyf69g1MkMLbpTVCWCFbDunSXNqx4TAQWiowWiNbvmztWjpJir2wVr/vQB/Oz7BN6iEeKGw3hwGCw==
   dependencies:
     "@emotion/core" "^10.0.27"
     "@pauliescanlon/gatsby-mdx-routes" "^0.0.10"
