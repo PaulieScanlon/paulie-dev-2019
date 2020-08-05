@@ -19,7 +19,15 @@ import { PostCard } from "../components/PostCard"
         .filter((edge) => !edge.node.frontmatter.isPrivate)
         .map((edge, index) => {
           const {
-            frontmatter: { title, featuredImage, featuredImageUrl, tags, date },
+            frontmatter: {
+              title,
+              featuredImage,
+              featuredImageUrl,
+              tags,
+              date,
+              dateModified,
+              pinned,
+            },
             excerpt,
             fields: { slug },
           } = edge.node
@@ -31,8 +39,10 @@ import { PostCard } from "../components/PostCard"
               featuredImageUrl={featuredImageUrl}
               tags={tags}
               date={date}
+              dateModified={dateModified}
               excerpt={excerpt}
               slug={slug}
+              pinned={pinned}
             />
           )
         })}

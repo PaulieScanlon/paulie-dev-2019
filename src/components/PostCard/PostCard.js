@@ -8,8 +8,10 @@ export const PostCard = ({
   featuredImageUrl,
   tags,
   date,
+  dateModified,
   excerpt,
   slug,
+  pinned,
 }) => {
   return (
     <Box
@@ -52,11 +54,20 @@ export const PostCard = ({
               p: 3,
             }}
           >
-            <Heading as="h3" variant="styles.h3" sx={{ color: "text", mt: 3 }}>
+            <Heading
+              as="h3"
+              variant="styles.h3"
+              sx={{ color: "text", mt: 3, span: { mr: 2 } }}
+            >
+              {pinned ? (
+                <span role="img" aria-labelledby="A silver paper clip">
+                  📎
+                </span>
+              ) : null}
               {title}
             </Heading>
             <Text sx={{ mb: 1, color: "success" }}>
-              {format(new Date(date), "d-MMM-u")}
+              {format(new Date(dateModified ? dateModified : date), "d-MMM-u")}
             </Text>
             <Text sx={{ mb: 1, color: "text", wordBreak: "break-word" }}>
               {excerpt}
