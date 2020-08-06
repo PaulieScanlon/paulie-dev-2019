@@ -2,6 +2,7 @@
 navigationLabel: home
 ---
 
+import { Link as GatsbyLink } from "gatsby"
 import { mix } from "@theme-ui/color"
 import { PostCard } from "../components/PostCard"
 
@@ -198,7 +199,7 @@ Well hey there! 👋 I'm Paul and a long long time ago was a designer but after 
   }}
 >
   <Box>
-    <Button as="a" variant="ghost" href="/posts">
+    <Button as={GatsbyLink} variant="ghost" href="/posts">
       More posts{" "}
       <Box as="span" role="img" aria-label="pencil">
         ✏️
