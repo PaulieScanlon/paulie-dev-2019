@@ -8,11 +8,6 @@ import { PostCard } from "../components/PostCard"
 
 <SourceList filter="posts">
   {(posts) => {
-    const thing = [...posts]
-    const pinned = thing.sort(
-      (a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned
-    )
-    console.log("pinned: ", pinned)
     return (
       <Flex
         sx={{
@@ -21,7 +16,7 @@ import { PostCard } from "../components/PostCard"
           mr: (theme) => `-${theme.space[2]}px`,
         }}
       >
-        {pinned
+        {posts
           .filter((edge) => !edge.node.frontmatter.isPrivate)
           .map((edge, index) => {
             const {
