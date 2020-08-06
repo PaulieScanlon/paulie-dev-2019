@@ -1,6 +1,6 @@
 import React from "react"
 import { format } from "date-fns"
-import { Box, Badge, Link, Card, Image, Heading, Text } from "theme-ui"
+import { Flex, Box, Badge, Link, Card, Image, Heading, Text } from "theme-ui"
 import { mix } from "@theme-ui/color"
 
 export const PostCard = ({
@@ -57,18 +57,45 @@ export const PostCard = ({
             <Heading
               as="h3"
               variant="styles.h3"
-              sx={{ color: "text", mt: 3, span: { mr: 2 } }}
+              sx={{
+                color: "text",
+                mt: 3,
+                span: { mr: 2 },
+              }}
             >
               {pinned ? (
-                <span role="img" aria-labelledby="A silver paper clip">
-                  📎
+                <span role="img" aria-labelledby="A thumbtack (drawing pin),">
+                  📌
                 </span>
               ) : null}
               {title}
             </Heading>
-            <Text sx={{ mb: 1, color: "success" }}>
-              {format(new Date(dateModified ? dateModified : date), "d-MMM-u")}
-            </Text>
+            <Flex
+              sx={{
+                justifyContent: "space-between",
+              }}
+            >
+              {dateModified ? (
+                <Text
+                  sx={{
+                    mb: 1,
+                    color: "success",
+                  }}
+                >
+                  {format(new Date(dateModified), "d-MMM-u")}
+                </Text>
+              ) : null}
+
+              <Text
+                sx={{
+                  mb: 1,
+                  color: dateModified ? "muted" : "success",
+                  textDecoration: dateModified ? "line-through" : "none",
+                }}
+              >
+                {format(new Date(date), "d-MMM-u")}
+              </Text>
+            </Flex>
             <Text sx={{ mb: 1, color: "text", wordBreak: "break-word" }}>
               {excerpt}
             </Text>
