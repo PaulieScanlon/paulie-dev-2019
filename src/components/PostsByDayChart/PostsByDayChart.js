@@ -1,7 +1,7 @@
 import React from "react"
 import { Flex, Box, Heading, Text } from "theme-ui"
 
-import { SourceDays } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceDays"
+import { SourceDays } from "@pauliescanlon/gatsby-theme-terminal"
 
 export const PostsByDayChart = ({ config }) => {
   const { color, year } = config

@@ -2630,10 +2630,10 @@
   resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-mdx-embed/-/gatsby-mdx-embed-0.0.19.tgz#e99ddf681690a2b3f57354342a09279f5b8b7089"
   integrity sha512-bpeu8duHx5IwqID7N5iBcEDWksfpsaRVWNrZbkRzab2PQXPQ2Tcof9V8iyh2DZDQw6XqgjLSsRbKTzHHmGtr4g==
 
-"@pauliescanlon/gatsby-theme-terminal@^0.0.37":
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.37.tgz#35a44f003a8d6ccfc5fa7c37b9138e68f82f6140"
-  integrity sha512-Ho7a9RB1oBbzxo0QV9fnUhdKbQFBLDsz3YiCUqMZ77COyZUjvCAwC3XpVuIet8XWtjyU9Nk2iM5/9gKZoW+Cew==
+"@pauliescanlon/gatsby-theme-terminal@^0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.39.tgz#497f89644e900da10022605d617a966cdbe685b3"
+  integrity sha512-JvpeL14IcRdSXkPX9+NAeE24uAeS+8JEB3nDMCyOA5ILVxBwdzvenmEwCQSRodBwZqg+oVopIc0nWKLbKUA6kg==
   dependencies:
     "@emotion/core" "^10.0.28"
     "@theme-ui/color" "^0.3.0"

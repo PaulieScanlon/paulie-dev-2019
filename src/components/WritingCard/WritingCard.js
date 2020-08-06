@@ -14,7 +14,7 @@ import {
 } from "theme-ui"
 import { mix } from "@theme-ui/color"
 
-import { useConfig } from "@pauliescanlon/gatsby-theme-terminal/src/data"
+import { useConfig } from "@pauliescanlon/gatsby-theme-terminal"
 
 export const WritingCard = ({
   title,

@@ -1,7 +1,7 @@
 import React from "react"
 import { Flex, Box, Heading, Text } from "theme-ui"
 
-import { SourceMonths } from "@pauliescanlon/gatsby-theme-terminal/src/components/SourceMonths"
+import { SourceMonths } from "@pauliescanlon/gatsby-theme-terminal"
 
 export const PostsByMonthChart = ({ config }) => {
   const { color, year } = config
