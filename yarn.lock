@@ -1855,7 +1855,7 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
-"@emotion/core@^10.0.0", "@emotion/core@^10.0.27":
+"@emotion/core@^10.0.0", "@emotion/core@^10.0.28":
   version "10.0.28"
   resolved "https://registry.yarnpkg.com/@emotion/core/-/core-10.0.28.tgz#bb65af7262a234593a9e952c041d0f1c9b9bef3d"
   integrity sha512-pH8UueKYO5jgg0Iq+AmCLxBsvuGtvlmiDCOuv8fGNYn3cowFpLN98L8zO56U0H1PjDIyAlXymgL3Wu7u7v6hbA==
@@ -2630,19 +2630,13 @@
   resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-mdx-embed/-/gatsby-mdx-embed-0.0.19.tgz#e99ddf681690a2b3f57354342a09279f5b8b7089"
   integrity sha512-bpeu8duHx5IwqID7N5iBcEDWksfpsaRVWNrZbkRzab2PQXPQ2Tcof9V8iyh2DZDQw6XqgjLSsRbKTzHHmGtr4g==
 
-"@pauliescanlon/gatsby-mdx-routes@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-mdx-routes/-/gatsby-mdx-routes-0.0.10.tgz#b9c3d62560e20d485e18c30385b72c111d04efda"
-  integrity sha512-kkyipsUzFZW9E/AKj+/B936+fR353NL3EgiEp9v53wdFerq5JHeZ+Vdw3ZFMIKby/J73d03jUrHnPf2yl7lm5w==
-
-"@pauliescanlon/gatsby-theme-terminal@^0.0.36":
-  version "0.0.36"
-  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.36.tgz#3e86fce0cf9993896a06535b2a637a023907eb0d"
-  integrity sha512-nVrCuf1Gf89ownuOkMj/+TjPoHT+V2VFMG8Tmn4rSGPmPY9zMlqnxTnHuxgc3ySLQi41QRBRv7tkJhSElS1pTA==
+"@pauliescanlon/gatsby-theme-terminal@^0.0.37":
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.37.tgz#35a44f003a8d6ccfc5fa7c37b9138e68f82f6140"
+  integrity sha512-Ho7a9RB1oBbzxo0QV9fnUhdKbQFBLDsz3YiCUqMZ77COyZUjvCAwC3XpVuIet8XWtjyU9Nk2iM5/9gKZoW+Cew==
   dependencies:
-    "@emotion/core" "^10.0.27"
-    "@pauliescanlon/gatsby-mdx-routes" "^0.0.10"
-    "@theme-ui/color" "^0.3.1"
+    "@emotion/core" "^10.0.28"
+    "@theme-ui/color" "^0.3.0"
     "@theme-ui/prism" "^0.3.0"
     date-fns "^2.10.0"
     gatsby-image "^2.2.41"
@@ -2827,7 +2821,7 @@
     "@theme-ui/css" "^0.3.1"
     deepmerge "^4.2.2"
 
-"@theme-ui/color@^0.3.1":
+"@theme-ui/color@^0.3.0", "@theme-ui/color@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@theme-ui/color/-/color-0.3.1.tgz#fceffc0be305ad6ca6be9755ac9cafc955b1e6f5"
   integrity sha512-Bgew6etspp087AdrKuMpcWjIQDQ8UTp28wtHCXgi1Ip5ClFn9i91DvaKgqXk9UwQJFL/IwydX8Bks/+u9tf0WA==
