@@ -2,6 +2,7 @@
 navigationLabel: posts
 ---
 
+import { Link as GatsbyLink } from "gatsby"
 import { PostCard } from "../components/PostCard"
 
 # posts
@@ -48,6 +49,47 @@ import { PostCard } from "../components/PostCard"
             )
           })}
       </Flex>
+    )
+  }}
+</SourceList>
+
+## Test
+
+Testing the pinned post sort method
+
+<SourceList filter="posts">
+  {(posts) => {
+    return (
+      <Box as="ul">
+        {posts
+          .filter((edge) => !edge.node.frontmatter.isPrivate)
+          .sort((a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned)
+          .map((edge, index) => {
+            const {
+              frontmatter: {
+                title,
+                featuredImage,
+                featuredImageUrl,
+                tags,
+                date,
+                dateModified,
+                pinned,
+              },
+              excerpt,
+              fields: { slug },
+            } = edge.node
+            return (
+              <Box as="li" sx={{ mb: 4 }}>
+                <Text>{index}</Text>
+                <Link to={slug} as={GatsbyLink}>
+                  {title}
+                </Link>
+                <Text>{slug}</Text>
+                <Image src={featuredImageUrl} sx={{ width: 100 }} />
+              </Box>
+            )
+          })}
+      </Box>
     )
   }}
 </SourceList>
