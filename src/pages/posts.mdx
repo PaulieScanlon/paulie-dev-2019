@@ -19,7 +19,11 @@ import { PostCard } from "../components/PostCard"
       >
         {posts
           .filter((edge) => !edge.node.frontmatter.isPrivate)
-          .sort((a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned)
+          .reduce((routes, route) => {
+            return route.node.frontmatter.pinned
+              ? [route, ...routes]
+              : [...routes, route]
+          }, [])
           .map((edge, index) => {
             const {
               frontmatter: {

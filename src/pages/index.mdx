@@ -156,11 +156,11 @@ Well hey there! 👋 I'm Paul and a long long time ago was a designer but after 
     >
       {posts
         .filter((edge) => !edge.node.frontmatter.isPrivate)
-        .sort(
-          (a, b) =>
-            new Date(b.node.frontmatter.date) -
-            new Date(a.node.frontmatter.date)
-        )
+        .reduce((routes, route) => {
+          return route.node.frontmatter.pinned
+            ? [route, ...routes]
+            : [...routes, route]
+        }, [])
         .splice(0, 4)
         .map((edge, index) => {
           const {
