@@ -7,45 +7,52 @@ import { PostCard } from "../components/PostCard"
 # posts
 
 <SourceList filter="posts">
-  {(posts) => (
-    <Flex
-      sx={{
-        flexWrap: "wrap",
-        ml: (theme) => `-${theme.space[2]}px`,
-        mr: (theme) => `-${theme.space[2]}px`,
-      }}
-    >
-      {posts
-        .filter((edge) => !edge.node.frontmatter.isPrivate)
-        .map((edge, index) => {
-          const {
-            frontmatter: {
-              title,
-              featuredImage,
-              featuredImageUrl,
-              tags,
-              date,
-              dateModified,
-              pinned,
-            },
-            excerpt,
-            fields: { slug },
-          } = edge.node
-          return (
-            <PostCard
-              key={index}
-              title={title}
-              featuredImage={featuredImage}
-              featuredImageUrl={featuredImageUrl}
-              tags={tags}
-              date={date}
-              dateModified={dateModified}
-              excerpt={excerpt}
-              slug={slug}
-              pinned={pinned}
-            />
-          )
-        })}
-    </Flex>
-  )}
+  {(posts) => {
+    const thing = [...posts]
+    const pinned = thing.sort(
+      (a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned
+    )
+    console.log("pinned: ", pinned)
+    return (
+      <Flex
+        sx={{
+          flexWrap: "wrap",
+          ml: (theme) => `-${theme.space[2]}px`,
+          mr: (theme) => `-${theme.space[2]}px`,
+        }}
+      >
+        {pinned
+          .filter((edge) => !edge.node.frontmatter.isPrivate)
+          .map((edge, index) => {
+            const {
+              frontmatter: {
+                title,
+                featuredImage,
+                featuredImageUrl,
+                tags,
+                date,
+                dateModified,
+                pinned,
+              },
+              excerpt,
+              fields: { slug },
+            } = edge.node
+            return (
+              <PostCard
+                key={index}
+                title={title}
+                featuredImage={featuredImage}
+                featuredImageUrl={featuredImageUrl}
+                tags={tags}
+                date={date}
+                dateModified={dateModified}
+                excerpt={excerpt}
+                slug={slug}
+                pinned={pinned}
+              />
+            )
+          })}
+      </Flex>
+    )
+  }}
 </SourceList>
