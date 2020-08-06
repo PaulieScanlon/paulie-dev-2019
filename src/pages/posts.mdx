@@ -17,7 +17,6 @@ import { PostCard } from "../components/PostCard"
     >
       {posts
         .filter((edge) => !edge.node.frontmatter.isPrivate)
-        .sort((a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned)
         .map((edge, index) => {
           const {
             frontmatter: {
@@ -46,7 +45,8 @@ import { PostCard } from "../components/PostCard"
               pinned={pinned}
             />
           )
-        })}
+        })
+        .sort((a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned)}
     </Flex>
   )}
 </SourceList>
