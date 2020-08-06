@@ -1,4 +1,5 @@
 import React from "react"
+import { Link as GatsbyLink } from "gatsby"
 import { format } from "date-fns"
 import { Flex, Box, Badge, Link, Card, Image, Heading, Text } from "theme-ui"
 import { mix } from "@theme-ui/color"
@@ -25,7 +26,8 @@ export const PostCard = ({
       }}
     >
       <Link
-        href={slug}
+        as={GatsbyLink}
+        to={slug}
         sx={{
           display: "flex",
           flex: "1 1 auto",
