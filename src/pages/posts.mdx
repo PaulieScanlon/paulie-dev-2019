@@ -45,8 +45,7 @@ import { PostCard } from "../components/PostCard"
               pinned={pinned}
             />
           )
-        })
-        .sort((a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned)}
+        })}
     </Flex>
   )}
 </SourceList>
