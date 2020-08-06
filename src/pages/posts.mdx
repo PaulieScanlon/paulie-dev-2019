@@ -19,11 +19,11 @@ import { PostCard } from "../components/PostCard"
       >
         {posts
           .filter((edge) => !edge.node.frontmatter.isPrivate)
+          .sort((a, b) => b.node.frontmatter.pinned - a.node.frontmatter.pinned)
           .map((edge, index) => {
             const {
               frontmatter: {
                 title,
-                featuredImage,
                 featuredImageUrl,
                 tags,
                 date,
@@ -37,7 +37,6 @@ import { PostCard } from "../components/PostCard"
               <PostCard
                 key={index}
                 title={title}
-                featuredImage={featuredImage}
                 featuredImageUrl={featuredImageUrl}
                 tags={tags}
                 date={date}
