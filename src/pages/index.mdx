@@ -156,10 +156,10 @@ Well hey there! 👋 I'm Paul and a long long time ago was a designer but after 
     >
       {posts
         .filter((edge) => !edge.node.frontmatter.isPrivate)
-        .reduce((routes, route) => {
-          return route.node.frontmatter.pinned
-            ? [route, ...routes]
-            : [...routes, route]
+        .reduce((posts, post) => {
+          return post.node.frontmatter.pinned
+            ? [post, ...posts]
+            : [...posts, post]
         }, [])
         .splice(0, 4)
         .map((edge, index) => {
