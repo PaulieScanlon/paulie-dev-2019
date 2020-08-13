@@ -2,14 +2,14 @@ module.exports = {
   siteMetadata: {
     name: "Paul Scanlon",
     description:
-      "I'm a Front End Developer / UX Engineer based in Worthing | London / UK. React, Gatsby, JavaScript, TypeScript/Flow, StyledComponents, Theme UI, Storybook, TDD (Jest/Enzyme/React Testing Libary) and a tiny bit of Node and FaunaDB",
+      "I'm a Front End Developer / UX Engineer based in Worthing | London / UK. React, Gatsby, JavaScript, TypeScript/Flow, styled-components, Theme UI, Storybook, TDD (Jest/Enzyme/React Testing Libary) and a tiny bit of Node and FaunaDB",
     keywords: [
       "React",
       "Gatsby",
       "JavaScript",
       "TypeScript",
       "Flow",
-      "StyledComponents",
+      "styled-components",
       "Theme UI",
       "Jest",
       "Enzyme",
