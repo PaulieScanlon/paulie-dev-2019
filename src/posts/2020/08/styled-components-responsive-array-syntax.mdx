@@ -12,9 +12,9 @@ In this post I'm going to discuss a new approach I've adopted when using [styled
 
 From the _outside_ when you use the Box component you can provide a `width` prop but instead of it simply being a string value it's an array of values. Reading from left to right this will translate to the following:
 
-- 0: The Box will be `width: 100%;` on small screens / 576px and up
-- 1: The Box will be `width: 50%;` on medium screens / 768px and up
-- 2: The Box will be `width: auto;` on large screens / 992px and up
+- 0: The Box will be `width: 100%;` on small screens
+- 1: The Box will be `width: 50%;` on medium screens
+- 2: The Box will be `width: auto;` on large screens
 
 NB: This is assuming in your application you have a set of breakpoints defined, for example:
 
@@ -60,7 +60,7 @@ If you're using styled-components and like the look of the **Responsive Array Sy
 
 Before I go too much further when I use styled-components I don't use template literals which is what you'll see in the [docs](https://styled-components.com/docs/basics#getting-started), instead I prefer to use the _style object_ syntax.
 
-There's a PR for the docs site I created in Mar 2019 that attempts to explain the _style object_ syntax which you can seen [here](https://github.com/styled-components/styled-components-website/pull/444). I think I still need to do some work on that 😬 ... so in the meantime I've prepared a short post with the same usage examples: [styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
+There's a PR for the docs site I created in Mar 2019 that attempts to explain the _style object_ syntax which you can see [here](https://github.com/styled-components/styled-components-website/pull/444). I think I still need to do some work on that 😬 ... so in the meantime I've prepared a short post with the same usage examples: [styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
 
 Ok, let's start!
 
@@ -114,7 +114,7 @@ export const createMediaQueries = (css) => {
 
 <Divider />
 
-The first step is to make sure you're able to pass the `backgroundColor` and `width` props through the styled component and on to the function. As mentioned above I prefer to use the _style object_ syntax because It's then easy to spread the return of the `createMediaQueries` straight on to the styles 🕺
+The first step is to make sure you're able to pass the `backgroundColor` and `width` props through the styled component and on to the function. As mentioned above I prefer to use the _style object_ syntax because I find it easier to destructure the props and to spread the return of the `createMediaQueries` function into the styles 🕺
 
 ```diff
 ...
@@ -180,7 +180,7 @@ export const createMediaQueries = (css) => {
 
 <Divider />
 
-The aim now is to create key values pairs for each property and each of the values, you'll also need to catch any values passed in that aren't an array by using `Array.isArray()` and rather than map them just return a key value pair.
+The aim now is to create key values pairs for each property and each of the values, you'll also need to catch any values passed in that aren't an array by using `Array.isArray()` and rather than `.map` them just return a key value pair.
 
 ```diff
 // create-media-queries.js
