@@ -10,13 +10,13 @@ In this post I'm going to discuss a new approach I've adopted when using [styled
 
 <Tweet tweetLink="peduarte/status/1295998559117074432" />
 
-From the _outside_ when you use the Box component you can provide a `width` prop but instead if it simply being a string value it's an array of values. Reading from left to right this will translate to the following:
+From the _outside_ when you use the Box component you can provide a `width` prop but instead of it simply being a string value it's an array of values. Reading from left to right this will translate to the following:
 
 - 0: The Box will be `width: 100%;` on small screens / 576px and up
 - 1: The Box will be `width: 50%;` on medium screens / 768px and up
-- 2: The Box will be `width: auto;` on large screen / 992px and up
+- 2: The Box will be `width: auto;` on large screens / 992px and up
 
-NB: This is assuming in your application you'd have a set of breakpoints defined, for example:
+NB: This is assuming in your application you have a set of breakpoints defined, for example:
 
 ```javascript
 const breakpoints = ["576px", "768px", "992px"]
@@ -56,11 +56,11 @@ _"Theme UI is a library for creating themeable user interfaces based on constrai
 
 The way I like to think about this is styled-components gives you the tools you need to build everything yourself where as Chakra UI and Theme UI give you the tools you need to build everything yourself + a load of stuff that's already built for you and can easily be re-themed.
 
-If you are using styled-components and like the look of the **Responsive Array Syntax** I'm going to explain how to write a utility function that you can gradually adopt without breaking anything.
+If you're using styled-components and like the look of the **Responsive Array Syntax** I'm going to explain how to write a utility function that you can gradually adopt without breaking anything.
 
 Before I go too much further when I use styled-components I don't use template literals which is what you'll see in the [docs](https://styled-components.com/docs/basics#getting-started), instead I prefer to use the _style object_ syntax.
 
-There's a PR for the docs site I created in Mar 2019 that attempts to explain the _style object_ syntax which you can see [here](https://github.com/styled-components/styled-components-website/pull/444). I think I still need to do some work on that 😬 ... so in the meantime I've prepared a short post with the same usage examples: [styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
+There's a PR for the docs site I created in Mar 2019 that attempts to explain the _style object_ syntax which you can seen [here](https://github.com/styled-components/styled-components-website/pull/444). I think I still need to do some work on that 😬 ... so in the meantime I've prepared a short post with the same usage examples: [styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
 
 Ok, let's start!
 
@@ -167,7 +167,7 @@ If you've followed the steps above you should see a `console.log` like this: �
 
 <Divider />
 
-Now we know the values passed in via the props get through the styled component and on to the `createMediaQueries` function we can do something with them, but before we move on let's define an array of breakpoints. You could put this array anywhere in your project but just for demo's sake I'll add it to the top of the `create-media-queries.js` file.
+Now you've confirmed the values passed in via the props get through the styled component and on to the `createMediaQueries` function you can do something with them, but before I move on let's define an array of breakpoints. You could put this array anywhere in your project but just for demo's sake I'll add it to the top of the `create-media-queries.js` file.
 
 ```diff
 // create-media-queries.js
@@ -180,7 +180,7 @@ export const createMediaQueries = (css) => {
 
 <Divider />
 
-The aim now is to create key values pairs for each property and each of the values, we also need to catch any values passed in that are not an array by using `Array.isArray()` and rather than map them just return a key value pair.
+The aim now is to create key values pairs for each property and each of the values, you'll also need to catch any values passed in that aren't an array by using `Array.isArray()` and rather than map them just return a key value pair.
 
 ```diff
 // create-media-queries.js
@@ -321,7 +321,7 @@ There's a couple of things this part of the function does so I'll talk through t
 
 <Divider />
 
-The above creates a new array and inserts a 0 at the beginning. We need the extra value at the start because we're developing this function to be mobile first. The first value from the values array is the default style and isn't part of the media query
+The above creates a new array and inserts a `0` at the beginning. You'll need the extra value at the start because you're developing this function to be _mobile first_. The first value from the values array is the default style and isn't part of a media query
 
 ```javascript
 breakpoint: breakpoint
@@ -351,9 +351,9 @@ The above creates a new object called `css` and within it are the key values pai
 
 <Divider />
 
-And lastly we remove the last item from the array since we shifted all the values up by one by inserting the `0` at the start of the array... I know... _mobile first_ is a bit confusing.
+Next you'll need to remove the last item from the array since you shifted all the values up by one by inserting the `0` at the start of the array... I know... _mobile first_ is a bit confusing.
 
-The final part of the function is where the magic happens.
+The final part of the function is where you can create formed media queries that will work when used with the _style object_ syntax
 
 ```diff
 // create-media-queries.js
@@ -430,7 +430,7 @@ Which should give you a `console.log` that looks like this: 👇
 
 <Divider />
 
-In this step I use array reduce again to loop over the `cssToBreakpoints` array and massage it in to a new shape.
+In this step you'll use array reduce again to loop over the `cssToBreakpoints` array and "massage" it into a new shape.
 
 The default `css` values are returned outside of a media query and the 2nd and 3rd set of values use the breakpoint number and return a formed media query with the correct `css` values _injected_
 
