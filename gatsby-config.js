@@ -15,7 +15,6 @@ module.exports = {
       "Enzyme",
       "React Testing Libary",
       "Node.js",
-      "Fauna",
       "FaunaDB",
       "JAMStack",
       "Component Library",
