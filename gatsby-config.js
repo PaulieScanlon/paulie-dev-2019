@@ -28,7 +28,7 @@ module.exports = {
     },
   },
   plugins: [
-    `@pauliescanlon/gatsby-mdx-embed`,
+    `gatsby-plugin-mdx-embed`,
     {
       resolve: "@pauliescanlon/gatsby-theme-terminal",
       options: {
