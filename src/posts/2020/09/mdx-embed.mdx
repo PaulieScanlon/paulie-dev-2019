@@ -1,0 +1,55 @@
+---
+title: MDX Embed
+tags: ["MDX", "Gatsby", "React", "npm"]
+date: 2020-09-02
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1599061021/paulie.dev/2020/09/mdx-embed_hcwy0p.jpg
+---
+
+Ahoy [MDX](https://mdxjs.com/) fans, I hope you're well. This post is to announce that my semi popular Open-source project [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) has been officially archived.
+
+But, good news!
+
+I'd also like to announce that [myself](https://twitter.com/PaulieScanlon), [Scott Spence](https://twitter.com/spences10) and [Rich Haines](https://twitter.com/studio_hungry) have been busy migrating it to a new home...
+
+- Docs site: [https://mdx-embed.com](https://mdx-embed.com)
+- Repo: [PaulieScanlon/mdx-embed](https://github.com/PaulieScanlon/mdx-embed)
+
+Thanks to [Griko Nibras](https://twitter.com/griko_nibras) for the snazzy new logo!
+
+The new project is a mono repp setup which is comprised of two main packages:
+
+- The core package [mdx-embed](https://www.npmjs.com/package/mdx-embed)
+- The Gatsby specific plugin [gatsby-plugin-mdx-embed](https://www.npmjs.com/package/gatsby-plugin-mdx-embed)
+
+The new goal for [MDX Embed](https://mdx-embed.com) is for it to work _anywhere_ MDX works!
+
+This actually was always the case except I didn't really call it out in the README but after two fantastic talks by [Monica Powell](https://twitter.com/waterproofheart) and [Kathleen McMahon](https://twitter.com/resource11) at the first ever [MDX Conf](https://mdxjs.com/conf/) it became clear that the name was a little misleading and in fact it could work just as well outside of a Gatsby project.
+
+This was the driving force behind the migration and we hope the new package is every bit as good as the old package.
+
+If you were using the old package `@pauliescanlon/gatsby-mdx-embed` you'll find information about how to migrate to the new package on the [docs site](https://www.mdx-embed.com/?path=/docs/gatsby-plugin--page) and if you've never heard of MDX Embed before then allow me to explain.
+
+[MDX Embed](https://mdx-embed.com) allows you to quickly and easily embed 3rd party media content such as YouTube Videos, Tweets, Instagram posts and many more directly into your MDX - **no import required!**
+
+The old package as the name suggests was primarily focussed on providing a easy way to embed 3rd part content in Gatsby projects that used MDX for content authoring. Under the hood the Gatsby plugin wrapped Gatsby's "Root Element" in the `MDXEmbedProvider`. This in itself wraps an `MDXProvider` which is where the magic happens.
+
+A typical scenario might be to write about a CodePen you've created, and then using MDX Embed, et voilà you could embed said CodePen right next to your content.
+
+```javascript
+// some-post.mdx
+
+# This is some-post.mdx and here\'s a CodePen 👇
+
+ <CodePen codePenId="PNaGbb" />
+```
+
+The new package(s) expose the same functionality but if you'd like to use the `MDXEmbedProvider` outside of a Gatsby project you only need install `mdx-embed` It's then over to you to wrap you sites/app/blog root element with it and again et voilà embedded 3rd party media content.
+
+We are working on some [examples](https://github.com/PaulieScanlon/mdx-embed/tree/main/examples) which we hope will help you understand how to use either of the packages and if you have a demo app using the package and wish to add it to our examples, please do!
+
+The old package managed to muster up an impressive 102 starts on GitHub and we'd really like your help in getting the new package but up there and with Re-Tweets of this post we hope to reach all our existing users to inform them of the change.
+
+Happy embedding!
+
+Paul, Scott and Rich
