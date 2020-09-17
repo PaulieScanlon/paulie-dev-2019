@@ -12,11 +12,9 @@ I first fell in love with MDX in 2019 and have been experimenting with it ever s
 
 > gatsby-mdx-embed is a Gatsby MDX plugin to embed Twitter, YouTube, Instagram and many more into your .mdx without import.
 
-You've probably encountered embed plugins for use with markdown before as I had but perhaps you won't have noticed one of the flaws some of these plugins have.
+Like me you've probably encountered markdown embed plugins before but it was some time before i noticed the flaws some of these plugins have, allow me to explain myself.
 
-Allow me to explain myself;
-
-When you use some of these markdown plugins you'll pop the embed code in you post like this 👇
+A markdown plugin will typically require you add a URL to your post like this one for CodePen 👇
 
 ```javascript
 # Lorem ipsum
@@ -27,53 +25,57 @@ https://codepen.io/team/codepen/pen/PNaGbb
 
 ```
 
-This will indeed execute the code and load the CodePen iframe. But... what you might not have noticed is that regardless of where this embed code is in relation to the viewport or in other words what the user is actually looking at it'll load when the page loads. This can lead to poorly performing page load speeds and lighthouse scores because all of this extra Javascript is loaded into the page regardless of whether the user can actually see the embedded content or not. Naturally this problem is exaggerated the more embeds you have on each page.
+...and this will indeed recognize `/codepen.io/...`, execute the code which in turn loads a CodePen iframe.
 
-MDX Embed differs somewhat to this approach of _"f\*\*k it, load it"_ and instead attempts to apply the _"would you mind awfully if I were to load myself please, I've become aware you can see me?"_ approach. In a manner of speaking MDX Embed is very polite / British, as am I. 😜
+However, what you might not have noticed is that regardless of where in the page this embed code lives, be it near the top where a user can see it or, [below the fold](https://www.optimizely.com/uk/optimization-glossary/below-the-fold/) where a user would have to scroll to see it, additional HTML, CSS and Javascript is loaded into the page in order for the CodePen to display correctly.
 
-This is possible thanks to MDX Embeds' use of the [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Right at the heart of MDX Embed wrapped around every component is what we call the **"General Observer"**.
+All this additional "code" can lead to poorly performing page load speeds and lighthouse scores and naturally this problem is exaggerated the more embeds you have on each page.
 
-When General Observer _reports for duty_, or in other words when a component enters the viewport then **and** only then does it attempt to load the 3rd party embed script. This is key to ensuring additional scripts are **only** loaded as and when they are required. This method can help keep page load speeds fast and lighthouse scores high.
+MDX Embed differs somewhat to this approach of _"f\*\*k it, load it"_ and instead attempts to apply the _"would you mind awfully if I were to load myself please"_ approach. In a manner of speaking MDX Embed is very polite.
 
-### Then
+This is possible thanks to MDX Embeds' use of the [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) and right at the heart of MDX Embed, wrapped around every component is what we call the **"General Observer"**
 
-Over the course of the 100 days challenge I released a few updates to the project and had some really positive initial feedback which was fab, [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) was just one of the [10 challenges](https://www.gatsbyjs.com/blog/2020-04-20-paulie-scanlons-journey-of-100-days/) I self-set myself and I was pleased at least one of these experiments was looking like it might have legs. On that note Gatsby's own [Laurie Barth](https://twitter.com/laurieontech) was actually one of the projects earliest adopters... Thanks Laurie 💜 your support back then really kept me going! Over time however my interest in the project waned for one main reason.
+When General Observer _reports for duty_, or in other words when a component enters the viewport then **and** only then does it attempt to load the 3rd party embed script. This is key to ensuring additional "code" is **only** loaded as and when required. This method can help keep page load speeds fast and lighthouse scores high.
 
-When you distribute a Gatsby plugin via npm all of your "dist" code must live at the root of the project because Gatsby plugins ignore the `main` key in `package.json`, not so bad if your project is Javascript but with a TypeScript project the files usually exported and stored in a `dist` or `lib` directory have to live at the root of the project. This makes it quite an unpleasant project to work on / contribute to.
+### 🕓 Then
 
-That said [Scott Spence](https://twitter.com/spences10) has been influential in keeping me upbeat and keeping the project alive and has contributed a number of times and generally just been a positive influence on both myself and the project. Thanks Scott! 💜
+Over the course of the 100 days challenge I released a few updates to the project and had some really positive initial feedback which was fab, [gatsby-mdx-embed](https://github.com/PaulieScanlon/gatsby-mdx-embed) was just one of the [10 challenges](https://www.gatsbyjs.com/blog/2020-04-20-paulie-scanlons-journey-of-100-days/) I self-set myself and I was pleased at least one of these experiments was looking like it might have legs. On that note Gatsby's own [Laurie Barth](https://twitter.com/laurieontech) was actually one of the projects earliest adopters... Thanks Laurie 💜 your support is very much appreciated!
 
-### Now
+Over time however my interest in the project waned and for one main reason.
 
-As an MDX enthusiast I was naturally pretty excited by the announcement of the first ever [MDX Conf](https://mdxjs.com/conf/) organised by [Chris Biscardi](https://twitter.com/chrisbiscardi), and so when I tuned in I couldn't believe what I was seeing, both [Monica Powell](https://twitter.com/waterproofheart) and [Kathleen McMahon](https://twitter.com/resource11) were talking about / using `gatsby-mdx-embed`... I then ruined it by making a joke meant for Scott but forgot it was a live stream. apologies again Kathleen!
+When you distribute a Gatsby plugin via npm all of your "dist" code must live at the root of the project because Gatsby plugins ignore the `main` key in `package.json`, not so bad if your project is Javascript but MDX Embed is TypeScript and all the transpiled JavaScript files that in any other npm package are usually exported and stored in a `dist` or `lib` directory have to live at the root of the project. This made it quite an unpleasant project to work on and contribute to.
 
-... anyway 😬
+That said [Scott Spence](https://twitter.com/spences10) has been instrumental in keeping me upbeat and keeping the project alive and has contributed a number of times and generally just been a positive influence on both myself and the project. Thanks Scott! 💜
 
-Following on from MDX Conf Monica tweeted the following:
+### 🕘 Now
+
+As an MDX enthusiast I was naturally pretty excited by the announcement of the first ever [MDX Conf](https://mdxjs.com/conf/) organized by [Chris Biscardi](https://twitter.com/chrisbiscardi), and when I tuned in I couldn't believe what I was seeing, both [Monica Powell](https://twitter.com/waterproofheart) and [Kathleen McMahon](https://twitter.com/resource11) were talking about and using `gatsby-mdx-embed`... I then ruined it by making a joke meant for Scott but forgot it was a live stream, apologies again Kathleen! 😬
+
+... anyway, following on from MDX Conf Monica tweeted the following:
 
 > With gatsby-mdx-embed you can embed all kinds things in MDX like Codepens, CodeSandboxes, tweets and even Egghead lessons! Don't let the name fool you...it can be used outside of Gatsby - @waterproofheart
 
-Monica is absolutely right, `gatsby-mdx-embed` can and always has been able to work outside of Gatsby I just hadn't done a very good job of calling it out in the README. From here both [Scott Spence](https://twitter.com/spences10) and [Rich Haines](https://twitter.com/studio_hungry) have offered up "friendly" encouragement for me to do something about that.
+Monica is absolutely right, `gatsby-mdx-embed` can and always has been able to work outside of Gatsby, I just hadn't done a very good job of calling it out in the README. From here both [Scott Spence](https://twitter.com/spences10) and [Rich Haines](https://twitter.com/studio_hungry) offered up frequent but friendly encouragement for me to do something about that.
 
-Rich has been doing quite a bit of work in and around the Next eco-system and has played a prominent role in "encouraging" MDX Embeds' usage outside of Gatsby. Thanks Rich 💜
+Rich has been doing quite a bit of work in and around the Next eco-system and has played a prominent role in encouraging MDX Embeds' usage outside of Gatsby. Thanks Rich 💜
 
 I'm really pleased to now have both Rich and Scott as part of the core contributors team, and if either of you are reading this. Thank you again!
 
-So the decision was made. MDX Embed needs to move, and as of Friday 28th of August 2020 I archived `gatsby-mdx-embed`
+So the decision was made. MDX Embed needs to move, and as of Friday 28th of August 2020 I archived `gatsby-mdx-embed` and set about creating an new monorepo which I hope will be much for developer friendly and pleasant to maintain and contribute to.
 
-### Back with a bang
+### 💥 Back with a bang
 
-I'm pleased to introduce the new home of MDX Embed. [https://mdx-embed.com](https://mdx-embed.com) complete with a snazzy new logo designed by [Griko Nibras](https://twitter.com/griko_nibras)
+I'm now pleased to introduce the new home of MDX Embed: [https://mdx-embed.com](https://mdx-embed.com) complete with a snazzy new logo designed by [Griko Nibras](https://twitter.com/griko_nibras)
 
-The new docs site which uses the latest version of [Storybook](https://storybook.js.org/) is home to documentation on how to use the components + help snippets to aid users in finding embed codes and a few examples of where and how MDX Embed can be used in other projects /frameworks.
+The new docs site which uses the latest version of [Storybook](https://storybook.js.org/) is home to documentation on how to use the components plus help snippets to aid users in finding embed codes from various providers and a few examples of where and how MDX Embed can be used in other projects and frameworks.
 
-### Fear ye not
+### 🙀 Fear ye not
 
-Gatsby plugin support remains and is now it's own package called `gatsby-plugin-mdx-embed` **and** for all other cases you can use the core package: `mdx-embed`
+Gatsby plugin support remains but is now it's own package called `gatsby-plugin-mdx-embed` which is really just a wrapper around Gatsbys' `wrapRootElement` and has a dependency on the core package `mdx-embed`
 
-This shift is more than just names and represents a new direction for MDX Embed. Our ethos if you like is that MDX Embed _should_ work anywhere MDX works... and why not ay, they are a solid paring and we hope MDX Embed will become the defacto method for Embedding 3rd party media content in MDX - no import required!
+This shift is more than just names for packages and represents a new direction for MDX Embed. Our ethos if you like is that MDX Embed _should_ work anywhere MDX works... and why not ay, they are a solid paring and we hope MDX Embed will become the defacto method for Embedding 3rd party media content in MDX - no import required!
 
-We're working on deploying example "sites" for various incarnations of MDX Embed but for now example "sites" can be found in the repo under [examples](https://github.com/PaulieScanlon/mdx-embed/tree/main/examples)
+We're actively working on deploying examples to illustrate the various MDX Embed consumption methods but for now these examples can be found in the repo under [examples](https://github.com/PaulieScanlon/mdx-embed/tree/main/examples)
 
 We currently have examples for the following:
 
@@ -82,25 +84,25 @@ We currently have examples for the following:
 - Next MDX Deck
 - Next
 
-### We're not _quite_ stable
+### ⚖️ We're not _quite_ stable
 
 At the time of writing this post we've not quite reached a stable release, and for good reason... tests!
 
-It's here where we're calling on the community for help and we've been really busy preparing the repo, creating a [CODE_OF_CONDUCT](https://github.com/PaulieScanlon/mdx-embed/blob/main/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/PaulieScanlon/mdx-embed/blob/main/CONTRIBUTING.md) document + `eslint` rules that are driving me crazy all so we can take part in this years [Hacktoberfest](https://hacktoberfest.digitalocean.com/)
+It's here where we're calling on the community for help and we've been really busy preparing the repo, creating a [CODE_OF_CONDUCT](https://github.com/PaulieScanlon/mdx-embed/blob/main/CODE_OF_CONDUCT.md) and [CONTRIBUTING](https://github.com/PaulieScanlon/mdx-embed/blob/main/CONTRIBUTING.md) document in preparation for this years [Hacktoberfest](https://hacktoberfest.digitalocean.com/)
 
-If you're interested in contributing to the project we have an ongoing [Umbrella Issue](https://github.com/PaulieScanlon/mdx-embed/issues/71) which _should_ be everything you need to get started.
+Since re-launching the package we've already welcomed our first contributor; [Gabi](https://twitter.com/nohinder) who did a splendid job enhancing the Twitch component and was an absolute joy to collaborate with, so if you're interested in contributing to the project we have an ongoing [Umbrella Issue](https://github.com/PaulieScanlon/mdx-embed/issues/71) which _should_ be everything you need to get started, and have a browse of any open issues labeled **Hacktoberfest**.
 
 The current plan is to ask for help in creating both Unit Tests and Integration Tests which once complete should bring us to a stable release of `1.0.0`
 
 Oh, and if you do happen to stop by the [repo](https://github.com/PaulieScanlon/mdx-embed) a cheeky GitHub star ⭐ would be very much appreciated!
 
-### The future
+### 🔮 The future
 
-The big picture plans for MDX Embed are for the larger blogging platforms [Medium](https://medium.com/) or [dev.to](https://dev.to/) et al to adopt the project affording users/writers the ability to embed _all the things_ but in a way that won't affect site performance as mentioned above. If anyone reading this has any good ins with either of those sites we'd love to get the conversations going.
+The bigger picture plans for MDX Embed are for the larger blogging platforms [Medium](https://medium.com/) or [dev.to](https://dev.to/) et al to adopt the project affording authors the ability to embed _all the things_ but in a way that won't affect site performance as mentioned above. If anyone reading this has any good ins with either of those sites we'd love to get the conversations going.
 
 Perhaps one day the Gatsby blog will also adopt MDX Embed making it possible to write about a piece of code and then have an embedded CodeSandbox right there in the post.
 
-...lastly, and this is _hot off the press_, i've been discussing with [Dominic Nguyen](https://twitter.com/domyen) at [Storybook](https://twitter.com/storybookjs) regarding an official Storybook [addon-on](https://storybook.js.org/addons/) so stay tuned for that!
+...lastly, and this is _hot off the press_, i've had discussions with [Dominic Nguyen](https://twitter.com/domyen) at [Storybook](https://twitter.com/storybookjs) regarding an official Storybook [addon-on](https://storybook.js.org/addons/) so stay tuned for that!
 
 ...and that's it for now folks!
 
