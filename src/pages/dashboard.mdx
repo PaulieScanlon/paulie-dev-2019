@@ -7,153 +7,136 @@ import { PostsByDayChart } from "../components/PostsByDayChart"
 import { WordsByMonthChart } from "../components/WordsByMonthChart"
 import { DonutChart } from "../components/DonutChart"
 
-<Box>
+# dashboard
 
-## statistics
-
-<Flex sx={{ flexWrap: "wrap" }}>
-
-<Box
-  sx={{
-    pr: 1,
-    width: ["100%", "50%"],
-  }}
->
-  <DonutChart
-    title="Average word count"
-    dimension="words"
-    config={{ year: 0, color: "primary" }}
-  />
-  <Divider />
-</Box>
-
-<Box
-  sx={{
-    pl: 1,
-    width: ["100%", "50%"],
-  }}
->
-  <DonutChart
-    title="Average word count"
-    dimension="words"
-    config={{ year: -1, color: "secondary" }}
-  />
-  <Divider />
-</Box>
-
-</Flex>   
-</Box>
+Here are the totals, counts and other statistics about the posts and tags on my blog
 
 <Divider />
 
-<Box>
+## word count statistics
+
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+
+<DonutChart
+  title="Average word count"
+  dimension="words"
+  config={{ year: 0, color: "primary" }}
+/>
+
+<DonutChart
+  title="Average word count"
+  dimension="words"
+  config={{ year: -1, color: "secondary" }}
+/>
+
+</Grid>
+
+<Divider />
 
 ## posts by day
 
-<Flex sx={{ flexWrap: "wrap" }}>
-  <Box
-    sx={{
-      pr: 1,
-      width: "50%",
-    }}
-  >
-    <PostsByDayChart
-      config={{
-        year: 0,
-        color: "primary",
-      }}
-    />
-  </Box>
-  <Box
-    sx={{
-      pl: 1,
-      width: "50%",
-    }}
-  >
-    <PostsByDayChart
-      config={{
-        year: -1,
-        color: "secondary",
-      }}
-    />
-  </Box>
-</Flex>
-</Box>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
 
-<Box>
+<PostsByDayChart
+  config={{
+    year: 0,
+    color: "primary",
+  }}
+/>
+
+<PostsByDayChart
+  config={{
+    year: -1,
+    color: "secondary",
+  }}
+/>
+
+</Grid>
 
 <Divider />
 
 ## posts by month
 
-<Divider />
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
 
-<Flex 
-  sx={{ flexWrap: 'wrap' }}
->
-<Box
-  sx={{ 
-    pr: [0, 1], 
-    width: ['100%', '50%']
-  }}
->
 <PostsByMonthChart
   config={{
     year: 0,
     color: "primary",
   }}
 />
-<Divider />
-</Box>
-<Box
-  sx={{ 
-    pl: [0, 1],
-    width: ['100%', '50%'] 
-  }}
->
+
 <PostsByMonthChart
   config={{
     year: -1,
     color: "secondary",
   }}
 />
-<Divider />
-</Box>
-</Flex>
-</Box>
+
+</Grid>
 
 <Divider />
-
-<Box>
 
 ## words by month
 
-<Flex sx={{ flexWrap: "wrap" }}>
-  <Box
-    sx={{
-      pr: 1,
-      width: "50%",
-    }}
-  >
-    <WordsByMonthChart
-      config={{
-        year: 0,
-        color: "primary",
-      }}
-    />
-  </Box>
-  <Box
-    sx={{
-      pl: 1,  
-      width: "50%",
-    }}
-  >
-    <WordsByMonthChart
-      config={{
-        year: -1,
-        color: "secondary",
-      }}
-    />
-  </Box>
-</Flex>
-</Box>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+
+<WordsByMonthChart
+  config={{
+    year: 0,
+    color: "primary",
+  }}
+/>
+
+<WordsByMonthChart
+  config={{
+    year: -1,
+    color: "secondary",
+  }}
+/>
+
+</Grid>
+
+<Divider />
+
+## tags by usage
+
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+
+<SourceTags>
+  {(source) => (
+    <Grid>
+      {source
+        .sort((a, b) => b.count - a.count)
+        .splice(0, 5)
+        .map((tag, index) => {
+          const { name, count } = tag
+          return (
+            <Flex key={index} sx={{ alignItems: "center" }}>
+              <Text sx={{ color: "primary", fontWeight: "bold", mr: 1 }}>{`${
+                index + 1
+              }:`}</Text>
+              <Text sx={{ mr: 2 }}>{name}</Text>
+              <Flex
+                sx={{
+                  alignItems: "center",
+                  backgroundColor: "surface",
+                  borderRadius: "50%",
+                  color: "success",
+                  fontWeight: "bold",
+                  fontSize: 0,
+                  justifyContent: "center",
+                  width: "28px",
+                  height: "28px",
+                }}
+              >
+                {`x${count}`}
+              </Flex>
+            </Flex>
+          )
+        })}
+    </Grid>
+  )}
+</SourceTags>
+
+</Grid>
