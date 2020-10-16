@@ -1,0 +1,379 @@
+---
+title: Storybook - The missing docs
+tags: ["Storybook", "JavaScript", "React"]
+date: 2020-10-18
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1598260412/paulie.dev/2020/08/gatsby-seo-component_htjrpq.jpg
+---
+
+Hiya, if you like [Storybook](https://storybook.js.org/) you've come to the right place. I loooooooove Storybook!! It is in my opinion the only way to develop a UI. but...
+
+Since the `v6.0.0` release I noticed one or two changes to how Storybook recommend writing stories.
+
+I recently discussed this with Michael Shilman in a [GitHub issue](https://github.com/storybookjs/storybook/issues/12752) and wanted to follow up with some alternative approaches to that shown in the docs.
+
+This isn't to say my suggestions are better but there are a few things that I feel it's important to understand before using the Storybook recommended approach verbatim.
+
+This is mainly because you might not need to use the recommended approach and sometimes a more simplified approach to writing code is actually more beneficial.
+
+I know as JavaScript developers we have a habit of using complicated solutions to solve really simple problems... and I appreciate that without overly complicated code examples we can't punishingly set technical tests for new hires, but in Storybook world there's an opportunity to cut through the BS and attempt to provide meaningful and actually helpful examples of the code we write.
+
+Personally I think this in itself is a skill, but then again I always have to google [.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) so maybe don't listen to me!
+
+On that note, if anyone on the Storybook team is reading this, I would like to make it abundantly clear none of the following are criticisms... I love the project and you're all super brill brills and lovely to communicate / collaborate with... I love you... marry me.
+
+Ok satire section over, lets get to the good stuff!
+
+I'm a React developer so most of what I'll be discussing relates to Storybook React but perhaps some of the methods will be framework agnostic. 🤷‍♂️
+
+I'll start with the basics.
+
+## 1. There are x2 types of `.stories`
+
+- CSF = [Component Story Format](https://storybook.js.org/docs/react/api/csf) 🔥
+- MDX = [Markdown on steroids](https://storybook.js.org/docs/react/api/mdx) 💪
+
+The CSF is for the most part the most common, but there are some advantages to using MDX.
+
+### CSF 🔥
+
+I typically use CSF to document components I build as part of components libraries which are used across a number of applications and I go to great lengths to document the props and their usage examples to aid developers implementing the library in using and composing the components. I will also use this format for components developed for use in a single project/app for the same reasons. I'm a contractor so once my work is done I'm outta there 🏃‍♂️ leaving permanent members of the team to maintain what I create.
+
+### MDX 💪
+
+MDX stories are good for long form documentation and users familiar with markdown may well enjoy the ability to write and display components in the same file. I find this format less useful if the component is part of a component library. FYI
+
+That said I have used the MDX approach in [MDX Embed](http://www.mdx-embed.com/) which is a kind of component library but because the entire project is for use with MDX it made sense to use the MDX format. Prop tables can of course be used to document props in this format too.
+
+## 2. Where to put your `.stories`.
+
+If you've used the `npx sb init` install you'll notice your `.stories` are placed in a _stories_ dir somewhere on the root of your project. I suspect this is the default because the Storybook team don't wish to be opinionated about where you put your `.stories`.
+
+I will be opinionated about this and state you should co-locate your `.stories` with your components. For the simple fact that...
+
+<Divider />
+
+> Files you edit together, should live together.
+
+<Divider />
+
+On any typical project this will be my directory structure and it's what I'll be working with in this post. I should also point out any Storybook specific config will be in reference to `@storybook/react": "^6.0.0`
+
+<Divider />
+
+```sh
+|-- src
+    |-- components
+      |--mr-button
+        |-- mr-button.js | .tsx
+        |-- mr-button.stories.js | .mdx | .tsx
+```
+
+<Divider />
+
+Now that your `.stories` are co-located with your components you'll need to let Storybook know what the file extensions are and where to find them. The below will find all files with the `.stories.js`, `.stories.mdx` or `.stories.tsx` file extension in any sub-directory of `src/components`.
+
+_Your exact config will differ if your directory structure is different from the above_
+
+```javascript
+// .storybook/main.js
+
+module.exports = {
+  stories: ["../src/components/**/*.stories.@(js|mdx|tsx)"],
+}
+```
+
+The next slightly confusing part of the Storybook setup is the difference between Canvas and Docs.
+
+- "canvas" = A single page to display a single story and the addons panel
+- "docs" = A single page to display multiple stories, the prop table and no addons panel
+
+In this post we'll mostly be focussing on the "docs" tab and for this we'll need to ensure we've installed the correct addons and configured Storybook correctly.
+
+First install the required addons
+
+```sh
+npm install @storybook/addon-actions @storybook/addon-docs --save -dev
+
+```
+
+Configure Storybook to use the above addons.
+_On this note. The Storybook default install `npx sb init` comes with `@storybook/addon-links` you can remove this if you like, as we won't be using it._
+
+```diff
+// .storybook/main.js
+
+module.exports = {
+  stories: ["../src/components/**/*.stories.@(js|mdx|tsx)"],
++  addons: ['@storybook/addon-actions', '@storybook/addon-docs'],
+}
+
+```
+
+I'll circle back to `addon-actions` later. We will be using it so don't worry about it for the moment.
+
+### TypeScript setup (check the code diff, is check:false needed)
+
+If you're a TypeScript user there's also a little bit of config required. Storybook does work with `.tsx` files out of the box but to generate prop tables from your `interface` declarations you'll need to install and then add `react-docgen-typescript` to the Storybook config.
+
+```sh
+npm install react-docgen-typescript --save -dev
+```
+
+<Divider />
+
+```diff
+// .storybook/main.js
+
+module.exports = {
+  stories: ["../src/components/**/*.stories.@(js|mdx|tsx)"],
+  addons: ['@storybook/addon-actions', '@storybook/addon-docs'],
++   typescript: {
++    check: false,
++    checkOptions: {},
++    reactDocgen: 'react-docgen-typescript',
++    reactDocgenTypescriptOptions: {
++      shouldExtractLiteralValuesFromEnum: true,
++      shouldExtractValuesFromUnion: true,
++      propFilter: (prop) =>
++        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true
++    }
++  }
+}
+
+```
+
+The full set of `typescript` options can be found [here](https://www.npmjs.com/package/react-docgen-typescript#options) but the main one to explain is the `propFilter`
+
+This might make more sense if I show you an interface for a `<button />` component
+
+```javascript
+// components/mrs-button/mrs-button.tsx
+import { HTMLAttributes } from "react"
+
+interface MrsButtonProps extends HTMLAttributes<HTMLButtonElement> {}
+```
+
+You can see from the above `MrsButtonProps` extends `HTMLAttributes<HTMLButtonElement>` and as you'll probably know HTML `<button />` elements have their own set of "props" or rather, [attributes](https://www.w3schools.com/tags/tag_button.asp). We don't want `react-docgen-typescript` to grab all of the default HTML attributes and display them in Storybooks' prop table so, we can filter them out by determining if they come from `node_modules`... because when you install React as a node module that's where `HTMLAttributes` come from.
+
+Now we have Storybook configured we can start to write stories, but before that we'll need a component.
+
+Here's a snippet for some example components that I've _amusingly_ named `<MrButton/>` and `<MrsButton />`
+
+## MrButton = Javascript + propTypes
+
+```javascript
+// components/mr-button/mr-button.js
+
+import React from "react"
+import PropTypes from "prop-types"
+
+export const MrButton = ({ children, isBoogyTime, ...props }) => (
+  <button {...props}>
+    {isBoogyTime ? <span role="img">🕺 </span> : null}
+    {children}
+  </button>
+)
+
+MrButton.propTypes = {
+  /** Displays man dancing emoji */
+  isBoogyTime: PropTypes.bool,
+}
+
+MrButton.defaultProps = {
+  isBoogyTime: false,
+}
+```
+
+## MrsButton = TypeScript + interface
+
+```javascript
+// components/mrs-button/mrs-button.tsx
+
+import React, { FunctionComponent, HTMLAttributes } from "react"
+
+interface MrsButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  /** Displays man dancing emoji */
+  isBoogyTime?: boolean;
+}
+
+export const MrsButton: FunctionComponent<MrsButtonProps> = ({
+  children,
+  isBoogyTime = false,
+  ...props
+}) => (
+  <button {...props}>
+    {isBoogyTime ? <span role="img">🕺 </span> : null}
+    {children}
+  </button>
+)
+```
+
+Ok, brills, now we have a component we can begin to document it's usage. The `.stories` snippets below are only for `<MrButton />` which is `.js` but it would be the same for `<MrsButton />` which is `.tsx`
+
+```javascript
+// components/mr-button/mr-button.stories.js
+
+import React from "react"
+import { MrButton } from "./mr-button"
+
+export default {
+  title: "components/MrButton",
+  parameters: {
+    component: MrButton,
+    componentSubtitle: "The MrButton component is of html type button",
+  },
+}
+
+export const Usage = () => <MrButton>Mr Button</MrButton>
+```
+
+This is how I like to start when documenting any component, and with a bit of luck the component in question won't require any props making the usage example easy to read, not to mention _easier_ to implement, naturally this changes on a case by case basis.
+
+Let's walk through this from top to bottom and i'll explain a few things along the way.
+
+### export default {}
+
+- This is as you'd expect the default object to export, Storybook knows what to do with this but we can give it a few object keys which might make for a better story
+
+### title:
+
+- This is the title of the story as seen in Storybooks' sidebar navigation, you can use slash separated values in this string and Storybook will turn those into a multi-level navigation items, I think this is really cool by the way!
+
+### parameters:{...}
+
+- The `component` key is used by Storybook to generate the prop table for the component you name here
+- The `componentSubtitle` is the text that will appear under the component heading when you're on the "docs" tab.
+
+### export const Usage = () => {}
+
+- You could name this first story anything you want, my preference is to call it **Usage** because it's usually an example of how to use the component in question.
+
+_You might have noticed that I've not used the `Template.bind({})` method as shown in the Storybook docs... don't worry about that at the moment... I just want to demonstrate that you don't have to use it if you don't want to, and you shouldn't use it if you're not clear on what it does._
+
+The above is a very simple example but I wanted to introduce the `parameters` object which isn't currently fully documented.
+
+## Documenting props
+
+This isn't by any means the only way to use Storybook but my preference is to name each story in accordance with the `prop` you're attempting to document.
+
+For example 👇
+
+```javascript
+// components/mr-button/mr-button.stories.js
+
+...
+export const IsBoogyTime = () => (
+  <MrButton isBoogyTime={true}>Click me</MrButton>
+);
+```
+
+... however 🤔
+
+Storybook by default will take the story name e.g `IsBoogyTime` and convert it using Lodash's [startCase](https://lodash.com/docs/#startCase), which results in `Is Boogy Time` being used in the sidebar navigation. On that note Storybook also recommend you start export names with a capital letter.
+
+That cool but, in this case the prop we're documenting is named `isBoogyTime` and it might be kinda cool to ensure the sidebar navigation item correctly represents the prop named
+
+If you're that way inclined you can use `storyName` to manually determine what the sidebar navigation items are
+
+For example 👇
+
+```diff
+// components/mr-button/mr-button.stories.js
+
+...
+export const IsBoogyTime = () => (
+  <MrButton isBoogyTime={true}>Click me</MrButton>
+);
++ IsBoogyTime.storyName = 'isBoogyTime'
+
+```
+
+## Documenting props continued
+
+As explained above Storybook has this mysterious undocumented `parameters` object but what you'll see in the docs is
+
+```javascript
+parameters: {...}
+```
+
+I hope you'll find this next bit helpful.
+
+```diff
+// components/mr-button/mr-button.stories.js
+
+export const IsBoogyTime = () => (
+  <MrButton isBoogyTime={true}>Click me</MrButton>
+);
+
+IsBoogyTime.storyName = 'isBoogyTime'
+
++ IsBoogyTime.parameters = {
++  docs: {
++    description: {
++      story: 'The `isBoogyTime` prop displays a man dancing emoji'
++    }
++  }
+};
+```
+
+### docs:{...}
+
+This is object has special powers and is what's used to pass component documentation on to the "docs" page.
+
+### description.story
+
+It's here where you can document your individual stories, it's a bit like the `componentSubtitle` outlined above and will appear under the title of each of your `.stories`. I like to use this to provide further information about the prop or prop usage.
+
+## Documenting props Show code
+
+The reason I prefer to name my `.stories` using the `storyName` and the reason I like to use `description.story` is so that everything works in harmony when a user clicks the "Show code" button in the bottom right of the Storybook preview panel.
+
+Here they'll see a code snippet of the component and the props that drive the rendered output seen in the preview panel.
+
+For example 👇
+
+<!-- prettier-ignore -->
+```javascript
+() => <MrButton isBoogyTime={true}>Click me</MrButton>
+```
+
+This for me completes the circle, and fundamentally **is** the whole point in writing documentation.
+
+Storybook is so good at providing ways for developers to document and display component usage but ultimately it falls on whoever is writing the `.stories` to ensure the navigation name, story name, story description and code snippet align.
+
+It's no small ask either. If you're developing something, anything, then you already know how it works and it is hard to pop a different hat on and think about what it might be like if you were looking at these docs for the first time...
+
+a good litmus tests for this I find is to chin 7 or 8 pints of Ale and see if I can build a UI using only the code i've copied from the "Show code" panel... to note, I'm not recommending this approach but it has served me well over the last 4 or 5 years I've been developing component libraries using Storybook 🕺
+
+## Beyond the basics
+
+There are of course many scenarios where your `.stories` primary focus isn't to document the components usage, instead you may like to add your brands preferred method of using said component. You can also use Storybook as a UI style guide to provide useful information to the design team before they spend hours and hours creating many largely pointless "mockups" to show non technical stake holders what a UI _could_ consist of.
+
+It's here where I like to use `decorators`.
+
+Decorators can be used to render things but amazingly keep the "Show code" code snippet super clean and developer friendly. `decorators` appear to render components in a way that to non technical people makes sense, but provide a way for technical people to skip over what they're seeing and understand how to use what's underneath.
+
+The TLDR of decorators is you can show a component rendered in a certain way and still provide a code snippet that is representative of the underlying components' props
+
+... i'll explain myself.
+
+A lot of designers, at least the ones i've worked with don't really understand what a browser is. They'll regularly refer to "desktop", "tablet" and "mobile" as different things which, as a Front End developer you'll know hasn't really been a thing for nearly a decade but... what they are referring to is browser screen sizes that are of `N` width where `N` could be any number between `0` and `whatever-the-largest-monitor-size-is` which can massively impact how a "view" or component is rendered.
+
+My preferred approach to this is, make as many things as you can "fluid", and what I mean by this is, make every component where possible fill `100%` of the thing that it's in...
+
+The thing that it's in of course will change on a case by case basis but... this is the job of a "masonry" components that manage the "layout" and aren't _really_ components, or at least they aren't components you can _see_, they act as "containers" that manage the things within them.
+
+In the context of a decorator this may manifest itself if you writing a story to demonstrate how two buttons can be displayed side by side.
+
+At the component level this isn't the job of the button. The button shouldn't know or care what's next to it and shouldn't know or care about the space it needs to add in order for it to display correclty when placed next to another button.
+
+There are a number of ways to achieve this, but if you don't have to support IE, i'd recommend using `display: "grid"`
+
+default decorators
+default args
+
+story decorators
+story args
+
+template.bind
