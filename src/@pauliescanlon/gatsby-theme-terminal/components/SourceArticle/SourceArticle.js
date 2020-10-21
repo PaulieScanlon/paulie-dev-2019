@@ -139,7 +139,7 @@ export const SourceArticle = ({
       <Text>
         If you've enjoyed this post I'd love to hear from you:{" "}
         <Link href="https://twitter.com/PaulieScanlon" target="_blank">
-          @pauliescanlon
+          @PaulieScanlon
         </Link>
       </Text>
       <Divider />
