@@ -1,16 +1,16 @@
 ---
-title: Storybook - Alternative docs - Work In Progress
+title: Storybook - An alternative approach
 tags: ["Storybook", "JavaScript", "React"]
 date: 2020-10-18
 author: Paul Scanlon
-featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1603273280/paulie.dev/placeholder_ekfnq2.jpg
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1603822721/paulie.dev/2020/10/storybook-an-alternative-approach_fjcass.jpg
 ---
 
-Hiya, if you like [Storybook](https://storybook.js.org/) you've come to the right place. I loooooooove Storybook!! It is in my opinion the ONLY way to develop a UI. but...
+Hiya 👋, if you like [Storybook](https://storybook.js.org/) you've come to the right place. I loooooooove Storybook!! It is in my opinion the ONLY way to develop a UI, but...
 
 Since the `v6.0.0` release I noticed one or two changes to how Storybook recommend writing `.stories`
 
-I recently discussed this with Michael Shilman in a [GitHub issue](https://github.com/storybookjs/storybook/issues/12752) and wanted to follow up with some alternative approaches to that shown in the docs.
+I recently discussed this with Michael Shilman in a [GitHub issue](https://github.com/storybookjs/storybook/issues/12752) and wanted to follow up with some _alternative approaches_ to that shown in the docs.
 
 This isn't to say my suggestions are better but there are a few things that I feel it's important to understand before using the Storybook recommended approach verbatim.
 
@@ -20,7 +20,11 @@ I know as JavaScript developers we have a habit of using complicated solutions t
 
 Personally I think this in itself is a skill, but then again I always have to google [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) so maybe don't listen to me!
 
-On that note, if anyone on the Storybook team is reading this, I would like to make it abundantly clear none of the following are criticisms... I love the project and you're all super brill brills and lovely to communicate / collaborate with!
+On that note, if anyone on the Storybook team is reading this, I would like to make it abundantly clear none of the following should be considered criticisms... I love the project and you are all super brill brills and lovely to communicate and collaborate with!
+
+Phew, panic over!
+
+## Start here
 
 I'm a React developer so most of what I'll be discussing relates to Storybook React but perhaps some of the methods will be framework agnostic. 🤷‍♂️
 
@@ -31,7 +35,7 @@ I'll start with the basics.
 - CSF = [Component Story Format](https://storybook.js.org/docs/react/api/csf) 🔥
 - MDX = [Markdown on steroids](https://storybook.js.org/docs/react/api/mdx) 💪
 
-The CSF is for the most part the most common, but there are some advantages to using MDX.
+The CSF is, for the most part the most common but there are some advantages to using MDX.
 
 ### CSF 🔥
 
@@ -109,7 +113,7 @@ module.exports = {
 
 I'll circle back to `addon-actions` later. We will be using it so don't worry about it for the moment.
 
-### TypeScript setup (check the code diff, is check:false needed)
+### TypeScript setup
 
 If you're a TypeScript user there's also a little bit of config required. Storybook does work with `.tsx` files out of the box but to generate prop tables from your `interface` declarations you'll need to install and then add `react-docgen-typescript` to the Storybook config.
 
@@ -126,8 +130,6 @@ module.exports = {
   stories: ["../src/components/**/*.stories.@(js|mdx|tsx)"],
   addons: ['@storybook/addon-actions', '@storybook/addon-docs'],
 +   typescript: {
-+    check: false,
-+    checkOptions: {},
 +    reactDocgen: 'react-docgen-typescript',
 +    reactDocgenTypescriptOptions: {
 +      shouldExtractLiteralValuesFromEnum: true,
@@ -146,6 +148,7 @@ This might make more sense if I show you an interface for a `<button />` compone
 
 ```javascript
 // components/mrs-button/mrs-button.tsx
+
 import { HTMLAttributes } from "react"
 
 interface MrsButtonProps extends HTMLAttributes<HTMLButtonElement> {}
@@ -166,7 +169,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 export const MrButton = ({ children, isBoogyTime, ...props }) => (
-  <button {...props}>
+  <button {...props} style={{ width: "100%" }}>
     {isBoogyTime ? <span role="img">🕺 </span> : null}
     {children}
   </button>
@@ -201,7 +204,7 @@ export const MrsButton: FunctionComponent<MrsButtonProps> = ({
   isBoogyTime = false,
   ...props
 }) => (
-  <button {...props}>
+  <button {...props} style={{ width: "100%" }}>
     {isBoogyTime ? <span role="img">🕺 </span> : null}
     {children}
   </button>
@@ -231,7 +234,7 @@ export const Usage = () => <MrButton>Mr Button</MrButton>
 
 <Divider />
 
-This is how I like to start when documenting any component, and with a bit of luck the component in question won't require any props making the usage example easy to read, not to mention _easier_ to implement, naturally this changes on a case by case basis.
+This is how I like to start when documenting any component, and with a bit of luck the component in question won't require any props making the "Show code" snippet easy to read, not to mention _easier_ to implement, naturally this changes on a case by case basis.
 
 Let's walk through this from top to bottom and i'll explain a few things along the way.
 
@@ -250,7 +253,7 @@ Let's walk through this from top to bottom and i'll explain a few things along t
 
 ### export const Usage = () => {}
 
-- You could name this first story anything you want, my preference is to call it **Usage** because it's usually an example of how to use the component in question.
+- You could name this first story anything you want, my preference is to call it **Usage** because it's usually an example of how to use the component i'm documenting.
 
 _You might have noticed that I've not used the `Template.bind({})` method as shown in the Storybook docs... don't worry about that at the moment... I just want to demonstrate that you don't have to use it if you don't want to, and you shouldn't use it if you're not clear on what it does._
 
@@ -273,7 +276,7 @@ export const IsBoogyTime = () => (
 
 ... however 🤔
 
-Storybook by default will take the cont name e.g `IsBoogyTime` and convert it using Lodash's [startCase](https://lodash.com/docs/#startCase), which results in `Is Boogy Time` being used in the sidebar navigation. _On that note Storybook also recommend you start const names with a capital letter._
+Storybook by default will take the const name e.g `IsBoogyTime` and convert it using Lodash's [startCase](https://lodash.com/docs/#startCase), which results in `Is Boogy Time` being used in the sidebar navigation. _On that note Storybook also recommend you start const names with a capital letter._
 
 That's cool but, in this case the prop we're documenting is named `isBoogyTime` and it might be kinda cool to ensure the sidebar navigation item correctly represents the prop name
 
@@ -355,33 +358,46 @@ Storybook is so good at providing ways for developers to document and display co
 
 It's no small ask either. If you're developing something, anything, then you already know how it works and it is hard to pop a different hat on and think about what it might be like if you were looking at these docs for the first time...
 
-a good litmus test for this I find is to chin 7 or 8 pints of Ale and see if I can build a UI using only the code i've copied from the "Show code" panel... to note, I'm not recommending this approach but it has served me well over the last 4 or 5 years I've been developing component libraries using Storybook 🕺
+I find a good litmus test for this is to down 7 or 8 pints of Ale and see if I can build a UI using only the code i've copied from the "Show code" panel... to note, I'm not recommending this approach but it has served me well over the years 🕺
 
 ## Beyond the basics
 
-There are of course many scenarios where your `.stories` primary focus isn't to document the components usage instead, you may like to add your brands preferred method of using said component. You can also use Storybook as a UI style guide to provide useful information to the design team before they spend hours and hours creating many largely pointless "mockups" to show non technical stake holders what a UI _could_ consist of.
+There are of course many scenarios where your `.stories` primary focus isn't to document the components usage instead, you may like to add your brands preferred method of using the component, e.g, "The primary button should only be used on the checkout page". You can also use Storybook as a UI style guide to provide useful information to the design team before they spend hours and hours creating many largely pointless "mockups" to show non technical stake holders what a UI _could_ look like 🙄.
 
 It's here where I like to use `decorators`.
 
-Decorators can be used to render things but amazingly keep the "Show code" code snippet super clean and developer friendly. `decorators` can be sued to render components in a way that to non technical people may reflect how composed components may look, but still provide a way for technical people to skip over what they're seeing and understand how to use what's underneath.
-
-The TLDR of decorators is you can show a component rendered in a certain way and still provide a code snippet that is representative of the underlying components' props
+Decorators can be used to render things but amazingly keep the "Show code" snippet super clean and developer friendly. `decorators` can be used to render components in a way that to non technical people may reflect how a page or feature may look, but still provide a way for technical people to skip over what they're seeing and understand how to use what's underneath.
 
 ... i'll explain myself.
 
-A lot of designers, at least the ones i've worked with don't really understand what a browser is. They'll regularly refer to "desktop", "tablet" and "mobile" as different things which, as a Front End developer you'll know hasn't really been a thing for nearly a decade but... what they are referring to is browser screen sizes that are of `N` width where `N` could be any number between `0` and `whatever-the-largest-monitor-size-is` which can massively impact how a "view" or component is rendered.
+Designers will often refer to their designs as "desktop", "tablet" and "mobile" which isn't _really_ a thing but I suppose the gist is this is we need to manage our applications' view across a multitude of screen sizes.
 
-My preferred approach to this is, make as many things as you can "fluid", and what I mean by this is, make every component where possible fill `100%` of the _thing_ that it's in...
+For the most part this isn't the job of any individual "component" e.g the humble button. Instead its a job for "layouts" or "grid systems".
 
-The _thing_ that it's in of course will change on a case by case basis but... this is the job of a "masonry" components that manage the "layout" and aren't _really_ components, or at least they aren't components you can _see_, they act as "containers" or "wrappers" that manage the _things_ within them.
+This would be my preferred approach and to facilitate this upper level of layout management I try where possible to make lower level components "fluid". When I say "fluid" I mean "100%".
+
+A simplified example of this might be:
+
+```javascript
+// example a
+
+<div style={{width: '500px'}}><MrButton>Click me</MrButton></div>
+
+
+// example b
+
+<div style={{width: '250px'}}><MrButton>Click me</MrButton></div>
+```
+
+In the two above examples i've set a `width` on the `div`, example a = 500px and example b = 250px but in both cases `<MrButton />` will appear to fill the full width of the containing div. This is because `<MrButton />` always fills "100%" of the thing that it's in.
 
 In the context of a decorator this may manifest itself if you're writing `.stories` to demonstrate how two buttons can be displayed side by side.
 
-At the component level this isn't the job of the `<button />`. The `<button />` shouldn't know or care what's next to it and shouldn't know or care about the space it needs to add in order for it to display correctly when placed next to another `<button />`.
+At the component level this isn't the job for `<MrButton />` and he shouldn't know or care what's next to him and shouldn't know or care about the space he needs to add in order to display correctly when placed next to `<MrsButton />`.
 
 There are a number of ways to achieve this, but if you don't have to support IE11, i'd recommend using `display: "grid"`
 
-To add decorators there are two main approaches. First is to apply a default decorator that will "wrap" every story in the `.stories` file.
+To add decorators there are two main approaches. First is to apply a default decorator that will "wrap" **every** story in the `.stories` file.
 
 The below will add a div around all `.stories` and apply a margin of `3em`. This approach works well if you want to apply the same decorator to **everything**, in some cases this can be helpful but personally I prefer to apply the decorators on a _story-by-story_ basis, more on that in a moment.
 
@@ -451,26 +467,26 @@ The use of defaults may or may not suite your needs, in a lot of cases my prefer
 
 ## story decorators
 
-As mentioned above you might have a requirement to show how x2 buttons can be displayed side by side. To work around the _Adjacent JSX elements must be wrapped in an enclosing tag_ warning I tend to wrap my components in `React.Fragment` which could look like one of the following depending on your preference. Personally I prefer to use option 3 because it keeps the "Show code" snippet looking squeaky clean.
+As mentioned above you might have a requirement to show how two buttons can be displayed side by side. To work around the _Adjacent JSX elements must be wrapped in an enclosing tag_ warning I tend to wrap my components in `React.Fragment` which could look like one of the following depending on your preference. Personally I prefer to use option 3 because it keeps the "Show code" snippet looking squeaky clean.
 
 1. `<React.Fragment>...</React.Fragment>`
 2. `<Fragment>...</Fragment>`
 3. `<>...</>`
 
-You'll see in `MasonryStory.decorators` below that I'm using a `div` with some light CSS inline styles to set it's display as grid plus a few other things to produce the layout I need, in this case `gridTemplateColumns: '1fr 1fr',` works a treat and combining it with `gridGap: '16px',` means I have a nice space between the buttons.
+You'll see in `LayoutStory.decorators` below that I'm using a `div` with some light inline styles to set it's display as grid plus a few other things to produce the layout I need, in this case `gridTemplateColumns: '1fr 1fr',` works a treat and combining it with `gridGap: '16px',` means I have a nice space between the buttons.
 
 ```javascript
 // components/mr-button/mr-button.stories.js
 
 ...
-export const MasonryStory = () => (
+export const LayoutStory = () => (
   <>
     <MrButton>Click me</MrButton>
-    <MrButton isBoogyTime={true}>Also click me</MrButton>
+    <MrsButton isBoogyTime={true}>Also click me</MrsButton>
   </>
 );
 
-MasonryStory.parameters = {
+LayoutStory.parameters = {
   docs: {
     description: {
       story: '...'
@@ -478,7 +494,7 @@ MasonryStory.parameters = {
   }
 };
 
-MasonryStory.decorators = [
+LayoutStory.decorators = [
   (Story) => (
     <div
       style={{
@@ -504,7 +520,7 @@ This would result in a nice looking "Show code" snippet that looks a little some
 () => (
   <>
     <MrButton>Click me</MrButton>
-    <MrButton isBoogyTime={true}>Also click me</MrButton>
+    <MrsButton isBoogyTime={true}>Also click me</MrsButton>
   </>
 )
 ```
@@ -515,7 +531,7 @@ Hopefully you'll agree with me and see the benefit of _hiding_ the decorator `<d
 
 ## story args
 
-Using the same approach as above with `decorators` you can also apply `args` on a story-by-story bases like the below 👇
+Using the same approach as above with `decorators` you can also apply `args` on a story-by-story basis like the below 👇
 
 If, as mentioned above you've already applied `args` using the default approach the story-by-story approach will win out
 
@@ -592,9 +608,11 @@ I think this comes back to one issue, and perhaps i'm alone in this way of think
 
 > `Template.bind({})` is trying to be too clever
 
-For me, writing application JavaScript and taking advantage of ES6 and beyond shorthand(s) etc is great for when you're writing JavaScript applications, It's not so great when you're writing documentation.
+For me, writing production JavaScript and taking advantage of ES6 (and beyond) shorthand methods are great for when you're writing JavaScript applications.
 
-I've worked on a few projects where Designers have asked if they could get involved with writing `.stories` which is wonderful, but imagine the problems I faced when I tried to explain what [Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) was, that and Designers don't care about duplicating code, they don't care about duplicating anything, they just want _things_ to look nice and "match" their designs and for me lowering the barrier to entry to facilitate writing better more imformative `.stories` is ultimately what Storybook is for.
+This mindset is perhaps not so great when writing documentation.
+
+I've worked on a few projects where Designers have asked if they could get involved with writing `.stories` which is wonderful, but imagine the problems I faced when I tried to explain what [Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) was, that **and** Designers don't care about duplicating code, they don't care about duplicating anything, they just want _things_ to look nice and "match" their designs and for me lowering the barrier to entry to facilitate writing better more informative `.stories` is ultimately what Storybook is for.
 
 It's for this reason that perhaps in _some_ instances we, as Developers (or Engineers if you're American) shouldn't be overly worried about being too clever or trying to write fewer lines of code.
 
@@ -602,9 +620,9 @@ My final word on the matter is:
 
 > Storybook is **not** your application, it's your documentation... maybe different rules apply 🤷‍♂️
 
-That said, you are of course free to make up your own mind but I hope some of the above will demystify some of approaches you _could_ take when writing `.stories`
+That said, you are of course free to make up your own mind but I hope some of the above will demystify some of the approaches you _could_ take when writing `.stories`
 
-... oh also, I'm totally prepared to be proven wrong, many of my approaches are influenced by previous versions of Storybook, and prior to `v6.0.0` writing `.stories` was at times be a little more "edgy"
+... oh also, I'm totally prepared to be proven wrong, many of my approaches are influenced by previous versions of Storybook, and prior to `v6.0.0` writing `.stories` could at times be a little more "edgy"
 
 Come find me on Twitter if you'd like to discuss this more,
 i'm fully open and up for discussing this further 😊 [@PaulieScanlon](https://twitter.com/PaulieScanlon)
