@@ -24,7 +24,7 @@ This might be fine if I weren't a developer but doing something twice is one tim
 
 It was also a little frustrating because I also wanted my Twitter profile description to be in sync with both the sites so, again another place to remember to update my personal blurb.
 
-One option I considered would have been to hook up Content Management System, and this would have been fine and it would have kept both my sites in sync but it wouldn't have been able to update my Twitter profile blurb...
+One option I considered would have been to hook up a Content Management System, and this would have been fine and it would have kept both my sites in sync but it wouldn't have been able to update my Twitter profile blurb...
 
 So, I've decided to reverse engineer the Twitter API and use that as a CMS to populate both my sites. The idea is quite simple. I'll use the Twitter profile description as though it were a field from a CMS. Naturally any changes I make to this will appear on my Twitter profile and below is how I pull that same info into both of my sites.
 
@@ -41,7 +41,7 @@ Here's what I'll be showing you how to build:
 
 ### Netlify Functions
 
-"Power your site without managing servers" is how Netlify describe Functions and all for intents and purposes thats exactly what they are. Similar to how you might create an [Express](https://expressjs.com/) app and deploy it somewhere but without the hassle of having to setup server side environments and more crucially any really dweeby server uptime monitoring.
+"Power your site without managing servers" is how Netlify describe Functions and for all intents and purposes thats exactly what they are. Similar to how you might create an [Express](https://expressjs.com/) app and deploy it somewhere but without the hassle of having to setup server side environments and more crucially any really dweeby server uptime monitoring.
 
 ### Twitter API v2
 
@@ -189,7 +189,7 @@ package.json
 
 <Divider />
 
-It's in here where we can use the `client.js` to hit a Twitter API endpoint and pass with it the required keys and tokens from the client
+It's in here where we can use the `client.js` to hit a Twitter API endpoint and pass with it the required keys and tokens from the `client`
 
 <Divider />
 
@@ -332,7 +332,7 @@ Also make sure you've correctly set the "Sensitive variable policy" I just set m
 
 <Divider />
 
-With all that set you should be able to spin up `netlify dev` visit `http://localhost:8888/` and see your own Twitter data rendered on the page, and once you deploy you "should" find everything continues to work as it did locally.
+With all that set you should be able to run `netlify dev` visit `http://localhost:8888/` and see your own Twitter data rendered on the page, and once you deploy you "should" find everything continues to work as it did locally.
 
 I'm not 100% on this but I think you might have to deploy at least once just so `netlify dev` knows where the functions are... it's a bit weird even though you're developing locally, however it seems to error until you deploy at least once.
 
