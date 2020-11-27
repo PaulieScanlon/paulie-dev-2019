@@ -2,9 +2,71 @@
 title: Silly Site Challenge
 tags: ["Gatsby"]
 date: 2020-11-25
+dateModified: 2020-11-27
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1606306250/paulie.dev/2020/11/silly-site-challenge_g3fse9.jpg
 ---
+
+## [Update 2](#update-2)
+
+I thought this update might dive into my process a bit. I still don't want to give the game away by sharing too many visuals but there were a number of things I needed to work on before I announced i'd be taking part in the [Silly Site Challenge](https://www.gatsbyjs.com/silly-site-challenge/)
+
+The reason for this is because the idea I have largely depends on two key things.
+
+- 1. Can I get my pea brain around the [GitHub REST API docs](https://docs.github.com/en/free-pro-team@latest/rest)
+- 2. Can the GitHub REST API return data I can use?
+
+I've spent about a week investigating this and I suppose in _agile_ terms this might be known as a **Spike**.
+
+If you're not familiar with agile ways of working a spike can be used where the outcome of a _thing_ is uncertain and needs to be investigated before everyone gets too excited and starts presenting ideas to stakeholders.
+
+Now, granted my puny Twitter following is hardly the same as having commercial stakeholders but the theory is the same. I didn't want to announce I was going to do something until I was sure I could deliver.
+
+I'm pleased to report that I have been able to understand the [GitHub REST API docs](https://docs.github.com/en/free-pro-team@latest/rest) and it can return data I can use to bring my idea to life.
+
+There was also a **second spike** required for my idea... and try to follow along as my mind unravels.
+
+As you might know Gatsby recently announced the new [Routes API](https://www.gatsbyjs.com/docs/routing/) and I was going to write a blog post about that and perhaps provide a working demo link and repository... but then I thought to myself;
+
+_No Paul, that's not good enough... write an entire application, develop it in public and somehow weave it into the #SillySiteChallenge_
+
+So that's what i've been doing. The new [Routes API](https://www.gatsbyjs.com/docs/routing/) is amazing, and I have already seen a few Tweets and posts from folks explaining how it works... however, and this isn't to knock anyone's hard work, these examples all seem to be regurgitations of the the Gatsby docs... and because I like to make my life difficult I started to think about ways to make my demo of the Routes API a bit different. Then it hit me.
+
+There's a section in the [docs](https://www.gatsbyjs.com/docs/routing/#using-the-file-system-route-api) that says the following:
+
+> Use the File System Route API when you want to programmatically create pages from your GraphQL data, e.g. to create individual blog post pages for your blog. With this API you can control the file path and queried data by adding some extra notation to the names of your files without touching or creating gatsby-node.js whatsoever.
+
+The key part is this bit _"without touching or creating gatsby-node.js whatsoever"_. This statement is 100% accurate but it only applies if you already have the nodes in the GraphQL layer. This would be possible if you had a load of pages as actual files on disk, eg. `.js`, | `.tsx` | `.md` | `.mdx` but...
+
+What if your "site content" doesn't exist on disk? What if your "site content" comes from a remote source, a CMS for example, or in my case a RESTful API. In this scenario you will absolutely need `gatsby-node.js`... and therein lies an angle for my silly site idea.
+
+I'll be using a remote RESTful API to source data using `gatsby-node.js` which creates the nodes in the GraphQL layer and THEN I can use the new Routes API to create pages from those nodes.... simple eh!
+
+But when I conjured up this elaborate plan I wasn't sure if it would work... hence the **second spike**.
+
+Ok cool, so now the idea is coming together, I can create pages from remotely source data at build time _and_ i'll be able to do something with it... but what data? all I want to say at the moment is it has something to do with the word "bums"... because bums are silly!
+
+Naturally "bums" _might_ be considered offensive... I don't know how exactly, but It would be prudent to tread carefully so I've now entered into the _art direction_ phase of the project.
+
+<Tweet tweetLink="https://twitter.com/PaulieScanlon/status/1331977130742263809" />
+
+<Divider />
+
+I need something that looks and feels fun... just like a bum. I'll be honest my designer days are long behind me but I do still have an eye for it so I spent a few days researching illustrators on [dribbble](https://dribbble.com/) and found this cheeky little [ghost](https://dribbble.com/shots/14455182-Boo-ty-Ghost) by the wonderful [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) so I've gone ahead and commissioned her to create a logo and some ancillary character illustrations.
+
+The reason for this is there's another twist to my silly site idea. Since i've decided to develop in public i'd like to start sharing a dev link of my progress but... to keep you all interested the site will automatically and progressively get more interesting throughout December, I'll say no more for now.
+
+Then lastly. Because Gatsby is predominantly a static site generator (it can do much much more FYI) it is by it's very nature quite Eco-Friendly and by this I mean because the _grunt_ work is handled server side at build time rather than by each and every browser that visits your site at run time much less of the worlds power is used up. Much less power means much less CO2, and much less CO2 makes for a healthier planet.
+
+I should point out here i'm not attempting to say "I'm making the world a better place"... i'll leave that to the tedious Twitter rock stars and the writers of [Silicon Valley](https://www.youtube.com/watch?v=B8C5sjjhsso) who made it into a very funny joke!
+
+Instead I plan to surface some of this Eco-Friendly data by leveraging statistics provided by [EcoPing](https://ecoping.earth/)... This one is a bit up in the air at the moment but I'm in discussions with the makers and hope to have some firmed up answers soon.
+
+So there you go, as promised a slightly more in depth update and I hope i've piqued your interest.
+
+If you're interested in taking part in the [#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) here's the sign up link again. [www.gatsbyjs.com/silly-site-challenge](https://www.gatsbyjs.com/silly-site-challenge/)
+
+Stay silly everyone 😘
 
 ## [Update 1](#update-1)
 
