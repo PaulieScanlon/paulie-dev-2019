@@ -17,7 +17,7 @@ tags:
     "Testing Library",
   ]
 date: 2020-08-05
-dateModified: 2020-10-27
+dateModified: 2020-11-25
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1603825597/paulie.dev/2020/best-bits/best-bits_icmyn7.jpg
 ---
@@ -28,7 +28,19 @@ Here's a byte-size round up of projects I've Open-sourced, posts and articles I'
 
 <Divider />
 
-## 1. SSR and JAMStack for the win!
+## 1. Hacker News Front Page and more...
+
+I recently wrote this blog post: [Use Netlify Functions and the Twitter API v2 as a CMS for your Gatsby blog](/posts/2020/11/gatsby-netlify-twitter/) which at the time didn't think would be of much interest to anyone. I was just curious to explore Netlify Functions and wanted to solve a small problem I was having with my digital footprint. However, just for kicks I thought i'd try and promote this post. I've never posted on Hacker News before but a few hours after I posted a friend messaged me to say my post had made the front page. Not bad for a first timer!
+
+Then... a couple of days later this happened
+
+<Tweet tweetLink="Netlify/status/1331599033073340416" />
+
+I also have it on good authority that this post caused quite a stir amongst the Gatsby engineering team and might even make the December edition of the [Gatsby Gazette](https://www.gatsbyjs.com/blog/tags/gazette)
+
+<Divider />
+
+## 2. SSR and JAMStack for the win!
 
 Gatsby recently announced <Link href="https://www.gatsbyjs.org/blog/2020-04-22-announcing-incremental-builds/" target="_blank">incremental builds</Link> and mono repo support so to put Gatsby Cloud through it's paces I created a multi-site, multi-brand mono repo + Shopify demo application and accompanying article for Gatsby. The demo application uses `gatsby-source-shopify` to source Shopify data at build time and lets Gatsby Cloud handle the re-build via a Webhook. It is as you'd imagine still blazing fast ⚡
 
@@ -41,7 +53,7 @@ Gatsby recently announced <Link href="https://www.gatsbyjs.org/blog/2020-04-22-a
 
 <Divider sx={{ my: 4 }} />
 
-## 2. Add Playful Animated SVG Reactions to a Gatsby Blog
+## 3. Add Playful Animated SVG Reactions to a Gatsby Blog
 
 I recently Open-sourced <Link href="https://react-svg-bubble-slider.netlify.app/" target="_blank">react-svg-bubble-slider</Link> to provide a fun way to add reactions to Gatsby blog posts. It was one of the most difficult UI components I've ever created! A lot of effort went into making it fully keyboard accessible and joy of joys Jason Lengstorf at Netlify helped promote it by publishing an article I wrote on the Netlify blog 😊
 
@@ -54,7 +66,7 @@ I recently Open-sourced <Link href="https://react-svg-bubble-slider.netlify.app/
 
 <Divider sx={{ my: 4 }} />
 
-## 3. A Zero Component Theme for Developers
+## 4. A Zero Component Theme for Developers
 
 I released <Link href="https://gatsby-theme-terminal.netlify.app/" target="_blank">
 gatsby-theme-terminal</Link> in early 2020, it was my second experiment with Gatsby themes and attempts
@@ -72,7 +84,7 @@ recently exceed 180 stars on GitHub 🎉
 
 <Divider sx={{ my: 4 }} />
 
-## 4. Full Stack Gatsby App
+## 5. Full Stack Gatsby App
 
 I hear a lot of things about Gatsby being a tool to build blogs but it can also create full stack React applications. As a fan of Theme UI and being aware the barrier to entry can be quite high if you're coming for CSS 🤢 I deiced to create Skin UI, a CSS-in-Js Theme UI editor which allows you to create, edit, save and share themes all from the browser! 💥 I don't claim to be a designer but I'm rather proud of this one!
 
@@ -82,13 +94,13 @@ I hear a lot of things about Gatsby being a tool to build blogs but it can also 
 
 <Divider sx={{ my: 4 }} />
 
-## 5. First commercial Gatsby build
+## 6. First commercial Gatsby build
 
 I have to be honest, I did struggle to blog every day for 100 days during the <Link href="https://paulie.dev/posts/2020/01/100DaysOfGatsby/" target="_blank">100 Days Of Gatsby</Link> challenge but my constant Tweets and posts did catch the attention of the lead developer at Manscaped who got in touch and I was hired to help re-build manscaped.com _(new site not live yet)_. It was great to finally use Gatsby and Theme UI in a commercial project and while the world was on lockdown I was crafting beautiful UI's to increase sales of products to help men groom their testicles 😲
 
 <Divider sx={{ my: 4 }} />
 
-## 6. Successful Open-source
+## 7. Successful Open-source
 
 I've released a lot of Open-source projects this year, to some extent I'm almost drowning in them but <Link href='https://gatsby-mdx-embed.netlify.app/' target="_blank">gatsby-mdx-embed</Link> has really made it worth it. It's been adopted by a number of high profile users in the community, has received praise from number of Gatsby employees and once even earned me £9 on Ko-fi 🤑
 
@@ -98,7 +110,7 @@ I've released a lot of Open-source projects this year, to some extent I'm almost
 
 <Divider sx={{ my: 4 }} />
 
-## 7. First article officially published
+## 8. First article officially published
 
 As mentioned above I blogged every day for 100 days, that's over 27'000 words for the <Link href="https://paulie.dev/posts/2020/01/100DaysOfGatsby/" target="_blank">100 Days Of Gatsby</Link> challenge and it was really brills to receive recognition by the Gatsby team who reached out and asked me to write up a "round up" article !
 
@@ -111,7 +123,7 @@ As mentioned above I blogged every day for 100 days, that's over 27'000 words fo
 
 <Divider sx={{ my: 4 }} />
 
-## 8. Published on CSS-Tricks
+## 9. Published on CSS-Tricks
 
 After the highs of writing for Gatsby I took on a second article, this time for Fauna. It was supposed to be a simple post about using GraphQL and Netlify functions but turned in to something much more complex. To demonstrate how it works I created a full stack <Link href="https://fauna-gatsby-comments.netlify.app/" target="_blank">demo application</Link> to accompany the post with user authentication, a moderation queue and commenting system. Fauna liked it so much they used their sponsored account to post it on CSS-Tricks 🕺
 
@@ -124,7 +136,7 @@ After the highs of writing for Gatsby I took on a second article, this time for 
 
 <Divider sx={{ my: 4 }} />
 
-## 9. Part of the CLI
+## 10. Part of the CLI
 
 As a Gatsby enthusiast as soon as Recipes launched I got stuck in and as much as I love Storybook and use it in all my personal and commercial projects (how else would you develop weapons grade UI's 🤷‍♂️) it is a bit tricky to configure with Gatsby.
 
