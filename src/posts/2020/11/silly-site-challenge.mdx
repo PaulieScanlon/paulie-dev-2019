@@ -1,13 +1,77 @@
 ---
 title: Silly Site Challenge
 tags: ["Gatsby"]
-date: 2020-11-25
+date: 2020-12-02
 dateModified: 2020-11-27
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1606306250/paulie.dev/2020/11/silly-site-challenge_g3fse9.jpg
 ---
 
+<Link
+  href="https://bumhub.netlify.app/"
+  target="_blank"
+  sx={{ color: "secondary", textDecoration: "none" }}
+>
+  <Card sx={{ p: 3 }}>
+    <Text sx={{ color: "primary", m: 0, fontSize: 3, fontWeight: "bold" }}>
+      BumHum
+    </Text>
+    <Text sx={{ color: "text", fontSize: 2 }}>
+      The cheekiest way to explore GitHub
+    </Text>
+    <Flex sx={{ fontSize: 0, mb: 3 }}>
+      <Text sx={{ mr: 1 }}>A</Text>
+      <Text sx={{ color: "primary", fontWeight: "bold", mr: 1 }}>
+        #SillySiteChallenge
+      </Text>
+      <Text sx={{ mr: 1 }}>by</Text>
+      <Text sx={{ color: "success", fontWeight: "bold" }}>@PaulieScanlon</Text>
+    </Flex>
+    <Divider />
+    <Flex>
+      <Button as="span" variant="ghost" sx={{ flex: 1, pointerEvents: "none" }}>
+        Visit BumHub {/* eslint-disable */}
+        <Box as="span" role="img" aria-label="peach">
+          🍑
+        </Box>
+      </Button>
+    </Flex>
+  </Card>
+</Link>
+
+<Divider />
+
+## [Update 3](#update-3)
+
+##### Dec 2 2020
+
+I feel like i'm really making progress now, so much so i'm now happy to share a link 🕺
+
+I've continued to work with the magnificent [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) who's delivered the first of the characters i'll be using on BumHub, aptly named _Pants Down_ and _Pants Up_ which are used in the Advent Calendar cards.
+
+_Pants Down_ is used when an Advent card is click-able which is determined by working out if it's the current day or if the day has passed.
+
+_Pants Up_ is used when an Advent card is disabled which is determined by working out if the day number is in the future.
+
+I've also added the custom components to the Bum UI page where you cam see how the components look and how they can be configured with props.
+
+The current `date` is provided by my [api](https://github.com/PaulieScanlon/bumhub/blob/main/functions/get-date/get-date.js) so you won't be able to cheat it by changing your system clock! In the short term though this might cause a bit of a hiccup.
+
+The data required to populate the Advent Cards is actually sourced at build time so _in theory_ no JavaScript is required for these to render on the page but... because this is an Advent Calendar I only want to reveal a card when it's the current day therefore JavaScript is required to make the api call to get the current server date. I think i'll leave this as is for now as it's part of the charm of an Advent Calendar but, after Dec 25 there's no need to disabled any of the cards so I'll remove the api call so this page will continue to work even if JavaScript is disabled.
+
+I've also added a bit of pure CSS animation to the starburst seen behind the main logo. This was achieved using some fun `nth-of-type` selectors and `animation-delay` durations. You can see the src [here](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/starburst/starburst.tsx#L30). I hadn't actually tried to use animation keyframes in Theme UI before but having had a look at the [`src`](https://github.com/system-ui/theme-ui/blob/master/packages/components/src/Spinner.js#L57) I could see how Theme UI have achieved this in the `<Spinner />` component.
+
+I'm hoping to tackle the EcoBum section next. I have it on good authority that [EcoPing](https://ecoping.earth/) are in the final stages of testing the _special_ endpoint required to calculate BumHubs carbon usage... in human farts no less!
+
+Usually I don't _love_ the art direction part of my side projects but this time round i'm really enjoying seeing what [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) creates and when I add them to the design it suddenly springs to life.
+
+I'm also really happy I completed the two spikes as mentioned before because i'm now 100% sure that I can work with the data I'm receiving which makes the UI development an absolute breeze!
+
+Stay tuned and i'll update this again when i've completed the next phase of development.
+
 ## [Update 2](#update-2)
+
+##### Nov 24 2020
 
 I thought this update might dive into my process a bit. I still don't want to give the game away by sharing too many visuals but there were a number of things I needed to work on before I announced i'd be taking part in the [Silly Site Challenge](https://www.gatsbyjs.com/silly-site-challenge/)
 
@@ -77,6 +141,8 @@ I don't wanna give the game away so here's a little teaser about what'll i'll be
 <Divider />
 
 ## [Go Go Go](#go-go-go)
+
+##### Nov 24 2020
 
 I'm at it again 🕺
 
