@@ -1,7 +1,7 @@
 ---
 title: Silly Site Challenge
 tags: ["Gatsby"]
-date: 2020-12-02
+date: 2020-12-03
 dateModified: 2020-11-27
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1606306250/paulie.dev/2020/11/silly-site-challenge_g3fse9.jpg
@@ -40,6 +40,28 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
 </Link>
 
 <Divider />
+
+## [Update 4](#update-4)
+
+##### Dec 3 2020
+
+I had a good hack on BumHub last night and dusted off my PhotoShop skills and designed the `/bums/-name-of-repo` page template.
+
+This is the part of BumHub that uses Gatsby's new [Routes API](https://www.gatsbyjs.com/docs/routing/).
+
+As mentioned below, the [docs](https://www.gatsbyjs.com/docs/routing/#using-the-file-system-route-api) say you no longer need to touch `gatsby-node` to create pages but...
+
+In my case because i'm sourcing the data at build time I still need `gatsby-node` to create the GraphQL layer from the GitHub REST response but, once the data is in "Gatsby world" the new Routes API takes over.
+
+You can see the src [here](https://github.com/PaulieScanlon/bumhub/blob/main/src/pages/bums/%7BadventBums.name%7D.tsx), you'll notice the name of this file is `{adventBums.name}.tsx`, the bit between the curly brackets is a node from the GraphQL layer I create in `gatsby-node` followed by `.name` which is a key in the response object.
+
+This NASA level regex is how the Gatsby engineers allow us to create _pages_ from nodes, or in my case nodes that are repository names sourced from GitHub. Thanks Gatsby engineers, this is some top shelf tekkers!
+
+The Jsx in the "page template" is populated by using a good old fashioned Gatsby page query plus the node `$id`, that part is actually old school Gatsby but I do really like the new Routes API, using `createPages` in `gatsby-node` was always a bit of faff.
+
+This latest feature completes my rather ambitious goal of weaving multiple ideas together to form one entity worthy of a[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) submission and the Routes API was always at the core of this so i'm pleased it works, it's styled and is out there for all to see.
+
+🕺🏻
 
 ## [Update 3](#update-3)
 
