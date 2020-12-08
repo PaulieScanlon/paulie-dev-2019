@@ -1,8 +1,8 @@
 ---
 title: Silly Site Challenge
 tags: ["Gatsby"]
-date: 2020-12-03
-dateModified: 2020-11-27
+date: 2020-11-27
+dateModified: 2020-12-08
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1606306250/paulie.dev/2020/11/silly-site-challenge_g3fse9.jpg
 ---
@@ -14,7 +14,7 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
 >
   <Card sx={{ p: 3 }}>
     <Text sx={{ color: "primary", m: 0, fontSize: 3, fontWeight: "bold" }}>
-      BumHum
+      BumHub
     </Text>
     <Text sx={{ color: "text", fontSize: 2 }}>
       The cheekiest way to explore GitHub
@@ -40,6 +40,42 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
 </Link>
 
 <Divider />
+
+## [Update 5](#update-5)
+
+##### Dec 8 2020
+
+This update is a bit of [A Tale of two Cities](https://en.wikipedia.org/wiki/A_Tale_of_Two_Cities). A city called client side and a city called server side.
+
+Let's start with the client side.
+
+I normally use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), in fact I love Fetch, it's native to modern / non crappy browsers (IE i'm talking about you!) and from what I gather pretty lightweight and lastly, it gets the job done. But...
+
+Fetch runs in / on the Window object and it can't be used server side to make HTTP requests.
+
+So what about server side?
+
+The server side equivalent is Node's [http](https://nodejs.org/api/http.html) module which is built in to Node and does indeed also get the job done.
+
+...but this want to use native functionality poses a problem for the JAMStack developer. If like me you're in a situation where you have a requirement to make both client and server side http requests do you opt to keep things native or do you opt for a solution that works consistently across the stack?
+
+For BumHub i've gone for consistency.
+
+I've chosen to use [axios](https://www.npmjs.com/package/axios).
+
+I wouldn't normally choose this but it can run both client and server side which means my http requests can be written in a consistent fashion. For me on this project, this matters.
+
+JAMStack development requires the humble Front End Developer to be many things and quite frankly it's sometimes too much for my pea brain to take. I feel like I have enough to worry about just making sure my CSS works across the million and one screen sizes that exist. I don't need to be worrying about really dweeby http request methods. If axios can do what it does in the same way when running in Node (server side) as it can in browser (client side) and can be written the same in my project on both sides of the stack then i'm happy to let sleeping dogs lie and crack on with the good stuff.
+
+That's my _opinion_ there are many other valid ones.
+
+That said I now need to do a bit of refactoring to my [`<MrFetchy />`](https://github.com/PaulieScanlon/bumhub/tree/main/src/components/mr-fetchy) component as it currently uses fetch not axios.
+
+The reason for this quandary is that in this update i've implemented the EcoBum section which utilizes a special end point created for me by my pals at [EcoPing](https://ecoping.earth/). This endpoint is still experimental so exposing it client side might cause some headaches. Instead, i'm making the request server side and storing the request address in an environment variable so it stays a secret... for now, and because I'm making the request server side I need some kind of http request method... actually this update is quite dweeby, sorry about that.
+
+Anyway, there's now a Bum on the index page farting and some lovely eco friendly stats about BumHub's carbon usage.
+
+Enjoy.
 
 ## [Update 4](#update-4)
 
