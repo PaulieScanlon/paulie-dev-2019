@@ -2,7 +2,7 @@
 title: Silly Site Challenge
 tags: ["Gatsby"]
 date: 2020-11-27
-dateModified: 2020-12-14
+dateModified: 2020-12-21
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1606306250/paulie.dev/2020/11/silly-site-challenge_g3fse9.jpg
 ---
@@ -41,6 +41,200 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
 
 <Divider />
 
+## [Update 8](#update-8)
+
+🚨 BRAND NEW FEATURE ALERT 🚨
+
+Pleased to present [Bum Bum Maker](https://bumhub.netlify.app/bum-bum-maker) and cooorrr blimey guv'nor this was a lot of work!
+
+As I mentioned in Update 7 I wanted to make a bit more of a point regarding what you can do with Gatsby, and the TLDR version is... anything you damn well please. Gatsby is built on top of React so if you can do it with React you can do it with Gatsby.
+
+Bum Bum Maker is an interactive character chooser tool, and it works like this.
+
+I have a React component called [`<MakerBum />`](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx) which receives a config array which looks a bit like the below
+
+_i've removed some of the options for brevity FYI_
+
+```javascript
+// src/plages/bum-bum-maker.tsx
+
+export const bumBumConfig = [
+  {
+    name: 'face',
+    options: [
+     ...
+      {
+        label: 'beard',
+        value: 'beard',
+        checked: true,
+        meta: {
+          type: 'image',
+          value: '',
+        },
+      },
+    ],
+  },
+  {
+    name: 'miscellaneous',
+    options: [
+      ...
+      {
+        label: 't-shirt',
+        value: 'tshirt',
+        checked: false,
+        meta: {
+          type: 'image',
+          value: '',
+        },
+      },
+    ],
+  },
+  {
+    name: 'head',
+    options: [
+      ...
+      {
+        label: 'glasses',
+        value: 'glasses',
+        checked: false,
+        meta: {
+          type: 'image',
+          value: '',
+        },
+      },
+    ],
+  },
+
+  {
+    name: 'accessories',
+    options: [
+      ...
+      {
+        label: 'coffee',
+        value: 'coffee',
+        checked: false,
+        meta: {
+          type: 'image',
+          value: '',
+        },
+      },
+    ],
+  },
+  {
+    name: 'tone',
+    options: [
+      ...colors.tone
+        .map((item): string => item.mid)
+        .map(
+          (item: string, index: number): IMakerConfigOption => {
+            return {
+              label: `${index}`,
+              value: `${index}`,
+              checked: index === 3,
+              meta: {
+                type: 'swatch',
+                value: item,
+              },
+            }
+          },
+        ),
+    ],
+  },
+] as IMakerConfigItem[]
+
+```
+
+<Divider />
+
+There's a couple of reasons for this. Firstly and, this is quite common in "app like" development, the UI is usually driven by data, Bum Bum Maker is no different. I have a _list_ of Radio buttons grouped together for each _part_ of the bum, eg. Head, Face, etc and using a top level `name` key means I can leverage normal HTML Radio behavior by grouping them together thus only allowing one Radio from each _part_ to be selected at any given time.
+
+The individual options themselves accept a `label`, `value`, and a default value for `checked`. I've also added a `meta` key. This is how I determine if the _list_ items are to have a little graphic of the value or a tone swatch.
+
+The tone hex reference comes from the tone key in Theme UI's [color object](https://github.com/PaulieScanlon/bumhub/blob/main/src/gatsby-plugin-theme-ui/index.ts#L31). The reason for directly referencing the color object in this way means that if I were to add a new tone to the theme the _list_ would automatically display a Radio button for it's given value... nice ey!
+
+Using a config object like this is great for the Bum Bum Maker UI elements but it's a bit verbose to drive the Svg conditional `<g>` rendering.... allow me to explain.
+
+By using my old chum [Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) I can "loop" over the items in the `bumBumConfig` array and pick out just the ones that have `checked: true`
+
+```javascript
+// src/components/maker-bum.tsx
+
+const getCheckedProperties = (config: IMakerConfigItem[]) => {
+  return config.reduce((items, item) => {
+    items.push(
+      item.options
+        .filter((option) => option.checked)
+        .map((option) => option.value)[0]
+    )
+    return items
+  }, [])
+}
+```
+
+<Divider />
+
+This results in an array of strings for each _part_ that is checked eg
+
+```javascript
+// (results array)
+;["beard", "noMiscellaneous", "headphones", "laptopStickers", "3"]
+```
+
+<Divider />
+
+Then I can use these value to _pick_ a key from a [properties](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx#L40) dispatch table... again i've removed a lot from the below example for brevity.
+
+```javascript
+// src/components/maker-bum.tsx
+
+const properties = (property: string, tone: number) => {
+  const config = {
+    ['beard'] :(
+      <g>...</g>
+    )
+    ['headphones'] :(
+      <g>...</g>
+    )
+    ['laptopStickers'] :(
+      <g>...</g>
+    )
+  }
+
+  return config[property] ? config[property] : null
+
+}
+
+export const MakerBum: FunctionComponent<IMakerBumProps> = ({ config }) => {
+  return (
+    <svg
+      version="1.0"
+      x="0px"
+      y="0px"
+      viewBox="0 0 550 410"
+      width="100%"
+      height="100%"
+    >
+      {getCheckedProperties(config).map(property => properties(property, tone))}
+    </svg>
+  )
+}
+
+```
+
+<Divider />
+
+For values in the results array that are present in the `properties` `config` object I return the Svg `<g>` element(s) and for values that aren't I return `null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
+
+If you open up your developer tools and find the Svg element, then click around on the Radio buttons you'll see the Svg re-renders it's child `<g>` elements according to the checked values provided by the Radio buttons. I typically use this approach in my day job to build complex web applications for companies that make bazillions that no one cares about but here i'm using the same approach to conditional render an Svg Bum graphic which really puts the _fun_ into Functional Programming.
+
+The fruits of this labour intensive task result in a fun UI with an added treat for the user allowing them to download their custom bum graphic as a bitmap in 16:9 aspect ratio, perfect for sharing on Twitter.
+
+This feature was a bit of a last minute idea but i'm pretty pleased with the outcome. It's purely luck that all the separate parts of the illustrations work together in any given order as this wasn't part of my original brief to [Miss_ChatZ](https://dribbble.com/Miss_ChatZ)
+
+My next "sprint" if you like will focus on accessibility and performance. Having reviewed the [Pre-submission checklist](https://www.gatsbyjs.com/silly-site-challenge-faq/#pre-submission-checklist) I do indeed want to make Bum Hub as good and silly as it can be.
+
+Catch ya later! 🕺
+
 ## [Update 7](#update-7)
 
 ##### Dec 14 2020
@@ -59,7 +253,7 @@ The Bum Search section features a fully functioning Search input, with a Select 
 
 Arguably in BumHub this kind of functionality isn't all that useful but it does, as mentioned above demonstrate that it's possible to do such things with Gatsby plus it demonstrates my ability to use array methods... hopefully that second point might allow me to swerve pointless tech tests when applying for future contacts. 🕺
 
-This latest update pretty much completes my "MVP" but i've had another idea, it's again grounded in my desire to demonstrate Gatsby is React and can do _all the things_ that Create React App can do so stay tuned and i'll be back with another update in a week or so.
+This latest update pretty much completes my "MVP" but i've had another idea, it's again grounded in my desire to demonstrate Gatsby is React and can do _all the things_ that a straight up React App can do so stay tuned and i'll be back with another update in a week or so.
 
 ## [Update 6](#update-6)
 
