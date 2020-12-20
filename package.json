@@ -6,8 +6,9 @@
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve"
+    "build": "gatsby build && yarn robots",
+    "serve": "gatsby serve",
+    "robots": "cp robots.txt public/"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",

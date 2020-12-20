@@ -43,6 +43,10 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
 
 ## [Update 8](#update-8)
 
+##### Dec 21 2020
+
+<Tweet tweetLink="PaulieScanlon/status/1341024963504058369" />
+
 🚨 BRAND NEW FEATURE ALERT 🚨
 
 Pleased to present [Bum Bum Maker](https://bumhub.netlify.app/bum-bum-maker) and cooorrr blimey guv'nor this was a lot of work!
@@ -61,6 +65,7 @@ _i've removed some of the options for brevity FYI_
 export const bumBumConfig = [
   {
     name: 'face',
+    ...
     options: [
      ...
       {
@@ -76,6 +81,7 @@ export const bumBumConfig = [
   },
   {
     name: 'miscellaneous',
+    ...
     options: [
       ...
       {
@@ -91,6 +97,7 @@ export const bumBumConfig = [
   },
   {
     name: 'head',
+    ...
     options: [
       ...
       {
@@ -107,6 +114,7 @@ export const bumBumConfig = [
 
   {
     name: 'accessories',
+    ...
     options: [
       ...
       {
@@ -122,6 +130,7 @@ export const bumBumConfig = [
   },
   {
     name: 'tone',
+    ...
     options: [
       ...colors.tone
         .map((item): string => item.mid)
@@ -152,9 +161,9 @@ The individual options themselves accept a `label`, `value`, and a default value
 
 The tone hex reference comes from the tone key in Theme UI's [color object](https://github.com/PaulieScanlon/bumhub/blob/main/src/gatsby-plugin-theme-ui/index.ts#L31). The reason for directly referencing the color object in this way means that if I were to add a new tone to the theme the _list_ would automatically display a Radio button for it's given value... nice ey!
 
-Using a config object like this is great for the Bum Bum Maker UI elements but it's a bit verbose to drive the Svg conditional `<g>` rendering.... allow me to explain.
+Using a config object like this is great for the Bum Bum Maker page elements but it's a bit verbose to drive the Svg conditional `<g>` rendering.... allow me to explain.
 
-By using my old chum [Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) I can "loop" over the items in the `bumBumConfig` array and pick out just the ones that have `checked: true`
+By using my old chum [Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) and [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) I can "loop" over the items in the `bumBumConfig` array and reduce the array down so it only contains the names of the _options_ that have `checked: true`
 
 ```javascript
 // src/components/maker-bum.tsx
@@ -173,7 +182,7 @@ const getCheckedProperties = (config: IMakerConfigItem[]) => {
 
 <Divider />
 
-This results in an array of strings for each _part_ that is checked eg
+This results in a **new** array of strings for each _option_ that is checked eg
 
 ```javascript
 // (results array)
@@ -182,7 +191,9 @@ This results in an array of strings for each _part_ that is checked eg
 
 <Divider />
 
-Then I can use these value to _pick_ a key from a [properties](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx#L40) dispatch table... again i've removed a lot from the below example for brevity.
+Then I can use these values to _pick_ a key from a [properties](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx#L40) dispatch table...
+
+_again i've removed a lot from the below example for brevity_
 
 ```javascript
 // src/components/maker-bum.tsx
@@ -223,17 +234,23 @@ export const MakerBum: FunctionComponent<IMakerBumProps> = ({ config }) => {
 
 <Divider />
 
-For values in the results array that are present in the `properties` `config` object I return the Svg `<g>` element(s) and for values that aren't I return `null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
+For the values contained within the new array I return the Svg `<g>` element(s) and for values that aren't I return `null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
 
-If you open up your developer tools and find the Svg element, then click around on the Radio buttons you'll see the Svg re-renders it's child `<g>` elements according to the checked values provided by the Radio buttons. I typically use this approach in my day job to build complex web applications for companies that make bazillions that no one cares about but here i'm using the same approach to conditional render an Svg Bum graphic which really puts the _fun_ into Functional Programming.
+If you open up your developer tools and find the Svg element, then click around on the Radio buttons you'll see the Svg re-renders it's child `<g>` elements according to the checked values provided by the Radio buttons. I typically use this approach in my day job to build complex web applications for companies that make bazillions that no one cares about but here i'm using the same approach to conditionally render an Svg Bum graphic which really puts the _fun_ into Functional Programming.
 
 The fruits of this labour intensive task result in a fun UI with an added treat for the user allowing them to download their custom bum graphic as a bitmap in 16:9 aspect ratio, perfect for sharing on Twitter.
 
 This feature was a bit of a last minute idea but i'm pretty pleased with the outcome. It's purely luck that all the separate parts of the illustrations work together in any given order as this wasn't part of my original brief to [Miss_ChatZ](https://dribbble.com/Miss_ChatZ)
 
-My next "sprint" if you like will focus on accessibility and performance. Having reviewed the [Pre-submission checklist](https://www.gatsbyjs.com/silly-site-challenge-faq/#pre-submission-checklist) I do indeed want to make Bum Hub as good and silly as it can be.
+Having reviewed the [Pre-submission checklist](https://www.gatsbyjs.com/silly-site-challenge-faq/#pre-submission-checklist) i've also been working on accessibility and performance and one thing I noticed on the home page was a warning about **maximum DOM depth**, this was due to the amount of Pants Up / Pants Down bums i'm rendering for the advent calendar. A relatively quick fix for this was to limit the amount of Advent Cards to render on initial page load.
 
-Catch ya later! 🕺
+I've achieved this by utilizing [Array.prototype.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice). Here's the [code](https://github.com/PaulieScanlon/bumhub/blob/main/src/pages/index.tsx#L120) but in short depending on if the state value `isAdventExpanded` is `true` or `false` I either render the full array or slice the array from -2 indexes from the current day + 2 indexes which gives me a day before the current day and 2 days after the current day or simply just x4 Advent Cards. This has improved the lighthouse scores too.
+
+An added bonus to this fix is that the UX has slightly improved because the user now doesn't need to scroll quite so far to see the other sections in the page, Bum Search, Bum UI etc.
+
+I also popped a little [useLocalStorage](https://usehooks.com/useLocalStorage/) hook in for the `isAdventExpanded` value. This is so the page remembers if you were or weren't in the expanded state when you navigate to and from the index page.
+
+I'm not sure there's anything left to do now so dare I say it... but, I think i'm done! 🕺
 
 ## [Update 7](#update-7)
 

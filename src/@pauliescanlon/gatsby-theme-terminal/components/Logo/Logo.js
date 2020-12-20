@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 export const Logo = () => (
   <Link
     to="/"
+    title="Paul Scanlon's Blog"
     sx={{
       ":focus": {
         outline: "none",

@@ -43,10 +43,11 @@ export const DonutChart = ({ title, dimension, config }) => {
                   position: "relative",
                 }}
               >
-                <Heading as="h4" variant="styles.h4">
+                <Heading as="div" variant="styles.h4">
                   {title}
                 </Heading>
                 <Donut
+                  role="img"
                   sx={{ mx: 3, mb: 2, color: color }}
                   value={
                     (totalWordsByYear(currentYear) /

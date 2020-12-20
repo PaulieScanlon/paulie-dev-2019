@@ -46,7 +46,7 @@ export const PostCard = ({
           }}
         >
           <Box sx={{ minHeight: "1px" }}>
-            {featuredImageUrl && <Image src={featuredImageUrl} />}
+            {featuredImageUrl && <Image src={featuredImageUrl} alt={title} />}
           </Box>
           <Box
             sx={{
@@ -57,7 +57,7 @@ export const PostCard = ({
             }}
           >
             <Heading
-              as="h3"
+              as="div"
               variant="styles.h3"
               sx={{
                 color: "text",
@@ -66,7 +66,11 @@ export const PostCard = ({
               }}
             >
               {pinned ? (
-                <span role="img" aria-labelledby="A thumbtack (drawing pin),">
+                <span
+                  as="span"
+                  role="img"
+                  aria-label="A thumbtack (drawing pin)"
+                >
                   📌
                 </span>
               ) : null}

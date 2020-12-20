@@ -44,6 +44,7 @@ export const WritingCard = ({
       <Link
         href={url}
         target="_blank"
+        rel="noopener"
         sx={{
           display: "flex",
           flex: "1 1 auto",
@@ -73,6 +74,7 @@ export const WritingCard = ({
               }}
             >
               <Image
+                alt={`${misc}-logo`}
                 src={`${siteUrl}/images/${misc}-logo.png`}
                 sx={{ width: 16, height: 16 }}
               />
@@ -83,7 +85,7 @@ export const WritingCard = ({
             </Text>
           </Flex>
           <Divider />
-          <Heading as="h3" variant="styles.h3" sx={{ color: "text" }}>
+          <Heading as="div" variant="styles.h3" sx={{ color: "text" }}>
             {title}
           </Heading>
           <Text sx={{ color: "text", wordBreak: "break-word" }}>{excerpt}</Text>
