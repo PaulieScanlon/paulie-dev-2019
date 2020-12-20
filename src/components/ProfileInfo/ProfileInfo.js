@@ -1,35 +1,48 @@
 import React, { useEffect, useState } from "react"
-import { Grid, Heading, Text, Spinner } from "theme-ui"
+import { Grid, Flex, Heading, Text, Spinner } from "theme-ui"
 
 export const ProfileInfo = () => {
-  const [res, setRes] = useState({ user: null })
+  const [response, setResponse] = useState({ user: null })
+  const [isMounted, setIsMounted] = useState(true)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
-      .then((res) => res.text())
-      .then((res) => {
+      .then((response) => response.text())
+      .then((response) => {
         setIsLoading(false)
-        setRes(JSON.parse(res))
+        if (isMounted) {
+          setResponse(JSON.parse(response))
+        }
       })
       .catch((err) => {
         setIsLoading(false)
         setHasError(true)
       })
-  }, [])
+  }, [isMounted])
+
+  useEffect(() => {
+    return () => {
+      setIsMounted(false)
+    }
+  })
 
   return (
     <>
       {hasError ? <Text sx={{ color: "error" }}>API Error</Text> : null}
-      {!hasError && isLoading ? <Spinner /> : null}
-      {!hasError && !isLoading && res.user ? (
+      {!hasError && isLoading ? (
+        <Flex sx={{ justifyContent: "center" }}>
+          <Spinner />
+        </Flex>
+      ) : null}
+      {!hasError && !isLoading && response.user ? (
         <Grid sx={{ gap: 2 }}>
           <Heading as="h1" variant="styles.h1">
-            {res.user.name.toLowerCase().replace(" ", "-")}
+            {response.user.name.toLowerCase().replace(" ", "-")}
           </Heading>
-          <Text>{res.user.description}</Text>
-          <Text>Location: {res.user.location}</Text>
+          <Text>{response.user.description}</Text>
+          <Text>Location: {response.user.location}</Text>
         </Grid>
       ) : null}
     </>
