@@ -235,8 +235,26 @@ min-width: 0;
 
 You'll see if you inspect the "I'm man aside" element that the actual HTML element is in fact an `<aside />` and it still inherits all the resets from `<Box />`
 
-The `as` props works with all manner of HTML elements... even inputs <Box as='input' placeholder="I'm an input"/>
+The `as` props works with all manner of HTML elements... even inputs:
+
+```javascript
+<Box as="input" placeholder="I'm an input" />
+```
+
+<Divider />
+
+<Box as="input" placeholder="I'm an input" />
+
+... but don't do as above, use the `<Input />` component instead because it maps to the correct key in the theme object: `forms.input`
+
+```javascript
+<Input placeholder="I'm an input" />
+```
+
+<Divider />
+
+<Input placeholder="I'm an input" />
 
 So now you know.
 
-Everything's a `<Box />`
+Everything's a `<Box />`... sort of
