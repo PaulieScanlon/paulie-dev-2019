@@ -50,8 +50,8 @@ export const DonutChart = ({ title, dimension, config }) => {
                   role="img"
                   sx={{ mx: 3, mb: 2, color: color }}
                   value={
-                    (totalWordsByYear(currentYear) /
-                      averageWordsByYear(currentYear)) *
+                    (averageWordsByYear(currentYear) /
+                      totalWordsByYear(currentYear)) *
                     100
                   }
                 />
