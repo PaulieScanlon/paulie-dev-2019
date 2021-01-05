@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     name: "Paul Scanlon",
     description:
-      "I'm a Front End Developer / UX Engineer based in Worthing | London / UK. React, Gatsby, JavaScript, TypeScript/Flow, styled-components, Theme UI, Storybook, TDD (Jest/Enzyme/React Testing Libary) and a tiny bit of Node and FaunaDB",
+      "Front End UI Developer / UX Engineer / JAMStack: React, Gatsby, JavaScript, TypeScript, CSS-in-Js, Storybook, TDD & a tiny bit of Apollo/GraphQL/Node",
     keywords: [
       "React",
       "Gatsby",
@@ -22,6 +22,7 @@ module.exports = {
       "FaunaDB",
       "JAMStack",
       "Component Library",
+      "Serverless Functions",
     ],
     siteUrl: "https://paulie.dev",
     siteImage: "https://paulie.dev/images/paulie-open-graph-image.jpg",
@@ -52,7 +53,6 @@ module.exports = {
         icon: `src/manifesticon-512x512.png`,
       },
     },
-    // `gatsby-plugin-offline`,
     `gatsby-plugin-remove-serviceworker`,
     {
       resolve: "gatsby-plugin-google-analytics",
@@ -60,7 +60,11 @@ module.exports = {
         trackingId: "UA-76055934-4",
       },
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/dummy-page/`],
+      },
+    },
   ],
 }
-
-// https://content-security-policy.com/examples/google-fonts/
