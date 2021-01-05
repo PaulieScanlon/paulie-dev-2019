@@ -1,0 +1,53 @@
+---
+title: Use Netlify Functions and the GitHub REST API to add Data Visualization to your Gatsby blog
+tags: ["JavaScript", "React", "Gatsby", "Netlify Functions", "GitHub REST"]
+date: 2021-01-06
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1603273280/paulie.dev/placeholder_ekfnq2.jpg
+---
+
+After a recent Twitter conversation with my good chum [Scott](https://twitter.com/spences10) we decided we'd both write a post about the various ways Serverless Functions could be used to render GitHub repository language data in our respective Gatsby Blogs
+
+<Tweet tweetLink="PaulieScanlon/status/1345670350160465920" />
+
+After a bit of initial brainstorming we both had a few extra requirements for the outcome of this experiment.
+
+Scott wanted a re-usable endpoint that will return a chart as an image
+
+And I wanted to investigate ways to render an Svg chart both with and without the use of client side JavaScript.
+
+Scott was starting to look at the GraphQL GitHub API and i've recently completed a ton of work with the GitHub REST api on my [Silly Site Challenge](/posts/2020/11/silly-site-challenge/)
+
+Apologies in advance for the rather long-winded blog title but as it suggests in this post i'm going to explain how you can use [Netlify Functions](https://www.netlify.com/products/functions/) and the [GitHub REST API](https://docs.github.com/en/free-pro-team@latest/rest) to create Data Visualizations in your Gatsby blog.
+
+A pre-cursor to this post is that [Scott](https://twitter.com/spences10) and I have teamed up to make a kind of "duo-post" approach. We'll both be attempting to create the same thing but will both be using very different approaches
+
+<Grid
+    sx={{
+        gridTemplateColumns: ['1fr', '1fr 1fr']
+    }}
+>
+
+<Box>
+
+### Scott's stack
+
+- Gatsby
+- TypeScript
+- Vercel Functions
+- GitHub GraphQL API
+
+</Box>
+
+<Box>
+
+### Paul's stack
+
+- Gatsby
+- TypeScript
+- Netlify Functions
+- GitHub REST API
+
+</Box>
+
+</Grid>
