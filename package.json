@@ -11,10 +11,11 @@
     "robots": "cp robots.txt public/"
   },
   "dependencies": {
+    "@emotion/react": "^11.1.4",
     "@mdx-js/mdx": "^1.5.7",
     "@mdx-js/react": "^1.5.7",
-    "@pauliescanlon/gatsby-theme-terminal": "^0.0.42",
-    "@theme-ui/color": "^0.3.1",
+    "@pauliescanlon/gatsby-theme-terminal": "^0.0.43",
+    "@theme-ui/color": "^0.3.5",
     "@theme-ui/prism": "^0.3.0",
     "date-fns": "^2.11.1",
     "dotenv": "^8.2.0",

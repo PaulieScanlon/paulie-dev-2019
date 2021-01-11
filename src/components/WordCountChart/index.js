@@ -1,0 +1,1 @@
+export { WordCountChart } from "./WordCountChart"

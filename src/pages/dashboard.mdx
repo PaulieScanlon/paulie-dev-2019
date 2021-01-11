@@ -5,32 +5,26 @@ navigationLabel: dashboard
 import { PostsByMonthChart } from "../components/PostsByMonthChart"
 import { PostsByDayChart } from "../components/PostsByDayChart"
 import { WordsByMonthChart } from "../components/WordsByMonthChart"
-import { DonutChart } from "../components/DonutChart"
+import { WordCountChart } from "../components/WordCountChart"
+import { TagPercentChart } from "../components/TagPercentChart"
 
 # dashboard
 
-Here are the totals, counts and other statistics about the posts and tags on my blog
+Here are the totals, counts and other statistics calculated from posts and tags used around my blog
 
 <Divider />
 
-## word count statistics
+## tags by usage
 
 <Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
 
-<DonutChart
-  title="Average word count"
-  dimension="words"
-  config={{ year: 0, color: "primary" }}
-/>
+<TagPercentChart year={0} color={"primary"} />
 
-<DonutChart
-  title="Average word count"
-  dimension="words"
-  config={{ year: -1, color: "secondary" }}
-/>
+<TagPercentChart year={-1} color={"secondary"} />
 
 </Grid>
 
+<Divider />
 <Divider />
 
 ## posts by day
@@ -54,6 +48,7 @@ Here are the totals, counts and other statistics about the posts and tags on my 
 </Grid>
 
 <Divider />
+<Divider />
 
 ## posts by month
 
@@ -75,6 +70,7 @@ Here are the totals, counts and other statistics about the posts and tags on my 
 
 </Grid>
 
+<Divider />
 <Divider />
 
 ## words by month
@@ -98,45 +94,22 @@ Here are the totals, counts and other statistics about the posts and tags on my 
 </Grid>
 
 <Divider />
+<Divider />
 
-## tags by usage
+## word count statistics
 
 <Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
 
-<SourceTags>
-  {(source) => (
-    <Grid>
-      {source
-        .sort((a, b) => b.count - a.count)
-        .splice(0, 5)
-        .map((tag, index) => {
-          const { name, count } = tag
-          return (
-            <Flex key={index} sx={{ alignItems: "center" }}>
-              <Text sx={{ color: "primary", fontWeight: "bold", mr: 1 }}>{`${
-                index + 1
-              }:`}</Text>
-              <Text sx={{ mr: 2 }}>{name}</Text>
-              <Flex
-                sx={{
-                  alignItems: "center",
-                  backgroundColor: "surface",
-                  borderRadius: "50%",
-                  color: "success",
-                  fontWeight: "bold",
-                  fontSize: 0,
-                  justifyContent: "center",
-                  width: "28px",
-                  height: "28px",
-                }}
-              >
-                {`x${count}`}
-              </Flex>
-            </Flex>
-          )
-        })}
-    </Grid>
-  )}
-</SourceTags>
+<WordCountChart
+  title="Average word count"
+  dimension="words"
+  config={{ year: 0, color: "primary" }}
+/>
+
+<WordCountChart
+  title="Average word count"
+  dimension="words"
+  config={{ year: -1, color: "secondary" }}
+/>
 
 </Grid>

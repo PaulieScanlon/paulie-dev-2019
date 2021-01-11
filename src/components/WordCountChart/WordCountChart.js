@@ -4,7 +4,7 @@ import { SourceWords } from "@pauliescanlon/gatsby-theme-terminal"
 
 import { formatNumber } from "../../utils/formatNumber"
 
-export const DonutChart = ({ title, dimension, config }) => {
+export const WordCountChart = ({ title, dimension, config }) => {
   const { color, year } = config
 
   const totalWordsByYear = (currentYear) =>
@@ -60,7 +60,7 @@ export const DonutChart = ({ title, dimension, config }) => {
                     sx={{
                       textAlign: "center",
                       color: color,
-                      fontSize: "22px",
+                      fontSize: 3,
                       fontWeight: "bold",
                       lineHeight: "1",
                     }}

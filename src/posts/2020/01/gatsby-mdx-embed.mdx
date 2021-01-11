@@ -9,7 +9,7 @@ embeddedImageUrls:
   - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927432/paulie.dev/2020/01/gatsby-mdx-embed-image1_vkf530.jpg
 ---
 
-import { DonutChart } from "../../../components/DonutChart"
+import { WordCountChart } from "../../../components/WordCountChart"
 
 Let's back track for just a second... What is [MDX](https://mdxjs.com/)?
 
@@ -21,9 +21,9 @@ To put that into context i've imported and used a React component in this post l
 
 <!-- prettier-ignore -->
 ```javascript
-import { DonutChart } from "../../../components/DonutChart"
+import { WordCountChart } from "../../../components/WordCountChart"
 
-<DonutChart
+<WordCountChart
   title="Average word count"
   dimension="words"
   config={{ year: 0, color: "primary" }}
@@ -32,7 +32,7 @@ import { DonutChart } from "../../../components/DonutChart"
 
 And thanks to MDX the React component magically renders. Like this 👇
 
-<DonutChart
+<WordCountChart
   title="Average word count"
   dimension="words"
   config={{ year: 0, color: "primary" }}

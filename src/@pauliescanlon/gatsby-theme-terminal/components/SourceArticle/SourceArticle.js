@@ -40,79 +40,82 @@ export const SourceArticle = ({
 }) => {
   return (
     <Main>
-      {isPrivate && (
+      {title ? (
         <Fragment>
-          <Alert variant="error">This is a private post</Alert>
-          <Divider />
-        </Fragment>
-      )}
-
-      <Box sx={{ mb: 4 }}>
-        {featuredImage && featuredImage.childImageSharp && (
-          <Img
-            fluid={featuredImage.childImageSharp.fluid}
-            alt={featuredImage.childImageSharp.fluid.originalName}
-          />
-        )}
-        {featuredImageUrl && <Image src={featuredImageUrl} />}
-      </Box>
-      <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
-        {title}
-      </Heading>
-      <Flex sx={{ flexWrap: "wrap" }}>
-        <Box
-          sx={{
-            width: ["100%", "50%"],
-          }}
-        >
-          {date && (
-            <Text sx={{ color: "muted" }}>
-              Date published: {formatDate(date)}
-            </Text>
+          {isPrivate && (
+            <Fragment>
+              <Alert variant="error">This is a private post</Alert>
+              <Divider />
+            </Fragment>
           )}
-        </Box>
-        <Box
-          sx={{
-            width: ["100%", "50%"],
-          }}
-        >
-          {dateModified && (
-            <Text
+          <Box sx={{ mb: 4 }}>
+            {featuredImage && featuredImage.childImageSharp && (
+              <Img
+                fluid={featuredImage.childImageSharp.fluid}
+                alt={featuredImage.childImageSharp.fluid.originalName}
+              />
+            )}
+            {featuredImageUrl && <Image src={featuredImageUrl} />}
+          </Box>
+          <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
+            {title}
+          </Heading>
+          <Flex sx={{ flexWrap: "wrap" }}>
+            <Box
               sx={{
-                color: "muted",
-                textAlign: ["left", "right"],
+                width: ["100%", "50%"],
               }}
             >
-              Date modified: {formatDate(dateModified)}
-            </Text>
-          )}
-        </Box>
-      </Flex>
+              {date && (
+                <Text sx={{ color: "muted" }}>
+                  Date published: {formatDate(date)}
+                </Text>
+              )}
+            </Box>
+            <Box
+              sx={{
+                width: ["100%", "50%"],
+              }}
+            >
+              {dateModified && (
+                <Text
+                  sx={{
+                    color: "muted",
+                    textAlign: ["left", "right"],
+                  }}
+                >
+                  Date modified: {formatDate(dateModified)}
+                </Text>
+              )}
+            </Box>
+          </Flex>
 
-      <Flex sx={{ flexWrap: "wrap" }}>
-        <Box
-          sx={{
-            width: ["100%", "50%"],
-          }}
-        >
-          <Text
-            sx={{ color: "muted" }}
-          >{`${timeToRead} min read / ${wordCount.words} words`}</Text>
-        </Box>
-        {author && (
-          <Box
-            sx={{
-              width: ["100%", "50%"],
-            }}
-          >
-            <Text sx={{ color: "muted", textAlign: ["left", "right"] }}>
-              Author: {author}
-            </Text>
-          </Box>
-        )}
-      </Flex>
+          <Flex sx={{ flexWrap: "wrap" }}>
+            <Box
+              sx={{
+                width: ["100%", "50%"],
+              }}
+            >
+              <Text
+                sx={{ color: "muted" }}
+              >{`${timeToRead} min read / ${wordCount.words} words`}</Text>
+            </Box>
+            {author && (
+              <Box
+                sx={{
+                  width: ["100%", "50%"],
+                }}
+              >
+                <Text sx={{ color: "muted", textAlign: ["left", "right"] }}>
+                  Author: {author}
+                </Text>
+              </Box>
+            )}
+          </Flex>
 
-      <Divider />
+          <Divider />
+        </Fragment>
+      ) : null}
 
       {tags &&
         tags.map((tag, index) => (
@@ -134,18 +137,24 @@ export const SourceArticle = ({
       <MDXProvider>
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
-      <Divider />
-      <Divider />
-      <Text>
-        If you've enjoyed this post I'd love to hear from you:{" "}
-        <Link href="https://twitter.com/PaulieScanlon" target="_blank">
-          @PaulieScanlon
-        </Link>
-      </Text>
-      <Divider />
-      <Link href="https://ko-fi.com/P5P31B7G8" target="_blank">
-        <Image src="https://www.ko-fi.com/img/githubbutton_sm.svg" />
-      </Link>
+
+      {title ? (
+        <Fragment>
+          <Divider />
+          <Divider />
+          <Text>
+            If you've enjoyed this post I'd love to hear from you:{" "}
+            <Link href="https://twitter.com/PaulieScanlon" target="_blank">
+              @PaulieScanlon
+            </Link>
+          </Text>
+          <Divider />
+          <Link href="https://ko-fi.com/P5P31B7G8" target="_blank">
+            <Image src="https://www.ko-fi.com/img/githubbutton_sm.svg" />
+          </Link>
+        </Fragment>
+      ) : null}
+
       {/* <Box
         sx={{
           ".speech-bubble-stroke": {
