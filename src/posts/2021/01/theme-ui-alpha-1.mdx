@@ -12,11 +12,11 @@ import { MrPragma } from "./MrPragma"
 
 In this post I'm going to try and explain [Theme UI](https://theme-ui.com/)'s Jsx Pragma. I hope to create a series of these posts that might help lower to the barrier to entry when learning Theme UI... let's see how that goes ay!
 
-I'll assume at this point you've already installed Theme UI but if you haven't, have a read of: [Getting Started](https://theme-ui.com/getting-started)
-
-The component we're going to build looks like the below and i've called it `<MrPragma />`. You can find the `src` [here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrPragma.js)
+I'll assume at this point you've already installed Theme UI but if you haven't, have a read of the [Getting Started](https://theme-ui.com/getting-started) section from the docs
 
 Before starting to explain Jsx Pragma I'm going to walk you through some steps which I feel are important to understand. The explanation might be a little convoluted but bear with me and hopefully once you reach the Jsx Pragma section it'll make more sense.
+
+To help demonstrate some of the Theme UI's principles we're going to build a very _simple_ component which you can see below, i've called it `<MrPragma />` and you can find the `src` [here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrPragma.js)
 
 <Divider />
 
@@ -26,13 +26,13 @@ Before starting to explain Jsx Pragma I'm going to walk you through some steps w
 
 ## [Theme Object](#theme-object)
 
-The theme object is a little bit like a global CSS file but without all the headaches.
+A core principle of Theme UI is the theme object it's a little bit like global CSS but without all the headaches.
 
-This is key to Theme UI so bookmark the [theme-spec](https://theme-ui.com/theme-spec) page as i'll be referring it frequently.
+This is key to understanding how Theme UI works so feel free to bookmark the [theme-spec](https://theme-ui.com/theme-spec) page as i'll be referring it frequently.
 
-When your first start your site after installing Theme UI you'll notice the background is a kind of purple color. That's fine, it means Theme UI is working and is applying the default styles.
+When your first start your site after installing Theme UI you'll notice the background is a kind of purple color. That's fine, it means Theme UI is working and is applying its default styles.
 
-Depending on which install method you've used will determine the name and location of the theme object. I'm going to base this post on the install method for [gatsby-plugin-theme-ui](https://www.gatsbyjs.com/plugins/gatsby-plugin-theme-ui/?=gatsby-plugin-theme-ui)
+Depending on which install method you've used will determine the file name and location of the theme object. I'm going to base this post on the install method for [gatsby-plugin-theme-ui](https://www.gatsbyjs.com/plugins/gatsby-plugin-theme-ui/?=gatsby-plugin-theme-ui)
 
 To change the default background and text colour you'll need to add a `colors` key to the theme object that contains key value pairs for both `text` and `background`
 
@@ -57,11 +57,11 @@ Theme UI's opening gambit if you like is as follows:
 
 > Build themeable design systems based on constraint-based design principles
 
-The bit i'd like to point out is where it says "constraint-based design principles". Theme UI makes some decisions for us so we don't have to, and when working with CSS some constraints are actually really really helpful. _I'll explain later about how the escape hatch works if you don't want or can't in some scenarios work with the constraints_
+The bit i'd like to point out is where it says "constraint-based design principles". Theme UI makes some decisions for us so we don't have to, and when working with CSS some constraints are actually really really helpful. _In a later posts I'll explain how to use Theme UI's escape hatches if you don't want or can't in some scenarios work with the constraints_
 
 ### [CSS Property maps](#css-property-maps)
 
-This is my opinion is one of the hardest concepts to grasp. The TLDR is Theme UI has made decisions regarding what CSS properties map to what keys in the theme object. The HTML `color` and `background-color` are mapped to the `colors` key which is why the changes above will have an effect on your overall site theme. More on this later
+This is my opinion is one of the hardest concepts to grasp. The TLDR is Theme UI has made decisions regarding what CSS properties map to what objects in the theme object. The HTML `color` and `background-color` are mapped to the `colors` object which is why the changes above will have an effect on your overall site theme. More on this later
 
 ### Object-oriented Programming (OOP):
 
@@ -209,9 +209,9 @@ export const MrPragma = () => {
 
 <Divider />
 
-You'll notice here that `text` is a string. The word or string "text" in CSS wouldn't normally mean anything since CSS will be expecting an actual hex reference. e.g: `#FFFFFF` but since the `sx` prop is compiled using the Jsx Pragma Theme UI is able to look up what that value actually is in the theme object.
+You'll notice here that `text` is a string. The word or string "text" in CSS wouldn't normally mean anything since CSS will be expecting an actual hex reference for a `color` property e.g: `#FFFFFF` but since the `sx` prop is compiled using the Jsx Pragma Theme UI is able to look up what the string value refers to in theme object.
 
-The reason you don't need to write `theme.colors.text` is because Theme UI shorthands the OOP lookup for us by mapping CSS properties of certain types to a constrained set of keys from the theme object
+The reason you don't need to write `theme.colors.text` is because Theme UI shorthands the OOP lookup for us by mapping CSS properties of certain types to a constrained set of objects from the theme object
 
 This is a small glimpse into Theme UI making decisions for us
 

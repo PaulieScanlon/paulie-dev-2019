@@ -324,7 +324,7 @@ So what about server side?
 
 The server side equivalent is Node's [http](https://nodejs.org/api/http.html) module which is built in to Node and does indeed also get the job done.
 
-...but this want to use native functionality poses a problem for the JAMStack developer. If like me you're in a situation where you have a requirement to make both client and server side http requests do you opt to keep things native or do you opt for a solution that works consistently across the stack?
+...but this want to use native functionality poses a problem for the Jamstack developer. If like me you're in a situation where you have a requirement to make both client and server side http requests do you opt to keep things native or do you opt for a solution that works consistently across the stack?
 
 For BumHub i've gone for consistency.
 
@@ -332,7 +332,7 @@ I've chosen to use [axios](https://www.npmjs.com/package/axios).
 
 I wouldn't normally choose this but it can run both client and server side which means my http requests can be written in a consistent fashion. For me on this project, this matters.
 
-JAMStack development requires the humble Front End Developer to be many things and quite frankly it's sometimes too much for my pea brain to take. I feel like I have enough to worry about just making sure my CSS works across the million and one screen sizes that exist. I don't need to be worrying about really dweeby http request methods. If axios can do what it does in the same way when running in Node (server side) as it can in browser (client side) and can be written the same in my project on both sides of the stack then i'm happy to let sleeping dogs lie and crack on with the good stuff.
+Jamstack development requires the humble Front End Developer to be many things and quite frankly it's sometimes too much for my pea brain to take. I feel like I have enough to worry about just making sure my CSS works across the million and one screen sizes that exist. I don't need to be worrying about really dweeby http request methods. If axios can do what it does in the same way when running in Node (server side) as it can in browser (client side) and can be written the same in my project on both sides of the stack then i'm happy to let sleeping dogs lie and crack on with the good stuff.
 
 That's my _opinion_ there are many other valid ones.
 
