@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from "react"
+import { Fragment } from "react"
 import { Grid, Flex, Heading, Text, Spinner } from "theme-ui"
+import { useStaticQuery, graphql } from "gatsby"
 
 export const ProfileInfo = () => {
   const [response, setResponse] = useState({ user: null })
   const [isMounted, setIsMounted] = useState(true)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+
+  const profileData = useStaticQuery(graphql`
+    query ProfileQuery {
+      site {
+        siteMetadata {
+          name
+          description
+        }
+      }
+    }
+  `).site.siteMetadata
+
+  console.log(profileData)
 
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
@@ -32,7 +47,13 @@ export const ProfileInfo = () => {
     <>
       {hasError ? <Text sx={{ color: "error" }}>API Error</Text> : null}
       {!hasError && isLoading ? (
-        <Flex sx={{ justifyContent: "center" }}>
+        <Flex sx={{ justifyContent: "center", minHeight: "150px" }}>
+          <Grid sx={{ gap: 2, display: "none", height: "0px" }}>
+            <Heading as="h1" variant="styles.h1">
+              {profileData.name}
+            </Heading>
+            <Text>{profileData.description}</Text>
+          </Grid>
           <Spinner />
         </Flex>
       ) : null}
