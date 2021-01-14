@@ -26,14 +26,8 @@ import { PostCard } from "../components/PostCard"
           }, [])
           .map((edge, index) => {
             const {
-              frontmatter: {
-                title,
-                featuredImageUrl,
-                tags,
-                date,
-                dateModified,
-                pinned,
-              },
+              featuredImageUrlSharp,
+              frontmatter: { title, tags, date, dateModified, pinned },
               excerpt,
               fields: { slug },
             } = edge.node
@@ -41,7 +35,7 @@ import { PostCard } from "../components/PostCard"
               <PostCard
                 key={index}
                 title={title}
-                featuredImageUrl={featuredImageUrl}
+                featuredImageUrlSharp={featuredImageUrlSharp}
                 tags={tags}
                 date={date}
                 dateModified={dateModified}

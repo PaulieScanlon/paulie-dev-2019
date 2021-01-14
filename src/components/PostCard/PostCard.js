@@ -1,12 +1,13 @@
 import React from "react"
 import { Link as GatsbyLink } from "gatsby"
 import { format } from "date-fns"
-import { Flex, Box, Badge, Link, Card, Image, Heading, Text } from "theme-ui"
+import { Flex, Box, Badge, Link, Card, Heading, Text } from "theme-ui"
 import { mix } from "@theme-ui/color"
+import Img from "gatsby-image"
 
 export const PostCard = ({
   title,
-  featuredImageUrl,
+  featuredImageUrlSharp,
   tags,
   date,
   dateModified,
@@ -46,7 +47,12 @@ export const PostCard = ({
           }}
         >
           <Box sx={{ minHeight: "1px" }}>
-            {featuredImageUrl && <Image src={featuredImageUrl} alt={title} />}
+            {featuredImageUrlSharp && (
+              <Img
+                fluid={featuredImageUrlSharp.childImageSharp.fluid}
+                alt={title}
+              />
+            )}
           </Box>
           <Box
             sx={{

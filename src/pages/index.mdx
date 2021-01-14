@@ -175,14 +175,8 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
         .splice(0, 4)
         .map((edge, index) => {
           const {
-            frontmatter: {
-              title,
-              featuredImageUrl,
-              tags,
-              date,
-              dateModified,
-              pinned,
-            },
+            featuredImageUrlSharp,
+            frontmatter: { title, tags, date, dateModified, pinned },
             excerpt,
             fields: { slug },
           } = edge.node
@@ -190,7 +184,7 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
             <PostCard
               key={index}
               title={title}
-              featuredImageUrl={featuredImageUrl}
+              featuredImageUrlSharp={featuredImageUrlSharp}
               tags={tags}
               date={date}
               dateModified={dateModified}

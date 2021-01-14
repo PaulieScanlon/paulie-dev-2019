@@ -32,7 +32,7 @@ export const SourceArticle = ({
   author,
   isPrivate,
   featuredImage,
-  featuredImageUrl,
+  featuredImageUrlSharp,
   embedded,
   body,
   timeToRead,
@@ -55,7 +55,12 @@ export const SourceArticle = ({
                 alt={featuredImage.childImageSharp.fluid.originalName}
               />
             )}
-            {featuredImageUrl && <Image src={featuredImageUrl} />}
+            {featuredImageUrlSharp && featuredImageUrlSharp.childImageSharp && (
+              <Img
+                fluid={featuredImageUrlSharp.childImageSharp.fluid}
+                alt={featuredImageUrlSharp.childImageSharp.fluid.originalName}
+              />
+            )}
           </Box>
           <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
             {title}
@@ -221,7 +226,7 @@ SourceArticle.propTypes = {
   /** FeaturedImage from frontmatter */
   featuredImage: PropTypes.any,
   /** FeaturedImageUrl from frontmatter */
-  featuredImageUrl: PropTypes.string,
+  featuredImageUrlSharp: PropTypes.any,
   /** embeddedImage array from SourceLayout */
   embedded: PropTypes.any,
   /** body from SourceLayout */
