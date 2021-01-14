@@ -48,7 +48,7 @@ export const SourceArticle = ({
               <Divider />
             </Fragment>
           )}
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: 4, minHeight: 160 }}>
             {featuredImage && featuredImage.childImageSharp && (
               <Img
                 fluid={featuredImage.childImageSharp.fluid}

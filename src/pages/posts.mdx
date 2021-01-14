@@ -10,11 +10,9 @@ import { PostCard } from "../components/PostCard"
 <SourceList filter="posts">
   {(posts) => {
     return (
-      <Flex
+      <Grid
         sx={{
-          flexWrap: "wrap",
-          ml: (theme) => `-${theme.space[2]}px`,
-          mr: (theme) => `-${theme.space[2]}px`,
+          gridTemplateColumns: ["1fr", "1fr", "1fr 1fr"],
         }}
       >
         {posts
@@ -45,7 +43,7 @@ import { PostCard } from "../components/PostCard"
               />
             )
           })}
-      </Flex>
+      </Grid>
     )
   }}
 </SourceList>

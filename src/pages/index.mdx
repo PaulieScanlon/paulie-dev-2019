@@ -158,11 +158,9 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
 
 <SourceList filter="posts">
   {(posts) => (
-    <Flex
+    <Grid
       sx={{
-        flexWrap: "wrap",
-        ml: (theme) => `-${theme.space[2]}px`,
-        mr: (theme) => `-${theme.space[2]}px`,
+        gridTemplateColumns: ["1fr", "1fr", "1fr 1fr"],
       }}
     >
       {posts
@@ -194,7 +192,7 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
             />
           )
         })}
-    </Flex>
+    </Grid>
   )}
 </SourceList>
 <Divider />

@@ -21,9 +21,6 @@ export const PostCard = ({
         display: "flex",
         flex: "1 1 auto",
         flexDirection: "column",
-        mb: 3,
-        maxWidth: ["100%", "100%", "50%", "50%"],
-        width: ["100%", "100%", "50%", "50%"],
       }}
     >
       <Link
@@ -33,7 +30,6 @@ export const PostCard = ({
           display: "flex",
           flex: "1 1 auto",
           flexDirection: "column",
-          m: (theme) => `0px ${theme.space[2]}px`,
           minHeight: "1px",
           textDecoration: "none",
         }}
