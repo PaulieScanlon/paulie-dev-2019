@@ -1,5 +1,5 @@
 import React from "react"
-import { Flex, Box, Heading, Text } from "theme-ui"
+import { Grid, Flex, Box, Heading, Text } from "theme-ui"
 
 import { SourceMonths } from "@pauliescanlon/gatsby-theme-terminal"
 
@@ -10,11 +10,26 @@ export const PostsByMonthChart = ({ config }) => {
     <SourceMonths>
       {(sourceMonths) => {
         const currentYear = sourceMonths[sourceMonths.length - (1 - year)]
+
         return (
           <Box>
-            <Heading variant="styles.h4" sx={{ color: color }}>
-              {currentYear[0].year}
-            </Heading>
+            <Grid
+              sx={{
+                alignItems: "center",
+                gridTemplateColumns: "1fr auto",
+                mb: 3,
+              }}
+            >
+              <Heading variant="styles.h4" sx={{ color: color, mb: 0 }}>
+                {currentYear[0].year}
+              </Heading>
+              <Text
+                sx={{ lineHeight: "heading" }}
+              >{`Total posts: x${currentYear.reduce(
+                (items, item) => items + item.count,
+                0
+              )}`}</Text>
+            </Grid>
             <Box
               sx={{
                 backgroundColor: "surface",
