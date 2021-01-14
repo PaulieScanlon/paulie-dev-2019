@@ -158,11 +158,9 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
 
 <SourceList filter="posts">
   {(posts) => (
-    <Flex
+    <Grid
       sx={{
-        flexWrap: "wrap",
-        ml: (theme) => `-${theme.space[2]}px`,
-        mr: (theme) => `-${theme.space[2]}px`,
+        gridTemplateColumns: ["1fr", "1fr", "1fr 1fr"],
       }}
     >
       {posts
@@ -175,14 +173,8 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
         .splice(0, 4)
         .map((edge, index) => {
           const {
-            frontmatter: {
-              title,
-              featuredImageUrl,
-              tags,
-              date,
-              dateModified,
-              pinned,
-            },
+            featuredImageUrlSharp,
+            frontmatter: { title, tags, date, dateModified, pinned },
             excerpt,
             fields: { slug },
           } = edge.node
@@ -190,7 +182,7 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
             <PostCard
               key={index}
               title={title}
-              featuredImageUrl={featuredImageUrl}
+              featuredImageUrlSharp={featuredImageUrlSharp}
               tags={tags}
               date={date}
               dateModified={dateModified}
@@ -200,7 +192,7 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
             />
           )
         })}
-    </Flex>
+    </Grid>
   )}
 </SourceList>
 <Divider />

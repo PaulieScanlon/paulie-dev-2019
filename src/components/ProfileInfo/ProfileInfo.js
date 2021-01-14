@@ -20,8 +20,6 @@ export const ProfileInfo = () => {
     }
   `).site.siteMetadata
 
-  console.log(profileData)
-
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
       .then((response) => response.text())
