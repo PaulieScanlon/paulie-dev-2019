@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useState, useRef } from 'react'
+import Matter from 'matter-js'
 
 const STATIC_DENSITY = 15
 const PARTICLE_SIZE = 6
@@ -35,7 +35,7 @@ export const MatterStepThree = () => {
       engine: engine,
       canvas: canvasRef.current,
       options: {
-        background: "transparent",
+        background: 'transparent',
         wireframes: false,
       },
     })
@@ -43,7 +43,7 @@ export const MatterStepThree = () => {
     const floor = Bodies.rectangle(0, 0, 0, STATIC_DENSITY, {
       isStatic: true,
       render: {
-        fillStyle: "blue",
+        fillStyle: 'blue',
       },
     })
 
@@ -55,12 +55,12 @@ export const MatterStepThree = () => {
     setContraints(boxRef.current.getBoundingClientRect())
     setScene(render)
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -103,7 +103,7 @@ export const MatterStepThree = () => {
         scene.engine.world,
         Matter.Bodies.circle(randomX, -PARTICLE_SIZE, PARTICLE_SIZE, {
           restitution: PARTICLE_BOUNCYNESS,
-        })
+        }),
       )
     }
   }, [scene, someStateValue])
@@ -112,18 +112,18 @@ export const MatterStepThree = () => {
   return (
     <div
       style={{
-        position: "relative",
-        border: "1px solid white",
-        padding: "8px",
+        position: 'relative',
+        border: '1px solid white',
+        padding: '8px',
       }}
     >
-      <div style={{ textAlign: "center" }}>Checkout</div>
+      <div style={{ textAlign: 'center' }}>Checkout</div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          rowGap: "16px",
-          marginBottom: "32px",
+          display: 'grid',
+          gridTemplateColumns: '1fr auto',
+          rowGap: '16px',
+          marginBottom: '32px',
         }}
       >
         <div>SubTitle</div>
@@ -136,11 +136,11 @@ export const MatterStepThree = () => {
 
       <button
         style={{
-          cursor: "pointer",
-          display: "block",
-          textAlign: "center",
-          marginBottom: "16px",
-          width: "100%",
+          cursor: 'pointer',
+          display: 'block',
+          textAlign: 'center',
+          marginBottom: '16px',
+          width: '100%',
         }}
         onClick={() => handleClick()}
       >
@@ -150,12 +150,12 @@ export const MatterStepThree = () => {
       <div
         ref={boxRef}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
         }}
       >
         <canvas ref={canvasRef} />

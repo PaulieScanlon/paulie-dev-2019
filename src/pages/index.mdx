@@ -2,10 +2,10 @@
 navigationLabel: home
 ---
 
-import { Link as GatsbyLink } from "gatsby"
-import { mix } from "@theme-ui/color"
-import { PostCard } from "../components/PostCard"
-import { ProfileInfo } from "../components/ProfileInfo"
+import { Link as GatsbyLink } from 'gatsby'
+import { mix } from '@theme-ui/color'
+import { PostCard } from '../components/PostCard'
+import { ProfileInfo } from '../components/ProfileInfo'
 
 <Alert variant="error">I'm currently on contract 😊</Alert>
 <Divider />
@@ -42,7 +42,10 @@ import { ProfileInfo } from "../components/ProfileInfo"
 
 ## intro
 
-Well hey there! 👋 I'm Paul and a long long time ago I was a designer but after a few years of pixel pushing I realised code is just better! I’ve held various positions in and around advertising and web development in both permanent and contract positions since 2005, and I once co-founded and ran an award winning digital production agency called Super natural based in London.
+Well hey there! 👋 I'm Paul and a long long time ago I was a designer but after a few years of pixel pushing I realised
+code is just better! I’ve held various positions in and around advertising and web development in both permanent and
+contract positions since 2005, and I once co-founded and ran an award winning digital production agency called Super
+natural based in London.
 
 <Divider />
 
@@ -60,34 +63,19 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
 ## contact
 
 <Text>Email</Text>
-<Link
-  href="mailto:pauliescanlon@gmail.com"
-  target="_blank"
-  variant="styles.a"
-  rel="noopener"
->
+<Link href="mailto:pauliescanlon@gmail.com" target="_blank" variant="styles.a" rel="noopener">
   pauliescanlon@gmail.com
 </Link>
 <Divider />
 
 <Text>Twitter</Text>
-<Link
-  href="https://twitter.com/PaulieScanlon"
-  target="_blank"
-  variant="styles.a"
-  rel="noopener"
->
+<Link href="https://twitter.com/PaulieScanlon" target="_blank" variant="styles.a" rel="noopener">
   https://twitter.com/PaulieScanlon
 </Link>
 <Divider />
 
 <Text>GitHub</Text>
-<Link
-  href="https://github.com/PaulieScanlon"
-  target="_blank"
-  variant="styles.a"
-  rel="noopener"
->
+<Link href="https://github.com/PaulieScanlon" target="_blank" variant="styles.a" rel="noopener">
   https://github.com/PaulieScanlon
 </Link>
 <Divider />
@@ -130,12 +118,8 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
               sx={{
                 mr: 2,
                 mb: 2,
-                color: mix("secondary", "primary", `${index / tags.length}`),
-                borderColor: mix(
-                  "secondary",
-                  "primary",
-                  `${index / tags.length}`
-                ),
+                color: mix('secondary', 'primary', `${index / tags.length}`),
+                borderColor: mix('secondary', 'primary', `${index / tags.length}`),
               }}
             >
               {name}
@@ -160,15 +144,13 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
   {(posts) => (
     <Grid
       sx={{
-        gridTemplateColumns: ["1fr", "1fr", "1fr 1fr"],
+        gridTemplateColumns: ['1fr', '1fr', '1fr 1fr'],
       }}
     >
       {posts
         .filter((edge) => !edge.node.frontmatter.isPrivate)
         .reduce((posts, post) => {
-          return post.node.frontmatter.pinned
-            ? [post, ...posts]
-            : [...posts, post]
+          return post.node.frontmatter.pinned ? [post, ...posts] : [...posts, post]
         }, [])
         .splice(0, 4)
         .map((edge, index) => {
@@ -198,12 +180,12 @@ Well hey there! 👋 I'm Paul and a long long time ago I was a designer but afte
 <Divider />
 <Flex
   sx={{
-    justifyContent: "center",
+    justifyContent: 'center',
   }}
 >
   <Box>
     <Button as={GatsbyLink} variant="ghost" to="/posts">
-      More posts{" "}
+      More posts{' '}
       <Box as="span" role="img" aria-label="pencil">
         ✏️
       </Box>

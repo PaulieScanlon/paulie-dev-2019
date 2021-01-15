@@ -1,8 +1,8 @@
-import React from "react"
-import { Flex, Box, Heading, Text } from "theme-ui"
-import { SourceWords } from "@pauliescanlon/gatsby-theme-terminal"
+import React from 'react'
+import { Flex, Box, Heading, Text } from 'theme-ui'
+import { SourceWords } from '@pauliescanlon/gatsby-theme-terminal'
 
-import { formatNumber } from "../../utils/formatNumber"
+import { formatNumber } from '../../utils/formatNumber'
 
 export const WordsByMonthChart = ({ config }) => {
   const { color, year } = config
@@ -10,10 +10,7 @@ export const WordsByMonthChart = ({ config }) => {
   return (
     <SourceWords>
       {(sourceWords) => {
-        const currentYear =
-          sourceWords.wordCountByMonth[
-            sourceWords.wordCountByMonth.length - (1 - year)
-          ]
+        const currentYear = sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - (1 - year)]
         const { wordCountTotal } = sourceWords
         return (
           <Box>
@@ -29,30 +26,28 @@ export const WordsByMonthChart = ({ config }) => {
                   <Flex
                     key={index}
                     sx={{
-                      backgroundColor: "surface",
-                      flexDirection: "column",
+                      backgroundColor: 'surface',
+                      flexDirection: 'column',
                       mb: 2,
-                      position: "relative",
+                      position: 'relative',
                     }}
                   >
                     <Box
                       sx={{
                         backgroundColor: color,
-                        height: "100%",
-                        position: "absolute",
+                        height: '100%',
+                        position: 'absolute',
                         width: `${percent}%`,
                       }}
                     />
                     <Box
                       sx={{
-                        position: "relative",
-                        display: "flex",
-                        justifyContent: "space-between",
+                        position: 'relative',
+                        display: 'flex',
+                        justifyContent: 'space-between',
                       }}
                     >
-                      <Text sx={{ textTransform: "capitalize", pl: 2 }}>
-                        {name}
-                      </Text>
+                      <Text sx={{ textTransform: 'capitalize', pl: 2 }}>{name}</Text>
                       <Text sx={{ pr: 2 }}>{formatNumber(words)}</Text>
                     </Box>
                   </Flex>

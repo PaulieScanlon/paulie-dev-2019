@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import { jsx, Box, Heading, Text, Grid } from "theme-ui"
-import { shade } from "@theme-ui/color"
-import { keyframes } from "@emotion/react"
-import { useAllMdx } from "@pauliescanlon/gatsby-theme-terminal"
+import { jsx, Box, Heading, Text, Grid } from 'theme-ui'
+import { shade } from '@theme-ui/color'
+import { keyframes } from '@emotion/react'
+import { useAllMdx } from '@pauliescanlon/gatsby-theme-terminal'
 
-const RADIUS = "15.91549430918954"
+const RADIUS = '15.91549430918954'
 const VIEW_BOX = 42
 const FIRST_OFFSET = 25
 const CIRCUMERANCE = 100
@@ -60,52 +60,47 @@ export const TagPercentChart = ({ year, color }) => {
       </Heading>
       <Box
         sx={{
-          backgroundColor: "surface",
+          backgroundColor: 'surface',
           py: 2,
         }}
       >
         <Box
           sx={{
-            position: "relative",
-            mx: "auto",
-            width: ["100%", "100%", "70%"],
+            position: 'relative',
+            mx: 'auto',
+            width: ['100%', '100%', '70%'],
           }}
         >
           <Box
             sx={{
-              position: "absolute",
-              transform: "translate(-49%, -50%)",
-              top: "49%",
-              left: "50%",
+              position: 'absolute',
+              transform: 'translate(-49%, -50%)',
+              top: '49%',
+              left: '50%',
             }}
           >
             <Text
               sx={{
-                textAlign: "center",
+                textAlign: 'center',
                 color: color,
                 fontSize: 3,
-                fontWeight: "bold",
-                lineHeight: "1",
+                fontWeight: 'bold',
+                lineHeight: '1',
               }}
             >
               {currentYear - -year}
             </Text>
             <Text
               sx={{
-                textAlign: "center",
+                textAlign: 'center',
                 color: color,
-                lineHeight: "1",
+                lineHeight: '1',
               }}
             >
               Top 5 tags
             </Text>
           </Box>
-          <svg
-            id="donut-chart"
-            width="100%"
-            height="100%"
-            viewBox={`0 0 ${VIEW_BOX} ${VIEW_BOX}`}
-          >
+          <svg id="donut-chart" width="100%" height="100%" viewBox={`0 0 ${VIEW_BOX} ${VIEW_BOX}`}>
             <title>Doughnut chart of popular tags</title>
             {tags.map((statistic, index) => {
               const { tag, percentage, remainder } = statistic
@@ -117,21 +112,17 @@ export const TagPercentChart = ({ year, color }) => {
                   role="presentation"
                   sx={{
                     stroke: shade(color, index / 7),
-                    fill: "transparent",
-                    animationTimingFunction: "cubic-bezier",
-                    animationFillMode: "forwards",
-                    animationDuration: "1s",
+                    fill: 'transparent',
+                    animationTimingFunction: 'cubic-bezier',
+                    animationFillMode: 'forwards',
+                    animationDuration: '1s',
                     animationName: keyframes({
-                      "0%": {
-                        strokeDashoffset: "0",
+                      '0%': {
+                        strokeDashoffset: '0',
                       },
-                      "100%": {
+                      '100%': {
                         strokeDashoffset: `${
-                          CIRCUMERANCE -
-                          tags
-                            .slice(0, index)
-                            .reduce((a, b) => a + b.percentage, 0) +
-                          FIRST_OFFSET
+                          CIRCUMERANCE - tags.slice(0, index).reduce((a, b) => a + b.percentage, 0) + FIRST_OFFSET
                         }`,
                       },
                     }).toString(),
@@ -160,28 +151,28 @@ export const TagPercentChart = ({ year, color }) => {
               <Grid
                 key={index}
                 sx={{
-                  alignItems: "center",
-                  gridTemplateColumns: "1fr auto",
+                  alignItems: 'center',
+                  gridTemplateColumns: '1fr auto',
                 }}
               >
                 <Grid
                   sx={{
-                    alignItems: "center",
+                    alignItems: 'center',
                     gap: 2,
-                    gridTemplateColumns: "12px auto",
+                    gridTemplateColumns: '12px auto',
                   }}
                 >
                   <Box
                     sx={{
-                      width: "12px",
-                      height: "12px",
+                      width: '12px',
+                      height: '12px',
                       backgroundColor: shade(color, index / 7),
-                      borderRadius: "100%",
+                      borderRadius: '100%',
                     }}
                   />
                   <Text>{tag}</Text>
                 </Grid>
-                <Text sx={{ fontWeight: "bold" }}>{`x${count}`}</Text>
+                <Text sx={{ fontWeight: 'bold' }}>{`x${count}`}</Text>
               </Grid>
             )
           })}

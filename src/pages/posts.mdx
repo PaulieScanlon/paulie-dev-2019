@@ -2,8 +2,8 @@
 navigationLabel: posts
 ---
 
-import { Link as GatsbyLink } from "gatsby"
-import { PostCard } from "../components/PostCard"
+import { Link as GatsbyLink } from 'gatsby'
+import { PostCard } from '../components/PostCard'
 
 # posts
 
@@ -12,15 +12,13 @@ import { PostCard } from "../components/PostCard"
     return (
       <Grid
         sx={{
-          gridTemplateColumns: ["1fr", "1fr", "1fr 1fr"],
+          gridTemplateColumns: ['1fr', '1fr', '1fr 1fr'],
         }}
       >
         {posts
           .filter((edge) => !edge.node.frontmatter.isPrivate)
           .reduce((posts, post) => {
-            return post.node.frontmatter.pinned
-              ? [post, ...posts]
-              : [...posts, post]
+            return post.node.frontmatter.pinned ? [post, ...posts] : [...posts, post]
           }, [])
           .map((edge, index) => {
             const {

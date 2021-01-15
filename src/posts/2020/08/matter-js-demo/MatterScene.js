@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useRef, useState } from 'react'
+import Matter from 'matter-js'
 
 const STATIC_DENSITY = 15
 const PARTICLE_SIZE = 6
@@ -28,16 +28,16 @@ export const MatterScene = ({ particleTrigger }) => {
       engine: engine,
       canvas: canvasRef.current,
       options: {
-        background: "transparent",
+        background: 'transparent',
         wireframes: false,
       },
     })
 
     const floor = Matter.Bodies.rectangle(0, 0, 0, STATIC_DENSITY, {
       isStatic: true,
-      label: "floor",
+      label: 'floor',
       render: {
-        fillStyle: "transparent",
+        fillStyle: 'transparent',
       },
     })
 
@@ -49,12 +49,12 @@ export const MatterScene = ({ particleTrigger }) => {
     setContraints(boxRef.current.getBoundingClientRect())
     setScene(render)
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -67,7 +67,7 @@ export const MatterScene = ({ particleTrigger }) => {
         scene.engine.world,
         Matter.Bodies.circle(randomX, -PARTICLE_SIZE, PARTICLE_SIZE, {
           restitution: PARTICLE_BOUNCYNESS,
-        })
+        }),
       )
     }
   }, [particleTrigger])
@@ -106,12 +106,12 @@ export const MatterScene = ({ particleTrigger }) => {
     <div
       ref={boxRef}
       style={{
-        position: "absolute",
-        overflow: "hidden",
+        position: 'absolute',
+        overflow: 'hidden',
         top: 0,
         left: 0,
-        width: "100%",
-        height: "100%",
+        width: '100%',
+        height: '100%',
         zIndex: 996,
       }}
     >

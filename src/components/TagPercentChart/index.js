@@ -1,1 +1,1 @@
-export { TagPercentChart } from "./TagPercentChart"
+export { TagPercentChart } from './TagPercentChart'

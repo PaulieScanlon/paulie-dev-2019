@@ -1,45 +1,58 @@
 ---
 title: gatsby-theme-terminal
-tags: ["Gatsby", "Gatsby Themes"]
+tags: ['Gatsby', 'Gatsby Themes']
 date: 2020-02-28
 dateModified: 2020-05-06
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915597/paulie.dev/2020/02/gatsby-theme-terminal_enq0b4.jpg
 ---
 
-import { mix } from "@theme-ui/color"
-import { PostCard } from "../../../components/PostCard"
+import { mix } from '@theme-ui/color'
+import { PostCard } from '../../../components/PostCard'
 
-This is my second attempt at creating a [Gatsby theme](https://www.gatsbyjs.org/docs/themes/) and my approach to this build was very different to the first time round.
+This is my second attempt at creating a [Gatsby theme](https://www.gatsbyjs.org/docs/themes/) and my approach to this
+build was very different to the first time round.
 
-If you want to dive right in you can see a demo here [https://gatsby-theme-terminal.netlify.com/](https://gatsby-theme-terminal.netlify.com/)
+If you want to dive right in you can see a demo here
+[https://gatsby-theme-terminal.netlify.com/](https://gatsby-theme-terminal.netlify.com/)
 
-In my first theme [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) i was treating the theme like it was a fully complete UI toolkit / Component Library and data provider all rolled in to one...
+In my first theme [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) i was treating the theme like it
+was a fully complete UI toolkit / Component Library and data provider all rolled in to one...
 
 ...this feels wrong ❌
 
 "Wrong" sounds a bit harsh but [Gatsby Themes](https://www.gatsbyjs.org/docs/themes/) are different to Wordpress Themes.
 
-If you've worked with Wordpress Themes you'll know the score, they are as i mentioned above "fully complete" and after you install and add your content you have a website or blog looking and working _perfectly_.
+If you've worked with Wordpress Themes you'll know the score, they are as i mentioned above "fully complete" and after
+you install and add your content you have a website or blog looking and working _perfectly_.
 
-The problem i've found with Wordpress is, it's fine if you want your site or blog to look and function in exactly the same way as the theme, but the troubles begin when you need something to be slightly different.
+The problem i've found with Wordpress is, it's fine if you want your site or blog to look and function in exactly the
+same way as the theme, but the troubles begin when you need something to be slightly different.
 
-Your only options are to hack over the top of the theme until you arrive at something both you and your client are happy with.
+Your only options are to hack over the top of the theme until you arrive at something both you and your client are happy
+with.
 
-This, in the "past" was an acceptable approach to web development but with Gatsby Themes the team have ushered in a new way of thinking, you can of course create a theme that does as i've mentioned above, but Gatsby themes **are** and **can** be so much more!
+This, in the "past" was an acceptable approach to web development but with Gatsby Themes the team have ushered in a new
+way of thinking, you can of course create a theme that does as i've mentioned above, but Gatsby themes **are** and
+**can** be so much more!
 
-I learned a lot from building my first theme but i learned a lot more when i started to use it ... this blog used to use [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) and whilst it does serve a purpose there were one or two areas where i've found it to be restrictive.
+I learned a lot from building my first theme but i learned a lot more when i started to use it ... this blog used to use
+[gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) and whilst it does serve a purpose there were one or
+two areas where i've found it to be restrictive.
 
-My new theme [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com) (the theme this blog is now built on) tries to remove those restrictions and aims to separate two very important _and_ different parts of a theme.
+My new theme [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com) (the theme this blog is now built on)
+tries to remove those restrictions and aims to separate two very important _and_ different parts of a theme.
 
 1. The data
 2. The presentation
 
 ## The data
 
-The data is somewhat a fixed set of rules. You can't for a number of reasons provide users of your theme the ability to create new `frontmatter` fields because your theme's GraphQL queries needs to know what they're called.
+The data is somewhat a fixed set of rules. You can't for a number of reasons provide users of your theme the ability to
+create new `frontmatter` fields because your theme's GraphQL queries needs to know what they're called.
 
-That said, by providing a decent set of `frontmatter` options for your users they should be able to get the right data _to_ and _from_ their file nodes.
+That said, by providing a decent set of `frontmatter` options for your users they should be able to get the right data
+_to_ and _from_ their file nodes.
 
 [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com) exposes the following frontmatter fields:
 
@@ -61,13 +74,17 @@ embeddedImages:
 
 ## The presentation
 
-This is where we use the data, but _how_ we use the data shouldn't be a job for the theme, whats to say that my requirements for creating a "posts list" will be the same for every user of the theme, and why restrict this to a single component that renders a list in a particular way, or even renders a list at all.
+This is where we use the data, but _how_ we use the data shouldn't be a job for the theme, whats to say that my
+requirements for creating a "posts list" will be the same for every user of the theme, and why restrict this to a single
+component that renders a list in a particular way, or even renders a list at all.
 
-What we really want is to provide the theme users with both a set of UI components that they can compose any which way they like **and** the data.
+What we really want is to provide the theme users with both a set of UI components that they can compose any which way
+they like **and** the data.
 
 This abstraction was fundamental to my approach with [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com)
 
-Let's start with data and by looking at the [`<SourceList />`](https://gatsby-theme-terminal.netlify.com/components/#source-list) component provided by the theme.
+Let's start with data and by looking at the
+[`<SourceList />`](https://gatsby-theme-terminal.netlify.com/components/#source-list) component provided by the theme.
 
 <Divider />
 
@@ -88,7 +105,9 @@ Let's start with data and by looking at the [`<SourceList />`](https://gatsby-th
 
 <Divider />
 
-The `<SourceList />` components finds and returns all data for all the `.mdx` files that have been defined in the [theme options](https://github.com/PaulieScanlon/gatsby-theme-terminal#theme-options) and gives you back an array of objects a bit like this.
+The `<SourceList />` components finds and returns all data for all the `.mdx` files that have been defined in the
+[theme options](https://github.com/PaulieScanlon/gatsby-theme-terminal#theme-options) and gives you back an array of
+objects a bit like this.
 
 <Divider />
 
@@ -119,11 +138,13 @@ The `<SourceList />` components finds and returns all data for all the `.mdx` fi
 
 <Divider />
 
-These are pretty much what GraphQL returns and in this component i've left the data untouched so theme users can map over the array and return any DOM node(s) they like.
+These are pretty much what GraphQL returns and in this component i've left the data untouched so theme users can map
+over the array and return any DOM node(s) they like.
 
 Now let's look at the presentation.
 
-Instead of a `ul` / `li` it might be nice to return some cards which have the featured image, the date, an excerpt, any tags used in the post and a "View Post" call to action, and then link it via the slug to the actual page.
+Instead of a `ul` / `li` it might be nice to return some cards which have the featured image, the date, an excerpt, any
+tags used in the post and a "View Post" call to action, and then link it via the slug to the actual page.
 
 To do this we can de-structure a bit more of the data returned from the `<SourceList />` component
 
@@ -139,7 +160,8 @@ const {
 
 <Divider />
 
-...and then use some of the [theme-ui/components](https://theme-ui.com/components) which are provided by the theme to create something a bit more eye catching, like one of `<Card />`components used on the posts page, like this 👇
+...and then use some of the [theme-ui/components](https://theme-ui.com/components) which are provided by the theme to
+create something a bit more eye catching, like one of `<Card />`components used on the posts page, like this 👇
 
 <SourceList filter="posts">
   {(posts) => {
@@ -149,14 +171,7 @@ const {
       fields: { slug },
     } = posts[3].node
     return (
-      <PostCard
-        title={title}
-        featuredImage={featuredImage}
-        tags={tags}
-        date={date}
-        excerpt={excerpt}
-        slug={slug}
-      />
+      <PostCard title={title} featuredImage={featuredImage} tags={tags} date={date} excerpt={excerpt} slug={slug} />
     )
   }}
 </SourceList>
@@ -173,25 +188,19 @@ const {
       excerpt,
       fields: { slug },
     } = posts[3].node
-    return (
-      <Card
-        title={title}
-        featuredImage={featuredImage}
-        tags={tags}
-        date={date}
-        excerpt={excerpt}
-        slug={slug}
-      />
-    )
+    return <Card title={title} featuredImage={featuredImage} tags={tags} date={date} excerpt={excerpt} slug={slug} />
   }}
 </SourceList>
 ```
 
 <Divider />
 
-To understand what's going on here you do need to be a little familiar with [theme-ui/components](https://theme-ui.com/components) but in short they are UI components that can be re-styled by adding object keys to your theme-ui theme.
+To understand what's going on here you do need to be a little familiar with
+[theme-ui/components](https://theme-ui.com/components) but in short they are UI components that can be re-styled by
+adding object keys to your theme-ui theme.
 
-A little segway here but with [gatsby-plugin-theme-ui](https://www.gatsbyjs.org/packages/gatsby-plugin-theme-ui/) you can write all your styles in one place and by providing design tokens all of your HTML can be styled very easily.
+A little segway here but with [gatsby-plugin-theme-ui](https://www.gatsbyjs.org/packages/gatsby-plugin-theme-ui/) you
+can write all your styles in one place and by providing design tokens all of your HTML can be styled very easily.
 
 for example
 
@@ -220,7 +229,8 @@ export default {
 
 <Divider />
 
-... and if you wanted to provide styles for any or all of the [theme-ui/components](https://theme-ui.com/components) components you can do something like this
+... and if you wanted to provide styles for any or all of the [theme-ui/components](https://theme-ui.com/components)
+components you can do something like this
 
 <Divider />
 
@@ -256,7 +266,10 @@ export default {
 
 <Divider />
 
-Using this method means that it doesn't matter how your theme users want to render their data because you've already provided them with a set of UI components that when used already feel like part of the same theme. Furthermore if what your theme users want isn't part of this components list they can use the `sx={{}}` prop to add theme specific styles to _any_ HTML element.
+Using this method means that it doesn't matter how your theme users want to render their data because you've already
+provided them with a set of UI components that when used already feel like part of the same theme. Furthermore if what
+your theme users want isn't part of this components list they can use the `sx={{}}` prop to add theme specific styles to
+_any_ HTML element.
 
 There's one more step that i feel is pretty essential in theme development and that's how to provide the components.
 
@@ -267,7 +280,7 @@ like this
 <Divider />
 
 ```javascript
-import { Card } from "@theme-ui/components"
+import { Card } from '@theme-ui/components'
 ```
 
 <Divider />
@@ -287,6 +300,8 @@ import * as themeUiComponents from "@theme-ui/components"
 
 <Divider />
 
-I'm pretty confident in this approach and have just used this theme to update my commercial portfolio [pauliescalon.io](https://www.pauliescanlon.io/) and found it to be as flexible as i'd intended.
+I'm pretty confident in this approach and have just used this theme to update my commercial portfolio
+[pauliescalon.io](https://www.pauliescanlon.io/) and found it to be as flexible as i'd intended.
 
-I'm always looking to improve my work so if you're using this theme and have any questions or problems please do let me know, i'd honestly love to hear from you [@pauliescanlon](https://twitter.com/PaulieScanlon)
+I'm always looking to improve my work so if you're using this theme and have any questions or problems please do let me
+know, i'd honestly love to hear from you [@pauliescanlon](https://twitter.com/PaulieScanlon)

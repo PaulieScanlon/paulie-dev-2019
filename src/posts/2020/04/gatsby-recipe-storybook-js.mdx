@@ -1,6 +1,6 @@
 ---
 title: gatsby-recipe-storybook-js
-tags: ["Gatsby", "Gatsby Recipes", "Storybook", "JavaScript"]
+tags: ['Gatsby', 'Gatsby Recipes', 'Storybook', 'JavaScript']
 date: 2020-04-26
 dateModified: 2020-05-08
 author: Paul Scanlon
@@ -9,7 +9,9 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v159591
 
 If you haven't tried Gatsby Recipes yet you really should!
 
-You can read a bit more about them [here](https://www.gatsbyjs.org/blog/2020-04-15-announcing-gatsby-recipes/) which will give you a better overview of how they work, but to summarize here's a quote from Gatsby founder [Kyle Mathews](https://www.gatsbyjs.org/contributors/kyle-mathews/)
+You can read a bit more about them [here](https://www.gatsbyjs.org/blog/2020-04-15-announcing-gatsby-recipes/) which
+will give you a better overview of how they work, but to summarize here's a quote from Gatsby founder
+[Kyle Mathews](https://www.gatsbyjs.org/contributors/kyle-mathews/)
 
 > Gatsby Recipes, a new tool to automate common site building tasks.
 
@@ -35,11 +37,14 @@ gatsby recipes url-to-recipe/name-of-recipe.mdx
 
 ## The Storybook Problem
 
-The problem in a nutshell is that Gatsby does a few things when you run either `gatsby develop` or `gatsby build` that Storybook by default does not.
+The problem in a nutshell is that Gatsby does a few things when you run either `gatsby develop` or `gatsby build` that
+Storybook by default does not.
 
-To get the two playing nicely together we need a custom webpack config and it's precisely tasks like this where Gatsby Recipes can do the lions share of the work so you don't have to! 🦁
+To get the two playing nicely together we need a custom webpack config and it's precisely tasks like this where Gatsby
+Recipes can do the lions share of the work so you don't have to! 🦁
 
-For instance, if you have any components that contain either a `<Link />` imported from `gatsby` or any GraphQL queries you'll likely see an error not to dissimilar to this 👇
+For instance, if you have any components that contain either a `<Link />` imported from `gatsby` or any GraphQL queries
+you'll likely see an error not to dissimilar to this 👇
 
 <Divider />
 
@@ -57,8 +62,10 @@ You may need an appropriate loader to handle this file type, currently no loader
 
 <Divider />
 
-- The first reason we get this error is because Gatsby exports as ES6 and Storybook by default expects all code to be ES5 / CommonJs.
-- The second reason is that the `gatsby develop` and `gatsby build` steps remove GraphQL queries, Storybook by default does not.
+- The first reason we get this error is because Gatsby exports as ES6 and Storybook by default expects all code to be
+  ES5 / CommonJs.
+- The second reason is that the `gatsby develop` and `gatsby build` steps remove GraphQL queries, Storybook by default
+  does not.
 
 So that's the issue, but what can we do about fixing it?
 
@@ -66,7 +73,9 @@ So that's the issue, but what can we do about fixing it?
 
 ## The solution
 
-Storybook allows us to write our own webpack config and there's some docs on that [here](https://storybook.js.org/docs/configurations/custom-webpack-config/) but in short we need to push a new rule to the Storybook webpack config that will mimic the Gatsby build steps.
+Storybook allows us to write our own webpack config and there's some docs on that
+[here](https://storybook.js.org/docs/configurations/custom-webpack-config/) but in short we need to push a new rule to
+the Storybook webpack config that will mimic the Gatsby build steps.
 
 This new rule will do the following things.
 
@@ -75,7 +84,8 @@ This new rule will do the following things.
 - Strip out any GraphQL queries
 - Add the `react-docgen` plugin (not essential but i like prop documentation)
 
-This doesn't sound like a huge job but if you're scared of Webpack like i am it's nice to be able to automate this step so you can just get on and develop your UI.
+This doesn't sound like a huge job but if you're scared of Webpack like i am it's nice to be able to automate this step
+so you can just get on and develop your UI.
 
 So that's why i created this recipe.
 
@@ -128,10 +138,14 @@ This recipe is now part of the official Gatsby CLI 🎉 You can test it out by r
 
 <Divider />
 
-The repo can be found here on [GitHub](https://github.com/PaulieScanlon/gatsby-recipe-storybook-js) and if you're interested in the Webpack config you can find that here in [main.js](https://github.com/PaulieScanlon/gatsby-recipe-storybook-js/blob/master/recipe/main.js)
+The repo can be found here on [GitHub](https://github.com/PaulieScanlon/gatsby-recipe-storybook-js) and if you're
+interested in the Webpack config you can find that here in
+[main.js](https://github.com/PaulieScanlon/gatsby-recipe-storybook-js/blob/master/recipe/main.js)
 
-Oh and before i forget, make sure you've run `gatsby develop` or `gatsby build` _before_ you start Storybook, because we need the relevant GraphQL data to exist before we run Storybook.
+Oh and before i forget, make sure you've run `gatsby develop` or `gatsby build` _before_ you start Storybook, because we
+need the relevant GraphQL data to exist before we run Storybook.
 
-There's also a **TypeScript** flavor of this recipe, you can read about that here [gatsby-recipe-storybook-ts](/posts/2020/05/gatsby-recipe-storybook-ts/)
+There's also a **TypeScript** flavor of this recipe, you can read about that here
+[gatsby-recipe-storybook-ts](/posts/2020/05/gatsby-recipe-storybook-ts/)
 
 Lemme know how you get on! [@pauliescanlon](https://twitter.com/PaulieScanlon)

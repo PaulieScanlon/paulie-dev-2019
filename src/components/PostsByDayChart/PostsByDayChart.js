@@ -1,7 +1,7 @@
-import React from "react"
-import { Flex, Box, Heading, Text } from "theme-ui"
+import React from 'react'
+import { Flex, Box, Heading, Text } from 'theme-ui'
 
-import { SourceDays } from "@pauliescanlon/gatsby-theme-terminal"
+import { SourceDays } from '@pauliescanlon/gatsby-theme-terminal'
 
 export const PostsByDayChart = ({ config }) => {
   const { color, year } = config
@@ -24,30 +24,28 @@ export const PostsByDayChart = ({ config }) => {
                     <Flex
                       key={index}
                       sx={{
-                        backgroundColor: "surface",
-                        flexDirection: "column",
+                        backgroundColor: 'surface',
+                        flexDirection: 'column',
                         mb: 2,
-                        position: "relative",
+                        position: 'relative',
                       }}
                     >
                       <Box
                         sx={{
                           backgroundColor: color,
-                          height: "100%",
-                          position: "absolute",
+                          height: '100%',
+                          position: 'absolute',
                           width: `${percent}%`,
                         }}
                       />
                       <Box
                         sx={{
-                          position: "relative",
-                          display: "flex",
-                          justifyContent: "space-between",
+                          position: 'relative',
+                          display: 'flex',
+                          justifyContent: 'space-between',
                         }}
                       >
-                        <Text sx={{ textTransform: "capitalize", pl: 2 }}>
-                          {name}
-                        </Text>
+                        <Text sx={{ textTransform: 'capitalize', pl: 2 }}>{name}</Text>
                         <Text sx={{ pr: 2 }}>{`x${count}`}</Text>
                       </Box>
                     </Flex>

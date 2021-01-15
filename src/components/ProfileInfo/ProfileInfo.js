@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
-import { Fragment } from "react"
-import { Grid, Flex, Heading, Text, Spinner } from "theme-ui"
-import { useStaticQuery, graphql } from "gatsby"
+import React, { useEffect, useState } from 'react'
+import { Fragment } from 'react'
+import { Grid, Flex, Heading, Text, Spinner } from 'theme-ui'
+import { useStaticQuery, graphql } from 'gatsby'
 
 export const ProfileInfo = () => {
   const [response, setResponse] = useState({ user: null })
@@ -43,10 +43,10 @@ export const ProfileInfo = () => {
 
   return (
     <>
-      {hasError ? <Text sx={{ color: "error" }}>API Error</Text> : null}
+      {hasError ? <Text sx={{ color: 'error' }}>API Error</Text> : null}
       {!hasError && isLoading ? (
-        <Flex sx={{ justifyContent: "center", minHeight: "150px" }}>
-          <Grid sx={{ gap: 2, display: "none", height: "0px" }}>
+        <Flex sx={{ justifyContent: 'center', minHeight: '150px' }}>
+          <Grid sx={{ gap: 2, display: 'none', height: '0px' }}>
             <Heading as="h1" variant="styles.h1">
               {profileData.name}
             </Heading>
@@ -58,7 +58,7 @@ export const ProfileInfo = () => {
       {!hasError && !isLoading && response.user ? (
         <Grid sx={{ gap: 2 }}>
           <Heading as="h1" variant="styles.h1">
-            {response.user.name.toLowerCase().replace(" ", "-")}
+            {response.user.name.toLowerCase().replace(' ', '-')}
           </Heading>
           <Text>{response.user.description}</Text>
           <Text>Location: {response.user.location}</Text>

@@ -1,7 +1,7 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
-const excluded = ["Dummy", "Tags"]
+const excluded = ['Dummy', 'Tags']
 
 export const MrDoughnut = () => {
   const tagData = useStaticQuery(graphql`
@@ -51,18 +51,18 @@ export const MrDoughnut = () => {
       }
     })
 
-  const colors = ["#ff6090", "#3f51b5", "#00bcd4", "#8bc34a", "#ffc107"]
+  const colors = ['#ff6090', '#3f51b5', '#00bcd4', '#8bc34a', '#ffc107']
 
   return (
     <div
       style={{
-        margin: "0 auto",
+        margin: '0 auto',
         width: 300,
       }}
     >
       <div
         style={{
-          position: "relative",
+          position: 'relative',
         }}
       >
         <svg width="100%" height="100%" viewBox="0 0 40 40">
@@ -76,13 +76,7 @@ export const MrDoughnut = () => {
                 cy="20"
                 r="15.91549430918954"
                 strokeDasharray={`${percentage} ${remainder}`}
-                strokeDashoffset={
-                  100 -
-                  tagData
-                    .slice(0, index)
-                    .reduce((a, b) => a + b.percentage, 0) +
-                  25
-                }
+                strokeDashoffset={100 - tagData.slice(0, index).reduce((a, b) => a + b.percentage, 0) + 25}
                 strokeWidth="6"
                 fill="transparent"
                 stroke={colors[index]}
@@ -92,28 +86,23 @@ export const MrDoughnut = () => {
         </svg>
         <div
           style={{
-            position: "absolute",
-            transform: "translate(-50%, -50%)",
-            top: "50%",
-            left: "50%",
-            textAlign: "center",
+            position: 'absolute',
+            transform: 'translate(-50%, -50%)',
+            top: '50%',
+            left: '50%',
+            textAlign: 'center',
           }}
         >
           <div
             style={{
-              fontSize: "20px",
-              fontWeight: "bold",
-              lineHeight: "14px",
+              fontSize: '20px',
+              fontWeight: 'bold',
+              lineHeight: '14px',
             }}
           >
             Top 5 tags
           </div>
-          <a
-            href="https://paulie.dev"
-            target="_blank"
-            rel="noreferrer"
-            style={{ color: "#ff6090" }}
-          >
+          <a href="https://paulie.dev" target="_blank" rel="noreferrer" style={{ color: '#ff6090' }}>
             paulie.dev
           </a>
         </div>
@@ -125,24 +114,24 @@ export const MrDoughnut = () => {
             <div
               key={index}
               style={{
-                alignItems: "center",
-                display: "grid",
-                gridTemplateColumns: "1fr auto",
+                alignItems: 'center',
+                display: 'grid',
+                gridTemplateColumns: '1fr auto',
               }}
             >
               <div
                 style={{
-                  alignItems: "center",
-                  display: "grid",
+                  alignItems: 'center',
+                  display: 'grid',
                   gridGap: 8,
-                  gridTemplateColumns: "12px auto",
+                  gridTemplateColumns: '12px auto',
                 }}
               >
                 <div
                   style={{
                     width: 12,
                     height: 12,
-                    borderRadius: "100%",
+                    borderRadius: '100%',
                     backgroundColor: colors[index],
                   }}
                 />
