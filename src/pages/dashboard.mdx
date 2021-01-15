@@ -2,11 +2,11 @@
 navigationLabel: dashboard
 ---
 
-import { PostsByMonthChart } from "../components/PostsByMonthChart"
-import { PostsByDayChart } from "../components/PostsByDayChart"
-import { WordsByMonthChart } from "../components/WordsByMonthChart"
-import { WordCountChart } from "../components/WordCountChart"
-import { TagPercentChart } from "../components/TagPercentChart"
+import { PostsByMonthChart } from '../components/PostsByMonthChart'
+import { PostsByDayChart } from '../components/PostsByDayChart'
+import { WordsByMonthChart } from '../components/WordsByMonthChart'
+import { WordCountChart } from '../components/WordCountChart'
+import { TagPercentChart } from '../components/TagPercentChart'
 
 # dashboard
 
@@ -18,9 +18,9 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 
 <Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
 
-<TagPercentChart year={0} color={"primary"} />
+<TagPercentChart year={0} color={'primary'} />
 
-<TagPercentChart year={-1} color={"secondary"} />
+<TagPercentChart year={-1} color={'secondary'} />
 
 </Grid>
 
@@ -34,14 +34,14 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 <PostsByDayChart
   config={{
     year: 0,
-    color: "primary",
+    color: 'primary',
   }}
 />
 
 <PostsByDayChart
   config={{
     year: -1,
-    color: "secondary",
+    color: 'secondary',
   }}
 />
 
@@ -57,14 +57,14 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 <PostsByMonthChart
   config={{
     year: 0,
-    color: "primary",
+    color: 'primary',
   }}
 />
 
 <PostsByMonthChart
   config={{
     year: -1,
-    color: "secondary",
+    color: 'secondary',
   }}
 />
 
@@ -80,14 +80,14 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 <WordsByMonthChart
   config={{
     year: 0,
-    color: "primary",
+    color: 'primary',
   }}
 />
 
 <WordsByMonthChart
   config={{
     year: -1,
-    color: "secondary",
+    color: 'secondary',
   }}
 />
 
@@ -100,16 +100,8 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 
 <Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
 
-<WordCountChart
-  title="Average word count"
-  dimension="words"
-  config={{ year: 0, color: "primary" }}
-/>
+<WordCountChart title="Average word count" dimension="words" config={{ year: 0, color: 'primary' }} />
 
-<WordCountChart
-  title="Average word count"
-  dimension="words"
-  config={{ year: -1, color: "secondary" }}
-/>
+<WordCountChart title="Average word count" dimension="words" config={{ year: -1, color: 'secondary' }} />
 
 </Grid>

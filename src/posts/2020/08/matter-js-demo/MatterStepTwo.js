@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useState, useRef } from 'react'
+import Matter from 'matter-js'
 
 const STATIC_DENSITY = 15
 
@@ -27,7 +27,7 @@ export const MatterStepTwo = () => {
       engine: engine,
       canvas: canvasRef.current,
       options: {
-        background: "rgba(255, 0, 0, 0.5)",
+        background: 'rgba(255, 0, 0, 0.5)',
         wireframes: false,
       },
     })
@@ -35,14 +35,14 @@ export const MatterStepTwo = () => {
     const floor = Bodies.rectangle(0, 0, 0, STATIC_DENSITY, {
       isStatic: true,
       render: {
-        fillStyle: "blue",
+        fillStyle: 'blue',
       },
     })
 
     const ball = Bodies.circle(150, 0, 10, {
       restitution: 0.9,
       render: {
-        fillStyle: "yellow",
+        fillStyle: 'yellow',
       },
     })
 
@@ -54,12 +54,12 @@ export const MatterStepTwo = () => {
     setContraints(boxRef.current.getBoundingClientRect())
     setScene(render)
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -95,18 +95,18 @@ export const MatterStepTwo = () => {
   return (
     <div
       style={{
-        position: "relative",
-        border: "1px solid white",
-        padding: "8px",
+        position: 'relative',
+        border: '1px solid white',
+        padding: '8px',
       }}
     >
-      <div style={{ textAlign: "center" }}>Checkout</div>
+      <div style={{ textAlign: 'center' }}>Checkout</div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          rowGap: "16px",
-          marginBottom: "32px",
+          display: 'grid',
+          gridTemplateColumns: '1fr auto',
+          rowGap: '16px',
+          marginBottom: '32px',
         }}
       >
         <div>SubTitle</div>
@@ -119,11 +119,11 @@ export const MatterStepTwo = () => {
 
       <button
         style={{
-          cursor: "pointer",
-          display: "block",
-          textAlign: "center",
-          marginBottom: "16px",
-          width: "100%",
+          cursor: 'pointer',
+          display: 'block',
+          textAlign: 'center',
+          marginBottom: '16px',
+          width: '100%',
         }}
       >
         Checkout
@@ -132,11 +132,11 @@ export const MatterStepTwo = () => {
       <div
         ref={boxRef}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
         }}
       >
         <canvas ref={canvasRef} />

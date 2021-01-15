@@ -1,7 +1,7 @@
-import React from "react"
-import { Grid, Flex, Box, Heading, Text } from "theme-ui"
+import React from 'react'
+import { Grid, Flex, Box, Heading, Text } from 'theme-ui'
 
-import { SourceMonths } from "@pauliescanlon/gatsby-theme-terminal"
+import { SourceMonths } from '@pauliescanlon/gatsby-theme-terminal'
 
 export const PostsByMonthChart = ({ config }) => {
   const { color, year } = config
@@ -15,46 +15,44 @@ export const PostsByMonthChart = ({ config }) => {
           <Box>
             <Grid
               sx={{
-                alignItems: "center",
-                gridTemplateColumns: "1fr auto",
+                alignItems: 'center',
+                gridTemplateColumns: '1fr auto',
                 mb: 3,
               }}
             >
               <Heading variant="styles.h4" sx={{ color: color, mb: 0 }}>
                 {currentYear[0].year}
               </Heading>
-              <Text
-                sx={{ lineHeight: "heading" }}
-              >{`Total posts: x${currentYear.reduce(
+              <Text sx={{ lineHeight: 'heading' }}>{`Total posts: x${currentYear.reduce(
                 (items, item) => items + item.count,
-                0
+                0,
               )}`}</Text>
             </Grid>
             <Box
               sx={{
-                backgroundColor: "surface",
-                display: "flex",
-                flex: "1 1 auto",
+                backgroundColor: 'surface',
+                display: 'flex',
+                flex: '1 1 auto',
                 p: 1,
                 height: 240,
               }}
             >
-              <Flex sx={{ flexWrap: "wrap", width: "100%" }}>
+              <Flex sx={{ flexWrap: 'wrap', width: '100%' }}>
                 {currentYear.map((month, index) => {
                   const { initial, count, percent } = month
                   return (
                     <Box
                       key={index}
                       sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-end",
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-end',
                         width: `${100 / currentYear.length}%`,
                       }}
                     >
                       <Text
                         sx={{
-                          textAlign: "center",
+                          textAlign: 'center',
                         }}
                       >
                         {`x${count}`}
@@ -69,8 +67,8 @@ export const PostsByMonthChart = ({ config }) => {
                       />
                       <Text
                         sx={{
-                          textTransform: "uppercase",
-                          textAlign: "center",
+                          textTransform: 'uppercase',
+                          textAlign: 'center',
                         }}
                       >
                         {initial}

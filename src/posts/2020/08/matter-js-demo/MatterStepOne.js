@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useRef } from 'react'
+import Matter from 'matter-js'
 
 export const MatterStepOne = () => {
   const boxRef = useRef(null)
@@ -20,7 +20,7 @@ export const MatterStepOne = () => {
       options: {
         width: 300,
         height: 300,
-        background: "rgba(255, 0, 0, 0.5)",
+        background: 'rgba(255, 0, 0, 0.5)',
         wireframes: false,
       },
     })
@@ -28,14 +28,14 @@ export const MatterStepOne = () => {
     const floor = Bodies.rectangle(150, 300, 300, 20, {
       isStatic: true,
       render: {
-        fillStyle: "blue",
+        fillStyle: 'blue',
       },
     })
 
     const ball = Bodies.circle(150, 0, 10, {
       restitution: 0.9,
       render: {
-        fillStyle: "yellow",
+        fillStyle: 'yellow',
       },
     })
 
@@ -49,7 +49,7 @@ export const MatterStepOne = () => {
     <div
       ref={boxRef}
       style={{
-        border: "1px solid white",
+        border: '1px solid white',
         width: 300,
         height: 300,
       }}

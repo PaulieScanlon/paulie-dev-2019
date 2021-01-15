@@ -1,7 +1,7 @@
-import React, { Fragment } from "react"
-import PropTypes from "prop-types"
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import { MDXProvider } from "@mdx-js/react"
+import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
 import {
   Heading,
   Badge,
@@ -13,16 +13,16 @@ import {
   // Button,
   Divider,
   Alert,
-} from "theme-ui"
-import { mix } from "@theme-ui/color"
-import { format } from "date-fns"
-import Img from "gatsby-image"
+} from 'theme-ui'
+import { mix } from '@theme-ui/color'
+import { format } from 'date-fns'
+import Img from 'gatsby-image'
 
 // import { SvgBubbleSlider } from "react-svg-bubble-slider"
 
-import { Main } from "@pauliescanlon/gatsby-theme-terminal/src/components/Main"
+import { Main } from '@pauliescanlon/gatsby-theme-terminal/src/components/Main'
 
-const formatDate = (date) => format(new Date(date), "d-MMM-u")
+const formatDate = (date) => format(new Date(date), 'd-MMM-u')
 
 export const SourceArticle = ({
   title,
@@ -50,10 +50,7 @@ export const SourceArticle = ({
           )}
           <Box sx={{ mb: 4, minHeight: 160 }}>
             {featuredImage && featuredImage.childImageSharp && (
-              <Img
-                fluid={featuredImage.childImageSharp.fluid}
-                alt={featuredImage.childImageSharp.fluid.originalName}
-              />
+              <Img fluid={featuredImage.childImageSharp.fluid} alt={featuredImage.childImageSharp.fluid.originalName} />
             )}
             {featuredImageUrlSharp && featuredImageUrlSharp.childImageSharp && (
               <Img
@@ -65,28 +62,24 @@ export const SourceArticle = ({
           <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
             {title}
           </Heading>
-          <Flex sx={{ flexWrap: "wrap" }}>
+          <Flex sx={{ flexWrap: 'wrap' }}>
             <Box
               sx={{
-                width: ["100%", "50%"],
+                width: ['100%', '50%'],
               }}
             >
-              {date && (
-                <Text sx={{ color: "muted" }}>
-                  Date published: {formatDate(date)}
-                </Text>
-              )}
+              {date && <Text sx={{ color: 'muted' }}>Date published: {formatDate(date)}</Text>}
             </Box>
             <Box
               sx={{
-                width: ["100%", "50%"],
+                width: ['100%', '50%'],
               }}
             >
               {dateModified && (
                 <Text
                   sx={{
-                    color: "muted",
-                    textAlign: ["left", "right"],
+                    color: 'muted',
+                    textAlign: ['left', 'right'],
                   }}
                 >
                   Date modified: {formatDate(dateModified)}
@@ -95,25 +88,21 @@ export const SourceArticle = ({
             </Box>
           </Flex>
 
-          <Flex sx={{ flexWrap: "wrap" }}>
+          <Flex sx={{ flexWrap: 'wrap' }}>
             <Box
               sx={{
-                width: ["100%", "50%"],
+                width: ['100%', '50%'],
               }}
             >
-              <Text
-                sx={{ color: "muted" }}
-              >{`${timeToRead} min read / ${wordCount.words} words`}</Text>
+              <Text sx={{ color: 'muted' }}>{`${timeToRead} min read / ${wordCount.words} words`}</Text>
             </Box>
             {author && (
               <Box
                 sx={{
-                  width: ["100%", "50%"],
+                  width: ['100%', '50%'],
                 }}
               >
-                <Text sx={{ color: "muted", textAlign: ["left", "right"] }}>
-                  Author: {author}
-                </Text>
+                <Text sx={{ color: 'muted', textAlign: ['left', 'right'] }}>Author: {author}</Text>
               </Box>
             )}
           </Flex>
@@ -130,8 +119,8 @@ export const SourceArticle = ({
             sx={{
               mb: 2,
               mr: 2,
-              color: mix("muted", "primary", `${index / tags.length}`),
-              borderColor: mix("muted", "primary", `${index / tags.length}`),
+              color: mix('muted', 'primary', `${index / tags.length}`),
+              borderColor: mix('muted', 'primary', `${index / tags.length}`),
             }}
           >
             {tag}
@@ -148,7 +137,7 @@ export const SourceArticle = ({
           <Divider />
           <Divider />
           <Text>
-            If you've enjoyed this post I'd love to hear from you:{" "}
+            If you've enjoyed this post I'd love to hear from you:{' '}
             <Link href="https://twitter.com/PaulieScanlon" target="_blank">
               @PaulieScanlon
             </Link>

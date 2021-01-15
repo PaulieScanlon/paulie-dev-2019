@@ -1,23 +1,22 @@
 ---
 title: React hooks and matter.js
-tags: ["React", "JavaScript", "matter.js"]
+tags: ['React', 'JavaScript', 'matter.js']
 date: 2020-08-03
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1596455021/paulie.dev/2020/08/react-hooks-and-matter-js_lj4ozy.jpg
 ---
 
-import {
-  Checkout,
-  MatterStepOne,
-  MatterStepTwo,
-  MatterStepThree,
-} from "./matter-js-demo"
+import { Checkout, MatterStepOne, MatterStepTwo, MatterStepThree } from './matter-js-demo'
 
-Recently I was creating a Shopify demo application and became a little underwhelmed with the Checkout experience and so decided to inject a bit of "joy" into an otherwise quite dull UI component... it was my demo so why not ay? 🤷‍♂️
+Recently I was creating a Shopify demo application and became a little underwhelmed with the Checkout experience and so
+decided to inject a bit of "joy" into an otherwise quite dull UI component... it was my demo so why not ay? 🤷‍♂️
 
-My plan was to add a "particle" every time the quantity of a product in the _Order_ changed. I wanted this particle to have real world physics and I wanted each particle to have collision detection so that it would bounce off other particles.
+My plan was to add a "particle" every time the quantity of a product in the _Order_ changed. I wanted this particle to
+have real world physics and I wanted each particle to have collision detection so that it would bounce off other
+particles.
 
-Quite a few years ago I used a physics engined called [matter.js](https://brm.io/matter-js/) but matter.js pre-dates React so I was curious to see if I could create the same cool physics based _animations_ in React.
+Quite a few years ago I used a physics engined called [matter.js](https://brm.io/matter-js/) but matter.js pre-dates
+React so I was curious to see if I could create the same cool physics based _animations_ in React.
 
 Here's what I came up with, have a play around with the `Qty` input.
 
@@ -30,7 +29,9 @@ Here's what I came up with, have a play around with the `Qty` input.
 <Divider />
 <Divider />
 
-If you'd like to start using [matter.js](https://brm.io/matter-js/) in your project I hope this will give you some indication of how to install it, use it, and the bit I really struggled with, how to make the "canvas" and "floor" responsive.
+If you'd like to start using [matter.js](https://brm.io/matter-js/) in your project I hope this will give you some
+indication of how to install it, use it, and the bit I really struggled with, how to make the "canvas" and "floor"
+responsive.
 
 Start by installing [matter.js](https://brm.io/matter-js/)
 
@@ -38,14 +39,16 @@ Start by installing [matter.js](https://brm.io/matter-js/)
 npm install matter-js --save
 ```
 
-Next create a component where you'll do all the "matter" setup, and here's an absolute minimal setup that will get you started. The src file for `MatterStepOne.js` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepOne.js)
+Next create a component where you'll do all the "matter" setup, and here's an absolute minimal setup that will get you
+started. The src file for `MatterStepOne.js` can be found
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepOne.js)
 
 ## Step One - Setup
 
 ```javascript
 // MatterStepOne.js
-import React, { useEffect, useRef } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useRef } from 'react'
+import Matter from 'matter-js'
 
 export const MatterStepOne = () => {
   const boxRef = useRef(null)
@@ -66,7 +69,7 @@ export const MatterStepOne = () => {
       options: {
         width: 300,
         height: 300,
-        background: "rgba(255, 0, 0, 0.5)",
+        background: 'rgba(255, 0, 0, 0.5)',
         wireframes: false,
       },
     })
@@ -74,14 +77,14 @@ export const MatterStepOne = () => {
     const floor = Bodies.rectangle(150, 300, 300, 20, {
       isStatic: true,
       render: {
-        fillStyle: "blue",
+        fillStyle: 'blue',
       },
     })
 
     const ball = Bodies.circle(150, 0, 10, {
       restitution: 0.9,
       render: {
-        fillStyle: "yellow",
+        fillStyle: 'yellow',
       },
     })
 
@@ -115,15 +118,19 @@ There's a couple of things going on here so I'll talk you through some React spe
 
 ### useRef
 
-`useRef` is used twice here, first to get a ref to the containing div, `boxRef` and then again on the canvas, `canvasRef`. These are so we can tell matter.js which element to render the canvas in and which canvas we'd like to render the matter.js _engine_ and _world_ in. You'll see both of those refs used in the `Render.create({})` method.
+`useRef` is used twice here, first to get a ref to the containing div, `boxRef` and then again on the canvas,
+`canvasRef`. These are so we can tell matter.js which element to render the canvas in and which canvas we'd like to
+render the matter.js _engine_ and _world_ in. You'll see both of those refs used in the `Render.create({})` method.
 
 ### useEffect
 
-As you may know using `useEffect` with an empty dependencies array means the code will only run once and only run when the component has mounted. It's in here where you can set up the matter.js `Engine`, `Render`, `World` and `Bodies`
+As you may know using `useEffect` with an empty dependencies array means the code will only run once and only run when
+the component has mounted. It's in here where you can set up the matter.js `Engine`, `Render`, `World` and `Bodies`
 
 ## Step Two - Responsive
 
-I had a long hard look around the internet and couldn't really find anything that helped me out here so I've come up with my own solution.
+I had a long hard look around the internet and couldn't really find anything that helped me out here so I've come up
+with my own solution.
 
 The first thing to get your head around is the difference between...
 
@@ -145,22 +152,28 @@ let render = Render.create({
 })
 ```
 
-We could use `CSS` to make the `canvas` and containing `div` fill `100%` or to put it another way, make them responsive, but... matter.js would still think the canvas has a `width` and `height` of `300`
+We could use `CSS` to make the `canvas` and containing `div` fill `100%` or to put it another way, make them responsive,
+but... matter.js would still think the canvas has a `width` and `height` of `300`
 
-To make the canvas truly responsive we need to do update matter.js with some new values which will be used as the `width` and `height`. In addition to this the position and width of the floor also need to be updated.
+To make the canvas truly responsive we need to do update matter.js with some new values which will be used as the
+`width` and `height`. In addition to this the position and width of the floor also need to be updated.
 
 To achieve this I've added a `resize` listener to the `window`
 
-When the `window` is resized `handleResize()` is called which uses `getBoundingClientRect()` to get the `width` and `height` of the `boxRef`.
+When the `window` is resized `handleResize()` is called which uses `getBoundingClientRect()` to get the `width` and
+`height` of the `boxRef`.
 
-These values are then used to update the state value `constraints` which will cause a re-render then we can grab these new `width` and `height` values in a second `useEffect` which is triggered only when the new constraint values are set and use them to dynamically update both the floor and the canvas
+These values are then used to update the state value `constraints` which will cause a re-render then we can grab these
+new `width` and `height` values in a second `useEffect` which is triggered only when the new constraint values are set
+and use them to dynamically update both the floor and the canvas
 
-The src file for `MatterStepTwo.js` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepTwo.js)
+The src file for `MatterStepTwo.js` can be found
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepTwo.js)
 
 ```javascript
 //MatterStepTwo.js
-import React, { useEffect, useState, useRef } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useState, useRef } from 'react'
+import Matter from 'matter-js'
 
 const STATIC_DENSITY = 15
 
@@ -188,7 +201,7 @@ export const MatterStepTwo = () => {
       engine: engine,
       canvas: canvasRef.current,
       options: {
-        background: "rgba(255, 0, 0, 0.5)",
+        background: 'rgba(255, 0, 0, 0.5)',
         wireframes: false,
       },
     })
@@ -196,14 +209,14 @@ export const MatterStepTwo = () => {
     const floor = Bodies.rectangle(0, 0, 0, STATIC_DENSITY, {
       isStatic: true,
       render: {
-        fillStyle: "blue",
+        fillStyle: 'blue',
       },
     })
 
     const ball = Bodies.circle(150, 0, 10, {
       restitution: 0.9,
       render: {
-        fillStyle: "yellow",
+        fillStyle: 'yellow',
       },
     })
 
@@ -215,12 +228,12 @@ export const MatterStepTwo = () => {
     setContraints(boxRef.current.getBoundingClientRect())
     setScene(render)
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -254,16 +267,14 @@ export const MatterStepTwo = () => {
   }, [scene, constraints])
 
   return (
-    <div
-      style={{ position: "relative", border: "1px solid blue", padding: "8px" }}
-    >
-      <div style={{ textAlign: "center" }}>Checkout</div>
+    <div style={{ position: 'relative', border: '1px solid blue', padding: '8px' }}>
+      <div style={{ textAlign: 'center' }}>Checkout</div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          rowGap: "16px",
-          marginBottom: "32px",
+          display: 'grid',
+          gridTemplateColumns: '1fr auto',
+          rowGap: '16px',
+          marginBottom: '32px',
         }}
       >
         <div>SubTitle</div>
@@ -276,11 +287,11 @@ export const MatterStepTwo = () => {
 
       <button
         style={{
-          cursor: "pointer",
-          display: "block",
-          textAlign: "center",
-          marginBottom: "16px",
-          width: "100%",
+          cursor: 'pointer',
+          display: 'block',
+          textAlign: 'center',
+          marginBottom: '16px',
+          width: '100%',
         }}
       >
         Checkout
@@ -289,11 +300,11 @@ export const MatterStepTwo = () => {
       <div
         ref={boxRef}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
         }}
       >
         <canvas ref={canvasRef} />
@@ -311,15 +322,17 @@ Which should render something like this 👇
 
 ## Step Three - Triggers
 
-The final step is to trigger a re-render when an interaction happens. In the top example this is when the value of the inputs change but in this step I'll show how to do it from an `onClick` on the button. (it's just easier to explain)
+The final step is to trigger a re-render when an interaction happens. In the top example this is when the value of the
+inputs change but in this step I'll show how to do it from an `onClick` on the button. (it's just easier to explain)
 
-The src file for `MatterStepThree.js` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepThree.js)
+The src file for `MatterStepThree.js` can be found
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/blob/master/src/posts/2020/08/matter-js-demo/MatterStepThree.js)
 
 ```javascript
 // MatterStepThree.js
 
-import React, { useEffect, useState, useRef } from "react"
-import Matter from "matter-js"
+import React, { useEffect, useState, useRef } from 'react'
+import Matter from 'matter-js'
 
 const STATIC_DENSITY = 15
 const PARTICLE_SIZE = 6
@@ -355,7 +368,7 @@ export const MatterStepThree = () => {
       engine: engine,
       canvas: canvasRef.current,
       options: {
-        background: "transparent",
+        background: 'transparent',
         wireframes: false,
       },
     })
@@ -363,7 +376,7 @@ export const MatterStepThree = () => {
     const floor = Bodies.rectangle(0, 0, 0, STATIC_DENSITY, {
       isStatic: true,
       render: {
-        fillStyle: "blue",
+        fillStyle: 'blue',
       },
     })
 
@@ -375,12 +388,12 @@ export const MatterStepThree = () => {
     setContraints(boxRef.current.getBoundingClientRect())
     setScene(render)
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -422,7 +435,7 @@ export const MatterStepThree = () => {
         scene.engine.world,
         Matter.Bodies.circle(randomX, -PARTICLE_SIZE, PARTICLE_SIZE, {
           restitution: PARTICLE_BOUNCYNESS,
-        })
+        }),
       )
     }
   }, [someStateValue])
@@ -430,18 +443,18 @@ export const MatterStepThree = () => {
   return (
     <div
       style={{
-        position: "relative",
-        border: "1px solid white",
-        padding: "8px",
+        position: 'relative',
+        border: '1px solid white',
+        padding: '8px',
       }}
     >
-      <div style={{ textAlign: "center" }}>Checkout</div>
+      <div style={{ textAlign: 'center' }}>Checkout</div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          rowGap: "16px",
-          marginBottom: "32px",
+          display: 'grid',
+          gridTemplateColumns: '1fr auto',
+          rowGap: '16px',
+          marginBottom: '32px',
         }}
       >
         <div>SubTitle</div>
@@ -454,11 +467,11 @@ export const MatterStepThree = () => {
 
       <button
         style={{
-          cursor: "pointer",
-          display: "block",
-          textAlign: "center",
-          marginBottom: "16px",
-          width: "100%",
+          cursor: 'pointer',
+          display: 'block',
+          textAlign: 'center',
+          marginBottom: '16px',
+          width: '100%',
         }}
         onClick={() => handleClick()}
       >
@@ -468,12 +481,12 @@ export const MatterStepThree = () => {
       <div
         ref={boxRef}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
         }}
       >
         <canvas ref={canvasRef} />
@@ -487,4 +500,8 @@ Which should render something like this 👇, go ahead and click the "Checkout" 
 
 <MatterStepThree />
 
-The main takeout from this is that to add a new ball I've added another `useEffect` that is triggered when `someStateValue` changes. The code in this `useEffect` adds a new ball at a `randomX` position between 0 and what ever the current `width` is set to. In this example it's the `onClick` that changes the `someStateValue` but in the top example that `useEffect` is triggered whenever the quantities change and is fired by the inputs not the Checkout button... apologies if that's a little confusing!
+The main takeout from this is that to add a new ball I've added another `useEffect` that is triggered when
+`someStateValue` changes. The code in this `useEffect` adds a new ball at a `randomX` position between 0 and what ever
+the current `width` is set to. In this example it's the `onClick` that changes the `someStateValue` but in the top
+example that `useEffect` is triggered whenever the quantities change and is fired by the inputs not the Checkout
+button... apologies if that's a little confusing!

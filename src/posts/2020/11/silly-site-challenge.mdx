@@ -1,35 +1,25 @@
 ---
 title: Silly Site Challenge
-tags: ["Gatsby"]
+tags: ['Gatsby']
 date: 2020-11-27
 dateModified: 2020-12-21
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1606306250/paulie.dev/2020/11/silly-site-challenge_g3fse9.jpg
 ---
 
-<Link
-  href="https://bumhub.netlify.app/"
-  target="_blank"
-  sx={{ color: "secondary", textDecoration: "none" }}
->
+<Link href="https://bumhub.netlify.app/" target="_blank" sx={{ color: 'secondary', textDecoration: 'none' }}>
   <Card sx={{ p: 3 }}>
-    <Text sx={{ color: "primary", m: 0, fontSize: 3, fontWeight: "bold" }}>
-      BumHub
-    </Text>
-    <Text sx={{ color: "text", fontSize: 2 }}>
-      The cheekiest way to explore GitHub
-    </Text>
+    <Text sx={{ color: 'primary', m: 0, fontSize: 3, fontWeight: 'bold' }}>BumHub</Text>
+    <Text sx={{ color: 'text', fontSize: 2 }}>The cheekiest way to explore GitHub</Text>
     <Flex sx={{ fontSize: 0, mb: 3 }}>
       <Text sx={{ mr: 1 }}>A</Text>
-      <Text sx={{ color: "primary", fontWeight: "bold", mr: 1 }}>
-        #SillySiteChallenge
-      </Text>
+      <Text sx={{ color: 'primary', fontWeight: 'bold', mr: 1 }}>#SillySiteChallenge</Text>
       <Text sx={{ mr: 1 }}>by</Text>
-      <Text sx={{ color: "success", fontWeight: "bold" }}>@PaulieScanlon</Text>
+      <Text sx={{ color: 'success', fontWeight: 'bold' }}>@PaulieScanlon</Text>
     </Flex>
     <Divider />
     <Flex>
-      <Button as="span" variant="ghost" sx={{ flex: 1, pointerEvents: "none" }}>
+      <Button as="span" variant="ghost" sx={{ flex: 1, pointerEvents: 'none' }}>
         Visit BumHub {/* eslint-disable */}
         <Box as="span" role="img" aria-label="peach">
           🍑
@@ -47,9 +37,12 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
 
 <Tweet tweetLink="PaulieScanlon/status/1341703685768966144" />
 
-Today i've pushed a couple of small changes. Bum Hub now has a footer section outlining roles and responsibilities on the project along with a shout out to my internet friends.
+Today i've pushed a couple of small changes. Bum Hub now has a footer section outlining roles and responsibilities on
+the project along with a shout out to my internet friends.
 
-Because I use [Theme UI](https://theme-ui.com/) this kind of UI work literally takes seconds. It's actually more work to create a git branch and a PR than it is to create two new sections... well a `<section />` and a `<footer />` if we're to be semantically correct.
+Because I use [Theme UI](https://theme-ui.com/) this kind of UI work literally takes seconds. It's actually more work to
+create a git branch and a PR than it is to create two new sections... well a `<section />` and a `<footer />` if we're
+to be semantically correct.
 
 ... and I can't think of anything to say about todays update.
 
@@ -61,13 +54,18 @@ Because I use [Theme UI](https://theme-ui.com/) this kind of UI work literally t
 
 🚨 BRAND NEW FEATURE ALERT 🚨
 
-Pleased to present [Bum Bum Maker](https://bumhub.netlify.app/bum-bum-maker) and cooorrr blimey guv'nor this was a lot of work!
+Pleased to present [Bum Bum Maker](https://bumhub.netlify.app/bum-bum-maker) and cooorrr blimey guv'nor this was a lot
+of work!
 
-As I mentioned in Update 7 I wanted to make a bit more of a point regarding what you can do with Gatsby, and the TLDR version is... anything you damn well please. Gatsby is built on top of React so if you can do it with React you can do it with Gatsby.
+As I mentioned in Update 7 I wanted to make a bit more of a point regarding what you can do with Gatsby, and the TLDR
+version is... anything you damn well please. Gatsby is built on top of React so if you can do it with React you can do
+it with Gatsby.
 
 Bum Bum Maker is an interactive character chooser tool, and it works like this.
 
-I have a React component called [`<MakerBum />`](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx) which receives a config array which looks a bit like the below
+I have a React component called
+[`<MakerBum />`](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx) which
+receives a config array which looks a bit like the below
 
 _i've removed some of the options for brevity FYI_
 
@@ -167,26 +165,35 @@ export const bumBumConfig = [
 
 <Divider />
 
-There's a couple of reasons for this. Firstly and, this is quite common in "app like" development, the UI is usually driven by data, Bum Bum Maker is no different. I have a _list_ of Radio buttons grouped together for each _part_ of the bum, eg. Head, Face, etc and using a top level `name` key means I can leverage normal HTML Radio behavior by grouping them together thus only allowing one Radio from each _part_ to be selected at any given time.
+There's a couple of reasons for this. Firstly and, this is quite common in "app like" development, the UI is usually
+driven by data, Bum Bum Maker is no different. I have a _list_ of Radio buttons grouped together for each _part_ of the
+bum, eg. Head, Face, etc and using a top level `name` key means I can leverage normal HTML Radio behavior by grouping
+them together thus only allowing one Radio from each _part_ to be selected at any given time.
 
-The individual options themselves accept a `label`, `value`, and a default value for `checked`. I've also added a `meta` key. This is how I determine if the _list_ items are to have a little graphic of the value or a tone swatch.
+The individual options themselves accept a `label`, `value`, and a default value for `checked`. I've also added a `meta`
+key. This is how I determine if the _list_ items are to have a little graphic of the value or a tone swatch.
 
-The tone hex reference comes from the tone key in Theme UI's [color object](https://github.com/PaulieScanlon/bumhub/blob/main/src/gatsby-plugin-theme-ui/index.ts#L31). The reason for directly referencing the color object in this way means that if I were to add a new tone to the theme the _list_ would automatically display a Radio button for it's given value... nice ey!
+The tone hex reference comes from the tone key in Theme UI's
+[color object](https://github.com/PaulieScanlon/bumhub/blob/main/src/gatsby-plugin-theme-ui/index.ts#L31). The reason
+for directly referencing the color object in this way means that if I were to add a new tone to the theme the _list_
+would automatically display a Radio button for it's given value... nice ey!
 
-Using a config object like this is great for the Bum Bum Maker page elements but it's a bit verbose to drive the Svg conditional `<g>` rendering.... allow me to explain.
+Using a config object like this is great for the Bum Bum Maker page elements but it's a bit verbose to drive the Svg
+conditional `<g>` rendering.... allow me to explain.
 
-By using my old chum [Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) and [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) I can "loop" over the items in the `bumBumConfig` array and reduce the array down so it only contains the names of the _options_ that have `checked: true`
+By using my old chum
+[Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+and
+[Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+I can "loop" over the items in the `bumBumConfig` array and reduce the array down so it only contains the names of the
+_options_ that have `checked: true`
 
 ```javascript
 // src/components/maker-bum.tsx
 
 const getCheckedProperties = (config: IMakerConfigItem[]) => {
   return config.reduce((items, item) => {
-    items.push(
-      item.options
-        .filter((option) => option.checked)
-        .map((option) => option.value)[0]
-    )
+    items.push(item.options.filter((option) => option.checked).map((option) => option.value)[0])
     return items
   }, [])
 }
@@ -198,12 +205,14 @@ This results in a **new** array of strings for each _option_ that is checked eg
 
 ```javascript
 // (results array)
-;["beard", "noMiscellaneous", "headphones", "laptopStickers", "3"]
+;['beard', 'noMiscellaneous', 'headphones', 'laptopStickers', '3']
 ```
 
 <Divider />
 
-Then I can use these values to _pick_ a key from a [properties](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx#L40) dispatch table...
+Then I can use these values to _pick_ a key from a
+[properties](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx#L40) dispatch
+table...
 
 _again i've removed a lot from the below example for brevity_
 
@@ -246,21 +255,41 @@ export const MakerBum: FunctionComponent<IMakerBumProps> = ({ config }) => {
 
 <Divider />
 
-For the values contained within the new array I return the Svg `<g>` element(s) and for values that aren't I return `null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
+For the values contained within the new array I return the Svg `<g>` element(s) and for values that aren't I return
+`null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
 
-If you open up your developer tools and find the Svg element, then click around on the Radio buttons you'll see the Svg re-renders it's child `<g>` elements according to the checked values provided by the Radio buttons. I typically use this approach in my day job to build complex web applications for companies that make bazillions that no one cares about but here i'm using the same approach to conditionally render an Svg Bum graphic which really puts the _fun_ into Functional Programming.
+If you open up your developer tools and find the Svg element, then click around on the Radio buttons you'll see the Svg
+re-renders it's child `<g>` elements according to the checked values provided by the Radio buttons. I typically use this
+approach in my day job to build complex web applications for companies that make bazillions that no one cares about but
+here i'm using the same approach to conditionally render an Svg Bum graphic which really puts the _fun_ into Functional
+Programming.
 
-The fruits of this labour intensive task result in a fun UI with an added treat for the user allowing them to download their custom bum graphic as a bitmap in 16:9 aspect ratio, perfect for sharing on Twitter.
+The fruits of this labour intensive task result in a fun UI with an added treat for the user allowing them to download
+their custom bum graphic as a bitmap in 16:9 aspect ratio, perfect for sharing on Twitter.
 
-This feature was a bit of a last minute idea but i'm pretty pleased with the outcome. It's purely luck that all the separate parts of the illustrations work together in any given order as this wasn't part of my original brief to [Miss_ChatZ](https://dribbble.com/Miss_ChatZ)
+This feature was a bit of a last minute idea but i'm pretty pleased with the outcome. It's purely luck that all the
+separate parts of the illustrations work together in any given order as this wasn't part of my original brief to
+[Miss_ChatZ](https://dribbble.com/Miss_ChatZ)
 
-Having reviewed the [Pre-submission checklist](https://www.gatsbyjs.com/silly-site-challenge-faq/#pre-submission-checklist) i've also been working on accessibility and performance and one thing I noticed on the home page was a warning about **maximum DOM depth**, this was due to the amount of Pants Up / Pants Down bums i'm rendering for the advent calendar. A relatively quick fix for this was to limit the amount of Advent Cards to render on initial page load.
+Having reviewed the
+[Pre-submission checklist](https://www.gatsbyjs.com/silly-site-challenge-faq/#pre-submission-checklist) i've also been
+working on accessibility and performance and one thing I noticed on the home page was a warning about **maximum DOM
+depth**, this was due to the amount of Pants Up / Pants Down bums i'm rendering for the advent calendar. A relatively
+quick fix for this was to limit the amount of Advent Cards to render on initial page load.
 
-I've achieved this by utilizing [Array.prototype.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice). Here's the [code](https://github.com/PaulieScanlon/bumhub/blob/main/src/pages/index.tsx#L120) but in short depending on if the state value `isAdventExpanded` is `true` or `false` I either render the full array or slice the array from -2 indexes from the current day + 2 indexes which gives me a day before the current day and 2 days after the current day or simply just x4 Advent Cards. This has improved the lighthouse scores too.
+I've achieved this by utilizing
+[Array.prototype.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice).
+Here's the [code](https://github.com/PaulieScanlon/bumhub/blob/main/src/pages/index.tsx#L120) but in short depending on
+if the state value `isAdventExpanded` is `true` or `false` I either render the full array or slice the array from -2
+indexes from the current day + 2 indexes which gives me a day before the current day and 2 days after the current day or
+simply just x4 Advent Cards. This has improved the lighthouse scores too.
 
-An added bonus to this fix is that the UX has slightly improved because the user now doesn't need to scroll quite so far to see the other sections in the page, Bum Search, Bum UI etc.
+An added bonus to this fix is that the UX has slightly improved because the user now doesn't need to scroll quite so far
+to see the other sections in the page, Bum Search, Bum UI etc.
 
-I also popped a little [useLocalStorage](https://usehooks.com/useLocalStorage/) hook in for the `isAdventExpanded` value. This is so the page remembers if you were or weren't in the expanded state when you navigate to and from the index page.
+I also popped a little [useLocalStorage](https://usehooks.com/useLocalStorage/) hook in for the `isAdventExpanded`
+value. This is so the page remembers if you were or weren't in the expanded state when you navigate to and from the
+index page.
 
 I'm not sure there's anything left to do now so dare I say it... but, I think i'm done! 🕺
 
@@ -272,17 +301,29 @@ I'm not sure there's anything left to do now so dare I say it... but, I think i'
 
 Bum Search section is done ✅
 
-When I first started thinking about an idea for the [#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) I wanted to demonstrate what I would refer to as "app like" functionality, purely because I regularly see comments on Twitter suggesting that Gatsby is just for blogs. I've never understood this.
+When I first started thinking about an idea for the
+[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) I wanted to demonstrate what I
+would refer to as "app like" functionality, purely because I regularly see comments on Twitter suggesting that Gatsby is
+just for blogs. I've never understood this.
 
-From the very start of my love affair with Gatsby I've understood Gatsby is React. I'm not sure how this point gets missed, perhaps Gatsby don't make a strong enough point about it or perhaps there's not enough examples of applications built with Gatsby.
+From the very start of my love affair with Gatsby I've understood Gatsby is React. I'm not sure how this point gets
+missed, perhaps Gatsby don't make a strong enough point about it or perhaps there's not enough examples of applications
+built with Gatsby.
 
-I'm not sure for the reason but it's my hope by creating the Bum Search page it'll at least go some way to voicing my opinion that Gatsby is React.
+I'm not sure for the reason but it's my hope by creating the Bum Search page it'll at least go some way to voicing my
+opinion that Gatsby is React.
 
-The Bum Search section features a fully functioning Search input, with a Select to change which value from the data you want to filter on, along with table column sorting functionality so users can explore the full data set returned by GitHub.
+The Bum Search section features a fully functioning Search input, with a Select to change which value from the data you
+want to filter on, along with table column sorting functionality so users can explore the full data set returned by
+GitHub.
 
-Arguably in BumHub this kind of functionality isn't all that useful but it does, as mentioned above demonstrate that it's possible to do such things with Gatsby plus it demonstrates my ability to use array methods... hopefully that second point might allow me to swerve pointless tech tests when applying for future contacts. 🕺
+Arguably in BumHub this kind of functionality isn't all that useful but it does, as mentioned above demonstrate that
+it's possible to do such things with Gatsby plus it demonstrates my ability to use array methods... hopefully that
+second point might allow me to swerve pointless tech tests when applying for future contacts. 🕺
 
-This latest update pretty much completes my "MVP" but i've had another idea, it's again grounded in my desire to demonstrate Gatsby is React and can do _all the things_ that a straight up React App can do so stay tuned and i'll be back with another update in a week or so.
+This latest update pretty much completes my "MVP" but i've had another idea, it's again grounded in my desire to
+demonstrate Gatsby is React and can do _all the things_ that a straight up React App can do so stay tuned and i'll be
+back with another update in a week or so.
 
 ## [Update 6](#update-6)
 
@@ -292,17 +333,29 @@ This latest update pretty much completes my "MVP" but i've had another idea, it'
 
 Not a major update here but... I've been playing around with ways to document the components used in BumHub.
 
-For now at least I have a kind of [style guide page](https://bumhub.netlify.app/bum-ui) which lists each component from BumHub and it's props.
+For now at least I have a kind of [style guide page](https://bumhub.netlify.app/bum-ui) which lists each component from
+BumHub and it's props.
 
-Further down the page i've started to do the same with the components that ship with [Theme UI](https://theme-ui.com/home)
+Further down the page i've started to do the same with the components that ship with
+[Theme UI](https://theme-ui.com/home)
 
-If you haven't used Theme UI before i'd recommend giving it a go. It is IMO the original and best take yet on CSS-in-Js not just because it _thankfully_ moves us away from `class` names... and we all know namings things is hard but because it blows my mind the way [Brent Jackson](https://twitter.com/jxnblk) re-imagined style systems... and the best of all these new school methods is what I refer to as the [Responsive Array Syntax](https://paulie.dev/posts/2020/08/styled-components-responsive-array-syntax/).
+If you haven't used Theme UI before i'd recommend giving it a go. It is IMO the original and best take yet on CSS-in-Js
+not just because it _thankfully_ moves us away from `class` names... and we all know namings things is hard but because
+it blows my mind the way [Brent Jackson](https://twitter.com/jxnblk) re-imagined style systems... and the best of all
+these new school methods is what I refer to as the
+[Responsive Array Syntax](https://paulie.dev/posts/2020/08/styled-components-responsive-array-syntax/).
 
-With Theme UI you get all this goodness out of the box, in the above blog post I explain how you can achieve a similar thing using [styled-components](https://styled-components.com/) but it does seem like a faff to roll your own when Theme UI gives it up for free.
+With Theme UI you get all this goodness out of the box, in the above blog post I explain how you can achieve a similar
+thing using [styled-components](https://styled-components.com/) but it does seem like a faff to roll your own when Theme
+UI gives it up for free.
 
-I'm not sure how popular Theme UI is amongst React Devs, I see a lot of chatter about [Tailwind](https://tailwindcss.com/) but because I know CSS I've never felt it was a good fit for me. Theme UI on the other hand provides just the right amount of opinions and restrictions. I've built loads of sites/apps/blogs with Theme IU in the last couple of years and so far i've not found anything it can't do.
+I'm not sure how popular Theme UI is amongst React Devs, I see a lot of chatter about
+[Tailwind](https://tailwindcss.com/) but because I know CSS I've never felt it was a good fit for me. Theme UI on the
+other hand provides just the right amount of opinions and restrictions. I've built loads of sites/apps/blogs with Theme
+IU in the last couple of years and so far i've not found anything it can't do.
 
-In any case, you're free to choose whichever CSS solution you're most comfortable with but for me i'm a 100% Theme UI fan boi!
+In any case, you're free to choose whichever CSS solution you're most comfortable with but for me i'm a 100% Theme UI
+fan boi!
 
 Thanks Jackson, you're the best!
 
@@ -312,33 +365,50 @@ Thanks Jackson, you're the best!
 
 <Tweet tweetLink="PaulieScanlon/status/1336303224819773440" />
 
-This update is a bit of [A Tale of two Cities](https://en.wikipedia.org/wiki/A_Tale_of_Two_Cities). A city called client side and a city called server side.
+This update is a bit of [A Tale of two Cities](https://en.wikipedia.org/wiki/A_Tale_of_Two_Cities). A city called client
+side and a city called server side.
 
 Let's start with the client side.
 
-I normally use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), in fact I love Fetch, it's native to modern / non crappy browsers (IE i'm talking about you!) and from what I gather pretty lightweight and lastly, it gets the job done. But...
+I normally use the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), in fact I love Fetch, it's
+native to modern / non crappy browsers (IE i'm talking about you!) and from what I gather pretty lightweight and lastly,
+it gets the job done. But...
 
 Fetch runs in / on the Window object and it can't be used server side to make HTTP requests.
 
 So what about server side?
 
-The server side equivalent is Node's [http](https://nodejs.org/api/http.html) module which is built in to Node and does indeed also get the job done.
+The server side equivalent is Node's [http](https://nodejs.org/api/http.html) module which is built in to Node and does
+indeed also get the job done.
 
-...but this want to use native functionality poses a problem for the Jamstack developer. If like me you're in a situation where you have a requirement to make both client and server side http requests do you opt to keep things native or do you opt for a solution that works consistently across the stack?
+...but this want to use native functionality poses a problem for the Jamstack developer. If like me you're in a
+situation where you have a requirement to make both client and server side http requests do you opt to keep things
+native or do you opt for a solution that works consistently across the stack?
 
 For BumHub i've gone for consistency.
 
 I've chosen to use [axios](https://www.npmjs.com/package/axios).
 
-I wouldn't normally choose this but it can run both client and server side which means my http requests can be written in a consistent fashion. For me on this project, this matters.
+I wouldn't normally choose this but it can run both client and server side which means my http requests can be written
+in a consistent fashion. For me on this project, this matters.
 
-Jamstack development requires the humble Front End Developer to be many things and quite frankly it's sometimes too much for my pea brain to take. I feel like I have enough to worry about just making sure my CSS works across the million and one screen sizes that exist. I don't need to be worrying about really dweeby http request methods. If axios can do what it does in the same way when running in Node (server side) as it can in browser (client side) and can be written the same in my project on both sides of the stack then i'm happy to let sleeping dogs lie and crack on with the good stuff.
+Jamstack development requires the humble Front End Developer to be many things and quite frankly it's sometimes too much
+for my pea brain to take. I feel like I have enough to worry about just making sure my CSS works across the million and
+one screen sizes that exist. I don't need to be worrying about really dweeby http request methods. If axios can do what
+it does in the same way when running in Node (server side) as it can in browser (client side) and can be written the
+same in my project on both sides of the stack then i'm happy to let sleeping dogs lie and crack on with the good stuff.
 
 That's my _opinion_ there are many other valid ones.
 
-That said I now need to do a bit of refactoring to my [`<MrFetchy />`](https://github.com/PaulieScanlon/bumhub/tree/main/src/components/mr-fetchy) component as it currently uses fetch not axios.
+That said I now need to do a bit of refactoring to my
+[`<MrFetchy />`](https://github.com/PaulieScanlon/bumhub/tree/main/src/components/mr-fetchy) component as it currently
+uses fetch not axios.
 
-The reason for this quandary is that in this update i've implemented the EcoBum section which utilizes a special end point created for me by my pals at [EcoPing](https://ecoping.earth/). This endpoint is still experimental so exposing it client side might cause some headaches. Instead, i'm making the request server side and storing the request address in an environment variable so it stays a secret... for now, and because I'm making the request server side I need some kind of http request method... actually this update is quite dweeby, sorry about that.
+The reason for this quandary is that in this update i've implemented the EcoBum section which utilizes a special end
+point created for me by my pals at [EcoPing](https://ecoping.earth/). This endpoint is still experimental so exposing it
+client side might cause some headaches. Instead, i'm making the request server side and storing the request address in
+an environment variable so it stays a secret... for now, and because I'm making the request server side I need some kind
+of http request method... actually this update is quite dweeby, sorry about that.
 
 Anyway, there's now a Bum on the index page farting and some lovely eco friendly stats about BumHub's carbon usage.
 
@@ -350,21 +420,31 @@ Enjoy.
 
 <Tweet tweetLink="PaulieScanlon/status/1334486756322910210" />
 
-I had a good hack on BumHub last night and dusted off my PhotoShop skills and designed the `/bums/-name-of-repo` page template.
+I had a good hack on BumHub last night and dusted off my PhotoShop skills and designed the `/bums/-name-of-repo` page
+template.
 
 This is the part of BumHub that uses Gatsby's new [Routes API](https://www.gatsbyjs.com/docs/routing/).
 
-As mentioned below, the [docs](https://www.gatsbyjs.com/docs/routing/#using-the-file-system-route-api) say you no longer need to touch `gatsby-node` to create pages but...
+As mentioned below, the [docs](https://www.gatsbyjs.com/docs/routing/#using-the-file-system-route-api) say you no longer
+need to touch `gatsby-node` to create pages but...
 
-In my case because i'm sourcing the data at build time I still need `gatsby-node` to create the GraphQL layer from the GitHub REST response but, once the data is in "Gatsby world" the new Routes API takes over.
+In my case because i'm sourcing the data at build time I still need `gatsby-node` to create the GraphQL layer from the
+GitHub REST response but, once the data is in "Gatsby world" the new Routes API takes over.
 
-You can see the src [here](https://github.com/PaulieScanlon/bumhub/blob/main/src/pages/bums/%7BadventBums.name%7D.tsx), you'll notice the name of this file is `{adventBums.name}.tsx`, the bit between the curly brackets is a node from the GraphQL layer I create in `gatsby-node` followed by `.name` which is a key in the response object.
+You can see the src [here](https://github.com/PaulieScanlon/bumhub/blob/main/src/pages/bums/%7BadventBums.name%7D.tsx),
+you'll notice the name of this file is `{adventBums.name}.tsx`, the bit between the curly brackets is a node from the
+GraphQL layer I create in `gatsby-node` followed by `.name` which is a key in the response object.
 
-This NASA level regex is how the Gatsby engineers allow us to create _pages_ from nodes, or in my case nodes that are repository names sourced from GitHub. Thanks Gatsby engineers, this is some top shelf tekkers!
+This NASA level regex is how the Gatsby engineers allow us to create _pages_ from nodes, or in my case nodes that are
+repository names sourced from GitHub. Thanks Gatsby engineers, this is some top shelf tekkers!
 
-The Jsx in the "page template" is populated by using a good old fashioned Gatsby page query plus the node `$id`, that part is actually old school Gatsby but I do really like the new Routes API, using `createPages` in `gatsby-node` was always a bit of faff.
+The Jsx in the "page template" is populated by using a good old fashioned Gatsby page query plus the node `$id`, that
+part is actually old school Gatsby but I do really like the new Routes API, using `createPages` in `gatsby-node` was
+always a bit of faff.
 
-This latest feature completes my rather ambitious goal of weaving multiple ideas together to form one entity worthy of a[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) submission and the Routes API was always at the core of this so i'm pleased it works, it's styled and is out there for all to see.
+This latest feature completes my rather ambitious goal of weaving multiple ideas together to form one entity worthy of
+a[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) submission and the Routes API
+was always at the core of this so i'm pleased it works, it's styled and is out there for all to see.
 
 🕺🏻
 
@@ -376,25 +456,44 @@ This latest feature completes my rather ambitious goal of weaving multiple ideas
 
 I feel like i'm really making progress now, so much so i'm now happy to share a link 🕺
 
-I've continued to work with the magnificent [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) who's delivered the first of the characters i'll be using on BumHub, aptly named _Pants Down_ and _Pants Up_ which are used in the Advent Calendar cards.
+I've continued to work with the magnificent [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) who's delivered the first of
+the characters i'll be using on BumHub, aptly named _Pants Down_ and _Pants Up_ which are used in the Advent Calendar
+cards.
 
-_Pants Down_ is used when an Advent card is click-able which is determined by working out if it's the current day or if the day has passed.
+_Pants Down_ is used when an Advent card is click-able which is determined by working out if it's the current day or if
+the day has passed.
 
-_Pants Up_ is used when an Advent card is disabled which is determined by working out if the day number is in the future.
+_Pants Up_ is used when an Advent card is disabled which is determined by working out if the day number is in the
+future.
 
-I've also added the custom components to the Bum UI page where you cam see how the components look and how they can be configured with props.
+I've also added the custom components to the Bum UI page where you cam see how the components look and how they can be
+configured with props.
 
-The current `date` is provided by my [api](https://github.com/PaulieScanlon/bumhub/blob/main/functions/get-date/get-date.js) so you won't be able to cheat it by changing your system clock! In the short term though this might cause a bit of a hiccup.
+The current `date` is provided by my
+[api](https://github.com/PaulieScanlon/bumhub/blob/main/functions/get-date/get-date.js) so you won't be able to cheat it
+by changing your system clock! In the short term though this might cause a bit of a hiccup.
 
-The data required to populate the Advent Cards is actually sourced at build time so _in theory_ no JavaScript is required for these to render on the page but... because this is an Advent Calendar I only want to reveal a card when it's the current day therefore JavaScript is required to make the api call to get the current server date. I think i'll leave this as is for now as it's part of the charm of an Advent Calendar but, after Dec 25 there's no need to disabled any of the cards so I'll remove the api call so this page will continue to work even if JavaScript is disabled.
+The data required to populate the Advent Cards is actually sourced at build time so _in theory_ no JavaScript is
+required for these to render on the page but... because this is an Advent Calendar I only want to reveal a card when
+it's the current day therefore JavaScript is required to make the api call to get the current server date. I think i'll
+leave this as is for now as it's part of the charm of an Advent Calendar but, after Dec 25 there's no need to disabled
+any of the cards so I'll remove the api call so this page will continue to work even if JavaScript is disabled.
 
-I've also added a bit of pure CSS animation to the starburst seen behind the main logo. This was achieved using some fun `nth-of-type` selectors and `animation-delay` durations. You can see the src [here](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/starburst/starburst.tsx#L30). I hadn't actually tried to use animation keyframes in Theme UI before but having had a look at the [`src`](https://github.com/system-ui/theme-ui/blob/master/packages/components/src/Spinner.js#L57) I could see how Theme UI have achieved this in the `<Spinner />` component.
+I've also added a bit of pure CSS animation to the starburst seen behind the main logo. This was achieved using some fun
+`nth-of-type` selectors and `animation-delay` durations. You can see the src
+[here](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/starburst/starburst.tsx#L30). I hadn't actually
+tried to use animation keyframes in Theme UI before but having had a look at the
+[`src`](https://github.com/system-ui/theme-ui/blob/master/packages/components/src/Spinner.js#L57) I could see how Theme
+UI have achieved this in the `<Spinner />` component.
 
-I'm hoping to tackle the EcoBum section next. I have it on good authority that [EcoPing](https://ecoping.earth/) are in the final stages of testing the _special_ endpoint required to calculate BumHubs carbon usage... in human farts no less!
+I'm hoping to tackle the EcoBum section next. I have it on good authority that [EcoPing](https://ecoping.earth/) are in
+the final stages of testing the _special_ endpoint required to calculate BumHubs carbon usage... in human farts no less!
 
-Usually I don't _love_ the art direction part of my side projects but this time round i'm really enjoying seeing what [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) creates and when I add them to the design it suddenly springs to life.
+Usually I don't _love_ the art direction part of my side projects but this time round i'm really enjoying seeing what
+[Miss_ChatZ](https://dribbble.com/Miss_ChatZ) creates and when I add them to the design it suddenly springs to life.
 
-I'm also really happy I completed the two spikes as mentioned before because i'm now 100% sure that I can work with the data I'm receiving which makes the UI development an absolute breeze!
+I'm also really happy I completed the two spikes as mentioned before because i'm now 100% sure that I can work with the
+data I'm receiving which makes the UI development an absolute breeze!
 
 Stay tuned and i'll update this again when i've completed the next phase of development.
 
@@ -404,7 +503,9 @@ Stay tuned and i'll update this again when i've completed the next phase of deve
 
 <Tweet tweetLink="PaulieScanlon/status/1331977130742263809" />
 
-I thought this update might dive into my process a bit. I still don't want to give the game away by sharing too many visuals but there were a number of things I needed to work on before I announced i'd be taking part in the [Silly Site Challenge](https://www.gatsbyjs.com/silly-site-challenge/)
+I thought this update might dive into my process a bit. I still don't want to give the game away by sharing too many
+visuals but there were a number of things I needed to work on before I announced i'd be taking part in the
+[Silly Site Challenge](https://www.gatsbyjs.com/silly-site-challenge/)
 
 The reason for this is because the idea I have largely depends on two key things.
 
@@ -413,51 +514,86 @@ The reason for this is because the idea I have largely depends on two key things
 
 I've spent about a week investigating this and I suppose in _agile_ terms this might be known as a **Spike**.
 
-If you're not familiar with agile ways of working a spike can be used where the outcome of a _thing_ is uncertain and needs to be investigated before everyone gets too excited and starts presenting ideas to stakeholders.
+If you're not familiar with agile ways of working a spike can be used where the outcome of a _thing_ is uncertain and
+needs to be investigated before everyone gets too excited and starts presenting ideas to stakeholders.
 
-Now, granted my puny Twitter following is hardly the same as having commercial stakeholders but the theory is the same. I didn't want to announce I was going to do something until I was sure I could deliver.
+Now, granted my puny Twitter following is hardly the same as having commercial stakeholders but the theory is the same.
+I didn't want to announce I was going to do something until I was sure I could deliver.
 
-I'm pleased to report that I have been able to understand the [GitHub REST API docs](https://docs.github.com/en/free-pro-team@latest/rest) and it can return data I can use to bring my idea to life.
+I'm pleased to report that I have been able to understand the
+[GitHub REST API docs](https://docs.github.com/en/free-pro-team@latest/rest) and it can return data I can use to bring
+my idea to life.
 
 There was also a **second spike** required for my idea... and try to follow along as my mind unravels.
 
-As you might know Gatsby recently announced the new [Routes API](https://www.gatsbyjs.com/docs/routing/) and I was going to write a blog post about that and perhaps provide a working demo link and repository... but then I thought to myself;
+As you might know Gatsby recently announced the new [Routes API](https://www.gatsbyjs.com/docs/routing/) and I was going
+to write a blog post about that and perhaps provide a working demo link and repository... but then I thought to myself;
 
-_No Paul, that's not good enough... write an entire application, develop it in public and somehow weave it into the #SillySiteChallenge_
+_No Paul, that's not good enough... write an entire application, develop it in public and somehow weave it into the
+#SillySiteChallenge_
 
-So that's what i've been doing. The new [Routes API](https://www.gatsbyjs.com/docs/routing/) is amazing, and I have already seen a few Tweets and posts from folks explaining how it works... however, and this isn't to knock anyone's hard work, these examples all seem to be regurgitations of the the Gatsby docs... and because I like to make my life difficult I started to think about ways to make my demo of the Routes API a bit different. Then it hit me.
+So that's what i've been doing. The new [Routes API](https://www.gatsbyjs.com/docs/routing/) is amazing, and I have
+already seen a few Tweets and posts from folks explaining how it works... however, and this isn't to knock anyone's hard
+work, these examples all seem to be regurgitations of the the Gatsby docs... and because I like to make my life
+difficult I started to think about ways to make my demo of the Routes API a bit different. Then it hit me.
 
-There's a section in the [docs](https://www.gatsbyjs.com/docs/routing/#using-the-file-system-route-api) that says the following:
+There's a section in the [docs](https://www.gatsbyjs.com/docs/routing/#using-the-file-system-route-api) that says the
+following:
 
-> Use the File System Route API when you want to programmatically create pages from your GraphQL data, e.g. to create individual blog post pages for your blog. With this API you can control the file path and queried data by adding some extra notation to the names of your files without touching or creating gatsby-node.js whatsoever.
+> Use the File System Route API when you want to programmatically create pages from your GraphQL data, e.g. to create
+> individual blog post pages for your blog. With this API you can control the file path and queried data by adding some
+> extra notation to the names of your files without touching or creating gatsby-node.js whatsoever.
 
-The key part is this bit _"without touching or creating gatsby-node.js whatsoever"_. This statement is 100% accurate but it only applies if you already have the nodes in the GraphQL layer. This would be possible if you had a load of pages as actual files on disk, eg. `.js`, | `.tsx` | `.md` | `.mdx` but...
+The key part is this bit _"without touching or creating gatsby-node.js whatsoever"_. This statement is 100% accurate but
+it only applies if you already have the nodes in the GraphQL layer. This would be possible if you had a load of pages as
+actual files on disk, eg. `.js`, | `.tsx` | `.md` | `.mdx` but...
 
-What if your "site content" doesn't exist on disk? What if your "site content" comes from a remote source, a CMS for example, or in my case a RESTful API. In this scenario you will absolutely need `gatsby-node.js`... and therein lies an angle for my silly site idea.
+What if your "site content" doesn't exist on disk? What if your "site content" comes from a remote source, a CMS for
+example, or in my case a RESTful API. In this scenario you will absolutely need `gatsby-node.js`... and therein lies an
+angle for my silly site idea.
 
-I'll be using a remote RESTful API to source data using `gatsby-node.js` which creates the nodes in the GraphQL layer and THEN I can use the new Routes API to create pages from those nodes.... simple eh!
+I'll be using a remote RESTful API to source data using `gatsby-node.js` which creates the nodes in the GraphQL layer
+and THEN I can use the new Routes API to create pages from those nodes.... simple eh!
 
 But when I conjured up this elaborate plan I wasn't sure if it would work... hence the **second spike**.
 
-Ok cool, so now the idea is coming together, I can create pages from remotely source data at build time _and_ i'll be able to do something with it... but what data? all I want to say at the moment is it has something to do with the word "bums"... because bums are silly!
+Ok cool, so now the idea is coming together, I can create pages from remotely source data at build time _and_ i'll be
+able to do something with it... but what data? all I want to say at the moment is it has something to do with the word
+"bums"... because bums are silly!
 
-Naturally "bums" _might_ be considered offensive... I don't know how exactly, but It would be prudent to tread carefully so I've now entered into the _art direction_ phase of the project.
+Naturally "bums" _might_ be considered offensive... I don't know how exactly, but It would be prudent to tread carefully
+so I've now entered into the _art direction_ phase of the project.
 
 <Divider />
 
-I need something that looks and feels fun... just like a bum. I'll be honest my designer days are long behind me but I do still have an eye for it so I spent a few days researching illustrators on [dribbble](https://dribbble.com/) and found this cheeky little [ghost](https://dribbble.com/shots/14455182-Boo-ty-Ghost) by the wonderful [Miss_ChatZ](https://dribbble.com/Miss_ChatZ) so I've gone ahead and commissioned her to create a logo and some ancillary character illustrations.
+I need something that looks and feels fun... just like a bum. I'll be honest my designer days are long behind me but I
+do still have an eye for it so I spent a few days researching illustrators on [dribbble](https://dribbble.com/) and
+found this cheeky little [ghost](https://dribbble.com/shots/14455182-Boo-ty-Ghost) by the wonderful
+[Miss_ChatZ](https://dribbble.com/Miss_ChatZ) so I've gone ahead and commissioned her to create a logo and some
+ancillary character illustrations.
 
-The reason for this is there's another twist to my silly site idea. Since i've decided to develop in public i'd like to start sharing a dev link of my progress but... to keep you all interested the site will automatically and progressively get more interesting throughout December, I'll say no more for now.
+The reason for this is there's another twist to my silly site idea. Since i've decided to develop in public i'd like to
+start sharing a dev link of my progress but... to keep you all interested the site will automatically and progressively
+get more interesting throughout December, I'll say no more for now.
 
-Then lastly. Because Gatsby is predominantly a static site generator (it can do much much more FYI) it is by it's very nature quite Eco-Friendly and by this I mean because the _grunt_ work is handled server side at build time rather than by each and every browser that visits your site at run time much less of the worlds power is used up. Much less power means much less CO2, and much less CO2 makes for a healthier planet.
+Then lastly. Because Gatsby is predominantly a static site generator (it can do much much more FYI) it is by it's very
+nature quite Eco-Friendly and by this I mean because the _grunt_ work is handled server side at build time rather than
+by each and every browser that visits your site at run time much less of the worlds power is used up. Much less power
+means much less CO2, and much less CO2 makes for a healthier planet.
 
-I should point out here i'm not attempting to say "I'm making the world a better place"... i'll leave that to the tedious Twitter rock stars and the writers of [Silicon Valley](https://www.youtube.com/watch?v=B8C5sjjhsso) who made it into a very funny joke!
+I should point out here i'm not attempting to say "I'm making the world a better place"... i'll leave that to the
+tedious Twitter rock stars and the writers of [Silicon Valley](https://www.youtube.com/watch?v=B8C5sjjhsso) who made it
+into a very funny joke!
 
-Instead I plan to surface some of this Eco-Friendly data by leveraging statistics provided by [EcoPing](https://ecoping.earth/)... This one is a bit up in the air at the moment but I'm in discussions with the makers and hope to have some firmed up answers soon.
+Instead I plan to surface some of this Eco-Friendly data by leveraging statistics provided by
+[EcoPing](https://ecoping.earth/)... This one is a bit up in the air at the moment but I'm in discussions with the
+makers and hope to have some firmed up answers soon.
 
 So there you go, as promised a slightly more in depth update and I hope i've piqued your interest.
 
-If you're interested in taking part in the [#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) here's the sign up link again. [www.gatsbyjs.com/silly-site-challenge](https://www.gatsbyjs.com/silly-site-challenge/)
+If you're interested in taking part in the
+[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) here's the sign up link again.
+[www.gatsbyjs.com/silly-site-challenge](https://www.gatsbyjs.com/silly-site-challenge/)
 
 Stay silly everyone 😘
 
@@ -477,13 +613,20 @@ I don't wanna give the game away so here's a little teaser about what'll i'll be
 
 I'm at it again 🕺
 
-If you followed along when I did my [100 Days Of Gatsby](/posts/2020/01/100DaysOfGatsby/) you'll know I have a tendency to write way too much about very little 😥
+If you followed along when I did my [100 Days Of Gatsby](/posts/2020/01/100DaysOfGatsby/) you'll know I have a tendency
+to write way too much about very little 😥
 
-... but because [100 Days Of Gatsby](https://www.gatsbyjs.com/blog/100days/) was an absolute tray of cakes I'm super excited to be doing it again for the recently announced [Silly Site Challenge](https://www.gatsbyjs.com/silly-site-challenge/)
+... but because [100 Days Of Gatsby](https://www.gatsbyjs.com/blog/100days/) was an absolute tray of cakes I'm super
+excited to be doing it again for the recently announced
+[Silly Site Challenge](https://www.gatsbyjs.com/silly-site-challenge/)
 
-If you'd like to know more about the challenge hosted by Gatsby have a read [here](https://www.gatsbyjs.com/silly-site-challenge/) and be sure to follow [GatsbyJS](https://twitter.com/GatsbyJS) on Twitter or search for the hashtag [#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click)
+If you'd like to know more about the challenge hosted by Gatsby have a read
+[here](https://www.gatsbyjs.com/silly-site-challenge/) and be sure to follow [GatsbyJS](https://twitter.com/GatsbyJS) on
+Twitter or search for the hashtag
+[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click)
 
-This time round I'll be doing things a little differently because updating a blog post every day for 100 days was, as you'd imagine... an absolute ball ache!
+This time round I'll be doing things a little differently because updating a blog post every day for 100 days was, as
+you'd imagine... an absolute ball ache!
 
 Instead i'll update less frequently but with more significant information... deal?
 

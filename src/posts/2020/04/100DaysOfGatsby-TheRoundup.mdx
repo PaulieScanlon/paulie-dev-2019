@@ -1,16 +1,20 @@
 ---
 title: 100DaysOfGatsby - The Roundup
-tags: ["Gatsby"]
+tags: ['Gatsby']
 date: 2020-04-09
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915579/paulie.dev/2020/04/100DaysOfGatsby-TheRoundup_n76noy.jpg
 ---
 
-For the past **100** days i've posted **every day** about the work i've been doing in & around the Gatsby eco-system. If you have a spare 206 minutes you can read about the full 100 days [here](https://paulie.dev/posts/2020/01/100DaysOfGatsby/)
+For the past **100** days i've posted **every day** about the work i've been doing in & around the Gatsby eco-system. If
+you have a spare 206 minutes you can read about the full 100 days
+[here](https://paulie.dev/posts/2020/01/100DaysOfGatsby/)
 
-I've not always followed the official challenges but for the most part i've covered off everything Gatsby set out to teach us.
+I've not always followed the official challenges but for the most part i've covered off everything Gatsby set out to
+teach us.
 
-For part of the last 100 days i was on a _learning_ sabbatical and self drove a Tuk Tuk around Sri Lanka for 30 days, the rest of the time i've been in the UK and for only some of that time was i working on commercial projects.
+For part of the last 100 days i was on a _learning_ sabbatical and self drove a Tuk Tuk around Sri Lanka for 30 days,
+the rest of the time i've been in the UK and for only some of that time was i working on commercial projects.
 
 Incidentally i got my current contract as a result of this challenge... and it's sweet!
 
@@ -18,15 +22,15 @@ Incidentally i got my current contract as a result of this challenge... and it's
 
 Before we dive in, special mentions have _got_ to go out to the following people:
 
-[Scott Spence](https://twitter.com/spences10)
-[Richard Haines](https://twitter.com/studio_hungry)
-[Eric Howey](https://twitter.com/erchwy)
-[Tom Hermans](https://twitter.com/tomhermans)
+[Scott Spence](https://twitter.com/spences10) [Richard Haines](https://twitter.com/studio_hungry)
+[Eric Howey](https://twitter.com/erchwy) [Tom Hermans](https://twitter.com/tomhermans)
 [Alex Luong](https://twitter.com/alex__luong)
 
-These guys have regularly liked and re-tweeted my post(s) and i'm very thankful we've met through this challenge and i look forward to seeing what you build next!
+These guys have regularly liked and re-tweeted my post(s) and i'm very thankful we've met through this challenge and i
+look forward to seeing what you build next!
 
-...and finally here's the list of _everything_ i've done for the [#100DaysOfGatsby](https://www.gatsbyjs.org/blog/tags/100-days-of-gatsby/) challenge!
+...and finally here's the list of _everything_ i've done for the
+[#100DaysOfGatsby](https://www.gatsbyjs.org/blog/tags/100-days-of-gatsby/) challenge!
 
 <Divider />
 <Divider />
@@ -35,9 +39,13 @@ These guys have regularly liked and re-tweeted my post(s) and i'm very thankful 
   1. Skin UI
 </Heading>
 
-This is proof that Gatsby can be more than just blogs. Skin UI is a full stack Gatsby App with client only routes, Netlify Identity, an Apollo/GraphQL api and Fauna for database storage. Using the editor and live preview you can tinker with Theme UI's theme object and see the styles update the markdown and Theme UI Components right in your browser. You can also save, share, edit and download your theme.
+This is proof that Gatsby can be more than just blogs. Skin UI is a full stack Gatsby App with client only routes,
+Netlify Identity, an Apollo/GraphQL api and Fauna for database storage. Using the editor and live preview you can tinker
+with Theme UI's theme object and see the styles update the markdown and Theme UI Components right in your browser. You
+can also save, share, edit and download your theme.
 
-This project i believe has legs. I need to do a bit more work on it and have it on good authority that something similar will make it's way in to [Blocks UI](https://blocks-ui.com/)... i just hope Gatsby hire me to help build it 😊
+This project i believe has legs. I need to do a bit more work on it and have it on good authority that something similar
+will make it's way in to [Blocks UI](https://blocks-ui.com/)... i just hope Gatsby hire me to help build it 😊
 
 <Divider />
 
@@ -45,8 +53,7 @@ This project i believe has legs. I need to do a bit more work on it and have it 
   <Button>Visit Site</Button>
 </Link>
 
-[GitHub](https://github.com/PaulieScanlon/skin-ui) |
-[Blog post](https://paulie.dev/posts/2020/04/skin-ui/)
+[GitHub](https://github.com/PaulieScanlon/skin-ui) | [Blog post](https://paulie.dev/posts/2020/04/skin-ui/)
 
 <Divider />
 
@@ -54,9 +61,18 @@ This project i believe has legs. I need to do a bit more work on it and have it 
   2. gatsby-theme-terminal
 </Heading>
 
-This was my second attempt at writing a theme and after making a bit of a mess of my first one [gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) i went back to the drawing board and decided to see if it was possible to write a theme with **zero components**. This is an odd concept if you're coming form WordPress but with this theme all i'm providing are some neat little data components that help you query the nodes from GraphQL and a very light skin that styles all markdown and all components provided by Theme UI Components. If you've read above about Skin UI this theme is essentially Skin UI but with some extra bits thrown in.
+This was my second attempt at writing a theme and after making a bit of a mess of my first one
+[gatsby-theme-gatstats](https://gatsby-theme-gatstats.netlify.com/) i went back to the drawing board and decided to see
+if it was possible to write a theme with **zero components**. This is an odd concept if you're coming form WordPress but
+with this theme all i'm providing are some neat little data components that help you query the nodes from GraphQL and a
+very light skin that styles all markdown and all components provided by Theme UI Components. If you've read above about
+Skin UI this theme is essentially Skin UI but with some extra bits thrown in.
 
-Having worked on themes for about a year now i think this approach to themes can be really powerful. Component Shadowing is awesome don't get me wrong but if you un-link the UI components from a theme and just provide _data_ and _styles_ the user then has full control over their UI. No more hacking over the top of CSS and no real need to shadow a component so you can change the way it looks. Just build anything you want using the components from Theme UI and boom, you've got yourself a very custom blog/site/app.
+Having worked on themes for about a year now i think this approach to themes can be really powerful. Component Shadowing
+is awesome don't get me wrong but if you un-link the UI components from a theme and just provide _data_ and _styles_ the
+user then has full control over their UI. No more hacking over the top of CSS and no real need to shadow a component so
+you can change the way it looks. Just build anything you want using the components from Theme UI and boom, you've got
+yourself a very custom blog/site/app.
 
 <Divider />
 
@@ -73,9 +89,13 @@ Having worked on themes for about a year now i think this approach to themes can
   3. gatsby-starter-terminal
 </Heading>
 
-It seems fitting that if i want folks to use my theme: [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com/) i should give them a helping hand. So here's a starter to... er... get you started 🤗
+It seems fitting that if i want folks to use my theme:
+[gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com/) i should give them a helping hand. So here's a
+starter to... er... get you started 🤗
 
-It's a pretty bare bones example of how to use the theme but it does demonstrate how to use Component Shadowing for the Logo and how to provide a custom Theme UI object to style the theme your way. _I believe the 2 stars it has on GitHub speak for themselves_ 🤣
+It's a pretty bare bones example of how to use the theme but it does demonstrate how to use Component Shadowing for the
+Logo and how to provide a custom Theme UI object to style the theme your way. _I believe the 2 stars it has on GitHub
+speak for themselves_ 🤣
 
 [GitHub](https://github.com/PaulieScanlon/gatsby-starter-terminal)
 
@@ -85,20 +105,24 @@ It's a pretty bare bones example of how to use the theme but it does demonstrate
   4. gatsby-plugin-prop-shop
 </Heading>
 
-I think perhaps this a unique concept that the masses just aren't ready for yet 🤔. With this plugin you can get an overview of all _PropTypes_ in your components, turns out that most developers building Gatsby sites don't use _PropTypes_ in fact i've been working on a much larger project where _PropTypes_ haven't be used at all... if you're doing this... then just stop it!
+I think perhaps this a unique concept that the masses just aren't ready for yet 🤔. With this plugin you can get an
+overview of all _PropTypes_ in your components, turns out that most developers building Gatsby sites don't use
+_PropTypes_ in fact i've been working on a much larger project where _PropTypes_ haven't be used at all... if you're
+doing this... then just stop it!
 
-I'm a massive TypeScript fan but when not using TypeScript, _PropTypes_ are the next best thing and when building Component Libraries which i've done a lot of i have found it crucially important to provide a consistent api for props.
+I'm a massive TypeScript fan but when not using TypeScript, _PropTypes_ are the next best thing and when building
+Component Libraries which i've done a lot of i have found it crucially important to provide a consistent api for props.
 
 PropShop aims to help you with this.
 
-I've created a [PR](https://github.com/system-ui/theme-ui/pull/669) for Theme UI but as the library is undergoing some vital TypeScript work it has yet to be merged. Again i have this on good authority that the team at Gatsby have seen the plugin and have found it somewhat interesting. I hope something similar will make it's way in to Gatsby Admin and again i hope they hire me to help build it. 🤞
+I've created a [PR](https://github.com/system-ui/theme-ui/pull/669) for Theme UI but as the library is undergoing some
+vital TypeScript work it has yet to be merged. Again i have this on good authority that the team at Gatsby have seen the
+plugin and have found it somewhat interesting. I hope something similar will make it's way in to Gatsby Admin and again
+i hope they hire me to help build it. 🤞
 
 <Divider />
 
-<Link
-  href="https://gatsby-plugin-prop-shop.netlify.com/prop-shop/"
-  target="_blank"
->
+<Link href="https://gatsby-plugin-prop-shop.netlify.com/prop-shop/" target="_blank">
   <Button>View Demo</Button>
 </Link>
 
@@ -111,7 +135,12 @@ I've created a [PR](https://github.com/system-ui/theme-ui/pull/669) for Theme UI
   5. @theme-ui/components
 </Heading>
 
-In the spirit of open-source i found myself wanting to contribute to the libraries i use and love. I noticed a request for collaboration on Theme UI Components by the Gatsby team who were switching _everything_ over to TypeScript... this kind of thing is right in my wheel house so i set about converting the package to TypeScript... unfortunately i ran out of talent and the [PR](https://github.com/system-ui/theme-ui/pull/692) remains open. I believe there are bigger pieces of work that first need to be completed before this will be looked at again... but if i suddenly become a TypeScript guru i'll be sure to pick this back up.
+In the spirit of open-source i found myself wanting to contribute to the libraries i use and love. I noticed a request
+for collaboration on Theme UI Components by the Gatsby team who were switching _everything_ over to TypeScript... this
+kind of thing is right in my wheel house so i set about converting the package to TypeScript... unfortunately i ran out
+of talent and the [PR](https://github.com/system-ui/theme-ui/pull/692) remains open. I believe there are bigger pieces
+of work that first need to be completed before this will be looked at again... but if i suddenly become a TypeScript
+guru i'll be sure to pick this back up.
 
 [PR](https://github.com/system-ui/theme-ui/pull/692)
 
@@ -121,13 +150,19 @@ In the spirit of open-source i found myself wanting to contribute to the librari
   6. gatsby-mdx-embed
 </Heading>
 
-Continuing with my interest in Gatsby plugins i was inspired by [gatsby-remark-oembed](https://github.com/raae/gatsby-remark-oembed). This is great plugin and allows you to use all sorts of media embed codes in your markdown blog.
+Continuing with my interest in Gatsby plugins i was inspired by
+[gatsby-remark-oembed](https://github.com/raae/gatsby-remark-oembed). This is great plugin and allows you to use all
+sorts of media embed codes in your markdown blog.
 
 Yeah.. markdown... what about MDX?
 
-Spotting a gap in the market i developed this plugin to bring all the same embedded-able joy to MDX. Since MDX is a super power much more can be done when combining it with `<Flex>` and `<Box>` from Theme UI Components. Imagine doing a full screen YouTube video wall on one of your blog posts, or displaying an entire Twitter timeline next to your content!
+Spotting a gap in the market i developed this plugin to bring all the same embedded-able joy to MDX. Since MDX is a
+super power much more can be done when combining it with `<Flex>` and `<Box>` from Theme UI Components. Imagine doing a
+full screen YouTube video wall on one of your blog posts, or displaying an entire Twitter timeline next to your content!
 
-That's all possible with this plugin. There are few shortcomings with the way the props are required for each of the components and i do hope to develop this further so it's easier to use but for now if you want to embed Twitter, YouTube Instagram and many more in to your `.mdx` without imports, this is the plugin for you!
+That's all possible with this plugin. There are few shortcomings with the way the props are required for each of the
+components and i do hope to develop this further so it's easier to use but for now if you want to embed Twitter, YouTube
+Instagram and many more in to your `.mdx` without imports, this is the plugin for you!
 
 <Divider />
 
@@ -144,9 +179,13 @@ That's all possible with this plugin. There are few shortcomings with the way th
   7. gatsby-remark-grid-system
 </Heading>
 
-Officially speaking i started this project before the challenge came about and before i truly discovered Theme UI Components but i was wondering why people didn't need Bootstrap style rows and containers in markdown... for the record i still don't know the answer to that question 🤷‍♂️
+Officially speaking i started this project before the challenge came about and before i truly discovered Theme UI
+Components but i was wondering why people didn't need Bootstrap style rows and containers in markdown... for the record
+i still don't know the answer to that question 🤷‍♂️
 
-That said this plugin was a head first dive into the [Markdown Abstract Syntax Tree](https://github.com/syntax-tree/mdast) and allowed me to understand what markdown and MDX do under the hood
+That said this plugin was a head first dive into the
+[Markdown Abstract Syntax Tree](https://github.com/syntax-tree/mdast) and allowed me to understand what markdown and MDX
+do under the hood
 
 <Link href="https://gatsby-remark-grid-system.netlify.com/" target="_blank">
   <Button>View Demo</Button>
@@ -161,9 +200,15 @@ That said this plugin was a head first dive into the [Markdown Abstract Syntax T
   8. gatsby-mdx-routes
 </Heading>
 
-Again officially speaking i started this plugin before the challenge started but i did continue to develop it over the course of the 100 days and released multiple updates as new requirements became clear. I've used this plugin in both this [blog](https://paulie.dev/) and my [commercial portfolio](https://www.pauliescanlon.io/) and that's because they are _both_ built on top of the same theme, [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com/). All in all this plugin was worth it's weight in gold!
+Again officially speaking i started this plugin before the challenge started but i did continue to develop it over the
+course of the 100 days and released multiple updates as new requirements became clear. I've used this plugin in both
+this [blog](https://paulie.dev/) and my [commercial portfolio](https://www.pauliescanlon.io/) and that's because they
+are _both_ built on top of the same theme, [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.com/). All in
+all this plugin was worth it's weight in gold!
 
-There are a few areas where it doesn't quite perform, namely in the recursive pattern but developing this really enhanced my JavaScript knowledge and dare i say it but i think i finally understand [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+There are a few areas where it doesn't quite perform, namely in the recursive pattern but developing this really
+enhanced my JavaScript knowledge and dare i say it but i think i finally understand
+[Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
 
 <Divider />
 
@@ -182,7 +227,10 @@ There are a few areas where it doesn't quite perform, namely in the recursive pa
 
 I love this plugin! Why wouldn't you want sticky header tables in your markdown!
 
-I developed this back in December but as my following grew as a result of this challenge more people became aware of my work and as a result of that issues got opened on GitHub... issues i always tried to resolve quickly. This was a nice introduction to what it's like being an open-source developer and i really love it. I've found that helping people use software i've written is actually very rewarding!
+I developed this back in December but as my following grew as a result of this challenge more people became aware of my
+work and as a result of that issues got opened on GitHub... issues i always tried to resolve quickly. This was a nice
+introduction to what it's like being an open-source developer and i really love it. I've found that helping people use
+software i've written is actually very rewarding!
 
 <Divider />
 
@@ -201,9 +249,14 @@ I developed this back in December but as my following grew as a result of this c
 
 ... and finally, GatStats.
 
-This was the whole reason i got in to Gatsby. I wanted to make a [blog](https://paulie.dev/) and a [commercial portfolio](https://www.pauliescanlon.io/) but i didn't want to support two separate entities. I did a bit of Google-ing around and found out about Gatsby Themes. Nearly a year later and i have what i've always wanted!
+This was the whole reason i got in to Gatsby. I wanted to make a [blog](https://paulie.dev/) and a
+[commercial portfolio](https://www.pauliescanlon.io/) but i didn't want to support two separate entities. I did a bit of
+Google-ing around and found out about Gatsby Themes. Nearly a year later and i have what i've always wanted!
 
-As mentioned above, this again was developed before the challenge but due to the new exposure more and more issues were raised on GitHub so i continued to support this over the course of the challenge. Knowing what i know now i think it's time to retire this theme. I plan to re-build it but using all my learnings from other Gatsby work. I still want to create a dashboard theme but i think there's a much better way to approach it.
+As mentioned above, this again was developed before the challenge but due to the new exposure more and more issues were
+raised on GitHub so i continued to support this over the course of the challenge. Knowing what i know now i think it's
+time to retire this theme. I plan to re-build it but using all my learnings from other Gatsby work. I still want to
+create a dashboard theme but i think there's a much better way to approach it.
 
 Apologies in advance if you're using this theme. They'll be an update soon about how to migrate.
 
@@ -223,9 +276,12 @@ Apologies in advance if you're using this theme. They'll be an update soon about
 
 And that's it 💥
 
-I won't lie, it's been hard work. No one asked me to post _every day_ for 100 days but i like a challenge and knowing that at this moment in time i'd be able to post a roundup explaining i'd posted _every day_ for 100 days has really kept me going.
+I won't lie, it's been hard work. No one asked me to post _every day_ for 100 days but i like a challenge and knowing
+that at this moment in time i'd be able to post a roundup explaining i'd posted _every day_ for 100 days has really kept
+me going.
 
-Big shout out to the Gatsby team, the people who use the technology and everyone i've interacted with on [Twitter](https://twitter.com/PaulieScanlon) over the past three months, it's been a blast.
+Big shout out to the Gatsby team, the people who use the technology and everyone i've interacted with on
+[Twitter](https://twitter.com/PaulieScanlon) over the past three months, it's been a blast.
 
 I don't know what's next for me but i've enjoyed the technical writing process and plan to do more, so stay tuned!
 

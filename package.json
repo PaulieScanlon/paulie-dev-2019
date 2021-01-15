@@ -8,30 +8,38 @@
     "start": "gatsby develop",
     "build": "gatsby build && yarn robots",
     "serve": "gatsby serve",
-    "robots": "cp robots.txt public/"
+    "robots": "cp robots.txt public/",
+    "prettier": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write \"**/*.{json,js,ts,tsx,mdx}\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier",
+      "pre-push": ""
+    }
   },
   "dependencies": {
     "@emotion/react": "^11.1.4",
-    "@mdx-js/mdx": "^1.5.7",
-    "@mdx-js/react": "^1.5.7",
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
     "@pauliescanlon/gatsby-theme-terminal": "^0.0.44",
     "@theme-ui/color": "^0.3.5",
-    "@theme-ui/prism": "^0.3.0",
-    "date-fns": "^2.11.1",
+    "@theme-ui/prism": "^0.3.5",
+    "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
-    "gatsby": "^2.30.0",
-    "gatsby-plugin-google-analytics": "^2.3.13",
-    "gatsby-plugin-manifest": "^2.4.21",
-    "gatsby-plugin-mdx": "^1.0.74",
-    "gatsby-plugin-mdx-embed": "^0.0.14",
-    "gatsby-plugin-remove-serviceworker": "^1.0.0",
+    "gatsby": "^2.30.2",
+    "gatsby-plugin-google-analytics": "^2.9.0",
+    "gatsby-plugin-mdx": "^1.8.0",
+    "gatsby-plugin-mdx-embed": "^0.0.17",
     "gatsby-plugin-sitemap": "^2.10.0",
-    "gatsby-source-filesystem": "^2.1.48",
-    "matter-js": "^0.14.2",
-    "mdx-embed": "^0.0.14",
+    "gatsby-source-filesystem": "^2.9.0",
+    "matter-js": "^0.15.0",
+    "mdx-embed": "^0.0.17",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-svg-bubble-slider": "^0.0.52",
-    "theme-ui": "^0.3.1"
+    "theme-ui": "^0.3.5"
+  },
+  "devDependencies": {
+    "husky": "^4.3.7"
   }
 }

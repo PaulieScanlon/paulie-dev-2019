@@ -1,6 +1,6 @@
 ---
 title: Effective Theme UI
-tags: ["React", "Gatsby", "JavaScript", "Theme UI"]
+tags: ['React', 'Gatsby', 'JavaScript', 'Theme UI']
 date: 2020-04-28
 status: draft
 author: Paul Scanlon
@@ -10,24 +10,29 @@ You'll find this post useful if you use Theme UI but have encounted issues when 
 
 ## The SX prop
 
-The `sx` prop is mind blowing, it looks like a `style` tag in that you appear to be adding styles `inline` but in fact, under the hood Theme UI takes these styles and turns them in to their own set of classes and resolves any specificity problems that CSS is known to have.
+The `sx` prop is mind blowing, it looks like a `style` tag in that you appear to be adding styles `inline` but in fact,
+under the hood Theme UI takes these styles and turns them in to their own set of classes and resolves any specificity
+problems that CSS is known to have.
 
-The problem with the `sx` is that it can encourange duplication of styles. And by that i mean because it's possible to use the `sx` prop to point to effectivelry a CSS variable you'd been forgiven for thinking that if you, for example point any `<h[n] />` tag at a font family you're doing the right thing.
+The problem with the `sx` is that it can encourange duplication of styles. And by that i mean because it's possible to
+use the `sx` prop to point to effectivelry a CSS variable you'd been forgiven for thinking that if you, for example
+point any `<h[n] />` tag at a font family you're doing the right thing.
 
-I'm not saying this is thw wrong thing but i do feel there's a better way to do this. This approach can reduce the amount of "style" code you have to write and it helps when code reviews need to be done as the reviewer can more easily see what these styles are.
+I'm not saying this is thw wrong thing but i do feel there's a better way to do this. This approach can reduce the
+amount of "style" code you have to write and it helps when code reviews need to be done as the reviewer can more easily
+see what these styles are.
 
 Let me give you can example.
 
 ```javascript
-<Heading
-  as="h1"
-  sx={{ fontFamily: "headings", fontSize: "lg", fontWeight: "bold", mb: "lg" }}
->
+<Heading as="h1" sx={{ fontFamily: 'headings', fontSize: 'lg', fontWeight: 'bold', mb: 'lg' }}>
   I'm a heading
 </Heading>
 ```
 
-This is perfectly acceptable, but the problem is that if you or someone else on your team wants to use an `<h1 />` somewhere else in the code base they have to know that the above styles are in fact what the design teams decided an `<h1 />` should look like.
+This is perfectly acceptable, but the problem is that if you or someone else on your team wants to use an `<h1 />`
+somewhere else in the code base they have to know that the above styles are in fact what the design teams decided an
+`<h1 />` should look like.
 
 If we come back a step and consider what this might look like with CSS
 
@@ -35,19 +40,25 @@ If we come back a step and consider what this might look like with CSS
 <h1 class="heading-h1">I'm a heading</h1>
 ```
 
-You'll see that there's no "styles" applied to the DOM node, instead all the styles are continentally encapsulated by the class `heading-h1`. Now when someone else in your team wants to use an `<h1 />` all they need to do is add the correct class and et voila.
+You'll see that there's no "styles" applied to the DOM node, instead all the styles are continentally encapsulated by
+the class `heading-h1`. Now when someone else in your team wants to use an `<h1 />` all they need to do is add the
+correct class and et voila.
 
-This is also helpful for code reviews as it's easy to determine if this is is the correct style. If you saw in the PR an `<h2 />` with that same class you'd know it was wrong and request a change.
+This is also helpful for code reviews as it's easy to determine if this is is the correct style. If you saw in the PR an
+`<h2 />` with that same class you'd know it was wrong and request a change.
 
 ## Effective Themes
 
-Theme UI provides us with the same power, if not more than CSS classes but in recent weeks i've seen this power completely over looked and it's made the code base difficult to work with and slowed production down, not to mention becoming an absolute dogs dinner of styles.
+Theme UI provides us with the same power, if not more than CSS classes but in recent weeks i've seen this power
+completely over looked and it's made the code base difficult to work with and slowed production down, not to mention
+becoming an absolute dogs dinner of styles.
 
 So how would we do this in Theme UI.
 
 THE THEME OBJECT!
 
-This is where you can really harness Theme UI's power and all you have to do is think like an old school CSS developer would.
+This is where you can really harness Theme UI's power and all you have to do is think like an old school CSS developer
+would.
 
 This is how an `<h1 />` should be styled.
 
@@ -72,33 +83,38 @@ styles: {
 ...
 ```
 
-Using this method you'd only define the styles for `<h1 />` once in the Theme object and this approach in my option should be taken with everything around the code base. All buttons for instance can be defined this way e.g.
+Using this method you'd only define the styles for `<h1 />` once in the Theme object and this approach in my option
+should be taken with everything around the code base. All buttons for instance can be defined this way e.g.
 
 ```javascript
 <Button>primary</Button>
 <Button variant='secondary'>secondary</Button>
 ```
 
-The difficulties you might encounter using this more strict Theme approach is that it surfaces these faffy one off styles that cause problems and whilst Theme UI does allow you to add any style you like using the `sx` prop perhaps you shouldn't and instead perhaps you should be thinking about how to use it to create more use able sytles.
+The difficulties you might encounter using this more strict Theme approach is that it surfaces these faffy one off
+styles that cause problems and whilst Theme UI does allow you to add any style you like using the `sx` prop perhaps you
+shouldn't and instead perhaps you should be thinking about how to use it to create more use able sytles.
 
 Here's another example.
 
 ```javascript
 <Box
   sx={{
-    backgroundColor: "surface",
-    borderColor: "muted",
-    borderStyle: "solid",
+    backgroundColor: 'surface',
+    borderColor: 'muted',
+    borderStyle: 'solid',
     borderWidth: 1,
     boxShadow: 1,
-    color: "text",
+    color: 'text',
   }}
 >
   some content
 </Box>
 ```
 
-This might be a "panel" and will mostly likely be used in a number of places around the application, but just because it's styles reference parts of Theme UI's style object doesn't mean it's effective. Any one person could copy and past those styles and use them elsewhere to create a new panel.
+This might be a "panel" and will mostly likely be used in a number of places around the application, but just because
+it's styles reference parts of Theme UI's style object doesn't mean it's effective. Any one person could copy and past
+those styles and use them elsewhere to create a new panel.
 
 A better way would be to define a `panel` style and reference it as you would a `class` | `className`
 

@@ -1,17 +1,21 @@
 ---
 title: TypeScript Theme UI Link
-tags: ["React", "Gatsby", "TypeScript", "Theme UI"]
+tags: ['React', 'Gatsby', 'TypeScript', 'Theme UI']
 date: 2020-04-24
 dateModified: 2020-04-28
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915579/paulie.dev/2020/04/typescript-theme-ui-link_crs1ig.jpg
 ---
 
-In a previous post; [gatsby-or-theme-ui-link](/posts/2020/04/gatsby-or-theme-ui-link/) i talked about how to cast a Theme UI Link as `gatsby` Link... and that will work fine in **JavaScript** but as i've discovered when you attempt to do the same thing in **TypeScript** you'll run into problems.
+In a previous post; [gatsby-or-theme-ui-link](/posts/2020/04/gatsby-or-theme-ui-link/) i talked about how to cast a
+Theme UI Link as `gatsby` Link... and that will work fine in **JavaScript** but as i've discovered when you attempt to
+do the same thing in **TypeScript** you'll run into problems.
 
-Not big problems, it's just TypeScript doing it's job and letting you know that you've neglected to tell your code something important.
+Not big problems, it's just TypeScript doing it's job and letting you know that you've neglected to tell your code
+something important.
 
-That was the case with me so i'm now going to elaborate on my previous post and explain how to create your own custom Link component that meets the below **Acceptance Criteria**
+That was the case with me so i'm now going to elaborate on my previous post and explain how to create your own custom
+Link component that meets the below **Acceptance Criteria**
 
 - It will accept an `sx` prop
 
@@ -21,14 +25,19 @@ That was the case with me so i'm now going to elaborate on my previous post and 
 
 I'll briefly explain those three points.
 
-1. The `sx` prop is part of the Theme UI JSX pragma and allows you to style any DOM node or component as if it were a component from Theme UI using the `sx` prop
+1. The `sx` prop is part of the Theme UI JSX pragma and allows you to style any DOM node or component as if it were a
+   component from Theme UI using the `sx` prop
 
-2. The Link component imported from `gatsby` has super powers, it has some functional props and is location aware... we don't wanna lose this functionality.
+2. The Link component imported from `gatsby` has super powers, it has some functional props and is location aware... we
+   don't wanna lose this functionality.
 
 3. It's still an `<a>` so should still behave like one.
 
-If you need a little more guidance i've made a bare bones repo which you can see on GitHub [PaulieScanlon/typescript-theme-ui-link](https://github.com/PaulieScanlon/typescript-theme-ui-link)
-and most things i'll be explaining in this post can be seen in the [MrLinky.tsx](https://github.com/PaulieScanlon/typescript-theme-ui-link/blob/master/demo/src/components/MrLinky/MrLinky.tsx) file
+If you need a little more guidance i've made a bare bones repo which you can see on GitHub
+[PaulieScanlon/typescript-theme-ui-link](https://github.com/PaulieScanlon/typescript-theme-ui-link) and most things i'll
+be explaining in this post can be seen in the
+[MrLinky.tsx](https://github.com/PaulieScanlon/typescript-theme-ui-link/blob/master/demo/src/components/MrLinky/MrLinky.tsx)
+file
 
 <Divider />
 <Divider />
@@ -41,17 +50,17 @@ To recap this is where we left off with [gatsby-or-theme-ui-link](/posts/2020/04
 
 ```javascript
 // some-file.js
-import React from "react"
-import { Link as GatsbyLink } from "gatsby"
-import { Link } from "@theme-ui/components"
+import React from 'react'
+import { Link as GatsbyLink } from 'gatsby'
+import { Link } from '@theme-ui/components'
 
 const SomeComponent = () => {
   return (
     <>
-      <Link sx={{ color: "primary" }} to="/" as={GatsbyLink}>
+      <Link sx={{ color: 'primary' }} to="/" as={GatsbyLink}>
         Back to home
       </Link>
-      <Link sx={{ color: "secondary" }} href="https://www.paulie.dev">
+      <Link sx={{ color: 'secondary' }} href="https://www.paulie.dev">
         https://www.paulie.dev
       </Link>
     </>
@@ -74,7 +83,8 @@ So what can we do about it? 🤔
 
 One way, and there may well be more ways to accomplish this but...
 
-I created a _new_ component and called it **MrLinky** ... because it's confusing having all these components called Link.
+I created a _new_ component and called it **MrLinky** ... because it's confusing having all these components called
+Link.
 
 <Divider />
 
@@ -113,12 +123,13 @@ export const MrLinky: FunctionComponent<MrLinkyProps> = ({
 
 So what's going on here then?
 
-1. First off we ditch the `React` import and replace it with the JSX Pragma from Theme UI which allows us to apply the `sx` prop to any DOM node, `div` `span` or a React component etc, in this case it's Link from `gatsby`
+1. First off we ditch the `React` import and replace it with the JSX Pragma from Theme UI which allows us to apply the
+   `sx` prop to any DOM node, `div` `span` or a React component etc, in this case it's Link from `gatsby`
 
-2. Then we add an `sx` prop so we can pass in styles from the parent and spread them inside the `sx` prop which is now accepted by our Link from `gatsby`.
+2. Then we add an `sx` prop so we can pass in styles from the parent and spread them inside the `sx` prop which is now
+   accepted by our Link from `gatsby`.
 
-3. We also need to pass on the `to` prop
-   since this is what makes Link from `gatsby` an internal routing link.
+3. We also need to pass on the `to` prop since this is what makes Link from `gatsby` an internal routing link.
 
 4. Then finally spread the `rest` as we may want to pass on HTMLAnchorElement attributes, a `title` for example
 
@@ -127,9 +138,7 @@ The tricky part is typing all of these props. So let's have a look at the `inter
 <Divider />
 
 ```javascript
-interface MrLinkyProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement>,
-    GatsbyLinkProps<{}> {
+interface MrLinkyProps extends AnchorHTMLAttributes<HTMLAnchorElement>, GatsbyLinkProps<{}> {
   /** Theme UI JSX pragma */
   sx?: SxStyleProp;
 }
@@ -137,17 +146,21 @@ interface MrLinkyProps
 
 <Divider />
 
-1. First we have to extend the interface to include `AnchorHTMLAttributes<HTMLAnchorElement>` which will be handy if we want to pass on HTMLAnchorElement attributes.
+1. First we have to extend the interface to include `AnchorHTMLAttributes<HTMLAnchorElement>` which will be handy if we
+   want to pass on HTMLAnchorElement attributes.
 
 2. Then include `GatsbyLinkProps<{}>` This comes from `gatsby` and is what gives the Link it's super powers.
 
-   _I'll revisit the `GatsbyLinkProps<{}>` in another post as it relates to a TypeScript generic used to type the `location.state` shape, You could type as "any" for now_
+   _I'll revisit the `GatsbyLinkProps<{}>` in another post as it relates to a TypeScript generic used to type the
+   `location.state` shape, You could type as "any" for now_
 
-3. Lastly "hand crank" the `sx` prop and type it as `SxStyleProp` from `theme-ui` which allows us to pass on any `sx` based styes which will get applied because the entire component is now JSX Pragma enabled. 😅
+3. Lastly "hand crank" the `sx` prop and type it as `SxStyleProp` from `theme-ui` which allows us to pass on any `sx`
+   based styes which will get applied because the entire component is now JSX Pragma enabled. 😅
 
 ### Usage
 
-And here you go, a new Link component that does all the things Link from `gatsby` does and all the things that Link from `theme-ui` does... and it has a cooler name 😎
+And here you go, a new Link component that does all the things Link from `gatsby` does and all the things that Link from
+`theme-ui` does... and it has a cooler name 😎
 
 ```javascript
 
@@ -162,7 +175,8 @@ And here you go, a new Link component that does all the things Link from `gatsby
 
 ### [Warning ⚠️](#warning)
 
-There is one caveat to using this method that i think you should know about. Theme UI also has a `variant` prop but since **MrLinky** is actually a Gatsby link we won't be able to use variant as a prop like this 👇
+There is one caveat to using this method that i think you should know about. Theme UI also has a `variant` prop but
+since **MrLinky** is actually a Gatsby link we won't be able to use variant as a prop like this 👇
 
 ```javascript
 <MrLinky variant="links.navigation" />
@@ -173,10 +187,7 @@ There is one caveat to using this method that i think you should know about. The
 ...but we can still take advantage of the `variant` prop by passing it on via the `sx` prop e.g 👇
 
 ```javascript
-<MrLinky
-  to="/some-internal-link/"
-  sx={{ color: "primary", variant: "links.navigation" }}
->
+<MrLinky to="/some-internal-link/" sx={{ color: 'primary', variant: 'links.navigation' }}>
   Sone internal link
 </Link>
 ```
@@ -228,9 +239,11 @@ It's a small shortcoming in my opinion and keeping all the Gatsby Link super pow
 
 ## MrsLinky
 
-For completeness i've also created a MrsLinky component which pretty much does the same thing but is straight up **JavaScript** and uses `PropTypes` just to give you some indication of what the props are.
+For completeness i've also created a MrsLinky component which pretty much does the same thing but is straight up
+**JavaScript** and uses `PropTypes` just to give you some indication of what the props are.
 
-The `to` prop is marked as `isRequired` as it's also required by Link from `gatsby` under the hood. The remaining props are marked as good old `any` because this is JavaScript so you can do whatever you like!
+The `to` prop is marked as `isRequired` as it's also required by Link from `gatsby` under the hood. The remaining props
+are marked as good old `any` because this is JavaScript so you can do whatever you like!
 
 <Divider />
 
@@ -238,9 +251,9 @@ The `to` prop is marked as `isRequired` as it's also required by Link from `gats
 // MrsLinky.js
 
 /** @jsx jsx */
-import { jsx } from "theme-ui"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
 
 export const MrsLinky = ({ children, to, sx, ...rest }) => (
   <Link to={to} sx={{ ...sx }} {...rest}>

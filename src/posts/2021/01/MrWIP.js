@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
+import { jsx } from 'theme-ui'
 
 export const MrJsx = () => {
   return (
     <div
       sx={{
-        alignItems: "center",
-        backgroundColor: "surface",
-        display: "grid",
+        alignItems: 'center',
+        backgroundColor: 'surface',
+        display: 'grid',
         gridGap: 3,
-        gridTemplateColumns: "80px auto",
+        gridTemplateColumns: '80px auto',
         p: 3,
       }}
     >
@@ -17,15 +17,15 @@ export const MrJsx = () => {
         src="https://avatars2.githubusercontent.com/u/1465706?s=460&u=a3c1ce80b0ce24b68a66bfa59ca546d83f95877f&v=4"
         alt="Paul Scanlon"
         sx={{
-          width: "100%",
-          height: "auto",
+          width: '100%',
+          height: 'auto',
         }}
       />
 
       <div>
         <h3
           sx={{
-            color: "primary",
+            color: 'primary',
             m: 0,
           }}
         >
@@ -37,14 +37,14 @@ export const MrJsx = () => {
             fontSize: 0,
           }}
         >
-          Follow me on Twitter:{" "}
+          Follow me on Twitter:{' '}
           <a
             href="https://twitter.com/PaulieScanlon"
             target="_blank"
             rel="noreferrer"
             sx={{
-              color: "secondary",
-              fontSize: "inherit",
+              color: 'secondary',
+              fontSize: 'inherit',
             }}
           >
             @pauliescanlon

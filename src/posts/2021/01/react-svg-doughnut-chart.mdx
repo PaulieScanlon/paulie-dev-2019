@@ -1,18 +1,22 @@
 ---
 title: Create an Svg Doughnut Chart from scratch for your Gatsby blog
-tags: ["JavaScript", "React", "SVG", "Gatsby", "CSS"]
+tags: ['JavaScript', 'React', 'SVG', 'Gatsby', 'CSS']
 date: 2021-01-11
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1610380360/paulie.dev/2021/01/react-svg-doughnut-chart_u7wza7.jpg
 ---
 
-import { MrDoughnut } from "./MrDoughnut"
+import { MrDoughnut } from './MrDoughnut'
 
 Charting libraries are great don't get me wrong but sometimes... you just need a bloody doughnut! 🍩
 
-This post is largely based on this [article](https://medium.com/@heyoka/scratch-made-svg-donut-pie-charts-in-html5-2c587e935d72) by [Mark Caron](https://twitter.com/heyoka) and using this as the foundation i'm going to explain how I created the "tags" chart seen in my [dashboard](/dashboard)
+This post is largely based on this
+[article](https://medium.com/@heyoka/scratch-made-svg-donut-pie-charts-in-html5-2c587e935d72) by
+[Mark Caron](https://twitter.com/heyoka) and using this as the foundation i'm going to explain how I created the "tags"
+chart seen in my [dashboard](/dashboard)
 
-To start with I created a new React component and called it `MrDoughnut` and by using `useStaticQuery` and `graphql` from `gatsby` I'm able to query the tags used in my blog posts
+To start with I created a new React component and called it `MrDoughnut` and by using `useStaticQuery` and `graphql`
+from `gatsby` I'm able to query the tags used in my blog posts
 
 <Divider />
 
@@ -54,28 +58,21 @@ Which outputs something similar to the below 👇
   {
     node: {
       frontmatter: {
-        tags: [
-          "JavaScript",
-          "React",
-          "Gatsby",
-          "SVG",
-          "Netlify Functions",
-          "GitHub REST",
-        ],
+        tags: ['JavaScript', 'React', 'Gatsby', 'SVG', 'Netlify Functions', 'GitHub REST'],
       },
     },
   },
   {
     node: {
       frontmatter: {
-        tags: ["React"],
+        tags: ['React'],
       },
     },
   },
   {
     node: {
       frontmatter: {
-        tags: ["JavaScript", "React", "SVG"],
+        tags: ['JavaScript', 'React', 'SVG'],
       },
     },
   },
@@ -84,9 +81,11 @@ Which outputs something similar to the below 👇
 
 <Divider />
 
-This is a good start but to use this data to drive `<MrDoughnut />` it needs to be _massaged_ into a slightly different shape.
+This is a good start but to use this data to drive `<MrDoughnut />` it needs to be _massaged_ into a slightly different
+shape.
 
-Ideally what I need is an object for each tag name containing a value for the `tag`, `count`, `percentage` and `remainder`.
+Ideally what I need is an object for each tag name containing a value for the `tag`, `count`, `percentage` and
+`remainder`.
 
 A shape like this will do the trick 👇
 
@@ -95,7 +94,7 @@ A shape like this will do the trick 👇
 ```javascript
 ;[
   {
-    tag: "React",
+    tag: 'React',
     count: 3,
     percentage: x,
     remainder: x,
@@ -105,7 +104,8 @@ A shape like this will do the trick 👇
 
 <Divider />
 
-To modify the shape of any data the most common method to use is [Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+To modify the shape of any data the most common method to use is
+[Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
 
 ## [The Data](#the-data)
 
@@ -170,11 +170,13 @@ Which results in an array of strings similar to the below 👇
 
 <Divider />
 
-You'll notice there are duplicates in this array and in step two i'll count the duplicates which will give me enough data to work out what percentage each tag represents.
+You'll notice there are duplicates in this array and in step two i'll count the duplicates which will give me enough
+data to work out what percentage each tag represents.
 
 ### [Step two](#step-two)
 
-Count the amount of duplicate items and assign a value in a new object key called `count` and return this value along with the tag name
+Count the amount of duplicate items and assign a value in a new object key called `count` and return this value along
+with the tag name
 
 <Divider />
 
@@ -227,7 +229,9 @@ export const MrDoughnut = () => {
 
 <Divider />
 
-In the above snippet I use `array.reduce()` in order to determine if it's an `existingItem` where i'll increment the `count` or return a new item with a `count` of 1 . Using `array.find()` I loop over the `items` to see if the array contains the `item` passed from the params in the _parent_ `array.reduce()` 😓
+In the above snippet I use `array.reduce()` in order to determine if it's an `existingItem` where i'll increment the
+`count` or return a new item with a `count` of 1 . Using `array.find()` I loop over the `items` to see if the array
+contains the `item` passed from the params in the _parent_ `array.reduce()` 😓
 
 This gives me an output similar to the below 👇
 
@@ -260,7 +264,8 @@ This gives me an output similar to the below 👇
 
 ### [Step three](#step-three)
 
-Using the new `count` value I need to calculate how this corresponds to the total count from the array which I'll use to create the percentage value for each tag
+Using the new `count` value I need to calculate how this corresponds to the total count from the array which I'll use to
+create the percentage value for each tag
 
 <Divider />
 
@@ -324,7 +329,11 @@ export const MrDoughnut = () => {
 
 <Divider />
 
-In this step I use `array.map()` to loop over the newly constructed `name: '', count: ''` object and using `array.reduce()` I sum up **all** the count values for each tag name to create a `countTotal`. A percentage can then be calculated by dividing the current `count` value by the `countTotal` value and multiplying it by 100. The remainder is calculated in a similar way by subtracting it from 100. I'll need the remainder later when I come to draw the `<circle />` element used in the chart.
+In this step I use `array.map()` to loop over the newly constructed `name: '', count: ''` object and using
+`array.reduce()` I sum up **all** the count values for each tag name to create a `countTotal`. A percentage can then be
+calculated by dividing the current `count` value by the `countTotal` value and multiplying it by 100. The remainder is
+calculated in a similar way by subtracting it from 100. I'll need the remainder later when I come to draw the
+`<circle />` element used in the chart.
 
 The final return statement spreads the `item` object along with the new `percentage` and `remainder` values.
 
@@ -396,13 +405,16 @@ export const MrDoughnut = () => {
 
 <Divider />
 
-Using `array.sort()` I return the array ordered by the largest count in ascending order. _I've added an `array.slice(0,5)` because I'm only concerned with the top five results_
+Using `array.sort()` I return the array ordered by the largest count in ascending order. _I've added an
+`array.slice(0,5)` because I'm only concerned with the top five results_
 
 Now that I have the data in the correct shape it's time to tackle the Doughnut Chart itself.
 
-The general idea is to use `array.map()` again but this time in `Jsx` to loop over each of the tag objects and return a `<circle />` for each one.
+The general idea is to use `array.map()` again but this time in `Jsx` to loop over each of the tag objects and return a
+`<circle />` for each one.
 
-By using a combination of CSS values; `strokeDashoffset` and `strokeDasharray` I'm able to determine where to start and end the stroke
+By using a combination of CSS values; `strokeDashoffset` and `strokeDasharray` I'm able to determine where to start and
+end the stroke
 
 ## [The Chart](#the-chart)
 
@@ -498,19 +510,28 @@ export const MrDoughnut = () => {
 
 <Divider />
 
-In this step I return an `svg` with a `viewBox` property of `0,0,40,40`, to be honest this value doesn't really matter because the **s** in `svg` stands for **scalable** however, it is important that the `cx` and `cy` values for each circle are half the `viewBox` value, e.g 20
+In this step I return an `svg` with a `viewBox` property of `0,0,40,40`, to be honest this value doesn't really matter
+because the **s** in `svg` stands for **scalable** however, it is important that the `cx` and `cy` values for each
+circle are half the `viewBox` value, e.g 20
 
-The `svg` has a width and height of 100% which means it will fill 100% of whatever it's contained within. In this case I have a parent `div` with a width of 300
+The `svg` has a width and height of 100% which means it will fill 100% of whatever it's contained within. In this case I
+have a parent `div` with a width of 300
 
-The `r` value is where things get a bit _mathematical_. `r` is the [radius](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/r) of the circle.
+The `r` value is where things get a bit _mathematical_. `r` is the
+[radius](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/r) of the circle.
 
-As [Mark Caron](https://twitter.com/heyoka) mentions in [this article](https://medium.com/@heyoka/scratch-made-svg-donut-pie-charts-in-html5-2c587e935d72) keeping things human readable helps with the complexity and basing everything off 100 goes someway to achieving this.
+As [Mark Caron](https://twitter.com/heyoka) mentions in
+[this article](https://medium.com/@heyoka/scratch-made-svg-donut-pie-charts-in-html5-2c587e935d72) keeping things human
+readable helps with the complexity and basing everything off 100 goes someway to achieving this.
 
-The calculation to create the `r` value looks like this `100/(2π)` which roughly translates to 100 divided by 2, multiplied by pi, where pi is approximately 3.14... or in actual numbers 100 / 6.28
+The calculation to create the `r` value looks like this `100/(2π)` which roughly translates to 100 divided by 2,
+multiplied by pi, where pi is approximately 3.14... or in actual numbers 100 / 6.28
 
 For the `stroke` color i've defined an array of colours that's the same length as the `tagData`
 
-The next step is a bit tricky and to prevent the strokes from overlapping I'm using `strokeDashoffset` and `strokeDasharray` to determine how much of the circumference of the `<circle />` the stroke should cover and where the stroke should start
+The next step is a bit tricky and to prevent the strokes from overlapping I'm using `strokeDashoffset` and
+`strokeDasharray` to determine how much of the circumference of the `<circle />` the stroke should cover and where the
+stroke should start
 
 <Divider />
 
@@ -603,7 +624,8 @@ export const MrDoughnut = () => {
 
 <Divider />
 
-Here I'm using the `percentage` and the `remainder` to determine how much of the circle the stroke should cover and to determine where the stroke starts. To calculate these values here's the formula 👇
+Here I'm using the `percentage` and the `remainder` to determine how much of the circle the stroke should cover and to
+determine where the stroke starts. To calculate these values here's the formula 👇
 
 `(circumference) - (all preceding segments percentage) + (starting position)`
 
@@ -613,11 +635,14 @@ Here I'm using the `percentage` and the `remainder` to determine how much of the
 
 ## [The legend](#the-legend)
 
-A lot of charting libraries will plot a title next to each segments to help users identify what each segment represents along with a value. However, and i've wrestled with this so many times because I like to develop _mobile first_ and more often than not this approach results in text too small to read on smaller screens.
+A lot of charting libraries will plot a title next to each segments to help users identify what each segment represents
+along with a value. However, and i've wrestled with this so many times because I like to develop _mobile first_ and more
+often than not this approach results in text too small to read on smaller screens.
 
 Instead, I generally opt for positioning a color coded legend below the chart to ensure the text always remains legible.
 
-The complete component now looks like the below 👇 and the `src` can be found [here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrDoughnut.js)
+The complete component now looks like the below 👇 and the `src` can be found
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrDoughnut.js)
 
 <Divider />
 

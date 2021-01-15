@@ -1,1 +1,1 @@
-export { PostsByMonthChart } from "./PostsByMonthChart";
+export { PostsByMonthChart } from './PostsByMonthChart'
