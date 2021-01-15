@@ -1902,10 +1902,10 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@pauliescanlon/gatsby-theme-terminal@^0.0.44":
-  version "0.0.44"
-  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.44.tgz#75103e17fcfeea67b1a654ad72b9aaae300968aa"
-  integrity sha512-ayLhzONQH3XCGcZJoDVCn3MdWABc+Ev7wgW32AhpfXRlLV42wvdItITjTKLARdBh2Jch7KIWBxPcEfRnUbuDew==
+"@pauliescanlon/gatsby-theme-terminal@^0.0.45":
+  version "0.0.45"
+  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-theme-terminal/-/gatsby-theme-terminal-0.0.45.tgz#33e357b3b3377ea39738996fd3bf3dc74a34e057"
+  integrity sha512-xUzQ8qZ9D0UFLtFJxsYovJpxmBEL5ELOcCjW+3yL6OpudhViiHaLZ3eslTPRXl1aFcasBONPkQNjEqbUaBrTBw==
   dependencies:
     "@emotion/core" "^10.0.28"
     "@theme-ui/color" "^0.3.0"
