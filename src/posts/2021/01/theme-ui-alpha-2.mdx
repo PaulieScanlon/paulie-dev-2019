@@ -90,9 +90,50 @@ color: var(--theme-ui-colors-secondary, #c39eff);
 I'd like to draw you attention if I may to the absence of the `class` name where I've defined `<Styled.h3 />` which begs
 the question where the W.T.Flip are the styles being applied.
 
-The secret lies in the theme object, here's the
-[src](https://github.com/PaulieScanlon/gatsby-theme-terminal/blob/master/%40pauliescanlon/gatsby-theme-terminal/src/gatsby-plugin-theme-ui/index.js#L68)
-for how I'm styling my `<h3 />` elements
+The secret lies in the theme object. You'll notice from the below there's an object called `styles` within `styles`
+there's an object called `h3` and within the `h3` object are the styles that Theme UI applies to `<Styled.h3 />` because
+it's being mapped by default to `theme.styles.h3`
 
-bit confusing bit it maps to to `text.heading` and the src for that is
-[here](https://github.com/PaulieScanlon/gatsby-theme-terminal/blob/master/%40pauliescanlon/gatsby-theme-terminal/src/gatsby-plugin-theme-ui/index.js#L373)
+<Divider />
+
+```javascript
+// theme.js
+
+export default {
+  colors: {
+    secondary: '#c39eff',
+  },
+  fonts: {
+    heading: 'Inconsolata, monospace',
+  },
+  fontWeights: {
+    heading: 700,
+  },
+  styles: {
+    h3: {
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      fontSize: '18px',
+      marginTop: 0,
+      marginBottom: 16,
+      color: 'secondary',
+    },
+  },
+}
+```
+
+<Divider />
+
+There's a few other things going on in `theme.styles.h3` which i'll attempt to explain now. You may or may not know but
+in Object Oriented JavaScript it's not possible for an object key to reference itself of a parent object.
+
+Using the above as an example the `fontFamily` value is "heading", heading is a "string" which in normal OOP wouldn't
+mean anything but Theme UI is able to map "strings" to values contained elsewhere in the theme object.
+
+In the case of `fontFamily` Theme UI maps the "heading" string to `theme.styles.font.heading` which has a value of
+"Inconsolata, monospace". Theme UI uses the same approach for `fontWeight` which maps to `theme.fontsWeights.heading`,
+similarly `color` is mapped to `theme.colors.secondary`.
+
+Understanding where Theme UI maps HTML element types and CSS properties to is a fundamental requirement if you're
+planning on using Theme UI to style your project. Take some time to familiarize yourself with both the
+[Styles](https://theme-ui.com/theme-spec#styles) and the [Theme Scales](https://theme-ui.com/theme-spec#theme-scales)
