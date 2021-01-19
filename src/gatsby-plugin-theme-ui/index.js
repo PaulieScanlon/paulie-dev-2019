@@ -18,6 +18,7 @@ export default {
   styles: {
     ...baseTheme.styles,
     p: {
+      ...baseTheme.styles.p,
       a: {
         ...baseTheme.styles.p.a,
         color: 'secondary',
