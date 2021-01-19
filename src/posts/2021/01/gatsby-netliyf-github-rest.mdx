@@ -6,12 +6,15 @@ author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1609937744/paulie.dev/2021/01/gatsby-netlify-github_shrg45.jpg
 embeddedImageUrls:
   - https://res.cloudinary.com/www-paulie-dev/image/upload/v1609952268/paulie.dev/2021/01/gatsby-netlify-github-embedded-paul_vzpddb.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1611091167/paulie.dev/2021/01/gatsby-netlify-github-embedded-scott_fhlnzq.jpg
 ---
 
 After a recent Twitter conversation with my good chum [Scott](https://twitter.com/spences10) we decided we'd run a
 little experiment that will attempt to broadly achieve the same thing but in two different ways.
 
 <Tweet tweetLink="PaulieScanlon/status/1345670350160465920" />
+
+<Divider />
 
 The "end goal" if you like, will be to request data using a GitHub API, or more specifically request data regarding the
 programming languages used in **all** repositories for a given GitHub user and render a nice looking Doughnut Chart in a
@@ -106,11 +109,15 @@ terms and below is the tech we've chosen to use 👇
 
 <Box>
 
-<Image src="https://ghui.vercel.app/card.png?username=pauliescanlon" />
+<Image src={props.embedded.image2.url} />
+
+<Divider />
+
+### Scott
 
 Scott's results, demo and repo are available on below links👇
 
-- [Blog 📖 - link tbc](https://scottspence.com/)
+- [Blog 📖](https://scottspence.com/2021/01/19/github-user-details/)
 - [Demo 👀](https://ghui.vercel.app/card.png?username=pauliescanlon)
 - [Repo 🦜](https://github.com/spences10/github-user-information)
 
@@ -120,8 +127,13 @@ Scott's results, demo and repo are available on below links👇
 
 <Image src={props.embedded.image1.url} />
 
+<Divider />
+
+### Paul
+
 My demo and repo are available on the below links and my results are explained further down the page 👇
 
+-
 - [Demo 👀](https://gatsby-netlify-github-rest.netlify.app/)
 - [Repo 🦜](https://github.com/PaulieScanlon/gatsby-netlify-github-rest)
 

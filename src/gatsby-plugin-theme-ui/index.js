@@ -17,6 +17,14 @@ export default {
 
   styles: {
     ...baseTheme.styles,
+    root: {
+      ...baseTheme.styles.root,
+      '.mdx-embed': {
+        '.twitter-tweet-mdx-embed': {
+          minHeight: 500,
+        },
+      },
+    },
     p: {
       ...baseTheme.styles.p,
       a: {
