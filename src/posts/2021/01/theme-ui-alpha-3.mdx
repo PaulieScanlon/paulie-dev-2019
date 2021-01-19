@@ -1,0 +1,404 @@
+---
+title: Understanding Theme UI's Components
+tags: ['JavaScript', 'React', 'Theme UI']
+date: 2021-01-19
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1611064599/paulie.dev/2021/01/theme-ui-alpha-3_cqf7ny.jpg
+---
+
+import { MrJsxCard } from './MrJsxCard'
+import { MrStyledCard } from './MrStyledCard'
+import { MrComponentCard } from './MrComponentCard'
+
+In this post i'm going to explain how to use Theme UI's _built in_ components. If you're new to Theme UI i'd suggest
+having a read of the first two posts in this series to bring you up to speed
+
+- 1. [Theme UI's Jsx Pragma](/posts/2021/01/theme-ui-alpha-1/)
+- 2. [Theme UI's Styled component](/posts/2021/01/theme-ui-alpha-2/)
+
+If you have read the first two posts, I must apologize as I'll now be explaining why I don't use either of those methods
+but I will of course be offering up an my preferred approach.
+
+Under the hood things remain broadly the same, it's where we write the Jsx that differs somewhat. To give you a taster
+of what I'll be covering I have previously touched upon this subject in a previous post:
+[Everything's a box](/posts/2021/07/everythings-a-box/)
+
+To demonstrate I'll be creating the same component using three different methods available to you in Theme UI and
+explain why I prefer the final method which i'll refer to as "the component" approach"
+
+### The Jsx approach
+
+This approach uses the Jsx Pragma and is mostly what you'll see in the docs. You can find the `src` for this component
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrJsxCard.js)
+
+<Grid
+ sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Output 👇
+
+<MrJsxCard />
+
+</Box>
+
+<Box>
+
+Src 👇
+
+```javascript
+// MrJsxCard.js
+
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
+
+export const MrJsxCard = () => {
+  return (
+    <div
+      sx={{
+        backgroundColor: 'surface',
+      }}
+    >
+      <img
+        src="https://placedog.net/600/350"
+        alt="a dog - woof"
+        sx={{ boxSizing: 'border-box', margin: 0, minWidth: 0, maxWidth: '100%', height: 'auto' }}
+      />
+      <div
+        sx={{
+          p: 3,
+        }}
+      >
+        <h4
+          sx={{
+            color: 'text',
+            fontFamily: 'heading',
+            fontWeight: 'heading',
+            fontSize: 2,
+            mt: 0,
+            mb: 3,
+          }}
+        >
+          MrJsxCard
+        </h4>
+        <p
+          sx={{
+            color: 'text',
+            fontFamily: 'body',
+            fontWeight: 'body',
+            mt: 0,
+            mb: 3,
+          }}
+        >
+          Lorem ipsum ...
+        </p>
+        <button
+          sx={{
+            appearance: 'none',
+            backgroundColor: 'primary',
+            border: 0,
+            color: 'text',
+            borderRadius: 0,
+            cursor: 'pointer',
+            fontSize: 1,
+            lineHeight: 'inherit',
+            minWidth: 120,
+            margin: 0,
+            textDecoration: 'none',
+            px: 3,
+            py: 2,
+            ':focus': {
+              outline: 'none',
+              transition: '.2s linear box-shadow',
+              boxShadow: (theme) => `0 0 0 2px ${theme.colors.muted}`,
+            },
+          }}
+        >
+          Click Me
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+</Box>
+
+</Grid>
+
+<Divider />
+
+Pretty verbose ay?! That's because there's quite a lot of styles applied via the `sx` prop. Each mapped CSS property
+still looks to the correct part of the theme to find it's appropriate value but this approach can lead to duplicating a
+lot of styles between components making re-usability difficult to maintain.
+
+### The Styled approach
+
+This approach uses the Styled component which can reduce the verbosity. You can find the `src` for this component
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrStyledCard.js)
+
+<Grid
+ sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Output 👇
+
+<MrStyledCard />
+
+</Box>
+
+<Box>
+
+Src 👇
+
+```javascript
+// MrStyledCard.js
+
+/** @jsx jsx */
+import { jsx, Styled } from 'theme-ui'
+
+export const MrStyledCard = () => {
+  return (
+    <div
+      sx={{
+        backgroundColor: 'surface',
+      }}
+    >
+      <Styled.img
+        src="https://placedog.net/600/350"
+        alt="a dog - woof"
+        sx={{ boxSizing: 'border-box', margin: 0, minWidth: 0, maxWidth: '100%', height: 'auto' }}
+      />
+      <div
+        sx={{
+          p: 3,
+        }}
+      >
+        <Styled.h4>MrStyledCard</Styled.h4>
+        <Styled.p>Lorem ipsum ...</Styled.p>
+        <button
+          sx={{
+            appearance: 'none',
+            backgroundColor: 'primary',
+            border: 0,
+            color: 'text',
+            borderRadius: 0,
+            cursor: 'pointer',
+            fontSize: 1,
+            lineHeight: 'inherit',
+            minWidth: 120,
+            margin: 0,
+            textDecoration: 'none',
+            px: 3,
+            py: 2,
+            ':focus': {
+              outline: 'none',
+              transition: '.2s linear box-shadow',
+              boxShadow: (theme) => `0 0 0 2px ${theme.colors.muted}`,
+            },
+          }}
+        >
+          Click Me
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+</Box>
+
+</Grid>
+
+<Divider />
+
+By using `<Styled.h4 />` and `<Styled.p />` we can remove quite a few styles from the `<h4 />` and `<p />` HTML
+elements. This is a perfectly valid way to use Theme UI but personally the _mix n match_ methods of using the Jsx Pragma
+and Styled don't quite sit right with me. The `<button />` is still a little verbose looking and would be tricky to
+re-use
+
+### The Component approach
+
+This approach (my preference) uses Theme UI's built in components. As with CSS properties, components can also "map" to
+a specific objects within the theme. You can find the `src` for this component
+[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrComponentCard.js)
+
+<Grid
+ sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Output 👇
+
+<MrComponentCard />
+
+</Box>
+
+<Box>
+
+Src 👇
+
+```javascript
+// MrComponentCard.js
+
+import React from 'react'
+import { Box, Heading, Text, Button, Card, Image } from 'theme-ui'
+
+export const MrComponentCard = () => {
+  return (
+    <Card>
+      <Image src="https://placedog.net/600/350" alt="a dog - woof" />
+      <Box
+        sx={{
+          p: 3,
+        }}
+      >
+        <Heading as="h4" variant="styles.h4">
+          MrComponentCard
+        </Heading>
+        <Text as="p" variant="styles.p">
+          Lorem ipsum ...
+        </Text>
+        <Button>Click Me</Button>
+      </Box>
+    </Card>
+  )
+}
+```
+
+</Box>
+
+</Grid>
+
+<Divider />
+
+Using Theme UI's components keeps things consistent and we no longer need to _mix n match_ methods and, et voilà the
+React import is back which makes this component look much more familiar. I also believe this is much more readable in
+terms of what each component is, e.g "Heading" and "Text" and because all components are mapped back to the theme we can
+_hide_ all their styles away in the theme object.
+
+Only one element has an `sx` prop, the `<Box />` personally I feel it's ok to add the `sx` props on layout _wrappers_
+for CSS properties like `padding`, `margin` and `display` etc as these vary greatly from component to component. The
+styles for common or re-usable components e.g `<Heading />`, `<Text />` and `<Button />` have all been neatly abstracted
+away.
+
+I've mentioned "mapping" a few times throughout these posts and I know from discussions this is a tricky concept to
+grasp, but, it **is** covered in the docs if you know where to look.
+
+Here's what the [docs](https://theme-ui.com/components/button) say about the `<Button />` component
+
+<Divider />
+
+> Button variants can be defined in the `theme.buttons` object. The Button component uses `theme.buttons.primary` as its
+> default variant style.
+
+<Divider />
+
+```javascript
+// path-to-theme/index.js
+
+export default {
+  colors: {
+   ...
+  },
+  fonts: {
+   ...
+  },
+  fontWeights: {
+   ...
+  },
+  space : {
+   ...
+  },
+  styles: {
+   ...
+  },
+  buttons: {
+    primary: {
+      backgroundColor: 'primary',
+      color: 'text',
+      ...
+      ':focus' : {
+        ...
+      }
+    },
+  },
+}
+```
+
+<Divider />
+
+Hopefully you can see the theme object above contains an object called `buttons` and within it is another object called
+`primary`. This is the location in the theme object that the `<Button />` component will look to by default for it's
+styles.
+
+If you wanted to introduce a new variant, e.g "secondary" you could do the following
+
+<Grid
+ sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Usage 👇
+
+```javascript
+<Button variant="secondary">Click Me</Button>
+```
+
+Output 👇
+
+<Button variant="secondary">Click Me</Button>
+
+</Box>
+
+<Box>
+
+Theme 👇
+
+```javascript
+// path-to-theme/index.js
+
+export default {
+  ...
+  buttons: {
+    primary: {
+     ...
+    },
+    secondary : {
+      backgroundColor: 'secondary',
+      color: 'background',
+      ...
+      ':focus' : {
+        ...
+      }
+    }
+  },
+}
+
+```
+
+</Box>
+
+</Grid>
+
+<Divider />
+
+In this scenario instead of the `<Button />` defaulting to `theme.buttons.primary` we re-map it to
+`theme.buttons.secondary` by applying a variant prop of "secondary"
+
+The above introduces a new concept called "variants" and variants can be used by components using the `variant` prop or
+by using `variant` as CSS key from either the `sx` prop or from within the theme object itself. I'll be discussing
+variants in more depth in a later post so please hang tight whilst I whip up more code snippets and examples.
