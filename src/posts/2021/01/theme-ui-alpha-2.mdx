@@ -1,5 +1,5 @@
 ---
-title: Understanding Theme UI's Styled component
+title: 'Understanding Theme UI: 2 - Styled component'
 tags: ['JavaScript', 'React', 'Theme UI']
 date: 2021-01-18
 author: Paul Scanlon
@@ -10,8 +10,11 @@ embeddedImageUrls:
 
 import { MrStyled } from './MrStyled'
 
-In my last post I attempted to explain [Theme UI's Jsx Pragma](/posts/2021/01/theme-ui-alpha-1/) and in this post i'll
-be breaking down how to use Theme UI's [Styled component](https://theme-ui.com/styled)
+In my last post I attempted to explain Theme UI's Jsx Pragma, if you missed that, here's the link again
+
+- [Understanding Theme UI: 1 - Jsx Pragma](/posts/2021/01/theme-ui-alpha-1/)
+
+In this post i'll be breaking down how to use Theme UI's [Styled component](https://theme-ui.com/styled)
 
 The Styled component introduces a new concept, it's related to the previous post by way of CSS properties being mapped
 to themes object keys but this time we'll be mapping HTML elements to the `styles` object.
@@ -99,7 +102,7 @@ and within `styles` there's an object called `h3` and within the `h3` object are
 <Divider />
 
 ```javascript
-// theme.js
+// path-to-theme/index.js
 
 export default {
   colors: {

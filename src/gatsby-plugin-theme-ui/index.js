@@ -13,6 +13,8 @@ export default {
     success: '#58e6d9',
     background: '#131127',
     surface: '#232140',
+    highlight: '#ffeb3b',
+    placeholder: '#4e4b85',
   },
 
   styles: {
@@ -38,6 +40,10 @@ export default {
         fontSize: '14px',
         wordBreak: 'break-word',
         backgroundColor: 'surface',
+      },
+      mark: {
+        color: 'background',
+        backgroundColor: 'highlight',
       },
     },
     pre: {
@@ -72,6 +78,20 @@ export default {
       transition: '.2s linear background-color',
       ':hover': {
         backgroundColor: 'surface',
+      },
+    },
+  },
+
+  forms: {
+    ...baseTheme.forms,
+    label: {
+      ...baseTheme.forms.label,
+      color: 'primary',
+    },
+    input: {
+      ...baseTheme.forms.input,
+      '::placeholder': {
+        color: 'placeholder',
       },
     },
   },
