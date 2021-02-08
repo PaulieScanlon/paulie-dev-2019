@@ -48,17 +48,22 @@ export const SourceArticle = ({
               <Divider />
             </Fragment>
           )}
-          <Box sx={{ mb: 4, minHeight: 160 }}>
-            {featuredImage && featuredImage.childImageSharp && (
-              <Img fluid={featuredImage.childImageSharp.fluid} alt={featuredImage.childImageSharp.fluid.originalName} />
-            )}
-            {featuredImageUrlSharp && featuredImageUrlSharp.childImageSharp && (
-              <Img
-                fluid={featuredImageUrlSharp.childImageSharp.fluid}
-                alt={featuredImageUrlSharp.childImageSharp.fluid.originalName}
-              />
-            )}
-          </Box>
+          {featuredImage || featuredImageUrlSharp ? (
+            <Box sx={{ mb: 4, minHeight: 160 }}>
+              {featuredImage && featuredImage.childImageSharp && (
+                <Img
+                  fluid={featuredImage.childImageSharp.fluid}
+                  alt={featuredImage.childImageSharp.fluid.originalName}
+                />
+              )}
+              {featuredImageUrlSharp && featuredImageUrlSharp.childImageSharp && (
+                <Img
+                  fluid={featuredImageUrlSharp.childImageSharp.fluid}
+                  alt={featuredImageUrlSharp.childImageSharp.fluid.originalName}
+                />
+              )}
+            </Box>
+          ) : null}
           <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
             {title}
           </Heading>

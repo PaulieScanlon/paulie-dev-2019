@@ -19,7 +19,7 @@ module.exports = {
       'Enzyme',
       'React Testing Libary',
       'Node.js',
-      'FaunaDB',
+      'Fauna',
       'Jamstack',
       'Component Library',
       'Serverless Functions',

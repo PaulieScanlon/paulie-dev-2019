@@ -5,10 +5,10 @@ import { mix } from '@theme-ui/color'
 
 import { useConfig } from '@pauliescanlon/gatsby-theme-terminal'
 
-export const WritingCard = ({ title, tags, date, excerpt, url, misc, author }) => {
+export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
   const {
     site: {
-      siteMetadata: { siteUrl },
+      siteMetadata: { name, siteUrl },
     },
   } = useConfig()
 
@@ -55,7 +55,7 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc, author }) =
               }}
             >
               <Image alt={`${misc}-logo`} src={`${siteUrl}/images/${misc}-logo.png`} sx={{ width: 16, height: 16 }} />
-              <Text sx={{ color: 'secondary', ml: 2 }}>{author}</Text>
+              <Text sx={{ color: 'secondary', ml: 2 }}>{misc}</Text>
             </Flex>
             <Text sx={{ color: 'success' }}>{format(new Date(date), 'd-MMM-u')}</Text>
           </Flex>
