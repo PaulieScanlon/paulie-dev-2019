@@ -1,0 +1,459 @@
+---
+title: 'Understanding Theme UI: 6 - The Hacks'
+tags: ['JavaScript', 'React', 'Theme UI']
+date: 2021-02-09
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1612869331/paulie.dev/2021/02/theme-ui-alpha-6_esqykh.jpg
+---
+
+import { LogoIcon } from './bumhub-logo-icon'
+
+In this post i'm going to explain some of my Theme UI "hacks"... to be honest they're not really hacks but you won't
+necessarily find these in the docs since they mostly relate to standard CSS selectors but it wasn't immediately obvious
+to me that the `sx` prop can be used in this way.
+
+If you're new to Theme UI i'd suggest having a read of the first five posts in this series to bring you up to speed
+
+- 1. [Understanding Theme UI: 1 - Jsx Pragma](/posts/2021/01/theme-ui-alpha-1/)
+- 2. [Understanding Theme UI: 2 - Styled component](/posts/2021/01/theme-ui-alpha-2/)
+- 3. [Understanding Theme UI: 3 - Components](/posts/2021/01/theme-ui-alpha-3/)
+- 4. [Understanding Theme UI: 4 - Scales](/posts/2021/01/theme-ui-alpha-4/)
+- 5. [Understanding Theme UI: 5 - Media Queries](/posts/2021/01/theme-ui-alpha-5/)
+
+<Divider />
+
+## [Variants - Buttons](#variants-button)
+
+There are some obvious uses for variants that are explained in the docs but one method I use a fair bit isn't covered by
+the docs so here's one way you can use variants inside the theme object.
+
+Below is a method I use for styling button variants and as the [docs](https://theme-ui.com/components/button#variants)
+mention the default variant is `theme.buttons.primary`. You'll see in the source below that if the `<Button />`
+component is used without a variant prop it'll default to the styles in defined in `theme.buttons.primary`
+
+<Divider />
+
+<Grid
+ sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Src 👇
+
+```javascript
+<Button>Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="ghost">Ghost</Button>
+```
+
+Output 👇
+
+<Grid
+ sx={{
+  gridTemplateColumns: "1fr"
+ }}
+>
+
+<Button>Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="ghost">Ghost</Button>
+
+</Grid>
+
+</Box>
+
+<Box>
+
+Theme 👇
+
+```javascript
+// path-to-theme/index.js
+
+export default {
+  colors: {
+    text: '#FFFFFF',
+    muted: '#8b87ea',
+    primary: '#f056c7',
+    secondary: '#c39eff',
+    background: '#131127',
+  },
+  buttons: {
+    primary: {
+      backgroundColor: 'primary',
+      borderRadius: 0,
+      color: 'text',
+      cursor: 'pointer',
+      minWidth: 120,
+      px: 3,
+      py: 2,
+    },
+    secondary: {
+      variant: 'buttons.primary',
+      color: 'background',
+      backgroundColor: 'secondary',
+    },
+    ghost: {
+      variant: 'buttons.primary',
+      color: 'muted',
+      backgroundColor: 'background',
+    },
+  },
+}
+```
+
+ </Box>
+
+</Grid>
+
+<Divider />
+
+To create alternative button variants I define them in the same `buttons` object and give each one a name. e.g
+"secondary" and "ghost".
+
+Like in normal CSS you'll want the additional button variants to extend the default class, in this case it's called
+"primary" this is so you don't have to re-define or duplicate CSS properties for the `padding`, `min-with` etc and the
+way to do this in Theme UI is to use the variant "prop" inside the theme object.
+
+Looking at the object for `secondary` you'll notice it has a variant of `buttons.primary` this means it'll extend all
+the CSS properties from the default button and will then apply / overwrite new CSS properties for it's `color` and
+`backgroundColor`. You can use this approach for as many button variants as you require, but do always "extend" using
+the variant before applying new styles.
+
+<Divider />
+
+## [Variants - typography](#variants-typography)
+
+This one is a bit gnarly so strap in. The concept here is that the variant prop used on the component can be used to
+point to a specific set of styles in the theme, this can be any theme key, in the below example it's `styles` and as
+seen in the button example above you can also extend from a theme object using the variant key
+
+<Divider />
+
+<Grid
+ sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Src 👇
+
+```javascript
+<Heading as='h3' variant='styles.h3'>Heading h3</Heading>
+<Heading as='h4' variant='styles.h4'>Heading h4</Heading>
+```
+
+Output 👇
+
+<Heading as="h3" variant="styles.h3">
+  Heading h3
+</Heading>
+<Heading as="h4" variant="styles.h4">
+  Heading h4
+</Heading>
+
+</Box>
+
+<Box>
+
+Theme 👇
+
+```javascript
+// path-to-theme/index.js
+
+export default {
+  fonts: {
+    heading: 'Inconsolata, monospace',
+  },
+  fontSizes: [12, 16, 18],
+  text: {
+    heading: {
+      fontFamily: 'heading',
+      fontSize: 2,
+    },
+  },
+  styles: {
+    h3: {
+      variant: 'text.heading',
+      color: 'secondary',
+    },
+    h4: {
+      variant: 'text.heading',
+      color: 'text',
+    },
+  },
+}
+```
+
+ </Box>
+
+</Grid>
+
+<Divider />
+
+First thing to note with typography is that you'll most likely want to use the `as` prop to determine the HTML dom node,
+but... this doesn't automatically mean HTML dom nodes map to styles. As an aside it's quite possible you'll want to
+style `h(n)` tags differently on different pages and by de-coupling `as` from `variant` is quite handy albeit a bit
+complicated to grasp at first.
+
+With that out of the way we can move on to variants.
+
+You'll see above in the above `<Heading as='h3' variant='styles.h3'/>` I map the variant to `styles.h3` and if you look
+at the theme object for `styles.h3` it first extends the styles defined in `text.heading` and then applies a new CSS
+property for `color`.
+
+These styles are from my theme: [gatsby-theme-terminal](https://gatsby-theme-terminal.netlify.app/) and the typography
+treatments are quite simple but hopefully you can see from the above how to map from component usage to a theme key
+using the variant prop and from there you can extend from another theme key.
+
+If you're coming to Theme UI from `.scss` it's a bit like `@extend` and if you're coming from `css-modules` it's a bit
+like `composes`
+
+_FYI The reason I point typography to `styles` is because the `styles` key is what Theme UI uses when styling HTML dom
+nodes found in markdown (`.md`) or MDX (`.mdx`)_
+
+<Divider />
+<Divider />
+
+## [CSS selectors](#css-selectors)
+
+Every now and then you might run into an issue where you'll need to target a sibling or child of a Theme UI component.
+
+I had this recently when I used the [Reach UI - menu-button](https://reach.tech/menu-button). For the purposes of an
+example i've removed a lot of the code but the TLDR is that you can style any sibling or child from the `sx` prop using
+normal CSS selectors
+
+To target a child by `id` you can do this 👇
+
+<Divider />
+
+```javascript
+<Box
+  sx={{
+    '#menu--1': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+>
+  <div id="menu--1">...</div>
+</Box>
+```
+
+<Divider />
+
+<Box
+  sx={{
+    '#menu--1': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+>
+  <div id="menu--1">...</div>
+</Box>
+
+<Divider />
+
+To target a child by `class` you can do this 👇
+
+<Divider />
+
+```javascript
+<Box
+  sx={{
+    '.menu': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+>
+  <div className="menu">...</div>
+</Box>
+```
+
+<Divider />
+
+<Box
+  sx={{
+    '.menu': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+>
+  <div className="menu">...</div>
+</Box>
+
+<Divider />
+
+To target a child by `data-` attribute you can do this 👇
+
+<Divider />
+
+```javascript
+<Box
+  sx={{
+    '[data-reach-menu-list="menu"]': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+>
+  <div data-reach-menu-list="menu">...</div>
+</Box>
+```
+
+<Divider />
+
+<Box
+  sx={{
+    '[data-reach-menu-list="menu"]': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+>
+  <div data-reach-menu-list="menu">...</div>
+</Box>
+
+<Divider />
+
+To target an adjacent sibling by `class` you can do this 👇
+
+<Divider />
+
+```javascript
+<Box
+  sx={{
+    '+ .menu': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+/>
+<div className="menu">...</div>
+```
+
+<Divider />
+
+<Box
+  sx={{
+    '+ .menu': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+/>
+<div className="menu">...</div>
+
+<Divider />
+
+To target a general sibling by `class` you can do this 👇
+
+<Divider />
+
+```javascript
+<Box
+  sx={{
+    '~ .menu': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+/>
+<div className="menu">...</div>
+<div className="menu menu-items">...</div>
+```
+
+<Divider />
+
+<Box
+  sx={{
+    '~ .menu': {
+      borderColor: 'primary',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+    },
+  }}
+/>
+<div className="menu">...</div>
+<div className="menu menu-items">...</div>
+
+<Divider />
+
+I've written a post about how to use "style objects" for use with styled-components but the same approach works with
+Theme UI. You can read more about "style objects" in this post:
+[styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
+
+<Divider />
+<Divider />
+
+## [Svg paths](#svg-paths)
+
+One "hack" I used extensively in [BumHub](https://gatsbyjs.com/blog/2020-silly-site-top-20/) was to target the Svg's
+`<path>` tags via a `className` to set their `fill` to colors defined in the theme. This way if you change any color
+values for use around your site all your Svg's will update the same as any other HTML dom nodes.
+
+_the colors seen below are inherited from the theme used in this blog_
+
+```javascript
+import React, { FunctionComponent } from 'react'
+import { Box } from 'theme-ui'
+
+export const LogoIcon: FunctionComponent = () => {
+  return (
+    <Box
+      as="svg"
+      sx={{
+        '.logo-outline': {
+          fill: 'surface',
+        },
+        '.logo-solid': {
+          fill: 'primary',
+        },
+        '.logo-detail': {
+          fill: 'text',
+        },
+      }}
+    >
+      <g>
+        <path className="logo-solid" d="..." />
+        <g className="logo-detail">
+          <path d="..." />
+          <path d="..." />
+          <path d="..." />
+          <path d="..." />
+          <path d="..." />
+        </g>
+
+        <path className="logo-outline" d="..." />
+      </g>
+    </Box>
+  )
+}
+```
+
+<Divider />
+
+<LogoIcon />
+
+<Divider />
+
+I'm sure i've implemented a number of other CSS selector "hacks" on projects but I can't think of any more right now.
+I'll endeavour to update this post as and when any new ones come to mind.
+
+That just about wraps up this series on Theme UI, if you have any questions please feel free to find me on Twitter
