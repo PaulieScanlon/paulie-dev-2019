@@ -8,7 +8,7 @@ import { useConfig } from '@pauliescanlon/gatsby-theme-terminal'
 export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
   const {
     site: {
-      siteMetadata: { name, siteUrl },
+      siteMetadata: { siteUrl },
     },
   } = useConfig()
 
