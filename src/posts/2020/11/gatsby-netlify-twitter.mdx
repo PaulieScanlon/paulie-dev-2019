@@ -280,21 +280,18 @@ const IndexPage = () => {
 
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((response) => {
-        console.log(JSON.parse(response))
-        setResponse(JSON.parse(response))
+        setResponse({ user: response.user })
       })
       .catch((error) => {
         console.error({ error })
       })
   }, [])
 
-  const { user } = response
-
   return (
     <pre>
-      <code>{JSON.stringify(user, null, 2)}</code>
+      <code>{JSON.stringify(response.user, null, 2)}</code>
     </pre>
   )
 }
