@@ -93,23 +93,24 @@ export const PostCard = ({ title, featuredImageUrlSharp, tags, date, dateModifie
               p: 3,
             }}
           >
-            {tags &&
-              tags.map((tag, index) => {
-                return (
-                  <Badge
-                    key={index}
-                    variant="primary"
-                    sx={{
-                      mr: 2,
-                      mb: 2,
-                      color: mix('muted', 'primary', `${index / tags.length}`),
-                      borderColor: mix('muted', 'primary', `${index / tags.length}`),
-                    }}
-                  >
-                    {tag}
-                  </Badge>
-                )
-              })}
+            {tags
+              ? tags.map((tag, index) => {
+                  return (
+                    <Badge
+                      key={index}
+                      variant="primary"
+                      sx={{
+                        mr: 2,
+                        mb: 2,
+                        color: mix('muted', 'primary', `${index / tags.length}`),
+                        borderColor: mix('muted', 'primary', `${index / tags.length}`),
+                      }}
+                    >
+                      {tag}
+                    </Badge>
+                  )
+                })
+              : null}
           </Box>
           <Box sx={{ p: 3 }}>
             <Text sx={{ color: 'secondary', textAlign: 'right' }}>View post</Text>

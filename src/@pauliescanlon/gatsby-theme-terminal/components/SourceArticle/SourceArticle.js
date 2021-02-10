@@ -116,21 +116,22 @@ export const SourceArticle = ({
         </Fragment>
       ) : null}
 
-      {tags &&
-        tags.map((tag, index) => (
-          <Badge
-            key={index}
-            variant="primary"
-            sx={{
-              mb: 2,
-              mr: 2,
-              color: mix('muted', 'primary', `${index / tags.length}`),
-              borderColor: mix('muted', 'primary', `${index / tags.length}`),
-            }}
-          >
-            {tag}
-          </Badge>
-        ))}
+      {tags
+        ? tags.map((tag, index) => (
+            <Badge
+              key={index}
+              variant="primary"
+              sx={{
+                mb: 2,
+                mr: 2,
+                color: mix('muted', 'primary', `${index / tags.length}`),
+                borderColor: mix('muted', 'primary', `${index / tags.length}`),
+              }}
+            >
+              {tag}
+            </Badge>
+          ))
+        : null}
 
       <Divider />
       <MDXProvider>

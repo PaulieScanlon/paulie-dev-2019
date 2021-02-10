@@ -22,7 +22,9 @@ export const TagPercentChart = ({ year, color }) => {
     })
     .reduce((items, item) => {
       const { tags } = item.node.frontmatter
-      tags.map((tag) => items.push(tag))
+      if (tags) {
+        tags.map((tag) => items.push(tag))
+      }
       return items
     }, [])
     .reduce((items, item) => {
@@ -144,38 +146,40 @@ export const TagPercentChart = ({ year, color }) => {
             pb: 2,
           }}
         >
-          {tags.map((statistic, index) => {
-            const { tag, count } = statistic
+          {tags
+            ? tags.map((statistic, index) => {
+                const { tag, count } = statistic
 
-            return (
-              <Grid
-                key={index}
-                sx={{
-                  alignItems: 'center',
-                  gridTemplateColumns: '1fr auto',
-                }}
-              >
-                <Grid
-                  sx={{
-                    alignItems: 'center',
-                    gap: 2,
-                    gridTemplateColumns: '12px auto',
-                  }}
-                >
-                  <Box
+                return (
+                  <Grid
+                    key={index}
                     sx={{
-                      width: '12px',
-                      height: '12px',
-                      backgroundColor: shade(color, index / 7),
-                      borderRadius: '100%',
+                      alignItems: 'center',
+                      gridTemplateColumns: '1fr auto',
                     }}
-                  />
-                  <Text>{tag}</Text>
-                </Grid>
-                <Text sx={{ fontWeight: 'bold' }}>{`x${count}`}</Text>
-              </Grid>
-            )
-          })}
+                  >
+                    <Grid
+                      sx={{
+                        alignItems: 'center',
+                        gap: 2,
+                        gridTemplateColumns: '12px auto',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: '12px',
+                          height: '12px',
+                          backgroundColor: shade(color, index / 7),
+                          borderRadius: '100%',
+                        }}
+                      />
+                      <Text>{tag}</Text>
+                    </Grid>
+                    <Text sx={{ fontWeight: 'bold' }}>{`x${count}`}</Text>
+                  </Grid>
+                )
+              })
+            : null}
         </Grid>
       </Box>
     </Box>
