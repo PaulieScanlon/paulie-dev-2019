@@ -7,6 +7,7 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v161286
 ---
 
 import { LogoIcon } from './bumhub-logo-icon'
+import { MrKeyframes } from './MrKeyframes'
 
 In this post i'm going to explain some of my Theme UI "hacks"... to be honest they're not really hacks but you won't
 necessarily find these in the docs since they mostly relate to standard CSS selectors but it wasn't immediately obvious
@@ -455,5 +456,80 @@ export const LogoIcon: FunctionComponent = () => {
 
 I'm sure i've implemented a number of other CSS selector "hacks" on projects but I can't think of any more right now.
 I'll endeavour to update this post as and when any new ones come to mind.
+
+<Divider />
+<Divider />
+
+## [css keyframes](#css-keyframes)
+
+This is a lesser understood part of CSS and arguably even more so with Theme UI as it's not mentioned in the docs
+anywhere. However it is possible to animate using CSS keyframes using `keyframes` from `@emotion/react`
+
+To help demonstrate how keyframes work here's a very _simple_ loading component called `<MrKeyframes />` and you can
+find the `src` [here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/02/MrKeyframes.js)
+
+```javascript
+import React from 'react'
+import { Box, Grid } from 'theme-ui'
+import { keyframes } from '@emotion/react'
+
+export const MrKeyframes = () => {
+  const size = '8px'
+  const dots = new Array(10).fill(null)
+
+  return (
+    <Grid
+      sx={{
+        gap: 1,
+        textAlign: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      Loading
+      <Grid
+        sx={{
+          gridAutoFlow: 'column',
+          gap: 2,
+        }}
+      >
+        {dots.map((dot, index) => (
+          <Box
+            key={index}
+            sx={{
+              animationDelay: `${index / 10}s`,
+              animationDuration: '1.2s',
+              animationTimingFunction: 'linear',
+              animationIterationCount: 'infinite',
+              animationName: keyframes({
+                '0%': {
+                  opacity: 1,
+                },
+                '20%': {
+                  opacity: 0,
+                },
+                '100%': {
+                  opacity: 1,
+                },
+              }),
+              backgroundColor: 'primary',
+              borderRadius: `${size}`,
+              height: `${size}`,
+              width: `${size}`,
+              opacity: 0,
+            }}
+          />
+        ))}
+      </Grid>
+    </Grid>
+  )
+}
+```
+
+<Divider />
+
+<MrKeyframes />
+
+<Divider />
+<Divider />
 
 That just about wraps up this series on Theme UI, if you have any questions please feel free to find me on Twitter

@@ -10,7 +10,7 @@ export const LogoIcon: FunctionComponent = () => {
       y="0px"
       viewBox="0 0 24 32"
       width="128px"
-      height="auto"
+      height="100%"
       sx={{
         '.logo-outline': {
           fill: 'surface',
