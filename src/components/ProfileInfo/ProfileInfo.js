@@ -22,11 +22,11 @@ export const ProfileInfo = () => {
 
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((response) => {
         setIsLoading(false)
         if (isMounted) {
-          setResponse(JSON.parse(response))
+          setResponse({ user: response.user })
         }
       })
       .catch((err) => {
