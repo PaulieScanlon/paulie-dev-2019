@@ -10,6 +10,7 @@ export const MrKeyframes = () => {
     <Grid
       sx={{
         gap: 1,
+        p: 5,
         textAlign: 'center',
         justifyContent: 'center',
       }}
