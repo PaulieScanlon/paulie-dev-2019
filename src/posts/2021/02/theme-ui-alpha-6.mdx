@@ -528,6 +528,62 @@ export const MrKeyframes = () => {
 
 <Divider />
 <Divider />
+<Divider />
+
+## [functional values](#functional-values)
+
+I've talked a lot about how Theme UI maps CSS properties to specific theme objects, e.g `color` and `background-color`
+automatically map to `colors`... but if you need to access a value from your theme and map it to a different CSS
+property you can do so by using [functional values](https://theme-ui.com/sx-prop#functional-values)
+
+The idea here is you pass the `theme` object on via an inline function and by using template literals you can construct
+any CSS value you need.
+
+<Grid
+sx={{
+  gridTemplateColumns: ["1fr", '1fr 1fr']
+ }}
+>
+
+<Box>
+
+Src 👇
+
+```javascript
+<Box
+  sx={{
+    boxShadow: (theme) => `0 0 7px 3px ${theme.colors.secondary}`,
+    backgroundColor: 'surface',
+    color: 'secondary',
+    p: 3,
+  }}
+>
+  I'm a Box
+</Box>
+```
+
+</Box>
+
+<Box>
+
+Output 👇
+
+<Box
+  sx={{
+    boxShadow: (theme) => `0 0 7px 3px ${theme.colors.secondary}`,
+    backgroundColor: 'surface',
+    color: 'secondary',
+    p: 3,
+  }}
+>
+  I'm a Box
+</Box>
+
+</Box>
+
+</Grid>
+
+<Divider />
 
 I'm sure i've implemented a number of other CSS methods using Theme UI on various projects but I can't think of any more
 right now. I'll endeavour to update this post as and when any new ones come to mind.
