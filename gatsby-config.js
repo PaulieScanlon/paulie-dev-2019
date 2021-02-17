@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     name: 'Paul Scanlon',
     description:
-      'Front End UI Developer / UX Engineer / Jamstack: React, Gatsby, JavaScript, TypeScript, CSS-in-Js, Storybook, TDD & a tiny bit of Apollo/GraphQL/Node',
+      'Jamstack Developer: React, Gatsby, JavaScript, TypeScript, CSS-in-Js, Storybook, TDD & a tiny bit of Apollo/GraphQL/Node',
     keywords: [
       'React',
       'Gatsby',
