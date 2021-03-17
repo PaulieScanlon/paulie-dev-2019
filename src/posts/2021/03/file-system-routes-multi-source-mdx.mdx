@@ -50,8 +50,9 @@ website, and this also works for nested directories, E.g
 Which would produce a route or URL like this [~~http://localhost:8000~~/company/about]() or
 [~~www.example.com~~/company/about]()
 
-_The above is actually default Gatsby behavior and not related to the Files System Route API but I did want to point out
-that Gatsby is able to create routes from any `.js|tsx|md|mdx` file(s) found under `src/pages`_
+_The above is actually default Gatsby behavior and uses the Files System Route API under the hood. In this post I'll be
+taking it a step further and demonstrate the power of "programmatically" naming directories and files. For completeness
+I did want to point out that Gatsby is able to create routes from any `.js|tsx|md|mdx` file(s) found under `src/pages`_
 
 However things get a little more dicey if:
 
@@ -379,7 +380,7 @@ there's no need to create a list for the tags because there's no `tags` field pr
 there's a `client` field in the `frontmatter` which I render as an `<h3>`
 
 It's an odd concept to get your head around at first. `src/pages` is in many ways completely un-related to where you
-chose to locate your source files and those curly braces are a bit odd when you first seem them.
+chose to locate your source files and those curly braces are a bit odd when you first see them.
 
 What I have found however is that by running the query in GraphiQL first I'm able to better visualize what the actual
 value inside the curly braces will be and in turn what the resulting URL will look like, you might find that helpful too
