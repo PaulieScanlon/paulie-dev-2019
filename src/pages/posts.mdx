@@ -3,45 +3,8 @@ navigationLabel: posts
 ---
 
 import { Link as GatsbyLink } from 'gatsby'
-import { PostCard } from '../components/PostCard'
+import { PostsPage } from '../components/PostsPage'
 
 # posts
 
-<SourceList filter="posts">
-  {(posts) => {
-    return (
-      <Grid
-        sx={{
-          gridTemplateColumns: ['1fr', '1fr', '1fr 1fr'],
-        }}
-      >
-        {posts
-          .filter((edge) => !edge.node.frontmatter.isPrivate)
-          .reduce((posts, post) => {
-            return post.node.frontmatter.pinned ? [post, ...posts] : [...posts, post]
-          }, [])
-          .map((edge, index) => {
-            const {
-              featuredImageUrlSharp,
-              frontmatter: { title, tags, date, dateModified, pinned },
-              excerpt,
-              fields: { slug },
-            } = edge.node
-            return (
-              <PostCard
-                key={index}
-                title={title}
-                featuredImageUrlSharp={featuredImageUrlSharp}
-                tags={tags}
-                date={date}
-                dateModified={dateModified}
-                excerpt={excerpt}
-                slug={slug}
-                pinned={pinned}
-              />
-            )
-          })}
-      </Grid>
-    )
-  }}
-</SourceList>
+<PostsPage />
