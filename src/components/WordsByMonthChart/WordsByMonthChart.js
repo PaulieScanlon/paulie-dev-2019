@@ -48,7 +48,14 @@ export const WordsByMonthChart = ({ config }) => {
                       }}
                     >
                       <Text sx={{ textTransform: 'capitalize', pl: 2 }}>{name}</Text>
-                      <Text sx={{ pr: 2 }}>{formatNumber(words)}</Text>
+                      <Text
+                        sx={{
+                          color: words > 0 ? 'inherit' : 'placeholder',
+                          pr: 2,
+                        }}
+                      >
+                        {formatNumber(words)}
+                      </Text>
                     </Box>
                   </Flex>
                 )

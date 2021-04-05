@@ -53,13 +53,14 @@ export const PostsByMonthChart = ({ config }) => {
                       <Text
                         sx={{
                           textAlign: 'center',
+                          color: percent > 0 ? 'inherit' : 'placeholder',
                         }}
                       >
                         {`x${count}`}
                       </Text>
                       <Box
                         sx={{
-                          backgroundColor: color,
+                          backgroundColor: percent > 0 ? color : 'placeholder',
                           height: `${percent}%`,
                           p: 1,
                           mx: 1,
