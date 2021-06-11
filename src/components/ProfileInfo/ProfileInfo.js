@@ -22,14 +22,20 @@ export const ProfileInfo = () => {
 
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status >= 200 && response.status <= 299) {
+          return response.json()
+        } else {
+          throw Error(response.message)
+        }
+      })
       .then((response) => {
         setIsLoading(false)
         if (isMounted) {
           setResponse({ user: response.user })
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         setIsLoading(false)
         setHasError(true)
       })
