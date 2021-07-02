@@ -17,6 +17,8 @@ there's no suitable source plugin available to install you could use the followi
 If you'd prefer to jump ahead here's a demo repo:
 [https://github.com/PaulieScanlon/nasa-data-source](https://github.com/PaulieScanlon/nasa-data-source)
 
+... and a live demo can be seen here: [https://nasadatasource.gatsbyjs.io/](https://nasadatasource.gatsbyjs.io/)
+
 ## [sourceNodes](#sourceNodes)
 
 To source data from a remote source and add it to Gatsby's data layer you can use the `sourceNodes` extension point from
@@ -141,9 +143,9 @@ parameters including but not limited to the following.
 
 I've refereed to Gatsby's data layer a number of times and at the time of writing this post, This is actually Redux.
 Actions are the equivalent to actions bound with [bindActionCreators](https://redux.js.org/api/bindactioncreators/) in
-Redux. One of the parameters, `actions` contains a function called
-[createNode](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createNode). This is how you add data to the
-Redux state object / Gatsby's data layer
+Redux. One of the parameters. `actions` contains a function called
+[createNode](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createNode) and this is how you add data to
+the Redux state object / Gatsby's data layer
 
 #### [createNodeId](#createNodeId)
 

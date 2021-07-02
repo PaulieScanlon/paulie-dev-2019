@@ -1,0 +1,530 @@
+---
+title: "Modify Gatsby's GraphQL data types using createSchemaCustomization"
+tags: ['React', 'Gatsby', 'JavaScript', 'GraphQL']
+date: 2021-07-02
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1625228217/paulie.dev/2021/07/gatsby-create-schema-customization_c88wzg.jpg
+---
+
+Hi friends, yesterday I published a little post about how to
+[Add data to Gatsby's GraphQL layer using sourceNodes](/posts/2021/07/gatsby-source-nodes/), this post will be expanding
+on the topic of data management but this time i'm going to hone in on how to modify GraphQL's inferred data types so
+that you can use the new upgraded [gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/) with
+remotely sourced images.
+
+If you'd prefer to jump ahead here's a demo repo:
+[https://github.com/PaulieScanlon/nasa-image-type](https://github.com/PaulieScanlon/nasa-image-type)
+
+... and a live demo can be seen here: [https://nasaimagetype.gatsbyjs.io/](https://nasaimagetype.gatsbyjs.io/)
+
+## The Problem
+
+The "problem" with remotely sourced images is that they are usually returned by API's as url's, E.g
+`http://example.com/images/some-image.jpg`
+
+When GraphQL see's this it correctly infers the data type as a `String`. However, in order for
+[gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/) to process the image there are two
+requirements.
+
+1. The GraphQL node must be of type `File`
+2. The image needs to have been downloaded and exist on your local filesystem
+
+In this post i'll explain how you can satisfy both of these requirements using a combination of
+[createRemoteFileNode](https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/#createremotefilenode) from
+[gatsby-source-filesystem](https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/) and
+[createSchemaCustomization](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createSchemaCustomization)
+which is utility function available in the
+[Gatsby Node API](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/)
+
+The code i'll be explaining below expands on yesterday's post:
+[Add data to Gatsby's GraphQL layer using sourceNodes](/posts/2021/07/gatsby-source-nodes/) so i'd advise you have a
+read of that before diving in.
+
+## [Pre-Flight Checks](#pre-flight-checks)
+
+You'll need to have all the following dependencies installed and configured in `gatsby-config.js` The docs can be found
+here: [gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/#installation)
+
+<Divider />
+
+```shell
+yarn add gatsby-plugin-image gatsby-plugin-sharp gatsby-source-filesystem gatsby-transformer-sharp # npm install gatsby-plugin-image gatsby-plugin-sharp gatsby-source-filesystem gatsby-transformer-sharp --save
+```
+
+<Divider />
+
+To use the approach I'll be using below you'll also need to have
+[gatsby-source-filesystem](https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/?=gatsby-source) installed, but
+don't worry about adding it to `gatsby-config.js`
+
+<Divider />
+
+```shell
+yarn add gatsby-source-filesystem # npm install gatsby-source-filesystem --save
+```
+
+<Divider />
+
+If you don't already have one, you'll need a `gatsby-config.js` at the root of you project:
+
+<Divider />
+
+```shell
+...
+src
+gatsby-config.js
+package.json
+```
+
+<Divider />
+
+And finally you'll need to add the following to `gatsby-config.js`
+
+<Divider />
+
+```javascript
+// gatsby-config.js
+
+module.exports = {
+  plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          quality: 70,
+          formats: ['auto', 'webp', 'avif'],
+          placeholder: 'blurred',
+        },
+      },
+    },
+  ],
+}
+```
+
+<Divider />
+
+I prefer to set the defaults for `gatsby-plugin-sharp` in my `gatsby-config.js`, this is optional, but i'd advise it.
+
+## 1. Source The Image
+
+The following code can all be written in `gatsby-node.js`
+
+I use [onCreateNode](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#onCreateNode) which is a Gatsby
+function called each time a new node is created. By using an `if` condition I'm able to only call `createRemoteFileNode`
+if the `node.internal.type` equals `apod`, which is the new node I created in yesterday's post.
+
+<Divider />
+
+```javascript
+// gatsby-node.js
+const { createRemoteFileNode } = require('gatsby-source-filesystem')
+
+exports.onCreateNode = async ({ node, actions: { createNode }, createNodeId, cache, store }) => {
+  if (node.internal.type === 'apod') {
+    node.image = await createRemoteFileNode({
+      url: node.url,
+      parentNodeId: node.id,
+      createNode,
+      createNodeId,
+      cache,
+      store,
+    })
+  }
+}
+```
+
+<Divider />
+
+Starting from the top I destructure `createRemoteFileNode` from `gatsby-source-filesystem`, more on that in a moment.
+
+Next I define and export `onCreateNode`. onCreateNode can be an `async` function and accepts a number of parameters
+including but not limited to the following.
+
+- node
+- actions
+- createNodeId,
+- cache
+- store
+
+#### [node](#node)
+
+This is the new node type sourced from the NASA API and already exists in Gatsby's data layer
+
+#### [actions](#actions)
+
+Actions are the equivalent to actions bound with [bindActionCreators](https://redux.js.org/api/bindactioncreators/) in
+Redux. `actions` contains a function called
+[createNode](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createNode) and this is how you add data to
+the Redux state object / Gatsby's data layer
+
+#### [createNodeId](#createNodeId)
+
+This is effectively a helper function that aids in the creation of unique id's. Under the hood Gatsby are using
+[uuid](https://www.npmjs.com/package/uuid), you can of course use your preferred method but since uuid is already part
+of the Gatsby bundle it makes sense to use it.
+
+#### [cache](#cache)
+
+Cache is the `.cache` directory Gatsby creates in/on your local filesystem
+
+#### [store](#store)
+
+This is Gatsby's Data layer / The Redux state object
+
+To the best of my knowledge all of the above are required. You might not see errors if you don't include `cache` or
+`store` when creating a remote file node but I have experienced odd behavior if I failed to included them.
+
+**The next bit deals with sourcing the image using the image url returned by the NASA API.**
+
+#### [node.image](#node-image)
+
+I create a new object on the node and call it `image` which will be the response from `createRemoteFileNode`.
+
+### [createRemoteFileNode | params](#create-remote-file-node-params)
+
+This function comes from [gatsby-source-filesystem](https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/) and
+accepts the following parameters
+
+- url
+- parentNodeId
+- createNode
+- createNodeId
+- cache
+- store
+
+#### [url](#create-remmote-file-node-url)
+
+The source url of the remote file
+
+#### [parentNodeId](#parent-node-id)
+
+The id of the parent node (i.e. the node to which the new remote File node will be linked to.
+
+#### [createNode](#create-node)
+
+The action used to create nodes, I covered this in more detail in yesterday's post
+[#actions-createNode](https://paulie.dev/posts/2021/07/gatsby-source-nodes/#actions-createNode)
+
+#### [createNodeId](#create-node-id)
+
+A helper function for creating node ids, I covered this in more detail in yesterday's post
+[#createNodeId](posts/2021/07/gatsby-source-nodes/#createNodeId)
+
+#### [cache](#cache)
+
+As above
+
+#### [store](#store)
+
+As Above
+
+With all of the above in place you should now be able to query the new `image` node in the GraphiQL explorer. Visit
+[http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) to investigate.
+
+<Divider />
+
+```graphql
+{
+  apod {
+    url
+    image {
+      relativePath
+    }
+  }
+}
+```
+
+<Divider />
+
+Which should give you a response similar to the below
+
+<Divider />
+
+```graphql
+{
+  "data": {
+    "apod": {
+      "url": "https://apod.nasa.gov/apod/image/2107/AR2835_20210701_W2x1024.jpg",
+      "image": {
+        "relativePath": ".cache/caches/default-site-plugin/bcd18c3c0f372d1ad0d180fa82cde702/AR2835_20210701_W2x1024.jpg"
+      }
+    }
+  },
+}
+```
+
+<Divider />
+
+You can see the new `image` node and by querying the `relativePath` you can see that the file exists on disc in the
+`.cache/caches` directory. Compare this to the `url` which has remained as it was, a remote url.
+
+This satisfies **one** of the two requirements I mentioned above, but GraphQL still thinks the data type is a
+`String`... but we know it's now actually a `File`
+
+## 2. Modify the GraphQL type
+
+To see GraphQL's inferred types Gatsby have exposed an additional action called
+[printTypeDefinitions](https://www.gatsbyjs.com/docs/reference/config-files/actions/#printTypeDefinitions) which can be
+called from Gatsby Node using this function:
+[createSchemaCustomization](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node#createSchemaCustomization)
+
+<Divider />
+
+```javascript
+// gatsby-node.js
+
+exports.createSchemaCustomization = ({ actions: { createTypes, printTypeDefinitions } }) => {
+  printTypeDefinitions({ path: './typeDefs.txt' })
+}
+```
+
+<Divider />
+
+If you've added the above to `gatsby-node.js` you can now run `gatsby build` and you should see a file pop up in your
+filesystem called `typeDefs.txt`. Open it and scroll to the bottom, i've removed quite a lot from the below snippet for
+brevity, but the main thing to notice is that GraphQL has inferred that the new `image` node has a child node called
+`url` and is typed as a `String` 👎
+
+<Divider />
+
+```graphql
+type apod implements Node @derivedTypes @dontInfer {
+  ...
+  title: String
+  url: String
+  image: apodImage
+}
+
+type apodImage @derivedTypes {
+  ...
+  url: String
+}
+
+```
+
+<Divider />
+
+To correct this you can manually override GraphQL's type inference and provide your own type definitions. You can do
+this by using `createTypes` from `actions`
+
+```diff
+exports.createSchemaCustomization = ({
+  actions: { createTypes, printTypeDefinitions }
+}) => {
++  createTypes(`
++    type apod implements Node {
++      image: apodImage
++    }
++    type apodImage @dontInfer {
++      url: File @link(by: "url")
++    }
++  `);
+
+  printTypeDefinitions({ path: './typeDefs.txt' });
+};
+```
+
+<Divider />
+
+This looks a little peculiar if you're new to GraphQL and being honest I found this really difficult so here's my best
+attempt to explain what's going on.
+
+#### [type apodImage](#type-apod-image)
+
+`apodImage` first needs to be set to `@dontInfer`. This is a way to tell GraphQL that I know best and i'll handle the
+types so don't worry about inferring the data type.
+
+#### [url](#apod-image-url)
+
+Finally it's here where I tell GraphQL that the `image.url` is of type `File` and I link it to the `url` defined by the
+`url` parameter from `createRemoteFileNode` 🥵
+
+If you delete the `typeDefs.txt` file from your local filesystem and run `gatsby build` again and investigate the types
+you should now see the following.
+
+<Divider />
+
+```graphql
+
+type apod implements Node @dontInfer {
+  ...
+  title: String
+  url: String
+  image: apodImage
+}
+
+type apodImage {
+  url: File @link(by: "url")
+}
+
+```
+
+<Divider />
+
+And now GraphQL correctly understands that `image.url` is of type `File` -- Hooray! 🎉
+
+This now satisfies **both** of the above mentioned requirements!
+
+_If you see any weird looking errors in your terminal it might be best to run `gatsby clean` before running
+`gatsby build` since we're messing with a few low level things_
+
+## Using GatsbyImage
+
+`gatsby-plugin-image` exports two components, `<StaticImage />` and `<GatsbyImage />` I won't explain why we need to use
+`<GatsbyImage />` but there's a good explanation in the docs:
+[Using the Gatsby Image components](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/?=gatsby-plugin-image#using-the-gatsby-image-components)
+
+With the type now set as `File` you can now query the `image.url` using `childImageSharp.gatsbyImageData`. The query
+i've used in [index.js](https://github.com/PaulieScanlon/nasa-image-type/blob/main/src/pages/index.js) looks a little
+something like this
+
+<Divider />
+
+```graphql
+{
+  apod {
+    id
+    date
+    explanation
+    media_type
+    service_version
+    title
+    url
+    image {
+      url {
+        childImageSharp {
+          gatsbyImageData
+        }
+      }
+    }
+  }
+}
+```
+
+<Divider />
+
+Which should return something similar to the below. You should be able to see the various image data objects,
+`placeholder`, `images`, and `sources`. All of this can be passed on to the `<GatsbyImage />` component.
+
+<Divider />
+
+```graphql
+{
+  "data": {
+    "apod": {
+      "id": "63a09eef-2a28-5632-94c6-50061b62a0bf",
+      "date": "2021-07-02",
+      "explanation": "Awash in a sea of incandescent plasma and anchored in strong magnetic fields, sunspots are planet-sized dark islands in the solar photosphere, the bright surface of the Sun. Found in solar active regions, sunspots look dark only because they are slightly cooler though, with temperatures of about 4,000 kelvins compared to 6,000 kelvins for the surrounding solar surface. These sunspots lie in active region AR2835. The largest active region now crossing the Sun, AR2835 is captured in this sharp telescopic close-up from July 1 in a field of view that spans about 150,000 kilometers or over ten Earth diameters. With powerful magnetic fields, solar active regions are often responsible for solar flares and coronal mass ejections, storms which affect space weather near planet Earth.",
+      "media_type": "image",
+      "service_version": "v1",
+      "title": "AR2835: Islands in the Photosphere",
+      "url": "https://apod.nasa.gov/apod/image/2107/AR2835_20210701_W2x1024.jpg",
+      "image": {
+        "url": {
+          "childImageSharp": {
+            "gatsbyImageData": {
+              "layout": "constrained",
+              "placeholder": {
+                "fallback": "data:image/jpeg;base64,/9j/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wgARCAANABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAECAwQF/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAEEBv/aAAwDAQACEAMQAAAB6lTeeukZwf8A/8QAGRAAAgMBAAAAAAAAAAAAAAAAAQIAAxAh/9oACAEBAAEFAhGuRbIGwt3/xAAVEQEBAAAAAAAAAAAAAAAAAAAAEf/aAAgBAwEBPwFH/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAIAQIBAT8BR//EABkQAAIDAQAAAAAAAAAAAAAAAAEQABExA//aAAgBAQAGPwLIOZ0u6X//xAAbEAADAAIDAAAAAAAAAAAAAAAAAREhUTFBgf/aAAgBAQABPyGF6iKAdY+RuhtN4LsbR//aAAwDAQACAAMAAAAQ+x//xAAWEQADAAAAAAAAAAAAAAAAAAAQESH/2gAIAQMBAT8QVD//xAAXEQADAQAAAAAAAAAAAAAAAAAAAREx/9oACAECAQE/EFFqKP/EABwQAAMAAgMBAAAAAAAAAAAAAAABETFRIUFh0f/aAAgBAQABPxBkpNlZF374QMUmWzJIaX0LDw6ciSJh7P/Z"
+              },
+              "images": {
+                "fallback": {
+                  "src": "/static/8574311e0c9d3b7520b2714c8baa995e/862d2/AR2835_20210701_W2x1024.jpg",
+                  "srcSet": "/static/8574311e0c9d3b7520b2714c8baa995e/ac769/AR2835_20210701_W2x1024.jpg 256w,\n/static/8574311e0c9d3b7520b2714c8baa995e/0e233/AR2835_20210701_W2x1024.jpg 512w,\n/static/8574311e0c9d3b7520b2714c8baa995e/862d2/AR2835_20210701_W2x1024.jpg 1024w",
+                  "sizes": "(min-width: 1024px) 1024px, 100vw"
+                },
+                "sources": [
+                  {
+                    "srcSet": "/static/8574311e0c9d3b7520b2714c8baa995e/c4e41/AR2835_20210701_W2x1024.avif 256w,\n/static/8574311e0c9d3b7520b2714c8baa995e/542bf/AR2835_20210701_W2x1024.avif 512w,\n/static/8574311e0c9d3b7520b2714c8baa995e/59a35/AR2835_20210701_W2x1024.avif 1024w",
+                    "type": "image/avif",
+                    "sizes": "(min-width: 1024px) 1024px, 100vw"
+                  },
+                  {
+                    "srcSet": "/static/8574311e0c9d3b7520b2714c8baa995e/053d8/AR2835_20210701_W2x1024.webp 256w,\n/static/8574311e0c9d3b7520b2714c8baa995e/93623/AR2835_20210701_W2x1024.webp 512w,\n/static/8574311e0c9d3b7520b2714c8baa995e/41185/AR2835_20210701_W2x1024.webp 1024w",
+                    "type": "image/webp",
+                    "sizes": "(min-width: 1024px) 1024px, 100vw"
+                  }
+                ]
+              },
+              "width": 1024,
+              "height": 683
+            }
+          }
+        }
+      }
+    }
+  },
+}
+```
+
+<Divider />
+
+## [Jsx](#jsx)
+
+To return the above image data you can use `<GatsbyImage />` with the `getImage` helper to pass the data on to
+`<GatsbyImage />` via the`image` prop
+
+<Divider />
+
+```javascript
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
+const IndexPage = () => {
+  const {
+    apod: { id, date, explanation, media_type, service_version, title, image },
+  } = useStaticQuery(graphql`
+    query {
+      apod {
+        id
+        date
+        explanation
+        media_type
+        service_version
+        title
+        image {
+          url {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  return (
+    <main>
+      <p>{date}</p>
+      <h1>{title}</h1>
+      <p>{explanation}</p>
+      <GatsbyImage alt={title} image={getImage(image.url)} /> // oh hai!
+      <p>{`id: ${id}`}</p>
+      <p>{`media_type: ${media_type}`}</p>
+      <p>{`service_version: ${service_version}`}</p>
+    </main>
+  )
+}
+
+export default IndexPage
+```
+
+<Divider />
+
+... and there you have it, modifying GraphQL's data types for remotely sourced images! I've used this approach many
+times in various projects and covered it quite conclusively with [Benedicte Raae](https://twitter.com/raae) on our pokey
+internet show
+[Gatsby Deep Dives with Queen Raae and the Nattermobs Pirates](https://www.youtube.com/playlist?list=PL9W-8hhRoLoN7axEFJQ17rJvk2KTiM2GP)
+
+<Divider />
+
+<YouTube youTubeId="TfV9qGfNPJI" />
+
+<Divider />
+
+If you're looking for a similar solution when working with remote images in Markdown or MDX I wrote a post that can be
+found on the Gatsby blog:
+[MDX Embedded Images with the All-New Gatsby Image Plugin](https://www.gatsbyjs.com/blog/mdx-embedded-gatsby-image/)
