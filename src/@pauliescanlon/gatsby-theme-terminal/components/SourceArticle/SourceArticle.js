@@ -2,23 +2,10 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import {
-  Heading,
-  Badge,
-  Text,
-  Flex,
-  Box,
-  Link,
-  Image,
-  // Button,
-  Divider,
-  Alert,
-} from 'theme-ui'
+import { Heading, Badge, Text, Flex, Box, Link, Image, Divider, Alert } from 'theme-ui'
 import { mix } from '@theme-ui/color'
 import { format } from 'date-fns'
-import Img from 'gatsby-image'
-
-// import { SvgBubbleSlider } from "react-svg-bubble-slider"
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { Main } from '@pauliescanlon/gatsby-theme-terminal/src/components/Main'
 
@@ -49,18 +36,12 @@ export const SourceArticle = ({
             </Fragment>
           )}
           {featuredImage || featuredImageUrlSharp ? (
-            <Box sx={{ mb: 4, minHeight: 160 }}>
+            <Box sx={{ mb: 4 }}>
               {featuredImage && featuredImage.childImageSharp && (
-                <Img
-                  fluid={featuredImage.childImageSharp.fluid}
-                  alt={featuredImage.childImageSharp.fluid.originalName}
-                />
+                <GatsbyImage alt={`${title}-image`} image={featuredImage.childImageSharp.gatsbyImageData} />
               )}
               {featuredImageUrlSharp && featuredImageUrlSharp.childImageSharp && (
-                <Img
-                  fluid={featuredImageUrlSharp.childImageSharp.fluid}
-                  alt={featuredImageUrlSharp.childImageSharp.fluid.originalName}
-                />
+                <GatsbyImage alt={`${title}-image`} image={featuredImageUrlSharp.childImageSharp.gatsbyImageData} />
               )}
             </Box>
           ) : null}
@@ -154,53 +135,6 @@ export const SourceArticle = ({
           </Link>
         </Fragment>
       ) : null}
-
-      {/* <Box
-        sx={{
-          ".speech-bubble-stroke": {
-            stroke: "primary",
-          },
-          ".speech-bubble-fill": {
-            fill: "text",
-          },
-          ".speech-bubble-text": {
-            fill: "primary",
-            fontSize: "22px",
-            fontWeight: "bold",
-            textTransform: "capitalize",
-          },
-          ".speech-bubble-pop-line": {
-            stroke: "primary",
-          },
-          ".reaction-icon": {
-            fill: "text",
-          },
-          ".reaction-dot": {
-            fill: "primary",
-          },
-          ".svg-bubble-action": {
-            height: "36px",
-            textAlign: "center",
-          },
-        }}
-      >
-        <SvgBubbleSlider>
-          {({ reaction }) =>
-            reaction && (
-              <Button
-                sx={{
-                  cursor: "pointer",
-                  fontFamily: "body",
-                  textTransform: "capitalize",
-                  backgroundColor: "primary",
-                }}
-              >
-                {reaction}
-              </Button>
-            )
-          }
-        </SvgBubbleSlider>
-      </Box> */}
     </Main>
   )
 }

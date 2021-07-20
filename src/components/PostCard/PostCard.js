@@ -3,7 +3,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import { format } from 'date-fns'
 import { Flex, Box, Badge, Link, Card, Heading, Text } from 'theme-ui'
 import { mix } from '@theme-ui/color'
-import Img from 'gatsby-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 export const PostCard = ({ title, featuredImageUrlSharp, tags, date, dateModified, excerpt, slug, pinned }) => {
   return (
@@ -34,7 +34,9 @@ export const PostCard = ({ title, featuredImageUrlSharp, tags, date, dateModifie
           }}
         >
           <Box sx={{ minHeight: '1px' }}>
-            {featuredImageUrlSharp && <Img fluid={featuredImageUrlSharp.childImageSharp.fluid} alt={title} />}
+            {featuredImageUrlSharp && (
+              <GatsbyImage alt={title} image={getImage(featuredImageUrlSharp.childImageSharp.gatsbyImageData)} />
+            )}
           </Box>
           <Box
             sx={{
