@@ -51,7 +51,7 @@ export const PostsPage = () => {
                   }, [])
                   .map(({ node }, index) => {
                     const {
-                      featuredImageUrlSharp,
+                      featuredImageUrl,
                       frontmatter: { title, tags, date, dateModified, pinned },
                       excerpt,
                       fields: { slug },
@@ -61,7 +61,7 @@ export const PostsPage = () => {
                       <PostCard
                         key={index}
                         title={title}
-                        featuredImageUrlSharp={featuredImageUrlSharp}
+                        featuredImageUrl={featuredImageUrl}
                         tags={tags}
                         date={date}
                         dateModified={dateModified}

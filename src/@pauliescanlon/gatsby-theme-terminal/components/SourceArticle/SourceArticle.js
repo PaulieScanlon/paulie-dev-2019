@@ -19,7 +19,7 @@ export const SourceArticle = ({
   author,
   isPrivate,
   featuredImage,
-  featuredImageUrlSharp,
+  featuredImageUrl,
   embedded,
   body,
   timeToRead,
@@ -35,16 +35,14 @@ export const SourceArticle = ({
               <Divider />
             </Fragment>
           )}
-          {featuredImage || featuredImageUrlSharp ? (
-            <Box sx={{ mb: 4 }}>
-              {featuredImage && featuredImage.childImageSharp && (
-                <GatsbyImage alt={`${title}-image`} image={featuredImage.childImageSharp.gatsbyImageData} />
-              )}
-              {featuredImageUrlSharp && featuredImageUrlSharp.childImageSharp && (
-                <GatsbyImage alt={`${title}-image`} image={featuredImageUrlSharp.childImageSharp.gatsbyImageData} />
-              )}
-            </Box>
-          ) : null}
+          <Box sx={{ mb: 4 }}>
+            {featuredImage && featuredImage.childImageSharp && (
+              <GatsbyImage alt={`${title}-image`} image={featuredImage.childImageSharp.gatsbyImageData} />
+            )}
+            {featuredImageUrl && featuredImageUrl.url.childImageSharp && (
+              <GatsbyImage alt={`${title}-image`} image={featuredImageUrl.url.childImageSharp.gatsbyImageData} />
+            )}
+          </Box>
           <Heading as="h1" variant="styles.h1" sx={{ mb: 4 }}>
             {title}
           </Heading>
@@ -155,7 +153,7 @@ SourceArticle.propTypes = {
   /** FeaturedImage from frontmatter */
   featuredImage: PropTypes.any,
   /** FeaturedImageUrl from frontmatter */
-  featuredImageUrlSharp: PropTypes.any,
+  featuredImageUrl: PropTypes.any,
   /** embeddedImage array from SourceLayout */
   embedded: PropTypes.any,
   /** body from SourceLayout */
