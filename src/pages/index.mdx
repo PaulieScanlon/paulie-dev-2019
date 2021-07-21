@@ -168,7 +168,7 @@ For more information about what I do in my day to day job as a contractor feel f
         .splice(0, 4)
         .map((edge, index) => {
           const {
-            featuredImageUrlSharp,
+            featuredImageUrl,
             frontmatter: { title, tags, date, dateModified, pinned },
             excerpt,
             fields: { slug },
@@ -177,7 +177,7 @@ For more information about what I do in my day to day job as a contractor feel f
             <PostCard
               key={index}
               title={title}
-              featuredImageUrlSharp={featuredImageUrlSharp}
+              featuredImageUrl={featuredImageUrl}
               tags={tags}
               date={date}
               dateModified={dateModified}
