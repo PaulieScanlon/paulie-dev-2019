@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Grid, Input } from 'theme-ui'
 
 import { SourceList } from '@pauliescanlon/gatsby-theme-terminal'
-import { PostCard } from '../PostCard'
+import { PostCard } from '../post-card'
 
 import Fuse from 'fuse.js'
 import { Fragment } from 'react'

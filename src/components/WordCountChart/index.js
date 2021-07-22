@@ -1,1 +1,0 @@
-export { WordCountChart } from './WordCountChart'

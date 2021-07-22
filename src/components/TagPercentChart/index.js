@@ -1,1 +1,0 @@
-export { TagPercentChart } from './TagPercentChart'

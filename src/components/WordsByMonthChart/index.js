@@ -1,1 +1,0 @@
-export { WordsByMonthChart } from './WordsByMonthChart'
