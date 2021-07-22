@@ -9,13 +9,8 @@
     "build": "gatsby build && yarn robots",
     "serve": "gatsby serve",
     "robots": "cp robots.txt public/",
-    "prettier": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write \"**/*.{json,js,ts,tsx,mdx}\""
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prettier",
-      "pre-push": ""
-    }
+    "prettier": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write \"**/*.{json,js,ts,tsx,mdx}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.1.5",
@@ -45,6 +40,9 @@
     "theme-ui": "^0.3.5"
   },
   "devDependencies": {
-    "husky": "^4.3.7"
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "husky": "^7.0.1",
+    "prettier": "^2.3.2"
   }
 }

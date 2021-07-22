@@ -268,15 +268,15 @@ And to take advantage of `gatsby-image` we can also pass the `<Img />` component
 ```javascript
 // post-layout.js
 
-import * as ThemeUIComponents from "@theme-ui/components"
+import * as ThemeUIComponents from '@theme-ui/components'
 import Img from 'gatsby-image'
 
 const components = {
   ...ThemeUIComponents,
-  Img
+  Img,
 }
 
-<MDXProvider components={components}>
+;<MDXProvider components={components}>
   <MDXRenderer embeddedImages={embeddedImagesByKey}>{body}</MDXRenderer>
 </MDXProvider>
 ```
