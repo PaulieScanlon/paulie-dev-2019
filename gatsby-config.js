@@ -33,6 +33,7 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-gatsby-cloud`,
     `gatsby-plugin-mdx-embed`,
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
