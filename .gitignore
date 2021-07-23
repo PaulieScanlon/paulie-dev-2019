@@ -67,6 +67,7 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+yarn.lock
 
 # Local Netlify folder
 .netlify
