@@ -119,6 +119,8 @@ export const SourceArticle = ({
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
 
+      <NewsletterForm />
+
       {title ? (
         <Fragment>
           <Divider />
@@ -135,8 +137,6 @@ export const SourceArticle = ({
           </Link>
         </Fragment>
       ) : null}
-
-      <NewsletterForm />
     </Main>
   )
 }
