@@ -62,21 +62,10 @@ For more information about what I do in my day to day job as a contractor feel f
 <Divider />
 <Divider />
 
-<NewsletterForm />
-
-<Divider />
-<Divider />
-
-<Flex
-  sx={{ flexWrap: 'wrap'}}
+<Grid
+  sx={{ gridTemplateColumns: ['1fr', '1fr 1fr']}}
 >
-<Box
-  sx={{
-    width: ["100%", "100%", "55%"],
-    mb: 3,
-    pr: [0,0, 4],
-  }}
->
+<Box>
 
 ## contact
 
@@ -108,16 +97,9 @@ For more information about what I do in my day to day job as a contractor feel f
 >
   https://linkedin.com/in/PaulieScanlon
 </Link>
-<Divider />
-<Divider />
 </Box>
 
-<Box
-  sx={{
-    width: ["100%", "100%", "45%"],
-    mb: 3
-  }}
->
+<Box>
 
 ## blog topics
 
@@ -149,11 +131,10 @@ For more information about what I do in my day to day job as a contractor feel f
   )}
 </SourceTags>
 
-<Divider />
-<Divider />
-
 </Box>
-</Flex>
+</Grid>
+
+<NewsletterForm />
 
 ## latest posts
 
