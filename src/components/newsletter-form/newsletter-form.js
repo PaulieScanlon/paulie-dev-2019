@@ -98,7 +98,7 @@ export const NewsletterForm = () => {
             },
           }}
         >
-          <form onSubmit={handleSubmit} novalidate="novalidate">
+          <form onSubmit={handleSubmit} noValidate>
             <Input
               placeholder="ahoy@shipmate.com"
               type="email"
