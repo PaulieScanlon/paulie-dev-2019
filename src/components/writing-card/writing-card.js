@@ -12,6 +12,35 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
     },
   } = useConfig()
 
+  const getLogo = (image) => {
+    const config = {
+      gatsby: {
+        image: image,
+        name: 'Gatsby',
+      },
+      ['css-tricks']: {
+        image: image,
+        name: 'CSS Tricks',
+      },
+      netlify: {
+        image: image,
+        name: 'Netlify',
+      },
+      storybook: {
+        image: image,
+        name: 'Storybook',
+      },
+      ['smashing-magazine']: {
+        image: image,
+        name: 'Smashing Magazine',
+      },
+    }
+
+    return config[image]
+  }
+
+  console.log(getLogo(misc))
+
   return (
     <Box
       sx={{
@@ -54,8 +83,12 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
                 alignItems: 'center',
               }}
             >
-              <Image alt={`${misc}-logo`} src={`${siteUrl}/images/${misc}-logo.png`} sx={{ width: 16, height: 16 }} />
-              <Text sx={{ color: 'secondary', ml: 2 }}>{misc}</Text>
+              <Image
+                alt={`${misc}-logo`}
+                src={`${siteUrl}/images/${getLogo(misc).image}-logo.png`}
+                sx={{ width: 16, height: 16 }}
+              />
+              <Text sx={{ color: 'secondary', ml: 2 }}>{getLogo(misc).name}</Text>
             </Flex>
             <Text sx={{ color: 'success' }}>{format(new Date(date), 'd-MMM-u')}</Text>
           </Flex>
