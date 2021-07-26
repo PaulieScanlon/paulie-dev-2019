@@ -18,7 +18,7 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
         image: image,
         name: 'Gatsby',
       },
-      ['css-tricks']: {
+      'css-tricks': {
         image: image,
         name: 'CSS Tricks',
       },
@@ -30,7 +30,7 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
         image: image,
         name: 'Storybook',
       },
-      ['smashing-magazine']: {
+      'smashing-magazine': {
         image: image,
         name: 'Smashing Magazine',
       },
@@ -38,8 +38,6 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
 
     return config[image]
   }
-
-  console.log(getLogo(misc))
 
   return (
     <Box
