@@ -2,7 +2,7 @@
 import { jsx, Box, Heading, Text, Grid } from 'theme-ui'
 import { shade } from '@theme-ui/color'
 import { keyframes } from '@emotion/react'
-import { useAllMdx } from '@pauliescanlon/gatsby-theme-terminal'
+import { useTags } from '@pauliescanlon/gatsby-theme-terminal'
 
 const RADIUS = '15.91549430918954'
 const VIEW_BOX = 42
@@ -12,7 +12,7 @@ const CIRCUMERANCE = 100
 export const TagPercentChart = ({ year, color }) => {
   const currentYear = new Date().getFullYear()
 
-  const tags = useAllMdx()
+  const tags = useTags()
     .filter((item) => {
       const { date } = item.node.frontmatter
       if (new Date(date).getFullYear() === currentYear - -year) {
