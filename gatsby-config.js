@@ -5,7 +5,6 @@ require('dotenv').config({
 module.exports = {
   flags: {
     FAST_DEV: true,
-    FAST_REFRESH: true,
   },
   siteMetadata: {
     name: 'Paul Scanlon',
