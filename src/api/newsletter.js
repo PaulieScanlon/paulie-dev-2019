@@ -2,7 +2,7 @@ const axios = require('axios')
 
 export default async function handler(req, res) {
   const { email } = req.body
-  console.log(req.body)
+
   if (!email) {
     res.status(400).json({ message: 'Email is required' })
   } else {

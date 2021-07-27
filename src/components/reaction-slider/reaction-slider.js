@@ -1,12 +1,19 @@
 import React from 'react'
 import { Grid, Button, Heading, Text } from 'theme-ui'
 import { SvgBubbleSlider } from 'react-svg-bubble-slider'
+import axios from 'axios'
 
 import { ReactionCount } from '../reaction-count'
 
 const config = ['wondering', 'sad', 'happy', 'cool', 'confused', 'neutral', 'tongue']
 
 export const ReactionSlider = () => {
+  const handleReaction = async () => {
+    const response = await axios.post('/api/add-reaction', {
+      reaction: '',
+    })
+  }
+
   return (
     <Grid
       sx={{
@@ -66,6 +73,7 @@ export const ReactionSlider = () => {
         <SvgBubbleSlider icons={config}>
           {({ reaction }) => (
             <Button
+              onClick={handleReaction}
               disabled={!reaction}
               sx={{
                 cursor: 'pointer',
