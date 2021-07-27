@@ -51,6 +51,7 @@ export const WordCountChart = ({ title, dimension, config }) => {
                 />
                 <Box sx={{ position: 'absolute' }}>
                   <Text
+                    as="div"
                     sx={{
                       textAlign: 'center',
                       color: color,
@@ -62,6 +63,7 @@ export const WordCountChart = ({ title, dimension, config }) => {
                     {formatNumber(averageWordsByYear(currentYear))}
                   </Text>
                   <Text
+                    as="div"
                     sx={{
                       textAlign: 'center',
                       color: color,

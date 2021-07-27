@@ -82,6 +82,7 @@ export const TagPercentChart = ({ year, color }) => {
             }}
           >
             <Text
+              as="div"
               sx={{
                 textAlign: 'center',
                 color: color,
@@ -93,6 +94,7 @@ export const TagPercentChart = ({ year, color }) => {
               {currentYear - -year}
             </Text>
             <Text
+              as="div"
               sx={{
                 textAlign: 'center',
                 color: color,
