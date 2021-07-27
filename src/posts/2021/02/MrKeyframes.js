@@ -6,6 +6,18 @@ export const MrKeyframes = () => {
   const size = '8px'
   const dots = new Array(10).fill(null)
 
+  const animation = keyframes({
+    '0%': {
+      opacity: 1,
+    },
+    '20%': {
+      opacity: 0,
+    },
+    '100%': {
+      opacity: 1,
+    },
+  })
+
   return (
     <Grid
       sx={{
@@ -30,17 +42,7 @@ export const MrKeyframes = () => {
               animationDuration: '1.2s',
               animationTimingFunction: 'linear',
               animationIterationCount: 'infinite',
-              animationName: keyframes({
-                '0%': {
-                  opacity: 1,
-                },
-                '20%': {
-                  opacity: 0,
-                },
-                '100%': {
-                  opacity: 1,
-                },
-              }),
+              animationName: animation.toString(),
               backgroundColor: 'primary',
               borderRadius: `${size}`,
               height: `${size}`,

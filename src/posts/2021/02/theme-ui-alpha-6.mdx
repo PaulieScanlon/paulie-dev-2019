@@ -35,9 +35,9 @@ component is used without a variant prop it'll default to the styles in defined 
 <Divider />
 
 <Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
+  sx={{
+    gridTemplateColumns: ["1fr", '1fr 1fr']
+  }}
 >
 
 <Box>
@@ -53,9 +53,9 @@ Src 👇
 Output 👇
 
 <Grid
- sx={{
-  gridTemplateColumns: "1fr"
- }}
+  sx={{
+    gridTemplateColumns: "1fr"
+  }}
 >
 
 <Button>Primary</Button>
@@ -134,9 +134,9 @@ seen in the button example above you can also extend from a theme object using t
 <Divider />
 
 <Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
+  sx={{
+    gridTemplateColumns: ["1fr", '1fr 1fr']
+  }}
 >
 
 <Box>
@@ -474,6 +474,18 @@ export const MrKeyframes = () => {
   const size = '8px'
   const dots = new Array(10).fill(null)
 
+  const animation = keyframes({
+    '0%': {
+      opacity: 1,
+    },
+    '20%': {
+      opacity: 0,
+    },
+    '100%': {
+      opacity: 1,
+    },
+  })
+
   return (
     <Grid
       sx={{
@@ -498,17 +510,7 @@ export const MrKeyframes = () => {
               animationDuration: '1.2s',
               animationTimingFunction: 'linear',
               animationIterationCount: 'infinite',
-              animationName: keyframes({
-                '0%': {
-                  opacity: 1,
-                },
-                '20%': {
-                  opacity: 0,
-                },
-                '100%': {
-                  opacity: 1,
-                },
-              }),
+              animationName: animation.toString(),
               backgroundColor: 'primary',
               borderRadius: `${size}`,
               height: `${size}`,
@@ -539,9 +541,9 @@ The idea here is you pass the `theme` object on via an inline function and by us
 any CSS value you need.
 
 <Grid
-sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
+  sx={{
+    gridTemplateColumns: ["1fr", '1fr 1fr']
+  }}
 >
 
 <Box>
