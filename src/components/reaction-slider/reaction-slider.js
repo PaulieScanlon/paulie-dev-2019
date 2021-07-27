@@ -9,9 +9,9 @@ const config = ['wondering', 'sad', 'happy', 'cool', 'confused', 'neutral', 'ton
 
 export const ReactionSlider = () => {
   const handleReaction = async () => {
-    const response = await axios.post('/api/add-reaction', {
-      reaction: '',
-    })
+    const response = await axios.get('/api/add-reaction')
+
+    console.log({ response })
   }
 
   return (
