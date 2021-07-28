@@ -3,9 +3,6 @@ require('dotenv').config({
 })
 
 module.exports = {
-  flags: {
-    FAST_DEV: true,
-  },
   siteMetadata: {
     name: 'Paul Scanlon',
     description:
@@ -53,7 +50,16 @@ module.exports = {
     {
       resolve: '@pauliescanlon/gatsby-theme-terminal',
       options: {
-        source: ['posts', 'writing'],
+        source: [
+          {
+            name: 'posts',
+            dir: process.env.NODE_ENV === 'development' ? 'posts/2021/07' : 'posts',
+          },
+          {
+            name: 'writing',
+            dir: 'writing',
+          },
+        ],
       },
     },
     {
