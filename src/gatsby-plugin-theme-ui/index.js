@@ -13,6 +13,7 @@ export default {
     success: '#58e6d9',
     background: '#131127',
     surface: '#232140',
+    disabled: '#312e57',
     highlight: '#ffeb3b',
     placeholder: '#4e4b85',
   },

@@ -1,55 +1,36 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { SvgIcon } from 'react-svg-bubble-slider'
 
-import { Flex, Box, Text } from 'theme-ui'
+import { Grid, Text } from 'theme-ui'
 
-export const ReactionCount = ({ name, count }) => {
+export const ReactionCount = ({ name, count = 0 }) => {
   return (
-    <Flex
+    <Grid
       sx={{
+        gap: 1,
+        justifyContent: 'center',
         alignItems: 'center',
-        position: 'relative',
+        '.svg-icon': {
+          color: 'text',
+          borderWidth: '3px',
+          borderColor: 'primary',
+          borderStyle: 'solid',
+          borderRadius: '50%',
+        },
       }}
     >
-      <Box
-        sx={{
-          position: 'absolute',
-          left: '38px',
-          bottom: '-6px',
-        }}
-      >
-        <Flex
-          sx={{
-            alignItems: 'center',
-            borderColor: 'primary',
-            borderStyle: 'solid',
-            borderWidth: '3px',
-            backgroundColor: 'white',
-            borderRadius: '50%',
-            height: 38,
-            justifyContent: 'center',
-            textAlign: 'center',
-            width: 38,
-          }}
-        >
-          <Text as="small" variant="small" sx={{ m: 0, textAlign: 'center' }}>
-            {count}
-          </Text>
-        </Flex>
-      </Box>
-      <Flex
-        sx={{
-          alignItems: 'center',
-          p: 1,
-          backgroundColor: 'primary',
-          borderRadius: '50%',
-          '.svg-icon': {
-            color: 'text',
-          },
-        }}
-      >
-        <SvgIcon name={name} size={40} />
-      </Flex>
-    </Flex>
+      <SvgIcon name={name} size={38} />
+      <Text as="div" sx={{ textAlign: 'center' }}>
+        {count}
+      </Text>
+    </Grid>
   )
+}
+
+ReactionCount.propTypes = {
+  /** Name of reaction" */
+  name: PropTypes.string,
+  /** React count per post*/
+  count: PropTypes.number,
 }

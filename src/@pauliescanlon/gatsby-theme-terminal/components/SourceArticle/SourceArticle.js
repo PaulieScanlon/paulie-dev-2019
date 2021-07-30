@@ -27,6 +27,7 @@ export const SourceArticle = ({
   body,
   timeToRead,
   wordCount,
+  slug,
 }) => {
   return (
     <Main>
@@ -120,7 +121,9 @@ export const SourceArticle = ({
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
 
-      <ReactionSlider />
+      <Divider />
+
+      <ReactionSlider slug={slug} />
 
       <NewsletterForm />
 
@@ -171,4 +174,6 @@ SourceArticle.propTypes = {
   wordCount: PropTypes.shape({
     words: PropTypes.number,
   }),
+  /** slug from SourceLayout */
+  slug: PropTypes.string,
 }
