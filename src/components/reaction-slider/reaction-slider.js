@@ -22,17 +22,22 @@ export const ReactionSlider = ({ slug }) => {
     setIsSubmitting(true)
 
     try {
-      await axios.post('/api/add-reaction', {
+      const response = await axios.post('/api/add-reaction', {
         slug: slug,
         reaction: reaction,
       })
       setCookie(`${slug}`, `${slug}`)
       ref.current.rewardMe()
-      setReactionMessage('Lovely stuff, your reaction has been added!')
+      setReactionMessage(response.data.message)
       setReactionEmoji('🎉')
       setIsSubmitting(false)
       setIsDisabled(true)
-    } catch (error) {}
+    } catch (error) {
+      setReactionMessage(error.message)
+      setReactionEmoji('🚨')
+      setIsSubmitting(false)
+      setIsDisabled(true)
+    }
   }
 
   useEffect(() => {

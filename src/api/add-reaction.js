@@ -8,10 +8,11 @@ export default async function handler(req, res) {
   const client = new faunadb.Client({ secret: process.env.GATSBY_FAUNA_KEY })
 
   try {
+    // throw Error('Error')
     await client.query(q.Create(q.Collection('reactions'), { data: { slug: slug, reaction: reaction } }))
 
     setTimeout(() => {
-      res.status(200).json({ message: 'reaction added ok' })
+      res.status(200).json({ message: 'Lovely stuff, your reaction has been added!' })
     }, 2000)
   } catch (error) {
     res.status(500).json({ message: error.message })
