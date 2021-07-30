@@ -1,7 +1,7 @@
 import codeTheme from '@theme-ui/prism/presets/shades-of-purple.json'
 import baseTheme from '@pauliescanlon/gatsby-theme-terminal/src/gatsby-plugin-theme-ui'
 
-export default {
+const theme = {
   ...baseTheme,
   colors: {
     ...baseTheme.colors,
@@ -108,3 +108,5 @@ export default {
     },
   },
 }
+
+export default theme
