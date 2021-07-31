@@ -29,8 +29,7 @@ which got me thinking about adding these to the Gatsby CLI
 So that's what i did.
 
 <GatsbyImage alt=" " image={props.embedded.image1} />
-<Divider />
-<Divider />
+
 <GatsbyImage alt=" " image={props.embedded.image2} />
 
 ...and delight of delights once they were merged i upgraded to the latest version of the Gatsby CLI and boom! 💥 both
@@ -41,23 +40,15 @@ available and hope they'll help someone, somewhere, sometime.
 
 To give them a whirl make sure you upgrade to the latest version of the Gatsby CLI
 
-<Divider />
-
 ```sh
 npm install -g gatsby-cli@latest
 ```
 
-<Divider />
-
 Now you can run the below and choose either the JavaScript or TypeScript variant from the list.
-
-<Divider />
 
 ```sh
 gatsby recipes
 ```
-
-<Divider />
 
 There is one small snag and that's the Storybook config files will always be installed at the root of your project. This
 will likely be fine in most cases but if you're using yarn workspaces you may need to move the Webpack config files to

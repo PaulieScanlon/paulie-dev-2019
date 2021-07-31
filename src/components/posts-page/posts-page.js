@@ -18,7 +18,6 @@ export const PostsPage = () => {
     <Box>
       <SourceList filter="posts">
         {(posts) => {
-          // console.log('///// posts: ', posts)
           const fuse = new Fuse(posts, {
             includeScore: true,
             keys: ['node.frontmatter.title', 'node.frontmatter.tags'],

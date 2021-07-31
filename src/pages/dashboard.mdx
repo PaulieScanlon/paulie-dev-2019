@@ -12,11 +12,9 @@ import { TagPercentChart } from '../components/tag-percent-chart'
 
 Here are the totals, counts and other statistics calculated from posts and tags used around my blog
 
-<Divider />
-
 ## tags by usage
 
-<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3, mb: 5}}>
 
 <TagPercentChart year={0} color={'primary'} />
 
@@ -24,12 +22,9 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 
 </Grid>
 
-<Divider />
-<Divider />
-
 ## posts by day
 
-<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3, mb: 5}}>
 
 <PostsByDayChart
   config={{
@@ -46,13 +41,10 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 />
 
 </Grid>
-
-<Divider />
-<Divider />
 
 ## posts by month
 
-<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3, mb: 5}}>
 
 <PostsByMonthChart
   config={{
@@ -69,13 +61,10 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 />
 
 </Grid>
-
-<Divider />
-<Divider />
 
 ## words by month
 
-<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3, mb: 5}}>
 
 <WordsByMonthChart
   config={{
@@ -93,12 +82,9 @@ Here are the totals, counts and other statistics calculated from posts and tags 
 
 </Grid>
 
-<Divider />
-<Divider />
-
 ## word count statistics
 
-<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3}}>
+<Grid sx={{gridTemplateColumns: ['1fr', '1fr 1fr'], gridGap: 3, mb: 5}}>
 
 <WordCountChart title="Average word count" dimension="words" config={{ year: 0, color: 'primary' }} />
 

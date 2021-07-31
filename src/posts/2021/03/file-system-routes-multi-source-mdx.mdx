@@ -20,15 +20,11 @@ When I first read the docs for the
 the connection between "file system" and "route", but in short the idea behind this API is that Gatsby will create URLs
 in accordance with how you've organized your `pages` directory, E.g
 
-<Divider />
-
 ```sh
 |-- src
   |-- pages
      |-- about.js
 ```
-
-<Divider />
 
 Which would produce an about page on a route or URL like this, E.g [~~http://localhost:8000~~/about]() or
 [~~www.example.com~~/about]()
@@ -36,16 +32,12 @@ Which would produce an about page on a route or URL like this, E.g [~~http://loc
 Using the file system in this way it makes it quite easy to determine the eventual URL of any given page of your
 website, and this also works for nested directories, E.g
 
-<Divider />
-
 ```sh
 |-- src
   |-- pages
      |-- company
         |-- about.js
 ```
-
-<Divider />
 
 Which would produce a route or URL like this [~~http://localhost:8000~~/company/about]() or
 [~~www.example.com~~/company/about]()
@@ -66,8 +58,6 @@ To address one issue at a time. First I'll deal with sourcing from outside of th
 For example, If I wanted to source my MDX from a directory called `things` which has x2 sub directories called `posts`
 and `projects` E.g
 
-<Divider />
-
 ```sh
 |-- src
   |-- things
@@ -78,12 +68,8 @@ and `projects` E.g
   |-- pages
 ```
 
-<Divider />
-
 I'd install `gatsby-source-filesystem`, add the plugin to `gatsby-config.js` and use multiple resolvers to source from
 multiple file system locations. E.g
-
-<Divider />
 
 ```javascript
 // gatsby-config.js
@@ -106,13 +92,9 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 ## 2. gatsby-plugin-mdx
 
 Because my "source" is MDX I'd also install `gatsby-plugin-mdx` and add the plugin to `gatsby-config.js`
-
-<Divider />
 
 ```diff
 // gatsby-config.js
@@ -136,8 +118,6 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 Whilst this will indeed "source" my MDX from the above locations they're not actually pages yet!
 
 To turn them into pages Gatsby needs to be told about them... and Gatsby is expecting to be told about them in
@@ -152,8 +132,6 @@ In the demo repo you'll see I have something like this 👇
 
 _Just a heads up but, notice `content` is a sub directory of `pages` which is where the magic will happen_
 
-<Divider />
-
 ```sh
 |-- src
   |-- things
@@ -167,8 +145,6 @@ _Just a heads up but, notice `content` is a sub directory of `pages` which is wh
            |-- {mdx.slug}.js
 ```
 
-<Divider />
-
 ## frontmatter
 
 If you're familiar with MDX you'll probably already know about `frontmatter` but for those who don't `frontmatter` is a
@@ -177,8 +153,6 @@ _special_ way to store and then later query and render additional information ab
 Here's the `frontmatter` used in
 [post-1.mdx](https://raw.githubusercontent.com/PaulieScanlon/gatsby-multi-source-mdx/main/src/things/posts/post-1.mdx)
 from the demo repo
-
-<Divider />
 
 ```sh
 ---
@@ -191,13 +165,9 @@ tags: [React, Gatsby, MDX]
 
 ```
 
-<Divider />
-
 and here's the `frontmatter` used in
 [project-1.mdx](https://raw.githubusercontent.com/PaulieScanlon/gatsby-multi-source-mdx/main/src/things/projects/project-1.mdx)
 from the demo repo
-
-<Divider />
 
 ```sh
 ---
@@ -210,8 +180,6 @@ client: Boogy Inc
 
 ```
 
-<Divider />
-
 Since `posts` and `projects` will likely be used differently there are some differences in the `frontmatter` but, both
 contain a field called `variant`.
 
@@ -221,8 +189,6 @@ The `variant` is what's used by the File System Route API and can be seen in the
 _The double underscore denotes that `variant` is a nested property of the `frontmatter` object_ ☝️
 
 For clarity if I run the below query in GraphiQL
-
-<Divider />
 
 ```sh
 {
@@ -234,11 +200,7 @@ For clarity if I run the below query in GraphiQL
 }
 ```
 
-<Divider />
-
 I'll see something similar to this 👇
-
-<Divider />
 
 ```sh
 {
@@ -251,8 +213,6 @@ I'll see something similar to this 👇
   }
 }
 ```
-
-<Divider />
 
 By translating `src/pages/content/{mdx.frontmatter__variant}` Gatsby will produce URLs that looks like this 👇
 
@@ -268,8 +228,6 @@ The next bit is a bit vexing so strap in 😬
 
 If I run the below query in GraphiQL
 
-<Divider />
-
 ```sh
 {
   mdx {
@@ -278,11 +236,7 @@ If I run the below query in GraphiQL
 }
 ```
 
-<Divider />
-
 I'll get an output something like this 👇
-
-<Divider />
 
 ```sh
 {
@@ -293,8 +247,6 @@ I'll get an output something like this 👇
   },
 }
 ```
-
-<Divider />
 
 The `slug` is the actual file name on disk E.g `post-1.mdx`, and I use this to create the next part of the URL by using
 the curly braces as a "programmatic page" file name E.g `{mdx.slug}.js`
@@ -308,8 +260,6 @@ By process I mean for **both** `posts` and `projects` I'll want to do the follow
 - Query the `frontmatter`
 - Determine which page template to use
 - Add a "Back" link
-
-<Divider />
 
 ```javascript
 // src/pages/content/{mdx.frontmatter__variant}/{mdx.slug}.js
@@ -357,8 +307,6 @@ export const query = graphql`
 
 export default MdxPage
 ```
-
-<Divider />
 
 You can see the `src` file for the above
 [here](https://github.com/PaulieScanlon/gatsby-multi-source-mdx/blob/main/src/pages/content/%7Bmdx.frontmatter__variant%7D/%7Bmdx.slug%7D.js)

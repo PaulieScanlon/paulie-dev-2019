@@ -1,6 +1,6 @@
 import React from 'react'
 import { format } from 'date-fns'
-import { Flex, Box, Badge, Link, Card, Heading, Text, Divider, Image, Button } from 'theme-ui'
+import { Grid, Box, Badge, Link, Card, Heading, Text, Image, Button } from 'theme-ui'
 import { mix } from '@theme-ui/color'
 
 import { useConfig } from '@pauliescanlon/gatsby-theme-terminal'
@@ -40,45 +40,31 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
   }
 
   return (
-    <Box
+    <Link
+      href={url}
+      target="_blank"
+      rel="noopener"
       sx={{
-        display: 'flex',
-        flex: '1 1 auto',
-        flexDirection: 'column',
-        mb: 3,
-        width: '100%',
+        textDecoration: 'none',
       }}
     >
-      <Link
-        href={url}
-        target="_blank"
-        rel="noopener"
+      <Card
         sx={{
-          display: 'flex',
-          flex: '1 1 auto',
-          flexDirection: 'column',
-          m: (theme) => `0px ${theme.space[2]}px`,
-          minHeight: '1px',
-          textDecoration: 'none',
+          p: 3,
         }}
       >
-        <Card
-          sx={{
-            display: 'flex',
-            flex: '1 1 auto',
-            flexDirection: 'column',
-            minHeight: '1px',
-            p: 3,
-          }}
-        >
-          <Flex
+        <Grid>
+          <Grid
             sx={{
-              justifyContent: 'space-between',
+              alignItems: 'center',
+              gridTemplateColumns: '1fr auto',
             }}
           >
-            <Flex
+            <Grid
               sx={{
                 alignItems: 'center',
+                gap: 0,
+                gridTemplateColumns: 'auto 1fr',
               }}
             >
               <Image
@@ -87,15 +73,15 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
                 sx={{ width: 16, height: 16 }}
               />
               <Text sx={{ color: 'secondary', ml: 2 }}>{getLogo(misc).name}</Text>
-            </Flex>
+            </Grid>
             <Text sx={{ color: 'success' }}>{format(new Date(date), 'd-MMM-u')}</Text>
-          </Flex>
-          <Divider />
+          </Grid>
+
           <Heading as="div" variant="styles.h3" sx={{ color: 'text' }}>
             {title}
           </Heading>
           <Text sx={{ color: 'text', wordBreak: 'break-word' }}>{excerpt}</Text>
-          <Divider />
+
           <Box
             sx={{
               ml: '2px',
@@ -118,15 +104,15 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
               )
             })}
           </Box>
-          <Divider />
+
           <Button as="span" variant="ghost" sx={{ pointerEvents: 'none' }}>
             Read article {/* eslint-disable */}
             <Box as="span" role="img" aria-label="pencil">
               ✏️
             </Box>
           </Button>
-        </Card>
-      </Link>
-    </Box>
+        </Grid>
+      </Card>
+    </Link>
   )
 }

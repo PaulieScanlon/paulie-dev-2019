@@ -45,29 +45,19 @@ read of that before diving in.
 You'll need to have all the following dependencies installed and configured in `gatsby-config.js` The docs can be found
 here: [gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/#installation)
 
-<Divider />
-
 ```shell
 yarn add gatsby-plugin-image gatsby-plugin-sharp gatsby-source-filesystem gatsby-transformer-sharp # npm install gatsby-plugin-image gatsby-plugin-sharp gatsby-source-filesystem gatsby-transformer-sharp --save
 ```
-
-<Divider />
 
 To use the approach I'll be using below you'll also need to have
 [gatsby-source-filesystem](https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/?=gatsby-source) installed, but
 don't worry about adding it to `gatsby-config.js`
 
-<Divider />
-
 ```shell
 yarn add gatsby-source-filesystem # npm install gatsby-source-filesystem --save
 ```
 
-<Divider />
-
 If you don't already have one, you'll need a `gatsby-config.js` at the root of you project:
-
-<Divider />
 
 ```shell
 ...
@@ -76,11 +66,7 @@ gatsby-config.js
 package.json
 ```
 
-<Divider />
-
 And finally you'll need to add the following to `gatsby-config.js`
-
-<Divider />
 
 ```javascript
 // gatsby-config.js
@@ -103,8 +89,6 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 I prefer to set the defaults for `gatsby-plugin-sharp` in my `gatsby-config.js`, this is optional, but i'd advise it.
 
 ## 1. Source The Image
@@ -114,8 +98,6 @@ The following code can all be written in `gatsby-node.js`
 I use [onCreateNode](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#onCreateNode) which is a Gatsby
 function called each time a new node is created. By using an `if` condition I'm able to only call `createRemoteFileNode`
 if the `node.internal.type` equals `apod`, which is the new node I created in yesterday's post.
-
-<Divider />
 
 ```javascript
 // gatsby-node.js
@@ -134,8 +116,6 @@ exports.onCreateNode = async ({ node, actions: { createNode }, createNodeId, cac
   }
 }
 ```
-
-<Divider />
 
 Starting from the top I destructure `createRemoteFileNode` from `gatsby-source-filesystem`, more on that in a moment.
 
@@ -223,8 +203,6 @@ As Above
 With all of the above in place you should now be able to query the new `image` node in the GraphiQL explorer. Visit
 [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) to investigate.
 
-<Divider />
-
 ```graphql
 {
   apod {
@@ -236,11 +214,7 @@ With all of the above in place you should now be able to query the new `image` n
 }
 ```
 
-<Divider />
-
 Which should give you a response similar to the below
-
-<Divider />
 
 ```graphql
 {
@@ -255,8 +229,6 @@ Which should give you a response similar to the below
 }
 ```
 
-<Divider />
-
 You can see the new `image` node and by querying the `relativePath` you can see that the file exists on disc in the
 `.cache/caches` directory. Compare this to the `url` which has remained as it was, a remote url.
 
@@ -270,8 +242,6 @@ To see GraphQL's inferred types Gatsby have exposed an additional action called
 called from Gatsby Node using this function:
 [createSchemaCustomization](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node#createSchemaCustomization)
 
-<Divider />
-
 ```javascript
 // gatsby-node.js
 
@@ -280,14 +250,10 @@ exports.createSchemaCustomization = ({ actions: { createTypes, printTypeDefiniti
 }
 ```
 
-<Divider />
-
 If you've added the above to `gatsby-node.js` you can now run `gatsby build` and you should see a file pop up in your
 filesystem called `typeDefs.txt`. Open it and scroll to the bottom, i've removed quite a lot from the below snippet for
 brevity, but the main thing to notice is that GraphQL has inferred that the new `image` node has a child node called
 `url` and is typed as a `String` 👎
-
-<Divider />
 
 ```graphql
 type apod implements Node @derivedTypes @dontInfer {
@@ -303,8 +269,6 @@ type apodImage @derivedTypes {
 }
 
 ```
-
-<Divider />
 
 To correct this you can manually override GraphQL's type inference and provide your own type definitions. You can do
 this by using `createTypes` from `actions`
@@ -326,8 +290,6 @@ exports.createSchemaCustomization = ({
 };
 ```
 
-<Divider />
-
 This looks a little peculiar if you're new to GraphQL and being honest I found this really difficult so here's my best
 attempt to explain what's going on.
 
@@ -344,8 +306,6 @@ Finally it's here where I tell GraphQL that the `image.url` is of type `File` an
 If you delete the `typeDefs.txt` file from your local filesystem and run `gatsby build` again and investigate the types
 you should now see the following.
 
-<Divider />
-
 ```graphql
 
 type apod implements Node @dontInfer {
@@ -360,8 +320,6 @@ type apodImage {
 }
 
 ```
-
-<Divider />
 
 And now GraphQL correctly understands that `image.url` is of type `File` -- Hooray! 🎉
 
@@ -379,8 +337,6 @@ _If you see any weird looking errors in your terminal it might be best to run `g
 With the type now set as `File` you can now query the `image.url` using `childImageSharp.gatsbyImageData`. The query
 i've used in [index.js](https://github.com/PaulieScanlon/nasa-image-type/blob/main/src/pages/index.js) looks a little
 something like this
-
-<Divider />
 
 ```graphql
 {
@@ -403,12 +359,8 @@ something like this
 }
 ```
 
-<Divider />
-
 Which should return something similar to the below. You should be able to see the various image data objects,
 `placeholder`, `images`, and `sources`. All of this can be passed on to the `<GatsbyImage />` component.
-
-<Divider />
 
 ```graphql
 {
@@ -459,14 +411,10 @@ Which should return something similar to the below. You should be able to see th
 }
 ```
 
-<Divider />
-
 ## [Jsx](#jsx)
 
 To return the above image data you can use `<GatsbyImage />` with the `getImage` helper to pass the data on to
 `<GatsbyImage />` via the`image` prop
-
-<Divider />
 
 ```javascript
 import React from 'react'
@@ -512,18 +460,12 @@ const IndexPage = () => {
 export default IndexPage
 ```
 
-<Divider />
-
 ... and there you have it, modifying GraphQL's data types for remotely sourced images! I've used this approach many
 times in various projects and covered it quite conclusively with [Benedicte Raae](https://twitter.com/raae) on our pokey
 internet show
 [Gatsby Deep Dives with Queen Raae and the Nattermobs Pirates](https://www.youtube.com/playlist?list=PL9W-8hhRoLoN7axEFJQ17rJvk2KTiM2GP)
 
-<Divider />
-
 <YouTube youTubeId="TfV9qGfNPJI" />
-
-<Divider />
 
 If you're looking for a similar solution when working with remote images in Markdown or MDX I wrote a post that can be
 found on the Gatsby blog:

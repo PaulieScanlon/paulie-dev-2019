@@ -27,21 +27,13 @@ GitHub [PaulieScanlon/mdx-embedded-images](https://github.com/PaulieScanlon/mdx-
 explaining in this post can be seen in the
 [post-layout.js](https://github.com/PaulieScanlon/mdx-embedded-images/blob/master/src/layouts/post-layout.js) file
 
-<Divider />
-
 Before we start just check you have the following dependencies installed to process the images.
-
-<Divider />
 
 ```sh
 yarn add gatsby-image gatsby-plugin-sharp gatsby-transformer-sharp
 ```
 
-<Divider />
-
 And make sure you add the following to `gatsby-config.js`
-
-<Divider />
 
 ```javascript
 module.exports = {
@@ -53,14 +45,10 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 Ok let's start with `frontmatter`, you'll probably have a title already so add one more field below it called
 `embeddedImages`
 
 EmbeddedImages is a list of files you'd like to access from anywhere in the MDX body.
-
-<Divider />
 
 ```javascript
 // test-post.mdx
@@ -73,8 +61,6 @@ embeddedImages:
 ---
 ```
 
-<Divider />
-
 The images referenced in this example sit in the same directory as the `.mdx` file but you could source them from
 anywhere.
 
@@ -83,8 +69,6 @@ reference later in the post_
 
 You can see the bare bones repo directory structure here:
 [PaulieScanlon/mdx-embedded-images/tree/master/src/posts](https://github.com/PaulieScanlon/mdx-embedded-images/tree/master/src/posts)
-
-<Divider />
 
 ```javascript
 | -- src
@@ -95,13 +79,9 @@ You can see the bare bones repo directory structure here:
 
 ```
 
-<Divider />
-
 Now we need to amend the GraphQL query that handles getting the title from `frontmatter` by adding an `embeddedImages`
 query with a child `childImageSharp` query, _you can use `original` or `fluid` or anything `childImageSharp` supports._
 I've also added an image quality of 90% for good measure.
-
-<Divider />
 
 ```javascript
 // post-layout.js
@@ -124,12 +104,8 @@ frontmatter {
 }
 ```
 
-<Divider />
-
 Next we need to make sure we can access this data in Javascript. Typically you'll have a `data` prop in the layout
 component where you're accessing `frontmatter` so add the `embeddedImages` field to that so we can use it later
-
-<Divider />
 
 ```javascript
 // post-layout.js
@@ -142,17 +118,11 @@ data: {
 }
 ```
 
-<Divider />
-
 Next we need to add a prop to the `MDXRenderer`, call it `embeddedImages`
-
-<Divider />
 
 ```javascript
 <MDXRenderer embeddedImages={}>{body}</MDXRenderer>
 ```
-
-<Divider />
 
 Now it's time for some Functional Programming! 😎
 
@@ -163,8 +133,6 @@ something more usable.
 If you're a bit lost at this point here's the
 [post-layout.js](https://github.com/PaulieScanlon/mdx-embedded-images/blob/master/src/layouts/post-layout.js) for
 reference
-
-<Divider />
 
 ```javascript
 // post-layout.js
@@ -181,16 +149,12 @@ const embeddedImagesByKey =
   }, {})
 ```
 
-<Divider />
-
 We should end up with the following object.
 
 For brevity i've removed parts of the image values but you can see that for each image found in `embeddedImages` we
 create a new key in the **embeddedImagesByKey** object called "image", plus a number e.g "image1". Within each key is
 the result of spreading `...childImageSharp` which contains data for `original` and `fluid`, which are the fields we
 queried earlier in GraphQL... phew 😓
-
-<Divider />
 
 ```javascript
 {
@@ -225,11 +189,7 @@ queried earlier in GraphQL... phew 😓
 }
 ```
 
-<Divider />
-
 Now we need to pass the **embeddedImagesByKey** object on to the MDXRenderer.
-
-<Divider />
 
 ```javascript
 // post-layout.js
@@ -237,14 +197,10 @@ Now we need to pass the **embeddedImagesByKey** object on to the MDXRenderer.
 <MDXRenderer embeddedImages={embeddedImagesByKey}>{body}</MDXRenderer>
 ```
 
-<Divider />
-
 With this all sorted we will have a prop called `embeddedImages` available in the body of our MDX 🎉
 
 To test this is working correctly use `JSON.stringyify` to render the result of **embeddedImages** in a `<pre>` and
 `<code>` tag in the `.mdx` file where you added `embeddedImages` to frontmatter
-
-<Divider />
 
 ```javascript
 // test-post.mdx
@@ -254,16 +210,12 @@ To test this is working correctly use `JSON.stringyify` to render the result of 
 </pre>
 ```
 
-<Divider />
-
 We're nearly there!
 
 I like to use [@theme-ui/components](https://theme-ui.com/components/link/) in all of my Gatsby projects and an easy way
 to give MDX access to these components is to pass them to the MDXProvider
 
 And to take advantage of `gatsby-image` we can also pass the `<Img />` component on to the MDXProvider
-
-<Divider />
 
 ```javascript
 // post-layout.js
@@ -281,8 +233,6 @@ const components = {
 </MDXProvider>
 ```
 
-<Divider />
-
 Now that you have Theme UI components available in your MDX you can use the `<Flex>` and `<Box>` components to create
 more interesting layouts without having to import them first.
 
@@ -295,8 +245,6 @@ here but there are four available by default.
 We're also going to use the `fluid` prop on the `<Img />` component and pass it the `fluid` data from
 **props.embeddedImages.image(n).fluid**
 
-<Divider />
-
 ```javascript
 <Flex sx={{ flexWrap: 'wrap' }}>
   <Box sx={{ width: ['100%', '50%'] }}>
@@ -307,8 +255,6 @@ We're also going to use the `fluid` prop on the `<Img />` component and pass it 
   </Box>
 </Flex>
 ```
-
-<Divider />
 
 et voilà! now you can display embedded images defined in `frontmatter` anywhere in your MDX. 😎
 

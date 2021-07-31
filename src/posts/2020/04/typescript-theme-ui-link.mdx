@@ -39,14 +39,9 @@ be explaining in this post can be seen in the
 [MrLinky.tsx](https://github.com/PaulieScanlon/typescript-theme-ui-link/blob/master/demo/src/components/MrLinky/MrLinky.tsx)
 file
 
-<Divider />
-<Divider />
-
 ## Recap
 
 To recap this is where we left off with [gatsby-or-theme-ui-link](/posts/2020/04/gatsby-or-theme-ui-link/)
-
-<Divider />
 
 ```javascript
 // some-file.js
@@ -68,16 +63,11 @@ const SomeComponent = () => {
 }
 ```
 
-<Divider />
-
 If you try and do that in **TypeScript** you'll get an error because `to` isn't a recognized prop for Link.
 
 Remember Link is effectively still Link from `theme-ui` and not quite yet a Link from `gatsby`
 
 So what can we do about it? 🤔
-
-<Divider />
-<Divider />
 
 ## MrLinky
 
@@ -85,8 +75,6 @@ One way, and there may well be more ways to accomplish this but...
 
 I created a _new_ component and called it **MrLinky** ... because it's confusing having all these components called
 Link.
-
-<Divider />
 
 ```javascript
 // MrLinky.tsx
@@ -119,8 +107,6 @@ export const MrLinky: FunctionComponent<MrLinkyProps> = ({
 );
 ```
 
-<Divider />
-
 So what's going on here then?
 
 1. First off we ditch the `React` import and replace it with the JSX Pragma from Theme UI which allows us to apply the
@@ -135,16 +121,12 @@ So what's going on here then?
 
 The tricky part is typing all of these props. So let's have a look at the `interface`
 
-<Divider />
-
 ```javascript
 interface MrLinkyProps extends AnchorHTMLAttributes<HTMLAnchorElement>, GatsbyLinkProps<{}> {
   /** Theme UI JSX pragma */
   sx?: SxStyleProp;
 }
 ```
-
-<Divider />
 
 1. First we have to extend the interface to include `AnchorHTMLAttributes<HTMLAnchorElement>` which will be handy if we
    want to pass on HTMLAnchorElement attributes.
@@ -171,8 +153,6 @@ And here you go, a new Link component that does all the things Link from `gatsby
 
 ```
 
-<Divider />
-
 ### [Warning ⚠️](#warning)
 
 There is one caveat to using this method that i think you should know about. Theme UI also has a `variant` prop but
@@ -182,8 +162,6 @@ since **MrLinky** is actually a Gatsby link we won't be able to use variant as a
 <MrLinky variant="links.navigation" />
 ```
 
-<Divider />
-
 ...but we can still take advantage of the `variant` prop by passing it on via the `sx` prop e.g 👇
 
 ```javascript
@@ -191,8 +169,6 @@ since **MrLinky** is actually a Gatsby link we won't be able to use variant as a
   Sone internal link
 </Link>
 ```
-
-<Divider />
 
 You might also want to spread some default styles inside the component to ensure it points at `styles.a` by default.
 
@@ -229,13 +205,9 @@ export const MrLinky: FunctionComponent<MrLinkyProps> = ({
 );
 ```
 
-<Divider />
-
 It's a small shortcoming in my opinion and keeping all the Gatsby Link super powers is well worth the _sacrifice_.
 
 ### End Warning ⚠️
-
-<Divider />
 
 ## MrsLinky
 
@@ -244,8 +216,6 @@ For completeness i've also created a MrsLinky component which pretty much does t
 
 The `to` prop is marked as `isRequired` as it's also required by Link from `gatsby` under the hood. The remaining props
 are marked as good old `any` because this is JavaScript so you can do whatever you like!
-
-<Divider />
 
 ```javascript
 // MrsLinky.js
@@ -270,5 +240,3 @@ MrsLinky.propTypes = {
   rest: PropTypes.any,
 }
 ```
-
-<Divider />

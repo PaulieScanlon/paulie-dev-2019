@@ -129,8 +129,6 @@ export const MrJsxCard = () => {
 
 </Grid>
 
-<Divider />
-
 Pretty verbose ay?! That's because there's quite a lot of styles applied via the `sx` prop. Each mapped CSS property
 still looks to the correct part of the theme to find it's appropriate value but this approach can lead to duplicating a
 lot of styles between components making re-usability difficult to maintain.
@@ -217,8 +215,6 @@ export const MrStyledCard = () => {
 
 </Grid>
 
-<Divider />
-
 By using `<Styled.h4 />` and `<Styled.p />` we can remove quite a few styles from the `<h4 />` and `<p />` HTML
 elements. This is a perfectly valid way to use Theme UI but personally the _mix n match_ methods of using the Jsx Pragma
 and Styled don't quite sit right with me. The `<button />` is still a little verbose looking and would be tricky to
@@ -280,8 +276,6 @@ export const MrComponentCard = () => {
 
 </Grid>
 
-<Divider />
-
 Using Theme UI's components keeps things consistent and we no longer need to _mix n match_ methods and, et voilà the
 React import is back which makes this component look much more familiar. I also believe this is much more readable in
 terms of what each component is, e.g "Heading" and "Text" and because all components are mapped back to the theme we can
@@ -297,12 +291,8 @@ grasp, but, it **is** covered in the docs if you know where to look.
 
 Here's what the [docs](https://theme-ui.com/components/button) say about the `<Button />` component
 
-<Divider />
-
 > Button variants can be defined in the `theme.buttons` object. The Button component uses `theme.buttons.primary` as its
 > default variant style.
-
-<Divider />
 
 ```javascript
 // path-to-theme/index.js
@@ -335,8 +325,6 @@ export default {
   },
 }
 ```
-
-<Divider />
 
 Hopefully you can see the theme object above contains an object called `buttons` and within it is another object called
 `primary`. This is the location in the theme object that the `<Button />` component will look to by default for it's
@@ -393,8 +381,6 @@ export default {
 </Box>
 
 </Grid>
-
-<Divider />
 
 In this scenario instead of the `<Button />` defaulting to `theme.buttons.primary` we re-map it to
 `theme.buttons.secondary` by applying a variant prop of "secondary"

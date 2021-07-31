@@ -74,7 +74,7 @@ export const Checkout = () => {
           <Heading as="div" variant="styles.h3" sx={{ textAlign: 'center', textTransform: 'uppercase' }}>
             Order
           </Heading>
-          <Divider />
+
           <Grid
             sx={{
               alignItems: 'center',
@@ -120,7 +120,6 @@ export const Checkout = () => {
           <Heading as="div" variant="styles.h3" sx={{ textAlign: 'center', textTransform: 'uppercase' }}>
             Checkout
           </Heading>
-          <Divider />
 
           <Grid
             sx={{
@@ -142,7 +141,6 @@ export const Checkout = () => {
             >{`${currency}${cartTotal}`}</Heading>
           </Grid>
 
-          <Divider />
           <Button
             sx={{
               display: 'block',

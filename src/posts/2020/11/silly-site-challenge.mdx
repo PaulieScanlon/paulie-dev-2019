@@ -17,7 +17,7 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
       <Text sx={{ mr: 1 }}>by</Text>
       <Text sx={{ color: 'success', fontWeight: 'bold' }}>@PaulieScanlon</Text>
     </Flex>
-    <Divider />
+
     <Flex>
       <Button as="span" variant="ghost" sx={{ flex: 1, pointerEvents: 'none' }}>
         Visit BumHub {/* eslint-disable */}
@@ -28,8 +28,6 @@ featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v160630
     </Flex>
   </Card>
 </Link>
-
-<Divider />
 
 ## [Go Go Go](#go-go-go)
 
@@ -56,8 +54,6 @@ Instead i'll update less frequently but with more significant information... dea
 
 Great... see you around!
 
-<Divider />
-
 ## [Update 1](#update-1)
 
 ##### Nov 24 2020
@@ -66,15 +62,11 @@ I don't wanna give the game away so here's a little teaser about what'll i'll be
 
 <Tweet tweetLink="PaulieScanlon/status/1331338057161838605" />
 
-<Divider />
-
 ## [Update 2](#update-2)
 
 ##### Nov 26 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1331977130742263809" />
-
-<Divider />
 
 I thought this update might dive into my process a bit. I still don't want to give the game away by sharing too many
 visuals but there were a number of things I needed to work on before I announced i'd be taking part in the
@@ -137,8 +129,6 @@ able to do something with it... but what data? all I want to say at the moment i
 Naturally "bums" _might_ be considered offensive... I don't know how exactly, but It would be prudent to tread carefully
 so I've now entered into the _art direction_ phase of the project.
 
-<Divider />
-
 I need something that looks and feels fun... just like a bum. I'll be honest my designer days are long behind me but I
 do still have an eye for it so I spent a few days researching illustrators on [dribbble](https://dribbble.com/) and
 found this cheeky little [ghost](https://dribbble.com/shots/14455182-Boo-ty-Ghost) by the wonderful
@@ -170,15 +160,11 @@ If you're interested in taking part in the
 
 Stay silly everyone 😘
 
-<Divider />
-
 ## [Update 3](#update-3)
 
 ##### Dec 2 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1334136583335841792" />
-
-<Divider />
 
 I feel like i'm really making progress now, so much so i'm now happy to share a link 🕺
 
@@ -223,15 +209,11 @@ data I'm receiving which makes the UI development an absolute breeze!
 
 Stay tuned and i'll update this again when i've completed the next phase of development.
 
-<Divider />
-
 ## [Update 4](#update-4)
 
 ##### Dec 3 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1334486756322910210" />
-
-<Divider />
 
 I had a good hack on BumHub last night and dusted off my PhotoShop skills and designed the `/bums/-name-of-repo` page
 template.
@@ -259,15 +241,11 @@ This latest feature completes my rather ambitious goal of weaving multiple ideas
 a[#SillySiteChallenge](https://twitter.com/hashtag/SillySiteChallenge?src=hashtag_click) submission and the Routes API
 was always at the core of this so i'm pleased it works, it's styled and is out there for all to see. 🕺🏻
 
-<Divider />
-
 ## [Update 5](#update-5)
 
 ##### Dec 8 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1336303224819773440" />
-
-<Divider />
 
 This update is a bit of [A Tale of two Cities](https://en.wikipedia.org/wiki/A_Tale_of_Two_Cities). A city called client
 side and a city called server side.
@@ -318,15 +296,11 @@ Anyway, there's now a Bum on the index page farting and some lovely eco friendly
 
 Enjoy.
 
-<Divider />
-
 ## [Update 6](#update-6)
 
 ##### Dec 10 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1337040114787213322" />
-
-<Divider />
 
 Not a major update here but... I've been playing around with ways to document the components used in BumHub.
 
@@ -356,15 +330,11 @@ fan boi!
 
 Thanks Jackson, you're the best!
 
-<Divider />
-
 ## [Update 7](#update-7)
 
 ##### Dec 14 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1338482392252772353" />
-
-<Divider />
 
 Bum Search section is done ✅
 
@@ -392,15 +362,11 @@ This latest update pretty much completes my "MVP" but i've had another idea, it'
 demonstrate Gatsby is React and can do _all the things_ that a straight up React App can do so stay tuned and i'll be
 back with another update in a week or so.
 
-<Divider />
-
 ## [Update 8](#update-8)
 
 ##### Dec 21 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1341024963504058369" />
-
-<Divider />
 
 🚨 BRAND NEW FEATURE ALERT 🚨
 
@@ -513,8 +479,6 @@ export const bumBumConfig = [
 
 ```
 
-<Divider />
-
 There's a couple of reasons for this. Firstly and, this is quite common in "app like" development, the UI is usually
 driven by data, Bum Bum Maker is no different. I have a _list_ of Radio buttons grouped together for each _part_ of the
 bum, eg. Head, Face, etc and using a top level `name` key means I can leverage normal HTML Radio behavior by grouping
@@ -549,16 +513,12 @@ const getCheckedProperties = (config: IMakerConfigItem[]) => {
 }
 ```
 
-<Divider />
-
 This results in a **new** array of strings for each _option_ that is checked eg
 
 ```javascript
 // (results array)
 ;['beard', 'noMiscellaneous', 'headphones', 'laptopStickers', '3']
 ```
-
-<Divider />
 
 Then I can use these values to _pick_ a key from a
 [properties](https://github.com/PaulieScanlon/bumhub/blob/main/src/components/maker-bum/maker-bum.tsx#L40) dispatch
@@ -603,8 +563,6 @@ export const MakerBum: FunctionComponent<IMakerBumProps> = ({ config }) => {
 
 ```
 
-<Divider />
-
 For the values contained within the new array I return the Svg `<g>` element(s) and for values that aren't I return
 `null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
 
@@ -648,8 +606,6 @@ I'm not sure there's anything left to do now so dare I say it... but, I think i'
 ##### Dec 23 2020
 
 <Tweet tweetLink="PaulieScanlon/status/1341703685768966144" />
-
-<Divider />
 
 Today i've pushed a couple of small changes. BumHub now has a footer section outlining roles and responsibilities on the
 project along with a shout out to my internet friends.

@@ -25,8 +25,6 @@ NB: This is assuming in your application you have a set of breakpoints defined, 
 const breakpoints = ['576px', '768px', '992px']
 ```
 
-<Divider />
-
 In terms of rendered output this is what the above might look like: Resize your browser to see the `width` change across
 the breakpoints.
 
@@ -98,8 +96,6 @@ const MrButton = styled.button({
 export default MrButton
 ```
 
-<Divider />
-
 ## 2.
 
 Make sure you've implemented `<MrButton />` somewhere in your app and are passing in an array of values via the
@@ -112,8 +108,6 @@ Make sure you've implemented `<MrButton />` somewhere in your app and are passin
 </MrButton>
 ```
 
-<Divider />
-
 ## 3.
 
 Create a util function somewhere and call it `create-media-queries.js`
@@ -124,8 +118,6 @@ export const createMediaQueries = (css) => {
   console.log(JSON.stringify(css, null, 2))
 }
 ```
-
-<Divider />
 
 The first step is to make sure you're able to pass the `backgroundColor` and `width` props through the styled component
 and on to the function. As mentioned above I prefer to use the _style object_ syntax because I find it easier to
@@ -163,8 +155,6 @@ export default MrButton;
 
 ```
 
-<Divider />
-
 If you've followed the steps above you should see a `console.log` like this: 👇
 
 ```javascript
@@ -180,8 +170,6 @@ If you've followed the steps above you should see a `console.log` like this: �
 ]
 ```
 
-<Divider />
-
 Now you've confirmed the values passed in via the props get through the styled component and on to the
 `createMediaQueries` function you can do something with them, but before I move on let's define an array of breakpoints.
 You could put this array anywhere in your project but just for demo's sake I'll add it to the top of the
@@ -195,8 +183,6 @@ export const createMediaQueries = (css) => {
   console.log(JSON.stringify(css, null, 2));
 }
 ```
-
-<Divider />
 
 The aim now is to create key values pairs for each property and each of the values, you'll also need to catch any values
 passed in that aren't an array by using `Array.isArray()` and rather than `.map` them just return a key value pair.
@@ -226,8 +212,6 @@ export const createMediaQueries = (css) => {
 }
 ```
 
-<Divider />
-
 Which should give you a `console.log` that looks like this: 👇
 
 ```javascript
@@ -256,8 +240,6 @@ Which should give you a `console.log` that looks like this: 👇
   ],
 ]
 ```
-
-<Divider />
 
 The next part of the function will be responsible for assigning each of those values to an appropriate breakpoint value
 
@@ -299,8 +281,6 @@ export const createMediaQueries = (css) => {
 }
 ```
 
-<Divider />
-
 Which should give you a `console.log` that looks like this: 👇
 
 ```javascript
@@ -330,15 +310,11 @@ Which should give you a `console.log` that looks like this: 👇
 ​
 ```
 
-<Divider />
-
 There's a couple of things this part of the function does so I'll talk through them.
 
 ```javascript
 ;[0, ...breakpoints]
 ```
-
-<Divider />
 
 The above creates a new array and inserts a `0` at the beginning. You'll need the extra value at the start because
 you're developing this function to be _mobile first_. The first value from the values array is the default style and
@@ -347,8 +323,6 @@ isn't part of a media query
 ```javascript
 breakpoint: breakpoint
 ```
-
-<Divider />
 
 The above creates a key value pair for the breakpoint value, eg `breakpoint: 0,`
 
@@ -362,15 +336,11 @@ css: cssKeyValuePairs
   }, {})
 ```
 
-<Divider />
-
 The above creates a new object called `css` and within it are the key values pairs from the first part of the function
 
 ```javascript
 .slice(0, -1);
 ```
-
-<Divider />
 
 Next you'll need to remove the last item from the array since you shifted all the values up by one by inserting the `0`
 at the start of the array... I know... _mobile first_ is a bit confusing.
@@ -432,8 +402,6 @@ export const createMediaQueries = (css) => {
 }
 ```
 
-<Divider />
-
 Which should give you a `console.log` that looks like this: 👇
 
 ```javascript
@@ -450,8 +418,6 @@ Which should give you a `console.log` that looks like this: 👇
   }
 }
 ```
-
-<Divider />
 
 In this step you'll use array reduce again to loop over the `cssToBreakpoints` array and "massage" it into a new shape.
 

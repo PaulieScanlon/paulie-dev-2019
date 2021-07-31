@@ -21,8 +21,6 @@ If you're new to Theme UI i'd suggest having a read of the first five posts in t
 - 4. [Understanding Theme UI: 4 - Scales](/posts/2021/01/theme-ui-alpha-4/)
 - 5. [Understanding Theme UI: 5 - Media Queries](/posts/2021/01/theme-ui-alpha-5/)
 
-<Divider />
-
 ## [Variants - Buttons](#variants-button)
 
 There are some obvious uses for variants that are explained in the docs but one method I use a fair bit isn't covered by
@@ -31,8 +29,6 @@ the docs so here's one way you can use variants inside the theme object.
 Below is a method I use for styling button variants and as the [docs](https://theme-ui.com/components/button#variants)
 mention the default variant is `theme.buttons.primary`. You'll see in the source below that if the `<Button />`
 component is used without a variant prop it'll default to the styles in defined in `theme.buttons.primary`
-
-<Divider />
 
 <Grid
   sx={{
@@ -109,8 +105,6 @@ export default {
 
 </Grid>
 
-<Divider />
-
 To create alternative button variants I define them in the same `buttons` object and give each one a name. e.g
 "secondary" and "ghost".
 
@@ -123,15 +117,11 @@ the CSS properties from the default button and will then apply / overwrite new C
 `backgroundColor`. You can use this approach for as many button variants as you require, but do always "extend" using
 the variant before applying new styles.
 
-<Divider />
-
 ## [Variants - typography](#variants-typography)
 
 This one is a bit gnarly so strap in. The concept here is that the variant prop used on the component can be used to
 point to a specific set of styles in the theme, this can be any theme key, in the below example it's `styles` and as
 seen in the button example above you can also extend from a theme object using the variant key
-
-<Divider />
 
 <Grid
   sx={{
@@ -194,8 +184,6 @@ export default {
 
 </Grid>
 
-<Divider />
-
 First thing to note with typography is that you'll most likely want to use the `as` prop to determine the HTML dom node,
 but... this doesn't automatically mean HTML dom nodes map to styles. As an aside it's quite possible you'll want to
 style `h(n)` tags differently on different pages and by de-coupling `as` from `variant` is quite handy albeit a bit
@@ -217,9 +205,6 @@ like `composes`
 _FYI The reason I point typography to `styles` is because the `styles` key is what Theme UI uses when styling HTML dom
 nodes found in markdown (`.md`) or MDX (`.mdx`)_
 
-<Divider />
-<Divider />
-
 ## [CSS selectors](#css-selectors)
 
 Every now and then you might run into an issue where you'll need to target a sibling or child of a Theme UI component.
@@ -230,8 +215,6 @@ normal CSS selectors
 
 To target a child by `id` you can do this 👇
 
-<Divider />
-
 ```javascript
 <Box
   sx={{
@@ -246,8 +229,6 @@ To target a child by `id` you can do this 👇
 </Box>
 ```
 
-<Divider />
-
 <Box
   sx={{
     '#menu--1': {
@@ -259,13 +240,9 @@ To target a child by `id` you can do this 👇
 >
   <div id="menu--1">...</div>
 </Box>
-
-<Divider />
 
 To target a child by `class` you can do this 👇
 
-<Divider />
-
 ```javascript
 <Box
   sx={{
@@ -280,8 +257,6 @@ To target a child by `class` you can do this 👇
 </Box>
 ```
 
-<Divider />
-
 <Box
   sx={{
     '.menu': {
@@ -293,13 +268,9 @@ To target a child by `class` you can do this 👇
 >
   <div className="menu">...</div>
 </Box>
-
-<Divider />
 
 To target a child by `data-` attribute you can do this 👇
 
-<Divider />
-
 ```javascript
 <Box
   sx={{
@@ -314,8 +285,6 @@ To target a child by `data-` attribute you can do this 👇
 </Box>
 ```
 
-<Divider />
-
 <Box
   sx={{
     '[data-reach-menu-list="menu"]': {
@@ -327,13 +296,9 @@ To target a child by `data-` attribute you can do this 👇
 >
   <div data-reach-menu-list="menu">...</div>
 </Box>
-
-<Divider />
 
 To target an adjacent sibling by `class` you can do this 👇
 
-<Divider />
-
 ```javascript
 <Box
   sx={{
@@ -347,8 +312,6 @@ To target an adjacent sibling by `class` you can do this 👇
 <div className="menu">...</div>
 ```
 
-<Divider />
-
 <Box
   sx={{
     '+ .menu': {
@@ -359,13 +322,9 @@ To target an adjacent sibling by `class` you can do this 👇
   }}
 />
 <div className="menu">...</div>
-
-<Divider />
 
 To target a general sibling by `class` you can do this 👇
 
-<Divider />
-
 ```javascript
 <Box
   sx={{
@@ -380,8 +339,6 @@ To target a general sibling by `class` you can do this 👇
 <div className="menu menu-items">...</div>
 ```
 
-<Divider />
-
 <Box
   sx={{
     '~ .menu': {
@@ -393,15 +350,10 @@ To target a general sibling by `class` you can do this 👇
 />
 <div className="menu">...</div>
 <div className="menu menu-items">...</div>
-
-<Divider />
 
 I've written a post about how to use "style objects" for use with styled-components but the same approach works with
 Theme UI. You can read more about "style objects" in this post:
 [styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
-
-<Divider />
-<Divider />
 
 ## [Svg paths](#svg-paths)
 
@@ -448,14 +400,7 @@ export const LogoIcon: FunctionComponent = () => {
 }
 ```
 
-<Divider />
-
 <LogoIcon />
-
-<Divider />
-
-<Divider />
-<Divider />
 
 ## [css keyframes](#css-keyframes)
 
@@ -525,11 +470,7 @@ export const MrKeyframes = () => {
 }
 ```
 
-<Divider />
-
 <MrKeyframes />
-
-<Divider />
 
 ## [functional values](#functional-values)
 
@@ -583,8 +524,6 @@ Output 👇
 </Box>
 
 </Grid>
-
-<Divider />
 
 I'm sure i've implemented a number of other CSS methods using Theme UI on various projects but I can't think of any more
 right now. I'll endeavour to update this post as and when any new ones come to mind.

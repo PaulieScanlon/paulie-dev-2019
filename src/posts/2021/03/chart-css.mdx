@@ -41,8 +41,6 @@ const MyComponent = ({ children }) => {
 export default MyComponent
 ```
 
-<Divider />
-
 ### Usage
 
 ```javascript
@@ -73,8 +71,6 @@ const IndexPage = () => {
 export default IndexPage
 ```
 
-<Divider />
-
 Which would result in a `<ul>` being returned with an `<li>` for each string in the `data` array. E.g
 
 - foo
@@ -82,8 +78,6 @@ Which would result in a `<ul>` being returned with an `<li>` for each string in 
 - baz
 
 If you were feeling so inclined you could also return an `<ol>` under the `<ul>` like this 👇
-
-<Divider />
 
 ```diff
 // index.js
@@ -124,8 +118,6 @@ const IndexPage = () => {
 export default IndexPage
 ```
 
-<Divider />
-
 ...which would return something like this 👇
 
 - foo
@@ -152,8 +144,6 @@ This is the data I'll be using to drive Charts.css
 
 This data component is going to be in charge of querying `allMdx.frontmatter.tags` and then transforming the result into
 something I can use to drive Charts.css
-
-<Divider />
 
 ```javascript
 // components/tags-data.js
@@ -211,8 +201,6 @@ const TagsData = ({ children }) => {
 export default TagsData
 ```
 
-<Divider />
-
 It looks a bit wild eh... lemme walk you though it.
 
 1. Query `allMdx` and return the `tags` from `frontmatter`
@@ -221,8 +209,6 @@ It looks a bit wild eh... lemme walk you though it.
 4. Return children with an array of tag data
 
 The above will return an array containing the tag names and a count value for each, like this 👇
-
-<Divider />
 
 ```javascript
 ;[
@@ -249,14 +235,10 @@ The above will return an array containing the tag names and a count value for ea
 ]
 ```
 
-<Divider />
-
 Now that the data is in the correct shape and passed via children as a Render Function it cam be accessed from wherever
 I chose to use the `<TagsData />` component.
 
 To use the list example again, I could create a `<ul>` with an `<li>` for each tag and display the name and count
-
-<Divider />
 
 ```javascript
 // index.js
@@ -282,8 +264,6 @@ import TagsData from './components/tags-data'
 ...
 ```
 
-<Divider />
-
 But what we really want to do is return a Chart right?
 
 To use Charts.css first install it
@@ -300,8 +280,6 @@ yarn add charts.css
 
 Then add the CSS to `gatsby-browser.js`
 
-<Divider />
-
 ```javascript
 // gatsby-browser-js
 
@@ -309,8 +287,6 @@ import 'charts.css'
 ```
 
 Now I can re-use the `<TagsData />` component again and return all the bits required to render a Charts.css chart
-
-<Divider />
 
 ```javascript
 // index.js
@@ -343,8 +319,6 @@ Now I can re-use the `<TagsData />` component again and return all the bits requ
       </TagsData>
 ...
 ```
-
-<Divider />
 
 You'll see in the demo repo i've returned a few examples of the Charts and they are all children of the **same**
 `<TagsData />` component. I like this approach but naturally it might not work for you!

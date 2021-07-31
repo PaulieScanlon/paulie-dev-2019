@@ -25,8 +25,10 @@ const theme = {
         '.twitter-tweet-mdx-embed': {
           minHeight: 500,
         },
+        my: 5,
       },
     },
+
     p: {
       ...baseTheme.styles.p,
       a: {

@@ -39,22 +39,16 @@ methods will eventually create `post` and `posts` in Gatsby's GraphQL layer whic
 [syntax collection routes](https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#syntax-collection-routes)
 method to create each of the "post" pages seen in the demo
 
-<Divider />
-
 ## [Single .json file](#single-json-file)
 
 The code for this example can be found on this branch:
 [main](https://github.com/PaulieScanlon/gatsby-local-source-node), and the directory structure looks like this
-
-<Divider />
 
 ```shell
 content
    |-- MOCK_DATA.json
 
 ```
-
-<Divider />
 
 ```javascript
 // gatsby-node.js
@@ -75,8 +69,6 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
 }
 ```
 
-<Divider />
-
 From top to bottom here's what's going on.
 
 1. Fist I `require` a single `.json` file called `MOCK_DATA.json`
@@ -91,8 +83,6 @@ From top to bottom here's what's going on.
 Once Gatsby has created the node it's then query-able using GraphQL. An example query in GraphiQL would look like this
 👇
 
-<Divider />
-
 ```shell
 // gets all posts
 
@@ -105,8 +95,6 @@ Once Gatsby has created the node it's then query-able using GraphQL. An example 
 
 ```
 
-<Divider />
-
 ```shell
 // get a single post by `id`
 
@@ -116,19 +104,13 @@ Once Gatsby has created the node it's then query-able using GraphQL. An example 
 
 ```
 
-<Divider />
-
 The query names `post` and `allPost` are created by Gatsby using the name provided by `internal.type`
-
-<Divider />
 
 ## [Multiple .json files](#multiple-json-files)
 
 The code for this example can be found on this branch:
 [multiple-json-files](https://github.com/PaulieScanlon/gatsby-local-source-node/tree/feat/multiple-json-files), and the
 directory structure looks like this
-
-<Divider />
 
 ```shell
 content
@@ -137,8 +119,6 @@ content
    |-- 07-May-2020.json
    ...
 ```
-
-<Divider />
 
 ```javascript
 // gatsby-node.js
@@ -168,8 +148,6 @@ exports.sourceNodes = ({ actions: { createNode }, createContentDigest }) => {
 }
 ```
 
-<Divider />
-
 This approach is a bit more of a rascal because each object from the previous example has now been extracted into
 individual `.json` files and named by date.
 
@@ -184,8 +162,6 @@ individual `.json` files and named by date.
 As above once Gatsby has created the node it's then query-able using GraphQL. An example query in GraphiQL would look
 the same as above but here it is again 👇
 
-<Divider />
-
 ```shell
 // gets all posts
 
@@ -198,8 +174,6 @@ the same as above but here it is again 👇
 
 ```
 
-<Divider />
-
 ```shell
 // get a single post by `id`
 
@@ -209,15 +183,11 @@ the same as above but here it is again 👇
 
 ```
 
-<Divider />
-
 ## [Gatsby Plugins](#gatsby-plugins)
 
 The code for this example can be found on this branch:
 [gatsby-plugins](https://github.com/PaulieScanlon/gatsby-local-source-node/tree/feat/gatsby-plugins), and the directory
 structure looks like this
-
-<Divider />
 
 ```shell
 content
@@ -227,12 +197,8 @@ content
    ...
 ```
 
-<Divider />
-
 Using this final approach it's possible to avoid `gatsby-node.js` altogether and instead achieve the exact same thing
 using `gatsby-transform-json` and `gatsby-source-filesystem` and configuring them in `gatsby-config.js`
-
-<Divider />
 
 ```javascript
 // gatsby-config.js
@@ -256,13 +222,9 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 By setting the `typeName` in the `gatsby-transformer-json` options to 'post' Gatsby will again create `post` and
 `allPost` meaning the nodes continue to be query-able as mentioned above using GraphQL. An example query in GraphiQL
 would again look the same as above E.g 👇
-
-<Divider />
 
 ```shell
 // gets all posts
@@ -276,8 +238,6 @@ would again look the same as above E.g 👇
 
 ```
 
-<Divider />
-
 ```shell
 // get a single post by `id`
 
@@ -286,8 +246,6 @@ would again look the same as above E.g 👇
   }
 
 ```
-
-<Divider />
 
 ## Final Thoughts
 

@@ -88,8 +88,6 @@ export default {
 
 </Grid>
 
-<Divider />
-
 I'd first like to discuss the **Src**. Notice instead of `padding` being a single value it's an array of values:
 
 Reading the CSS properties from left to right on the `<Box />` above for `padding` the breakdown looks like this
@@ -109,8 +107,6 @@ Reading the CSS properties from left to right on the `<Box />` above for `paddin
 | 3              | padding  | lg  | 32px  | space |
 
 </Box>
-
-<Divider />
 
 Next have a look at the `breakpoints` array from the theme object.
 
@@ -135,8 +131,6 @@ How the breakpoints relate to the properties defined on the `<Box />` above brea
 | 3              | padding  | lg  | 32px  | space | 2                | 64em             |
 
 </Box>
-
-<Divider />
 
 I'd now like to translate the above table into the resulting CSS, I hope this will feel a little more familiar to you
 since it's CSS
@@ -164,8 +158,6 @@ since it's CSS
   }
 }
 ```
-
-<Divider />
 
 ### no breakpoint
 
@@ -241,8 +233,6 @@ Output 👇
 </Box>
 
 </Grid>
-
-<Divider />
 
 In this example i'm not using any values from the theme object, instead I'm using web safe colors for `borderColor`, a
 hard-coded "px" value for `borderWidth` and valid `border-style` CSS properties for the `borderStyle`

@@ -32,8 +32,6 @@ Here's a brief list of the Gatsby's build steps, the full list can be seen here:
 
 **NB: There are some subtle differences between the build steps when running gatsby develop vs gatsby build**
 
-<Divider />
-
 ```shell
 success open and validate gatsby-configs - 0.062 s
 success load plugins - 0.915 s
@@ -46,8 +44,6 @@ success source and transform nodes - 0.121 s
 success Add explicit types - 0.025 s
 success Add inferred types - 0.144 s
 ```
-
-<Divider />
 
 You'll see near the bottom of the snippet: **success source and transform nodes**. It's here where you can source your
 own data and make it available to query via GraphQL by using
@@ -82,8 +78,6 @@ To use the NASA API you'll need an API key, you can get that from NASA's API Sit
 
 You'll also need a `gatsby-node.js` at the root of you project:
 
-<Divider />
-
 ```shell
 ...
 src
@@ -91,25 +85,17 @@ gatsby-node.js
 package.json
 ```
 
-<Divider />
-
 And finally since I'll be requesting data on the server rather than in browser I'll be using
 [axios](https://github.com/axios/axios)
-
-<Divider />
 
 ```shell
 yarn add axios # npm install axios --save
 ```
 
-<Divider />
-
 ## [The Code](#the-code)
 
 Ok, with all of the above in place add the below to your `gatsby-node.js` file. You'll need to add your own API to the
 request string.
-
-<Divider />
 
 ```javascript
 // gatsby-node.js
@@ -129,8 +115,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   })
 }
 ```
-
-<Divider />
 
 Starting at the top I define and export `sourceNodes`. sourceNodes can be an `async` function and accepts a number
 parameters including but not limited to the following.
@@ -165,8 +149,6 @@ To create a node there's a few things Gatsby requires, and below is the absolute
 The full list of accepted parameters can be seen in the
 [docs](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createNode)
 
-<Divider />
-
 ```javascript
 // gatsby-node.js // snippet from above
 actions.createNode({
@@ -178,8 +160,6 @@ actions.createNode({
   },
 })
 ```
-
-<Divider />
 
 #### [data](#data)
 
@@ -210,17 +190,11 @@ With the node created you should be able to see the `apod` type in the GraphiQL 
 [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) to investigate. If you've used the APOD API as
 i've done the accepted query types are as follows.
 
-<Divider />
-
 <GatsbyImage alt=" " image={props.embedded.image1} />
-
-<Divider />
 
 You'll notice i'm using the singular `apod` query name. Gatsby will create two queries for you, the singular as seen
 below but also a plural, prefixed by `all`, E.g `allApod`. As mentioned above the data returned by the NASA API is an
 object rather than an array of objects.
-
-<Divider />
 
 ```graphql
 {
@@ -236,11 +210,7 @@ object rather than an array of objects.
 }
 ```
 
-<Divider />
-
 Which should give you a response similar to the below
-
-<Divider />
 
 ```graphql
 {
@@ -258,8 +228,6 @@ Which should give you a response similar to the below
 }
 ```
 
-<Divider />
-
 This confirms that the node was created successfully and can be queried by GraphQL in your React component or page.
 
 ## [Jsx](#jsx)
@@ -267,8 +235,6 @@ This confirms that the node was created successfully and can be queried by Graph
 My preferred method for querying non page queries in Gatsby is to use `useStaticQuery`. Here's a query that i've used in
 the [index.js](https://github.com/PaulieScanlon/nasa-data-source/blob/main/src/pages/index.js) and I return it using
 some simple un-styled HTML
-
-<Divider />
 
 ```javascript
 // index.js
@@ -309,17 +275,11 @@ const IndexPage = () => {
 export default IndexPage
 ```
 
-<Divider />
-
 ... and there you have it, data sourcing without plugins! I've used this approach many times in various projects and
 covered it quite conclusively with [Benedicte Raae](https://twitter.com/raae) on our pokey internet show
 [Gatsby Deep Dives with Queen Raae and the Nattermobs Pirates](https://www.youtube.com/playlist?list=PL9W-8hhRoLoN7axEFJQ17rJvk2KTiM2GP)
 
-<Divider />
-
 <YouTube youTubeId="tJHV96jVlKg" />
-
-<Divider />
 
 Stay tuned for the next post where i'll explain how to convert the image url GraphQL type from "string" to "file" using
 [createSchemaCustomization](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createSchemaCustomization)
