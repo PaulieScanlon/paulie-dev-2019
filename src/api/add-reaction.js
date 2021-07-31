@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     setTimeout(() => {
       res.status(200).json({ message: 'Lovely stuff, your reaction has been added!' })
-    }, 1000)
+    }, 500)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
