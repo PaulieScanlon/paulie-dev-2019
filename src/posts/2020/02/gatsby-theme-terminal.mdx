@@ -70,8 +70,6 @@ embeddedImages:
 
 ```
 
-<Divider />
-
 ## The presentation
 
 This is where we use the data, but _how_ we use the data shouldn't be a job for the theme, whats to say that my
@@ -85,8 +83,6 @@ This abstraction was fundamental to my approach with [gatsby-theme-terminal](htt
 
 Let's start with data and by looking at the
 [`<SourceList />`](https://gatsby-theme-terminal.netlify.com/components/#source-list) component provided by the theme.
-
-<Divider />
 
 ```javascript
 <SourceList>
@@ -103,13 +99,9 @@ Let's start with data and by looking at the
 </SourceList>
 ```
 
-<Divider />
-
 The `<SourceList />` components finds and returns all data for all the `.mdx` files that have been defined in the
 [theme options](https://github.com/PaulieScanlon/gatsby-theme-terminal#theme-options) and gives you back an array of
 objects a bit like this.
-
-<Divider />
 
 ```javascript
 {
@@ -136,8 +128,6 @@ objects a bit like this.
 }
 ```
 
-<Divider />
-
 These are pretty much what GraphQL returns and in this component i've left the data untouched so theme users can map
 over the array and return any DOM node(s) they like.
 
@@ -148,8 +138,6 @@ tags used in the post and a "View Post" call to action, and then link it via the
 
 To do this we can de-structure a bit more of the data returned from the `<SourceList />` component
 
-<Divider />
-
 ```javascript
 const {
   frontmatter: { title, featuredImage, tags, date },
@@ -157,8 +145,6 @@ const {
   excerpt,
 } = edge.node
 ```
-
-<Divider />
 
 ...and then use some of the [theme-ui/components](https://theme-ui.com/components) which are provided by the theme to
 create something a bit more eye catching, like one of `<Card />`components used on the posts page, like this 👇
@@ -178,8 +164,6 @@ create something a bit more eye catching, like one of `<Card />`components used 
 
 ... and here's the source code
 
-<Divider />
-
 ```javascript
 <SourceList filter="posts">
   {(posts) => {
@@ -193,8 +177,6 @@ create something a bit more eye catching, like one of `<Card />`components used 
 </SourceList>
 ```
 
-<Divider />
-
 To understand what's going on here you do need to be a little familiar with
 [theme-ui/components](https://theme-ui.com/components) but in short they are UI components that can be re-styled by
 adding object keys to your theme-ui theme.
@@ -203,8 +185,6 @@ A little segway here but with [gatsby-plugin-theme-ui](https://www.gatsbyjs.org/
 can write all your styles in one place and by providing design tokens all of your HTML can be styled very easily.
 
 for example
-
-<Divider />
 
 ```javascript
 // gatsby-plugin-theme-ui/index.js
@@ -227,12 +207,8 @@ export default {
 }
 ```
 
-<Divider />
-
 ... and if you wanted to provide styles for any or all of the [theme-ui/components](https://theme-ui.com/components)
 components you can do something like this
-
-<Divider />
 
 ```javascript
 // gatsby-plugin-theme-ui/index.js
@@ -264,8 +240,6 @@ export default {
 }
 ```
 
-<Divider />
-
 Using this method means that it doesn't matter how your theme users want to render their data because you've already
 provided them with a set of UI components that when used already feel like part of the same theme. Furthermore if what
 your theme users want isn't part of this components list they can use the `sx={{}}` prop to add theme specific styles to
@@ -277,19 +251,13 @@ In order to use the `<Card />` component in `.mdx` you would either have to impo
 
 like this
 
-<Divider />
-
 ```javascript
 import { Card } from '@theme-ui/components'
 ```
 
-<Divider />
-
 Or continue on with the "power" approach and provide all of these components via the `MDXProvider`
 
 like this
-
-<Divider />
 
 <!-- prettier-ignore -->
 ```javascript
@@ -297,8 +265,6 @@ like this
 import * as themeUiComponents from "@theme-ui/components"
 <MDXProvider components={themeUiComponents}>{children}</MDXProvider>
 ```
-
-<Divider />
 
 I'm pretty confident in this approach and have just used this theme to update my commercial portfolio
 [pauliescalon.io](https://www.pauliescanlon.io/) and found it to be as flexible as i'd intended.

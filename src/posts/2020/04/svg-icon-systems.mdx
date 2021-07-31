@@ -10,8 +10,6 @@ embeddedImageUrls:
 
 If you're doing this in your React project... just stop it! 🛑
 
-<Divider />
-
 ```javascript
 // some-file.js
 import iconA from './icons/icon-a.svg'
@@ -20,8 +18,6 @@ import iconC from './icons/icon-c.svg'
 import iconD from './icons/icon-d.svg'
 ```
 
-<Divider />
-
 ```javascript
 // some-other-file.js
 import iconA from './icons/icon-a.svg'
@@ -29,8 +25,6 @@ import iconB from './icons/icon-b.svg'
 import iconC from './icons/icon-c.svg'
 import iconD from './icons/icon-d.svg'
 ```
-
-<Divider />
 
 But why is that bad?
 
@@ -103,8 +97,6 @@ re-usable Svg icon System.
 
 We're now going to create a utils file to store our icon "paths" and build an `SvgIcon` component in React
 
-<Divider />
-
 ```javascript
 // icon-paths.js
 
@@ -117,19 +109,13 @@ export const PERSON =
 export const FOLDER = 'M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z'
 ```
 
-<Divider />
-
 To extract the paths from an Svg open it up in VS Code and copy the string. Using material icons it's easy to identify
 which path is the icon and which is the 24x24 transparent rectangle as it's usually the longer one. To help you identify
 which path is which, the 24x24 transparent rectangle looks like this 👇
 
-<Divider />
-
 ```javascript
 <path d="M0 0h24v24H0z" fill="none" />
 ```
-
-<Divider />
 
 Now lets create a component that has props for `iconName`, `size` and `color`. We are using the second path with
 `fill="none"` just in the component and this is the 24x24 transparent rectangle as mentioned earlier.
@@ -175,11 +161,7 @@ SvgIcon.propTypes = {
 export default SvgIcon
 ```
 
-<Divider />
-
 and your usage would look something like this 👇
-
-<Divider />
 
 ```javascript
 // SomeComponent.js

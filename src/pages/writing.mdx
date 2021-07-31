@@ -12,11 +12,9 @@ Here's a collection of articles I've written that have been officially published
 
 <SourceList filter="writing">
   {(writing) => (
-    <Flex
+    <Grid
       sx={{
-        flexWrap: "wrap",
-        ml: (theme) => `-${theme.space[2]}px`,
-        mr: (theme) => `-${theme.space[2]}px`,
+        gap: 4
       }}
     >
       {writing
@@ -41,7 +39,7 @@ Here's a collection of articles I've written that have been officially published
             />
           )
         })}
-    </Flex>
+    </Grid>
 )}
 
 </SourceList>

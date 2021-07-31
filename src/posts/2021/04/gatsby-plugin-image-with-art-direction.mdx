@@ -14,8 +14,6 @@ helper functions right at the bottom of the docs called
 [withArtDirection](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#withartdirection)
 that no one was really talking about.
 
-<Divider />
-
 ## [What's withArtDirection?](#whats-with-art-direction)
 
 In short it's a way to show different images to the user via media queries but, without loading additional images into
@@ -27,15 +25,11 @@ about each of the examples
 - [Demo](https://gatsbypluginimagewithartdirect.gatsbyjs.io/animation)
 - [Repo](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction)
 
-<Divider />
-
 ## [Animation](#animation)
 
 In this first example I went mega overboard and instead of adding two or three media queries I added over a thousand!
 
 <Tweet tweetLink="PaulieScanlon/status/1380067456606175232" />
-
-<Divider />
 
 The reason there's so many media queries is because i'm swapping an image out at each and every `px` value between
 **576px** and approx **1967px** using
@@ -50,8 +44,6 @@ make your browser smaller Mr Lemon will walk forward, if you make your browser l
 To achieve this I start with 48 single `.jpg` files,
 [you can see these images in the repo here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/tree/main/src/images/lemon)
 and theb by using `gatsby-source-filesystem` i'm able to then query them using GraphQL
-
-<Divider />
 
 ```javascript
 const {
@@ -70,8 +62,6 @@ const {
   }
 `)
 ```
-
-<Divider />
 
 The nodes returned by this query look a little like the below:
 
@@ -112,11 +102,7 @@ _I've removed some parts of the returned values for brevity_
 ]
 ```
 
-<Divider />
-
 Then using these `nodes` it's possible to pass them on to the `withArtDirection` helper function
-
-<Divider />
 
 ```javascript
 const images = withArtDirection(
@@ -132,8 +118,6 @@ const images = withArtDirection(
     .reverse(),
 )
 ```
-
-<Divider />
 
 - The first argument of `withArtDirection` is the default image, in my case it's the first node in the index. E.g
   `nodes[0]`
@@ -155,8 +139,6 @@ on my mac plays these back quite smoothly.
 You can see the
 [full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/lemon.js)
 
-<Divider />
-
 ## [Aspect Ratio](#aspect-ratio)
 
 This example is probably a little less of an edge case and it reminds me of what the social media advertising dweebs
@@ -176,8 +158,6 @@ The GraphQL query is pretty much the same as the above but only returns x2 nodes
 
 Then using those nodes it's possible to pass them on to the `withArtDirection` helper function
 
-<Divider />
-
 ```javascript
 const images = withArtDirection(getImage(nodes[0]), [
   {
@@ -186,8 +166,6 @@ const images = withArtDirection(getImage(nodes[0]), [
   },
 ])
 ```
-
-<Divider />
 
 - As above the first argument is the default image to display before the `@media` query kicks In
 - The second argument again is an array but this time it's an array of only one item.
@@ -216,12 +194,8 @@ _This is CSS-in-Js syntax FYI_
 
 ```
 
-<Divider />
-
 You can see the
 [full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/aspect-ratio.js)
-
-<Divider />
 
 ## [Desktop First](#desktop-first)
 
@@ -242,8 +216,6 @@ The GraphQL query is pretty much the same as the above and only returns x2 nodes
 
 Then using those nodes it's possible to pass them on to the `withArtDirection` helper function
 
-<Divider />
-
 ```javascript
 const images = withArtDirection(getImage(nodes[1]), [
   {
@@ -252,8 +224,6 @@ const images = withArtDirection(getImage(nodes[1]), [
   },
 ])
 ```
-
-<Divider />
 
 - As above the first argument is the default image to display before the `@media` query kicks In
 - The second argument again is an array but this time it's an array of only one item.
@@ -264,8 +234,6 @@ this image is shown on screen sizes above **576px**
 
 You can see the
 [full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/desktop-first.js)
-
-<Divider />
 
 ## [Printer](#printer)
 
@@ -283,8 +251,6 @@ The GraphQL query is pretty much the same as the above and only returns x2 nodes
 
 Then using those nodes it's possible to pass them on to the `withArtDirection` helper function
 
-<Divider />
-
 ```javascript
 const images = withArtDirection(getImage(nodes[0]), [
   {
@@ -293,8 +259,6 @@ const images = withArtDirection(getImage(nodes[0]), [
   },
 ])
 ```
-
-<Divider />
 
 - As above the first argument is the default image to display before the `@media` query kicks In
 - The second argument again is an array but this time it's an array of only one item.

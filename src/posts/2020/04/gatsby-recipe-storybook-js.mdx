@@ -17,23 +17,15 @@ will give you a better overview of how they work, but to summarize here's a quot
 
 To use recipes you must upgrade to the latest version of the Gatsby CLI
 
-<Divider />
-
 ```sh
 npm install -g gatsby-cli@latest
 ```
 
-<Divider />
-
 You can then use a recipe by running something similar to the below in your CLI
-
-<Divider />
 
 ```sh
 gatsby recipes url-to-recipe/name-of-recipe.mdx
 ```
-
-<Divider />
 
 ## The Storybook Problem
 
@@ -45,8 +37,6 @@ Recipes can do the lions share of the work so you don't have to! 🦁
 
 For instance, if you have any components that contain either a `<Link />` imported from `gatsby` or any GraphQL queries
 you'll likely see an error not to dissimilar to this 👇
-
-<Divider />
 
 ```javascript
 ERROR in ../node_modules/gatsby/cache-dir/gatsby-browser-entry.js 25:4
@@ -60,16 +50,12 @@ You may need an appropriate loader to handle this file type, currently no loader
 
 ```
 
-<Divider />
-
 - The first reason we get this error is because Gatsby exports as ES6 and Storybook by default expects all code to be
   ES5 / CommonJs.
 - The second reason is that the `gatsby develop` and `gatsby build` steps remove GraphQL queries, Storybook by default
   does not.
 
 So that's the issue, but what can we do about fixing it?
-
-<Divider />
 
 ## The solution
 
@@ -89,8 +75,6 @@ so you can just get on and develop your UI.
 
 So that's why i created this recipe.
 
-<Divider />
-
 ## The recipe
 
 The complete steps of my recipe are as follows:
@@ -104,8 +88,6 @@ The complete steps of my recipe are as follows:
 - Add Storybook npm scripts to `package.json`
 
 ~~You can test out my recipe **gatsby-recipe-storybook-js** by running the following in your CLI~~
-
-<Divider />
 
 <Box
   sx={{
@@ -123,20 +105,13 @@ https://raw.githubusercontent.com/PaulieScanlon/gatsby-recipe-storybook-js/maste
 
 </Box>
 
-<Divider />
-<Divider />
-
 ## 🚨 Update:
 
 This recipe is now part of the official Gatsby CLI 🎉 You can test it out by running the following in your CLI 👇
 
-<Divider />
-
 ```sh
  gatsby recipes storybook-js.mdx
 ```
-
-<Divider />
 
 The repo can be found here on [GitHub](https://github.com/PaulieScanlon/gatsby-recipe-storybook-js) and if you're
 interested in the Webpack config you can find that here in

@@ -24,8 +24,6 @@ The IntersectionObserver component will manage a few things. These are;
 
 A first pass at this component looks like this 👇
 
-<Divider />
-
 ```javascript
 // ReactObserver.js
 import React, { useRef, useEffect } from 'react'
@@ -57,11 +55,7 @@ const ReactObserver = ({ children }) => {
 export default ReactObserver
 ```
 
-<Divider />
-
 And to use it you can do something like this 👇
-
-<Divider />
 
 <!-- prettier-ignore -->
 ```javascript
@@ -82,8 +76,6 @@ import ReactObserver from "./RectObserver"
 ...
 ```
 
-<Divider />
-
 This isn't going to do very much but if you've got this far you'll see a `console.log()` when the `ReactObserver`
 component enters the viewport.
 
@@ -103,8 +95,6 @@ until the `ReactObserver` component enters the viewport.
 
 When the `ReactObserver` component enters the viewport we can set the `isChildVisible` state hook to `true` which when
 combined with a ternary operator can be used to determine if we should render the children.
-
-<Divider />
 
 ```javascript
 // ReactObserver.js
@@ -138,14 +128,10 @@ const ReactObserver = ({ children }) => {
 export default ReactObserver
 ```
 
-<Divider />
-
 There are more methods besides `entry.isIntersecting` which i've found to be quite useful.
 
 For instance using `entry.intersectionRatio` is useful for determining when the component enters and exits the
 viewpoint, and by changing the threshold values and adding conditions you can determine when certain events are fired.
-
-<Divider />
 
 ```javascript
 import React, { useRef, useEffect, useState } from 'react'
@@ -184,12 +170,8 @@ const ReactObserver = ({ children }) => {
 export default ReactObserver
 ```
 
-<Divider />
-
 To make your `ReactObserver` component even more reusable you might want to consider exposing some of the internal
 configuration via `props`
-
-<Divider />
 
 ```javascript
 import React, { useRef, useEffect, useState } from 'react'
@@ -234,11 +216,7 @@ ReactObserver.propTypes = {
 export default ReactObserver
 ```
 
-<Divider />
-
 And to use it you can do something like this 👇
-
-<Divider />
 
 ```javascript
 <ReactObserver threshold={0.5}>

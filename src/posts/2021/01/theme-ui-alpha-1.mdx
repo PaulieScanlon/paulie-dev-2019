@@ -24,11 +24,7 @@ To help demonstrate some of the Theme UI's principles we're going to build a ver
 below, i've called it `<MrPragma />` and you can find the `src`
 [here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrPragma.js)
 
-<Divider />
-
 <MrPragma />
-
-<Divider />
 
 ## [Theme Object](#theme-object)
 
@@ -47,8 +43,6 @@ to base this post on the install method for
 To change the default background and text colour you'll need to add a `colors` key to the theme object that contains key
 value pairs for both `text` and `background`
 
-<Divider />
-
 ```javascript
 // src/gatsby-plugin-theme-ui/index.js
 
@@ -59,8 +53,6 @@ export default {
   },
 }
 ```
-
-<Divider />
 
 By default Theme UI will use `text` and `background` to style the body `color` and the body `background-color` and
 before we go any further I'd like to explain why.
@@ -87,8 +79,6 @@ Theme UI uses OOP to allow access to CSS properties defined in the theme object.
 As a practical example go ahead and create a `<MrPragma />` component and ensure you can render it to a page as we'll
 need to see the output of a `console.log()`
 
-<Divider />
-
 ```javascript
 // MrPragma.js
 
@@ -102,14 +92,10 @@ export const MrPragma = () => {
 }
 ```
 
-<Divider />
-
 The above will log out the entire theme object. You should see all the default styles and if you've implemented the
 above change to `colors` you should see that `text` and `background` are the same as the values you've defined.
 
 To go one step further change the `console.log()` so it only logs out the values for the `text` key
-
-<Divider />
 
 ```diff
 // MrPragma.js
@@ -124,11 +110,7 @@ export const MrPragma = () => {
 }
 ```
 
-<Divider />
-
 And now finally use this `text` value to style the `<div />`
-
-<Divider />
 
 ```diff
 // MrPragma.js
@@ -151,8 +133,6 @@ export const MrPragma = () => {
 }
 ```
 
-<Divider />
-
 🚨🚨 This is NOT how you use Theme UI 🚨🚨
 
 ... but it does go some way to understanding what the theme object is and how you can access key value pairs contained
@@ -174,8 +154,6 @@ case of Theme UI we need the compiler to understand and compile something called
 [The sx Prop](https://theme-ui.com/sx-prop) and it looks like the below.
 
 _Theme UI's Jsx Pragma already includes React so you'll notice in the below i've removed the React import_
-
-<Divider />
 
 ```diff
 // MrPragma.js
@@ -201,16 +179,12 @@ export const MrPragma = () => {
 }
 ```
 
-<Divider />
-
 If you're familiar with HTML you'll know that `sx` isn't a valid HTML attribute but by including Theme UI's Jsx Pragma
 the compiler understands what it is and will know what to do with it before the Jsx is returned to the browser.
 
 ### [Step Two](#step-two)
 
 Use the `sx` prop to style a `<div />`
-
-<Divider />
 
 ```diff
 // MrPragma.js
@@ -231,8 +205,6 @@ export const MrPragma = () => {
 }
 ```
 
-<Divider />
-
 You'll notice here that `text` is a string. The word or string "text" in CSS wouldn't normally mean anything since CSS
 will be expecting an actual hex reference for a `color` property e.g: `#FFFFFF` but since the `sx` prop is compiled
 using the Jsx Pragma Theme UI is able to look up what the string value refers to in theme object.
@@ -248,8 +220,6 @@ pair of `text`
 Moreover if we introduce a new colour to the theme object called `surface` and give it a hex value we can then use it
 with another CSS property that is also mapped to the `colors` object
 
-<Divider />
-
 ```diff
 // src/gatsby-plugin-theme-ui/index.js
 
@@ -261,8 +231,6 @@ export default {
   },
 }
 ```
-
-<Divider />
 
 ```diff
 // MrPragma.js
@@ -283,8 +251,6 @@ export const MrPragma = () => {
   )
 }
 ```
-
-<Divider />
 
 <Image src={props.embedded.image1.url} alt="diagram of theme object map" />
 

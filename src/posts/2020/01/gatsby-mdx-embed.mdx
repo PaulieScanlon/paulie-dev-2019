@@ -36,8 +36,6 @@ And thanks to MDX the React component magically renders. Like this 👇
 
 <WordCountChart title="Average word count" dimension="words" config={{ year: 0, color: 'primary' }} />
 
-<Divider />
-
 The one snag, and it's a tiny drawback is that to use React components in MDX you have to import them. This is fine for
 one off components but for common components adding an `import` to every post is a hassle. Fortunately using the
 `MDXProvider` you can provide your blog with a kind of "global" way to handle components without needing to import them
@@ -57,8 +55,6 @@ custom `MdxProvider` which makes it possible for embed codes like this 👇
 <Tweet tweetLink="PaulieScanlon/status/1232993668690259968" />
 ```
 
-<Divider />
-
 To be automatically rendered. Like this 👇
 
 <Tweet tweetLink="PaulieScanlon/status/1232993668690259968" />
@@ -75,8 +71,6 @@ npm install @pauliescanlon/gatsby-mdx-embed --save
 
 ```
 
-<Divider />
-
 ... and then add it to `gatsby-config.js` and you're good to go.
 
 ```javascript
@@ -88,8 +82,6 @@ module.exports = {
   ...
 }
 ```
-
-<Divider />
 
 ## [There's more](#theres-more)
 

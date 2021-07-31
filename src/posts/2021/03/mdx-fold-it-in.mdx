@@ -20,8 +20,6 @@ did _attempt_ to explain what we meant by "fold it in" You can watch that below.
 
 <YouTube youTubeId="DugJk0P93rI" />
 
-<Divider />
-
 In an attempt to explain a little more i've documented a couple of ways this approach can be used.
 
 In this example i'll be specifically referring to methods I use in my Gatsby builds when working with MDX
@@ -32,8 +30,6 @@ For those not familiar with MDX it's similar to Markdown and additionally provid
 along with typical Markdown syntax... MDX is brilliant and I love it!
 
 Here's an example 👇
-
-<Divider />
 
 ```javascript
 // some-blog-post.mdx
@@ -49,8 +45,6 @@ And this is a React component 👇
 <CustomBlockquote>This is a quote - from someone</CustomBlockquote>
 
 ```
-
-<Divider />
 
 This will result in something like the below 👇
 
@@ -74,8 +68,6 @@ And this is a React component 👇
 
 </Box>
 
-<Divider />
-
 You'll see near the top of `some-blog-post.mdx` there's a familiar looking `import` statement, this is pretty much what
 you'd expect to see if you were in Jsx land.
 
@@ -97,8 +89,6 @@ import it first.
 
 Your implementation of MDX will likely be different to mine but you will probably have an `<MDXProvider />` somewhere in
 your project. Here's a stripped back MDX Template file.
-
-<Divider />
 
 ```javascript
 // src/pages/{mdx.slug}.js
@@ -135,14 +125,10 @@ export const query = graphql`
 export default MdxTemplate
 ```
 
-<Divider />
-
 ## [MDXProvider](#mdx-provider)
 
 To "fold" components into MDX I use the `components` prop on the `<MDXProvider />` and pass in the components i'd like
 to make available to all MDX files.
-
-<Divider />
 
 ```diff
 // src/pages/{mdx.slug}.js
@@ -186,11 +172,7 @@ export const query = graphql`
 export default MdxTemplate
 ```
 
-<Divider />
-
 Now that the `<CustomBlockquote />` component has been "folded" in there's no need to import it in the MDX blog post.
-
-<Divider />
 
 ```diff
 // some-blog-post.mdx
@@ -206,8 +188,6 @@ Now that the `<CustomBlockquote />` component has been "folded" in there's no ne
  <CustomBlockquote>This is a quote - from someone</CustomBlockquote>
 
 ```
-
-<Divider />
 
 I've been asked a number of times about how this might affect bundle size / page size because using this method bundles
 the `<CustomBlockquote />` component with each page regardless of if it's being used or not.
@@ -236,8 +216,6 @@ First I add a new field in `frontmatter` called `quotes`, it's of type `array` b
 If the below diff is a little hard to read, the `quotes` field should look like this, the `---` are important as they
 signify the beginning and end of `frontmatter`
 
-<Divider />
-
 ```javascript
 ---
  quotes:
@@ -246,8 +224,6 @@ signify the beginning and end of `frontmatter`
    - 'this is a quote 3 - from someone c'
 ---
 ```
-
-<Divider />
 
 ### [Props instead of children](#props-instead-of-children)
 
@@ -280,14 +256,10 @@ _The `[0]` is normal array syntax and represents an index from an array_
 
 ```
 
-<Divider />
-
 ### [MDXRenderer Props](#mdx-renderer-props)
 
 In order for `props.quotes[0]` to equal something other than `null` I now query the `frontmatter` from the MDX Template
 file and pass the `quotes` back to the `<MDXRenderer />` on a prop i've also called `quotes`
-
-<Divider />
 
 ```diff
 
@@ -335,8 +307,6 @@ export const query = graphql`
 
 export default MdxTemplate
 ```
-
-<Divider />
 
 This is a slightly contrived example but I suppose it might be useful if you had a really long blog post with lots of
 quotes and rather than having to scroll through the page and find one that might need editing you could find the quote

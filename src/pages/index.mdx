@@ -8,14 +8,23 @@ import { PostCard } from '../components/post-card'
 import { ProfileInfo } from '../components/profile-info'
 import { NewsletterForm } from '../components/newsletter-form'
 
+<Grid
+  sx={{
+    gap: 4,
+    mb: 5
+  }}
+>
+
 <Alert variant="error">I'm currently on contract</Alert>
-<Divider />
-<Divider />
 
 <ProfileInfo />
-<Divider />
-<Divider />
 
+<Grid
+  sx={{
+    alignItems: 'center',
+    gridTemplateColumns: 'auto 1fr'
+  }}
+>
 <Button
   as="a"
   title="View CV"
@@ -38,8 +47,15 @@ import { NewsletterForm } from '../components/newsletter-form'
 >
   .pdf version
 </Link>
-<Divider />
-<Divider />
+</Grid>
+
+</Grid>
+
+<Box
+  sx={{
+    mb: 5
+  }}
+>
 
 ## intro
 
@@ -48,7 +64,13 @@ code is just better! I’ve held various positions in and around advertising and
 contract positions since 2005, and I once co-founded and ran an award winning digital production agency called Super
 natural based in London.
 
-<Divider />
+</Box>
+
+<Box
+  sx={{
+    mb: 5
+  }}
+>
 
 ## commercial portfolio
 
@@ -59,35 +81,31 @@ For more information about what I do in my day to day job as a contractor feel f
   Visit Portfolio
 </Button>
 
-<Divider />
-<Divider />
+</Box>
 
 <Grid
-  sx={{ gridTemplateColumns: ['1fr', '1fr 1fr']}}
+  sx={{ gridTemplateColumns: ['1fr', '1fr 1fr'], gridRowGap: 5,}}
 >
 <Box>
 
 ## contact
 
-<Text>Email</Text>
+<Text as="p">Email</Text>
 <Link href="mailto:pauliescanlon@gmail.com" target="_blank" variant="styles.a" rel="noopener">
   pauliescanlon@gmail.com
 </Link>
-<Divider />
 
-<Text>Twitter</Text>
+<Text as="p">Twitter</Text>
 <Link href="https://twitter.com/PaulieScanlon" target="_blank" variant="styles.a" rel="noopener">
   https://twitter.com/PaulieScanlon
 </Link>
-<Divider />
 
-<Text>GitHub</Text>
+<Text as="p">GitHub</Text>
 <Link href="https://github.com/PaulieScanlon" target="_blank" variant="styles.a" rel="noopener">
   https://github.com/PaulieScanlon
 </Link>
-<Divider />
 
-<Text>
+<Text as='p'>
   LinkedIn
 </Text>
 <Link
@@ -102,8 +120,6 @@ For more information about what I do in my day to day job as a contractor feel f
 <Box>
 
 ## blog topics
-
-<Divider />
 
 <SourceTags>
   {(tags) => (
@@ -138,13 +154,12 @@ For more information about what I do in my day to day job as a contractor feel f
 
 ## latest posts
 
-<Divider />
-
 <SourceList filter="posts">
   {(posts) => (
     <Grid
       sx={{
         gridTemplateColumns: ['1fr', '1fr', '1fr 1fr'],
+        mb: 5,
       }}
     >
       {posts
@@ -177,7 +192,7 @@ For more information about what I do in my day to day job as a contractor feel f
     </Grid>
   )}
 </SourceList>
-<Divider />
+
 <Flex
   sx={{
     justifyContent: 'center',

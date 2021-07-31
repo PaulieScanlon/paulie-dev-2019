@@ -31,8 +31,6 @@ In order to speed that bit up it's advised you limit the amount of data you're s
 This plugin is usually responsible for sourcing files. In the demo repo I'm sourcing Markdown files from the `content`
 directory, and I'd imagine you'll have something similar to the below in your `gatsby-config`
 
-<Divider />
-
 ```javascript
 // gatsby-config.js
 module.exports = {
@@ -48,8 +46,6 @@ module.exports = {
   ],
 }
 ```
-
-<Divider />
 
 The main thing to look at is the `path`. The above snippet will source **everything** from the `src/content` directory.
 
@@ -67,8 +63,6 @@ When I'm developing a new feature for my blog or writing a new post I don't need
 a handful of the latest posts will be enough.
 
 So the above could now look like this 👇
-
-<Divider />
 
 ```javascript
 require('dotenv').config({
@@ -88,8 +82,6 @@ module.exports = {
   ],
 }
 ```
-
-<Divider />
 
 Using a ternary operator and testing if `process.env.NODE_ENV` equals `development` I can either source a smaller
 amount: `src/content/2021` or **all** of the content: `src/content`

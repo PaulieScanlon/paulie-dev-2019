@@ -22,8 +22,6 @@ Install the following dependencies to get started 👇
 npm install react-helmet gatsby-plugin-react-helmet --save
 ```
 
-<Divider />
-
 Then open up your `gatsby-config.js` and add the plugin to the plugins array
 
 ```javascript
@@ -33,12 +31,8 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 While we're in `gatsby-config.js` have a look over what keys you have in you `siteMetadata`, this is a standard one I've
 used a few times and has most of what you'll need to pass on to the Seo component when we build it in a moment.
-
-<Divider />
 
 ```diff
 // gatsby-config.js
@@ -60,8 +54,6 @@ module.exports = {
 }
 ```
 
-<Divider />
-
 I'd like to point one thing out here and that's the path to the `.jpg` and `.ico`, `.png` files. Those paths relate to
 an `images` directory that I've created in `./static`. The static directory is where Gatsby looks to load statically
 served content. For the above to work your directory structure would probably look a bit like this 👇
@@ -76,8 +68,6 @@ static
 gatsby-config.js
 package.json
 ```
-
-<Divider />
 
 No we can build the component.
 
@@ -149,8 +139,6 @@ Seo.propTypes = {
   path: PropTypes.string.isRequired,
 }
 ```
-
-<Divider />
 
 You should be able to see from each of the prop descriptions what each one does and from `title` to `lang` you'll be
 using the values from `siteMetadata`... more on that in a moment.
@@ -238,8 +226,6 @@ const IndexPage = () => {
 export default IndexPage
 ```
 
-<Divider />
-
 I've destructured all the props in the above code snippet but you can of course use JavaScript's native spread operator
 to achieve the same thing but in the interest of making this post as clear as possible I'll try and avoid
 [draw the rest of the fucking owl](https://www.reddit.com/r/restofthefuckingowl/)
@@ -251,8 +237,6 @@ type = 'website'
 page = 'Home'
 path = ''
 ```
-
-<Divider />
 
 As always there's a million ways to do the same thing but I hope this gives you some indication of one way to do it but
 in most cases you'll likely need to make a change here and there.... and that's absolutely fine!

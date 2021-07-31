@@ -38,8 +38,6 @@ need to see and inspect the output. _it's worth noting the styles you see here i
 already use around my blog which is based on my theme:
 [gatsby-theme-terminal](https://github.com/PaulieScanlon/gatsby-theme-terminal)_
 
-<Divider />
-
 ```javascript
 // MrStyled.js
 
@@ -50,8 +48,6 @@ export const MrStyled = () => {
   return <Styled.h3>MrStyled</Styled.h3>
 }
 ```
-
-<Divider />
 
 If you inspect the output below in your browser you should be able to see that the rendered output of `<MrStyled />` is
 an HTML `<h3>` element and will most likely have a weird `class` name, e.g ".css-1cl1f0n". Class names are automatically
@@ -90,16 +86,12 @@ color: var(--theme-ui-colors-secondary, #c39eff);
 
 </Grid>
 
-<Divider />
-
 I'd like to draw you attention if I may to the absence of the `className` attribute in `MrStyled.js` which begs the
 question, where the W.T.Flip are the styles coming from?
 
 The secret lies in the theme object an example of which can be seen below. You'll see there's an object called `styles`
 and within `styles` there's an object called `h3` and within the `h3` object are the styles that Theme UI applies to
 `<Styled.h3 />`
-
-<Divider />
 
 ```javascript
 // path-to-theme/index.js
@@ -126,8 +118,6 @@ export default {
   },
 }
 ```
-
-<Divider />
 
 <Image src={props.embedded.image1.url} alt="diagram of theme object map" />
 

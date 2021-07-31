@@ -68,11 +68,6 @@ module.exports = {
         trackingId: 'UA-76055934-4',
       },
     },
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        exclude: [`/dummy-page/`],
-      },
-    },
+    `gatsby-plugin-sitemap`,
   ],
 }

@@ -77,16 +77,10 @@ you put your `.stories`
 I will be opinionated about this and state you should co-locate your `.stories` with your components, for the simple
 fact that 👇
 
-<Divider />
-
 > Files you edit together, should live together.
-
-<Divider />
 
 On any typical project this will be my directory structure and it's what I'll be working with in this post. I should
 also point out any Storybook specific config will be in reference to `@storybook/react": "^6.0.0`
-
-<Divider />
 
 ```sh
 |-- src
@@ -95,8 +89,6 @@ also point out any Storybook specific config will be in reference to `@storybook
         |-- mr-button.js | .tsx
         |-- mr-button.stories.js | .mdx | .tsx
 ```
-
-<Divider />
 
 Now that your `.stories` are co-located with your components you'll need to let Storybook know what the file extensions
 are and where to find them. The below will find all files with the `.stories.js`, `.stories.mdx` or `.stories.tsx` file
@@ -151,8 +143,6 @@ the box but to generate prop tables from your `interface` declarations you'll ne
 ```sh
 npm install typescript react-docgen-typescript --save -dev
 ```
-
-<Divider />
 
 ```diff
 // .storybook/main.js
@@ -221,8 +211,6 @@ MrButton.defaultProps = {
 }
 ```
 
-<Divider />
-
 ## MrsButton = TypeScript + interface
 
 ```javascript
@@ -243,8 +231,6 @@ export const MrsButton: FunctionComponent<MrsButtonProps> = ({ children, isBoogy
 )
 ```
 
-<Divider />
-
 Ok, brills, now we have a component we can begin to document it's usage. The `.stories` snippets below are only for
 `<MrButton />` which is `.js` but it would be the same for `<MrsButton />` which is `.tsx`
 
@@ -264,8 +250,6 @@ export default {
 
 export const Usage = () => <MrButton>Mr Button</MrButton>
 ```
-
-<Divider />
 
 This is how I like to start when documenting any component, and with a bit of luck the component in question won't
 require any props making the "Show code" snippet easy to read, not to mention _easier_ to implement, naturally this
@@ -341,8 +325,6 @@ export const IsBoogyTime = () => (
 
 ```
 
-<Divider />
-
 ## Documenting props continued
 
 As explained above Storybook has this mysterious `parameters` object but what you'll see in the docs is
@@ -350,8 +332,6 @@ As explained above Storybook has this mysterious `parameters` object but what yo
 ```javascript
 parameters: {...}
 ```
-
-<Divider />
 
 I hope you'll find this next bit helpful.
 
@@ -372,8 +352,6 @@ IsBoogyTime.storyName = 'isBoogyTime'
 +  }
 };
 ```
-
-<Divider />
 
 ### docs:{...}
 
@@ -499,8 +477,6 @@ export default {
 export const Usage = () => <MrButton>Mr Button</MrButton>
 ```
 
-<Divider />
-
 ## default args
 
 While we're talking about "defaults" you can provide default args to every story using the same approach, in the case of
@@ -535,8 +511,6 @@ export default {
   </MrButton>
 );
 ```
-
-<Divider />
 
 The use of defaults may or may not suite your needs, in a lot of cases my preference is to apply decorators and or args
 on a story-by-story basis. I appreciate this may result in some duplication but `.stories` aren't you're application or
@@ -593,8 +567,6 @@ LayoutStory.decorators = [
 ];
 ```
 
-<Divider />
-
 This would result in a nice looking "Show code" snippet that looks a little something like the below 👇
 
 <!-- prettier-ignore -->
@@ -608,8 +580,6 @@ This would result in a nice looking "Show code" snippet that looks a little some
   </>
 )
 ```
-
-<Divider />
 
 Hopefully you'll agree with me and see the benefit of _hiding_ the decorator `<div>` so that the "Show code" snippet
 _only_ shows the buttons. But lets face it, we know we can use CSS to put things side by side, we don't need to provide
@@ -636,8 +606,6 @@ ArgsStory.args = {
   handleClick: (emoji) => action('handleClick')(emoji),
 }
 ```
-
-<Divider />
 
 ## ... finally Template.bind({})
 
@@ -671,8 +639,6 @@ TemplateStory.decorators = [
 TemplateStory.args = { ['aria-label']: 'A button that mostly does nothing' }
 ```
 
-<Divider />
-
 ... which results in a "Show code" snippet that looks like this 👇
 
 <!-- prettier-ignore -->
@@ -687,8 +653,6 @@ TemplateStory.args = { ['aria-label']: 'A button that mostly does nothing' }
   <No Display Name />
 </div>
 ```
-
-<Divider />
 
 I think this comes back to one issue, and perhaps i'm alone in this way of thinking but...
 

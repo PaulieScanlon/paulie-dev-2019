@@ -17,8 +17,6 @@ The problem is that [Gatsby](https://www.gatsbyjs.org/docs/gatsby-link/) and
 
 First let's look at the Gatsby Link
 
-<Divider />
-
 ```javascript
 // some-file.js
 import { Link } from 'gatsby'
@@ -28,14 +26,10 @@ const SomeComponent = () => {
 }
 ```
 
-<Divider />
-
 The Gatsby Link uses a `to` prop instead of an `href`, this is because a Gatsby Link is used to navigate around the
 routes in your blog / site / application.
 
 Now let's look at the Theme UI Link
-
-<Divider />
 
 ```javascript
 // some-file.js
@@ -46,8 +40,6 @@ const SomeComponent = () => {
 }
 ```
 
-<Divider />
-
 The Theme UI Link uses an `href` attribute which is what you'd normally expect to see on an `<a>` and it's used to
 navigate to a URL.
 
@@ -56,8 +48,6 @@ look very similar, apart from the difference mentioned above.
 
 We're also presented with a little problem, suppose you want to navigate to a route _and_ link to a URL in the same
 component. This requires importing and using both the Link from Gatsby _and_ the Link from Theme UI components...
-
-<Divider />
 
 ```javascript
 // some-file.js
@@ -74,13 +64,9 @@ const SomeComponent = () => {
 }
 ```
 
-<Divider />
-
 ❌ ... and as you know you can't import two components with the same name.
 
 The next problem is how to style these links. If you're familiar with Theme UI you'll want to use the `sx` prop 👇
-
-<Divider />
 
 ```javascript
 // some-file.js
@@ -101,14 +87,10 @@ const SomeComponent = () => {
 }
 ```
 
-<Divider />
-
 ... but the Gatsby Link isn't a Theme UI component so it's unable to translate the values passed by the `sx` prop into
 CSS styles. Instead it'll pass the `sx` prop on as an attribute with an odd looking string object thingy.
 
 The rendered DOM node might look like this 👇
-
-<Divider />
 
 ```javascript
 <a sx="[object Object]" href="/">
@@ -116,20 +98,14 @@ The rendered DOM node might look like this 👇
 </a>
 ```
 
-<Divider />
-
 ## [The solution](#the-solution)
 
 First off lets change the way we import the Gatsby Link
-
-<Divider />
 
 ```javascript
 // some-file.js
 import { Link as GatsbyLink } from 'gatsby'
 ```
-
-<Divider />
 
 No it's easier to determine if we're looking at a Gatsby Link or a Theme UI Link in both the import statement and in the
 usage.
@@ -137,8 +113,6 @@ usage.
 Great! we've solved one of the problems, but we still want to style these Links using Theme UI.
 
 To achieve this we can _cast_ the Theme UI Link as a `GatsbyLink` using the `as` prop ✨
-
-<Divider />
 
 ```javascript
 // some-file.js
@@ -158,8 +132,6 @@ const SomeComponent = () => {
   )
 }
 ```
-
-<Divider />
 
 Now we can use the `to` prop to navigate around our blog / site / application _and_ we can access all that Theme UI
 goodness using the `sx` prop.
