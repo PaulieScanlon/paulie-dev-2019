@@ -13,7 +13,6 @@ const theme = {
     success: '#58e6d9',
     background: '#131127',
     surface: '#232140',
-    icon: '#312e57',
     highlight: '#ffeb3b',
     placeholder: '#4e4b85',
   },
@@ -79,7 +78,7 @@ const theme = {
       color: 'muted',
       backgroundColor: 'background',
       transition: '.2s linear background-color',
-      ':hover': {
+      ':hover:enabled': {
         backgroundColor: 'surface',
       },
     },

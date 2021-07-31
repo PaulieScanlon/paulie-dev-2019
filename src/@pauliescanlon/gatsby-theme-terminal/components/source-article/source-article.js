@@ -10,7 +10,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { Main } from '@pauliescanlon/gatsby-theme-terminal/src/components/main'
 
 import { NewsletterForm } from '../../../../components/newsletter-form'
-import { ReactionSlider } from '../../../../components/reaction-slider'
+import { Reactions } from '../../../../components/reactions'
 
 const formatDate = (date) => format(new Date(date), 'd-MMM-u')
 
@@ -130,9 +130,7 @@ export const SourceArticle = ({
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
 
-      <Divider />
-
-      <ReactionSlider slug={slug} />
+      <Reactions slug={slug} />
 
       <NewsletterForm />
 

@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Button, Heading, Text, Spinner, Box } from 'theme-ui'
-import { SvgBubbleSlider } from 'react-svg-bubble-slider'
+import { SvgIcon } from 'react-svg-bubble-slider'
 import Reward from 'react-rewards'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
 
-import { ReactionCount } from '../reaction-count'
-
 const config = ['wondering', 'sad', 'happy', 'cool', 'confused', 'neutral', 'tongue']
 
-export const ReactionSlider = ({ slug }) => {
+export const Reactions = ({ slug }) => {
   const ref = useRef(null)
+  const [reaction, setReaction] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [reactionMessage, setReactionMessage] = useState('')
@@ -20,6 +19,7 @@ export const ReactionSlider = ({ slug }) => {
 
   const handleReaction = async (reaction) => {
     setIsSubmitting(true)
+    setReaction(reaction)
 
     try {
       const response = await axios.post('/api/add-reaction', {
@@ -95,72 +95,6 @@ export const ReactionSlider = ({ slug }) => {
         </Text>
       </Grid>
 
-      {isDisabled ? (
-        <Box />
-      ) : (
-        <Grid
-          sx={{
-            gap: 4,
-            mb: 4,
-            '.svg-timeline': {
-              ':focus': {
-                outlineColor: 'surface',
-                outlineWidth: '3px',
-                outlineStyle: 'solid',
-                boxShadow: 'none',
-              },
-            },
-            '.speech-bubble-stroke': {
-              stroke: 'muted',
-            },
-            '.speech-bubble-fill': {
-              fill: 'text',
-            },
-            '.speech-bubble-text': {
-              fill: 'muted',
-              fontSize: 3,
-              fontWeight: 'bold',
-              textTransform: 'capitalize',
-            },
-            '.speech-bubble-pop-line': {
-              stroke: 'muted',
-            },
-            '.reaction-icon': {
-              fill: 'text',
-            },
-            '.reaction-dot': {
-              fill: 'muted',
-            },
-            '.svg-bubble-action': {
-              minHeight: 3,
-              textAlign: 'center',
-            },
-          }}
-        >
-          <SvgBubbleSlider icons={config} scale={0.9} isDisabled={isDisabled} showSpeechBubble={false}>
-            {({ reaction }) => (
-              <Button
-                type="button"
-                onClick={() => handleReaction(reaction)}
-                disabled={!reaction || isSubmitting || isDisabled}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
-                  minWidth: 160,
-                  minHeight: 46,
-                  cursor: 'pointer',
-                  backgroundColor: 'primary',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {isSubmitting ? <Spinner sx={{ height: 28 }} /> : reaction ? `${reaction}` : '...'}
-              </Button>
-            )}
-          </SvgBubbleSlider>
-        </Grid>
-      )}
       <Grid
         sx={{
           gap: 0,
@@ -170,14 +104,49 @@ export const ReactionSlider = ({ slug }) => {
         }}
       >
         {config.map((icon, index) => (
-          <ReactionCount key={index} name={icon} count={0} />
+          <Grid
+            sx={{
+              gap: 0,
+              justifyContent: 'center',
+            }}
+          >
+            <Button
+              aria-label={`${icon}-reaction-button`}
+              key={index}
+              variant="ghost"
+              type="button"
+              onClick={() => handleReaction(icon)}
+              disabled={isSubmitting || isDisabled}
+              sx={{
+                alignItems: 'center',
+                cursor: isSubmitting || isDisabled ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                justifyContent: 'center',
+                p: 1,
+                minWidth: 0,
+                width: 48,
+                '.svg-icon': {
+                  color: isSubmitting || isDisabled ? 'placeholder' : 'text',
+                  borderWidth: '3px',
+                  borderColor: isSubmitting || isDisabled ? 'surface' : 'primary',
+                  borderStyle: 'solid',
+                  borderRadius: '50%',
+                },
+              }}
+            >
+              {reaction === icon && isSubmitting ? <Spinner sx={{ width: 30, height: 30 }} /> : <SvgIcon name={icon} />}
+            </Button>
+            {/* <Text as="div" sx={{ textAlign: 'center' }}>
+              0
+            </Text> */}
+          </Grid>
         ))}
       </Grid>
     </Grid>
   )
 }
 
-ReactionSlider.propTypes = {
+Reactions.propTypes = {
   /** Post title" */
   slug: PropTypes.string,
 }
