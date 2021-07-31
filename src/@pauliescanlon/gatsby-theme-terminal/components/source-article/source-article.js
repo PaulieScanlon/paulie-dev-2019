@@ -10,6 +10,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { Main } from '@pauliescanlon/gatsby-theme-terminal/src/components/main'
 
 import { NewsletterForm } from '../../../../components/newsletter-form'
+import { Reactions } from '../../../../components/reactions'
 
 const formatDate = (date) => format(new Date(date), 'd-MMM-u')
 
@@ -26,6 +27,7 @@ export const SourceArticle = ({
   body,
   timeToRead,
   wordCount,
+  slug,
 }) => {
   return (
     <Main>
@@ -128,6 +130,8 @@ export const SourceArticle = ({
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
 
+      <Reactions slug={slug} />
+
       <NewsletterForm />
 
       {title ? (
@@ -175,4 +179,6 @@ SourceArticle.propTypes = {
   wordCount: PropTypes.shape({
     words: PropTypes.number,
   }),
+  /** slug from SourceLayout */
+  slug: PropTypes.string,
 }

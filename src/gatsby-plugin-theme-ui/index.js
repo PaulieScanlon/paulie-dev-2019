@@ -78,7 +78,7 @@ const theme = {
       color: 'muted',
       backgroundColor: 'background',
       transition: '.2s linear background-color',
-      ':hover': {
+      ':hover:enabled': {
         backgroundColor: 'surface',
       },
     },
