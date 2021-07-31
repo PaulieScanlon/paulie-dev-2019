@@ -95,47 +95,49 @@ export const ReactionSlider = ({ slug }) => {
         </Text>
       </Grid>
 
-      <Grid
-        sx={{
-          gap: 4,
-          mb: 4,
-          '.svg-timeline': {
-            ':focus': {
-              outlineColor: 'surface',
-              outlineWidth: '3px',
-              outlineStyle: 'solid',
-              boxShadow: 'none',
+      {isDisabled ? (
+        <Box />
+      ) : (
+        <Grid
+          sx={{
+            gap: 4,
+            mb: 4,
+            '.svg-timeline': {
+              ':focus': {
+                outlineColor: 'surface',
+                outlineWidth: '3px',
+                outlineStyle: 'solid',
+                boxShadow: 'none',
+              },
             },
-          },
-          '.speech-bubble-stroke': {
-            stroke: 'primary',
-          },
-          '.speech-bubble-fill': {
-            fill: 'text',
-          },
-          '.speech-bubble-text': {
-            fill: 'primary',
-            fontSize: 3,
-            fontWeight: 'bold',
-            textTransform: 'capitalize',
-          },
-          '.speech-bubble-pop-line': {
-            stroke: 'primary',
-          },
-          '.reaction-icon': {
-            fill: 'text',
-          },
-          '.reaction-dot': {
-            fill: 'primary',
-          },
-          '.svg-bubble-action': {
-            minHeight: 3,
-            textAlign: 'center',
-          },
-        }}
-      >
-        {isDisabled ? null : (
-          <SvgBubbleSlider icons={config} scale={0.9} isDisabled={isDisabled}>
+            '.speech-bubble-stroke': {
+              stroke: 'muted',
+            },
+            '.speech-bubble-fill': {
+              fill: 'text',
+            },
+            '.speech-bubble-text': {
+              fill: 'muted',
+              fontSize: 3,
+              fontWeight: 'bold',
+              textTransform: 'capitalize',
+            },
+            '.speech-bubble-pop-line': {
+              stroke: 'muted',
+            },
+            '.reaction-icon': {
+              fill: 'text',
+            },
+            '.reaction-dot': {
+              fill: 'muted',
+            },
+            '.svg-bubble-action': {
+              minHeight: 3,
+              textAlign: 'center',
+            },
+          }}
+        >
+          <SvgBubbleSlider icons={config} scale={0.9} isDisabled={isDisabled} showSpeechBubble={false}>
             {({ reaction }) => (
               <Button
                 type="button"
@@ -147,18 +149,18 @@ export const ReactionSlider = ({ slug }) => {
                   justifyContent: 'center',
                   mx: 'auto',
                   minWidth: 160,
-                  minHeight: 52,
+                  minHeight: 46,
                   cursor: 'pointer',
                   backgroundColor: 'primary',
                   textTransform: 'capitalize',
                 }}
               >
-                {isSubmitting ? <Spinner sx={{ height: 30 }} /> : reaction ? `${reaction}` : '...'}
+                {isSubmitting ? <Spinner sx={{ height: 28 }} /> : reaction ? `${reaction}` : '...'}
               </Button>
             )}
           </SvgBubbleSlider>
-        )}
-      </Grid>
+        </Grid>
+      )}
       <Grid
         sx={{
           gap: 0,

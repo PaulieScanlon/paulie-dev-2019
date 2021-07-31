@@ -12,9 +12,9 @@ export const ReactionCount = ({ name, count = 0 }) => {
         justifyContent: 'center',
         alignItems: 'center',
         '.svg-icon': {
-          color: 'text',
+          color: 'placeholder',
           borderWidth: '3px',
-          borderColor: 'primary',
+          borderColor: 'icon',
           borderStyle: 'solid',
           borderRadius: '50%',
         },
