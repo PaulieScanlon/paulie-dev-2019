@@ -30,7 +30,7 @@
     "gatsby-plugin-mdx": "^2.10.1",
     "gatsby-plugin-mdx-embed": "^0.0.20-alpha",
     "gatsby-plugin-sharp": "^3.9.0",
-    "gatsby-plugin-sitemap": "^2.10.0",
+    "gatsby-plugin-sitemap": "^4.6.0",
     "gatsby-source-filesystem": "^3.10.0",
     "gatsby-transformer-sharp": "^3.10.0",
     "matter-js": "^0.17.1",
