@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Button, Heading, Text, Spinner, Box } from 'theme-ui'
+import { Grid, Button, Heading, Text, Spinner, Flex, Box } from 'theme-ui'
 import { SvgIcon } from 'react-svg-bubble-slider'
 import Reward from 'react-rewards'
 import axios from 'axios'
@@ -16,6 +16,8 @@ export const Reactions = ({ slug }) => {
   const [reactionMessage, setReactionMessage] = useState('')
   const [reactionEmoji, setReactionEmoji] = useState('')
   const [cookies, setCookie] = useCookies()
+  const [isLoading, setIsLoading] = useState(true)
+  const [reactionCounts, setReactionsCounts] = useState({})
 
   const handleReaction = async (reaction) => {
     setIsSubmitting(true)
@@ -26,12 +28,15 @@ export const Reactions = ({ slug }) => {
         slug: slug,
         reaction: reaction,
       })
-      setCookie(`${slug}`, `${slug}`)
+
+      if (process.env.NODE_ENV === 'production') {
+        setCookie(`${slug}`, `${slug}`)
+        setIsDisabled(true)
+      }
       ref.current.rewardMe()
       setReactionMessage(response.data.message)
       setReactionEmoji('🎉')
       setIsSubmitting(false)
-      setIsDisabled(true)
     } catch (error) {
       setReactionMessage(error.message)
       setReactionEmoji('🚨')
@@ -50,6 +55,25 @@ export const Reactions = ({ slug }) => {
       setReactionEmoji('👇')
     }
   }, [cookies, slug])
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const response = await axios.post('/api/get-reactions', {
+          slug: slug,
+        })
+
+        setReactionsCounts(response.data.reactions)
+        setIsLoading(false)
+      } catch (error) {
+        setReactionMessage(error.message)
+        setReactionEmoji('🚨')
+        setIsSubmitting(false)
+        setIsDisabled(true)
+        setIsLoading(false)
+      }
+    })()
+  }, [slug, isDisabled])
 
   return (
     <Grid
@@ -95,53 +119,71 @@ export const Reactions = ({ slug }) => {
         </Text>
       </Grid>
 
-      <Grid
+      <Box
         sx={{
-          gap: 0,
-          gridTemplateColumns: [`repeat(${config.length}, 1fr)`],
-          width: ['100%', '50%'],
-          mx: 'auto',
+          minHeight: 70,
         }}
       >
-        {config.map((icon, index) => (
+        {!isLoading ? (
           <Grid
             sx={{
               gap: 0,
-              justifyContent: 'center',
+              gridTemplateColumns: [`repeat(${config.length}, 1fr)`],
+              width: ['100%', '50%'],
+              mx: 'auto',
             }}
           >
-            <Button
-              aria-label={`${icon}-reaction-button`}
-              key={index}
-              variant="ghost"
-              type="button"
-              onClick={() => handleReaction(icon)}
-              disabled={isSubmitting || isDisabled}
-              sx={{
-                alignItems: 'center',
-                cursor: isSubmitting || isDisabled ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                justifyContent: 'center',
-                p: 1,
-                minWidth: 0,
-                width: 48,
-                '.svg-icon': {
-                  color: isSubmitting || isDisabled ? 'placeholder' : 'text',
-                  borderWidth: '3px',
-                  borderColor: isSubmitting || isDisabled ? 'surface' : 'primary',
-                  borderStyle: 'solid',
-                  borderRadius: '50%',
-                },
-              }}
-            >
-              {reaction === icon && isSubmitting ? <Spinner sx={{ width: 30, height: 30 }} /> : <SvgIcon name={icon} />}
-            </Button>
-            {/* <Text as="div" sx={{ textAlign: 'center' }}>
-              0
-            </Text> */}
+            {config.map((icon, index) => {
+              return (
+                <Grid
+                  key={index}
+                  sx={{
+                    gap: 0,
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Button
+                    aria-label={`${icon}-reaction-button`}
+                    variant="ghost"
+                    type="button"
+                    onClick={() => handleReaction(icon)}
+                    disabled={isSubmitting || isDisabled}
+                    sx={{
+                      alignItems: 'center',
+                      cursor: isSubmitting || isDisabled ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      p: 1,
+                      minWidth: 0,
+                      width: 48,
+                      '.svg-icon': {
+                        color: isSubmitting || isDisabled ? 'placeholder' : 'text',
+                        borderWidth: '3px',
+                        borderColor: isSubmitting || isDisabled ? 'surface' : 'primary',
+                        borderStyle: 'solid',
+                        borderRadius: '50%',
+                      },
+                    }}
+                  >
+                    {reaction === icon && isSubmitting ? (
+                      <Spinner sx={{ width: 30, height: 30 }} />
+                    ) : (
+                      <SvgIcon name={icon} />
+                    )}
+                  </Button>
+                  <Text as="div" sx={{ textAlign: 'center' }}>
+                    {reactionCounts[icon] ? reactionCounts[icon].count : 0}
+                  </Text>
+                </Grid>
+              )
+            })}
           </Grid>
-        ))}
-      </Grid>
+        ) : (
+          <Flex sx={{ justifyContent: 'center' }}>
+            <Spinner sx={{ color: 'secondary' }} />
+          </Flex>
+        )}
+      </Box>
     </Grid>
   )
 }

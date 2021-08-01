@@ -8,7 +8,9 @@ export default async function handler(req, res) {
   const client = new faunadb.Client({ secret: process.env.FAUNA_KEY })
 
   try {
-    await client.query(q.Create(q.Collection('reactions'), { data: { slug: slug, reaction: reaction } }))
+    await client.query(
+      q.Create(q.Collection(`reactions_${process.env.NODE_ENV}`), { data: { slug: slug, reaction: reaction } }),
+    )
 
     setTimeout(() => {
       res.status(200).json({ message: 'Lovely stuff, your reaction has been added!' })
