@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Grid, Box, Card, Text, Heading, Input, Button, Divider } from 'theme-ui'
+import { Grid, Box, Card, Text, Heading, Input, Button } from 'theme-ui'
 
 import { MatterScene } from './MatterScene'
 

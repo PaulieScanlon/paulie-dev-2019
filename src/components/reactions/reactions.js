@@ -27,6 +27,7 @@ export const Reactions = ({ slug }) => {
       const response = await axios.post('/api/add-reaction', {
         slug: slug,
         reaction: reaction,
+        date: new Date(),
       })
 
       if (process.env.NODE_ENV === 'production') {

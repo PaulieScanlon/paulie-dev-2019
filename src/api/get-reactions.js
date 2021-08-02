@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const response = await client.query(
       q.Map(
         q.Paginate(q.Match(q.Index(`reactions_by_slug_${process.env.NODE_ENV}`), `${slug}`)),
-        q.Lambda(['ref', 'slug', 'reaction'], q.Get(q.Var('ref'))),
+        q.Lambda(['ref', 'slug', 'reaction', 'date'], q.Get(q.Var('ref'))),
       ),
     )
 

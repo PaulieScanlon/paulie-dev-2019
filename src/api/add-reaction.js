@@ -1,7 +1,7 @@
 const faunadb = require('faunadb')
 
 export default async function handler(req, res) {
-  const { slug, reaction } = req.body
+  const { slug, reaction, date } = req.body
 
   const q = faunadb.query
 
@@ -9,7 +9,9 @@ export default async function handler(req, res) {
 
   try {
     await client.query(
-      q.Create(q.Collection(`reactions_${process.env.NODE_ENV}`), { data: { slug: slug, reaction: reaction } }),
+      q.Create(q.Collection(`reactions_${process.env.NODE_ENV}`), {
+        data: { slug: slug, reaction: reaction, date: date },
+      }),
     )
 
     setTimeout(() => {
