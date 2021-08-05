@@ -49,7 +49,7 @@ module.exports = {
         source: [
           {
             name: 'posts',
-            dir: process.env.NODE_ENV === 'development' ? 'posts/2021/07' : 'posts',
+            dir: process.env.NODE_ENV === 'development' ? 'posts/2021' : 'posts',
           },
           {
             name: 'writing',
