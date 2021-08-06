@@ -7,14 +7,12 @@ import { SvgIcon } from 'react-svg-bubble-slider'
 export const ReactionsByAmount = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
-
   const [reactions, setReactions] = useState([])
 
   useEffect(() => {
     const getAllReactions = async () => {
       try {
         const response = await axios.get('/api/get-all-reactions')
-
         setReactions(response.data.reactions.slice(0, 5))
         setIsLoading(false)
       } catch (error) {

@@ -102,7 +102,6 @@ export const Reactions = ({ slug }) => {
           }}
         >
           {reactionMessage}
-
           <Box>
             <Reward
               ref={ref}
