@@ -102,7 +102,6 @@ export const Reactions = ({ slug }) => {
           }}
         >
           {reactionMessage}
-
           <Box>
             <Reward
               ref={ref}
@@ -112,7 +111,7 @@ export const Reactions = ({ slug }) => {
                 springAnimation: false,
               }}
             >
-              <Box as="span" role="image">
+              <Box as="span" role="img">
                 {reactionEmoji}
               </Box>
             </Reward>

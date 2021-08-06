@@ -70,7 +70,7 @@ export const TagPercentChart = ({ year, color }) => {
           sx={{
             position: 'relative',
             mx: 'auto',
-            width: ['100%', '100%', '70%'],
+            width: '60%',
           }}
         >
           <Box
