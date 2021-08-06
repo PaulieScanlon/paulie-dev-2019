@@ -112,7 +112,7 @@ export const Reactions = ({ slug }) => {
                 springAnimation: false,
               }}
             >
-              <Box as="span" role="image">
+              <Box as="span" role="img">
                 {reactionEmoji}
               </Box>
             </Reward>
