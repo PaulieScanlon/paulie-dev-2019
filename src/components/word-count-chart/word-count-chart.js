@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Box, Heading, Text, Donut } from 'theme-ui'
 import { SourceWords } from '@pauliescanlon/gatsby-theme-terminal'
 
-import { formatNumber } from '../../utils/formatNumber'
+import { formatNumber } from '../../utils/format-number'
 
 export const WordCountChart = ({ title, dimension, config }) => {
   const { color, year } = config

@@ -51,9 +51,7 @@ export const ReactionsByAmount = () => {
     const getAllReactions = async () => {
       try {
         const response = await axios.get('/api/get-all-reactions')
-        // console.log(JSON.stringify(response.data.reactions, null, 2))
         setReactions(response.data.reactions)
-        console.log(response.data.reactions)
         setIsLoading(false)
       } catch (error) {
         setIsLoading(false)
