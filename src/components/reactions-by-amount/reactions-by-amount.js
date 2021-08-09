@@ -145,11 +145,3 @@ export const ReactionsByAmount = () => {
     </Box>
   )
 }
-
-// const out = [
-//   {
-//     reaction: 'cool',
-//     count: 4,
-//     slug: '/'
-//   }
-// ]
