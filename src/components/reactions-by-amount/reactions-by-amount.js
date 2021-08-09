@@ -1,8 +1,46 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import { Box, Spinner, Grid, Text, Flex } from 'theme-ui'
+import PropTypes from 'prop-types'
+import { Box, Spinner, Grid, Text, Flex, Heading } from 'theme-ui'
 import { Link } from 'gatsby'
 import axios from 'axios'
 import { SvgIcon } from 'react-svg-bubble-slider'
+
+const ReactionRow = ({ reaction, slug, count }) => {
+  return (
+    <Grid
+      sx={{
+        py: 1,
+        px: 2,
+        alignItems: 'center',
+        backgroundColor: 'surface',
+        gridTemplateColumns: '32px 1fr auto',
+        '.svg-icon': {
+          color: 'text',
+          borderWidth: '3px',
+          borderColor: 'primary',
+          borderStyle: 'solid',
+          borderRadius: '50%',
+        },
+        a: {
+          variant: 'styles.a',
+        },
+      }}
+    >
+      <SvgIcon name={reaction} />
+      <Link to={slug}>{slug}</Link>
+      <Text as="div" sx={{ textAlign: 'center' }}>{`x${count}`}</Text>
+    </Grid>
+  )
+}
+
+ReactionRow.propTypes = {
+  /** Reaction icon name */
+  reaction: PropTypes.string,
+  /** Slug */
+  slug: PropTypes.string,
+  /** Count */
+  count: PropTypes.number,
+}
 
 export const ReactionsByAmount = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -13,7 +51,9 @@ export const ReactionsByAmount = () => {
     const getAllReactions = async () => {
       try {
         const response = await axios.get('/api/get-all-reactions')
-        setReactions(response.data.reactions.slice(0, 5))
+        // console.log(JSON.stringify(response.data.reactions, null, 2))
+        setReactions(response.data.reactions)
+        console.log(response.data.reactions)
         setIsLoading(false)
       } catch (error) {
         setIsLoading(false)
@@ -47,73 +87,71 @@ export const ReactionsByAmount = () => {
               Blast, There's been an error!
             </Text>
           ) : (
-            <Box as="ol">
-              {reactions.map((reaction, index) => {
-                const { slug, reactions } = reaction
+            <Grid
+              sx={{
+                gap: 4,
+              }}
+            >
+              {reactions.cool ? (
+                <Box>
+                  <Heading as="h2" variant="styles.h2">
+                    Coolest Post
+                  </Heading>
+                  <Grid>
+                    {reactions.cool.map((reaction) => {
+                      return reaction.slice(0, 1).map((item, index) => {
+                        const { reaction, slug, count } = item
 
-                return (
-                  <Box
-                    key={index}
-                    as="li"
-                    sx={{
-                      mb: 3,
-                      a: {
-                        display: 'grid',
-                        gap: 3,
-                        alignItems: 'center',
-                        gridTemplateColumns: ['1fr', '1fr', '1fr auto'],
-                        variant: 'styles.a',
-                        textDecoration: 'none',
-                      },
-                    }}
-                  >
-                    <Link to={slug}>
-                      <Box
-                        as="span"
-                        sx={{
-                          textDecoration: 'underline',
-                        }}
-                      >
-                        {slug}
-                      </Box>
+                        return <ReactionRow key={index} reaction={reaction} slug={slug} count={count} />
+                      })
+                    })}
+                  </Grid>
+                </Box>
+              ) : null}
+              {reactions.happy ? (
+                <Box>
+                  <Heading as="h2" variant="styles.h2">
+                    Happiest Post
+                  </Heading>
+                  <Grid>
+                    {reactions.happy.map((reaction) => {
+                      return reaction.slice(0, 1).map((item, index) => {
+                        const { reaction, slug, count } = item
 
-                      <Grid
-                        sx={{
-                          gridTemplateColumns: [`repeat(${reactions.length}, 48px)`],
-                        }}
-                      >
-                        {reactions.map((reaction, index) => {
-                          const { count, name } = reaction
-                          return (
-                            <Grid
-                              sx={{
-                                justifyContent: 'center',
-                                gap: 0,
-                                '.svg-icon': {
-                                  color: 'text',
-                                  borderWidth: '3px',
-                                  borderColor: 'primary',
-                                  borderStyle: 'solid',
-                                  borderRadius: '50%',
-                                },
-                              }}
-                            >
-                              <SvgIcon name={name} />
-                              <Text as="div" sx={{ color: 'text', textAlign: 'center' }}>
-                                {`x${count}`}
-                              </Text>
-                            </Grid>
-                          )
-                        })}
-                      </Grid>
-                    </Link>
-                  </Box>
-                )
-              })}
-            </Box>
+                        return <ReactionRow key={index} reaction={reaction} slug={slug} count={count} />
+                      })
+                    })}
+                  </Grid>
+                </Box>
+              ) : null}
+              {reactions.sad ? (
+                <Box>
+                  <Heading as="h2" variant="styles.h2">
+                    Saddest Post
+                  </Heading>
+                  <Grid>
+                    {reactions.sad.map((reaction) => {
+                      return reaction.slice(0, 1).map((item, index) => {
+                        const { reaction, slug, count } = item
+
+                        return <ReactionRow key={index} reaction={reaction} slug={slug} count={count} />
+                      })
+                    })}
+                  </Grid>
+                </Box>
+              ) : null}
+            </Grid>
           )}
         </Fragment>
       )}
     </Box>
   )
 }
+
+// const out = [
+//   {
+//     reaction: 'cool',
+//     count: 4,
+//     slug: '/'
+//   }
+// ]
