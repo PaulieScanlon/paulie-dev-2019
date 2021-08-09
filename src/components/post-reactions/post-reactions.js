@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Button, Heading, Text, Spinner, Flex, Box } from 'theme-ui'
-import { SvgIcon } from 'react-svg-bubble-slider'
+
 import Reward from 'react-rewards'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
+
+import { ReactionIcon } from '../reaction-icon'
 
 const config = ['wondering', 'sad', 'happy', 'cool', 'confused', 'neutral', 'tongue']
 
@@ -156,19 +158,12 @@ export const PostReactions = ({ slug }) => {
                       p: 1,
                       minWidth: 0,
                       width: 48,
-                      '.svg-icon': {
-                        color: isSubmitting || isDisabled ? 'placeholder' : 'text',
-                        borderWidth: '3px',
-                        borderColor: isSubmitting || isDisabled ? 'surface' : 'primary',
-                        borderStyle: 'solid',
-                        borderRadius: '50%',
-                      },
                     }}
                   >
                     {reaction === icon && isSubmitting ? (
                       <Spinner sx={{ width: 30, height: 30 }} />
                     ) : (
-                      <SvgIcon name={icon} />
+                      <ReactionIcon name={icon} />
                     )}
                   </Button>
                   <Text as="div" sx={{ textAlign: 'center' }}>

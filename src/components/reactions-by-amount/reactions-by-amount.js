@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Box, Spinner, Grid, Text, Flex, Heading } from 'theme-ui'
 import { Link } from 'gatsby'
 import axios from 'axios'
-import { SvgIcon } from 'react-svg-bubble-slider'
+
+import { ReactionIcon } from '../reaction-icon'
 
 const ReactionRow = ({ reaction, slug, count }) => {
   return (
@@ -14,19 +15,12 @@ const ReactionRow = ({ reaction, slug, count }) => {
         alignItems: 'center',
         backgroundColor: 'surface',
         gridTemplateColumns: '32px 1fr auto',
-        '.svg-icon': {
-          color: 'text',
-          borderWidth: '3px',
-          borderColor: 'primary',
-          borderStyle: 'solid',
-          borderRadius: '50%',
-        },
         a: {
           variant: 'styles.a',
         },
       }}
     >
-      <SvgIcon name={reaction} />
+      <ReactionIcon name={reaction} />
       <Link to={slug}>{slug}</Link>
       <Text as="div" sx={{ textAlign: 'center' }}>{`x${count}`}</Text>
     </Grid>
@@ -93,7 +87,7 @@ export const ReactionsByAmount = () => {
               {reactions.cool ? (
                 <Box>
                   <Heading as="h2" variant="styles.h2">
-                    Coolest Post
+                    most cool reactions
                   </Heading>
                   <Grid>
                     {reactions.cool.map((reaction) => {
@@ -109,7 +103,7 @@ export const ReactionsByAmount = () => {
               {reactions.happy ? (
                 <Box>
                   <Heading as="h2" variant="styles.h2">
-                    Happiest Post
+                    most happy reactions
                   </Heading>
                   <Grid>
                     {reactions.happy.map((reaction) => {
@@ -122,13 +116,13 @@ export const ReactionsByAmount = () => {
                   </Grid>
                 </Box>
               ) : null}
-              {reactions.sad ? (
+              {reactions.wondering ? (
                 <Box>
                   <Heading as="h2" variant="styles.h2">
-                    Saddest Post
+                    most wondering reactions
                   </Heading>
                   <Grid>
-                    {reactions.sad.map((reaction) => {
+                    {reactions.wondering.map((reaction) => {
                       return reaction.slice(0, 1).map((item, index) => {
                         const { reaction, slug, count } = item
 
