@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie'
 
 const config = ['wondering', 'sad', 'happy', 'cool', 'confused', 'neutral', 'tongue']
 
-export const Reactions = ({ slug }) => {
+export const PostReactions = ({ slug }) => {
   const ref = useRef(null)
   const [reaction, setReaction] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -60,7 +60,7 @@ export const Reactions = ({ slug }) => {
   useEffect(() => {
     ;(async () => {
       try {
-        const response = await axios.post('/api/get-reactions', {
+        const response = await axios.post('/api/get-reactions-by-slug', {
           slug: slug,
         })
 
@@ -188,7 +188,7 @@ export const Reactions = ({ slug }) => {
   )
 }
 
-Reactions.propTypes = {
+PostReactions.propTypes = {
   /** Post title" */
   slug: PropTypes.string,
 }
