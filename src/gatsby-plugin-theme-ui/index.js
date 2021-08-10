@@ -11,6 +11,7 @@ const theme = {
     secondary: '#c39eff',
     error: '#ff4343',
     success: '#58e6d9',
+    warning: '#fdd835',
     background: '#131127',
     surface: '#232140',
     highlight: '#ffeb3b',
@@ -94,6 +95,18 @@ const theme = {
       ...baseTheme.forms.input,
       '::placeholder': {
         color: 'placeholder',
+      },
+    },
+  },
+
+  alerts: {
+    ...baseTheme.alerts,
+    warning: {
+      ...baseTheme.alerts.primary,
+      color: 'background',
+      backgroundColor: 'warning',
+      a: {
+        color: 'primary',
       },
     },
   },

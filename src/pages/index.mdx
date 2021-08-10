@@ -15,7 +15,32 @@ import { NewsletterForm } from '../components/newsletter-form'
   }}
 >
 
-<Alert variant="error">I'm currently on contract</Alert>
+<Alert variant="warning">
+  <Grid
+    sx={{
+      gridTemplateColumns: '1fr',
+      gap: [3, 0],
+    }}
+  >
+    <Flex
+      sx={{
+        alignItems: ['flex-start', 'center']
+      }}
+    >
+      I'm currently on contract, but am open to new opportunities.{' '}
+      <Box role="img" aria-label="Eyes" sx={{ml: 2, mt: 1}}>
+        👀
+      </Box>
+    </Flex>
+    <Text>
+      Find me on Twitter:{' '}
+      <Link href="https://twitter.com/PaulieScanlon" target="_blank" rel="noopener">
+        @PaulieScanlon
+      </Link>
+    </Text>
+
+  </Grid>
+</Alert>
 
 <ProfileInfo />
 
