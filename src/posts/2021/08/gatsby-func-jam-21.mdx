@@ -1,0 +1,118 @@
+---
+title: Gatsby FuncJam 21
+tags: [Gatsby, React, TypeScript, JavaScript, Theme UI, Gatsby Functions, Google Analytics]
+date: 2021-08-18
+author: Paul Scanlon
+featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1629283119/paulie.dev/2021/08/gatsby-func-jam-21-low-res_ifvoat.jpg
+---
+
+<Link
+  href="https://gatsbygroovyanalytics.gatsbyjs.io/"
+  target="_blank"
+  sx={{ display: 'block', color: 'secondary', textDecoration: 'none', mb: 3 }}
+>
+  <Card sx={{ p: 3, display: 'grid', gap: 4 }}>
+    <Box>
+      <Text sx={{ color: 'primary', m: 0, fontSize: 3, fontWeight: 'bold' }}>Groovy Analytics</Text>
+      <Text as="p" sx={{ color: 'text' }}>
+        It's gonna be something to do with Google Analytics
+      </Text>
+      <Link href="https://github.com/PaulieScanlon/gatsby-groovy-analytics" target="_blank" rel="noopener">
+        https://github.com/PaulieScanlon/gatsby-groovy-analytics
+      </Link>
+    </Box>
+    <Flex
+      sx={{
+        alignItems: 'center',
+      }}
+    >
+      <Button as="span" variant="ghost" sx={{ flex: 1, pointerEvents: 'none' }}>
+        Visit Groovy Analytics{' '}
+        <Box as="span" role="img" aria-label="Man Dancing">
+          🕺
+        </Box>
+      </Button>
+    </Flex>
+  </Card>
+</Link>
+
+## [Go Go Go](#go-go-go)
+
+### Aug 18 2021
+
+Here we go again 🕺
+
+In 2019/2020 I blogged every day for 100 days totaling 27,341 words and you can read them all in this post:
+[100 Days Of Gatsby](/posts/2020/01/100DaysOfGatsby/), but if you don't have a million hours to spare Gatsby asked me to
+write a round-up post which can be seen on the Gatsby blog:
+[Challenge Accepted: One Developer, 10 Projects, 100 Days of Gatsby](https://www.gatsbyjs.com/blog/2020-04-20-paulie-scanlons-journey-of-100-days)
+
+In 2020 I participated in Gatsby's
+[Silly Site Challenge](https://www.gatsbyjs.com/blog/silly-site-challenge#gatsby-skip-here) and developed my site
+[BumHub](https://bumhub.netlify.app/) in public. You can read all about that in a blog post I updated as the challenge
+progressed: [Silly Site Challenge](/https://paulie.dev/posts/2020/11/silly-site-challenge/)
+
+...and joy of joys I won!
+
+Here's the official announcement:
+[Presenting the 2020 Silly Site Challenge Winners!](https://www.gatsbyjs.com/blog/2020-silly-site-top-20/#gatsby-skip-here)
+
+Gatsby again asked if i'd do a little write up, so here ya go:
+[Bottoms Up: Gatsby File System Route API + Bums = BumHub](https://www.gatsbyjs.com/blog/bottoms-up-gatsby-file-system-route-api-bums-bumhub)
+
+And as of about 8pm last night (my time) Gatsby announced
+[#FuncJam](https://twitter.com/hashtag/FuncJam?src=hashtag_click)
+
+<Tweet tweetLink="GatsbyJS/status/1427709225497726982" />
+
+... which may or may not be a name I came up with 😏
+
+<Tweet tweetLink="pauliescanlon/status/1397215365105602562?s=21" />
+
+... but either way. I'm doing it, and not for the super duper prizes but because I love it.
+
+As before with [Silly Site Challenge](/https://paulie.dev/posts/2020/11/silly-site-challenge/) I plan to update this
+blog post as and when I make significant progress.
+
+## [Update 1](#update-1)
+
+### Aug 18 2021
+
+Last night and on my lunch break today I've whipped up a new Gatsby site and hosted in on Gatsby Cloud. For now all the
+site does is display a 3D Globe which I created using React Three Fibre, you can read about how I did that in this post
+published by Smashing Magazine:
+[Gatsby Serverless Functions And The International Space Station](https://www.smashingmagazine.com/2021/07/gatsby-serverless-functions-international-space-station/)
+
+The idea I have at the moment will be to use both the static and the dynamic offerings from Gatsby.
+
+##### Static
+
+The Google Analytics API is rate limited and whilst I could hit the endpoint and request all `pageViews` for the Groovy
+Analytics site and plot the lat/lng locations on the 3D Globe using Gatsby Functions, I fear that the rate limits will
+soon cap out and the request would fail. Instead, I'll be using the power of Gatsby to hit the Google Analytics API at
+build time... It's kinda weird to request data at build time and pump it into a 3D globe because part of the reason
+static data is so cool is because it's baked right into the page, meaning your site is blazing fast, SEO friendly and
+works with JavaScript disabled in the browser. Sadly no such luck when using this data to drive geographical locations
+on a Three.js globe... but, Gatsby if nothing else is totally flexible so why not eh?!
+
+There's a problem though.... This is FuncJam and sourcing data at build time using `gatsby-node` isn't making use of
+Gatsby Functions.
+
+##### Dynamic
+
+To take advantage of Gatsby Functions I plan to add a number of other features that won't succumb to rate limiting.
+These features may include the following:
+
+- Posting reactions to a backend like Fauna
+- Adding Authentication using Auth0 to authenticate users
+- Allowing authenticated users to leave comments on the site
+- Hitting my own abstracted API: [paulieapi](https://paulieapi.gatsbyjs.io/) to display real time Twitter or GitHub
+  information on the site (that API is also built using Gatsby Functions and hosted on Gatsby Cloud FYI)
+- A Newsletter sign up form (gotta have a form in there somewhere right!)
+
+... or maybe all of the above.
+
+I'll see how much time I have after working my day job building _complex_ / boring React Applications that no one cares
+about.
+
+Stay tuned for more updates on this post or follow me on Twitter: [@PaulieScanlon](https://twitter.com/PaulieScanlon)
