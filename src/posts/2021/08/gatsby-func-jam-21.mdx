@@ -4,6 +4,8 @@ tags: [Gatsby, React, TypeScript, JavaScript, Theme UI, Gatsby Functions, Google
 date: 2021-08-18
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1629283119/paulie.dev/2021/08/gatsby-func-jam-21-low-res_ifvoat.jpg
+embeddedImageUrls:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1629357089/paulie.dev/2021/08/teaser-update-2_raue2s.jpg
 ---
 
 <Link
@@ -116,3 +118,37 @@ I'll see how much time I have after working my day job building _complex_ / bori
 about.
 
 Stay tuned for more updates on this post or follow me on Twitter: [@PaulieScanlon](https://twitter.com/PaulieScanlon)
+
+## [Update 2](#update-2)
+
+### Aug 19 2021
+
+Last night I added a GitHub action that will rebuild the site every hour: You can see the `src` here:
+[https://github.com/PaulieScanlon/gatsby-groovy-analytics/blob/main/.github/workflows/build-me.yml](https://github.com/PaulieScanlon/gatsby-groovy-analytics/blob/main/.github/workflows/build-me.yml)
+This takes care of the static data becoming stale and should mean I never cap out the Google Analytics usage quota. The
+GitHub actions is scheduled to run every hour and calls the Gatsby Cloud build webhook which in turn rebuilds and
+deploys the site.
+
+I then tackled the design. This is always my least favorite part of any side project. I've got something that i'm pretty
+happy with. It's kinda 70s themed and I spent quite a lot of time searching for era correct 70s phrases for the copy.
+
+The design includes sections for statistics and I'll calculate these using the Google Analytics API, I'll be crunching
+the numbers to surface which city, country, continent, browser, device and operating system have produced the most
+`pageViews`
+
+There's also a comment form that requires Twitter sign in with Auth0, a reactions section for folks that don't want to
+"sign in" or don't have Twitter but would still like to interact with the site and a Newsletter sign up. The Newsletter
+sign up will be the same as my my and all submissions go to [Queen Raae's](https://twitter.com/raae) Gatsby newsletter.
+
+I asked last night for folks to visit the site and Gatsby gave me a retweet -- lovely stuff
+
+<Tweet tweetLink="https://twitter.com/PaulieScanlon/status/1428096625394790401?s=20" />
+
+This now means I have enough data to start developing the 3D globe and I think i'm going to add some kind of search
+functionality so it's easier to see where on the globe individual locations are, kinda like how you'd filter table data
+but in the context of the 3D globe.
+
+Here's a little teaser of where i'm at with the design. I still need to work out what the 3D globe will look like but
+i'll trust the process and no doubt continue to tinker in between feature development.
+
+<GatsbyImage image={props.embedded.image1} />
