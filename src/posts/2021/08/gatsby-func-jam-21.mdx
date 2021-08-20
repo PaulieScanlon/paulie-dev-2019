@@ -152,3 +152,34 @@ Here's a little teaser of where i'm at with the design. I still need to work out
 i'll trust the process and no doubt continue to tinker in between feature development.
 
 <GatsbyImage image={props.embedded.image1} />
+
+## [Update 3](#update-3)
+
+### Aug 20 2021
+
+Last night over some pints and then today after brunch I added [Auth0](https://auth0.com/) to the site. I'm using the
+Auth0 React package which is absolutely brills. It's here if you fancy giving it a try:
+[@auth0/auth0-react](https://www.npmjs.com/package/@auth0/auth0-react)
+
+I'm using Auth0's Social Connections so that the only way to sign up/in is to connect via a users Twitter account. This
+way I don't need to worry about "confirmation email" or "forgot password" user flows.
+
+If a user is authenticated i'm enabling a comment section, comments are tricky because you might not want anonymous
+users commenting but I figure if their name is attached to the comment they might think twice before posting profanities
+or generally being a tinker. -- but we shall see.
+
+The `comment` text, `user` details and a `date` are posted to the first of many Gatsby Functions in this site. You can
+see the `src` for the `add-comment` function here:
+[src/api/add-comment.ts](https://github.com/PaulieScanlon/gatsby-groovy-analytics/blob/main/src/api/add-comment.ts)
+
+This function is extra secure too because I send an access token collected from Auth0 using the `getAccessTokenSilently`
+hook on the client and verify it using [express-jwt](https://www.npmjs.com/package/express-jwt) on the server before
+posting to my [Fauna](https://fauna.com/) database.
+
+I've also prepared for Tonight's [Nattermob](https://nattermob.dev/) stream where I'll talk Benedicte through how to
+fetch these comments and display them on a comments page. We'll also be discussing ways in which Gatsby Functions can be
+polled so updates to data can been seen without users needing to refresh the page.
+
+Here's tonights stream... see you there!
+
+<YouTube youTubeId="C-Ct9QmN6tM" />

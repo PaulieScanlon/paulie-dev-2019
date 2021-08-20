@@ -28,6 +28,9 @@ const theme = {
         },
         my: 5,
       },
+      '.gatsby-image-wrapper': {
+        my: 5,
+      },
     },
 
     p: {
