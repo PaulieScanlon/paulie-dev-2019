@@ -84,54 +84,22 @@ export const ReactionsByAmount = () => {
                 gap: 4,
               }}
             >
-              {reactions.cool ? (
-                <Box>
-                  <Heading as="h2" variant="styles.h2">
-                    most cool reactions
-                  </Heading>
-                  <Grid>
-                    {reactions.cool.map((reaction) => {
-                      return reaction.slice(0, 1).map((item, index) => {
-                        const { reaction, slug, count } = item
+              {Object.entries(reactions).map(([title, data], index) => {
+                // console.log(reaction)
+                const { reaction, slug, count } = data[0][0]
+                // console.log(reaction, slug, count)
 
-                        return <ReactionRow key={index} reaction={reaction} slug={slug} count={count} />
-                      })
-                    })}
-                  </Grid>
-                </Box>
-              ) : null}
-              {reactions.happy ? (
-                <Box>
-                  <Heading as="h2" variant="styles.h2">
-                    most happy reactions
-                  </Heading>
-                  <Grid>
-                    {reactions.happy.map((reaction) => {
-                      return reaction.slice(0, 1).map((item, index) => {
-                        const { reaction, slug, count } = item
-
-                        return <ReactionRow key={index} reaction={reaction} slug={slug} count={count} />
-                      })
-                    })}
-                  </Grid>
-                </Box>
-              ) : null}
-              {reactions.wondering ? (
-                <Box>
-                  <Heading as="h2" variant="styles.h2">
-                    most wondering reactions
-                  </Heading>
-                  <Grid>
-                    {reactions.wondering.map((reaction) => {
-                      return reaction.slice(0, 1).map((item, index) => {
-                        const { reaction, slug, count } = item
-
-                        return <ReactionRow key={index} reaction={reaction} slug={slug} count={count} />
-                      })
-                    })}
-                  </Grid>
-                </Box>
-              ) : null}
+                return (
+                  <Box key={index}>
+                    <Heading as="h2" variant="styles.h2">
+                      most {title} reactions
+                    </Heading>
+                    <Grid>
+                      <ReactionRow reaction={reaction} slug={slug} count={count} />
+                    </Grid>
+                  </Box>
+                )
+              })}
             </Grid>
           )}
         </Fragment>

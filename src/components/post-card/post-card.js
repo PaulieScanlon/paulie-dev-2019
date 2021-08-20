@@ -33,7 +33,14 @@ export const PostCard = ({ title, featuredImageUrl, tags, date, dateModified, ex
             minHeight: '1px',
           }}
         >
-          <Box sx={{ minHeight: '1px' }}>
+          <Box
+            sx={{
+              minHeight: '1px',
+              '.gatsby-image-wrapper': {
+                m: 0,
+              },
+            }}
+          >
             {featuredImageUrl ? (
               <GatsbyImage alt={title} image={getImage(featuredImageUrl.url.childImageSharp.gatsbyImageData)} />
             ) : null}
