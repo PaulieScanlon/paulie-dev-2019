@@ -2,6 +2,7 @@
 title: Gatsby FuncJam 21
 tags: [Gatsby, React, TypeScript, JavaScript, Theme UI, Gatsby Functions, Google Analytics]
 date: 2021-08-18
+dateModified: 2021-08-23
 author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1629283119/paulie.dev/2021/08/gatsby-func-jam-21-low-res_ifvoat.jpg
 embeddedImageUrls:
@@ -180,3 +181,45 @@ polled so updates to data can been seen without users needing to refresh the pag
 Here's tonights stream... see you there!
 
 <YouTube youTubeId="C-Ct9QmN6tM" />
+
+## [Update 4](#update-4)
+
+### Aug 23 2021
+
+I'm done!
+
+This weekend I set about completing all features and it all went pretty smoothly.
+
+After Friday nights stream i'd captured one or two comments which meant I could now work on the Function and UI that
+displays them on the site. Requesting the comments from Fauna doesn't require user authentication unlike posting a
+comment which does and was the more complicated part of this feature.
+
+Rendering the comments was no problem, Theme UI comes with a `<Card />` so I styled it up and wallop job done.
+
+Next up was Reactions. This was a two part feature. First I needed create the Function that posts a reaction object to
+Fauna, the payload is a reaction `name` and a `date`. The date is created on the client so it's accurate to timezone of
+where the user was at the time they posted it, i'm not sure i'll do anything with the timestamp now but it might have
+made for an interesting data viz piece to show reactions over time.
+
+Once I could post reactions I could then set about retrieving them. Same kind of approach as used to get all the
+comments but with reactions i needed to use `Array.reduce` on the server and sum up each reaction by name so I can
+display the count in the UI. The Reactions component, self updates and by this I mean once a reaction has been sent
+successfully i'm using a `useEffect` that fires when the post response resolves. The `useEffect` then calls a get all
+reactions function which returns the summed up reactions from Fauna/the server
+
+Strictly speaking this isn't a Gatsby Function feature but, i've added a few more Google Analytics queries to the build
+step and i pass them into Gatsby Data layer so I can display stats about which city, country and continent along with
+some details about which technology is used by visitors to the site. These are shown in the UI using another Theme UI
+`<Card />` component and a clear heading.
+
+Lastly I updated the [README](https://github.com/PaulieScanlon/gatsby-groovy-analytics#readme) with documentation about
+how each function works and linked to all the
+[#GatsbySummerFunctions](https://twitter.com/hashtag/gatsbysummerfunctions) streams where we'd previously built each of
+the features in Groovy Analytics site.
+
+I'm now pretty happy with it and in total spent 26 hours designing and developing. I had originally set out to do this
+in 24 hours but ran a little over.
+
+That's it, all done!
+
+Stay Funky!
