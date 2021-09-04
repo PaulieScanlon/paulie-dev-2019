@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import axios from 'axios'
 import { Grid, Flex, Heading, Text, Spinner } from 'theme-ui'
 import { useStaticQuery, graphql } from 'gatsby'
 
 export const ProfileInfo = () => {
   const [response, setResponse] = useState({ user: null })
-  const [isMounted, setIsMounted] = useState(true)
+  const [isMounted, setIsMounted] = useState(null)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -20,36 +20,58 @@ export const ProfileInfo = () => {
     }
   `).site.siteMetadata
 
-  useEffect(() => {
-    // fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
-    fetch('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
-      method: 'POST',
-      body: JSON.stringify({ username: 'PaulieScanlon' }),
-    })
-      .then((response) => {
-        if (response.status >= 200 && response.status <= 299) {
-          return response.json()
-        } else {
-          throw Error(response.message)
-        }
+  // useEffect(() => {
+  //   // // fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
+  //   // fetch('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
+  //   //   method: 'POST',
+  //   //   body: JSON.stringify({ username: 'PaulieScanlon' }),
+  //   // })
+  //   //   .then((response) => {
+  //   //     if (response.status >= 200 && response.status <= 299) {
+  //   //       return response.json()
+  //   //     } else {
+  //   //       throw Error(response.message)
+  //   //     }
+  //   //   })
+  //   //   .then((response) => {
+  //   //     setIsLoading(false)
+  //   //     if (isMounted) {
+  //   //       setResponse({ user: response.user })
+  //   //     }
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     setIsLoading(false)
+  //   //     setHasError(true)
+  //   //   })
+  // }, [isMounted])
+
+  const getTwitterUser = async () => {
+    try {
+      const response = await axios('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
+        method: 'POST',
+        data: {
+          username: 'PaulieScanlon',
+        },
       })
-      .then((response) => {
-        setIsLoading(false)
-        if (isMounted) {
-          setResponse({ user: response.user })
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false)
-        setHasError(true)
-      })
-  }, [isMounted])
+      setIsLoading(false)
+      if (isMounted) {
+        setResponse(response.data)
+      }
+    } catch (error) {
+      console.log(JSON.stringify(error, null, 2))
+      setIsLoading(false)
+      setHasError(true)
+      // setResponse(error.response.message)
+    }
+  }
 
   useEffect(() => {
+    setIsMounted(true)
+    getTwitterUser()
     return () => {
       setIsMounted(false)
     }
-  })
+  }, [getTwitterUser])
 
   return (
     <>
