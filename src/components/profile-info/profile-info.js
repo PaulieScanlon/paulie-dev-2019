@@ -59,7 +59,7 @@ export const ProfileInfo = () => {
         setResponse(response.data)
       }
     } catch (error) {
-      console.log(JSON.stringify(error, null, 2))
+      console.log(JSON.stringify(error.response, null, 2))
       setIsLoading(false)
       setHasError(true)
       // setResponse(error.response.message)
