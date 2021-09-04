@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 export const ProfileInfo = () => {
   const [response, setResponse] = useState({ user: null })
-  const [isMounted, setIsMounted] = useState(null)
+  const [isMounted, setIsMounted] = useState(true)
   const [hasError, setHasError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -55,6 +55,7 @@ export const ProfileInfo = () => {
       })
       setIsLoading(false)
       if (isMounted) {
+        console.log(JSON.stringify(response.data, null, 2))
         setResponse(response.data)
       }
     } catch (error) {
@@ -66,12 +67,11 @@ export const ProfileInfo = () => {
   }
 
   useEffect(() => {
-    setIsMounted(true)
     getTwitterUser()
     return () => {
       setIsMounted(false)
     }
-  }, [getTwitterUser])
+  }, [])
 
   return (
     <>
