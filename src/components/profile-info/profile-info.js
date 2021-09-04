@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 import { Grid, Flex, Box, Heading, Text, Spinner } from 'theme-ui'
 
@@ -6,7 +6,7 @@ export const ProfileInfo = () => {
   const [response, setResponse] = useState(null)
   const [isMounted, setIsMounted] = useState(true)
 
-  const getTwitterUser = async () => {
+  const getTwitterUser = useCallback(async () => {
     try {
       const response = await axios('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
         method: 'POST',
@@ -25,14 +25,14 @@ export const ProfileInfo = () => {
         setResponse(error.name)
       }
     }
-  }
+  }, [isMounted])
 
   useEffect(() => {
     getTwitterUser()
     return () => {
       setIsMounted(false)
     }
-  }, [])
+  }, [getTwitterUser])
 
   return (
     <Box
