@@ -1,49 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
-import { Grid, Flex, Heading, Text, Spinner } from 'theme-ui'
-import { useStaticQuery, graphql } from 'gatsby'
+import { Grid, Flex, Box, Heading, Text, Spinner } from 'theme-ui'
 
 export const ProfileInfo = () => {
-  const [response, setResponse] = useState({ user: null })
+  const [response, setResponse] = useState(null)
   const [isMounted, setIsMounted] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-
-  const profileData = useStaticQuery(graphql`
-    query ProfileQuery {
-      site {
-        siteMetadata {
-          name
-          description
-        }
-      }
-    }
-  `).site.siteMetadata
-
-  // useEffect(() => {
-  //   // // fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
-  //   // fetch('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
-  //   //   method: 'POST',
-  //   //   body: JSON.stringify({ username: 'PaulieScanlon' }),
-  //   // })
-  //   //   .then((response) => {
-  //   //     if (response.status >= 200 && response.status <= 299) {
-  //   //       return response.json()
-  //   //     } else {
-  //   //       throw Error(response.message)
-  //   //     }
-  //   //   })
-  //   //   .then((response) => {
-  //   //     setIsLoading(false)
-  //   //     if (isMounted) {
-  //   //       setResponse({ user: response.user })
-  //   //     }
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     setIsLoading(false)
-  //   //     setHasError(true)
-  //   //   })
-  // }, [isMounted])
 
   const getTwitterUser = async () => {
     try {
@@ -53,16 +14,16 @@ export const ProfileInfo = () => {
           username: 'PaulieScanlon',
         },
       })
-      setIsLoading(false)
+
       if (isMounted) {
-        console.log(JSON.stringify(response.data, null, 2))
         setResponse(response.data)
       }
     } catch (error) {
-      console.log(JSON.stringify(error.response, null, 2))
-      setIsLoading(false)
-      setHasError(true)
-      // setResponse(error.response.message)
+      if (error.response) {
+        setResponse(error.response.data.message)
+      } else {
+        setResponse(error.name)
+      }
     }
   }
 
@@ -74,28 +35,32 @@ export const ProfileInfo = () => {
   }, [])
 
   return (
-    <>
-      {hasError ? <Text sx={{ color: 'error' }}>API Error</Text> : null}
-      {!hasError && isLoading ? (
-        <Flex sx={{ justifyContent: 'center', minHeight: '150px' }}>
-          <Grid sx={{ gap: 2, display: 'none', height: '0px' }}>
-            <Heading as="h1" variant="styles.h1">
-              {profileData.name}
-            </Heading>
-            <Text>{profileData.description}</Text>
+    <Box
+      sx={{
+        minHeight: '120px',
+      }}
+    >
+      {response ? (
+        <Fragment>
+          <Grid sx={{ gap: 1 }}>
+            {response.user ? (
+              <Fragment>
+                <Heading as="h1" variant="styles.h1">
+                  {response.user.name}
+                </Heading>
+                <Text>{response.user.description}</Text>
+                <Text>Location: {response.user.location}</Text>
+              </Fragment>
+            ) : (
+              <Text sx={{ color: 'error' }}>{response}</Text>
+            )}
           </Grid>
+        </Fragment>
+      ) : (
+        <Flex sx={{ alignItems: 'center', justifyContent: 'center', height: '100%' }}>
           <Spinner />
         </Flex>
-      ) : null}
-      {!hasError && !isLoading && response.user ? (
-        <Grid sx={{ gap: 2 }}>
-          <Heading as="h1" variant="styles.h1">
-            {response.user.name.toLowerCase().replace(' ', '-')}
-          </Heading>
-          <Text>{response.user.description}</Text>
-          <Text>Location: {response.user.location}</Text>
-        </Grid>
-      ) : null}
-    </>
+      )}
+    </Box>
   )
 }
