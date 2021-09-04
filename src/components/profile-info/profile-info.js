@@ -21,7 +21,11 @@ export const ProfileInfo = () => {
   `).site.siteMetadata
 
   useEffect(() => {
-    fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
+    // fetch(`${process.env.GATSBY_API_URL}/twitter-user`)
+    fetch('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
+      method: 'POST',
+      body: JSON.stringify({ username: 'PaulieScanlon' }),
+    })
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
           return response.json()
