@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { Heading, Badge, Text, Grid, Flex, Box, Link, Image, Alert } from 'theme-ui'
+import { Heading, Badge, Text, Grid, Flex, Box, Alert } from 'theme-ui'
 import { mix } from '@theme-ui/color'
 import { format } from 'date-fns'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -11,6 +11,7 @@ import { Main } from '@pauliescanlon/gatsby-theme-terminal/src/components/main'
 
 import { NewsletterForm } from '../../../../components/newsletter-form'
 import { PostReactions } from '../../../../components/post-reactions'
+import { PayWhatYouWant } from '../../../../components/pay-what-you-want/pay-what-you-want'
 
 const formatDate = (date) => format(new Date(date), 'd-MMM-u')
 
@@ -130,24 +131,13 @@ export const SourceArticle = ({
         <MDXRenderer embedded={embedded}>{body}</MDXRenderer>
       </MDXProvider>
 
-      <PostReactions slug={slug} />
+      <Grid>
+        <PostReactions slug={slug} />
 
-      <NewsletterForm />
+        <NewsletterForm />
 
-      {title ? (
-        <Grid>
-          <Text as="p">
-            If you've enjoyed this post I'd love to hear from you:{' '}
-            <Link href="https://twitter.com/PaulieScanlon" target="_blank">
-              @PaulieScanlon
-            </Link>
-          </Text>
-
-          <Link href="https://ko-fi.com/P5P31B7G8" target="_blank">
-            <Image src="https://www.ko-fi.com/img/githubbutton_sm.svg" />
-          </Link>
-        </Grid>
-      ) : null}
+        <PayWhatYouWant slug={slug} />
+      </Grid>
     </Main>
   )
 }
