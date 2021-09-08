@@ -129,7 +129,11 @@ export const PayWhatYouWant = ({ slug }) => {
                 }}
               />
             </Flex>
-            <Button disabled={isSubmitting} onClick={makeStripePayment} sx={{ py: isSubmitting ? [1, 0] : 2 }}>
+            <Button
+              disabled={isSubmitting}
+              onClick={makeStripePayment}
+              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '130px' }}
+            >
               {isSubmitting ? <Spinner sx={{ height: '24px' }} /> : 'Buy me a pint'}
             </Button>
           </Grid>
