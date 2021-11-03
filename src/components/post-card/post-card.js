@@ -42,7 +42,7 @@ export const PostCard = ({ title, featuredImageUrl, tags, date, dateModified, ex
             }}
           >
             {featuredImageUrl ? (
-              <GatsbyImage alt={title} image={getImage(featuredImageUrl.url.childImageSharp.gatsbyImageData)} />
+              <GatsbyImage alt={title} image={getImage(featuredImageUrl.childImageSharp.gatsbyImageData)} />
             ) : null}
           </Box>
           <Box
