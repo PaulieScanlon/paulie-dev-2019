@@ -65,5 +65,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-sitemap`,
+    `@raae/gatsby-plugin-let-it-snow`,
   ],
 }
