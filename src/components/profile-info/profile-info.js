@@ -9,6 +9,7 @@ export const ProfileInfo = () => {
   const getTwitterUser = useCallback(async () => {
     try {
       const response = await axios('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
+        // const response = await axios('http://localhost:8001/api/get-twitter-user', {
         method: 'POST',
         data: {
           username: 'PaulieScanlon',
@@ -17,6 +18,7 @@ export const ProfileInfo = () => {
 
       if (isMounted) {
         setResponse(response.data)
+        console.log(response.data)
       }
     } catch (error) {
       if (error.response) {
@@ -49,8 +51,20 @@ export const ProfileInfo = () => {
                 <Heading as="h1" variant="styles.h1">
                   {response.user.name}
                 </Heading>
-                <Text>{response.user.description}</Text>
-                <Text>Location: {response.user.location}</Text>
+                <Grid
+                  dangerouslySetInnerHTML={{ __html: response.markdown }}
+                  sx={{
+                    gap: 0,
+                    h2: {
+                      m: 0,
+                    },
+                    p: {
+                      m: 0,
+                      fontWeight: 'bold',
+                      fontSize: 2,
+                    },
+                  }}
+                />
               </Fragment>
             ) : (
               <Text sx={{ color: 'error' }}>{response}</Text>
