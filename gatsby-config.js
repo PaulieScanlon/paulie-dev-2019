@@ -65,6 +65,11 @@ module.exports = {
       },
     },
     `gatsby-plugin-sitemap`,
-    `@raae/gatsby-plugin-let-it-snow`,
+    {
+      resolve: '@raae/gatsby-plugin-let-it-snow',
+      options: {
+        colors: ['#58e6d9', '#8b87ea', '#f056c7'],
+      },
+    },
   ],
 }
