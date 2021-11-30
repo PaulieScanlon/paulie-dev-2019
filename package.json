@@ -19,7 +19,7 @@
     "@raae/gatsby-plugin-let-it-snow": "^0.1.0",
     "@theme-ui/color": "^0.10.0",
     "@theme-ui/prism": "^0.10.0",
-    "axios": "0.21.1",
+    "axios": "0.24.0",
     "date-fns": "^2.23.0",
     "dotenv": "^8.2.0",
     "downshift": "^6.0.16",
