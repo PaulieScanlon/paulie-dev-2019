@@ -16,7 +16,6 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@pauliescanlon/gatsby-theme-terminal": "^2.0.0",
-    "@raae/gatsby-plugin-let-it-snow": "^0.1.0",
     "@theme-ui/color": "^0.10.0",
     "@theme-ui/prism": "^0.10.0",
     "axios": "0.24.0",

@@ -53,7 +53,7 @@ module.exports = {
         source: [
           {
             name: 'posts',
-            dir: process.env.NODE_ENV === 'development' ? 'posts/2021' : 'posts',
+            dir: process.env.NODE_ENV === 'development' ? 'posts/2022' : 'posts',
           },
           {
             name: 'writing',
@@ -69,11 +69,5 @@ module.exports = {
       },
     },
     `gatsby-plugin-sitemap`,
-    {
-      resolve: '@raae/gatsby-plugin-let-it-snow',
-      options: {
-        colors: ['#58e6d9', '#8b87ea', '#f056c7'],
-      },
-    },
   ],
 }
