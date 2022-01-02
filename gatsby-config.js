@@ -2,6 +2,28 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const sources = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return [
+      {
+        name: 'posts',
+        dir: 'posts/2021/08',
+      },
+      {
+        name: 'posts',
+        dir: 'posts/2022',
+      },
+    ]
+  } else {
+    return [
+      {
+        name: 'posts',
+        dir: 'posts',
+      },
+    ]
+  }
+}
+
 module.exports = {
   siteMetadata: {
     name: 'Paul Scanlon',
@@ -51,10 +73,7 @@ module.exports = {
       resolve: '@pauliescanlon/gatsby-theme-terminal',
       options: {
         source: [
-          {
-            name: 'posts',
-            dir: process.env.NODE_ENV === 'development' ? 'posts/2022' : 'posts',
-          },
+          ...sources(),
           {
             name: 'writing',
             dir: 'writing',
