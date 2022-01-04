@@ -40,7 +40,7 @@ export const ProfileInfo = () => {
     <Box
       sx={{
         minHeight: '120px',
-        my: 6,
+        my: 5,
       }}
     >
       {response ? (
@@ -48,14 +48,14 @@ export const ProfileInfo = () => {
           <Grid sx={{ gap: 1 }}>
             {response.user ? (
               <Fragment>
-                <Heading as="h1" variant="styles.h1">
+                <Heading as="h1" variant="styles.h1" sx={{ mb: 0 }}>
                   {response.user.name}
                 </Heading>
                 <Grid
                   dangerouslySetInnerHTML={{ __html: response.markdown }}
                   sx={{
                     gap: 0,
-                    h2: {
+                    h3: {
                       m: 0,
                     },
                     p: {
