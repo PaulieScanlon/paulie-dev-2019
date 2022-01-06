@@ -69,10 +69,10 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
             >
               <Image
                 alt={`${misc}-logo`}
-                src={`${siteUrl}/images/${getLogo(misc).image}-logo.png`}
+                src={`${siteUrl}/images/${getLogo(misc)?.image}-logo.png`}
                 sx={{ width: 16, height: 16 }}
               />
-              <Text sx={{ color: 'secondary', ml: 2 }}>{getLogo(misc).name}</Text>
+              <Text sx={{ color: 'secondary', ml: 2 }}>{getLogo(misc)?.name}</Text>
             </Grid>
             <Text sx={{ color: 'success' }}>{format(new Date(date), 'd-MMM-u')}</Text>
           </Grid>
@@ -87,22 +87,24 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
               ml: '2px',
             }}
           >
-            {tags.map((tag, index) => {
-              return (
-                <Badge
-                  key={index}
-                  variant="primary"
-                  sx={{
-                    mr: 2,
-                    mb: 2,
-                    color: mix('muted', 'primary', `${index / tags.length}`),
-                    borderColor: mix('muted', 'primary', `${index / tags.length}`),
-                  }}
-                >
-                  {tag}
-                </Badge>
-              )
-            })}
+            {tags
+              ? tags.map((tag, index) => {
+                  return (
+                    <Badge
+                      key={index}
+                      variant="primary"
+                      sx={{
+                        mr: 2,
+                        mb: 2,
+                        color: mix('muted', 'primary', `${index / tags.length}`),
+                        borderColor: mix('muted', 'primary', `${index / tags.length}`),
+                      }}
+                    >
+                      {tag}
+                    </Badge>
+                  )
+                })
+              : null}
           </Box>
 
           <Button as="span" variant="ghost" sx={{ pointerEvents: 'none' }}>
