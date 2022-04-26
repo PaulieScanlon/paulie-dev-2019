@@ -40,7 +40,7 @@ export const ProfileInfo = () => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        minHeight: '60px',
+        minHeight: '70px',
         my: 5,
       }}
     >
