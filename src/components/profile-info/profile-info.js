@@ -18,7 +18,6 @@ export const ProfileInfo = () => {
 
       if (isMounted) {
         setResponse(response.data)
-        console.log(response.data)
       }
     } catch (error) {
       if (error.response) {
