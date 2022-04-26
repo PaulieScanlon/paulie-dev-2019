@@ -39,7 +39,9 @@ export const ProfileInfo = () => {
   return (
     <Box
       sx={{
-        minHeight: '120px',
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: '60px',
         my: 5,
       }}
     >
