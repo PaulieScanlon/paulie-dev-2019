@@ -34,7 +34,6 @@
     "gatsby-plugin-sitemap": "^5.1.0",
     "gatsby-source-filesystem": "^4.1.0",
     "gatsby-transformer-sharp": "^4.1.0",
-    "googleapis": "^92.0.0",
     "matter-js": "^0.17.1",
     "mdx-embed": "^0.0.17",
     "react": "^17.0.2",

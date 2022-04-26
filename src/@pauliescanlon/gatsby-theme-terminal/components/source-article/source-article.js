@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { Heading, Badge, Text, Grid, Flex, Box, Alert } from 'theme-ui'
+import { Heading, Badge, Text, Grid, Flex, Box, Alert, Link } from 'theme-ui'
 import { mix } from '@theme-ui/color'
 import { format } from 'date-fns'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -12,6 +12,7 @@ import { Main } from '@pauliescanlon/gatsby-theme-terminal/src/components/main'
 import { NewsletterForm } from '../../../../components/newsletter-form'
 import { PostReactions } from '../../../../components/post-reactions'
 import { PayWhatYouWant } from '../../../../components/pay-what-you-want/pay-what-you-want'
+import { BlogAlert } from '../../../../components/blog-alert'
 
 const formatDate = (date) => format(new Date(date), 'd-MMM-u')
 
@@ -41,7 +42,7 @@ export const SourceArticle = ({
               </Alert>
             </Fragment>
           )}
-
+          <BlogAlert />
           <Box sx={{ mb: 4 }}>
             {featuredImage && featuredImage.childImageSharp && (
               <GatsbyImage alt={`${title}-image`} image={featuredImage.childImageSharp.gatsbyImageData} />
