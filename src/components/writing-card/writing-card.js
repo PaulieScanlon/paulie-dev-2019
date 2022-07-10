@@ -3,15 +3,7 @@ import { format } from 'date-fns'
 import { Grid, Box, Badge, Link, Card, Heading, Text, Image, Button } from 'theme-ui'
 import { mix } from '@theme-ui/color'
 
-import { useConfig } from '@pauliescanlon/gatsby-theme-terminal'
-
 export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
-  const {
-    site: {
-      siteMetadata: { siteUrl },
-    },
-  } = useConfig()
-
   const getLogo = (image) => {
     const config = {
       gatsby: {
@@ -33,6 +25,10 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
       'smashing-magazine': {
         image: image,
         name: 'Smashing Magazine',
+      },
+      contentful: {
+        image: image,
+        name: 'Contentful',
       },
     }
 
@@ -69,7 +65,7 @@ export const WritingCard = ({ title, tags, date, excerpt, url, misc }) => {
             >
               <Image
                 alt={`${misc}-logo`}
-                src={`${siteUrl}/images/${getLogo(misc)?.image}-logo.png`}
+                src={`/images/${getLogo(misc)?.image}-logo.png`}
                 sx={{ width: 16, height: 16 }}
               />
               <Text sx={{ color: 'secondary', ml: 2 }}>{getLogo(misc)?.name}</Text>
