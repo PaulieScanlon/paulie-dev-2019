@@ -7,7 +7,7 @@ const sources = () => {
     return [
       {
         name: 'posts',
-        dir: 'posts/2021/08',
+        dir: 'posts/2021/01',
       },
       {
         name: 'posts',
