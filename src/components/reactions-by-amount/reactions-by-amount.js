@@ -46,6 +46,7 @@ export const ReactionsByAmount = () => {
       try {
         const response = await axios.get('/api/get-all-reactions')
         setReactions(response.data.reactions)
+        // console.log(response.data.reactions)
         setIsLoading(false)
       } catch (error) {
         setIsLoading(false)
@@ -86,7 +87,7 @@ export const ReactionsByAmount = () => {
             >
               {Object.entries(reactions).map(([title, data], index) => {
                 // console.log(reaction)
-                const { reaction, slug, count } = data[0][0]
+                const { reaction, slug, count } = data[0]
                 // console.log(reaction, slug, count)
 
                 return (

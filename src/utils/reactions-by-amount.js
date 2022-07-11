@@ -46,7 +46,7 @@ export const reactionsByAmount = (array) => {
       const { icon } = item
 
       items[icon] = items[icon] || []
-      items[icon].push(item.posts)
+      items[icon].push(...item.posts)
 
       return items
     }, {})
