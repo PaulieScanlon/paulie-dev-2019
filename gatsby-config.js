@@ -78,6 +78,10 @@ module.exports = {
             name: 'writing',
             dir: 'writing',
           },
+          {
+            name: 'streams',
+            dir: 'streams',
+          },
         ],
       },
     },

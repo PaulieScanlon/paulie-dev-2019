@@ -2,9 +2,44 @@
 navigationLabel: streams
 ---
 
+import { StreamCard } from '../components/stream-card'
+
 # streams
 
-I prefer to write, but you can occasionally find me on video.
+I prefer to write, but you can occasionally find me on stream.
 
-- [Webinar | Achieving Performant Creativity with Gatsby and Rive](https://www.youtube.com/watch?v=Yxwf4B2H9LE)
-- [Gatsby Deep Dives with Queen Raae and the Nattermobs Pirates](https://www.youtube.com/playlist?list=PL9W-8hhRoLoN7axEFJQ17rJvk2KTiM2GP)
+<Divider />
+
+<SourceList filter="stream">
+  {(stream) => (
+    <Grid
+      sx={{
+        gap: 4
+      }}
+    >
+      {stream
+        .filter((edge) => !edge.node.frontmatter.isPrivate)
+        .map((edge, index) => {
+          const {
+            frontmatter: { title, featuredImage, tags, date, url, misc, author },
+            excerpt,
+      
+          } = edge.node
+          return (
+            <StreamCard
+              key={index}
+              title={title}
+              featuredImage={featuredImage}
+              tags={tags}
+              date={date}
+              excerpt={excerpt}
+              url={url}
+              misc={misc}
+              author={author}
+            />
+          )
+        })}
+    </Grid>
+)}
+
+</SourceList>
