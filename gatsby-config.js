@@ -5,14 +5,14 @@ require('dotenv').config({
 const sources = () => {
   if (process.env.NODE_ENV === 'development') {
     return [
-      {
-        name: 'posts',
-        dir: 'posts/2021/07',
-      },
       // {
       //   name: 'posts',
-      //   dir: 'posts/2022',
+      //   dir: 'posts/2021/07',
       // },
+      {
+        name: 'posts',
+        dir: 'posts/2020',
+      },
     ]
   } else {
     return [

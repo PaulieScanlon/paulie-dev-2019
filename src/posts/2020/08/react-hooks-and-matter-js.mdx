@@ -6,8 +6,6 @@ author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1596455021/paulie.dev/2020/08/react-hooks-and-matter-js_lj4ozy.jpg
 ---
 
-import { Checkout, MatterStepOne, MatterStepTwo, MatterStepThree } from './matter-js-demo'
-
 Recently I was creating a Shopify demo application and became a little underwhelmed with the Checkout experience and so
 decided to inject a bit of "joy" into an otherwise quite dull UI component... it was my demo so why not ay? 🤷‍♂️
 
@@ -20,7 +18,7 @@ React so I was curious to see if I could create the same cool physics based _ani
 
 Here's what I came up with, have a play around with the `Qty` input.
 
-<Checkout />
+<CodeSandbox codeSandboxId="react-hooks-and-matter-js-checkout-gmewkx" />
 
 If you'd like to start using [matter.js](https://brm.io/matter-js/) in your project I hope this will give you some
 indication of how to install it, use it, and the bit I really struggled with, how to make the "canvas" and "floor"
@@ -103,7 +101,7 @@ export const MatterStepOne = () => {
 
 Which should render something like this 👇
 
-<MatterStepOne />
+<CodeSandbox codeSandboxId="react-hooks-and-matter-js-step-one-39iqrc" />
 
 There's a couple of things going on here so I'll talk you through some React specific methods that we need to use.
 
@@ -307,7 +305,7 @@ export const MatterStepTwo = () => {
 
 Which should render something like this 👇
 
-<MatterStepTwo />
+<CodeSandbox codeSandboxId="react-hooks-and-matter-js-step-two-213fom" />
 
 ## Step Three - Triggers
 
@@ -487,7 +485,7 @@ export const MatterStepThree = () => {
 
 Which should render something like this 👇, go ahead and click the "Checkout" button
 
-<MatterStepThree />
+<CodeSandbox codeSandboxId="react-hooks-and-matter-js-step-three-79r6rx" />
 
 The main takeout from this is that to add a new ball I've added another `useEffect` that is triggered when
 `someStateValue` changes. The code in this `useEffect` adds a new ball at a `randomX` position between 0 and what ever
