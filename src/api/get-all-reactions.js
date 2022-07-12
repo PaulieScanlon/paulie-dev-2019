@@ -7,8 +7,9 @@ export default async function handler(req, res) {
   const client = new faunadb.Client({ secret: process.env.FAUNA_KEY })
 
   try {
-    const response = await client.query(q.Paginate(q.Match(q.Index(`all_reactions_production`))))
-
+    const response = await client.query(
+      q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 1000 }),
+    )
     const result = response.data.map(([ref, slug, reaction, date]) => ({
       ref: ref.id,
       slug,
