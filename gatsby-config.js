@@ -11,7 +11,7 @@ const sources = () => {
       // },
       {
         name: 'posts',
-        dir: 'posts/2020',
+        dir: 'posts/2021',
       },
     ]
   } else {

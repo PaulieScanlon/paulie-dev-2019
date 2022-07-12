@@ -1,59 +1,57 @@
 import React from 'react'
-import { Box, Text } from 'theme-ui'
 
-export const Icon = ({ path, sx }) => {
+export const Icon = ({ path, style }) => {
   return (
-    <Box
-      as="svg"
-      aria-hidden="true"
+    <svg
       version="1.0"
       fill="currentcolor"
       viewBox="0 0 24 24"
       preserveAspectRatio="xMidYMid meet"
       x="0"
       y="0"
-      sx={{
-        color: 'text',
-        width: '24px',
-        path: {
-          fill: 'inherit',
-        },
-        ...sx,
+      style={{
+        color: 'inherit',
+        width: 24,
+        ...style,
       }}
     >
-      <path d={path} />
-    </Box>
+      <path d={path} style={{ fill: 'inherit' }} />
+    </svg>
   )
 }
 
 const CustomBlockquote = ({ children }) => {
   return (
-    <Box as="blockquote" variant="styles.blockquote">
-      <Text
-        as="p"
-        sx={{
+    <blockquote
+      style={{
+        padding: 16,
+        margin: 0,
+      }}
+    >
+      <p
+        style={{
           display: 'flex',
         }}
       >
         <Icon
           path="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"
-          sx={{
+          style={{
             alignSelf: 'flex-start',
-            mr: 2,
+            marginRight: '8px',
             transform: 'rotate(180deg)',
           }}
         />
         {children}
         <Icon
           path="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"
-          sx={{
+          style={{
             alignSelf: 'flex-end',
-            ml: 2,
-            mt: '8px',
+            marginLeft: '8px',
+            marginTop: '4px',
           }}
         />
-      </Text>
-    </Box>
+      </p>
+    </blockquote>
   )
 }
 
