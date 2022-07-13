@@ -6,10 +6,6 @@ author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1611064599/paulie.dev/2021/01/theme-ui-alpha-3_cqf7ny.jpg
 ---
 
-import { MrJsxCard } from './MrJsxCard'
-import { MrStyledCard } from './MrStyledCard'
-import { MrComponentCard } from './MrComponentCard'
-
 In this post i'm going to explain how to use Theme UI's _built in_ components. If you're new to Theme UI i'd suggest
 having a read of the first two posts in this series to bring you up to speed
 
@@ -28,26 +24,9 @@ explain why I prefer the final method which i'll refer to as "the component" app
 
 ### The Jsx approach
 
-This approach uses the Jsx Pragma and is mostly what you'll see in the docs. You can find the `src` for this component
-[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrJsxCard.js)
+This approach uses the Jsx Pragma and is mostly what you'll see in the docs.
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
-Output 👇
-
-<MrJsxCard />
-
-</Box>
-
-<Box>
-
-Src 👇
+<CodeSandbox codeSandboxId="understanding-theme-ui-components-mrjsxcard-980szq" />
 
 ```javascript
 // MrJsxCard.js
@@ -125,36 +104,15 @@ export const MrJsxCard = () => {
 }
 ```
 
-</Box>
-
-</Grid>
-
 Pretty verbose ay?! That's because there's quite a lot of styles applied via the `sx` prop. Each mapped CSS property
 still looks to the correct part of the theme to find it's appropriate value but this approach can lead to duplicating a
 lot of styles between components making re-usability difficult to maintain.
 
 ### The Styled approach
 
-This approach uses the Styled component which can reduce the verbosity. You can find the `src` for this component
-[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrStyledCard.js)
+This approach uses the Styled component which can reduce the verbosity.
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
-Output 👇
-
-<MrStyledCard />
-
-</Box>
-
-<Box>
-
-Src 👇
+<CodeSandbox codeSandboxId="understanding-theme-ui-components-mrstyledcard-3j3uq9" />
 
 ```javascript
 // MrStyledCard.js
@@ -211,10 +169,6 @@ export const MrStyledCard = () => {
 }
 ```
 
-</Box>
-
-</Grid>
-
 By using `<Styled.h4 />` and `<Styled.p />` we can remove quite a few styles from the `<h4 />` and `<p />` HTML
 elements. This is a perfectly valid way to use Theme UI but personally the _mix n match_ methods of using the Jsx Pragma
 and Styled don't quite sit right with me. The `<button />` is still a little verbose looking and would be tricky to
@@ -223,26 +177,9 @@ re-use
 ### The Component approach
 
 This approach (my preference) uses Theme UI's built in components. As with CSS properties, components can also "map" to
-a specific objects within the theme. You can find the `src` for this component
-[here](https://github.com/PaulieScanlon/paulie-dev-2019/tree/master/src/posts/2021/01/MrComponentCard.js)
+a specific objects within the theme.
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
-Output 👇
-
-<MrComponentCard />
-
-</Box>
-
-<Box>
-
-Src 👇
+<CodeSandbox codeSandboxId="understanding-theme-ui-components-mrcomponentcard-54r3r5" />
 
 ```javascript
 // MrComponentCard.js
@@ -271,10 +208,6 @@ export const MrComponentCard = () => {
   )
 }
 ```
-
-</Box>
-
-</Grid>
 
 Using Theme UI's components keeps things consistent and we no longer need to _mix n match_ methods and, et voilà the
 React import is back which makes this component look much more familiar. I also believe this is much more readable in
@@ -332,27 +265,11 @@ styles.
 
 If you wanted to introduce a new variant, e.g "secondary" you could do the following
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
 Usage 👇
 
 ```javascript
 <Button variant="secondary">Click Me</Button>
 ```
-
-Output 👇
-
-<Button variant="secondary">Click Me</Button>
-
-</Box>
-
-<Box>
 
 Theme 👇
 
@@ -377,10 +294,6 @@ export default {
 }
 
 ```
-
-</Box>
-
-</Grid>
 
 In this scenario instead of the `<Button />` defaulting to `theme.buttons.primary` we re-map it to
 `theme.buttons.secondary` by applying a variant prop of "secondary"

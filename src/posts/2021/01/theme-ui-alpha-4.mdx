@@ -6,8 +6,6 @@ author: Paul Scanlon
 featuredImageUrl: https://res.cloudinary.com/www-paulie-dev/image/upload/v1611161909/paulie.dev/2021/01/theme-ui-alpha-4_pwoa5f.jpg
 ---
 
-import { ScaleExplorer } from '../../../components/scale-explorer'
-
 In this post i'm going to explain how Theme UI's [Theme Scales](https://theme-ui.com/theme-spec#theme-scales) work. If
 you're new to Theme UI i'd suggest having a read of the first three posts in this series to bring you up to speed
 
@@ -29,16 +27,6 @@ to _only_ use values defined in the corresponding _scale_.
 For example using any of the above methods, (Jsx Pragma, Styled or Components) you'll likely need to apply padding to a
 HTML element. Here's an example.
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
- <Box>
-
 Src 👇
 
 ```javascript
@@ -50,23 +38,6 @@ Src 👇
   I'm a Box
 </Box>
 ```
-
-Output 👇
-
-<Box
-  sx={{
-    backgroundColor: 'surface',
-    padding: 4,
-  }}
->
-  I'm a Box
-</Box>
-
- </Box>
-
-</Box>
-
- <Box>
 
 Theme 👇
 
@@ -86,10 +57,6 @@ export default {
    ]
 }
 ```
-
- </Box>
-
-</Grid>
 
 You'll see in the above "src" that the `<Box />` has a CSS property of `padding` which is assigned a value of 4, but
 what is 4?
@@ -113,16 +80,6 @@ I've gleaned from various discussions about Theme UI that the array syntax for `
 throw an alternative method in to the mix, `space` can also be an object. I suspect Theme UI don't mention this in the
 docs is because using an object syntax requires you give each key a name... and namings things is hard.
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
- <Box>
-
 Src 👇
 
 ```javascript
@@ -134,23 +91,6 @@ Src 👇
   I'm a Box
 </Box>
 ```
-
-Output 👇
-
-<Box
-  sx={{
-    backgroundColor: 'surface',
-    padding: 4,
-  }}
->
-  I'm a Box
-</Box>
-
- </Box>
-
-</Box>
-
- <Box>
 
 Theme 👇
 
@@ -171,26 +111,12 @@ export default {
 }
 ```
 
- </Box>
-
-</Grid>
-
 ## [Object Syntax](#object-syntax)
 
 In this example `padding` is given a "string" value of "lg" and if you look in the `space` object you'll see the `lg`
 key has a value of <mark>"32px"</mark>. The _longhand_ for this would be `theme.space.lg`
 
 The `space` key names _could_ be anything you want, here's another example (i'm not suggesting you do this by the way)
-
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
- <Box>
 
 Src 👇
 
@@ -203,23 +129,6 @@ Src 👇
   I'm a Box
 </Box>
 ```
-
-Output 👇
-
-<Box
-  sx={{
-    backgroundColor: 'surface',
-    padding: 4,
-  }}
->
-  I'm a Box
-</Box>
-
- </Box>
-
-</Box>
-
- <Box>
 
 Theme 👇
 
@@ -239,10 +148,6 @@ export default {
   }
 }
 ```
-
- </Box>
-
-</Grid>
 
 ## [Alt Syntax](#alt-syntax)
 
@@ -278,11 +183,6 @@ component and try to match whatever hardcoded `px` value was used, or worse... y
 team.
 
 So in my opinion constraints are a good thing.
-
-To help you better understand Theme UI's scales i've created an interactive property mapper to help you understand which
-CSS properties Theme UI will map, and where their respective values will be _looked up_ in the theme object.
-
-<ScaleExplorer />
 
 Not every CSS property is mapped by Theme UI to a scale in the theme object, as mentioned `display` can be any value
 defined in the CSS spec.
