@@ -26,16 +26,6 @@ applied to **any** CSS property via what I refer to as **Responsive Array Syntax
 I'm going to borrow the Object Syntax example from [this post](posts/2021/01/theme-ui-alpha-4/#object-syntax) but i've
 added a new `breakpoints` key to the theme object _(note: this is the default breakpoints array from Theme UI)_
 
-_You'll need to resize your browser to see the what happens to the `<Box />` across the different breakpoints_
-
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
 Src 👇
 
 ```javascript
@@ -48,21 +38,6 @@ Src 👇
   I'm a Box
 </Box>
 ```
-
-Output 👇
-
-<Box
-  sx={{
-    backgroundColor: 'surface',
-    padding: ['4px', '8px', '16px', '32px'],
-  }}
->
-  I'm a Box
-</Box>
-
-</Box>
-
- <Box>
 
 Theme 👇
 
@@ -84,16 +59,12 @@ export default {
 }
 ```
 
- </Box>
-
-</Grid>
-
 I'd first like to discuss the **Src**. Notice instead of `padding` being a single value it's an array of values:
 
 Reading the CSS properties from left to right on the `<Box />` above for `padding` the breakdown looks like this
 
-<Box
- sx={{
+<div
+ style={{
    overflowX: 'auto',
    scrollBehavior: 'smooth'
  }}  
@@ -106,7 +77,7 @@ Reading the CSS properties from left to right on the `<Box />` above for `paddin
 | 2              | padding  | md  | 16px  | space |
 | 3              | padding  | lg  | 32px  | space |
 
-</Box>
+</div>
 
 Next have a look at the `breakpoints` array from the theme object.
 
@@ -116,8 +87,8 @@ tenants of **mobile first**... because we handle the CSS properties for "mobile"
 
 How the breakpoints relate to the properties defined on the `<Box />` above breakdown like this.
 
-<Box
- sx={{
+<div
+ style={{
    overflowX: 'auto',
    scrollBehavior: 'smooth'
  }}  
@@ -130,7 +101,7 @@ How the breakpoints relate to the properties defined on the `<Box />` above brea
 | 2              | padding  | md  | 16px  | space | 1                | 56em             |
 | 3              | padding  | lg  | 32px  | space | 2                | 64em             |
 
-</Box>
+</div>
 
 I'd now like to translate the above table into the resulting CSS, I hope this will feel a little more familiar to you
 since it's CSS
@@ -190,14 +161,6 @@ via a `@media` rule which is created based on values from the `breakpoints` arra
 The above explains the principles but now I hope to demonstrate the same approach by using a more digestible example.
 Again as above you'll need to resize your browser to see what happens to the `<Box />` across the breakpoints.
 
-<Grid
- sx={{
-  gridTemplateColumns: ["1fr", '1fr 1fr']
- }}
->
-
-<Box>
-
 Src 👇
 
 ```javascript
@@ -212,27 +175,7 @@ Src 👇
 </Box>
 ```
 
-</Box>
-
-<Box>
-
-Output 👇
-
-<Box
-  sx={{
-    backgroundColor: 'surface',
-    borderColor: ['red', 'green', 'yellow', 'hotpink'],
-    borderStyle: ['solid', 'dashed'],
-    borderWidth: '6px',
-    padding: '8px',
-  }}
 >
-  I'm a Box
-</Box>
-
-</Box>
-
-</Grid>
 
 In this example i'm not using any values from the theme object, instead I'm using web safe colors for `borderColor`, a
 hard-coded "px" value for `borderWidth` and valid `border-style` CSS properties for the `borderStyle`
