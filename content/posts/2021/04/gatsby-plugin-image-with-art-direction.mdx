@@ -1,0 +1,276 @@
+---
+type: post
+title: 'Gatsby Plugin Image: withArtDirection'
+tags: ['React', 'Gatsby', 'JavaScript', 'Gatsby Plugins']
+date: 2021-04-09
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1617981184/paulie.dev/2021/04/with-art-direction_xatque.jpg
+---
+
+Hello! If you're reading this you probably already know about Gatsby Plugin Image, but if not here's a recap:
+[Announcing: Gatsby Plugin Image with Laurie Barth](https://www.youtube.com/watch?v=zRtFwzF4p1o)
+
+The new plugin is super dooper and there's been some great demos from the community but I was curious about one of the
+helper functions right at the bottom of the docs called
+[withArtDirection](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#withartdirection)
+that no one was really talking about.
+
+## [What's withArtDirection?](#whats-with-art-direction)
+
+In short it's a way to show different images to the user via media queries but, without loading additional images into
+the DOM using the `<img />` tag and slowing down the initial page load speed.
+
+Here's a demo site and repo for you to have a look at, and in the rest of this post i'll try to explain a little more
+about each of the examples
+
+- [Demo](https://gatsbypluginimagewithartdirect.gatsbyjs.io/animation)
+- [Repo](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction)
+
+## [Animation](#animation)
+
+In this first example I went mega overboard and instead of adding two or three media queries I added over a thousand!
+
+<Tweet tweetLink="PaulieScanlon/status/1380067456606175232" />
+
+The reason there's so many media queries is because i'm swapping an image out at each and every `px` value between
+**576px** and approx **1967px** using
+`@media (min-width 576px), @media (min-width 577px), @media (min-width 578px) ... and so on`
+
+Each media query will show a new image which, in this example is a single frame from an animated walk cycle
+
+Because media queries fire when the browser is resized it's possible to control the playback of the animation. If you
+make your browser smaller Mr Lemon will walk forward, if you make your browser larger again Mr Lemon will walk backwards
+(because the frames are now reversed)
+
+To achieve this I start with 48 single `.jpg` files,
+[you can see these images in the repo here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/tree/main/src/images/lemon)
+and theb by using `gatsby-source-filesystem` i'm able to then query them using GraphQL
+
+```javascript
+const {
+  allFile: { nodes }
+} = useStaticQuery(graphql`
+  query {
+    allFile(filter: { sourceInstanceName: { eq: "lemon" }, ext: { eq: ".jpg" } }, sort: { fields: name, order: DESC }) {
+      nodes {
+        name
+        sourceInstanceName
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
+      }
+    }
+  }
+`);
+```
+
+The nodes returned by this query look a little like the below:
+
+_I've removed some parts of the returned values for brevity_
+
+```javascript
+[
+  {
+    name: '01-lemon',
+    sourceInstanceName: 'lemon',
+    childImageSharp: {
+      gatsbyImageData: {
+        images: {
+          sources: [
+            {
+              srcSet: '/static//01-lemon.webp 750w'
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    name: '02-lemon',
+    sourceInstanceName: 'lemon',
+    childImageSharp: {
+      gatsbyImageData: {
+        images: {
+          sources: [
+            {
+              srcSet: '/static/02-lemon.webp 750w'
+            }
+          ]
+        }
+      }
+    }
+  }
+];
+```
+
+Then using these `nodes` it's possible to pass them on to the `withArtDirection` helper function
+
+```javascript
+const images = withArtDirection(
+  getImage(nodes[0]),
+  []
+    .concat(...new Array(29).fill(nodes))
+    .map((frame, index) => {
+      return {
+        media: `(min-width: ${576 + index}px)`,
+        image: getImage(frame)
+      };
+    })
+    .reverse()
+);
+```
+
+- The first argument of `withArtDirection` is the default image, in my case it's the first node in the index. E.g
+  `nodes[0]`
+- The second argument is an array of images to use across however many breakpoints you define.
+
+In my example the second argument is a concatenated array of all the `nodes` but repeated **29** times. This was to
+ensure I could incrementally increase the `min-width ...px` value to a high enough number for the resize effect to work
+on really large monitors. E.g up to **1967px**
+
+The return includes both the media query and the image data. I use a helper function here to. This one is called
+[getImage](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#getimage)
+
+This all results in 1,391 media queries, and each will show a frame from the original 48 `jpg`'s.
+
+I've mentioned in the example site that i'm not sure why you'd want to use this but it is kinda cool that it's possible
+and that browsers can even handle this many media queries. Chrome does struggle a bit with this to be honest but Firefox
+on my mac plays these back quite smoothly.
+
+You can see the
+[full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/lemon.js)
+
+## [Aspect Ratio](#aspect-ratio)
+
+This example is probably a little less of an edge case and it reminds me of what the social media advertising dweebs
+refer to as "vertical video". Generally, for social media users will be on their phones and generally phones will be
+held in the portrait orientation.
+
+With this in mind it's sometimes more effective to show a video in it's vertical format. (It saves the user rotating
+their phone to see smaller details in an ad)
+
+The same might also be helpful on the web and by using a much simpler `@media` query it's possible to show a landscape
+image to users on larger, wider screens and a portrait image to users on smaller, narrower screens.
+
+To achieve this I start with x1 landscape image and x1 portrait image,
+[you can see these images in the repo here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/tree/main/src/images/aspect-ratio)
+
+The GraphQL query is pretty much the same as the above but only returns x2 nodes.
+
+Then using those nodes it's possible to pass them on to the `withArtDirection` helper function
+
+```javascript
+const images = withArtDirection(getImage(nodes[0]), [
+  {
+    media: `(max-width: 576px)`,
+    image: getImage(nodes[1])
+  }
+]);
+```
+
+- As above the first argument is the default image to display before the `@media` query kicks In
+- The second argument again is an array but this time it's an array of only one item.
+
+This media query is kind of the wrong way round ("desktop first") because i'm using `max-width` rather than the "mobile
+first" approach of using `min-width`. I found that if I did this the other way round the aspect ratio was more difficult
+to control.
+
+This approach also requires a little bit of CSS. You can see below that `GatsbyImage` has a `className` of
+`art-directed` which I use to set the `height` of the image for screen sizes below **576px**
+
+_This is CSS-in-Js syntax FYI_
+
+```javascript
+
+'.art-directed': {
+    height: 'auto'
+},
+'@media (max-width: 576px)': {
+    '.art-directed': {
+        height: 600
+    }
+}
+
+<GatsbyImage className="art-directed" alt="animals" image={images} />
+
+```
+
+You can see the
+[full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/aspect-ratio.js)
+
+## [Desktop First](#desktop-first)
+
+Since we're talking about "desktop first", in this example I tried to be a little bit cheeky and present the user with a
+different image on smaller screen sizes. It's broadly the same as the Aspect Ratio example except in this example both
+images are landscape.
+
+If you're hearing claims that "no one uses the site on mobile" then surely there's no harm in displaying joke images for
+users on smaller screens... because there aren't any users on smaller screen right?
+
+In all seriousness this method is actually pretty helpful. You could perhaps tailor make designs, or change crops to
+make images look better when viewed on smaller screens
+
+To achieve this I start with x2 landscape images,
+[you can see these images in the repo here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/tree/main/src/images/desktop-first)
+
+The GraphQL query is pretty much the same as the above and only returns x2 nodes.
+
+Then using those nodes it's possible to pass them on to the `withArtDirection` helper function
+
+```javascript
+const images = withArtDirection(getImage(nodes[1]), [
+  {
+    media: `(min-width: 576px)`,
+    image: getImage(nodes[0])
+  }
+]);
+```
+
+- As above the first argument is the default image to display before the `@media` query kicks In
+- The second argument again is an array but this time it's an array of only one item.
+
+Unlike the Aspect Ratio in this example i'm using a "mobile first" approach and have set the default image to
+`nodes[1]`. The media query takes care of displaying `nodes[0]` which is the "desktop" design you see in the demo, and
+this image is shown on screen sizes above **576px**
+
+You can see the
+[full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/desktop-first.js)
+
+## [Printer](#printer)
+
+To the best of my knowledge this example only works in Firefox but the idea is similar to the above but instead of using
+a screen width `@media` query this time I use a `print` media query.
+
+The thinking behind this is to surprise the user if they were to print your webpage. Instead of seeing what they saw on
+screen they'd see a different image. You could use it for additional fun marketing or as i've tried to do remind the
+user that printing things isn't that great for the environment.
+
+To achieve this I start with x2 landscape images,
+[you can see these images in the repo here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/tree/main/src/images/printer)
+
+The GraphQL query is pretty much the same as the above and only returns x2 nodes.
+
+Then using those nodes it's possible to pass them on to the `withArtDirection` helper function
+
+```javascript
+const images = withArtDirection(getImage(nodes[0]), [
+  {
+    media: `print`,
+    image: getImage(nodes[1])
+  }
+]);
+```
+
+- As above the first argument is the default image to display before the `@media` query kicks In
+- The second argument again is an array but this time it's an array of only one item.
+
+Depending on how your GraphQL query returns these images will determine which `node[n]` is the default and which one is
+displayed when the media query kicks in
+
+You can see the
+[full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/printer.js)
+
+That just about wraps things up. If you have any ideas about how else to use `withArtDirection` please come find me on
+Twitter and we'll have chat.
+
+Cheerio!

@@ -1,0 +1,59 @@
+---
+type: post
+title: Gatsby CLI Recipes
+tags: ['Gatsby', 'Gatsby Recipes', 'Storybook', 'JavaScript', 'TypeScript']
+date: 2020-05-08
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915610/paulie.dev/2020/05/gatsby-cli-recipes_zxwzkd.jpg
+embeddedImages:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927856/paulie.dev/2020/05/gatsby-cli-recipes-js_sn3uuv.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927917/paulie.dev/2020/05/gatsby-cli-recipes-ts_nrgdck.jpg
+---
+
+I recently posted about two new Gatsby Recipes i was working on to help automate the sometimes quite tricky process of
+installing [Storybook](https://storybook.js.org/) in your Gatsby project
+
+If you haven't heard about Gatsby Recipes you can read more about them
+[here](https://www.gatsbyjs.org/blog/2020-04-15-announcing-gatsby-recipes/)
+
+I personally think Recipes are a really cool idea and wonder if something similar will work its way out of the Gatsby
+incubation lab and into a more general npm world 🤔
+
+If you're intrigued you can read about the two Storybook Recipes i created below
+
+- [JavaScript Recipe](/posts/2020/04/gatsby-recipe-storybook-js/)
+- [TypeScript Recipe](/posts/2020/05/gatsby-recipe-storybook-ts/)
+
+I've recently used both of these in a commercial project and they do indeed solve a problem and prevent a few headaches
+which got me thinking about adding these to the Gatsby CLI
+
+So that's what i did.
+
+<GatsbyImage alt=" " image={props.embedded.image1} />
+
+<GatsbyImage alt=" " image={props.embedded.image2} />
+
+...and delight of delights once they were merged i upgraded to the latest version of the Gatsby CLI and boom! 💥 both
+recipes are now available from the list of "official" Recipes.
+
+I'm not actually sure if it's fully "official" since Recipes are still experimental but i'm pretty happy they're both
+available and hope they'll help someone, somewhere, sometime.
+
+To give them a whirl make sure you upgrade to the latest version of the Gatsby CLI
+
+```sh
+npm install -g gatsby-cli@latest
+```
+
+Now you can run the below and choose either the JavaScript or TypeScript variant from the list.
+
+```sh
+gatsby recipes
+```
+
+There is one small snag and that's the Storybook config files will always be installed at the root of your project. This
+will likely be fine in most cases but if you're using yarn workspaces you may need to move the Webpack config files to
+the desired directory.
+
+Perhaps in time the Gatsby CLI will introduce arg flags so that destination directories can be passed in before a Recipe
+is run... only time will tell.
