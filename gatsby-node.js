@@ -134,7 +134,7 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
   });
 
   createRedirect({
-    fromPath: '/writing/&*',
+    fromPath: '/writing/*',
     toPath: '/articles/*'
   });
 };
