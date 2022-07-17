@@ -1,0 +1,157 @@
+---
+type: post
+title: gatsby-plugin-prop-shop
+tags: ['Gatsby', 'Gatsby Plugins', 'React', 'JavaScript']
+date: 2020-02-15
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915604/paulie.dev/2020/02/prop-shop_buykdi.jpg
+embeddedImages:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915589/paulie.dev/2020/02/prop-shop-demo_e3x0tu.jpg
+---
+
+[gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) is my newest Gatsby Plugins and it's
+slightly different to my previous plugins. The reason for this is because of the way it works, and i'd probably liken it
+more to a Gatsby theme than a Gatsby Plugins.
+
+I'll try and explain...
+
+Originally i wanted to create a report not too dissimilar to how Jest creates their coverage report, and if you've not
+seen the Jest coverage report it's basically a statically generated HTML page detailing each test in your project
+together with some highlighted rows for code not covered and a nice set of statistics about how much of your codebase is
+covered by unit tests.
+
+To create the report you run something like `npm run jest --coverage` and it creates a new directory in your project
+containing the static HTML.
+
+statically generated HTML i hear you say!... that's totally Gatsby territory... and you'd be right, that's exactly what
+Gatsby really nails so it seemed fitting to create [PropShop](https://gatsby-plugin-prop-shop.netlify.app/prop-shop/)
+using Gatsby... i've also totally got Gatsby fever 😊
+
+... but with this came some alterations to the way i was thinking about PropShop, ideally i wanted a CLI command to run
+that would generate the report as Jest does it, but to run a build on a Gatsby site from another Gatsby site is pretty
+difficult and although i did get this working i had problems moving the build folder into the correct part of the
+project.
+
+After a re-think i decided i was trying to re-invent the wheel and that themes do exactly this... well maybe not
+exactly, you can't for instance define an output directory as this is handled by the Gatsby build process.
+
+With that in mind i decided to run with it and create what is effectively a one page theme but all the styles and
+functionality are only exposed to a route of my choosing.
+
+That route is `/prop-shop` and on this page
+[gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop) provides an holistic view of _all_
+your props. 👏
+
+## Motivation
+
+If you're a theme builder or a component library author like me you have probably used
+[Storybook](https://storybook.js.org/) which is no short of genius, i personally couldn't do my day job without
+Storybook, but, and this but isn't a shortcoming of Storybook it's just something i've encountered a few times when
+developing component libraries and that's there's no way to see _all_ props used by _all_ components.
+
+In Storybook you're only really able to see props for individual components one at a time.
+
+> One important factor in the creation of Component Libraries is api consistency
+
+That's a quote from me 😊
+
+Moreover i believe it makes little sense in having a prop called `CardHeader` on a `<Card />` component and then having
+a `PanelHeading` prop on a `<Panel />` component, or worse, a prop that is actually a header or heading but called
+something completely different, but i know from experience it's sometimes difficult to remember what you've named all
+your props, some components might have been built weeks before, or by someone else and whilst PR reviews and or coding
+style guides are good i feel it would be extremely helpful to have an overview report of _all_ props
+
+So that's why i've created [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop)
+
+## Install
+
+If i've peeked your interest and you're keen to seel all your prop information and you've built a Gatsby blog/site or
+theme follow along and i'll show you how to set it up.
+
+```javascript
+npm install @pauliescanlon/gatsby-plugin-prop-shop --save
+```
+
+and then install the peer dependencies
+
+```javascript
+npm install gatsby-source-filesystem prop-types --save
+```
+
+You might also need to upgrade `gatsby` depending on when you're reading this, you can check the peerDependency versions
+[here](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop/blob/master/%40pauliescanlon/gatsby-plugin-prop-shop/package.json#L29)
+
+Once you have the necessary things installed open up `gatsby-config.js` and add `@pauliescanlon/gatsby-plugin-prop-shop`
+to the plugins array
+
+```javascript
+// gatsby-config.js
+module.exports = {
+  ...
+  plugins: [
+    {
+      resolve: `@pauliescanlon/gatsby-plugin-prop-shop`,
+      options: {
+        source: [`src/components`],
+      },
+    },
+  ]
+  ...
+}
+```
+
+The above example will look into the **local** `src/components` directory and find all files containing defined
+PropTypes
+
+If you're adding the plugin to your theme you'll need to provide a slightly more specific path of where to find things.
+
+```javascript
+// gatsby-config.js
+module.exports = {
+  ...
+  plugins: [
+    {
+      resolve: `@pauliescanlon/gatsby-plugin-prop-shop`,
+      options: {
+        source: [`${__dirname}/src/components`],
+      },
+    },
+  ]
+  ...
+}
+```
+
+In this example the `${__dirName}` tells the plugin you want the root of the file running the node process.
+
+You can add as many paths as you like to the `source` array eg:
+
+```javascript
+source: [`src/pages`, `src/layouts`, `src/components`],
+
+```
+
+You should now be able to run either `gatsby develop` or `gatsby build` and providing there's no errors you can visit
+the PropShop at `http://localhost:8000/prop-shop`... naturally the port number might be different to `8000`
+
+With PropShop up and running you can now see all the PropTypes defined in your project and using the search and filters
+you can inspect each prop name; it's type; if it's required; it's default value; and it's description.
+
+<GatsbyImage alt=" " image={props.embedded.image1} />
+
+One big bonus of PropShop technically being a theme is that it'll hot reload along with your project so if you do spot a
+mistake of a mismatch in descriptions you can quickly find the file, make the change, hit save and PropShop will reload
+with the updated detail.
+
+I'm still currently in the alpha testing phase with a few PR's open with trusted Gatsby developer chums
+[Scott Spence](https://twitter.com/spences10), [Eric Howey](https://twitter.com/erchwy) and
+[Rich Haines](https://twitter.com/studio_hungry) but so far it's looking good and still works as it should in TypeScript
+projects so that's a big plus!
+
+As with all my plugins i like to keep them in the patch versions until they've been battle tested in real projects and
+i'll probably do the same with [gatsby-plugin-prop-shop](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop).
+
+As always if you're using this plugin i'd love to hear from you, so feel free to contact me on Twitter
+[@PaulieScanlon](https://twitter.com/PaulieScanlon) or by opening an issue on
+[GitHub](https://github.com/PaulieScanlon/gatsby-plugin-prop-shop/issues)
+
+Happy propping!

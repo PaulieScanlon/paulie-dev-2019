@@ -1,0 +1,438 @@
+---
+type: post
+title: styled-components Responsive Array Syntax
+tags: ['React', 'JavaScript', 'styled-components']
+date: 2020-08-19
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1597837942/paulie.dev/2020/08/styled-components-responsive-array-syntax_iy5o8k.jpg
+---
+
+In this post I'm going to discuss a new approach I've adopted when using
+[styled-components](https://styled-components.com/), initially I wasn't sure what this approach was called but I do
+really like this suggestion from [Pedro Duarte](https://twitter.com/peduarte) at [Modulz](https://twitter.com/modulz)
+
+<Tweet tweetLink="peduarte/status/1295998559117074432" />
+
+From the _outside_ when you use the Box component you can provide a `width` prop but instead of it simply being a string
+value it's an array of values. Reading from left to right this will translate to the following:
+
+- 0: The Box will be `width: 100%;` on small screens
+- 1: The Box will be `width: 50%;` on medium screens
+- 2: The Box will be `width: auto;` on large screens
+
+NB: This is assuming in your application you have a set of breakpoints defined, for example:
+
+```javascript
+const breakpoints = ['576px', '768px', '992px'];
+```
+
+In terms of rendered output this is what the above might look like: Resize your browser to see the `width` change across
+the breakpoints.
+
+<Box
+  as="span"
+  role="img"
+  aria-labelledby="Smiling Face with Sunglasses"
+  sx={{
+    display: 'inline-block',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    p: 2,
+    width: ['100%', '50%', 'auto']
+  }}
+>
+  😎
+</Box>
+
+As my Tweet mentions both [Chakra UI](https://chakra-ui.com/responsive-styles) and
+[Theme UI](https://theme-ui.com/sx-prop#responsive-values) come with this kind of functionality built in,
+styled-components does not. That's not a bad thing, styled-components is different in many ways to Chakra UI and Theme
+UI, but rather than try to explain it myself here's the descriptions from each of the projects.
+
+### Chakra UI
+
+_"Chakra UI is a simple, modular and accessible component library that gives you all the building blocks you need to
+build your React applications"_
+
+### Theme UI
+
+_"Theme UI is a library for creating themeable user interfaces based on constraint-based design principles"_
+
+### styled-components
+
+"_Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅🏾_"
+
+The way I like to think about this is styled-components gives you the tools you need to build everything yourself where
+as Chakra UI and Theme UI give you the tools you need to build everything yourself + a load of stuff that's already
+built for you and can easily be re-themed.
+
+If you're using styled-components and like the look of the **Responsive Array Syntax** I'm going to explain how to write
+a utility function that you can gradually adopt without breaking anything.
+
+Before I go too much further when I use styled-components I don't use template literals which is what you'll see in the
+[docs](https://styled-components.com/docs/basics#getting-started), instead I prefer to use the _style object_ syntax.
+
+There's a PR for the docs site I created in Mar 2019 that attempts to explain the _style object_ syntax which you can
+see [here](https://github.com/styled-components/styled-components-website/pull/444). I think I still need to do some
+work on that 😬 ... so in the meantime I've prepared a short post with the same usage examples:
+[styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
+
+Ok, let's start!
+
+## 1.
+
+Create a test component, I've called mine `<MrButton />` because I'm a laugh.
+
+```javascript
+// mr-button.js
+import styled from 'styled-components';
+
+const MrButton = styled.button({
+  backgroundColor: 'hotpink',
+  border: 'none',
+  color: 'white',
+  padding: 8,
+  width: '100%'
+});
+
+export default MrButton;
+```
+
+## 2.
+
+Make sure you've implemented `<MrButton />` somewhere in your app and are passing in an array of values via the
+`backgroundColor` and `width` props.
+
+```javascript
+// app.js
+<MrButton backgroundColor={['hotpink', 'violet', 'purple']} width={['100%', '50%', 'auto']}>
+  Click Me
+</MrButton>
+```
+
+## 3.
+
+Create a util function somewhere and call it `create-media-queries.js`
+
+```javascript
+// create-media-queries.js
+export const createMediaQueries = (css) => {
+  console.log(JSON.stringify(css, null, 2));
+};
+```
+
+The first step is to make sure you're able to pass the `backgroundColor` and `width` props through the styled component
+and on to the function. As mentioned above I prefer to use the _style object_ syntax because I find it easier to
+destructure the props and to spread the return of the `createMediaQueries` function into the styles 🕺
+
+```diff
+...
+// mr-button.js
+import styled from 'styled-components'
++ import { createMediaQueries } from '../utils'
+
+const MrButton = styled.button(
+  {
+-   backgroundColor: "hotpink",
+    color: "white",
+    border: "none",
+    padding: 8,
+-    width: 100%
+  },
++  ({ backgroundColor, width }) => ({
++    ...createMediaQueries([
++      {
++        property: "background-color",
++        values: backgroundColor
++      },
++      {
++        property: "width",
++        values: width
++      }
++    ])
++  })
+);
+
+export default MrButton;
+
+```
+
+If you've followed the steps above you should see a `console.log` like this: 👇
+
+```javascript
+[
+  {
+    property: 'background-color',
+    values: ['hotpink', 'violet', 'purple']
+  },
+  {
+    property: 'width',
+    values: ['100%', '50%', 'auto']
+  }
+];
+```
+
+Now you've confirmed the values passed in via the props get through the styled component and on to the
+`createMediaQueries` function you can do something with them, but before I move on let's define an array of breakpoints.
+You could put this array anywhere in your project but just for demo's sake I'll add it to the top of the
+`create-media-queries.js` file.
+
+```diff
+// create-media-queries.js
++ const breakpoints = [576, 768, 992]
+
+export const createMediaQueries = (css) => {
+  console.log(JSON.stringify(css, null, 2));
+}
+```
+
+The aim now is to create key values pairs for each property and each of the values, you'll also need to catch any values
+passed in that aren't an array by using `Array.isArray()` and rather than `.map` them just return a key value pair.
+
+```diff
+// create-media-queries.js
+const breakpoints = [576, 768, 992]
+
+export const createMediaQueries = (css) => {
+-  console.log(JSON.stringify(css, null, 2));
+
++  const cssKeyValuePairs = css.reduce((items, item) => {
++    const { property, values } = item;
+
++    items.push(
++      Array.isArray(item.values)
++        ? values.map((value) => ({
++            [property]: value
++          }))
++        : [{ [property]: values }]
++    );
++   return items;
++  }, []);
+
++  console.log(JSON.stringify(cssKeyValuePairs, null, 2));
+
+}
+```
+
+Which should give you a `console.log` that looks like this: 👇
+
+```javascript
+[
+  [
+    {
+      'background-color': 'hotpink'
+    },
+    {
+      'background-color': 'violet'
+    },
+    {
+      'background-color': 'purple'
+    }
+  ],
+  [
+    {
+      width: '100%'
+    },
+    {
+      width: '50%'
+    },
+    {
+      width: 'auto'
+    }
+  ]
+];
+```
+
+The next part of the function will be responsible for assigning each of those values to an appropriate breakpoint value
+
+```diff
+// create-media-queries.js
+const breakpoints = [576, 768, 992]
+
+export const createMediaQueries = (css) => {
+
+  const cssKeyValuePairs = css.reduce((items, item) => {
+    const { property, values } = item;
+    items.push(
+      Array.isArray(item.values)
+        ? values.map((value) => ({
+            [property]: value
+          }))
+        : [{ [property]: values }]
+    );
+   return items;
+  }, []);
+
+-  console.log(JSON.stringify(cssKeyValuePairs, null, 2));
+
++  const cssToBreakpoints = [0, ...breakpoints]
++    .map((breakpoint, index) => ({
++      breakpoint: breakpoint,
++      css: cssKeyValuePairs
++        .map((array) => array[index])
++        .filter(Boolean)
++        .reduce((items, item) => {
++          items[`${Object.keys(item)}`] = `${Object.values(item)}`;
++          return items;
++        }, {})
++    }))
++    .slice(0, -1);
+
++  console.log(JSON.stringify(cssToBreakpoints, null, 2));
+
+}
+```
+
+Which should give you a `console.log` that looks like this: 👇
+
+```javascript
+[
+  {
+    "breakpoint": 0,
+    "css": {
+      "background-color": "hotpink",
+      "width": "100%"
+    }
+  },
+  {
+    "breakpoint": 576,
+    "css": {
+      "background-color": "violet",
+      "width": "50%"
+    }
+  },
+  {
+    "breakpoint": 768,
+    "css": {
+      "background-color": "purple",
+      "width": "auto"
+    }
+  }
+]
+​
+```
+
+There's a couple of things this part of the function does so I'll talk through them.
+
+```javascript
+[0, ...breakpoints];
+```
+
+The above creates a new array and inserts a `0` at the beginning. You'll need the extra value at the start because
+you're developing this function to be _mobile first_. The first value from the values array is the default style and
+isn't part of a media query
+
+```javascript
+breakpoint: breakpoint;
+```
+
+The above creates a key value pair for the breakpoint value, eg `breakpoint: 0,`
+
+```javascript
+css: cssKeyValuePairs
+  .map((array) => array[index])
+  .filter(Boolean)
+  .reduce((items, item) => {
+    items[`${Object.keys(item)}`] = `${Object.values(item)}`;
+    return items;
+  }, {});
+```
+
+The above creates a new object called `css` and within it are the key values pairs from the first part of the function
+
+```javascript
+.slice(0, -1);
+```
+
+Next you'll need to remove the last item from the array since you shifted all the values up by one by inserting the `0`
+at the start of the array... I know... _mobile first_ is a bit confusing.
+
+The final part of the function is where you can create formed media queries that will work when used with the _style
+object_ syntax
+
+```diff
+// create-media-queries.js
+const breakpoints = [576, 768, 992]
+
+export const createMediaQueries = (css) => {
+
+  const cssKeyValuePairs = css.reduce((items, item) => {
+    const { property, values } = item;
+    items.push(
+      Array.isArray(item.values)
+        ? values.map((value) => ({
+            [property]: value
+          }))
+        : [{ [property]: values }]
+    );
+   return items;
+  }, []);
+
+  const cssToBreakpoints = [0, ...breakpoints]
+    .map((breakpoint, index) => ({
+      breakpoint: breakpoint,
+      css: cssKeyValuePairs
+        .map((array) => array[index])
+        .filter(Boolean)
+        .reduce((items, item) => {
+          items[`${Object.keys(item)}`] = `${Object.values(item)}`;
+          return items;
+        }, {})
+    }))
+    .slice(0, -1);
+
+-  console.log(JSON.stringify(cssToBreakpoints, null, 2));
+
++  const cssMediaQueries = cssToBreakpoints.reduce((items, item) => {
++    const { breakpoint, css } = item;
++
++    breakpoint
++      ? (items[`@media screen and (min-width: ${breakpoint}px)`] = {
++          ...css
++        })
++      : (items = { ...css });
++
++    return items;
++  }, {});
+
++  console.log(JSON.stringify(cssMediaQueries, null, 2));
+
++  return {
++    ...cssMediaQueries
++  };
+
+}
+```
+
+Which should give you a `console.log` that looks like this: 👇
+
+```javascript
+{
+  "background-color": "hotpink",
+  "width": "100%",
+  "@media screen and (min-width: 576px)": {
+    "background-color": "violet",
+    "width": "50%"
+  },
+  "@media screen and (min-width: 768px)": {
+    "background-color": "purple",
+    "width": "auto"
+  }
+}
+```
+
+In this step you'll use array reduce again to loop over the `cssToBreakpoints` array and "massage" it into a new shape.
+
+The default `css` values are returned outside of a media query and the 2nd and 3rd set of values use the breakpoint
+number and return a formed media query with the correct `css` values _injected_
+
+I'm sure there's a million other ways to solve this problem but in my case it worked a treat. If you have any feedback
+or suggestions please feel free to find me on Twitter:
+
+<Link href="https://twitter.com/PaulieScanlon" target="_blank">
+  @pauliescanlon
+</Link>
+
+Oh and if you'd like to dig a little deep here's a
+[CodeSandbox](https://codesandbox.io/s/styled-components-responsive-array-syntax-3qxu3)
+
+<CodeSandbox codeSandboxId="/styled-components-responsive-array-syntax-3qxu3" />

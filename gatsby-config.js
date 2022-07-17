@@ -1,34 +1,12 @@
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
-
-const sources = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return [
-      // {
-      //   name: 'posts',
-      //   dir: 'posts/2021/07',
-      // },
-      {
-        name: 'posts',
-        dir: 'posts/2021',
-      },
-    ]
-  } else {
-    return [
-      {
-        name: 'posts',
-        dir: 'posts',
-      },
-    ]
-  }
-}
+  path: `.env.${process.env.NODE_ENV || 'production'}`
+});
 
 module.exports = {
+  trailingSlash: 'always',
   siteMetadata: {
     name: 'Paul Scanlon',
-    description:
-      'Jamstack Developer: React, Gatsby, JavaScript, TypeScript, CSS-in-Js, Storybook, TDD & a tiny bit of Apollo/GraphQL/Node',
+    description: 'Senior Software Engineer / Developer Relations',
     keywords: [
       'React',
       'Gatsby',
@@ -37,6 +15,7 @@ module.exports = {
       'Flow',
       'styled-components',
       'Theme UI',
+      'Tailwind',
       'Jest',
       'Enzyme',
       'React Testing Libary',
@@ -44,53 +23,67 @@ module.exports = {
       'Fauna',
       'Jamstack',
       'Component Library',
-      'Serverless Functions',
+      'Serverless Functions'
     ],
     siteUrl: 'https://paulie.dev',
-    siteImage: 'https://paulie.dev/images/paulie-open-graph-image.jpg',
-    profileImage: ``,
-    lang: `en`,
-    config: {
-      sidebarWidth: 200,
-    },
+    defaultImage: 'https://paulie.dev/images/paulie-open-graph-image.jpg',
+    lang: 'en-GB'
   },
   plugins: [
-    `gatsby-plugin-gatsby-cloud`,
-    `gatsby-plugin-mdx-embed`,
-    `gatsby-plugin-image`,
-    `gatsby-transformer-sharp`,
+    'gatsby-plugin-gatsby-cloud',
+    'gatsby-plugin-mdx-embed',
+    'gatsby-plugin-image',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-postcss',
+    'gatsby-plugin-react-helmet',
     {
-      resolve: `gatsby-plugin-sharp`,
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        remarkPlugins: [
+          process.env.NODE_ENV === 'development' ? [] : [require('remark-prism'), { transformInlineCode: true }]
+        ]
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-sharp',
       options: {
         defaults: {
           quality: 70,
           formats: ['auto', 'webp', 'avif'],
-          placeholder: 'blurred',
-        },
-      },
+          placeholder: 'blurred'
+        }
+      }
     },
     {
-      resolve: '@pauliescanlon/gatsby-theme-terminal',
+      resolve: 'gatsby-source-filesystem',
       options: {
-        source: [
-          ...sources(),
-          {
-            name: 'writing',
-            dir: 'writing',
-          },
-          {
-            name: 'streams',
-            dir: 'streams',
-          },
-        ],
-      },
+        path: `${__dirname}/content/pages/`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/posts/`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/articles/`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/streams/`
+      }
     },
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'UA-76055934-4',
-      },
-    },
-    `gatsby-plugin-sitemap`,
-  ],
-}
+        trackingId: 'UA-76055934-4'
+      }
+    }
+  ]
+};

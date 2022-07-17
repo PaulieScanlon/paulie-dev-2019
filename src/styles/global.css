@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply antialiased text-white bg-background;
+  }
+}
+
+.main-navigation {
+  @apply transition-all duration-300 capitalize inline-grid grid-cols-auto-1fr gap-x-4 items-center rounded-full border hover:border-outline border-transparent hover:bg-surface px-4 py-2 font-medium hover:text-white;
+}
+
+/* prism-shades-of-purple overwrites */
+code[class*='language-'],
+pre[class*='language-'] {
+  @apply text-sm;
+}
+.token.inserted {
+  @apply text-red-600 bg-transparent;
+}
+
+.token.deleted {
+  @apply text-lime-400 bg-transparent;
+}
+
+.youtube-mdx-embed {
+  @apply overflow-hidden rounded border border-outline;
+}
+
+.event-color-PushEvent {
+  @apply bg-salmon;
+}
+
+.event-color-CreateEvent {
+  @apply bg-violet;
+}
+
+.event-color-PullRequestEvent {
+  @apply bg-teal;
+}
+
+.event-color-ForkEvent {
+  @apply bg-bogey;
+}
+
+.event-color-WatchEvent {
+  @apply bg-yellow;
+}
