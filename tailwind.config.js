@@ -108,6 +108,9 @@ module.exports = {
               '&::after': {
                 content: '"" !important'
               }
+            },
+            blockquote: {
+              color: theme('colors.secondary')
             }
           }
         }

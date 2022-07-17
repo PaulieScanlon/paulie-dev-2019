@@ -19,7 +19,6 @@ const Page = ({
     }
   }
 }) => {
-  console.log('featuredImage: ', featuredImage);
   return (
     <Fragment>
       <Seo

@@ -26,23 +26,6 @@ NB: This is assuming in your application you have a set of breakpoints defined, 
 const breakpoints = ['576px', '768px', '992px'];
 ```
 
-In terms of rendered output this is what the above might look like: Resize your browser to see the `width` change across
-the breakpoints.
-
-<Box
-  as="span"
-  role="img"
-  aria-labelledby="Smiling Face with Sunglasses"
-  sx={{
-    display: 'inline-block',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    p: 2,
-    width: ['100%', '50%', 'auto']
-  }}
->
-  😎
-</Box>
-
 As my Tweet mentions both [Chakra UI](https://chakra-ui.com/responsive-styles) and
 [Theme UI](https://theme-ui.com/sx-prop#responsive-values) come with this kind of functionality built in,
 styled-components does not. That's not a bad thing, styled-components is different in many ways to Chakra UI and Theme
@@ -428,9 +411,7 @@ number and return a formed media query with the correct `css` values _injected_
 I'm sure there's a million other ways to solve this problem but in my case it worked a treat. If you have any feedback
 or suggestions please feel free to find me on Twitter:
 
-<Link href="https://twitter.com/PaulieScanlon" target="_blank">
-  @pauliescanlon
-</Link>
+[@pauliescanlon](https://twitter.com/PaulieScanlon)
 
 Oh and if you'd like to dig a little deep here's a
 [CodeSandbox](https://codesandbox.io/s/styled-components-responsive-array-syntax-3qxu3)

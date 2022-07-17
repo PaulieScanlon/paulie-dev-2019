@@ -135,24 +135,6 @@ Here's another lame demo.
 </SourceWords>
 ```
 
-<SourceWords>
-  {(sourceWords) => {
-    const currentYear = sourceWords.wordCountByMonth[sourceWords.wordCountByMonth.length - 1];
-    return (
-      <Box>
-        {currentYear.map((month, index) => {
-          const { name, words } = month;
-          return (
-            <Box key={index}>
-              <Text>{`${name} | ${words}`}</Text>
-            </Box>
-          );
-        })}
-      </Box>
-    );
-  }}
-</SourceWords>
-
 There's a better looking bar chart version of this on the
 [demo site](https://gatsby-theme-terminal.netlify.com/components/#source-words) if you're interested.
 
@@ -202,23 +184,6 @@ component right here in the `.mdx`
   }}
 </SourceWords>
 ```
-
-<SourceWords>
-  {(source) => {
-    const { wordCountTotal, wordCountAverage, wordCountHighest, wordCountLowest, timeToReadTotal, timeToReadAverage } =
-      source;
-    return (
-      <ul>
-        <li>{`wordCountTotal: ${wordCountTotal}`}</li>
-        <li>{`wordCountAverage: ${wordCountAverage}`}</li>
-        <li>{`wordCountHighest: ${wordCountHighest}`}</li>
-        <li>{`wordCountLowest: ${wordCountLowest}`}</li>
-        <li>{`timeToReadTotal: ${timeToReadTotal}`}</li>
-        <li>{`timeToReadAverage: ${timeToReadAverage}`}</li>
-      </ul>
-    );
-  }}
-</SourceWords>
 
 Pretty lame list right, but if you like donut charts checkout the
 [demo](https://gatsby-theme-terminal.netlify.com/components/#source-words)

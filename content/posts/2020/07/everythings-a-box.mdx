@@ -83,34 +83,14 @@ export default (props) => (
 You can see from the above that we don't need to import the `jsx` pragma and instead we can import React as we normally
 would and then use one of the components that ships with Theme UI.... The `<Box />`
 
-The Box is technically just a div but if you inspect the below you'll see there's a few things Theme UI does for us
-which will save us time later.
-
-<Flex
-sx={{ flexWrap: 'wrap'}}
->
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
+The Box is technically just a div but if you inspect a Theme UI element, there's a few things Theme UI does for us which
+will save us time later.
 
 _JavaScript for Box 👇_
 
 ```javascript
 <Box>I'm a Box</Box>
 ```
-
-<Box>I'm a Box</Box>
-</Box>
-
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
 
 _JavaScript for div 👇_
 
@@ -119,19 +99,6 @@ _JavaScript for div 👇_
 ```
 
 <div>I'm a div</div>
-</Box>
-
-</Flex>
-
-<Flex
-sx={{ flexWrap: 'wrap'}}
->
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
 
 _CSS for Box 👇_
 
@@ -142,24 +109,11 @@ margin: 0;
 min-width: 0;
 ```
 
-</Box>
-
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
-
 _CSS for div 👇_
 
 ```css
 display: block;
 ```
-
-</Box>
-
-</Flex>
 
 You can see from the above that the CSS for the `<Box />` includes some resets for us, eg. `box-sizing`,`margin` and
 `min-width` and whilst in the past we _could_ have used a global CSS file that handles the resets, we don't want to use
@@ -171,31 +125,11 @@ been removed which allows us to spend more time focussing on actually building s
 
 But wait, there's more, here's the `<Flex />` component that ships with Theme UI
 
-<Flex
-sx={{ flexWrap: 'wrap'}}
->
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
-
 _JavaScript for Flex 👇_
 
 ```javascript
 <Flex>I'm a Flex</Flex>
 ```
-
-<Flex>I'm a Flex</Flex>
-</Box>
-
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
 
 _CSS for Flex 👇_
 
@@ -206,40 +140,17 @@ margin: 0;
 min-width: 0;
 ```
 
-</Box>
-</Flex>
-
 ...and you can see from the CSS snippet that the defaults that come with this component save us the time of adding them
 ourselves. e.g `<Flex />` already has `display: flex;` Cool ay! 😎
 
 One last thing. Theme UI also allows the Polymorphic `as` prop. Poly meaning **many**, and morphic meaning **forms** so
 you can do things like this.
 
-<Flex
-sx={{ flexWrap: 'wrap'}}
->
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
-
 _JavaScript for aside 👇_
 
 ```javascript
 <Box as="aside">I'm an aside</Box>
 ```
-
-<Box as='aside'>I'm an aside</Box>
-</Box>
-
-<Box
-  sx={{
-    px: 2,
-    width: ['100%', '50%']
-  }}
->
 
 _CSS for aside 👇_
 
@@ -250,9 +161,6 @@ margin: 0;
 min-width: 0;
 ```
 
-</Box>
-</Flex>
-
 You'll see if you inspect the "I'm man aside" element that the actual HTML element is in fact an `<aside />` and it
 still inherits all the resets from `<Box />`
 
@@ -262,16 +170,12 @@ The `as` props works with all manner of HTML elements... even inputs:
 <Box as="input" placeholder="I'm an input" />
 ```
 
-<Box as="input" placeholder="I'm an input" />
-
 ... but don't do as above, use the `<Input />` component instead because it maps to the correct key in the theme object:
 `forms.input`
 
 ```javascript
 <Input placeholder="I'm an input" />
 ```
-
-<Input placeholder="I'm an input" />
 
 So now you know.
 

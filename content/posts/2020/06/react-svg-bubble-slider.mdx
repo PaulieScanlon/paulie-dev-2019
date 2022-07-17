@@ -39,65 +39,7 @@ As soon as i saw this i thought this would be the perfect way to allow users to 
 I contacted Chris and explained the idea and he was up for open-sourcing it. He has specified that so long as it's not
 used for commercial gain users are free to use this in their blogs.
 
-Here you can find the full [demo](https://react-svg-bubble-slider.netlify.app/) and here's the result 👇
-
-<Box
-  sx={{
-    '.svg-timeline': {
-      ':focus': {
-        outlineStyle: 'solid',
-        outlineColor: 'surface',
-        outlineWidth: '4px',
-        boxShadow: 'none',
-        borderColor: 'transparent'
-      }
-    },
-    '.speech-bubble-stroke': {
-      stroke: 'primary'
-    },
-    '.speech-bubble-fill': {
-      fill: 'text'
-    },
-    '.speech-bubble-text': {
-      fill: 'primary',
-      fontSize: '22px',
-      fontWeight: 'bold',
-      textTransform: 'capitalize'
-    },
-    '.speech-bubble-pop-line': {
-      stroke: 'primary'
-    },
-    '.reaction-icon': {
-      fill: 'text'
-    },
-    '.reaction-dot': {
-      fill: 'primary'
-    },
-    '.svg-bubble-action': {
-      height: '60px',
-      textAlign: 'center',
-      paddingTop: '16px'
-    }
-  }}
->
-  <SvgBubbleSlider>
-    {({ reaction }) => (
-      <Button
-        disabled={!reaction ? true : false}
-        sx={{
-          cursor: 'pointer',
-          fontFamily: 'body',
-          textTransform: 'capitalize',
-          backgroundColor: 'primary'
-        }}
-      >
-        {reaction ? reaction : '?'}
-      </Button>
-    )}
-  </SvgBubbleSlider>
-</Box>
-
-<Box sx={{ height: 50 }} />
+Here you can find the full [demo](https://react-svg-bubble-slider.netlify.app/).
 
 The original [Svg Bubble Slider](https://codepen.io/chrisgannon/pen/GZNgLw/) isn't built in React and also uses
 [GSAP v2](https://greensock.com/docs/v2) so i had quite a bit of work to do to make this work in React and using

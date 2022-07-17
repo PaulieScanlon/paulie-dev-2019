@@ -27,9 +27,7 @@ const Page = ({
         <small className="leading-6 font-semibold text-secondary">Publication &bull; {publication}</small>
       </div>
       <h1 className="my-12">{title}</h1>
-
       <MdxParser>{body}</MdxParser>
-
       <AsideElement>
         <GenericAside />
       </AsideElement>
