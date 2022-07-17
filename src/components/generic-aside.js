@@ -17,6 +17,8 @@ const GenericAside = () => {
       </div>
       <a
         href="https://www.gatsbyjs.com/contributors/paul-scanlon"
+        target="_blank"
+        rel="noreferrer"
         className="no-underline text-sm text-center py-2 px-4 transition-all duration-300 rounded border border-outline bg-surface hover:text-white hover:bg-muted/30"
       >
         Visit Gatsby

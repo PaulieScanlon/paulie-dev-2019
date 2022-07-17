@@ -78,12 +78,12 @@ module.exports = {
       options: {
         path: `${__dirname}/content/streams/`
       }
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-76055934-4'
+      }
     }
-    // {
-    //   resolve: 'gatsby-plugin-google-analytics',
-    //   options: {
-    //     trackingId: 'UA-76055934-4',
-    //   },
-    // },
   ]
 };

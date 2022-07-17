@@ -103,7 +103,7 @@ const RecentGitHubUserEvent = () => {
             clipRule="evenodd"
           />
         </svg>
-        <h3 className="m-0 text-base text-white">Recent Events</h3>
+        <h2 className="m-0 text-base text-white">Recent Events</h2>
       </div>
       <div className="rounded border border-outline bg-surface p-2 sm:p-4 bg-background h-96 overflow-y-hidden">
         {isLoading ? (

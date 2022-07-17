@@ -102,7 +102,7 @@ const RootElement = ({ children }) => {
               <article className="prose prose-lg max-w-none min-h-[calc(100vh-19rem)]">{children}</article>
               <footer className="text-sm leading-6 mt-12">
                 <div className="mb-10 font-semibold flex items-center"></div>
-                <div className="pt-10 pb-10 border-t border-outline sm:flex justify-between text-muted">
+                <div className="pt-10 pb-10 border-t border-outline sm:flex justify-between text-slate-400">
                   <div className="mb-6 sm:mb-0 sm:flex">
                     <p>
                       {/* TODO read the gatsby version from  package.json*/}
