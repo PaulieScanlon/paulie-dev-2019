@@ -16,7 +16,7 @@
 /* prism-shades-of-purple overwrites */
 code[class*='language-'],
 pre[class*='language-'] {
-  @apply text-sm;
+  @apply text-sm my-8;
 }
 .token.inserted {
   @apply text-red-600 bg-transparent;
