@@ -5,7 +5,7 @@ import { formatDatestamp } from '../utils/format-date-stamp';
 
 const DateTimeToRead = ({ date, timeToRead }) => {
   return (
-    <small className="leading-6 font-semibold text-secondary">
+    <small className="leading-6 font-semibold text-primary">
       {formatDatestamp(date)} {timeToRead ? `${String.fromCodePoint(8226)} ${timeToRead} min` : null}
     </small>
   );

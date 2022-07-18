@@ -6,6 +6,8 @@ import { MDXProvider } from '@mdx-js/react';
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
+import MarkdownCtaLink from './markdown-cta-link';
+
 import { transformImages } from '../utils/transform-images';
 
 const components = {
@@ -25,7 +27,8 @@ const components = {
     // if it's anything else, use Link
     return <Link to={href}>{children}</Link>;
   },
-  GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} />
+  GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} />,
+  MarkdownCtaLink
 };
 
 const MdxParser = ({ children, embedded }) => {

@@ -76,7 +76,7 @@ const AddReaction = ({ slug }) => {
   };
 
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center my-32">
       <div className="inline-flex justify-center flex-col min-h-[140px] max-w-[500px] w-full text-center rounded border border-outline bg-surface/70 p-4 sm:px-6">
         {hasSubmitted ? (
           <Fragment>
