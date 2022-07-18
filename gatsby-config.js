@@ -26,7 +26,7 @@ module.exports = {
       'Serverless Functions'
     ],
     siteUrl: 'https://paulie.dev',
-    defaultImage: 'https://paulie.dev/images/paulie-open-graph-image.jpg',
+    defaultImage: 'https://paulie.dev/images/paulie-open-graph-image-2022.jpg',
     lang: 'en-GB'
   },
   plugins: [
