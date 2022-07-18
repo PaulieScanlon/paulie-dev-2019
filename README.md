@@ -14,9 +14,9 @@ You can find out more about me at [https://paulie.dev/](https://paulie.dev/)
 
 Or come find me on Twitter and say hi: [@PaulieScanlon](https://twitter.com/PaulieScanlon)
 
-Icons by [Hero Icons](https://heroicons.com/)
-
 ### TODO
 
-- Add React SVG Bubble Slider to a CodeSandbox and remove it from the post.
-- Add Google Analytics using new Script Component.
+- Add Reactions to all posts, articles and streams
+- Add Queen Raae's Newsletter signup form
+- Add Google Analytics using new Script Component
+- Build Dashboard using SSR
