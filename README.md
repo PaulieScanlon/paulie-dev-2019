@@ -13,10 +13,3 @@
 You can find out more about me at [https://paulie.dev/](https://paulie.dev/)
 
 Or come find me on Twitter and say hi: [@PaulieScanlon](https://twitter.com/PaulieScanlon)
-
-### TODO
-
-- Add some kind of site search
-- Add Queen Raae's Newsletter signup form
-- Add Google Analytics using new Script Component
-- Build Dashboard using SSR
