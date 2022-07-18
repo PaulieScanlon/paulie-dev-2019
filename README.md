@@ -16,6 +16,7 @@ Or come find me on Twitter and say hi: [@PaulieScanlon](https://twitter.com/Paul
 
 ### TODO
 
+- Add some kind of site search
 - Add Reactions to all posts, articles and streams
 - Add Queen Raae's Newsletter signup form
 - Add Google Analytics using new Script Component
