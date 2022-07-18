@@ -80,7 +80,7 @@ const AddReaction = ({ slug }) => {
       <div className="inline-flex justify-center flex-col min-h-[140px] max-w-[500px] w-full text-center rounded border border-outline bg-surface/70 p-4 sm:px-6">
         {hasSubmitted ? (
           <Fragment>
-            <h5 className="text-base text-center leading-6 font-semibold uppercase text-secondary">Thanks</h5>
+            <p className="m-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Thanks</p>
             <p className="mb-5 text-slate-300 text-sm text-center m-0">
               {response}{' '}
               <span role="img" aria-label="Party Popper" className="text-center">
@@ -90,7 +90,9 @@ const AddReaction = ({ slug }) => {
           </Fragment>
         ) : (
           <Fragment>
-            <h5 className="text-base text-center leading-6 font-semibold uppercase text-secondary">How am I doing?</h5>
+            <p className="m-0 text-base text-center leading-6 font-semibold uppercase text-secondary">
+              How am I doing?
+            </p>
             <p className="mb-5 text-slate-300 text-sm text-center m-0">
               Hey! Lemme know if you found this helpful by leaving a reaction.
             </p>
