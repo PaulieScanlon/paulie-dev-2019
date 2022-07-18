@@ -1,20 +1,16 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 
-import Loading from '../components/loading';
-import AsideElement from '../components/aside-element';
 import Seo from '../components/seo';
+import AsideElement from '../components/aside-element';
 import GenericAside from '../components/generic-aside';
+
+import Loading from '../components/loading';
 
 const Page = ({
   data,
   data: {
-    pagesJson: {
-      slug,
-      excerpt,
-      frontmatter: { type, title },
-      body
-    }
+    allPagesJson: { nodes }
   },
   serverData: { serverResponse }
 }) => {
@@ -35,23 +31,24 @@ const Page = ({
     getAllReactions();
   }, []);
 
+  const { slug, title, body } = nodes[0];
+
   return (
     <Fragment>
-      <Seo title={title} description={excerpt} slug={slug} />
-      <small className="mb-4 leading-6 font-semibold capitalize text-primary">dashboard</small>
-      <h1>{excerpt}</h1>
+      <Seo title={title} description={title} slug={slug} />
+      <small className="mb-4 leading-6 font-semibold capitalize text-primary">{slug}</small>
+      <h1>{title}</h1>
       <p>{body}</p>
 
+      {/* temp stuff start */}
       <h2 className="mb-1">SSR Data</h2>
-
       <div className="h-[400px] overflow-y-scroll">
         <div className="remark-highlight">
           <pre className="language-javascript !m-0">{JSON.stringify(serverResponse, null, 2)}</pre>
         </div>
       </div>
 
-      <h2 className="mb-1">Serverless Function</h2>
-
+      <h2 className="mb-1">CSR (Serverless Function)</h2>
       <div className="h-[400px] overflow-y-scroll">
         {isPending ? (
           <Loading />
@@ -63,13 +60,12 @@ const Page = ({
       </div>
 
       <h2 className="mb-1">SSG Data</h2>
-
       <div className="h-[400px] overflow-y-scroll">
         <div className="remark-highlight">
           <pre className="language-javascript !m-0">{JSON.stringify(data, null, 2)}</pre>
         </div>
       </div>
-
+      {/* temp stuff end */}
       <AsideElement>
         <GenericAside />
       </AsideElement>
@@ -78,14 +74,13 @@ const Page = ({
 };
 
 export const query = graphql`
-  query ($id: String) {
-    pagesJson(id: { eq: $id }) {
-      slug
-      excerpt
-      frontmatter {
+  query {
+    allPagesJson(filter: { slug: { eq: "dashboard" } }) {
+      nodes {
+        slug
         title
+        body
       }
-      body
     }
   }
 `;

@@ -19,7 +19,6 @@ export const useNavigation = () => {
         nodes {
           slug
           frontmatter {
-            type
             title
             icon
           }

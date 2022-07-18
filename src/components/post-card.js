@@ -34,7 +34,7 @@ PostCard.propTypes = {
   /** The timeToRead to display */
   timeToRead: PropTypes.any.isRequired,
   /** The dateModified to display */
-  dateModified: PropTypes.string.isRequired,
+  dateModified: PropTypes.string,
   /** The date to display */
   date: PropTypes.string.isRequired,
   /** The excerpt to display */
