@@ -3,19 +3,19 @@ import { graphql } from 'gatsby';
 
 import Loading from '../components/loading';
 import AsideElement from '../components/aside-element';
-import Seo from '../components/seo';
+// import Seo from '../components/seo';
 import GenericAside from '../components/generic-aside';
 
 const Page = ({
   data,
-  data: {
-    pagesJson: {
-      slug,
-      excerpt,
-      frontmatter: { type, title },
-      body
-    }
-  },
+  // data: {
+  //   pagesJson: {
+  //     slug,
+  //     excerpt,
+  //     frontmatter: { type, title },
+  //     body
+  //   }
+  // },
   serverData: { serverResponse }
 }) => {
   const [isPending, setIsPending] = useState(true);
@@ -35,12 +35,14 @@ const Page = ({
     getAllReactions();
   }, []);
 
+  console.log(data);
+
   return (
     <Fragment>
-      <Seo title={title} description={excerpt} slug={slug} />
+      {/* <Seo title={title} description={excerpt} slug={slug} /> */}
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">dashboard</small>
-      <h1>{excerpt}</h1>
-      <p>{body}</p>
+      {/* <h1>{excerpt}</h1>
+      <p>{body}</p> */}
 
       <h2 className="mb-1">SSR Data</h2>
 
@@ -78,17 +80,33 @@ const Page = ({
 };
 
 export const query = graphql`
-  query ($id: String) {
-    pagesJson(id: { eq: $id }) {
-      slug
-      excerpt
-      frontmatter {
-        title
+  query {
+    allPagesJson(filter: { slug: { eq: "dashboard" } }) {
+      nodes {
+        slug
+        frontmatter {
+          icon
+          title
+          type
+        }
+        body
       }
-      body
     }
   }
 `;
+
+// export const query = graphql`
+//   query ($id: String) {
+//     pagesJson(id: { eq: $id }) {
+//       slug
+//       excerpt
+//       frontmatter {
+//         title
+//       }
+//       body
+//     }
+//   }
+// `;
 
 export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
