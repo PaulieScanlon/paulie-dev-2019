@@ -37,6 +37,7 @@ module.exports = {
     'gatsby-plugin-sitemap',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
