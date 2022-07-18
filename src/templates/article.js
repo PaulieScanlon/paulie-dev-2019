@@ -5,6 +5,7 @@ import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
 import DateTimeToRead from '../components/date-time-to-read';
 import GenericAside from '../components/generic-aside';
+import AddReaction from '../components/add-reaction';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
 
@@ -31,7 +32,7 @@ const Page = ({
         {tags
           ? tags.map((tag, index) => {
               return (
-                <li className="m-0 p-0">
+                <li key={index} className="m-0 p-0">
                   <Tag tag={tag} />
                 </li>
               );
@@ -39,6 +40,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser>{body}</MdxParser>
+      <AddReaction />
       <AsideElement>
         <GenericAside />
       </AsideElement>
