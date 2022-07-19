@@ -30,7 +30,7 @@ const LatestStreams = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase">Latest Streams</h2>
+      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Streams</h2>
       <p className="mt-0 mb-8 text-slate-300 text-base">
         I prefer to write, but occasionally you'll catch me on stream.
       </p>

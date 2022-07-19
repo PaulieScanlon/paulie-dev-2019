@@ -43,7 +43,10 @@ module.exports = {
       options: {
         remarkPlugins: [
           process.env.NODE_ENV === 'development' ? [] : [require('remark-prism'), { transformInlineCode: true }]
-        ]
+        ],
+        // rehypePlugins: [require('rehype-slug'), [require('rehype-autolink-headings'), { behavior: 'wrap' }]]
+        // rehypePlugins: [require('rehype-autolink-headings'), { behavior: 'wrap' }]
+        rehypePlugins: [require('rehype-slug')]
       }
     },
     {

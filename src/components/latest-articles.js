@@ -30,7 +30,7 @@ const LatestArticles = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase">Latest Articles</h2>
+      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Articles</h2>
       <p className="mt-0 mb-8 text-slate-300 text-base">
         Here's the latest articles I've written that have been published elsewhere.
       </p>

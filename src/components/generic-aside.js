@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 const GenericAside = () => {
   return (
-    <div className="grid gap-4 rounded border border-outline bg-surface/70 p-4 sm:px-6">
+    <div className="grid gap-4 rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6">
       <StaticImage
         alt="Introducing Gatsby 4"
         src="../../static/images/aside-gatsby.png"

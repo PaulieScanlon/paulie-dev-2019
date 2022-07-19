@@ -9,6 +9,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import MarkdownCtaLink from './markdown-cta-link';
 
 import { transformImages } from '../utils/transform-images';
+import { stripLeadingSlash } from '../utils/strip-leading-slash';
 
 const components = {
   a: ({ href, children }) => {
@@ -22,7 +23,7 @@ const components = {
     }
     // if it's a jumplink #, use Link which will fires an anchorScroll in gatsby-browser
     if (href.match(/#/gi)) {
-      return <Link to={href}>{children}</Link>;
+      return <a href={stripLeadingSlash(href)}>{children}</a>;
     }
     // if it's anything else, use Link
     return <Link to={href}>{children}</Link>;

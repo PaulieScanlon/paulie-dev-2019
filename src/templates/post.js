@@ -8,6 +8,7 @@ import GenericAside from '../components/generic-aside';
 import AddReaction from '../components/add-reaction';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
+import TableOfContents from '../components/table-of-contents';
 
 const Page = ({
   data: {
@@ -17,7 +18,8 @@ const Page = ({
       timeToRead,
       frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
       embeddedImages,
-      body
+      body,
+      tableOfContents: { items: toc }
     }
   }
 }) => {
@@ -51,6 +53,13 @@ const Page = ({
       <AddReaction />
       <AsideElement>
         <GenericAside />
+
+        {toc ? (
+          <div>
+            <h5 className="mb-1 text-md leading-6 font-semibold text-white">On this page</h5>
+            <TableOfContents items={toc} />{' '}
+          </div>
+        ) : null}
       </AsideElement>
     </Fragment>
   );
@@ -77,6 +86,7 @@ export const query = graphql`
         }
       }
       body
+      tableOfContents
     }
   }
 `;

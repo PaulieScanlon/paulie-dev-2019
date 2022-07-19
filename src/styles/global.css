@@ -26,6 +26,10 @@ pre[class*='language-'] {
   @apply text-lime-400 bg-transparent;
 }
 
+.prose :where(h1, h2, h3, h4, h5):not(:where([class~='not-prose'] *)) a {
+  @apply no-underline font-bold;
+}
+
 .youtube-mdx-embed {
   @apply overflow-hidden rounded border border-outline;
 }

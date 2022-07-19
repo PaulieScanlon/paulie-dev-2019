@@ -73,28 +73,53 @@ module.exports = {
           css: {
             color: theme('colors.text'),
             h1: {
-              color: theme('colors.text')
+              color: theme('colors.text'),
+              fontWieght: theme('font-bold'),
+              a: {
+                color: theme('colors.text')
+              }
             },
             h2: {
-              color: theme('colors.primary')
+              color: theme('colors.salmon'),
+              fontWieght: theme('font-bold'),
+              a: {
+                color: theme('colors.salmon')
+              }
             },
             h3: {
-              color: theme('colors.secondary')
+              color: theme('colors.salmon'),
+              fontWieght: theme('font-bold'),
+              a: {
+                color: theme('colors.salmon')
+              }
             },
             h4: {
-              color: theme('colors.secondary')
+              color: theme('colors.salmon'),
+              fontWieght: theme('font-bold'),
+              a: {
+                color: theme('colors.salmon')
+              }
             },
             h5: {
-              color: theme('colors.secondary')
+              color: theme('colors.salmon'),
+              fontWieght: theme('font-bold'),
+              a: {
+                color: theme('colors.salmon')
+              }
             },
             h6: {
-              color: theme('colors.secondary')
+              color: theme('colors.salmon'),
+              fontWieght: theme('font-bold'),
+              a: {
+                color: theme('colors.salmon')
+              }
             },
             strong: {
               color: theme('colors.text')
             },
             a: {
               color: theme('colors.secondary'),
+              fontWieght: theme('font-bold'),
               '&:hover': {
                 color: theme('colors.muted'),
                 transition: 'all 0.2s ease'
