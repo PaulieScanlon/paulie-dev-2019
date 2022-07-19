@@ -8,7 +8,8 @@ module.exports.get = async function () {
 
   try {
     const response = await client.query(
-      q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 1000 })
+      // q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 1000 })
+      q.Paginate(q.Match(q.Index('all_reactions_production')), { size: 1000 })
     );
 
     const result = response.data.map(([ref, slug, reaction, date]) => ({
@@ -18,7 +19,10 @@ module.exports.get = async function () {
       date
     }));
 
-    return { message: 'all reaction', reactions: reactionsByAmount(result) };
+    return {
+      message: 'all reactions',
+      reactions: reactionsByAmount(result)
+    };
   } catch (error) {
     return { message: error.message };
   }

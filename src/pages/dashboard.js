@@ -1,70 +1,91 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { graphql } from 'gatsby';
+import React, { Fragment, useState } from 'react';
+import { Link } from 'gatsby';
 
-import Seo from '../components/seo';
 import AsideElement from '../components/aside-element';
 import GenericAside from '../components/generic-aside';
 
-import Loading from '../components/loading';
+import { icons } from '../utils/reaction-paths';
 
-const Page = ({
-  data,
-  data: {
-    allPagesJson: { nodes }
-  },
-  serverData: { serverResponse }
-}) => {
-  const [isPending, setIsPending] = useState(true);
-  const [clientResponse, setClientResponse] = useState(null);
+const AccordionItem = ({ title, amount, children, index, activeIndex, setActiveIndex }) => {
+  const handleSetIndex = (index) => activeIndex !== index && setActiveIndex(index);
 
-  useEffect(() => {
-    const getAllReactions = async () => {
-      try {
-        const response = await (await fetch('/api/get-all-reactions')).json();
-        setIsPending(false);
-        setClientResponse(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getAllReactions();
-  }, []);
-
-  const { slug, title, body } = nodes[0];
+  const isActive = () => activeIndex === index;
 
   return (
     <Fragment>
-      <Seo title={title} description={title} slug={slug} />
-      <small className="mb-4 leading-6 font-semibold capitalize text-primary">{slug}</small>
-      <h1>{title}</h1>
-      <p>{body}</p>
+      <div
+        onClick={() => handleSetIndex(isActive() ? null : index)}
+        className="cursor-pointer flex gap-4 w-full justify-between px-4 py-2 mt-2 transition-all duration-300 rounded border border-outline bg-surface hover:bg-muted/20"
+      >
+        <div className="flex grow justify-between">
+          <div className="flex gap-4 items-center justify-center">
+            <div
+              className={`bg-${isActive() ? 'primary' : 'muted'} transition-all duration-300 rounded-full w-3 h-3`}
+            />
+            <div className="text-white capitalize">{title}</div>
+          </div>
+          <div className="text-white font-bold ">
+            x<span className="capitalize">{amount}</span>
+          </div>
+        </div>
+      </div>
+
+      {activeIndex === index && (
+        <ul className="flex flex-col gap-4 list-none m-0 px-8 py-4 border border-l-outline border-t-transparent border-b-outline border-r-outline">
+          {children}
+        </ul>
+      )}
+    </Fragment>
+  );
+};
+
+const Page = ({
+  serverData: {
+    serverResponse: { reactions }
+  }
+}) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  return (
+    <Fragment>
+      <small className="mb-4 leading-6 font-semibold capitalize text-primary">Dashboard</small>
+      <h1>Built-in Analytics</h1>
+      <p className="mb-16">
+        There's a whole lot of data points hidden within content creation, why not count them up and visualize them?
+      </p>
+
+      <h2 className="m-0 text-2xl uppercase text-salmon">Reactions</h2>
+      <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
+      <div>
+        {Object.keys(reactions).map((key, index) => {
+          return (
+            <AccordionItem
+              key={index}
+              title={key}
+              amount={reactions[key].length}
+              index={index}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            >
+              <div></div>
+              {reactions[key].map((item, index) => {
+                const { slug } = item;
+
+                return (
+                  <li key={index} className="m-0 p-0 text-base">
+                    <Link to={slug}>{slug}</Link>
+                  </li>
+                );
+              })}
+            </AccordionItem>
+          );
+        })}
+      </div>
 
       {/* temp stuff start */}
-      <h2 className="mb-1">SSR Data</h2>
-      <div className="h-[400px] overflow-y-scroll">
-        <div className="remark-highlight">
-          <pre className="language-javascript !m-0">{JSON.stringify(serverResponse, null, 2)}</pre>
-        </div>
-      </div>
-
-      <h2 className="mb-1">CSR (Serverless Function)</h2>
-      <div className="h-[400px] overflow-y-scroll">
-        {isPending ? (
-          <Loading />
-        ) : (
-          <div className="remark-highlight">
-            <pre className="language-javascript !m-0">{JSON.stringify(clientResponse, null, 2)}</pre>
-          </div>
-        )}
-      </div>
-
-      <h2 className="mb-1">SSG Data</h2>
-      <div className="h-[400px] overflow-y-scroll">
-        <div className="remark-highlight">
-          <pre className="language-javascript !m-0">{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      </div>
+      {/* <div className="remark-highlight">
+        <pre className="language-javascript !m-0">{JSON.stringify(reactions, null, 2)}</pre>
+      </div> */}
       {/* temp stuff end */}
       <AsideElement>
         <GenericAside />
@@ -72,18 +93,6 @@ const Page = ({
     </Fragment>
   );
 };
-
-export const query = graphql`
-  query {
-    allPagesJson(filter: { slug: { eq: "dashboard" } }) {
-      nodes {
-        slug
-        title
-        body
-      }
-    }
-  }
-`;
 
 export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
