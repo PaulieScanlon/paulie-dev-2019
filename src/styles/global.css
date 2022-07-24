@@ -30,6 +30,7 @@ pre[class*='language-'] {
   @apply no-underline font-bold;
 }
 
+/* Donut chart */
 .youtube-mdx-embed {
   @apply overflow-hidden rounded border border-outline;
 }
