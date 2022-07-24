@@ -43,7 +43,7 @@ const AccordionItem = ({ title, total, index, activeIndex, setActiveIndex, child
       </button>
 
       {activeIndex === index && (
-        <ul className="h-[300px] overflow-scroll flex flex-col gap-3 list-none m-0 px-8 py-4 border border-l-outline border-t-transparent border-b-outline border-r-outline">
+        <ul className="max-h-[300px] overflow-scroll flex flex-col gap-3 list-none m-0 px-8 py-4 border border-l-outline border-t-transparent border-b-outline border-r-outline">
           {children}
         </ul>
       )}
