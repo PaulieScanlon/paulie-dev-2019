@@ -1,6 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 
+import { colors } from '../utils/color-class-names';
+
 const AllTagsChart = () => {
   const {
     allMdx: { nodes: tags }
@@ -51,8 +53,6 @@ const AllTagsChart = () => {
         remainder: remainder
       };
     });
-
-  const colors = ['salmon', 'violet', 'teal', 'bogey', 'yellow'];
 
   return (
     <div className="grid gap-8 rounded border border-outline bg-surface py-3 px-4 sm:px-6">

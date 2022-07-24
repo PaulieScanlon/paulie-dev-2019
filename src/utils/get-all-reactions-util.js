@@ -1,4 +1,5 @@
 const faunadb = require('faunadb');
+const { groupBy } = require('./group-by');
 
 module.exports.get = async function () {
   const q = faunadb.query;
@@ -17,13 +18,6 @@ module.exports.get = async function () {
       reaction,
       date
     }));
-
-    const groupBy = (arr, key) => {
-      return arr.reduce(function (rv, x) {
-        (rv[x[key]] = rv[x[key]] || []).push(x);
-        return rv;
-      }, {});
-    };
 
     const format = (array) => {
       return result

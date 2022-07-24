@@ -18,16 +18,22 @@ module.exports = {
     'fill-teal',
     'fill-bogey',
     'fill-yellow',
+    'fill-purple',
+    'fill-orange',
     'stroke-salmon',
     'stroke-violet',
     'stroke-teal',
     'stroke-bogey',
     'stroke-yellow',
+    'stroke-purple',
+    'stroke-orange',
     'bg-salmon',
     'bg-violet',
     'bg-teal',
     'bg-bogey',
     'bg-yellow',
+    'bg-purple',
+    'bg-orange',
     // <!-- chart colors -->
     {
       pattern: /text-(primary|secondary|error|success|warning)/
@@ -50,6 +56,8 @@ module.exports = {
         teal: '#00bcd4',
         bogey: '#8bc34a',
         yellow: '#ffc107',
+        purple: '#7B1FA2',
+        orange: '#ff5722',
 
         background: '#131127',
         outline: '#232140',
