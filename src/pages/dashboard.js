@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 
+import Seo from '../components/seo';
 import AsideElement from '../components/aside-element';
 import GenericAside from '../components/generic-aside';
 import AccordionItem from '../components/accordion-item';
@@ -9,14 +10,24 @@ import AllDaysChart from '../components/all-days-chart';
 const Page = ({ serverData }) => {
   const [activeIndex, setActiveIndex] = useState(null);
 
+  const {
+    pagesJson: { title, slug, body }
+  } = useStaticQuery(graphql`
+    {
+      pagesJson {
+        title
+        slug
+        body
+      }
+    }
+  `);
+
   return (
     <Fragment>
-      <small className="mb-4 leading-6 font-semibold capitalize text-primary">Dashboard</small>
-      <h1>Built-in Analytics</h1>
-      <p className="mb-16">
-        There's a whole lot of data points hidden within content creation, why not count them up and visualize them? —
-        Work in progress
-      </p>
+      <Seo title={title} description={body} slug={slug} />
+      <small className="mb-4 leading-6 font-semibold capitalize text-primary">{slug}</small>
+      <h1>{title}</h1>
+      <p className="mb-16">{body}</p>
 
       <div className="grid gap-24">
         <section>
