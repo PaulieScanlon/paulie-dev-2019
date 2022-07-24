@@ -31,12 +31,14 @@ const AccordionItem = ({ title, total, index, activeIndex, setActiveIndex, child
               }`}
             >
               <svg
+                aria-labelledby={`reaction-${title}`}
                 title={title}
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-6 h-6 sm:w-7 sm:h-7"
                 fill="currentColor"
                 viewBox="0 0 32 32"
               >
+                <title id={`reaction-${title}`}>{title}</title>
                 <g key={index} dangerouslySetInnerHTML={{ __html: icon[0].paths.map((path) => path) }} />
               </svg>
             </div>

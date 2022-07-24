@@ -74,12 +74,14 @@ const AddReaction = ({ slug }) => {
                         onClick={() => handleReaction(name)}
                       >
                         <svg
+                          aria-labelledby={`reaction-${name}`}
                           title={name}
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 sm:w-8 sm:h-8"
                           fill="currentColor"
                           viewBox="0 0 32 32"
                         >
+                          <title id={`reaction-${name}`}>{name}</title>
                           <g key={index} dangerouslySetInnerHTML={{ __html: paths.map((path) => path) }} />
                         </svg>
                       </button>
