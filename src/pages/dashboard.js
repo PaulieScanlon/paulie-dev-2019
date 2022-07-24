@@ -45,7 +45,7 @@ const AccordionItem = ({ title, total, index, activeIndex, setActiveIndex, child
       </button>
 
       {activeIndex === index && (
-        <ul className="flex flex-col gap-4 list-none m-0 px-8 py-4 border border-l-outline border-t-transparent border-b-outline border-r-outline">
+        <ul className="h-[300px] overflow-scroll flex flex-col gap-3 list-none m-0 px-8 py-4 border border-l-outline border-t-transparent border-b-outline border-r-outline">
           {children}
         </ul>
       )}
@@ -84,11 +84,12 @@ const Page = ({ serverData }) => {
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
             >
-              <div>
-                {arrs.map((item, index) => {
+              {arrs
+                .sort((a, b) => b.length - a.length)
+                .map((item, index) => {
                   const { slug } = item[0];
                   return (
-                    <div key={index} className="flex gap-4 justify-between">
+                    <div key={index} className="flex gap-2 justify-between">
                       <Link to={slug} className="text-sm">
                         {slug}
                       </Link>
@@ -96,7 +97,6 @@ const Page = ({ serverData }) => {
                     </div>
                   );
                 })}
-              </div>
             </AccordionItem>
           );
         })}
