@@ -53,11 +53,10 @@ const Page = ({
       <AddReaction />
       <AsideElement>
         <GenericAside />
-
         {toc ? (
-          <div>
-            <h5 className="mb-1 text-md leading-6 font-semibold text-white">On this page</h5>
-            <TableOfContents items={toc} />{' '}
+          <div className="px-6">
+            <h5 className="mb-3 text-lg leading-6 font-semibold uppercase text-secondary">On this page</h5>
+            <TableOfContents items={toc} />
           </div>
         ) : null}
       </AsideElement>

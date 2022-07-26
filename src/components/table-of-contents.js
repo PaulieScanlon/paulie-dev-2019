@@ -17,7 +17,7 @@ const TableOfContents = ({ items, depth }) => {
                 href={newUrl}
                 className={`inline-flex items-center p-1 no-underline text-${
                   depth > 0 ? 'slate-400' : 'slate-100'
-                } text-${depth > 0 ? 'sm' : 'base'}`}
+                } text-${depth > 0 ? 'sm' : 'base'} hover:text-white`}
               >
                 {depth > 0 ? (
                   <svg
