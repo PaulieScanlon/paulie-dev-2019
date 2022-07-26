@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, Script } from 'gatsby';
 
 import Logo from '../components/logo';
 import MenuIcon from '../components/menu-icon';
@@ -17,6 +17,21 @@ const RootElement = ({ children }) => {
 
   return (
     <Fragment>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`}
+        strategy="off-main-thread"
+        forward={[`gtag`]}
+      />
+      <Script
+        id="gtag-config"
+        strategy="off-main-thread"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag(){ window.dataLayer.push(arguments);}
+          gtag('js', new Date()); 
+          gtag('config', '${process.env.GATSBY_GA_MEASUREMENT_ID}', { send_page_view: false })`
+        }}
+      />
       <div className="sticky top-0 z-50 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
         <div className="max-w-8xl mx-auto">
           <div className="py-4 mx-4 lg:px-8 lg:mx-0">

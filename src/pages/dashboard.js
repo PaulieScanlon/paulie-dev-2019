@@ -24,7 +24,7 @@ const Page = ({ serverData }) => {
 
   return (
     <Fragment>
-      <Seo title={title} description={body} slug={slug} />
+      <Seo title={slug} description={body} slug={slug} />
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">{slug}</small>
       <h1>{title}</h1>
       <p className="mb-16">{body}</p>
