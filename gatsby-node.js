@@ -103,7 +103,7 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
     data: { allMdx }
   } = await graphql(`
     query {
-      allMdx {
+      allMdx(filter: { frontmatter: { status: { ne: "draft" } } }) {
         nodes {
           id
           slug

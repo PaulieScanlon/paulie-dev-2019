@@ -8,7 +8,11 @@ const LatestPosts = () => {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { type: { eq: "post" } } }, sort: { order: DESC, fields: slug }, limit: 3) {
+      allMdx(
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "post" } } }
+        sort: { order: DESC, fields: frontmatter___date }
+        limit: 3
+      ) {
         nodes {
           slug
           excerpt(pruneLength: 100)

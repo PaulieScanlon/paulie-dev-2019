@@ -8,7 +8,10 @@ const LatestStreams = () => {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { type: { eq: "stream" } } }, sort: { order: DESC, fields: slug }) {
+      allMdx(
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "stream" } } }
+        sort: { order: DESC, fields: frontmatter___date }
+      ) {
         nodes {
           slug
           excerpt(pruneLength: 100)

@@ -20,7 +20,7 @@ const AllDaysChart = ({ year }) => {
     allMdx: { nodes: mdx }
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { type: { ne: "page" } } }) {
+      allMdx(filter: { frontmatter: { status: { ne: "draft" }, type: { ne: "page" } } }) {
         nodes {
           slug
           frontmatter {
