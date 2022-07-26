@@ -86,3 +86,17 @@ module.exports = {
   ],
   partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]
 };
+
+// module.exports = {
+//   plugins: [
+//     ...
+//     {
+//       resolve: 'gatsby-plugin-google-analytics',
+//       options: {
+//         trackingId: 'UA-12345678-9'
+//       }
+//     }
+//   ],
+// };
+
+// partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]

@@ -30,6 +30,10 @@ pre[class*='language-'] {
   @apply no-underline font-bold;
 }
 
+.prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+  @apply text-slate-300 text-xl bg-surface rounded border-l-yellow py-1 px-6;
+}
+
 /* Donut chart */
 .youtube-mdx-embed {
   @apply overflow-hidden rounded border border-outline;
