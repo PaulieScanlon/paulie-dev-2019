@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import { Script } from 'gatsby';
+import React from 'react';
 
 import RootElement from './src/components/root-element';
 
@@ -31,24 +30,5 @@ export const onRouteUpdate = ({ location }) => {
 };
 
 export const wrapRootElement = ({ element }) => {
-  return (
-    <Fragment>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`}
-        strategy="off-main-thread"
-        forward={[`gtag`]}
-      />
-      <Script
-        id="gtag-config"
-        strategy="off-main-thread"
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
-          window.gtag = function gtag(){ window.dataLayer.push(arguments);}
-          gtag('js', new Date()); 
-          gtag('config', '${process.env.GATSBY_GA_MEASUREMENT_ID}', { send_page_view: false })`
-        }}
-      />
-      <RootElement>{element}</RootElement>;
-    </Fragment>
-  );
+  return <RootElement>{element}</RootElement>;
 };
