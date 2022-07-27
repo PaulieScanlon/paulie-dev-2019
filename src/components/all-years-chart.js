@@ -3,28 +3,17 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import { groupBy } from '../utils/group-by';
 
-import LineChart from './line-chart';
-
-const data = [
-  { label: 'S', x: 0, y: 0 },
-  { label: 'M', x: 1, y: 400 },
-  { label: 'T', x: 2, y: 300 },
-  { label: 'W', x: 3, y: 100 },
-  { label: 'TH', x: 4, y: 400 },
-  { label: 'F', x: 5, y: 500 },
-  { label: 'S', x: 6, y: 400 }
-];
+import LinePlot from './line-plot';
+import LinePolyline from './line-polyline';
 
 const abbreviatedMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
 
 const AllYearsChart = () => {
-  const defaultValues = (year) =>
-    abbreviatedMonths.map((month) => {
+  const defaultValues = () =>
+    abbreviatedMonths.map((abbr) => {
       return {
-        slug: '',
-        abbr: month,
-        index: 0,
-        fullYear: year
+        label: abbr,
+        y: 0
       };
     });
 
@@ -66,33 +55,72 @@ const AllYearsChart = () => {
       return rv;
     }, {});
 
-  //   const groupByYear = groupBy(allMdxYears, 'fullYear');
-  console.log(allMdxYears);
+  const posytsByYear = Object.keys(allMdxYears).map((year) => {
+    const groupedByMonth = groupBy(allMdxYears[year], 'abbr');
+    const emptyData = defaultValues();
 
-  //   console.log(groupByYear);
+    const realData = Object.keys(groupedByMonth).map((abbr) => {
+      return {
+        label: abbr,
+        y: groupedByMonth[abbr].length
+      };
+    });
 
-  //   const posytsByMonth = Object.keys(groupByYear).map((year) => {
-  //     const emptyMonths = defaultValues(year);
-  //     const grouped = groupBy([...emptyMonths, ...groupByYear[year]], 'abbr');
+    const uniqueItems = [];
+    const combined = [...realData, ...emptyData];
 
-  //     return {
-  //       [year]: Object.keys(grouped).map((month, index) => {
-  //         return grouped[month].reduce((rv, x) => {
-  //           rv[index] = rv[index] || { label: x.abbr, x: index, y: 0 };
-  //           rv[index].y += 1;
+    const unique = combined
+      .filter((element) => {
+        const isDuplicate = uniqueItems.includes(element.label);
+        if (!isDuplicate) {
+          uniqueItems.push(element.label);
+          return true;
+        }
+        return false;
+      })
+      .sort((a, b) => abbreviatedMonths.indexOf(a.label) - abbreviatedMonths.indexOf(b.label))
+      .map((data, index) => {
+        const { label, y } = data;
+        return {
+          label: label,
+          x: index,
+          y: y
+        };
+      });
 
-  //           return rv;
-  //         }, {});
-  //       })
-  //     };
-  //   });
+    return {
+      year: year,
+      data: unique
+    };
+  });
 
-  //   console.log(posytsByMonth[2][2021]);
-  //   console.log(data);
-  //   console.log(JSON.stringify(posytsByMonth, null, 2));
   return (
     <div>
-      <LineChart width={500} height={300} data={data} horizontalGuides={5} precision={2} verticalGuides={1} />
+      <div className="border rounded border-outline bg-surface pl-6 pb-8 pt-2">
+        <LinePlot
+          width={500}
+          height={200}
+          xPad={30}
+          yPad={20}
+          xLines={5}
+          yLines={9}
+          color="#2d2a58"
+          labels={posytsByYear[0].data}
+          maxX={11}
+          maxY={10}
+        >
+          <LinePolyline data={posytsByYear[0].data} color="#f056c7" />
+          <LinePolyline data={posytsByYear[1].data} color="#8b87ea" />
+          <LinePolyline data={posytsByYear[2].data} color="#58e6d9" />
+          <LinePolyline data={posytsByYear[3].data} color="#ffc107" />
+        </LinePlot>
+      </div>
+      <ul className="list-none m-0 p-0 flex text-sm">
+        <li className="text-primary">2019</li>
+        <li className="text-secondary">2020</li>
+        <li className="text-tertiary">2021</li>
+        <li className="text-yellow">2022</li>
+      </ul>
     </div>
   );
 };
