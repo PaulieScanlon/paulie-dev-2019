@@ -6,6 +6,7 @@ import AsideElement from '../components/aside-element';
 import GenericAside from '../components/generic-aside';
 import AccordionItem from '../components/accordion-item';
 import AllDaysChart from '../components/all-days-chart';
+import AllYearsChart from '../components/all-years-chart';
 
 const Page = ({ serverData }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -65,6 +66,12 @@ const Page = ({ serverData }) => {
                 </AccordionItem>
               );
             })}
+        </section>
+
+        <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon">Published by Month</h2>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Total month of the year counts for Articles and Posts.</p>
+          <AllYearsChart />
         </section>
 
         <section>
