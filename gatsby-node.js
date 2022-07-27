@@ -35,6 +35,19 @@ exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
   // actions.printTypeDefinitions({ path: './typeDefs.txt' })
 };
 
+exports.sourceNodes = ({ actions: { createNode }, createNodeId, createContentDigest }) => {
+  const packageJson = require('./package.json');
+
+  createNode({
+    ...packageJson,
+    id: createNodeId(packageJson.version),
+    internal: {
+      type: 'packageJson',
+      contentDigest: createContentDigest(packageJson)
+    }
+  });
+};
+
 exports.onCreateNode = async ({
   node,
   actions: { createNodeField, createNode },

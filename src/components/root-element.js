@@ -5,11 +5,13 @@ import Logo from '../components/logo';
 import MenuIcon from '../components/menu-icon';
 import NavigationIcon from '../components/navigation-icon';
 import { useNavigation } from '../hooks/use-navigation';
+import { usePackage } from '../hooks/use-package';
 
 const RootElement = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const navigation = useNavigation();
+  const packageJson = usePackage();
 
   const handleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -120,8 +122,7 @@ const RootElement = ({ children }) => {
                 <div className="pt-10 pb-10 border-t border-outline sm:flex justify-between text-slate-400">
                   <div className="mb-6 sm:mb-0 sm:flex">
                     <p>
-                      {/* TODO read the gatsby version from  package.json*/}
-                      Built with Gatsby <span>4.18</span>
+                      Built with Gatsby <span>{packageJson.dependencies.gatsby}</span>
                     </p>
                   </div>
                 </div>

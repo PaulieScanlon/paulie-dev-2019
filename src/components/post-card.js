@@ -9,11 +9,11 @@ const PostCard = ({ link, title, thumbnail, timeToRead, date, dateModified, exce
   return (
     <li className="m-0 p-0 rounded border border-outline bg-surface transition-all shadow-lg hover:shadow-secondary/10 hover:-translate-y-2 ease-in-out duration-500">
       <Link to={link} className="block p-4 cursor-pointer no-underline hover:text-secondary ">
-        <div className="flex items-center">
-          <div className="hidden md:block rounded shadow-lg overflow-hidden shrink-0 w-[180px]">
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <div className="rounded shadow-lg overflow-hidden shrink-0 w-[180px]">
             <GatsbyImage alt={title} image={getImage(thumbnail)} />
           </div>
-          <div className="p-4">
+          <div>
             <DateTimeToRead date={dateModified ? dateModified : date} timeToRead={timeToRead} />
             <h3 className="m-0 text-xl text-white">{title}</h3>
             <p className="m-0 text-slate-300 text-base ">{excerpt}</p>
