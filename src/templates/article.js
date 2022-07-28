@@ -40,7 +40,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser>{body}</MdxParser>
-      <AddReaction />
+      <AddReaction slug={slug} />
       <AsideElement>
         <GenericAside />
       </AsideElement>

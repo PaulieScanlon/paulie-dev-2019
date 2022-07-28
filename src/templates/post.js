@@ -50,7 +50,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser embedded={embeddedImages}>{body}</MdxParser>
-      <AddReaction />
+      <AddReaction slug={slug} />
       <AsideElement>
         <GenericAside />
         {toc ? (

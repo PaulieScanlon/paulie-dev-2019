@@ -99,7 +99,7 @@ const AddReaction = ({ slug }) => {
 
 AddReaction.propTypes = {
   /** The slug to post reaction with */
-  slug: PropTypes.string
+  slug: PropTypes.string.isRequired
 };
 
 export default AddReaction;
