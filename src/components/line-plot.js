@@ -1,19 +1,6 @@
 import React, { Fragment, cloneElement } from 'react';
 
-const LinePlot = ({
-  width,
-  height,
-  xPad,
-  yPad,
-  xLines,
-  yLines,
-  color,
-  labels,
-  fontSize = 10,
-  maxX,
-  maxY,
-  ...props
-}) => {
+const LinePlot = ({ width, height, xPad, yPad, xLines, yLines, color, labels, fontSize = 9, maxX, maxY, ...props }) => {
   const XLabel = () => {
     const y = height - yPad + 20;
     return labels.map((element, index) => {
@@ -109,7 +96,7 @@ const LinePlot = ({
       <YLabel />
       {Array.isArray(props.children) ? (
         props.children.map((child, index) => (
-          <Fragment key={index}>{cloneElement(child, { width, height, xPad, yPad, maxX, maxY })}</Fragment>
+          <Fragment key={index}>{cloneElement(child, { index, width, height, xPad, yPad, maxX, maxY })}</Fragment>
         ))
       ) : (
         <Fragment>{cloneElement(props.children, { width, height, xPad, yPad, maxX, maxY })}</Fragment>

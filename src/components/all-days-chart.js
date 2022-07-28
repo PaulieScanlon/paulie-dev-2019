@@ -1,20 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { groupBy } from '../utils/group-by';
 import { colors } from '../utils/color-class-names';
 
 const abbreviatedDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const years = ['2019', '2020', '2021', '2022'];
 
-const AllDaysChart = ({ year }) => {
-  const defaultValues = abbreviatedDays.map((day) => {
-    return {
-      abbr: day,
-      slug: '',
-      fullYear: year
-    };
-  });
+const AllDaysChart = () => {
+  const defaultValues = () =>
+    years.map((year) => {
+      return {
+        label: year,
+        y: 0
+      };
+    });
 
   const {
     allMdx: { nodes: mdx }
@@ -32,8 +32,8 @@ const AllDaysChart = ({ year }) => {
     }
   `);
 
-  const allAbbreviatedMdxDays = mdx
-    .map((node) => {
+  const allMdxDays = mdx
+    .map((node, index) => {
       const {
         slug,
         frontmatter: { date }
@@ -43,58 +43,96 @@ const AllDaysChart = ({ year }) => {
       const fullYear = new Date(date).getFullYear();
 
       return {
-        abbr: abbreviatedDays[day],
         slug: slug,
+        abbr: abbreviatedDays[day],
         fullYear: fullYear
       };
     })
-    .filter((post) => post.fullYear === year);
+    .reduce((rv, v) => {
+      (rv[v.abbr] = rv[v.abbr] || []).push(v);
 
-  const combined = [...defaultValues, ...allAbbreviatedMdxDays];
+      return rv;
+    }, {});
 
-  const groupByDay = groupBy(combined, 'abbr');
-
-  const postsByDay = Object.keys(groupByDay)
+  const postsByDay = Object.keys(allMdxDays)
     .map((day) => {
-      const partialValue = groupByDay[day].length;
-      // const totalValue = combined.length;
-      const totalValue = 40;
+      const groupedByYear = groupBy(allMdxDays[day], 'fullYear');
+      const emptyData = defaultValues();
+
+      const realData = Object.keys(groupedByYear).map((abbr) => {
+        return {
+          label: abbr,
+          y: groupedByYear[abbr].length
+        };
+      });
+
+      const uniqueItems = [];
+      const combined = [...realData, ...emptyData];
+
+      const unique = combined
+        .filter((element) => {
+          const isDuplicate = uniqueItems.includes(element.label);
+          if (!isDuplicate) {
+            uniqueItems.push(element.label);
+            return true;
+          }
+          return false;
+        })
+        .sort((a, b) => years.indexOf(a.label) - years.indexOf(b.label))
+        .map((data, index) => {
+          const { label, y } = data;
+          return {
+            label: label,
+            x: index,
+            y: y
+          };
+        });
+
       return {
-        day,
-        count: partialValue,
-        percent: (100 * partialValue) / totalValue
+        day: day,
+        data: unique
       };
     })
     .sort((a, b) => abbreviatedDays.indexOf(a.day) - abbreviatedDays.indexOf(b.day));
 
   return (
-    <div className="rounded border border-outline bg-surface p-4">
-      <h2 className="m-0 flex justify-between font-normal items-center text-muted">
-        <span className="text-xl font-bold">{year}</span>
-        <span className="text-sm">{`Total: x${combined.length}`}</span>
-      </h2>
-      <ul className="list-none m-0 p-0 grid grid-cols-7">
-        {postsByDay.map((post, index) => {
-          const { day, count, percent } = post;
+    <div>
+      <div className="rounded border border-outline bg-surface p-4">
+        <ul className="list-none m-0 p-0 grid gap-1 grid-cols-7 items-end">
+          {postsByDay.map((item, index) => {
+            const { day, data } = item;
+
+            return (
+              <li key={index} className="m-0 p-0 flex flex-col gap-3 items-center text-ceter">
+                <div className="flex flex-col sm:flex-row gap-1 items-end">
+                  {data.map((year, index) => {
+                    const { y } = year;
+                    const height = y * 25;
+                    return (
+                      <div key={index}>
+                        <span className="text-sm font-semibold">{`x${y}`}</span>
+                        <div className={`w-4 border-2 border-${colors[index]}`} style={{ height }} />
+                      </div>
+                    );
+                  })}
+                </div>
+                <span className="uppercase text-muted text-sm font-semibold">{day}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <ul className="list-none m-0 p-0 flex text-sm">
+        {years.map((year, index) => {
           return (
-            <li className="m-0 p-1 text-center text-sm h-[200px] flex flex-col gap-1 justify-end" key={index}>
-              <span className="font-semibold"> {`x${count}`}</span>
-              <div
-                className={`w-full mx-auto border border-${colors[index]}`}
-                style={{ height: `${percent * 2}%` }}
-              ></div>
-              <span className="uppercase text-muted">{day}</span>
+            <li key={index} className={`text-${colors[index]}`}>
+              {year}
             </li>
           );
         })}
       </ul>
     </div>
   );
-};
-
-AllDaysChart.propTypes = {
-  /** The year to display data for */
-  year: PropTypes.number.isRequired
 };
 
 export default AllDaysChart;

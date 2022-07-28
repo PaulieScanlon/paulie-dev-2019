@@ -2,11 +2,13 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { groupBy } from '../utils/group-by';
+import { colors } from '../utils/color-class-names';
 
 import LinePlot from './line-plot';
 import LinePolyline from './line-polyline';
 
 const abbreviatedMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
+const years = ['2019', '2020', '2021', '2022'];
 
 const AllYearsChart = () => {
   const defaultValues = () =>
@@ -109,17 +111,20 @@ const AllYearsChart = () => {
           maxX={11}
           maxY={13}
         >
-          <LinePolyline data={posytsByYear[0].data} color="#f056c7" showAmt={true} />
-          <LinePolyline data={posytsByYear[1].data} color="#8b87ea" showAmt={true} />
-          <LinePolyline data={posytsByYear[2].data} color="#58e6d9" showAmt={true} />
-          <LinePolyline data={posytsByYear[3].data} color="#ffc107" showAmt={true} />
+          <LinePolyline data={posytsByYear[0].data} showAmt={true} />
+          <LinePolyline data={posytsByYear[1].data} showAmt={true} />
+          <LinePolyline data={posytsByYear[2].data} showAmt={true} />
+          <LinePolyline data={posytsByYear[3].data} showAmt={true} />
         </LinePlot>
       </div>
       <ul className="list-none m-0 p-0 flex text-sm">
-        <li className="text-primary">2019</li>
-        <li className="text-secondary">2020</li>
-        <li className="text-tertiary">2021</li>
-        <li className="text-yellow">2022</li>
+        {years.map((year, index) => {
+          return (
+            <li key={index} className={`text-${colors[index]}`}>
+              {year}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
