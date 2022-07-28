@@ -42,7 +42,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser>{body}</MdxParser>
-      <AddReaction slug={`/streams/${slug}`} />
+      <AddReaction title={title} slug={`/streams/${slug}`} />
       <AsideElement>
         <GenericAside />
       </AsideElement>

@@ -1,7 +1,7 @@
 const faunadb = require('faunadb');
 
 export default async function handler(req, res) {
-  const { slug, reaction, date } = JSON.parse(req.body);
+  const { title, slug, reaction, date } = JSON.parse(req.body);
 
   const q = faunadb.query;
 
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   try {
     await client.query(
       q.Create(q.Collection(`reactions_${process.env.NODE_ENV}`), {
-        data: { slug: slug, reaction: reaction, date: date }
+        data: { title: title, slug: slug, reaction: reaction, date: date }
       })
     );
 
