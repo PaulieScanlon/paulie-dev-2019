@@ -7,6 +7,7 @@ import GenericAside from '../components/generic-aside';
 import AccordionItem from '../components/accordion-item';
 import AllDaysChart from '../components/all-days-chart';
 import AllYearsChart from '../components/all-years-chart';
+import LatestReaction from '../components/latest-reaction';
 
 const Page = ({ serverData }) => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -42,8 +43,12 @@ const Page = ({ serverData }) => {
           <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by day for, Articles, Posts and Streams.</p>
           <AllDaysChart />
         </section>
+
         <section>
-          <h2 className="m-0 text-2xl uppercase text-salmon">Reactions</h2>
+          <LatestReaction />
+        </section>
+        <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
           {serverData.serverResponse.reactions
             .sort((a, b) => b.total - a.total)
