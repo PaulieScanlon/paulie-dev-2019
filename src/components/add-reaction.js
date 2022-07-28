@@ -5,7 +5,7 @@ import Loading from '../components/loading';
 
 import { icons } from '../utils/reaction-paths';
 
-const AddReaction = ({ slug }) => {
+const AddReaction = ({ title, slug }) => {
   const [response, setResponse] = useState('');
   const [isSubmittig, setIsSubmitting] = useState(false);
   const [currentReaction, setCurrentReaction] = useState(null);
@@ -19,6 +19,7 @@ const AddReaction = ({ slug }) => {
         await fetch('/api/add-reaction', {
           method: 'POST',
           body: JSON.stringify({
+            title: title,
             slug: slug,
             reaction: name,
             date: new Date()
