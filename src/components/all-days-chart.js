@@ -79,7 +79,10 @@ const AllDaysChart = ({ year }) => {
           return (
             <li className="m-0 p-1 text-center text-sm h-[200px] flex flex-col gap-1 justify-end" key={index}>
               <span className="font-semibold"> {`x${count}`}</span>
-              <div className={`w-full mx-auto bg-${colors[index]}`} style={{ height: `${percent * 2}%` }}></div>
+              <div
+                className={`w-full mx-auto border border-${colors[index]}`}
+                style={{ height: `${percent * 2}%` }}
+              ></div>
               <span className="uppercase text-muted">{day}</span>
             </li>
           );

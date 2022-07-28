@@ -32,6 +32,22 @@ const Page = ({ serverData }) => {
 
       <div className="grid gap-24">
         <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon">Published by Month</h2>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by month for, Articles, Posts and Streams.</p>
+          <AllYearsChart />
+        </section>
+
+        <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon">Published by Day</h2>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by day for, Articles, Posts and Streams.</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <AllDaysChart year={2022} />
+            <AllDaysChart year={2021} />
+            <AllDaysChart year={2020} />
+            <AllDaysChart year={2019} />
+          </div>
+        </section>
+        <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
           {serverData.serverResponse.reactions
@@ -66,23 +82,6 @@ const Page = ({ serverData }) => {
                 </AccordionItem>
               );
             })}
-        </section>
-
-        <section>
-          <h2 className="m-0 text-2xl uppercase text-salmon">Published by Month</h2>
-          <p className="mt-0 mb-4 text-slate-300 text-base">Total month of the year counts for Articles and Posts.</p>
-          <AllYearsChart />
-        </section>
-
-        <section>
-          <h2 className="m-0 text-2xl uppercase text-salmon">Published by Day</h2>
-          <p className="mt-0 mb-4 text-slate-300 text-base">Total days of the week counts for Articles and Posts.</p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <AllDaysChart year={2022} />
-            <AllDaysChart year={2021} />
-            <AllDaysChart year={2020} />
-            <AllDaysChart year={2019} />
-          </div>
         </section>
       </div>
 

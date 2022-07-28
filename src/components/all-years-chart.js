@@ -21,7 +21,7 @@ const AllYearsChart = () => {
     allMdx: { nodes: mdx }
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { type: { ne: "page" } } }) {
+      allMdx(filter: { frontmatter: { status: { ne: "draft" }, type: { ne: "page" } } }) {
         nodes {
           slug
           frontmatter {
@@ -96,10 +96,10 @@ const AllYearsChart = () => {
 
   return (
     <div>
-      <div className="border rounded border-outline bg-surface pl-6 pb-8 pt-2">
+      <div className="border rounded border-outline bg-surface pl-2 sm:pl-6 pb-3 sm:pb-8 pt-1 sm:pt-2">
         <LinePlot
           width={500}
-          height={200}
+          height={230}
           xPad={30}
           yPad={20}
           xLines={5}
@@ -107,12 +107,12 @@ const AllYearsChart = () => {
           color="#2d2a58"
           labels={posytsByYear[0].data}
           maxX={11}
-          maxY={10}
+          maxY={13}
         >
-          <LinePolyline data={posytsByYear[0].data} color="#f056c7" />
-          <LinePolyline data={posytsByYear[1].data} color="#8b87ea" />
-          <LinePolyline data={posytsByYear[2].data} color="#58e6d9" />
-          <LinePolyline data={posytsByYear[3].data} color="#ffc107" />
+          <LinePolyline data={posytsByYear[0].data} color="#f056c7" showAmt={true} />
+          <LinePolyline data={posytsByYear[1].data} color="#8b87ea" showAmt={true} />
+          <LinePolyline data={posytsByYear[2].data} color="#58e6d9" showAmt={true} />
+          <LinePolyline data={posytsByYear[3].data} color="#ffc107" showAmt={true} />
         </LinePlot>
       </div>
       <ul className="list-none m-0 p-0 flex text-sm">

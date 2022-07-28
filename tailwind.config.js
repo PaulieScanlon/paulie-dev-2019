@@ -34,6 +34,13 @@ module.exports = {
     'bg-yellow',
     'bg-purple',
     'bg-orange',
+    'border-salmon',
+    'border-violet',
+    'border-teal',
+    'border-bogey',
+    'border-yellow',
+    'border-purple',
+    'border-orange',
     // <!-- chart colors -->
     {
       pattern: /text-(primary|secondary|error|success|warning)/

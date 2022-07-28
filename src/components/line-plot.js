@@ -107,11 +107,13 @@ const LinePlot = ({
       <YGuides />
       <XLabel />
       <YLabel />
-      {Array.isArray(props.children)
-        ? props.children.map((child, index) => (
-            <Fragment key={index}>{cloneElement(child, { width, height, xPad, yPad, maxX, maxY })}</Fragment>
-          ))
-        : null}
+      {Array.isArray(props.children) ? (
+        props.children.map((child, index) => (
+          <Fragment key={index}>{cloneElement(child, { width, height, xPad, yPad, maxX, maxY })}</Fragment>
+        ))
+      ) : (
+        <Fragment>{cloneElement(props.children, { width, height, xPad, yPad, maxX, maxY })}</Fragment>
+      )}
     </svg>
   );
 };
