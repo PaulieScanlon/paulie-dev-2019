@@ -13,6 +13,8 @@ module.exports = {
     'gap-8',
     'gap-32',
     // <!-- chart colors -->
+    'fill-primary',
+    'fill-secondary',
     'fill-salmon',
     'fill-violet',
     'fill-teal',
@@ -20,6 +22,8 @@ module.exports = {
     'fill-yellow',
     'fill-purple',
     'fill-orange',
+    'stroke-primary',
+    'stroke-secondary',
     'stroke-salmon',
     'stroke-violet',
     'stroke-teal',
@@ -27,6 +31,8 @@ module.exports = {
     'stroke-yellow',
     'stroke-purple',
     'stroke-orange',
+    'bg-primary',
+    'bg-secondary',
     'bg-salmon',
     'bg-violet',
     'bg-teal',
@@ -34,6 +40,8 @@ module.exports = {
     'bg-yellow',
     'bg-purple',
     'bg-orange',
+    'border-primary',
+    'border-secondary',
     'border-salmon',
     'border-violet',
     'border-teal',
@@ -43,7 +51,7 @@ module.exports = {
     'border-orange',
     // <!-- chart colors -->
     {
-      pattern: /text-(primary|secondary|error|success|warning)/
+      pattern: /text-(primary|secondary|tertiary|muted|salmon|violet|teal|bogey|yellow|purple|orange)/
     }
   ],
   theme: {
@@ -54,7 +62,6 @@ module.exports = {
         primary: '#f056c7',
         secondary: '#8b87ea',
         tertiary: '#58e6d9',
-
         muted: '#605c9d',
 
         // these are used for the chart

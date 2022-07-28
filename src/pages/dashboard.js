@@ -40,12 +40,7 @@ const Page = ({ serverData }) => {
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Published by Day</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by day for, Articles, Posts and Streams.</p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <AllDaysChart year={2022} />
-            <AllDaysChart year={2021} />
-            <AllDaysChart year={2020} />
-            <AllDaysChart year={2019} />
-          </div>
+          <AllDaysChart />
         </section>
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Reactions</h2>

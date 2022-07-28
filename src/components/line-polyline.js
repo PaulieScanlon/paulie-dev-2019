@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
+import { colors } from '../utils/color-class-names';
 
-const LinePolyline = ({ data, color, width, height, xPad, yPad, maxX, maxY, showAmt = false }) => {
+const LinePolyline = ({ data, index = 0, width, height, xPad, yPad, maxX, maxY, showAmt = false }) => {
   const chartWidth = width - xPad * 2;
   const chartHeight = height - yPad * 2;
 
-  const fontSize = 11;
+  const fontSize = 7;
 
   const points = data.map((element) => {
     const x = (element.x / maxX) * chartWidth + xPad;
@@ -35,7 +36,7 @@ const LinePolyline = ({ data, color, width, height, xPad, yPad, maxX, maxY, show
             );
           })
         : null}
-      <polyline fill="none" stroke={color} strokeWidth={1} points={points.join(' ')} />;
+      <polyline fill="none" class={`stroke-${colors[index]}`} strokeWidth={1} points={points.join(' ')} />;
     </g>
   );
 };
