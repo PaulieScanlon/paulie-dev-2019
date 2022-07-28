@@ -36,7 +36,7 @@ const LinePolyline = ({ data, index = 0, width, height, xPad, yPad, maxX, maxY, 
             );
           })
         : null}
-      <polyline fill="none" class={`stroke-${colors[index]}`} strokeWidth={1} points={points.join(' ')} />;
+      <polyline fill="none" className={`stroke-${colors[index]}`} strokeWidth={1} points={points.join(' ')} />;
     </g>
   );
 };
