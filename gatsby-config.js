@@ -41,7 +41,6 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        remarkPlugins: [require('remark-prism')],
         // rehypePlugins: [require('rehype-slug'), [require('rehype-autolink-headings'), { behavior: 'wrap' }]]
         // rehypePlugins: [require('rehype-autolink-headings'), { behavior: 'wrap' }]
         rehypePlugins: [require('rehype-slug')]
@@ -86,17 +85,3 @@ module.exports = {
   ],
   partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]
 };
-
-// module.exports = {
-//   plugins: [
-//     ...
-//     {
-//       resolve: 'gatsby-plugin-google-analytics',
-//       options: {
-//         trackingId: 'UA-12345678-9'
-//       }
-//     }
-//   ],
-// };
-
-// partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]
