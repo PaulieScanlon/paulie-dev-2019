@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 const Seo = ({ type, title, description, slug, image, tags }) => {
   const {
     site: {
-      siteMetadata: { name, siteUrl, defaultImage, keywords, lang }
+      siteMetadata: { name, siteUrl, defaultImage, keywords }
     }
   } = useStaticQuery(graphql`
     {
@@ -16,7 +15,6 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
           siteUrl
           defaultImage
           keywords
-          lang
         }
       }
     }
@@ -27,8 +25,7 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
   const seoKeywords = tags ? tags : keywords;
 
   return (
-    <Helmet>
-      <html lang={lang} />
+    <Fragment>
       <title>{htmlTitle}</title>
       <link rel="canonical" href={`${siteUrl}/${slug}`} />
       <meta name="description" content={description} />
@@ -67,7 +64,7 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
         href={`${siteUrl}/images/favicon-32x32.png`}
         data-react-helmet="true"
       />
-    </Helmet>
+    </Fragment>
   );
 };
 

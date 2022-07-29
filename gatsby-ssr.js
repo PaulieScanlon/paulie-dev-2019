@@ -5,7 +5,8 @@ export const wrapRootElement = ({ element }) => {
   return <RootElement>{element}</RootElement>;
 };
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
+  setHtmlAttributes({ lang: 'en-GB' });
   setHeadComponents([
     <link
       key="inconsolata-regular"

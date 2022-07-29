@@ -18,7 +18,6 @@ const Page = ({
 }) => {
   return (
     <Fragment>
-      <Seo title={title} description={excerpt} slug={slug} />
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
       <MdxParser>{body}</MdxParser>
       <AsideElement>
@@ -43,3 +42,15 @@ export const query = graphql`
 `;
 
 export default Page;
+
+export const Head = ({
+  data: {
+    mdx: {
+      slug,
+      excerpt,
+      frontmatter: { title }
+    }
+  }
+}) => {
+  return <Seo title={title} description={excerpt} slug={slug} />;
+};
