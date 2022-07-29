@@ -22,7 +22,6 @@ const Page = ({
 }) => {
   return (
     <Fragment>
-      <Seo title={title} description={excerpt} slug={slug} />
       <div className="grid lg:grid-cols-1fr-auto">
         <DateTimeToRead date={date} />
         <small className="leading-6 font-semibold text-secondary">
@@ -70,3 +69,24 @@ export const query = graphql`
 `;
 
 export default Page;
+
+export const Head = ({
+  data: {
+    mdx: {
+      slug,
+      excerpt,
+      frontmatter: { type, title, tags, featuredImage }
+    }
+  }
+}) => {
+  return (
+    <Seo
+      type="article"
+      title={title}
+      description={excerpt}
+      slug={`${type}s/${slug}`}
+      image={featuredImage}
+      tags={tags}
+    />
+  );
+};
