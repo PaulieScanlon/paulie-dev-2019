@@ -140,9 +140,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       component: path.join(__dirname, `src/templates/${type}.js`),
       context: {
         id: id
-      }
-      // using defer means the conditional remark-prism plugin formatting doesn't work
-      // defer: true
+      },
+      defer: true
     });
   });
 

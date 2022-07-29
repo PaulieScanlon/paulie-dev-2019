@@ -41,14 +41,13 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        remarkPlugins: [
-          process.env.NODE_ENV === 'development' ? [] : [require('remark-prism'), { transformInlineCode: true }]
-        ],
+        remarkPlugins: [require('remark-prism')],
         // rehypePlugins: [require('rehype-slug'), [require('rehype-autolink-headings'), { behavior: 'wrap' }]]
         // rehypePlugins: [require('rehype-autolink-headings'), { behavior: 'wrap' }]
         rehypePlugins: [require('rehype-slug')]
       }
     },
+
     {
       resolve: 'gatsby-plugin-sharp',
       options: {
