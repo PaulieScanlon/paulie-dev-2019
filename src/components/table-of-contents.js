@@ -9,14 +9,14 @@ const TableOfContents = ({ slug, items, depth }) => {
   return (
     <ul key={items} className="list-none m-0 p-0">
       {items.map((item, index) => {
-        const newUrl = item.url ? stripLeadingSlash(item.url) : null;
+        const hash = item.url ? stripLeadingSlash(item.url) : null;
 
         return (
           <li key={index} className={`m-0 py-0 pl-${depth > 0 ? 3 : 0}`}>
             {item.url ? (
               <Link
-                id={newUrl}
-                to={`${slug}${newUrl}`}
+                id={hash}
+                to={`${slug}${hash}`}
                 className={`inline-flex items-center p-1 no-underline text-${
                   depth > 0 ? 'slate-400' : 'slate-100'
                 } text-${depth > 0 ? 'sm' : 'base'} hover:text-white`}
