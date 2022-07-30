@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'gatsby';
+
 import { stripLeadingSlash } from '../utils/strip-leading-slash';
 
-const TableOfContents = ({ items, depth }) => {
+const TableOfContents = ({ slug, items, depth }) => {
   return (
     <ul key={items} className="list-none m-0 p-0">
       {items.map((item, index) => {
@@ -12,9 +14,9 @@ const TableOfContents = ({ items, depth }) => {
         return (
           <li key={index} className={`m-0 py-0 pl-${depth > 0 ? 3 : 0}`}>
             {item.url ? (
-              <a
+              <Link
                 id={newUrl}
-                href={newUrl}
+                to={`${slug}${newUrl}`}
                 className={`inline-flex items-center p-1 no-underline text-${
                   depth > 0 ? 'slate-400' : 'slate-100'
                 } text-${depth > 0 ? 'sm' : 'base'} hover:text-white`}
@@ -31,9 +33,9 @@ const TableOfContents = ({ items, depth }) => {
                   </svg>
                 ) : null}
                 {item.title}
-              </a>
+              </Link>
             ) : null}
-            {item.items ? <TableOfContents items={item.items} depth={depth + 1} /> : null}
+            {item.items ? <TableOfContents slug={slug} items={item.items} depth={depth + 1} /> : null}
           </li>
         );
       })}

@@ -6,6 +6,7 @@ import './src/styles/prism-shades-of-purple.css';
 import './src/styles/global.css';
 
 export const onRouteUpdate = ({ location }) => {
+  const pagePath = location ? location.pathname + location.search + location.hash : undefined;
   const element = document.getElementById(location.hash.split('#')[1]?.toLowerCase());
 
   if (element) {
@@ -14,17 +15,13 @@ export const onRouteUpdate = ({ location }) => {
     });
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    return null;
+  if (process.env.NODE_ENV === 'production') {
+    setTimeout(() => {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'page_view', { page_path: pagePath });
+      }
+    }, 100);
   }
-
-  const pagePath = location ? location.pathname + location.search + location.hash : undefined;
-
-  setTimeout(() => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'page_view', { page_path: pagePath });
-    }
-  }, 100);
 
   return true;
 };

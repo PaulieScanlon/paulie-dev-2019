@@ -47,7 +47,7 @@ const Page = ({
         {toc ? (
           <div className="px-6">
             <h5 className="mb-3 text-lg leading-6 font-semibold uppercase text-secondary">On this page</h5>
-            <TableOfContents items={toc} />
+            <TableOfContents slug={slug} items={toc} />
           </div>
         ) : null}
       </AsideElement>
