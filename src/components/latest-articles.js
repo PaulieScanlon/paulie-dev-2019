@@ -14,7 +14,9 @@ const LatestArticles = () => {
         limit: 3
       ) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           excerpt(pruneLength: 100)
           timeToRead
           frontmatter {
@@ -41,7 +43,7 @@ const LatestArticles = () => {
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
-            slug,
+            fields: { slug },
             excerpt,
             frontmatter: { title, date, publication },
             logo: {
@@ -52,7 +54,7 @@ const LatestArticles = () => {
           return (
             <ArticleCard
               key={index}
-              link={`articles/${slug}`}
+              link={slug}
               title={title}
               logo={logo}
               publication={publication}

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 import Seo from '../components/seo';
 import AsideElement from '../components/aside-element';
@@ -9,26 +9,22 @@ import AllDaysChart from '../components/all-days-chart';
 import AllYearsChart from '../components/all-years-chart';
 import LatestReaction from '../components/latest-reaction';
 
-const Page = ({ serverData }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const {
-    pagesJson: { title, slug, body }
-  } = useStaticQuery(graphql`
-    {
-      pagesJson {
-        title
-        slug
-        body
-      }
+const Page = ({
+  data: {
+    pagesJson: {
+      frontmatter: { title },
+      heading,
+      body
     }
-  `);
+  },
+  serverData
+}) => {
+  const [activeIndex, setActiveIndex] = useState(null);
 
   return (
     <Fragment>
-      <Seo title={slug} description={body} slug={slug} />
-      <small className="mb-4 leading-6 font-semibold capitalize text-primary">{slug}</small>
-      <h1>{title}</h1>
+      <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
+      <h1>{heading}</h1>
       <p className="mb-16">{body}</p>
 
       <div className="grid gap-24">
@@ -102,4 +98,31 @@ export async function getServerData() {
   };
 }
 
+export const query = graphql`
+  query ($id: String) {
+    pagesJson(id: { eq: $id }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+      heading
+      body
+    }
+  }
+`;
+
 export default Page;
+
+export const Head = ({
+  data: {
+    pagesJson: {
+      fields: { slug },
+      frontmatter: { title },
+      body
+    }
+  }
+}) => {
+  return <Seo title={title} description={body} slug={slug} />;
+};

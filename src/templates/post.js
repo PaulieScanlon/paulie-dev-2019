@@ -13,7 +13,7 @@ import TableOfContents from '../components/table-of-contents';
 const Page = ({
   data: {
     mdx: {
-      slug,
+      fields: { slug },
       excerpt,
       timeToRead,
       frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
@@ -59,7 +59,9 @@ const Page = ({
 export const query = graphql`
   query ($id: String!) {
     mdx(id: { eq: $id }) {
-      slug
+      fields {
+        slug
+      }
       excerpt
       timeToRead
       frontmatter {
@@ -87,20 +89,11 @@ export default Page;
 export const Head = ({
   data: {
     mdx: {
-      slug,
+      fields: { slug },
       excerpt,
       frontmatter: { type, title, tags, featuredImage }
     }
   }
 }) => {
-  return (
-    <Seo
-      type="article"
-      title={title}
-      description={excerpt}
-      slug={`${type}s/${slug}`}
-      image={featuredImage}
-      tags={tags}
-    />
-  );
+  return <Seo type="article" title={title} description={excerpt} slug={slug} image={featuredImage} tags={tags} />;
 };

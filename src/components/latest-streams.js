@@ -14,7 +14,9 @@ const LatestStreams = () => {
         limit: 3
       ) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           excerpt(pruneLength: 100)
           timeToRead
           frontmatter {
@@ -41,7 +43,7 @@ const LatestStreams = () => {
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
-            slug,
+            fields: { slug },
             excerpt,
             frontmatter: { title, date, show },
             logo: {
@@ -50,15 +52,7 @@ const LatestStreams = () => {
           } = node;
 
           return (
-            <StreamCard
-              key={index}
-              link={`streams/${slug}`}
-              title={title}
-              logo={logo}
-              show={show}
-              date={date}
-              excerpt={excerpt}
-            />
+            <StreamCard key={index} link={slug} title={title} logo={logo} show={show} date={date} excerpt={excerpt} />
           );
         })}
       </ul>

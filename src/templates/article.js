@@ -12,7 +12,7 @@ import Seo from '../components/seo';
 const Page = ({
   data: {
     mdx: {
-      slug,
+      fields: { slug },
       excerpt,
       timeToRead,
       frontmatter: { type, title, date, publication, tags },
@@ -39,7 +39,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser>{body}</MdxParser>
-      <AddReaction title={title} slug={`/articles/${slug}`} />
+      <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
       </AsideElement>
@@ -50,7 +50,9 @@ const Page = ({
 export const query = graphql`
   query ($id: String!) {
     mdx(id: { eq: $id }) {
-      slug
+      fields {
+        slug
+      }
       excerpt
       timeToRead
       frontmatter {
@@ -70,20 +72,11 @@ export default Page;
 export const Head = ({
   data: {
     mdx: {
-      slug,
+      fields: { slug },
       excerpt,
       frontmatter: { type, title, tags, featuredImage }
     }
   }
 }) => {
-  return (
-    <Seo
-      type="article"
-      title={title}
-      description={excerpt}
-      slug={`${type}s/${slug}`}
-      image={featuredImage}
-      tags={tags}
-    />
-  );
+  return <Seo type="article" title={title} description={excerpt} slug={slug} image={featuredImage} tags={tags} />;
 };

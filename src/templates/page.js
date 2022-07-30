@@ -9,7 +9,6 @@ import GenericAside from '../components/generic-aside';
 const Page = ({
   data: {
     mdx: {
-      slug,
       excerpt,
       frontmatter: { type, title },
       body
@@ -30,7 +29,9 @@ const Page = ({
 export const query = graphql`
   query ($id: String!) {
     mdx(id: { eq: $id }) {
-      slug
+      fields {
+        slug
+      }
       excerpt
       frontmatter {
         type
@@ -46,7 +47,7 @@ export default Page;
 export const Head = ({
   data: {
     mdx: {
-      slug,
+      fields: { slug },
       excerpt,
       frontmatter: { title }
     }
