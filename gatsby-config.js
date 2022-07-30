@@ -29,6 +29,7 @@ module.exports = {
     defaultImage: 'https://paulie.dev/images/paulie-open-graph-image-2022.jpg'
   },
   plugins: [
+    'gatsby-plugin-netlify',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-mdx-embed',
     'gatsby-plugin-image',
