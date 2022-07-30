@@ -14,7 +14,9 @@ const LatestPosts = () => {
         limit: 3
       ) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           excerpt(pruneLength: 100)
           timeToRead
           frontmatter {
@@ -41,7 +43,7 @@ const LatestPosts = () => {
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
-            slug,
+            fields: { slug },
             excerpt,
             timeToRead,
             frontmatter: { title, date, dateModified },
@@ -53,7 +55,7 @@ const LatestPosts = () => {
           return (
             <PostCard
               key={index}
-              link={`posts/${slug}`}
+              link={slug}
               title={title}
               thumbnail={thumbnail}
               timeToRead={timeToRead}

@@ -13,7 +13,9 @@ const LatestArticles = () => {
         sort: { order: DESC, fields: frontmatter___date }
       ) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           excerpt(pruneLength: 100)
           timeToRead
           frontmatter {
@@ -35,13 +37,15 @@ const LatestArticles = () => {
     <ul className="mt-16 grid gap-8 list-none m-0 mb-8 p-0">
       {nodes.map((node, index) => {
         const {
-          slug,
+          fields: { slug },
           excerpt,
           frontmatter: { title, date, publication },
           logo: {
             childImageSharp: { logo }
           }
         } = node;
+
+        console.log(slug);
 
         return (
           <ArticleCard

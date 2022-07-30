@@ -8,7 +8,9 @@ export const useNavigation = () => {
     {
       allMdx(filter: { frontmatter: { type: { eq: "page" } } }, sort: { order: ASC, fields: slug }) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             title
             icon
@@ -17,7 +19,9 @@ export const useNavigation = () => {
       }
       allPagesJson {
         nodes {
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             title
             icon

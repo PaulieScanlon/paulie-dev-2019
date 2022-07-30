@@ -1,5 +1,5 @@
 const path = require('path');
-const { createRemoteFileNode } = require('gatsby-source-filesystem');
+const { createFilePath, createRemoteFileNode } = require('gatsby-source-filesystem');
 
 exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
   createTypes(`
@@ -56,6 +56,16 @@ exports.onCreateNode = async ({
   cache,
   createNodeId
 }) => {
+  if (node.internal.type === 'Mdx' || node.internal.type === 'PagesJson') {
+    const path = createFilePath({ node, getNode });
+
+    await createNodeField({
+      node,
+      name: 'slug',
+      value: node.frontmatter.type === 'page' ? path : `/${node.frontmatter.type}s${path}`
+    });
+  }
+
   if (node.internal.type === 'Mdx') {
     if (node.frontmatter.featuredImage) {
       let featuredImage = await createRemoteFileNode({
@@ -119,7 +129,9 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       allMdx(filter: { frontmatter: { status: { ne: "draft" } } }) {
         nodes {
           id
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             type
           }
@@ -131,12 +143,12 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
   allMdx.nodes.forEach((node) => {
     const {
       id,
-      slug,
+      fields: { slug },
       frontmatter: { type }
     } = node;
 
     createPage({
-      path: type === 'page' ? `${slug || '/'}` : `${type}s/${slug}`,
+      path: slug,
       component: path.join(__dirname, `src/templates/${type}.js`),
       context: {
         id: id

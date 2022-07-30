@@ -73,14 +73,14 @@ const RootElement = ({ children }) => {
               <ul>
                 {navigation.pages.map((page, index) => {
                   const {
-                    slug,
+                    fields: { slug },
                     frontmatter: { title, icon }
                   } = page;
                   return (
                     <li key={index} className="text-lg mb-2">
                       <Link
                         onClick={handleNav}
-                        to={`/${slug}`}
+                        to={slug}
                         activeClassName="!text-primary"
                         className="main-navigation text-slate-300"
                       >

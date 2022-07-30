@@ -22,7 +22,9 @@ const AllDaysChart = () => {
     {
       allMdx(filter: { frontmatter: { status: { ne: "draft" }, type: { ne: "page" } } }) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             title
             date
@@ -35,7 +37,7 @@ const AllDaysChart = () => {
   const allMdxDays = mdx
     .map((node, index) => {
       const {
-        slug,
+        fields: { slug },
         frontmatter: { date }
       } = node;
 

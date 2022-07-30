@@ -25,7 +25,9 @@ const AllYearsChart = () => {
     {
       allMdx(filter: { frontmatter: { status: { ne: "draft" }, type: { ne: "page" } } }) {
         nodes {
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             title
             date
@@ -38,7 +40,7 @@ const AllYearsChart = () => {
   const allMdxYears = mdx
     .map((node, index) => {
       const {
-        slug,
+        fields: { slug },
         frontmatter: { date }
       } = node;
 
