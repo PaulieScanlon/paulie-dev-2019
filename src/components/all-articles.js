@@ -45,8 +45,6 @@ const LatestArticles = () => {
           }
         } = node;
 
-        console.log(slug);
-
         return (
           <ArticleCard
             key={index}

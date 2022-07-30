@@ -42,7 +42,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser embedded={embeddedImages}>{body}</MdxParser>
-      <AddReaction title={title} slug={`/posts/${slug}`} />
+      <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
         {toc ? (
