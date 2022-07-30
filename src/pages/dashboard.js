@@ -99,8 +99,8 @@ export async function getServerData() {
 }
 
 export const query = graphql`
-  query ($id: String) {
-    pagesJson(id: { eq: $id }) {
+  query {
+    pagesJson {
       fields {
         slug
       }
