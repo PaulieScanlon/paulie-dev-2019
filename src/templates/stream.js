@@ -14,7 +14,6 @@ const Page = ({
     mdx: {
       fields: { slug },
       excerpt,
-      timeToRead,
       frontmatter: { type, title, date, role, show, tags },
       body
     }
@@ -56,7 +55,6 @@ export const query = graphql`
         slug
       }
       excerpt
-      timeToRead
       frontmatter {
         type
         title

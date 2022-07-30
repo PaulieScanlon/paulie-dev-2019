@@ -18,7 +18,6 @@ const LatestPosts = () => {
             slug
           }
           excerpt(pruneLength: 100)
-          timeToRead
           frontmatter {
             title
             date
@@ -45,7 +44,6 @@ const LatestPosts = () => {
           const {
             fields: { slug },
             excerpt,
-            timeToRead,
             frontmatter: { title, date, dateModified },
             featuredImage: {
               childImageSharp: { thumbnail }
@@ -58,7 +56,6 @@ const LatestPosts = () => {
               link={slug}
               title={title}
               thumbnail={thumbnail}
-              timeToRead={timeToRead}
               date={date}
               dateModified={dateModified}
               excerpt={excerpt}

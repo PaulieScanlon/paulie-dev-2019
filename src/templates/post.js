@@ -15,7 +15,6 @@ const Page = ({
     mdx: {
       fields: { slug },
       excerpt,
-      timeToRead,
       frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
       embeddedImages,
       body,
@@ -26,7 +25,7 @@ const Page = ({
   return (
     <Fragment>
       <div className="grid lg:grid-cols-1fr-auto">
-        <DateTimeToRead date={dateModified ? dateModified : date} timeToRead={timeToRead} />
+        <DateTimeToRead date={dateModified ? dateModified : date} />
         <small className="leading-6 font-semibold text-secondary">Author &bull; {author}</small>
       </div>
       <h1 className="my-12">{title}</h1>
@@ -63,7 +62,6 @@ export const query = graphql`
         slug
       }
       excerpt
-      timeToRead
       frontmatter {
         type
         title

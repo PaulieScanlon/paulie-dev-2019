@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import DateTimeToRead from './date-time-to-read';
 
-const PostCard = ({ link, title, thumbnail, timeToRead, date, dateModified, excerpt }) => {
+const PostCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
   return (
     <li className="m-0 p-0 rounded border border-outline bg-surface transition-all shadow-lg hover:shadow-secondary/10 hover:-translate-y-2 ease-in-out duration-500">
       <Link to={link} className="block p-4 cursor-pointer no-underline hover:text-secondary ">
@@ -14,7 +14,7 @@ const PostCard = ({ link, title, thumbnail, timeToRead, date, dateModified, exce
             <GatsbyImage alt={title} image={getImage(thumbnail)} />
           </div>
           <div>
-            <DateTimeToRead date={dateModified ? dateModified : date} timeToRead={timeToRead} />
+            <DateTimeToRead date={dateModified ? dateModified : date} />
             <h3 className="m-0 text-xl text-white">{title}</h3>
             <p className="m-0 text-slate-300 text-base ">{excerpt}</p>
           </div>
@@ -31,8 +31,6 @@ PostCard.propTypes = {
   title: PropTypes.string.isRequired,
   /** Gatsby Image Data */
   thumbnail: PropTypes.any.isRequired,
-  /** The timeToRead to display */
-  timeToRead: PropTypes.any.isRequired,
   /** The dateModified to display */
   dateModified: PropTypes.string,
   /** The date to display */

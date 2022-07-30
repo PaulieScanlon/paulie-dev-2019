@@ -18,7 +18,6 @@ const LatestStreams = () => {
             slug
           }
           excerpt(pruneLength: 100)
-          timeToRead
           frontmatter {
             title
             date
