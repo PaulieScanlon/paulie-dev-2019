@@ -17,8 +17,10 @@ const LatestReaction = () => {
     const getLatestReaction = async () => {
       try {
         const response = await (await fetch('/api/get-latest-reaction')).json();
-        setIsLoading(false);
         setResponse(response.reaction);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       } catch (error) {
         console.error(error);
       }
@@ -29,7 +31,7 @@ const LatestReaction = () => {
     return () => {
       isMounted.current = false;
     };
-  }, []);
+  }, [isMounted]);
 
   const { title, reaction, slug, date } = response;
 
