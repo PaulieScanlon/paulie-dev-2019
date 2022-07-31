@@ -152,8 +152,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       component: path.join(__dirname, `src/templates/${type}.js`),
       context: {
         id: id
-      }
-      // defer: true // test for rehype-slug
+      },
+      defer: type !== 'post' ? true : false
     });
   });
 
