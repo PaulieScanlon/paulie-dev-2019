@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { graphql, Link } from 'gatsby';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
 import Seo from '../components/seo';
 import AsideElement from '../components/aside-element';
@@ -17,9 +18,13 @@ const Page = ({
       body
     }
   },
-  serverData
+  serverData: {
+    serverResponse: { reactions, locations }
+  }
 }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+
+  console.log(locations);
 
   return (
     <Fragment>
@@ -42,11 +47,48 @@ const Page = ({
 
         <section>
           <LatestReaction />
+          <div className="mt-4 leading-tight">
+            <small className="text-slate-400 text-xs">Powered by </small>
+            <a href="https://fauna.com/" target="_blank" rel="noreferrer" className="text-xs">
+              Fauna
+            </a>
+          </div>
         </section>
+
+        <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
+          <ul className="m-0 p-0 rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6 min-h-[200px]">
+            {locations.data.map((row, index) => {
+              const { flag, name, amount } = row;
+              return (
+                <li key={index} className="m-0 p-0 flex justify-between items-center">
+                  <div className="flex gap-2 items-center">
+                    <span className="mt-1">{getUnicodeFlagIcon(flag)}</span>
+                    <span>{name}</span>
+                  </div>
+                  <span className="font-semibold">{`x${amount}`}</span>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="mt-4 leading-tight">
+            <small className="text-slate-400 text-xs">Data from </small>
+            <a
+              href="https://developers.google.com/analytics/devguides/reporting/data/v1?hl=en"
+              target="_blank"
+              rel="noreferrer"
+              className="text-xs"
+            >
+              Google Analytics Data API V1 (Beta)
+            </a>
+          </div>
+        </section>
+
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
-          {serverData.serverResponse.reactions
+          {reactions.data
             .sort((a, b) => b.total - a.total)
             .map((item, index) => {
               const { title, total, posts } = item;
@@ -78,6 +120,12 @@ const Page = ({
                 </AccordionItem>
               );
             })}
+          <div className="mt-4 leading-tight">
+            <small className="text-slate-400 text-xs">Powered by </small>
+            <a href="https://fauna.com/" target="_blank" rel="noreferrer" className="text-xs">
+              Fauna
+            </a>
+          </div>
         </section>
       </div>
 
@@ -90,10 +138,14 @@ const Page = ({
 
 export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
+  const allLocationsUtil = require('../utils/get-all-locations-util');
 
   return {
     props: {
-      serverResponse: await allReactionsUtil.get()
+      serverResponse: {
+        reactions: await allReactionsUtil.get(),
+        locations: await allLocationsUtil.get()
+      }
     }
   };
 }
