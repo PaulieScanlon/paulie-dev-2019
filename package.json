@@ -24,8 +24,10 @@
     "url": "https://github.com/PaulieScanlon/paulie-dev-2019/issues"
   },
   "dependencies": {
+    "@google-analytics/data": "^2.8.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "country-flag-icons": "^1.5.5",
     "faunadb": "^4.6.0",
     "gatsby": "^4.19.2",
     "gatsby-plugin-gatsby-cloud": "^4.19.0",

@@ -1,12 +1,3 @@
-# Gatsby
-public
-.env.development
-.env.production
-refs.md
-typeDefs.txt
-yarn.lock
-.DS_Store
-
 # Logs
 logs
 *.log
@@ -96,6 +87,13 @@ dist
 # Comment in the public line in if your project uses Gatsby and *not* Next.js
 # https://nextjs.org/blog/next-9-1#public-directory-support
 public
+.env.development
+.env.production
+refs.md
+yarn.lock
+.DS_Store
+paulie-dev-541568ac1566.json
+
 
 # vuepress build output
 .vuepress/dist

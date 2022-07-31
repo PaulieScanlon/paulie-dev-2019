@@ -54,7 +54,7 @@ module.exports.get = async function () {
 
     return {
       message: 'all reactions',
-      reactions: grouped
+      data: grouped
     };
   } catch (error) {
     return { message: error.message };
