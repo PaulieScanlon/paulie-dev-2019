@@ -77,6 +77,15 @@ module.exports = {
         outline: '#232140',
         surface: '#1a182e'
       },
+      keyframes: {
+        bar: {
+          '0%': { width: '100%' },
+          '100%': { width: '0%' }
+        }
+      },
+      animation: {
+        'scaling-bar': 'bar 60s linear infinite'
+      },
       fontFamily: {
         sans: ['Inconsolata', 'ui-sans-serif', 'system-ui'],
         mono: ['ui-monospace', 'monospace']
