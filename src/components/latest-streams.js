@@ -56,7 +56,7 @@ const LatestStreams = () => {
         })}
       </ul>
       <div className="flex justify-center">
-        <Link to="/articles" className="flex gap-2 items-center no-underline">
+        <Link to="/streams" className="flex gap-2 items-center no-underline">
           More Streams{' '}
           <span role="img" aria-label="television">
             📺
