@@ -25,7 +25,7 @@ In an attempt to explain a little more i've documented a couple of ways this app
 
 In this example i'll be specifically referring to methods I use in my Gatsby builds when working with MDX
 
-## [MDX](#mdx)
+## MDX
 
 For those not familiar with MDX it's similar to Markdown and additionally provides a method to render React components
 along with typical Markdown syntax... MDX is brilliant and I love it!
@@ -79,7 +79,7 @@ x2 Svg quote icons either side of the text.
 This approach works great for "one off" components but in the case of the `<CustomBlockquote />` you might want to use
 it more regularly when writing blog posts and having to import it for each and every MDX file can be a bit of a faff.
 
-## [Fold it in](#fold-it-in)
+## Fold it in
 
 It's at this point where you might like to think about providing all MDX files with the ability to render the
 `<CustomBlockquote />` component without needing to import it first. It's here where the term "fold it in" makes a bit
@@ -126,7 +126,7 @@ export const query = graphql`
 export default MdxTemplate
 ```
 
-## [MDXProvider](#mdx-provider)
+## MDXProvider
 
 To "fold" components into MDX I use the `components` prop on the `<MDXProvider />` and pass in the components i'd like
 to make available to all MDX files.
@@ -203,7 +203,7 @@ approachable chaps and were heavily involved in the creation of MDX.
 
 However, if you have any other questions i'll do my best to answer them!
 
-## [MDXRenderer](#mdx-renderer)
+## MDXRenderer
 
 In the above example i'm using the `<MDXProvider />` from `@mdx-js/react` and passing in a React component, in this next
 bit i'm going to use the `<MDXRenderer />` from `gatsby-plugin-mdx` to fold in "data".
@@ -211,7 +211,7 @@ bit i'm going to use the `<MDXRenderer />` from `gatsby-plugin-mdx` to fold in "
 I'll use the `<CustomBlockquote />` component again but this time rather than rendering it's children i'm going to pass
 data stored in `frontmatter` back through the `<MDXRenderer />` and make it available as a `prop` in the MDX body 🥴
 
-### [Frontmatter](#frontmatter)
+### Frontmatter
 
 First I add a new field in `frontmatter` called `quotes`, it's of type `array` but looks like a list syntax in Markdown.
 If the below diff is a little hard to read, the `quotes` field should look like this, the `---` are important as they
@@ -226,7 +226,7 @@ signify the beginning and end of `frontmatter`
 ---
 ```
 
-### [Props instead of children](#props-instead-of-children)
+### Props instead of children
 
 This is a weird one, but notice now instead of rendering the children of `<CustomBlockquote />` as text I'm using an
 escaped Jsx syntax and pointing it to `props.quotes[0]`
@@ -257,7 +257,7 @@ _The `[0]` is normal array syntax and represents an index from an array_
 
 ```
 
-### [MDXRenderer Props](#mdx-renderer-props)
+### MDXRenderer Props
 
 In order for `props.quotes[0]` to equal something other than `null` I now query the `frontmatter` from the MDX Template
 file and pass the `quotes` back to the `<MDXRenderer />` on a prop i've also called `quotes`

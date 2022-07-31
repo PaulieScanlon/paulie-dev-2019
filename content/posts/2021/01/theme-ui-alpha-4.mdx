@@ -75,7 +75,7 @@ and the reason this value is stored in the `space` array is because one of Theme
 You can see the full set of scales in the [docs](https://theme-ui.com/theme-spec#theme-scales) which explain where each
 CSS property looks in the theme to find it's value.
 
-## [Array Syntax](#array-syntax)
+## Array Syntax
 
 I've gleaned from various discussions about Theme UI that the array syntax for `space` can be a little confusing so to
 throw an alternative method in to the mix, `space` can also be an object. I suspect Theme UI don't mention this in the
@@ -112,7 +112,7 @@ export default {
 }
 ```
 
-## [Object Syntax](#object-syntax)
+## Object Syntax
 
 In this example `padding` is given a "string" value of "lg" and if you look in the `space` object you'll see the `lg`
 key has a value of <mark>"32px"</mark>. The _longhand_ for this would be `theme.space.lg`
@@ -150,7 +150,7 @@ export default {
 }
 ```
 
-## [Alt Syntax](#alt-syntax)
+## Alt Syntax
 
 As per the previous example `padding` is given a "string" value of "jaguar" and if you look in the `space` object you'll
 see the `jaguar` key has a value of <mark>"32px"</mark>

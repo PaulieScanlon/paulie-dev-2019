@@ -19,7 +19,7 @@ If you're new to Theme UI i'd suggest having a read of the first five posts in t
 - 4. [Understanding Theme UI: 4 - Scales](/posts/2021/01/theme-ui-alpha-4/)
 - 5. [Understanding Theme UI: 5 - Media Queries](/posts/2021/01/theme-ui-alpha-5/)
 
-## [Variants - Buttons](#variants-button)
+## Variants - Buttons
 
 There are some obvious uses for variants that are explained in the docs but one method I use a fair bit isn't covered by
 the docs so here's one way you can use variants inside the theme object.
@@ -85,7 +85,7 @@ the CSS properties from the default button and will then apply / overwrite new C
 `backgroundColor`. You can use this approach for as many button variants as you require, but do always "extend" using
 the variant before applying new styles.
 
-## [Variants - typography](#variants-typography)
+## Variants - typography
 
 This one is a bit gnarly so strap in. The concept here is that the variant prop used on the component can be used to
 point to a specific set of styles in the theme, this can be any theme key, in the below example it's `styles` and as
@@ -148,7 +148,7 @@ like `composes`
 _FYI The reason I point typography to `styles` is because the `styles` key is what Theme UI uses when styling HTML dom
 nodes found in markdown (`.md`) or MDX (`.mdx`)_
 
-## [CSS selectors](#css-selectors)
+## CSS selectors
 
 Every now and then you might run into an issue where you'll need to target a sibling or child of a Theme UI component.
 
@@ -239,7 +239,7 @@ I've written a post about how to use "style objects" for use with styled-compone
 Theme UI. You can read more about "style objects" in this post:
 [styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
 
-## [Svg paths](#svg-paths)
+## Svg paths
 
 One "hack" I used extensively in [BumHub](https://gatsbyjs.com/blog/2020-silly-site-top-20/) was to target the Svg's
 `<path>` tags via a `className` to set their `fill` to colors defined in the theme. This way if you change any color
@@ -284,7 +284,7 @@ export const LogoIcon = () => {
 };
 ```
 
-## [css keyframes](#css-keyframes)
+## css keyframes
 
 This is a lesser understood part of CSS and arguably even more so with Theme UI as it's not mentioned in the docs
 anywhere. However it is possible to animate using CSS keyframes using `keyframes` from `@emotion/react`
@@ -352,7 +352,7 @@ export const MrKeyframes = () => {
 };
 ```
 
-## [functional values](#functional-values)
+## functional values
 
 I've talked a lot about how Theme UI maps CSS properties to specific theme objects, e.g `color` and `background-color`
 automatically map to `colors`... but if you need to access a value from your theme and map it to a different CSS

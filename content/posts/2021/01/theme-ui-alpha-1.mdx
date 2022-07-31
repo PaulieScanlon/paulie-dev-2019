@@ -25,7 +25,7 @@ below, i've called it `<MrPragma />` and you can find the `src`
 
 <CodeSandbox codeSandboxId="understanding-theme-ui-jsx-pragma-vjo1gd" />
 
-## [Theme Object](#theme-object)
+## Theme Object
 
 A core principle of Theme UI is the theme object it's a little bit like global CSS but without all the headaches.
 
@@ -65,7 +65,7 @@ us so we don't have to, and when working with CSS some constraints are actually 
 I'll explain how to use Theme UI's escape hatches if you don't want or can't in some scenarios work with the
 constraints_
 
-### [CSS Property maps](#css-property-maps)
+### CSS Property maps
 
 This is my opinion is one of the hardest concepts to grasp. The TLDR is Theme UI has made decisions regarding which CSS
 properties map to which objects in the theme object. The HTML `color` and `background-color` are mapped to the `colors`
@@ -137,11 +137,11 @@ export const MrPragma = () => {
 ... but it does go some way to understanding what the theme object is and how you can access key value pairs contained
 within it.
 
-## [Jsx Pragma](#jsx-pragma)
+## Jsx Pragma
 
 In the next step I'll explain how to achieve the same thing but by leverageing Theme UI's super power, The Jsx Pragma.
 
-### [Step One](#step-one)
+### Step One
 
 W.T.Flip is [Jsx Pragma](https://www.gatsbyjs.com/blog/2019-08-02-what-is-jsx-pragma/)?... well, to quote the Gatsby
 docs
@@ -181,7 +181,7 @@ export const MrPragma = () => {
 If you're familiar with HTML you'll know that `sx` isn't a valid HTML attribute but by including Theme UI's Jsx Pragma
 the compiler understands what it is and will know what to do with it before the Jsx is returned to the browser.
 
-### [Step Two](#step-two)
+### Step Two
 
 Use the `sx` prop to style a `<div />`
 

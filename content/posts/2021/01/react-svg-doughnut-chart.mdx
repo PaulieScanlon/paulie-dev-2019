@@ -94,9 +94,9 @@ A shape like this will do the trick 👇
 To modify the shape of any data the most common method to use is
 [Array.prototype.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
 
-## [The Data](#the-data)
+## The Data
 
-### [Step one](#step-one)
+### Step one
 
 Reduce all the tag names into one array
 
@@ -154,7 +154,7 @@ Which results in an array of strings similar to the below 👇
 You'll notice there are duplicates in this array and in step two i'll count the duplicates which will give me enough
 data to work out what percentage each tag represents.
 
-### [Step two](#step-two)
+### Step two
 
 Count the amount of duplicate items and assign a value in a new object key called `count` and return this value along
 with the tag name
@@ -235,7 +235,7 @@ This gives me an output similar to the below 👇
   },
 ```
 
-### [Step three](#step-three)
+### Step three
 
 Using the new `count` value I need to calculate how this corresponds to the total count from the array which I'll use to
 create the percentage value for each tag
@@ -306,7 +306,7 @@ calculated in a similar way by subtracting it from 100. I'll need the remainder 
 
 The final return statement spreads the `item` object along with the new `percentage` and `remainder` values.
 
-### [Step four](#step-four)
+### Step four
 
 Return the values with the largest count first
 
@@ -381,7 +381,7 @@ The general idea is to use `array.map()` again but this time in `Jsx` to loop ov
 By using a combination of CSS values; `strokeDashoffset` and `strokeDasharray` I'm able to determine where to start and
 end the stroke
 
-## [The Chart](#the-chart)
+## The Chart
 
 Return a circle for each `tag` item and set a stroke color
 
@@ -590,7 +590,7 @@ determine where the stroke starts. To calculate these values here's the formula 
 - All preceding segments percentage = a sum of a slice of the total `tagData` percentage
 - The start position = 25 and is to offset the start point for each stroke so it's at the top of the circle
 
-## [The legend](#the-legend)
+## The legend
 
 A lot of charting libraries will plot a title next to each segments to help users identify what each segment represents
 along with a value. However, and i've wrestled with this so many times because I like to develop _mobile first_ and more
@@ -764,7 +764,7 @@ export const MrDoughnut = () => {
 }
 ```
 
-## [The Result](#the-result)
+## The Result
 
 Finally, here's the result 🦜
 

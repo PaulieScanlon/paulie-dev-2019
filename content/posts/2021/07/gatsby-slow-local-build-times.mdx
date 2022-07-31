@@ -20,14 +20,14 @@ dependant on if the plugin author has exposed a method to limit how much data is
 If you wanna jump ahead here's a demo repo:
 [https://github.com/PaulieScanlon/gatsby-slow-local-build-times](https://github.com/PaulieScanlon/gatsby-slow-local-build-times)
 
-## [How much data is being sourced](#how-much-data-is-being-sourced)
+## How much data is being sourced
 
 In short this is the crux of the _problem_. If you're sourcing loads of data the Gatsby build steps are delayed while
 Node / `gatsby-source-filesystem` do their thing.
 
 In order to speed that bit up it's advised you limit the amount of data you're sourcing.
 
-## [gatsby-source-filesystem](#gatsby-source-filesystem)
+## gatsby-source-filesystem
 
 This plugin is usually responsible for sourcing files. In the demo repo I'm sourcing Markdown files from the `content`
 directory, and I'd imagine you'll have something similar to the below in your `gatsby-config`
@@ -50,7 +50,7 @@ module.exports = {
 
 The main thing to look at is the `path`. The above snippet will source **everything** from the `src/content` directory.
 
-## [Do you need to source everything?](#do-you-need-to-source-everything)
+## Do you need to source everything
 
 Good question right? Well, in `production`, mostly likely the answer will be yes. In `development` however, probably
 not.

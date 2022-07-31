@@ -20,7 +20,7 @@ If you'd prefer to jump ahead here's a demo repo:
 
 ... and a live demo can be seen here: [https://nasadatasource.gatsbyjs.io/](https://nasadatasource.gatsbyjs.io/)
 
-## [sourceNodes](#sourceNodes)
+## sourceNodes
 
 To source data from a remote source and add it to Gatsby's data layer you can use the `sourceNodes` extension point from
 within `gatsby-node.js`
@@ -62,7 +62,7 @@ If you're attempting to download a million 4k videos from a remote server on the
 much longer to complete. You've probably seen comments on Twitter regarding slow Gatsby build times, these comments
 seldom mention how much data is being sourced, and from where.
 
-## [Source Plugins](#source-plugins)
+## Source Plugins
 
 As great as source plugins are, you might find yourself experiencing some of these slow build time issues but because
 you're using a source plugin it might be hard to resolve them since you don't have access to Gatsby's underlying
@@ -72,7 +72,7 @@ My motivation for writing this post is for precisely this reason. You might not 
 solution it's quite likely you can source a smaller data payload which could help bring your build times back up to
 speed.
 
-## [Pre-Flight Checks](#pre-flight-checks)
+## Pre-Flight Checks
 
 To use the NASA API you'll need an API key, you can get that from NASA's API Site:
 [https://api.nasa.gov](https://api.nasa.gov)
@@ -93,7 +93,7 @@ And finally since I'll be requesting data on the server rather than in browser I
 yarn add axios # npm install axios --save
 ```
 
-## [The Code](#the-code)
+## The Code
 
 Ok, with all of the above in place add the below to your `gatsby-node.js` file. You'll need to add your own API to the
 request string.
@@ -124,7 +124,7 @@ parameters including but not limited to the following.
 - createNodeId
 - createContentDigest
 
-#### [actions](#actions)
+#### actions
 
 I've refereed to Gatsby's data layer a number of times and at the time of writing this post, This is actually Redux.
 Actions are the equivalent to actions bound with [bindActionCreators](https://redux.js.org/api/bindactioncreators/) in
@@ -132,19 +132,19 @@ Redux. One of the parameters. `actions` contains a function called
 [createNode](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createNode) and this is how you add data to
 the Redux state object / Gatsby's data layer
 
-#### [createNodeId](#createNodeId)
+#### createNodeId
 
 This is effectively a helper function that aids in the creation of unique id's. Under the hood Gatsby are using
 [uuid](https://www.npmjs.com/package/uuid), you can of course use your preferred method but since uuid is already part
 of the Gatsby bundle it makes sense to use it.
 
-#### [createContentDigest](#createContentDigest)
+#### createContentDigest
 
 This again is a helper function provided by Gatsby that allows for the creation of a content digest.
 [createContentDigest](https://www.gatsbyjs.com/docs/reference/config-files/node-api-helpers/#createContentDigest) is
 used to determine if data has changed or has remained the same since the last build.
 
-#### [actions.createNode](#actions-createNode)
+#### actions.createNode
 
 To create a node there's a few things Gatsby requires, and below is the absolute minimum set of parameters you'll need.
 The full list of accepted parameters can be seen in the
@@ -162,30 +162,30 @@ actions.createNode({
 });
 ```
 
-#### [data](#data)
+#### data
 
 The `...data` is the data returned by the NASA API. It's a single object rather than an array of objects. I spread this
 straight into my new node, you can of course abstract the response and only inject the data you need.
 
-#### [id](#id)
+#### id
 
 Every node needs an id, i'm not 100% clear on why, but id's are usually required to ensure data is uniquely identifiable
 
-#### [internal.type](#internal-type)
+#### internal.type
 
 This is where you can define a type. In the above i've defined this as `apod`. APOD is the NASA API endpoint i'm using
 and stands for Astronomy Picture of the Day. This internal type is what you'll use later when querying the data using
 GraphQL.
 
-#### [internal.contentDigest](#internal-contentDigest)
+#### internal.contentDigest
 
 As above, each node requires a `contentDigest` to enable stale node detection
 
-## [Run develop](#run-develop)
+## Run develop
 
 At this point you should be able to run `gatsby develop`, if there's no errors you're in a good place.
 
-## [GraphiQL](#graphiql)
+## GraphiQL
 
 With the node created you should be able to see the `apod` type in the GraphiQL explorer. Visit
 [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql) to investigate. If you've used the APOD API as
@@ -231,7 +231,7 @@ Which should give you a response similar to the below
 
 This confirms that the node was created successfully and can be queried by GraphQL in your React component or page.
 
-## [Jsx](#jsx)
+## Jsx
 
 My preferred method for querying non page queries in Gatsby is to use `useStaticQuery`. Here's a query that i've used in
 the [index.js](https://github.com/PaulieScanlon/nasa-data-source/blob/main/src/pages/index.js) and I return it using

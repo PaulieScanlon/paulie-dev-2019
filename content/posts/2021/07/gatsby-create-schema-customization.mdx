@@ -41,7 +41,7 @@ The code i'll be explaining below expands on yesterday's post:
 [Add data to Gatsby's GraphQL layer using sourceNodes](/posts/2021/07/gatsby-source-nodes/) so i'd advise you have a
 read of that before diving in.
 
-## [Pre-Flight Checks](#pre-flight-checks)
+## Pre-Flight Checks
 
 You'll need to have all the following dependencies installed and configured in `gatsby-config.js` The docs can be found
 here: [gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/#installation)
@@ -129,28 +129,28 @@ including but not limited to the following.
 - cache
 - store
 
-#### [node](#node)
+#### node
 
 This is the new node type sourced from the NASA API and already exists in Gatsby's data layer
 
-#### [actions](#actions)
+#### actions
 
 Actions are the equivalent to actions bound with [bindActionCreators](https://redux.js.org/api/bindactioncreators/) in
 Redux. `actions` contains a function called
 [createNode](https://www.gatsbyjs.com/docs/reference/config-files/actions/#createNode) and this is how you add data to
 the Redux state object / Gatsby's data layer
 
-#### [createNodeId](#createNodeId)
+#### createNodeId
 
 This is effectively a helper function that aids in the creation of unique id's. Under the hood Gatsby are using
 [uuid](https://www.npmjs.com/package/uuid), you can of course use your preferred method but since uuid is already part
 of the Gatsby bundle it makes sense to use it.
 
-#### [cache](#cache)
+#### cache
 
 Cache is the `.cache` directory Gatsby creates in/on your local filesystem
 
-#### [store](#store)
+#### store
 
 This is Gatsby's Data layer / The Redux state object
 
@@ -159,11 +159,11 @@ To the best of my knowledge all of the above are required. You might not see err
 
 **The next bit deals with sourcing the image using the image url returned by the NASA API.**
 
-#### [node.image](#node-image)
+#### node.image
 
 I create a new object on the node and call it `image` which will be the response from `createRemoteFileNode`.
 
-### [createRemoteFileNode | params](#create-remote-file-node-params)
+### createRemoteFileNode | params
 
 This function comes from [gatsby-source-filesystem](https://www.gatsbyjs.com/plugins/gatsby-source-filesystem/) and
 accepts the following parameters
@@ -175,29 +175,29 @@ accepts the following parameters
 - cache
 - store
 
-#### [url](#create-remmote-file-node-url)
+#### url
 
 The source url of the remote file
 
-#### [parentNodeId](#parent-node-id)
+#### parentNodeId
 
 The id of the parent node (i.e. the node to which the new remote File node will be linked to.
 
-#### [createNode](#create-node)
+#### createNode
 
 The action used to create nodes, I covered this in more detail in yesterday's post
 [#actions-createNode](https://paulie.dev/posts/2021/07/gatsby-source-nodes/#actions-createNode)
 
-#### [createNodeId](#create-node-id)
+#### createNodeId
 
 A helper function for creating node ids, I covered this in more detail in yesterday's post
 [#createNodeId](posts/2021/07/gatsby-source-nodes/#createNodeId)
 
-#### [cache](#cache)
+#### cache
 
 As above
 
-#### [store](#store)
+#### store
 
 As Above
 
@@ -294,12 +294,12 @@ exports.createSchemaCustomization = ({
 This looks a little peculiar if you're new to GraphQL and being honest I found this really difficult so here's my best
 attempt to explain what's going on.
 
-#### [type apodImage](#type-apod-image)
+#### type apodImage
 
 `apodImage` first needs to be set to `@dontInfer`. This is a way to tell GraphQL that I know best and i'll handle the
 types so don't worry about inferring the data type.
 
-#### [url](#apod-image-url)
+#### url
 
 Finally it's here where I tell GraphQL that the `image.url` is of type `File` and I link it to the `url` defined by the
 `url` parameter from `createRemoteFileNode` 🥵
@@ -412,7 +412,7 @@ Which should return something similar to the below. You should be able to see th
 }
 ```
 
-## [Jsx](#jsx)
+## Jsx
 
 To return the above image data you can use `<GatsbyImage />` with the `getImage` helper to pass the data on to
 `<GatsbyImage />` via the`image` prop

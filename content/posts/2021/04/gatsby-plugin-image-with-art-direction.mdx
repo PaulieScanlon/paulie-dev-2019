@@ -15,7 +15,7 @@ helper functions right at the bottom of the docs called
 [withArtDirection](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#withartdirection)
 that no one was really talking about.
 
-## [What's withArtDirection?](#whats-with-art-direction)
+## What's withArtDirection?
 
 In short it's a way to show different images to the user via media queries but, without loading additional images into
 the DOM using the `<img />` tag and slowing down the initial page load speed.
@@ -26,7 +26,7 @@ about each of the examples
 - [Demo](https://gatsbypluginimagewithartdirect.gatsbyjs.io/animation)
 - [Repo](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction)
 
-## [Animation](#animation)
+## Animation
 
 In this first example I went mega overboard and instead of adding two or three media queries I added over a thousand!
 
@@ -140,7 +140,7 @@ on my mac plays these back quite smoothly.
 You can see the
 [full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/lemon.js)
 
-## [Aspect Ratio](#aspect-ratio)
+## Aspect Ratio
 
 This example is probably a little less of an edge case and it reminds me of what the social media advertising dweebs
 refer to as "vertical video". Generally, for social media users will be on their phones and generally phones will be
@@ -198,7 +198,7 @@ _This is CSS-in-Js syntax FYI_
 You can see the
 [full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/aspect-ratio.js)
 
-## [Desktop First](#desktop-first)
+## Desktop First
 
 Since we're talking about "desktop first", in this example I tried to be a little bit cheeky and present the user with a
 different image on smaller screen sizes. It's broadly the same as the Aspect Ratio example except in this example both
@@ -236,7 +236,7 @@ this image is shown on screen sizes above **576px**
 You can see the
 [full component `src` here](https://github.com/PaulieScanlon/gatsby-plugin-image-with-art-direction/blob/main/src/components/desktop-first.js)
 
-## [Printer](#printer)
+## Printer
 
 To the best of my knowledge this example only works in Firefox but the idea is similar to the above but instead of using
 a screen width `@media` query this time I use a `print` media query.
