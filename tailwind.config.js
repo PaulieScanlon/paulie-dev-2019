@@ -154,6 +154,9 @@ module.exports = {
               '&:hover': {
                 color: theme('colors.muted'),
                 transition: 'all 0.2s ease'
+              },
+              '> p': {
+                margin: 0
               }
             },
             code: {
