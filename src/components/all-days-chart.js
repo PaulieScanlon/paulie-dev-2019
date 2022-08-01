@@ -97,32 +97,65 @@ const AllDaysChart = () => {
     })
     .sort((a, b) => abbreviatedDays.indexOf(a.day) - abbreviatedDays.indexOf(b.day));
 
+  const width = 500;
+  const height = 230;
+  const fontSize = 9;
+
   return (
     <div>
       <div className="rounded border border-outline bg-surface p-4">
-        <ul className="list-none m-0 p-0 grid gap-1 grid-cols-7 items-end">
-          {postsByDay.map((item, index) => {
+        <svg viewBox={`0,0,${width},${height}`}>
+          {postsByDay.map((item, g) => {
             const { day, data } = item;
+            const xPad = postsByDay.length;
+            const yPad = 16;
+            const barWidth = width / (data.length * postsByDay.length) - xPad;
+            const groupWidth = width / postsByDay.length;
 
             return (
-              <li key={index} className="m-0 p-0 flex flex-col gap-3 items-center text-ceter">
-                <div className="flex flex-col sm:flex-row gap-1 items-end">
-                  {data.map((year, index) => {
-                    const { y } = year;
-                    const height = y * 25;
-                    return (
-                      <div key={index}>
-                        <span className="text-sm font-semibold">{`x${y}`}</span>
-                        <div className={`w-4 border-2 border-${colors[index]}`} style={{ height }} />
-                      </div>
-                    );
-                  })}
-                </div>
-                <span className="uppercase text-muted text-sm font-semibold">{day}</span>
-              </li>
+              <g key={g}>
+                <text
+                  x={groupWidth * g + xPad + barWidth * 2 + fontSize / 2}
+                  y={height}
+                  className="fill-muted font-semibold"
+                  style={{ fontSize: fontSize }}
+                >
+                  {day.toUpperCase()}
+                </text>
+                {data.map((year, i) => {
+                  const { y } = year;
+                  const inc = i + 1;
+                  const barHeight = (y + 0.05) * 15;
+                  const xPos = groupWidth * g + barWidth * inc + (xPad / 2) * inc;
+                  const yPos = height - barHeight - yPad;
+                  const labelSize = 7;
+                  return (
+                    <g>
+                      {y > 0 ? (
+                        <text
+                          x={xPos + labelSize / 4}
+                          y={yPos - 7}
+                          className="fill-white font-semibold"
+                          style={{ fontSize: labelSize }}
+                        >{`x${y}`}</text>
+                      ) : null}
+                      <rect
+                        key={i}
+                        x={xPos}
+                        y={yPos}
+                        width={barWidth}
+                        height={barHeight}
+                        fill="transparent"
+                        className={`stroke-${colors[i]}`}
+                        strokeWidth={1.2}
+                      />
+                    </g>
+                  );
+                })}
+              </g>
             );
           })}
-        </ul>
+        </svg>
       </div>
       <ul className="list-none m-0 p-0 flex text-sm">
         {years.map((year, index) => {
