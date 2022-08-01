@@ -17,12 +17,11 @@ const Page = ({
       excerpt,
       frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
       embeddedImages,
-      tableOfContents
+      tableOfContents: { items: toc }
     }
   },
   children
 }) => {
-  console.log(tableOfContents);
   return (
     <Fragment>
       <div className="grid lg:grid-cols-1fr-auto">
@@ -45,10 +44,10 @@ const Page = ({
       <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
-        {tableOfContents && tableOfContents.items ? (
+        {toc ? (
           <div className="px-6">
             <h5 className="mb-3 text-lg leading-6 font-semibold uppercase text-secondary">On this page</h5>
-            <TableOfContents slug={slug} items={tableOfContents.items} />
+            <TableOfContents slug={slug} items={toc} />
           </div>
         ) : null}
       </AsideElement>
