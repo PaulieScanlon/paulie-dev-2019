@@ -17,10 +17,10 @@ const Page = ({
       excerpt,
       frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
       embeddedImages,
-      body,
       tableOfContents: { items: toc }
     }
-  }
+  },
+  children
 }) => {
   return (
     <Fragment>
@@ -40,7 +40,7 @@ const Page = ({
             })
           : null}
       </ul>
-      <MdxParser embedded={embeddedImages}>{body}</MdxParser>
+      <MdxParser embedded={embeddedImages}>{children}</MdxParser>
       <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
@@ -76,7 +76,6 @@ export const query = graphql`
           gatsbyImageData(layout: FULL_WIDTH)
         }
       }
-      body
       tableOfContents
     }
   }

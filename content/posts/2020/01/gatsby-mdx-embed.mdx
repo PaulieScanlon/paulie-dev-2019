@@ -3,8 +3,8 @@ type: post
 title: gatsby-mdx-embed
 tags: ['Gatsby', 'Gatsby Plugins', 'MDX']
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915604/paulie.dev/2020/01/gatsby-mdx-embed_oacgpn.jpg
-date: 2020-01-06
-dateModified: 2020-04-30
+date: 2020/01/06
+dateModified: 2020/04/30
 author: Paul Scanlon
 embeddedImages:
   - https://res.cloudinary.com/www-paulie-dev/image/upload/v1595927432/paulie.dev/2020/01/gatsby-mdx-embed-image1_vkf530.jpg
@@ -20,15 +20,10 @@ To quote the creators;
 
 To put that into context you can import and use a React component in this post like this 👇
 
-<!-- prettier-ignore -->
 ```javascript
-import { WordCountChart } from "../../../components/word-count-chart"
+import { WordCountChart } from '../../../components/word-count-chart';
 
-<WordCountChart
-  title="Average word count"
-  dimension="words"
-  config={{ year: 0, color: "primary" }}
-/>
+<WordCountChart title="Average word count" dimension="words" config={{ year: 0, color: 'primary' }} />;
 ```
 
 The one snag, and it's a tiny drawback is that to use React components in MDX you have to import them. This is fine for

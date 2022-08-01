@@ -2,7 +2,7 @@
 type: post
 title: Storybook - An alternative approach
 tags: ['Storybook', 'JavaScript', 'React']
-date: 2020-10-27
+date: 2020/10/27
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1603822721/paulie.dev/2020/10/storybook-an-alternative-approach_fjcass.jpg
 ---
@@ -258,7 +258,7 @@ changes on a case by case basis.
 
 Let's walk through this from top to bottom and i'll explain a few things along the way.
 
-### export default {}
+### export default \{}
 
 - This is as you'd expect the default object to export, Storybook knows what to do with this but we can give it a few
   object keys which might make for a better story
@@ -269,12 +269,12 @@ Let's walk through this from top to bottom and i'll explain a few things along t
   string and Storybook will turn those into a multi-level navigation items, I think this is really cool by the way! The
   above will results in a story called "MrButton" being nested under a navigation item called "components"
 
-### parameters:{...}
+### parameters:\{...}
 
 - The `component` key is used by Storybook to generate the prop table for the component you name here
 - The `componentSubtitle` is the text that will appear under the main heading when you're on the "docs" tab.
 
-### export const Usage = () => {}
+### export const Usage = () => \{}
 
 - You could name this first story anything you want, my preference is to call it **Usage** because it's usually an
   example of how to use the component i'm documenting.
@@ -354,7 +354,7 @@ IsBoogyTime.storyName = 'isBoogyTime'
 };
 ```
 
-### docs:{...}
+### docs:\{...}
 
 This object has special powers and is what's used to pass component documentation on to the "docs" page.
 
@@ -374,11 +374,10 @@ Here they'll see a code snippet of the component and the props that drive the re
 
 For example 👇
 
-<!-- prettier-ignore -->
 ```javascript
 // "Show code"
 
-() => <MrButton isBoogyTime={true}>Click me</MrButton>
+() => <MrButton isBoogyTime={true}>Click me</MrButton>;
 ```
 
 This for me completes the circle, and fundamentally **is** the whole point in writing documentation.
@@ -570,7 +569,6 @@ LayoutStory.decorators = [
 
 This would result in a nice looking "Show code" snippet that looks a little something like the below 👇
 
-<!-- prettier-ignore -->
 ```javascript
 // "Show code"
 
@@ -579,7 +577,7 @@ This would result in a nice looking "Show code" snippet that looks a little some
     <MrButton>Click me</MrButton>
     <MrsButton isBoogyTime={true}>Also click me</MrsButton>
   </>
-)
+);
 ```
 
 Hopefully you'll agree with me and see the benefit of _hiding_ the decorator `<div>` so that the "Show code" snippet
@@ -608,7 +606,7 @@ ArgsStory.args = {
 };
 ```
 
-## ... finally Template.bind({})
+## ... finally Template.bind(\{})
 
 There are a number of useful examples of how to use `Template.bind({})` and it this approach has been covered really,
 really well in the [docs](https://storybook.js.org/docs/react/writing-stories/introduction) but I have run into a number
@@ -642,7 +640,6 @@ TemplateStory.args = { ['aria-label']: 'A button that mostly does nothing' };
 
 ... which results in a "Show code" snippet that looks like this 👇
 
-<!-- prettier-ignore -->
 ```javascript
 // "Show code"
 
