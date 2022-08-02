@@ -40,6 +40,7 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         mdxOptions: {
+          remarkPlugins: [process.env.NODE_ENV === 'development' ? [] : [require('remark-prism')]],
           rehypePlugins: [require('rehype-slug'), [require('rehype-autolink-headings'), { behavior: 'wrap' }]]
         }
       }
