@@ -130,7 +130,7 @@ const AllDaysChart = () => {
                   const yPos = height - barHeight - yPad;
                   const labelSize = 7;
                   return (
-                    <g>
+                    <g key={i}>
                       {y > 0 ? (
                         <text
                           x={xPos + labelSize / 4}
@@ -140,7 +140,6 @@ const AllDaysChart = () => {
                         >{`x${y}`}</text>
                       ) : null}
                       <rect
-                        key={i}
                         x={xPos}
                         y={yPos}
                         width={barWidth}
