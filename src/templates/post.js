@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
 import DateTimeToRead from '../components/date-time-to-read';
-import GenericAside from '../components/generic-aside';
+import FeaturedImageAside from '../components/featured-image-aside';
 import AddReaction from '../components/add-reaction';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
@@ -16,8 +16,14 @@ const Page = ({
       fields: { slug },
       excerpt,
       frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
+      featuredImage: {
+        childImageSharp: { thumbnail }
+      },
       embeddedImages,
       tableOfContents: { items: toc }
+    },
+    site: {
+      siteMetadata: { siteUrl }
     }
   },
   children
@@ -43,7 +49,7 @@ const Page = ({
       <MdxParser embedded={embeddedImages}>{children}</MdxParser>
       <AddReaction title={title} slug={slug} />
       <AsideElement>
-        <GenericAside />
+        <FeaturedImageAside alt={title} thumbnail={thumbnail} shareText={`${title}\n ${siteUrl}${slug}`} />
         {toc ? (
           <div className="px-6">
             <h5 className="mb-3 text-lg leading-6 font-semibold uppercase text-secondary">On this page</h5>
@@ -71,12 +77,22 @@ export const query = graphql`
         tags
         featuredImage
       }
+      featuredImage {
+        childImageSharp {
+          thumbnail: gatsbyImageData(width: 240)
+        }
+      }
       embeddedImages {
         childImageSharp {
           gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       tableOfContents
+    }
+    site {
+      siteMetadata {
+        siteUrl
+      }
     }
   }
 `;
