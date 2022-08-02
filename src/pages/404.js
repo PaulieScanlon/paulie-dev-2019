@@ -6,7 +6,7 @@ const Page = () => {
     <div>
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">404</small>
       <h1>Page Not Found</h1>
-      <p>Blast! Thhe page you're looking for can't be found.</p>
+      <p>Blast! The page you're looking for can't be found.</p>
     </div>
   );
 };

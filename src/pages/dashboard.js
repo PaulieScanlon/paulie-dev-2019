@@ -8,6 +8,8 @@ import GenericAside from '../components/generic-aside';
 import AccordionItem from '../components/accordion-item';
 import AllDaysChart from '../components/all-days-chart';
 import AllYearsChart from '../components/all-years-chart';
+import AllTagsChart from '../components/all-tags-chart';
+import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
 
 const Page = ({
@@ -41,6 +43,21 @@ const Page = ({
           <h2 className="m-0 text-2xl uppercase text-salmon">Published by Day</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by day for, Articles, Posts and Streams.</p>
           <AllDaysChart />
+        </section>
+
+        <section className="grid sm:grid-cols-2 gap-8">
+          <div>
+            <h2 className="m-0 text-2xl uppercase text-salmon">Articles By Publisher</h2>
+            <p className="mt-0 mb-4 text-slate-300 text-base">
+              I mainly write for Gatsby, but occasionally I'll publish elsewhere.
+            </p>
+            <AllPublisherChart />
+          </div>
+          <div>
+            <h2 className="m-0 text-2xl uppercase text-salmon">Tags By Usage</h2>
+            <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by tag for, Articles, Posts and Streams.</p>
+            <AllTagsChart />
+          </div>
         </section>
 
         <section>
