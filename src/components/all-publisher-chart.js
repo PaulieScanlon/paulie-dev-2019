@@ -145,14 +145,13 @@ const AllPublisherChart = ({ size }) => {
         {publisherData
           .sort((a, b) => b.count - a.count)
           .map((item, index) => {
-            const { label, count, logo } = item;
+            const { label, logo } = item;
             return (
               <li key={index} className="grid grid-cols-1fr-auto items-center p-0 m-0">
                 <div className="grid grid-cols-auto-1fr gap-4 items-center">
                   <p className="m-0">{label}</p>
                 </div>
-                <img src={logo} className="m-0 w-4 h-4" />
-                {/* <div className="font-semibold">{`x${count}`}</div> */}
+                <img src={logo} className="m-0 w-4 h-4" alt={label} />
               </li>
             );
           })}
