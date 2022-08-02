@@ -4,7 +4,7 @@ import Loading from '../components/loading';
 
 import { formatDatestamp } from '../utils/format-date-stamp';
 
-const RecentGitHubUserEvent = () => {
+const RecentTweets = () => {
   const isMounted = useRef(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -13,18 +13,17 @@ const RecentGitHubUserEvent = () => {
   useEffect(() => {
     const getGitHubData = async () => {
       try {
-        const eventsData = await (
-          await fetch('https://paulieapi.gatsbyjs.io/api/get-github-user-events', {
+        const tweetsData = await (
+          await fetch('https://paulieapi.gatsbyjs.io/api/get-latest-tweets', {
             method: 'POST',
             body: JSON.stringify({
-              username: 'PaulieScanlon',
-              results: 20
+              id: 470012453
             })
           })
         ).json();
 
         const userData = await (
-          await fetch('https://paulieapi.gatsbyjs.io/api/get-github-user', {
+          await fetch('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
             method: 'POST',
             body: JSON.stringify({
               username: 'PaulieScanlon'
@@ -34,7 +33,7 @@ const RecentGitHubUserEvent = () => {
 
         if (isMounted) {
           setResponse({
-            events: eventsData.events,
+            tweets: tweetsData.tweets,
             user: userData.user
           });
           setIsLoading(false);
@@ -54,10 +53,10 @@ const RecentGitHubUserEvent = () => {
     };
   }, []);
 
-  //   if (!isLoading) {
-  //     console.log(response.events);
-  //     console.log(response.user);
-  //   }
+  if (!isLoading) {
+    console.log(response.tweets);
+    // console.log(response.user);
+  }
 
   return (
     <div className="flex flex-col items-stretch rounded border border-outline bg-surface p-4">
@@ -69,20 +68,20 @@ const RecentGitHubUserEvent = () => {
         ) : (
           <div className="grid sm:grid-cols-auto-1fr gap-2 justify-center text-center sm:text-left items-center">
             <img
-              src={response.user.avatar_url}
+              src={response.user.profile_image_url}
               alt={response.user.name}
               className="rounded-full border-2 border-outline h-10 w-10 m-0 mx-auto"
             />
             <div className="grid">
               <a
-                href={response.user.html_url}
+                href={`https://twitter.com/${response.user.username}`}
                 target="_blank"
                 rel="noreferrer"
                 className="m-0 p-0 text-white text-base sm:text-lg font-semibold"
               >
-                {response.user.html_url.replace(/^https?:\/\//, '')}
+                {`twitter.com/${response.user.username}`}
               </a>
-              <small className="m-0 text-sm">Public Repos &bull; {response.user.public_repos}</small>
+              <small className="m-0 text-sm">Followers &bull; {response.user.public_metrics.followers_count}</small>
             </div>
           </div>
         )}
@@ -90,17 +89,17 @@ const RecentGitHubUserEvent = () => {
       <div className="flex items-center ml-1 mb-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="mr-2 h-5 w-5 fill-salmon"
+          className="mr-2 h-5 w-5 fill-teal"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
           <path
             fillRule="evenodd"
-            d="M10,0.3c-5.4,0-9.8,4.4-9.8,9.8c0,4.6,3.2,8.5,7.5,9.5c0-0.1-0.1-0.3-0.1-0.5v-1.7c-0.4,0-1.1,0-1.2,0c-0.7,0-1.3-0.3-1.6-0.8c-0.3-0.6-0.4-1.5-1.2-2.1c-0.2-0.2-0.1-0.4,0.2-0.4c0.5,0.1,0.9,0.5,1.3,1c0.4,0.5,0.6,0.6,1.3,0.6c0.4,0,0.9,0,1.4-0.1c0.3-0.7,0.7-1.3,1.3-1.6c-3.3-0.3-4.8-2-4.8-4.2c0-1,0.4-1.9,1.1-2.7C5.1,6.6,4.8,5,5.4,4.4c1.5,0,2.4,1,2.6,1.2c0.7-0.3,1.5-0.4,2.4-0.4c0.9,0,1.7,0.1,2.4,0.4c0.2-0.3,1.1-1.2,2.6-1.2C16,5,15.7,6.6,15.5,7.4c0.7,0.8,1.1,1.7,1.1,2.6c0,2.2-1.6,3.8-4.8,4.2c0.9,0.5,1.6,1.8,1.6,2.8v2.2c0,0.1,0,0.1,0,0.2c3.8-1.3,6.6-5,6.6-9.3C19.8,4.7,15.4,0.3,10,0.3z"
+            d="M19.3,4.2c-0.7,0.3-1.4,0.5-2.2,0.6c0.8-0.5,1.4-1.2,1.7-2.1c-0.7,0.4-1.6,0.8-2.4,0.9c-0.7-0.7-1.7-1.2-2.8-1.2c-2.1,0-3.8,1.7-3.8,3.8c0,0.3,0,0.6,0.1,0.9C6.7,7,3.9,5.4,2,3.1C1.7,3.7,1.5,4.4,1.5,5.1c0,1.3,0.7,2.5,1.7,3.2C2.5,8.2,2,8,1.4,7.8c0,0,0,0,0,0c0,1.9,1.3,3.4,3.1,3.7c-0.3,0.1-0.7,0.1-1,0.1c-0.2,0-0.5,0-0.7-0.1c0.5,1.5,1.9,2.6,3.6,2.7c-1.3,1-3,1.6-4.7,1.6c-0.3,0-0.6,0-0.9-0.1c1.7,1.1,3.7,1.7,5.9,1.7c7,0,10.9-5.8,10.9-10.9c0-0.2,0-0.3,0-0.5C18.1,5.7,18.8,5,19.3,4.2z"
             clipRule="evenodd"
           />
         </svg>
-        <h2 className="m-0 text-base text-white">Recent Events</h2>
+        <h2 className="m-0 text-base text-white">Recent Tweets</h2>
       </div>
       <div className="rounded border border-outline bg-surface p-2 sm:p-4 bg-background h-96 overflow-y-hidden">
         {isLoading ? (
@@ -109,31 +108,12 @@ const RecentGitHubUserEvent = () => {
           </div>
         ) : (
           <ul className="list-none m-0 p-0 overflow-y-auto overflow-x-hidden h-[355px]">
-            {response.events.map((event, index) => {
-              const {
-                type,
-                created_at,
-                actor: { login },
-                repo: { name }
-              } = event;
-
+            {response.tweets.map((tweet, index) => {
+              const { created_at, text } = tweet;
               return (
                 <li key={index} className="mt-0 rounded bg-surface p-3 leading-tight">
-                  <strong className="block">
-                    <span className={`inline-block bg-muted event-color-${type} rounded-full w-3 h-3 mr-2`} />
-                    Event: <small className="font-normal">{type}</small>
-                  </strong>
                   <small className="text-secondary">{formatDatestamp(created_at, true)}</small>
-                  <div className="grid gap-1 my-4">
-                    <strong className="grid grid-cols-auto-1fr gap-2 items-start">
-                      <span>User: </span>
-                      <small className="font-normal mt-1">{login}</small>
-                    </strong>
-                    <strong className="grid grid-cols-auto-1fr gap-2 items-start">
-                      <span>Repo: </span>
-                      <small className="font-normal mt-1 break-all">{name}</small>
-                    </strong>
-                  </div>
+                  <p className="text-sm">{text}</p>
                 </li>
               );
             })}
@@ -150,4 +130,4 @@ const RecentGitHubUserEvent = () => {
   );
 };
 
-export default RecentGitHubUserEvent;
+export default RecentTweets;
