@@ -61,12 +61,12 @@ and remove it from the plugins array in `gatsby-config`.
 module.exports = {
   plugins: [
     ...
- -   {
- -     resolve: 'gatsby-plugin-google-analytics',
- -     options: {
- -       trackingId: 'UA-12345678-9'
- -     }
- -   }
+-   {
+-     resolve: 'gatsby-plugin-google-analytics',
+-     options: {
+-       trackingId: 'UA-12345678-9'
+-     }
+-   }
   ],
 };
 
@@ -207,7 +207,8 @@ import RootElement from './src/components/root-element';
 +  }, 100);
 
 +  return true;
-};
++ };
+
 
 export const wrapRootElement = ({ element }) => {
   return <RootElement>{element}</RootElement>;
