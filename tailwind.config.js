@@ -151,6 +151,7 @@ module.exports = {
             a: {
               color: theme('colors.secondary'),
               fontWieght: theme('font-bold'),
+              wordBreak: 'break-all',
               '&:hover': {
                 color: theme('colors.muted'),
                 transition: 'all 0.2s ease'
