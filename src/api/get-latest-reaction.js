@@ -7,8 +7,12 @@ export default async function handler(req, res) {
 
   try {
     const response = await client.query(
-      q.Reverse(q.Paginate(q.Match(q.Index(`latest_reaction_${process.env.NODE_ENV}`)), { size: 1000 }))
-      // q.Paginate(q.Match(q.Index('latest_reaction_production')), { size: 1000 })
+      q.Paginate(q.Reverse(q.Match(q.Index(`latest_reaction_${process.env.NODE_ENV}`))), {
+        size: 1
+      })
+      // q.Paginate(q.Reverse(q.Match(q.Index('latest_reaction_production'))), {
+      //   size: 1
+      // })
     );
 
     const result = response.data.map(([ref, title, slug, reaction, date]) => ({

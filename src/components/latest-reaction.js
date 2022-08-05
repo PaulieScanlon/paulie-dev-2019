@@ -19,12 +19,11 @@ const LatestReaction = () => {
     setIsLoading(true);
     try {
       const response = await (await fetch('/api/get-latest-reaction')).json();
-
       if (isMounted) {
         setResponse(response.reaction);
         setTimeout(() => {
           setIsLoading(false);
-        }, 300);
+        }, 150);
       }
     } catch (error) {
       console.error(error);
