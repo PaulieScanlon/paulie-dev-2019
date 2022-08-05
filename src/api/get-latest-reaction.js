@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await client.query(
-      q.Paginate(q.Match(q.Index(`latest_reaction_${process.env.NODE_ENV}`)), { size: 1000 })
+      q.Reverse(q.Paginate(q.Match(q.Index(`latest_reaction_${process.env.NODE_ENV}`)), { size: 1000 }))
       // q.Paginate(q.Match(q.Index('latest_reaction_production')), { size: 1000 })
     );
 
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       date
     }));
 
-    res.status(200).json({ message: 'A ok', reaction: result.slice(-1).pop() });
+    res.status(200).json({ message: 'A ok', reaction: result[0] });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
