@@ -34,9 +34,16 @@ pre[class*='language-'] {
   @apply text-slate-300 text-xl bg-surface rounded border-l-yellow py-1 px-6;
 }
 
-/* Donut chart */
 .youtube-mdx-embed {
   @apply overflow-hidden rounded border border-outline;
+}
+
+.twitter-tweet-mdx-embed {
+  @apply flex justify-center my-16;
+}
+
+.twitter-tweet-mdx-embed > .twitter-tweet {
+  @apply !m-0;
 }
 
 .event-color-PushEvent {
