@@ -36,9 +36,9 @@ const LatestReactionDom = ({ hasJavascript, isLoading, title, reaction, slug, da
               </svg>
             </div>
             <div className="grid gap-1">
-              <h5 className="m-0 text-2xl text-center leading-6 font-semibold uppercase text-salmon">
+              <h2 className="m-0 text-2xl text-center leading-6 font-semibold uppercase text-salmon">
                 Latest Reaction
-              </h5>
+              </h2>
               <p className="m-0 text-base text-slate-300 text-center font-semibold">{title}</p>
               <p className="m-0 text-sm text-slate-300 text-center ">{formatDatestamp(date, true)}</p>
             </div>
