@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { graphql, Link } from 'gatsby';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
@@ -11,6 +11,7 @@ import AllYearsChart from '../components/all-years-chart';
 import AllTagsChart from '../components/all-tags-chart';
 import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
+import LatestReactionDom from '../components/latest-reaction-dom';
 
 const Page = ({
   data: {
@@ -21,10 +22,15 @@ const Page = ({
     }
   },
   serverData: {
-    serverResponse: { reactions, locations }
+    serverResponse: { reactions, locations, latest }
   }
 }) => {
+  const [hasJavascript, setHasJavascript] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    setHasJavascript(true);
+  }, []);
 
   return (
     <Fragment>
@@ -93,7 +99,18 @@ const Page = ({
         </section>
 
         <section>
-          <LatestReaction />
+          {hasJavascript ? (
+            <LatestReaction />
+          ) : (
+            <LatestReactionDom
+              hasJavascript={false}
+              isLoading={false}
+              title={latest.data.title}
+              reaction={latest.data.reaction}
+              slug={latest.data.slug}
+              date={latest.data.date}
+            />
+          )}
           <div className="mt-2 leading-tight">
             <small className="text-slate-400 text-xs">Powered by </small>
             <a href="https://fauna.com/" target="_blank" rel="noreferrer" className="text-xs">
@@ -158,12 +175,14 @@ const Page = ({
 export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
   const allLocationsUtil = require('../utils/get-all-locations-util');
+  const latestReactionUtil = require('../utils/get-latest-reaction-util');
 
   return {
     props: {
       serverResponse: {
         reactions: await allReactionsUtil.get(),
-        locations: await allLocationsUtil.get()
+        locations: await allLocationsUtil.get(),
+        latest: await latestReactionUtil.get()
       }
     }
   };
