@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
-import { Tweet } from 'mdx-embed';
 
 import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
