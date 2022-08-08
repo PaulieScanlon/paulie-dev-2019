@@ -177,12 +177,16 @@ export async function getServerData() {
   const allLocationsUtil = require('../utils/get-all-locations-util');
   const latestReactionUtil = require('../utils/get-latest-reaction-util');
 
+  const reactions = await allReactionsUtil.get();
+  const locations = await allLocationsUtil.get();
+  const latest = await latestReactionUtil.get();
+
   return {
     props: {
       serverResponse: {
-        reactions: await allReactionsUtil.get(),
-        locations: await allLocationsUtil.get(),
-        latest: await latestReactionUtil.get()
+        reactions,
+        locations,
+        latest
       }
     }
   };
