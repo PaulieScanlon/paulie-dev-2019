@@ -6,7 +6,7 @@ import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import MarkdownCtaLink from './markdown-cta-link';
-import CodeHighlight from './code-highlight';
+import PrismSyntaxHighlight from './prism-syntax-highlight.js';
 
 import { transformImages } from '../utils/transform-images';
 import { stripLeadingSlash } from '../utils/strip-leading-slash';
@@ -28,13 +28,12 @@ const components = {
     // if it's anything else, use Link
     return <Link to={href}>{children}</Link>;
   },
-  pre: ({ children }) => {
-    const { type, props } = children;
-    if (type === 'code') {
-      return <CodeHighlight {...props} />;
-    } else {
-      return children;
-    }
+  code: ({ children, className }) => {
+    return className ? (
+      <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>
+    ) : (
+      <code>{children}</code>
+    );
   },
   GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} />,
   MarkdownCtaLink

@@ -2,7 +2,7 @@
 type: post
 title: Syntax highlighting with Gatsby, MDX, Tailwind and Prism React Renderer
 tags: [Gatsby, React, JavaScript, MDX, Tailwind, Prism]
-date: 2022/08/05
+date: 2022/08/08
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1659974111/paulie.dev/2022/08/prism-react-renderer_azp4lo.jpg
 ---
@@ -19,12 +19,12 @@ The complete examples can be found on the following links
 - ⚙️ [gatsby-prism-react-renderer-mdx](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx)
   - [Gatsby Cloud Preview](https://gatsbyprismreactrenderermdx.gatsbyjs.io/posts/post-one/)
 
-#### Branch: feat/mdx-2 » MDX 2
+#### Branch: refactor/mdx-2 » MDX 2
 
-- ⚙️ [feat/mdx-v2](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/tree/feat/mdx-2)
-  - [PR (files changed)](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/pull/2/files)
+- ⚙️ [refactor/mdx-v2](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/tree/refactor/mdx-v2)
+  - [PR (files changed)](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/pull/4/files)
   - [MDX 2 WIP Docs](https://github.com/gatsbyjs/gatsby/blob/feat/mdx-v2-docs/docs/docs/how-to/routing/mdx.md)
-  - [Gatsby Cloud Preview](https://gatsbyprismreactrenderermdx-featmdx2.gtsb.io/posts/post-one/)
+  - [Gatsby Cloud Preview](https://gatsbyprismreactrenderermdx-refactormdxv2.gtsb.io/posts/post-one/)
 
 ## MDX 1
 
@@ -48,7 +48,7 @@ component can be found here:
 This component looks a little something like this.
 
 ```javascript
-// src/components/root-element
+// src/components/root-element.js
 
 import React from 'react';
 
@@ -200,7 +200,7 @@ but it looks similar the below.
 ```javascript
 // src/components/prism-syntax-highlight.js
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/dracula';
 
@@ -210,18 +210,15 @@ const PrismSyntaxHighlight = ({ children, className }) => {
   return (
     <Highlight {...defaultProps} code={children} language={language} theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Fragment>
-          <span className="...">{language}</span>
-          <code className={className} style={style}>
-            {tokens.slice(0, -1).map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </code>
-        </Fragment>
+        <code className={className} style={style}>
+          {tokens.slice(0, -1).map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </code>
       )}
     </Highlight>
   );
@@ -274,20 +271,6 @@ easily style it using Tailwind.
 + </code>
 - </pre>
 
-```
-
-##### Span
-
-I've added an extra `<span />` element to display the language inside the code block and have added a `Fragment` to
-avoid the Jsx multiple elements error. _I'll cover how to I styled this later using Tailwind._
-
-```diff
-+ <Fragment>
-+  <span className="...">{language}</span>
-    <code className={className} style={style}>
-      ...
-    </code>
-+ </Fragment>
 ```
 
 ##### Slice
@@ -350,59 +333,6 @@ module.exports = {
 
 ```
 
-#### Style and Position
-
-In order to position the language `<span />` using `absolute` I need to ensure the parent `<pre />` had a `relative`
-position style applied to it. I accomplished this by adding the following to `tailwind.config.js`.
-
-```diff
-module.exports = {
-  ...
-  theme: {
-    ...
-    extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-+            pre: {
-+              position: 'relative'
-+            },
-            ...
-          }
-        }
-      })
-    }
-  },
-  plugins: [require('@tailwindcss/typography')]
-};
-```
-
-I also added a new `fontSize` to `tailwind.config.js`
-
-```diff
-module.exports = {
-  ...
-  theme: {
-    ...
-    extend: {
-+      fontSize: {
-+        tiny: '.5rem'
-+      },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            ...
-          }
-        }
-      })
-    }
-  },
-  plugins: [require('@tailwindcss/typography')]
-};
-```
-
-The rest of the styles added to the `<span />` are available from Tailwind's default config.
-
 ## MDX 2 (RC Version)
 
 This guide is for v4 of the Gatsby MDX Plugin: `gatsby-plugin-mdx`: `4.0.0-rc.3` which is designed to work with MDX 2.
@@ -411,7 +341,7 @@ The main changes for using MDX 2 are with how the MDX `body` and `<MDXRenderer /
 Tailwind changes required.
 
 Here's a diff of
-[\{mdx.fields\_\_slug}.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/feat/mdx-2/src/pages/posts/%7Bmdx.fields__slug%7D.js)
+[\{mdx.fields\_\_slug}.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/pull/4/files#diff-806ba7639fe92e93ebdf27e87cddb9c053e36422755369f5be1a847332f68874)
 
 ```diff
 // src/pages/posts/{mdx.fields__slug}.js
@@ -458,9 +388,18 @@ export const query = graphql`
 export default Page;
 ```
 
-### MDX Provider | MDX 2
+### Changes | MDX 2
 
 Here are the changes in a little more detail.
+
+##### Dependencies
+
+```json
+"@mdx-js/react": "^2.1.2",
+"gatsby": "4.20.0-mdxv4-rc.65",
+"gatsby-plugin-mdx": "4.0.0-rc.3",
+"gatsby-source-filesystem": "4.20.0-mdxv4-rc.124",
+```
 
 ##### MDXRenderer
 
@@ -475,10 +414,10 @@ rather than the `<PrismSyntaxHighlight />`
 
 And that's about it!
 
-### General Availability
+### General Availability (GA)
 
-The new MDX Plugin isn't generally available (GA) just yet but the team have been doing such a super job and I'm so
-excited by it that I thought I'd share how I've been using it.
+The new MDX Plugin isn't quite ready yet but the team have been doing such a super job, and I'm so excited by it, that I
+thought I'd share how I've been using it.
 
-I don't expect there to be any further major changes in the way you use it so once it hits GA the example should still
-work. If that turns out to not be the case i'll circle back to this post and update it.
+I don't expect there to be any further major changes in the way you use it, so once it hits GA this example _should_
+still work. If that turns out not to be the case I'll circle back to this post, and update it.

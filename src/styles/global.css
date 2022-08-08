@@ -13,19 +13,6 @@
   @apply transition-all duration-300 capitalize inline-grid grid-cols-auto-1fr gap-x-4 items-center rounded-full border hover:border-outline border-transparent hover:bg-surface px-4 py-2 font-medium hover:text-white;
 }
 
-/* prism-shades-of-purple overwrites */
-code[class*='language-'],
-pre[class*='language-'] {
-  @apply text-sm my-8;
-}
-.token.inserted {
-  @apply text-lime-400 bg-transparent;
-}
-
-.token.deleted {
-  @apply text-red-600 bg-transparent;
-}
-
 .prose :where(h1, h2, h3, h4, h5):not(:where([class~='not-prose'] *)) a {
   @apply no-underline font-bold;
 }

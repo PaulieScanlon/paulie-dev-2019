@@ -162,7 +162,13 @@ module.exports = {
                 margin: 0
               }
             },
+            pre: {
+              background: theme('colors.surface')
+            },
             code: {
+              '& .prism-code': {
+                background: theme('colors.transparent')
+              },
               color: theme('colors.tertiary'),
               '&::before': {
                 content: '"" !important'

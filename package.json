@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@google-analytics/data": "^2.8.0",
-    "@mdx-js/react": "2.1.2",
+    "@mdx-js/react": "^2.1.2",
     "country-flag-icons": "^1.5.5",
     "faunadb": "^4.6.0",
     "gatsby": "4.20.0-mdxv4-rc.65",
