@@ -1,0 +1,484 @@
+---
+type: post
+title: Syntax highlighting with Gatsby, MDX, Tailwind and Prism React Renderer
+tags: [Gatsby, React, JavaScript, MDX, Tailwind, Prism]
+date: 2022/08/05
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1659974111/paulie.dev/2022/08/prism-react-renderer_azp4lo.jpg
+---
+
+In this post I'll explain how I use [Formiddable's](https://twitter.com/FormidableLabs) excellent
+[Prism React Renderer](https://github.com/FormidableLabs/prism-react-renderer) to add syntax highlighting to code blocks
+using Tailwind and Tailwind Typography, using both **MDX 1** and **MDX 2** with the help from
+[gatsby-plugin-mdx](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/).
+
+The complete examples can be found on the following links
+
+#### Branch: main » MDX 1
+
+- ⚙️ [gatsby-prism-react-renderer-mdx](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx)
+  - [Gatsby Cloud Preview](https://gatsbyprismreactrenderermdx.gatsbyjs.io/posts/post-one/)
+
+#### Branch: feat/mdx-2 » MDX 2
+
+- ⚙️ [feat/mdx-v2](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/tree/feat/mdx-2)
+  - [PR (files changed)](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/pull/2/files)
+  - [MDX 2 WIP Docs](https://github.com/gatsbyjs/gatsby/blob/feat/mdx-v2-docs/docs/docs/how-to/routing/mdx.md)
+  - [Gatsby Cloud Preview](https://gatsbyprismreactrenderermdx-featmdx2.gtsb.io/posts/post-one/)
+
+## MDX 1
+
+This guide is for v3 of the Gatsby MDX Plugin: `gatsby-plugin-mdx`: `^3.0.0` which is designed to work with MDX 1.
+
+### Tailwind Install
+
+I'm going to assume you already have Tailwind and Tailwind Typography installed and configured. If you haven't, have a
+look at the Tailwind installation guides.
+
+- [Install Tailwind CSS with Gatsby](https://tailwindcss.com/docs/guides/gatsby)
+- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)
+
+### Prose
+
+To enable `prose` and Typography settings across the entirety of my example site I've added the necessary Tailwind
+classes to an HTML elment that wraps the whole Gatsby site and created a `RootElement` component. The `src` for this
+component can be found here:
+[root-element.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/main/src/components/root-element.js)
+
+This component looks a little something like this.
+
+```javascript
+// src/components/root-element
+
+import React from 'react';
+
+const RootElement = ({ children }) => {
+  return <main className="mx-auto px-2 sm:px-4 prose prose-sm sm:prose">{children}</main>;
+};
+
+export default RootElement;
+```
+
+I then use the `RootElement` component in both `gatsby-browser.js` and `gatsby-ssr.js` like this.
+
+```javascript
+// gatsby-browser.js
+
+import React from 'react';
+
+import RootElement from './src/components/root-element';
+import './src/styles/global.css';
+
+export const wrapRootElement = ({ element }) => {
+  return <RootElement>{element}</RootElement>;
+};
+```
+
+```javascript
+// gatsby-ssr.js
+
+import React from 'react';
+
+import RootElement from './src/components/root-element';
+
+export const wrapRootElement = ({ element }) => {
+  return <RootElement>{element}</RootElement>;
+};
+```
+
+### MDXProvider | MDX 1
+
+The location of your `MDXProvider` will entirely depend on where in your project you've used it. On the
+[main branch](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx) in my example repo I've added it to the
+[collection route](https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#collection-routes) responsible
+for rendering my `.mdx` files: You can find the `src` code here:
+[\{mdx.fields\_\_slug}.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/main/src/pages/posts/%7Bmdx.fields__slug%7D.js).
+
+The main thing to draw your attention to is the use of the `components` prop. This is responsible for handling
+transformations of HTML tags or React components found in any MDX file.
+
+```javascript
+// src/pages/posts/{mdx.fields__slug}.js
+
+import React from 'react';
+import { graphql } from 'gatsby';
+
+import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+
+import PrismSyntaxHighlight from '../../components/prism-syntax-highlight';
+
+const components = {
+  code: ({ children, className }) => {
+    return <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>;
+  }
+};
+
+const Page = ({
+  data: {
+    mdx: { body }
+  }
+}) => (
+  <MDXProvider components={components}>
+    <MDXRenderer>{body}</MDXRenderer>
+  </MDXProvider>
+);
+
+export const query = graphql`
+  query ($id: String) {
+    mdx(id: { eq: $id }) {
+      body
+    }
+  }
+`;
+
+export default Page;
+```
+
+In the case of syntax highlighting you'll want to transform any HTML `code` elements into a "styled code block". You
+achieve this using the `components` prop. You'll see in the `components` object I've added a key for `code` and
+destructured both the `children` and `className` from the MDX props.
+
+I pass the `className` on to the `<PrismSyntaxHighlight />` component via a prop called `className` and render the
+`children` as children of the `<PrismSyntaxHighlight />` component.
+
+#### Components | MDX 1
+
+```javascript
+// components object
+
+const components = {
+  code: ({ children, className }) => {
+    return <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>;
+  }
+};
+```
+
+### PrismSyntaxHighlight
+
+The next step is to create the `<PrismSyntaxHighlight />` component. The below is the default setup that I've lifted
+straight from the repo: [Usage](https://github.com/FormidableLabs/prism-react-renderer#usage).
+
+#### Default Highlight
+
+This example will work just fine but you'll need to make a few changes in order to pass the language from MDX. I also
+made a few more changes so I could more easily style the code using Tailwind, and finally, I added an extra `<span />`
+to display the `language` in the code block as seen in the preview.
+
+```javascript
+
+import React from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+
+const PrismSyntaxHighlight = ({ children, className }) => {
+  return (
+    <Highlight {...defaultProps} code={, className} language="jsx">
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={style}>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
+
+export default PrismSyntaxHighlight;
+```
+
+#### Custom Highlight
+
+The `src` for my completed version can be found here:
+[prism-syntax-highlight.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/main/src/components/prism-syntax-highlight.js),
+but it looks similar the below.
+
+```javascript
+// src/components/prism-syntax-highlight.js
+
+import React, { Fragment } from 'react';
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import theme from 'prism-react-renderer/themes/dracula';
+
+const PrismSyntaxHighlight = ({ children, className }) => {
+  const language = className.replace(/language-/gm, '');
+
+  return (
+    <Highlight {...defaultProps} code={children} language={language} theme={theme}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <Fragment>
+          <span className="...">{language}</span>
+          <code className={className} style={style}>
+            {tokens.slice(0, -1).map((line, i) => (
+              <div {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </code>
+        </Fragment>
+      )}
+    </Highlight>
+  );
+};
+
+export default PrismSyntaxHighlight;
+```
+
+Here are the changes in a little more detail.
+
+##### Language
+
+In order to pass the language from MDX on to the `language` prop it's necessary to remove the word "language from the
+MDX `className`. I accomplished this using a Regular Expression (RegEx).
+
+```javascript
+const language = className.replace(/language-/gm, '');
+```
+
+The new `language` const can now be passed on to the `<Highlight />` via the `language` prop.
+
+```diff
+-   <Highlight {...defaultProps} code={children} language="jsx">
++   <Highlight {...defaultProps} code={children} language={language}>
+```
+
+##### Theme
+
+Prism React Renderer comes with a few themes, you can find them by having a look at the repo:
+[prism-react-renderer/src/themes/](https://github.com/FormidableLabs/prism-react-renderer/tree/master/src/themes). I
+chose to use "dracula".
+
+```diff
++ import theme from 'prism-react-renderer/themes/dracula';
+
+
+- <Highlight {...defaultProps} code={children} language={language}>
++ <Highlight {...defaultProps} code={children} language={language} theme={theme}>
+```
+
+##### Code
+
+I chose to return a `code` element rather than the `pre` element from the Default Highlight example so I could more
+easily style it using Tailwind.
+
+```diff
+- <pre className={className} style={style}>
++ <code className={className} style={style}>
+    ...
++ </code>
+- </pre>
+
+```
+
+##### Span
+
+I've added an extra `<span />` element to display the language inside the code block and have added a `Fragment` to
+avoid the Jsx multiple elements error. _I'll cover how to I styled this later using Tailwind._
+
+```diff
++ <Fragment>
++  <span className="...">{language}</span>
+    <code className={className} style={style}>
+      ...
+    </code>
++ </Fragment>
+```
+
+##### Slice
+
+At this point everything was looking great. However, I noticed a spurious extra empty line at the bottom of each code
+block. Using
+[Array.prototype.slice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+did allow me to remove it, but I haven't tested every scenario, so this might not be a good idea. 😬
+
+```diff
+<code className={className} style={style}>
+-  {tokens.map((line, i) => (
++  {tokens.slice(0, -1).map((line, i) => (
+    <div {...getLineProps({ line, key: i })}>
+      {line.map((token, key) => (
+        <span {...getTokenProps({ token, key })} />
+      ))}
+    </div>
+  ))}
+</code>
+```
+
+### Tailwind
+
+In addition to styling code that appears in a "code block" you'll probably also need to style inline code. The `src` for
+the complete Tailwind config can be here:
+[tailwind.config.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/main/tailwind.config.js)
+
+#### Inline code
+
+The first thing I noticed was that "inline" code was displaying the backtick around the code. E.g. \`code\`. To remove
+this I added the following to `tailwind.config.js`
+
+```javascript
+// ./tailwind.config.js
+
+module.exports = {
+  ...
+  theme: {
+    ...
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            code: {
+              '&::before': {
+                content: '"" !important'
+              },
+              '&::after': {
+                content: '"" !important'
+              }
+            }
+          }
+        }
+      })
+    }
+  },
+  plugins: [require('@tailwindcss/typography')]
+};
+
+```
+
+#### Style and Position
+
+In order to position the language `<span />` using `absolute` I need to ensure the parent `<pre />` had a `relative`
+position style applied to it. I accomplished this by adding the following to `tailwind.config.js`.
+
+```diff
+module.exports = {
+  ...
+  theme: {
+    ...
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
++            pre: {
++              position: 'relative'
++            },
+            ...
+          }
+        }
+      })
+    }
+  },
+  plugins: [require('@tailwindcss/typography')]
+};
+```
+
+I also added a new `fontSize` to `tailwind.config.js`
+
+```diff
+module.exports = {
+  ...
+  theme: {
+    ...
+    extend: {
++      fontSize: {
++        tiny: '.5rem'
++      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            ...
+          }
+        }
+      })
+    }
+  },
+  plugins: [require('@tailwindcss/typography')]
+};
+```
+
+The rest of the styles added to the `<span />` are available from Tailwind's default config.
+
+## MDX 2 (RC Version)
+
+This guide is for v4 of the Gatsby MDX Plugin: `gatsby-plugin-mdx`: `4.0.0-rc.3` which is designed to work with MDX 2.
+
+The main changes for using MDX 2 are with how the MDX `body` and `<MDXRenderer />` are no longer required. There are no
+Tailwind changes required.
+
+Here's a diff of
+[\{mdx.fields\_\_slug}.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/feat/mdx-2/src/pages/posts/%7Bmdx.fields__slug%7D.js)
+
+```diff
+// src/pages/posts/{mdx.fields__slug}.js
+
+import React from 'react';
+import { graphql } from 'gatsby';
+
+import { MDXProvider } from '@mdx-js/react';
+- import { MDXRenderer } from 'gatsby-plugin-mdx';
+
+import PrismSyntaxHighlight from '../../components/prism-syntax-highlight';
+
+const components = {
+  code: ({ children, className }) => {
+-    return <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>;
++    return className ? (
++      <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>
++    ) : (
++      <code>{children}</code>
++    );
+  }
+};
+
+const Page = ({
+  data: {
+-    mdx: { body }
+  },
++ children
+}) => (
+  <MDXProvider components={components}>
+-    <MDXRenderer>{body}</MDXRenderer>
++    {children}
+  </MDXProvider>
+);
+
+export const query = graphql`
+  query ($id: String) {
+    mdx(id: { eq: $id }) {
+-      body
+    }
+  }
+`;
+
+export default Page;
+```
+
+### MDX Provider | MDX 2
+
+Here are the changes in a little more detail.
+
+##### MDXRenderer
+
+The MDXRenderer is no longer required so this can be removed all together, and instead of querying `mdx.body` you can
+pass `children` directly to the `MDXProvider`.
+
+##### Components | MDX 2
+
+I've added a ternary condition to the to catch any "code" passed that doesn't have a class name. Inline code for
+instance won't have a language defined at the start of the code fences. If that's the case I return a `<code />` element
+rather than the `<PrismSyntaxHighlight />`
+
+And that's about it!
+
+### General Availability
+
+The new MDX Plugin isn't generally available (GA) just yet but the team have been doing such a super job and I'm so
+excited by it that I thought I'd share how I've been using it.
+
+I don't expect there to be any further major changes in the way you use it so once it hits GA the example should still
+work. If that turns out to not be the case i'll circle back to this post and update it.
