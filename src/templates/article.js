@@ -25,7 +25,7 @@ const Page = ({
         <DateTimeToRead date={date} />
         <small className="leading-6 font-semibold text-secondary">Publication &bull; {publication}</small>
       </div>
-      <h1 className="my-12">{title}</h1>
+      <h1 className="my-12 text-3xl sm:text-5xl">{title}</h1>
       <ul className="list-none m-0 p-0 flex flex-wrap gap-2 mb-12">
         {tags
           ? tags.map((tag, index) => {
