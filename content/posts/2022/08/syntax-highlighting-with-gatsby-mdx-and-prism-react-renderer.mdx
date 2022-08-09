@@ -163,8 +163,7 @@ straight from the repo: [Usage](https://github.com/FormidableLabs/prism-react-re
 #### Default Highlight
 
 This example will work just fine but you'll need to make a few changes in order to pass the language from MDX. I also
-made a few more changes so I could more easily style the code using Tailwind, and finally, I added an extra `<span />`
-to display the `language` in the code block as seen in the preview.
+made a few more changes so I could more easily style the code using Tailwind.
 
 ```javascript
 
@@ -239,7 +238,7 @@ MDX `className`. I accomplished this using a Regular Expression (RegEx).
 const language = className.replace(/language-/gm, '');
 ```
 
-The new `language` const can now be passed on to the `<Highlight />` via the `language` prop.
+The new `language` const can now be passed on to the `<Highlight />` component via the `language` prop.
 
 ```diff
 -   <Highlight {...defaultProps} code={children} language="jsx">
@@ -338,8 +337,8 @@ module.exports = {
 
 This guide is for v4 of the Gatsby MDX Plugin: `gatsby-plugin-mdx`: `4.0.0-rc.3` which is designed to work with MDX 2.
 
-The main changes for using MDX 2 are with how the MDX `body` and `<MDXRenderer />` are no longer required. There are no
-Tailwind changes required.
+The main changes for using MDX 2 are that `body` and the `<MDXRenderer />` component are no longer required. There are
+no Tailwind changes required.
 
 Here's a diff of
 [\{mdx.fields\_\_slug}.js](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/pull/4/files#diff-806ba7639fe92e93ebdf27e87cddb9c053e36422755369f5be1a847332f68874)
@@ -395,23 +394,30 @@ Here are the changes in a little more detail.
 
 ##### Dependencies
 
+These are the dependencies used in the example repo in the refactor/mdx-v2 branch, you can see them listed here in
+[package.json](https://github.com/PaulieScanlon/gatsby-prism-react-renderer-mdx/blob/refactor/mdx-v2/package.json#L24).
+
 ```json
-"@mdx-js/react": "^2.1.2",
-"gatsby": "4.20.0-mdxv4-rc.65",
-"gatsby-plugin-mdx": "4.0.0-rc.3",
-"gatsby-source-filesystem": "4.20.0-mdxv4-rc.124",
+// package.json
+"dependencies": {
+  "@mdx-js/react": "^2.1.2",
+  "gatsby": "4.20.0-mdxv4-rc.65",
+  "gatsby-plugin-mdx": "4.0.0-rc.3",
+  "gatsby-source-filesystem": "4.20.0-mdxv4-rc.124",
+  ...
+}
 ```
 
 ##### MDXRenderer
 
 The MDXRenderer is no longer required so this can be removed all together, and instead of querying `mdx.body` you can
-pass `children` directly to the `MDXProvider`.
+pass `children` directly to the `<MDXProvider >` component.
 
 ##### Components | MDX 2
 
 I've added a ternary condition to the to catch any "code" passed that doesn't have a class name. Inline code for
-instance won't have a language defined at the start of the code fences. If that's the case I return a `<code />` element
-rather than the `<PrismSyntaxHighlight />`
+instance won't have a `language` defined at the start of the code fences. If that's the case I return an HTML `<code />`
+element rather than the `<PrismSyntaxHighlight />` component.
 
 And that's about it!
 
