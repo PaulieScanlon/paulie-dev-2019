@@ -48,22 +48,6 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       <meta name="twitter:image:alt" content={description}></meta>
-
-      {/* favicon */}
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`${siteUrl}/images/favicon-16x16.png`}
-        data-react-helmet="true"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href={`${siteUrl}/images/favicon-32x32.png`}
-        data-react-helmet="true"
-      />
     </Fragment>
   );
 };

@@ -10,9 +10,9 @@ const SiteSearch = ({ nodes }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
 
-  const handleNavigate = (event) => {
+  const handleNavigate = (event, slug) => {
     if (event.key === 'Enter') {
-      navigate(event.target.href);
+      navigate(slug);
     }
   };
 
@@ -86,7 +86,7 @@ const SiteSearch = ({ nodes }) => {
                         value={title}
                         disabled={true}
                         className="m-2 border-b-[1px] border-outline hover:bg-purple"
-                        onKeyDown={handleNavigate}
+                        onKeyDown={(event) => handleNavigate(event, slug)}
                       >
                         <Link to={slug} className="group flex flex-col px-4 py-3 text-slate-400 hover:text-white">
                           <span className="text-primary group-hover:text-white text-[0.6rem]">
