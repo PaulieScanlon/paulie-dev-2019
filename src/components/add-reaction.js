@@ -34,8 +34,8 @@ const AddReaction = ({ title, slug }) => {
   };
 
   return (
-    <section className="flex justify-center my-32">
-      <div className="inline-flex justify-center flex-col min-h-[140px] max-w-[500px] w-full text-center rounded border border-outline bg-surface/70 p-4 sm:px-6">
+    <section className="mx-auto w-full sm:w-11/12 flex justify-center my-16">
+      <div className="inline-flex justify-center flex-col min-h-[140px] w-full text-center rounded border border-outline bg-surface/70 p-4 sm:px-6">
         {hasSubmitted ? (
           <Fragment>
             <p className="m-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Thanks</p>
