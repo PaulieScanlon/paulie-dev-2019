@@ -34,7 +34,8 @@ const RootElement = ({ children }) => {
           gtag('config', '${process.env.GATSBY_GA_MEASUREMENT_ID}', { send_page_view: false })`
         }}
       />
-      <div className="sticky top-0 z-50 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
+
+      <div className="sticky top-0 z-40 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
         <div className="max-w-8xl mx-auto">
           <div className="py-4 mx-4 lg:px-8 lg:mx-0">
             <div className="relative flex items-center">
@@ -63,6 +64,7 @@ const RootElement = ({ children }) => {
             isNavOpen ? 'fixed lg:hidden' : 'hidden'
           }`}
         />
+
         <div className="site-container max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
           <div
             className={`site-nav lg:block fixed z-30 inset-0 top-[3.8125rem] transition-all duration-300
