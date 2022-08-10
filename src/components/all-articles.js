@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import ArticleCard from '../components/article-card';
 
-const LatestArticles = () => {
+const AllArticles = () => {
   const {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
@@ -60,4 +60,4 @@ const LatestArticles = () => {
   );
 };
 
-export default LatestArticles;
+export default AllArticles;

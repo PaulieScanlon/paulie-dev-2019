@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import StreamCard from '../components/stream-card';
 
-const LatestStreams = () => {
+const AllStreams = () => {
   const {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
@@ -52,4 +52,4 @@ const LatestStreams = () => {
   );
 };
 
-export default LatestStreams;
+export default AllStreams;

@@ -53,10 +53,10 @@ const RecentTweets = () => {
     };
   }, []);
 
-  if (!isLoading) {
-    console.log(response.tweets);
-    // console.log(response.user);
-  }
+  // if (!isLoading) {
+  // console.log(response.tweets);
+  // console.log(response.user);
+  // }
 
   return (
     <div className="flex flex-col items-stretch rounded border border-outline bg-surface p-4">
