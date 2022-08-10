@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, navigate } from 'gatsby';
 import { Command } from 'cmdk';
@@ -35,7 +35,7 @@ const SiteSearch = ({ nodes }) => {
   }, []);
 
   return (
-    <Fragment>
+    <div className="hidden lg:block mt-8">
       <QuickSearch onClick={handleClick} />
       <Command.Dialog
         open={isOpen}
@@ -114,7 +114,7 @@ const SiteSearch = ({ nodes }) => {
           </div>
         </div>
       </Command.Dialog>
-    </Fragment>
+    </div>
   );
 };
 

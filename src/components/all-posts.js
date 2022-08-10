@@ -36,7 +36,7 @@ const AllPosts = () => {
   return (
     <Fragment>
       <SiteSearch nodes={nodes} />
-      <ul className="mt-16 grid gap-8 list-none m-0 mb-8 p-0">
+      <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
             fields: { slug },
