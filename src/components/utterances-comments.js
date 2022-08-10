@@ -41,7 +41,17 @@ UtterancesComments.propTypes = {
   /** The name of the public repository to open issues  */
   repo: PropTypes.string.isRequired,
   /** The type of Theme to use */
-  theme: PropTypes.oneOf(['github-light', 'github-dark']),
+  theme: PropTypes.oneOf([
+    'github-light',
+    'github-dark',
+    'preferred-color-scheme',
+    'github-dark-orange',
+    'icy-dark',
+    'dark-blue',
+    'photon-dark',
+    'boxy-light',
+    'gruvbox-dark'
+  ]),
   /** The property to use as the issue title */
   issueTerm: PropTypes.string
 };
