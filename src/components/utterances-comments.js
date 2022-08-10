@@ -25,7 +25,11 @@ const UtterancesComments = ({ repo, theme, issueTerm }) => {
     }, 300);
   }, [repo, theme, issueTerm]);
 
-  return <div ref={ref} />;
+  return (
+    <section className="mx-auto w-full sm:w-11/12">
+      <div ref={ref} />
+    </section>
+  );
 };
 
 UtterancesComments.defaultProps = {
