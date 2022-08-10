@@ -7,12 +7,8 @@ import QuickSearch from './quick-search';
 import { formatDatestamp } from '../utils/format-date-stamp';
 
 const SiteSearch = ({ nodes }) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
-
-  const handleOpen = () => {
-    setOpen((open) => !open);
-  };
 
   const handleNavigate = (event) => {
     if (event.key === 'Enter') {
@@ -20,26 +16,30 @@ const SiteSearch = ({ nodes }) => {
     }
   };
 
-  useEffect(() => {
-    const down = (event) => {
-      if (event.key === 'k' && event.metaKey) {
-        setOpen((open) => !open);
-      }
-      if (event.key === 'Enter' && event.target.value === 'esc') {
-        setOpen((open) => !open);
-      }
-    };
+  const handleClick = () => {
+    setIsOpen((open) => !open);
+  };
 
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
+  const handleDown = (event) => {
+    if (event.key === 'k' && event.metaKey) {
+      setIsOpen((open) => !open);
+    }
+    if (event.key === 'Enter' && event.target.value === 'esc') {
+      setIsOpen((open) => !open);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleDown);
+    return () => document.removeEventListener('keydown', handleDown);
   }, []);
 
   return (
     <Fragment>
-      <QuickSearch onClick={handleOpen} />
+      <QuickSearch onClick={handleClick} />
       <Command.Dialog
-        open={open}
-        onOpenChange={setOpen}
+        open={isOpen}
+        onOpenChange={setIsOpen}
         label="Search posts"
         role="button"
         className="cursor-default fixed z-40 top-0 left-0 w-screen h-screen bg-background/80 backdrop-blur-sm"
@@ -59,6 +59,7 @@ const SiteSearch = ({ nodes }) => {
                   className="text-xs uppercase bg-outline rounded px-2 py-1 transition-all duration-300 hover:bg-muted/20"
                   aria-label="esc"
                   value="esc"
+                  onClick={handleClick}
                 >
                   esc
                 </button>
@@ -101,13 +102,8 @@ const SiteSearch = ({ nodes }) => {
             </Command>
             <div className="flex gap-2 mt-8 leading-tight">
               <small className="text-slate-400 text-xs">Powered by </small>
-              <a
-                href="https://paulieapi.gatsbyjs.io/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-slate-400 text-xs"
-              >
-                <kbd className="flex gap-1 font-sans font-semibold">
+              <a href="https://cmdk.paco.me/" target="_blank" rel="noreferrer" className="text-slate-400 text-xs">
+                <kbd className="flex gap-1 text-secondary font-sans font-semibold">
                   <abbr title="Command" className="no-underline">
                     ⌘
                   </abbr>
