@@ -1,11 +1,3 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -90,7 +82,6 @@ public
 .env.development
 .env.production
 refs.md
-yarn.lock
 .DS_Store
 paulie-dev-541568ac1566.json
 
