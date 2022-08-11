@@ -71,7 +71,7 @@ const RootElement = ({ children }) => {
             ${isNavOpen ? 'left-[max(0px,calc(50%-45rem))]' : 'left-[-240px] lg:left-[max(0px,calc(50%-45rem))]'} 
             right-auto w-[14.5rem] pb-10 px-6 overflow-y-auto border-r border-r-outline bg-background`}
           >
-            <nav className="relative  pt-8">
+            <nav className="relative pt-8">
               <ul>
                 {navigation.pages.map((page, index) => {
                   const {
