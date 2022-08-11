@@ -59,7 +59,7 @@ export const query = graphql`
       frontmatter {
         type
         title
-        date
+        date(formatString: "MMMM DD, YYYY")
         role
         show
         tags

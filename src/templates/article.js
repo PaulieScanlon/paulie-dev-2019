@@ -57,7 +57,7 @@ export const query = graphql`
       frontmatter {
         type
         title
-        date
+        date(formatString: "MMMM DD, YYYY")
         publication
         tags
       }

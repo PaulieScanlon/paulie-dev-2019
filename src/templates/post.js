@@ -73,8 +73,8 @@ export const query = graphql`
       frontmatter {
         type
         title
-        date
-        dateModified
+        date(formatString: "MMMM DD, YYYY")
+        dateModified(formatString: "MMMM DD, YYYY")
         author
         tags
         featuredImage

@@ -1,5 +1,4 @@
 import { useStaticQuery, graphql } from 'gatsby';
-import { formatDatestamp } from '../utils/format-date-stamp';
 
 export const useBuildTime = () => {
   const {
@@ -7,10 +6,10 @@ export const useBuildTime = () => {
   } = useStaticQuery(graphql`
     {
       site {
-        buildTime
+        buildTime(formatString: "MMMM DD, YYYY @HH:MM:SS")
       }
     }
   `);
 
-  return formatDatestamp(buildTime, true);
+  return buildTime;
 };

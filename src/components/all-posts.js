@@ -20,8 +20,8 @@ const AllPosts = () => {
           excerpt(pruneLength: 100)
           frontmatter {
             title
-            date
-            dateModified
+            date(formatString: "MMMM DD, YYYY")
+            dateModified(formatString: "MMMM DD, YYYY")
           }
           featuredImage {
             childImageSharp {

@@ -20,7 +20,7 @@ const LatestStreams = () => {
           excerpt(pruneLength: 100)
           frontmatter {
             title
-            date
+            date(formatString: "MMMM DD, YYYY")
             show
           }
           logo {
