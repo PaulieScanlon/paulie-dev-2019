@@ -1,5 +1,7 @@
 const faunadb = require('faunadb');
 
+const { formatDatestamp } = require('./format-date-stamp');
+
 module.exports.get = async function () {
   const q = faunadb.query;
 
@@ -20,7 +22,7 @@ module.exports.get = async function () {
       title,
       slug,
       reaction,
-      date
+      date: formatDatestamp(date)
     }));
 
     return {

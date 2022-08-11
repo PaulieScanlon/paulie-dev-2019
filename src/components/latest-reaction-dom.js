@@ -5,7 +5,6 @@ import { Link } from 'gatsby';
 import Loading from '../components/loading';
 
 import { icons } from '../utils/reaction-paths';
-import { formatDatestamp } from '../utils/format-date-stamp';
 
 const LatestReactionDom = ({ isLoading, hasJavascript, title, reaction, slug, date }) => {
   return (
@@ -40,7 +39,7 @@ const LatestReactionDom = ({ isLoading, hasJavascript, title, reaction, slug, da
                 Latest Reaction
               </h2>
               <p className="m-0 text-base text-slate-300 text-center font-semibold">{title}</p>
-              <p className="m-0 text-sm text-slate-300 text-center ">{formatDatestamp(date, true)}</p>
+              <time className="m-0 text-sm text-slate-300 text-center ">{date}</time>
             </div>
             <Link
               to={slug}

@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import DateTimeToRead from './date-time-to-read';
+import DateStamp from './date-stamp';
 
 const StreamCard = ({ link, title, logo, show, date, excerpt }) => {
   return (
@@ -17,7 +17,7 @@ const StreamCard = ({ link, title, logo, show, date, excerpt }) => {
               {show} <span className="hidden sm:block ml-2 ">&bull;</span>
             </strong>
           </div>
-          <DateTimeToRead date={date} />
+          <DateStamp date={date} />
         </div>
         <h3 className="m-0 text-xl text-white">{title}</h3>
         <p className="m-0 text-slate-300 text-base ">{excerpt}</p>

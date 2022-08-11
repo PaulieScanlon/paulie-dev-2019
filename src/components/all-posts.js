@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import PostCard from '../components/post-card';
+import SiteSearch from './site-search';
 
 const AllPosts = () => {
   const {
@@ -19,8 +20,8 @@ const AllPosts = () => {
           excerpt(pruneLength: 100)
           frontmatter {
             title
-            date
-            dateModified
+            date(formatString: "MMMM DD, YYYY")
+            dateModified(formatString: "MMMM DD, YYYY")
           }
           featuredImage {
             childImageSharp {
@@ -34,6 +35,7 @@ const AllPosts = () => {
 
   return (
     <Fragment>
+      <SiteSearch nodes={nodes} />
       <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
