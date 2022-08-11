@@ -1,6 +1,7 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
@@ -41,7 +42,9 @@ const components = {
 
 const MdxParser = ({ children, embedded }) => {
   return (
-    <MDXProvider components={components}>{cloneElement(children, { embedded: transformImages(embedded) })}</MDXProvider>
+    <MDXProvider components={components}>
+      <MDXRenderer embedded={transformImages(embedded)}>{children}</MDXRenderer>
+    </MDXProvider>
   );
 };
 

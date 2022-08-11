@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
 import MdxParser from '../components/mdx-parser';
+
 import AsideElement from '../components/aside-element';
 import DateTimeToRead from '../components/date-time-to-read';
 import GenericAside from '../components/generic-aside';
@@ -14,10 +15,10 @@ const Page = ({
     mdx: {
       fields: { slug },
       excerpt,
-      frontmatter: { type, title, date, role, show, tags }
+      frontmatter: { type, title, date, role, show, tags },
+      body
     }
-  },
-  children
+  }
 }) => {
   return (
     <Fragment>
@@ -39,7 +40,7 @@ const Page = ({
             })
           : null}
       </ul>
-      <MdxParser>{children}</MdxParser>
+      <MdxParser>{body}</MdxParser>
       <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
@@ -63,6 +64,7 @@ export const query = graphql`
         show
         tags
       }
+      body
     }
   }
 `;

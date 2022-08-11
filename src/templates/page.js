@@ -10,15 +10,15 @@ const Page = ({
   data: {
     mdx: {
       excerpt,
-      frontmatter: { type, title }
+      frontmatter: { type, title },
+      body
     }
-  },
-  children
+  }
 }) => {
   return (
     <Fragment>
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
-      <MdxParser>{children}</MdxParser>
+      <MdxParser>{body}</MdxParser>
       <AsideElement>
         <GenericAside />
       </AsideElement>
@@ -37,6 +37,7 @@ export const query = graphql`
         type
         title
       }
+      body
     }
   }
 `;

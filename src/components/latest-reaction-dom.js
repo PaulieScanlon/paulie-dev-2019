@@ -7,7 +7,7 @@ import Loading from '../components/loading';
 import { icons } from '../utils/reaction-paths';
 import { formatDatestamp } from '../utils/format-date-stamp';
 
-const LatestReactionDom = ({ hasJavascript, isLoading, title, reaction, slug, date }) => {
+const LatestReactionDom = ({ isLoading, hasJavascript, title, reaction, slug, date }) => {
   return (
     <div className="relative flex flex-col items-center justify-center overflow-hidden rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6 min-h-[270px]">
       {isLoading && hasJavascript ? (
@@ -69,7 +69,7 @@ LatestReactionDom.propTypes = {
   /** The slug of the post */
   slug: PropTypes.string.isRequired,
   /** The date the reacton was submitted */
-  date: PropTypes.any.isRequired
+  date: PropTypes.any
 };
 
 export default LatestReactionDom;

@@ -1,3 +1,5 @@
+// not currently used — but keep it around for a while
+
 const axios = require('axios');
 
 export default async function handler(req, res) {
