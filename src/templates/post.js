@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 
 import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
-import DateTimeToRead from '../components/date-time-to-read';
+import DateStamp from '../components/date-stamp';
 import FeaturedImageAside from '../components/featured-image-aside';
 import AddReaction from '../components/add-reaction';
 import UtterancesComments from '../components/utterances-comments';
@@ -32,7 +32,7 @@ const Page = ({
   return (
     <Fragment>
       <div className="grid lg:grid-cols-1fr-auto">
-        <DateTimeToRead date={dateModified ? dateModified : date} />
+        <DateStamp date={dateModified ? dateModified : date} />
         <small className="leading-6 font-semibold text-secondary">Author &bull; {author}</small>
       </div>
       <h1 className="my-12 text-3xl sm:text-5xl">{title}</h1>

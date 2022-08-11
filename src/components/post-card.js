@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import DateTimeToRead from './date-time-to-read';
+import DateStamp from './date-stamp';
 
 const PostCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
   return (
@@ -14,7 +14,7 @@ const PostCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
             <GatsbyImage alt={title} image={getImage(thumbnail)} />
           </div>
           <div>
-            <DateTimeToRead date={dateModified ? dateModified : date} />
+            <DateStamp date={dateModified ? dateModified : date} />
             <h3 className="m-0 text-xl text-white">{title}</h3>
             <p className="m-0 text-slate-300 text-base ">{excerpt}</p>
           </div>
