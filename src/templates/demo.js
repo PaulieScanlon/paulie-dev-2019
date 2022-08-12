@@ -9,6 +9,7 @@ import FeaturedImageAside from '../components/featured-image-aside';
 import AddReaction from '../components/add-reaction';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
+import TableOfContents from '../components/table-of-contents';
 
 const Page = ({
   data: {
@@ -50,6 +51,12 @@ const Page = ({
       <AddReaction title={title} slug={slug} />
       <AsideElement>
         <FeaturedImageAside alt={title} thumbnail={thumbnail} shareText={`${title}\n ${siteUrl}${slug}`} />
+        {toc ? (
+          <div className="px-6">
+            <h5 className="mb-3 text-lg leading-6 font-semibold uppercase text-secondary">On this page</h5>
+            <TableOfContents slug={slug} items={toc} />
+          </div>
+        ) : null}
       </AsideElement>
     </Fragment>
   );
