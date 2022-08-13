@@ -1,8 +1,18 @@
-const { PrismaClient } = require('@prisma/client');
+import fs from 'fs';
+import { PrismaClient } from '@prisma/client';
+
 import { formatDatestamp } from '../utils/format-date-stamp';
+
+import prismaSchema from 'raw-loader!../../prisma/schema.prisma';
+
+if (process.env.GATSBY_CLOUD === 'true') {
+  fs.writeFileSync('./schema.prisma', prismaSchema);
+}
 
 export default async function handler(req, res) {
   const { lat, long, date } = JSON.parse(req.body);
+
+  console.log('process.env.GATSBY_CLOUD: ', process.env.GATSBY_CLOUD);
 
   const prisma = new PrismaClient({
     datasources: {
