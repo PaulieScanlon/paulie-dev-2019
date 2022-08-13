@@ -1,4 +1,4 @@
-const { PrismaClient, Decimal } = require('@prisma/client');
+const { PrismaClient } = require('@prisma/client');
 import { formatDatestamp } from '../utils/format-date-stamp';
 
 export default async function handler(req, res) {
