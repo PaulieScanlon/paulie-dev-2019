@@ -7,7 +7,7 @@
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "start": "gatsby develop",
-    "build": "prisma generate && gatsby build && yarn robots",
+    "build": "gatsby build && yarn robots",
     "serve": "gatsby serve",
     "robots": "cp robots.txt public/",
     "prettier": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write \"**/*.{json,js,ts,tsx,mdx}\"",
