@@ -1,5 +1,16 @@
 const path = require('path');
 const { createFilePath, createRemoteFileNode } = require('gatsby-source-filesystem');
+// const { IgnorePlugin } = require('webpack');
+
+// exports.onCreateWebpackConfig = ({ actions }) => {
+//   actions.setWebpackConfig({
+//     plugins: [
+//       new IgnorePlugin({
+//         resourceRegExp: /^pg-native$/
+//       })
+//     ]
+//   });
+// };
 
 exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
   createTypes(`

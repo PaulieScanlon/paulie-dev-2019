@@ -1,0 +1,29 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["cockroachdb"]
+  // The following is needed when using deploying to netlify using `netlify deploy` locally
+  // It can be removed if the deployment is configured on netlify to automatically deploy for each commit
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model user_locations {
+  id          BigInt    @id @default(autoincrement())
+  location_id BigInt
+  date        DateTime  @db.Date
+  locations   locations @relation(fields: [location_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_location")
+  @@index([date], map: "user_locations_date")
+  @@index([location_id], map: "user_locations_location_id")
+}
+
+model locations {
+  id             BigInt           @id @default(autoincrement())
+  lat            Float
+  long           Float
+  date           DateTime         @db.Date
+  user_locations user_locations[]
+}
