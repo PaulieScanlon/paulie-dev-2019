@@ -6,7 +6,7 @@ const Loading = ({ className }) => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className={`${className} text-outline animate-spin fill-primary`}
+        className={`text-outline animate-spin w-9 h-9 ${className}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const Loading = ({ className }) => {
 };
 
 Loading.defaultProps = {
-  className: 'w-9 h-9'
+  className: 'fill-salmon'
 };
 
 Loading.propTypes = {
