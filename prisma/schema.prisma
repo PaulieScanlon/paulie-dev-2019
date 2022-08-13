@@ -1,9 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["cockroachdb"]
-  // The following is needed when using deploying to netlify using `netlify deploy` locally
-  // It can be removed if the deployment is configured on netlify to automatically deploy for each commit
-  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+  binaryTargets = ["debian-openssl-1.1.x"]
 }
 
 datasource db {
