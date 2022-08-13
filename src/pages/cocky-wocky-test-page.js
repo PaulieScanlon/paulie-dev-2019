@@ -31,7 +31,7 @@ const Page = () => {
     const addLocation = async () => {
       try {
         const response = await (
-          await fetch('/api/add-location', {
+          await fetch('/api/add-user-location', {
             method: 'POST',
             body: JSON.stringify({
               lat: 51.507351,
