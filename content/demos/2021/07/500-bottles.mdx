@@ -5,40 +5,47 @@ tags: [Gatsby, React, JavaScript, three.js, Shopify]
 date: 2021-07-07
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1660341000/paulie.dev/2021/07/og-image-500_ziriwj.jpg
+embeddedImages:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1660376262/paulie.dev/2021/07/embeddedd-500-bottles_bxjxdx.jpg
 ---
 
 ## Project Overview
 
 In the summer of 2021 I created [500 Bottles](https://500bottles.gatsbyjs.io/). I designed the logo and the bottle, and
-worked with Marketing to create limited edition swag, along with designing and building the site.
+worked with Marketing to create a limited edition free swag giveaway, along with designing and building a promotional
+demo site.
 
 This site is an example of what can be achieved using
 [gatsby-source-shopify](https://www.gatsbyjs.com/plugins/gatsby-source-shopify/), Gatsby's Headless e-commerce solution.
 How it differs from a other e-commerce demos that display lots of products on a page is, by displaying 0 products on a
 page.
 
+<GatsbyImage alt="500 Bottles screenshots" image={props.embedded.image1} />
+
 ## Deliverables
 
 What the site does do however is source the one and only product in the store that was marked to be part of a free swag
-giveaway, and invites users to spin to win.
+giveaway, and invites users to spin to win. The form inputs act as a lead capture mechanic and were used by Gatsby's
+sales and growth teams.
 
 Users entered their details, and upon successful submission, via the use of a Gatsby
-[Serverless Function](https://www.gatsbyjs.com/products/cloud/functions), the bottle began to spin. There was a 1-in -5
+[Serverless Function](https://www.gatsbyjs.com/products/cloud/functions), the bottle began to spin. There was a 1-in-5
 chance the wheel would land on win.
 
 If the bottle landed on win I programmatically created a Shopify checkout and unique, one-time-use discount code using
 the Shopify Buy API, and then directed users over to a secure Shopify page to complete the checkout process.
 
 Once a checkout was completed I call the Gatsby Cloud Webhook which rebuilds the site and decreases the available stock
-inventory by 1. An new Open-graph image was also created which displayed the current stock level when shared on social
-media.
+inventory by 1. The new inventory level is reflected in a three.js hero animation seen at teh top of the site, and a new
+Open-graph image was generated which displayed the current stock level. This could be seen in the meta preview when a
+link to the site was shared on social media.
 
 The campaign ran for 14 days until all 500 limited edition bottles had been claimed.
 
 ### Bonus Deliverable
 
 Shopify captures lots of information about users, so I thought I'd surface some of it. At build time, and securely on
-the server I used the Shopify Admin API to get geo-graphical shipping information to display on a three.js interactive
+the server, I used the Shopify Admin API to get geographical shipping information to display on a three.js interactive
 globe. This allowed anyone visiting the site to see where in the world the winners were. I wrote article for
 [Smashing Magazine](https://www.smashingmagazine.com/2021/07/gatsby-serverless-functions-international-space-station/)
 which explains how I achieved this.
