@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Blast! There's been an error.", data: error });
   } finally {
     prisma.$disconnect();
   }
