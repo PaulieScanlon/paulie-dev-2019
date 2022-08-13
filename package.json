@@ -7,11 +7,12 @@
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "start": "gatsby develop",
-    "build": "gatsby build && yarn robots",
+    "build": "yarn generate && gatsby build && yarn robots",
     "serve": "gatsby serve",
     "robots": "cp robots.txt public/",
     "prettier": "prettier --config ./.prettierrc.js --ignore-path ./.prettierignore --write \"**/*.{json,js,ts,tsx,mdx}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate": "prisma generate"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
