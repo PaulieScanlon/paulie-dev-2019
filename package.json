@@ -14,7 +14,7 @@
     "prepare": "husky install"
   },
   "prisma": {
-    "seed": "prisma/seed.js"
+    "seed": "node prisma/seed.js"
   },
   "repository": {
     "type": "git",
