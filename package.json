@@ -27,7 +27,7 @@
     "@google-analytics/data": "^3.0.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@react-three/fiber": "^8.3.1",
+    "@react-three/fiber": "^6.0.19",
     "cmdk": "^0.1.18",
     "country-flag-icons": "^1.5.5",
     "faunadb": "^4.6.0",
@@ -48,7 +48,7 @@
     "react-dom": "18.0.0",
     "rehype-autolink-headings": "4.0.0",
     "rehype-slug": "4.0.0",
-    "three": "^0.143.0"
+    "three": "^0.130.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
