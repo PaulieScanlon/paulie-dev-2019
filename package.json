@@ -27,6 +27,7 @@
     "@google-analytics/data": "^3.0.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "@react-three/fiber": "^8.3.1",
     "cmdk": "^0.1.18",
     "country-flag-icons": "^1.5.5",
     "faunadb": "^4.6.0",
