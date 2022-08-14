@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Seo from '../components/seo';
 
+import ThreeScene from '../components/three-scene';
+
 const Page = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [locations, setLocations] = useState(null);
 
   useEffect(() => {
@@ -15,7 +16,6 @@ const Page = () => {
         ).json();
 
         setLocations(response.data);
-        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +29,9 @@ const Page = () => {
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">404</small>
       <h1>Page Not Found</h1>
       <p>Blast! The page you're looking for can't be found.</p>
-      <pre>{JSON.stringify(locations, null, 2)}</pre>
+      <div className="w-full h-[36rem] rounded border border-outline">
+        <ThreeScene locations={locations} />
+      </div>
     </div>
   );
 };
