@@ -9,7 +9,7 @@ const ThreeGeo = () => {
       {data.features.map(({ geometry }, index) => {
         return (
           <lineSegments key={index} geometry={new GeoJsonGeometry(geometry, 1)}>
-            <lineBasicMaterial color="#47457c" />
+            <lineBasicMaterial color="#4b4582" />
           </lineSegments>
         );
       })}
