@@ -5,7 +5,7 @@ const QuickSearch = ({ onClick }) => {
   return (
     <button
       type="button"
-      className="w-full flex justify-between items-center text-sm text-slate-300 transition-all duration-300 rounded border border-outline bg-surface/70 px-4 py-2 hover:text-white hover:bg-muted/20"
+      className="w-full flex justify-between items-center text-sm text-slate-300 transition-all duration-300 rounded border border-outline bg-surface px-4 py-2 hover:text-white hover:bg-muted/20"
       onClick={onClick}
     >
       <span className="flex items-center gap-2">

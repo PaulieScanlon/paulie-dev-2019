@@ -69,7 +69,7 @@ const Page = ({
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
-          <ul className="m-0 p-0 rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6 min-h-[200px]">
+          <ul className="m-0 p-0 rounded border border-outline bg-surface px-4 sm:px-6 py-6 min-h-[200px]">
             {locations
               ? locations.data.map((row, index) => {
                   const { flag, name, amount } = row;

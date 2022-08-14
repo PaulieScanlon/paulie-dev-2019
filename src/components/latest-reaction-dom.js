@@ -8,7 +8,7 @@ import { icons } from '../utils/reaction-paths';
 
 const LatestReactionDom = ({ isLoading, hasJavascript, title, reaction, slug, date }) => {
   return (
-    <div className="relative flex flex-col items-center justify-center overflow-hidden rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6 min-h-[270px]">
+    <div className="relative flex flex-col items-center justify-center overflow-hidden rounded border border-outline bg-surface px-4 sm:px-6 py-6 min-h-[270px]">
       {isLoading && hasJavascript ? (
         <div className="flex items-center justify-center h-full">
           <Loading />
