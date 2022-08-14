@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { groupBy } from '../utils/group-by';
@@ -100,15 +100,64 @@ const AllDaysChart = () => {
   const width = 500;
   const height = 230;
   const fontSize = 9;
+  const xLines = 5;
+  const yLines = 9;
+  const xPad = postsByDay.length;
+  const yPad = 8;
+  const color = '#2d2a58';
+
+  const XGuides = () => {
+    const startX = xPad;
+    const endX = width - xPad;
+
+    return new Array(xLines + 1).fill(null).map((_, index) => {
+      const ratio = index / xLines;
+
+      const yCoordinate = height * ratio + yPad;
+
+      return (
+        <Fragment key={index}>
+          <polyline
+            fill="none"
+            stroke={color}
+            strokeWidth=".5"
+            points={`${startX},${yCoordinate} ${endX},${yCoordinate}`}
+          />
+        </Fragment>
+      );
+    });
+  };
+
+  const YGuides = () => {
+    const startY = yPad;
+    const endY = height + xPad;
+
+    return new Array(yLines + 1).fill(null).map((_, index) => {
+      const ratio = index / yLines;
+
+      const xCoordinate = xPad + ratio * (width - xPad * 2);
+
+      return (
+        <Fragment key={index}>
+          <polyline
+            fill="none"
+            stroke={color}
+            strokeWidth=".5"
+            points={`${xCoordinate},${startY} ${xCoordinate},${endY}`}
+          />
+        </Fragment>
+      );
+    });
+  };
 
   return (
     <div>
       <div className="rounded border border-outline bg-surface p-4">
         <svg viewBox={`0,0,${width},${height}`}>
+          <XGuides />
+          <YGuides />
           {postsByDay.map((item, g) => {
             const { day, data } = item;
-            const xPad = postsByDay.length;
-            const yPad = 16;
             const barWidth = width / (data.length * postsByDay.length) - xPad;
             const groupWidth = width / postsByDay.length;
 
