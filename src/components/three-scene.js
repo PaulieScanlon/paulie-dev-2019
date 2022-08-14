@@ -6,7 +6,7 @@ import { Canvas } from '@react-three/fiber';
 
 // import ThreeGeo from './three-geo';
 // import ThreeGraticule from './three-graticlue';
-// import ThreeLatLong from './three-lat-long';
+import ThreeLatLong from './three-lat-long';
 import ThreeSphere from './three-sphere';
 
 const ThreeScene = ({ locations }) => {
@@ -19,9 +19,10 @@ const ThreeScene = ({ locations }) => {
     >
       {/* <OrbitControls enableRotate={true} enableZoom={false} enablePan={false} /> */}
       <ambientLight intensity={2} />
-      {/* <ThreeLatLong locations={locations} /> */}
+      <ThreeLatLong locations={locations} />
       {/* <ThreeGeo />
-        <ThreeGraticule /> */}
+        <ThreeGraticule /> 
+        */}
       <ThreeSphere />
     </Canvas>
   );
