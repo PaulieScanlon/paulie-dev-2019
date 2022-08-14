@@ -15,7 +15,7 @@ module.exports.get = async function () {
       ids: `ga:${process.env.GOOGLE_ANALYTICS_VIEW_ID}`,
       'start-date': '2019-10-01',
       // 'start-date': '7daysAgo',
-      'end-date': 'today',
+      'end-date': '2022-07-01',
       metrics: 'ga:pageviews',
       dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode'
     });
