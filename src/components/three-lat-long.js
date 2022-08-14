@@ -16,7 +16,6 @@ const ThreeLatLong = ({ locations }) => {
       {locations
         ? locations.map((data, index) => {
             const { lat, lng } = data;
-
             return (
               <mesh key={index} position={getVertex(lat, lng, 1.05)}>
                 <sphereGeometry args={[0.005, 32]} />
