@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Seo from '../components/seo';
 
-import ThreeScene from '../components/three-scene';
+// import ThreeScene from '../components/three-scene';
 
 const Page = () => {
   const [locations, setLocations] = useState(null);
@@ -29,9 +29,7 @@ const Page = () => {
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">404</small>
       <h1>Page Not Found</h1>
       <p>Blast! The page you're looking for can't be found.</p>
-      <div className="w-full h-[36rem] rounded border border-outline">
-        <ThreeScene locations={locations} />
-      </div>
+      <div className="w-full h-[36rem] rounded border border-outline">{/* <ThreeScene locations={locations} /> */}</div>
     </div>
   );
 };
