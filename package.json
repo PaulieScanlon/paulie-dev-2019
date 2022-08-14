@@ -27,11 +27,9 @@
     "@google-analytics/data": "^3.0.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@react-three/drei": "^8.11.0",
-    "@react-three/fiber": "^7.0.24",
+    "@react-three/fiber": "^8.3.1",
     "cmdk": "^0.1.18",
     "country-flag-icons": "^1.5.5",
-    "d3-geo": "^3.0.1",
     "faunadb": "^4.6.0",
     "gatsby": "^4.19.2",
     "gatsby-plugin-gatsby-cloud": "^4.19.0",
@@ -50,8 +48,7 @@
     "react-dom": "18.0.0",
     "rehype-autolink-headings": "4.0.0",
     "rehype-slug": "4.0.0",
-    "three": "^0.136.0",
-    "three-geojson-geometry": "^1.1.7"
+    "three": "^0.143.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
