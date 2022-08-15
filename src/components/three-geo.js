@@ -29,7 +29,6 @@ const ThreeGeo = () => {
         <Fragment>
           {response.map((data, index) => {
             const { geometry } = data;
-            // console.log(new GeoJsonGeometry(geometry, 1));
             return (
               <lineSegments key={index} geometry={new GeoJsonGeometry(geometry, 1)}>
                 <lineBasicMaterial color="#4b4582" />
@@ -38,17 +37,6 @@ const ThreeGeo = () => {
           })}
         </Fragment>
       )}
-      {/* {isLoading ? null : (
-        <Fragment>
-          {response.map(({ geometry }, index) => {
-            return (
-              <lineSegments key={index} geometry={new GeoJsonGeometry(geometry, 1)}>
-                <lineBasicMaterial color="#4b4582" />
-              </lineSegments>
-            );
-          })}
-        </Fragment>
-      )} */}
     </Fragment>
   );
 };

@@ -1,14 +1,13 @@
 import React from 'react';
-// import { GeoJsonGeometry } from 'three-geojson-geometry';
-// import * as d3 from 'd3-geo';
+import { GeoJsonGeometry } from 'three-geojson-geometry';
+import { geoGraticule10 } from 'd3-geo';
 
 const ThreeGraticule = () => {
-  return null;
-  // return (
-  //   <lineSegments geometry={new GeoJsonGeometry(d3.geoGraticule10(), 1.03)}>
-  //     <lineBasicMaterial color="#34324f" />
-  //   </lineSegments>
-  // );
+  return (
+    <lineSegments geometry={new GeoJsonGeometry(geoGraticule10(), 1.03)}>
+      <lineBasicMaterial color="#3c3a5a" />
+    </lineSegments>
+  );
 };
 
 export default ThreeGraticule;
