@@ -31,6 +31,7 @@
     "@react-three/fiber": "^8.3.1",
     "cmdk": "^0.1.18",
     "country-flag-icons": "^1.5.5",
+    "d3-geo": "^3.0.1",
     "faunadb": "^4.6.0",
     "gatsby": "^4.20.0",
     "gatsby-plugin-gatsby-cloud": "^4.20.0",
