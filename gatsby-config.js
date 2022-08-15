@@ -62,25 +62,25 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/posts/`
+        path: `${__dirname}/content/posts/2022`
       }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/articles/`
+        path: `${__dirname}/content/articles/2022`
       }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/demos/`
+        path: `${__dirname}/content/demos/2022`
       }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/streams/`
+        path: `${__dirname}/content/streams/2022`
       }
     }
   ],
