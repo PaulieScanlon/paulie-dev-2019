@@ -150,7 +150,7 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
     }
   `);
 
-  allMdx.nodes.forEach((node) => {
+  allMdx.nodes.forEach((node, index) => {
     const {
       id,
       fields: { slug },
@@ -162,7 +162,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       component: path.join(__dirname, `./src/templates/${type}.js`),
       context: {
         id: id
-      }
+      },
+      defer: index + 1 > 10
       // defer: true
       // defer: type !== 'post' ? true : false
       // defer: false
