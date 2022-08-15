@@ -1,6 +1,16 @@
 const path = require('path');
 const { createFilePath, createRemoteFileNode } = require('gatsby-source-filesystem');
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    ignoreWarnings: [
+      {
+        module: /chevrotain/ // this is ussed by @react-three/drei i think!
+      }
+    ]
+  });
+};
+
 exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
   createTypes(`
     type Mdx implements Node {
