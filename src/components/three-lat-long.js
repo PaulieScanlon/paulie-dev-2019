@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Points, Point } from '@react-three/drei';
 
 import * as THREE from 'three';
 
@@ -12,19 +13,15 @@ const getVertex = (lat, lng, radius) => {
 
 const ThreeLatLong = ({ locations }) => {
   return (
-    <Fragment>
-      {locations
-        ? locations.map((data, index) => {
-            const { lat, lng } = data;
-            return (
-              <mesh key={index} position={getVertex(lat, lng, 1.06)}>
-                <sphereGeometry args={[0.005, 16]} />
-                <meshBasicMaterial color="#fd417a" />
-              </mesh>
-            );
-          })
-        : null}
-    </Fragment>
+    <group>
+      <Points>
+        <pointsMaterial vertexColors size={0.013} />
+        {locations.map((data, index) => {
+          const { lat, lng } = data;
+          return <Point key={index} position={getVertex(lat, lng, 1.06)} color="#fd417a" />;
+        })}
+      </Points>
+    </group>
   );
 };
 
