@@ -74,7 +74,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/demos/2022`
+        path: `${__dirname}/content/demos/`
       }
     },
     {
