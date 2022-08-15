@@ -1,38 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
+import React from 'react';
 import Seo from '../components/seo';
 
-import ThreeScene from '../components/three-scene';
-
 const Page = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [locations, setLocations] = useState(null);
-
-  useEffect(() => {
-    const getAnalytics = async () => {
-      try {
-        const response = await (
-          await fetch('/api/get-lat-long-google-ua', {
-            method: 'GET'
-          })
-        ).json();
-        setIsLoading(false);
-        setLocations(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getAnalytics();
-  }, []);
-
   return (
     <div>
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">404</small>
       <h1>Page Not Found</h1>
       <p>Blast! The page you're looking for can't be found.</p>
-      <div className="w-full h-[36rem] rounded border border-outline cursor-move">
-        {isLoading ? null : <ThreeScene locations={locations} />}
-      </div>
+      <Link to="/">Home</Link>
     </div>
   );
 };

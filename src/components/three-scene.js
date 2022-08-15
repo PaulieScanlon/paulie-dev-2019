@@ -11,7 +11,7 @@ const ThreeScene = ({ locations }) => {
     <Canvas
       camera={{
         fov: 75,
-        position: [0, 0, 2]
+        position: [0, 0, 2.1]
       }}
       className="max-w-[300px]"
     >

@@ -71,7 +71,7 @@ const Page = ({
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
-            <ul className="h-[385px] m-0 p-0 rounded border border-outline bg-surface px-4 sm:px-6 py-6">
+            <ul className="h-[405px] m-0 p-0 rounded border border-outline bg-surface px-4 sm:px-6 py-6">
               {locations
                 ? locations.data.map((row, index) => {
                     const { flag, name, amount } = row;
@@ -105,7 +105,7 @@ const Page = ({
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
-            <div className="flex justify-center w-full h-[385px] rounded border border-outline bg-surface cursor-move">
+            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
               <ThreeScene locations={lagLongGoogle.data} />
             </div>
             <div className="mt-2 leading-tight">

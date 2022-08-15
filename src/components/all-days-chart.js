@@ -130,7 +130,7 @@ const AllDaysChart = () => {
 
   const YGuides = () => {
     const startY = yPad;
-    const endY = height + xPad;
+    const endY = height - yPad * 2;
 
     return new Array(yLines + 1).fill(null).map((_, index) => {
       const ratio = index / yLines;
@@ -175,8 +175,8 @@ const AllDaysChart = () => {
                   const { y } = year;
                   const inc = i + 1;
                   const barHeight = (y + 0.05) * 15;
-                  const xPos = groupWidth * g + barWidth * inc + (xPad / 2) * inc;
-                  const yPos = height - barHeight - yPad;
+                  const xPos = groupWidth * g + barWidth * inc + (xPad / 4) * inc;
+                  const yPos = height - barHeight - yPad * 2;
                   const labelSize = 7;
                   return (
                     <g key={i}>
