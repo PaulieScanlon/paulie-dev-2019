@@ -15,7 +15,7 @@ const ThreeLatLong = ({ locations }) => {
   return (
     <group>
       <Points>
-        <pointsMaterial size={0.013} />
+        <pointsMaterial vertexColors size={0.013} />
         {locations
           ? locations.map((data, index) => {
               const { lat, lng } = data;
