@@ -162,10 +162,10 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       component: path.join(__dirname, `./src/templates/${type}.js`),
       context: {
         id: id
-      },
+      }
       // defer: true
       // defer: type !== 'post' ? true : false
-      defer: false
+      // defer: false
       // defer: type === 'article' || type === 'stream' ? true : false
     });
   });
