@@ -42,13 +42,12 @@ module.exports = {
         rehypePlugins: [require('rehype-slug'), [require('rehype-autolink-headings'), { behavior: 'wrap' }]]
       }
     },
-
     {
       resolve: 'gatsby-plugin-sharp',
       options: {
         defaults: {
           quality: 70,
-          formats: ['auto', 'webp', 'avif'],
+          formats: ['auto', 'webp'],
           placeholder: 'blurred'
         }
       }
