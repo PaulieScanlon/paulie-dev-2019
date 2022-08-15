@@ -1,3 +1,4 @@
+import { GeoJsonGeometry } from 'three-geojson-geometry';
 const ThreeGeo = () => null;
 
 export default ThreeGeo;
