@@ -105,7 +105,7 @@ const Page = ({
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
-            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
+            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface">
               <ThreeScene locations={lagLongGoogle.data} />
             </div>
             <div className="mt-2 leading-tight">
