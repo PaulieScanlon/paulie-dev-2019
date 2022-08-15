@@ -163,7 +163,7 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       context: {
         id: id
       },
-      defer: index + 1 > 10
+      defer: index + 1 > 20
       // defer: true
       // defer: type !== 'post' ? true : false
       // defer: false
