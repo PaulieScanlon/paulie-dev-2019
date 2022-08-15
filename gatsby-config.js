@@ -48,7 +48,7 @@ module.exports = {
       options: {
         defaults: {
           quality: 70,
-          formats: ['auto', 'webp', 'avif'],
+          formats: ['auto', 'webp'],
           placeholder: 'blurred'
         }
       }
