@@ -37,7 +37,6 @@
     "gatsby-plugin-image": "^2.21.0",
     "gatsby-plugin-mdx": "^3.20.0",
     "gatsby-plugin-mdx-embed": "^1.0.0",
-
     "gatsby-plugin-sharp": "^4.21.0",
     "gatsby-plugin-sitemap": "^5.21.0",
     "gatsby-source-filesystem": "^4.21.0",
@@ -52,7 +51,6 @@
     "rehype-slug": "5.0.1",
     "three": "^0.143.0",
     "three-geojson-geometry": "^1.1.7"
-
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
