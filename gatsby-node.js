@@ -164,8 +164,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
         id: id
       },
       // defer: true
-      defer: type !== 'post' ? true : false
-      // defer: false
+      // defer: type !== 'post' ? true : false
+      defer: false
       // defer: type === 'article' || type === 'stream' ? true : false
     });
   });
