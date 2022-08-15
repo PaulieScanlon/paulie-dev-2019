@@ -4,6 +4,7 @@ import Seo from '../components/seo';
 import ThreeScene from '../components/three-scene';
 
 const Page = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [locations, setLocations] = useState(null);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const Page = () => {
             method: 'GET'
           })
         ).json();
-
+        setIsLoading(false);
         setLocations(response.data);
       } catch (error) {
         console.log(error);
@@ -30,7 +31,7 @@ const Page = () => {
       <h1>Page Not Found</h1>
       <p>Blast! The page you're looking for can't be found.</p>
       <div className="w-full h-[36rem] rounded border border-outline">
-        <ThreeScene locations={locations} />
+        {isLoading ? null : <ThreeScene locations={locations} />}
       </div>
     </div>
   );

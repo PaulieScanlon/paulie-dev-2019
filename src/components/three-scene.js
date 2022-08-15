@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import { Canvas } from '@react-three/fiber';
 // import { OrbitControls } from '@react-three/drei';
 
-import ThreeGeo from './three-geo';
-import ThreeGraticule from './three-graticule';
-import ThreeLatLong from './three-lat-long';
-import ThreeSphere from './three-sphere';
+import ThreeMesh from './three-mesh';
 
 const ThreeScene = ({ locations }) => {
   return (
@@ -19,17 +16,14 @@ const ThreeScene = ({ locations }) => {
     >
       {/* <OrbitControls enableRotate={true} enableZoom={false} enablePan={false} /> */}
       <ambientLight intensity={2} />
-      <ThreeLatLong locations={locations} />
-      <ThreeGeo />
-      <ThreeGraticule />
-      <ThreeSphere />
+      <ThreeMesh locations={locations} />
     </Canvas>
   );
 };
 
 ThreeScene.propTypes = {
   /** Geographical Locations */
-  locations: PropTypes.any
+  locations: PropTypes.any.isRequired
 };
 
 export default ThreeScene;

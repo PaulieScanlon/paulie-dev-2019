@@ -30,8 +30,8 @@ const ThreeGeo = () => {
           {response.map((data, index) => {
             const { geometry } = data;
             return (
-              <lineSegments key={index} geometry={new GeoJsonGeometry(geometry, 1)}>
-                <lineBasicMaterial color="#4b4582" />
+              <lineSegments key={index} geometry={new GeoJsonGeometry(geometry, 1.03)}>
+                <lineBasicMaterial color="#59519f" />
               </lineSegments>
             );
           })}

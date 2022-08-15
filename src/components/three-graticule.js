@@ -4,8 +4,8 @@ import { geoGraticule10 } from 'd3-geo';
 
 const ThreeGraticule = () => {
   return (
-    <lineSegments geometry={new GeoJsonGeometry(geoGraticule10(), 1.03)}>
-      <lineBasicMaterial color="#3c3a5a" />
+    <lineSegments geometry={new GeoJsonGeometry(geoGraticule10(), 1)}>
+      <lineBasicMaterial color="#423c77" />
     </lineSegments>
   );
 };
