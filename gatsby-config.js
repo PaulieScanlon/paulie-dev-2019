@@ -80,7 +80,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/streams/2022`
+        path: `${__dirname}/content/streams/`
       }
     }
   ],
