@@ -12,6 +12,7 @@ import AllTagsChart from '../components/all-tags-chart';
 import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
 import LatestReactionDom from '../components/latest-reaction-dom';
+import ThreeScene from '../components/three-scene';
 
 const Page = ({
   data: {
@@ -22,7 +23,7 @@ const Page = ({
     }
   },
   serverData: {
-    serverResponse: { reactions, locations, latest }
+    serverResponse: { reactions, locations, latest, lagLongGoogle }
   }
 }) => {
   const [hasJavascript, setHasJavascript] = useState(false);
@@ -38,7 +39,7 @@ const Page = ({
       <h1>{heading}</h1>
       <p className="mb-16">{body}</p>
 
-      <div className="grid gap-24">
+      <div className="grid gap-24 justify-center min-w-full">
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Published by Month</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by month for, Articles, Posts and Streams.</p>
@@ -66,35 +67,61 @@ const Page = ({
           </div>
         </section>
 
-        <section>
-          <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
-          <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
-          <ul className="m-0 p-0 rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6 min-h-[200px]">
-            {locations
-              ? locations.data.map((row, index) => {
-                  const { flag, name, amount } = row;
-                  return (
-                    <li key={index} className="m-0 p-0 flex justify-between items-center">
-                      <div className="flex gap-2 items-center">
-                        <span className="mt-1">{getUnicodeFlagIcon(flag)}</span>
-                        <span>{name}</span>
-                      </div>
-                      <span className="font-semibold">{`x${amount}`}</span>
-                    </li>
-                  );
-                })
-              : null}
-          </ul>
-          <div className="mt-2 leading-tight">
-            <small className="text-slate-400 text-xs">Data from </small>
-            <a
-              href="https://developers.google.com/analytics/devguides/reporting/data/v1?hl=en"
-              target="_blank"
-              rel="noreferrer"
-              className="text-xs"
-            >
-              Google Analytics Data API V1 (Beta)
-            </a>
+        <section className="grid sm:grid-cols-2 gap-8">
+          <div>
+            <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
+            <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
+            <ul className="h-[405px] m-0 p-0 rounded border border-outline bg-surface px-4 sm:px-6 py-6">
+              {locations
+                ? locations.data.map((row, index) => {
+                    const { flag, name, amount } = row;
+                    return (
+                      <li key={index} className="m-0 p-0 flex justify-between items-center">
+                        <div className="flex gap-2 items-center">
+                          <span className="mt-1">{getUnicodeFlagIcon(flag)}</span>
+                          <span>{name}</span>
+                        </div>
+                        <span className="font-semibold">{`x${amount}`}</span>
+                      </li>
+                    );
+                  })
+                : null}
+            </ul>
+            <div className="mt-2 leading-tight">
+              <div className="leading-tight">
+                <small className="text-slate-400 text-xs">Data from </small>
+                <a
+                  href="https://developers.google.com/analytics/devguides/reporting/data/v1?hl=en"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs"
+                >
+                  Google Analytics Data API V1 (Beta)
+                </a>
+              </div>
+              <time className="blog text-slate-400 text-xs">July 1, 2022 | Now</time>
+            </div>
+          </div>
+          <div>
+            <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
+            <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
+            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
+              <ThreeScene locations={lagLongGoogle.data} />
+            </div>
+            <div className="mt-2 leading-tight">
+              <div className="leading-tight">
+                <small className="text-slate-400 text-xs">Data from </small>
+                <a
+                  href="https://developers.google.com/analytics/devguides/reporting/core/v3"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs"
+                >
+                  Google Analytics Core Reporting API V3
+                </a>
+              </div>
+              <time className="blog text-slate-400 text-xs"> October 1, 2019 | July 1, 2022</time>
+            </div>
           </div>
         </section>
 
@@ -176,17 +203,20 @@ export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
   const allLocationsUtil = require('../utils/get-all-locations-util');
   const latestReactionUtil = require('../utils/get-latest-reaction-util');
+  const latLongGoogleUaUtil = require('../utils/get-lat-long-google-ua.util');
 
   const reactions = await allReactionsUtil.get();
   const locations = await allLocationsUtil.get();
   const latest = await latestReactionUtil.get();
+  const lagLongGoogle = await latLongGoogleUaUtil.get();
 
   return {
     props: {
       serverResponse: {
         reactions,
         locations,
-        latest
+        latest,
+        lagLongGoogle
       }
     }
   };

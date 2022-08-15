@@ -5,7 +5,7 @@ import NavigationIcon from './navigation-icon';
 
 const FeaturedImageAside = ({ alt, thumbnail, shareText }) => {
   return (
-    <div className="grid gap-4 rounded border border-outline bg-surface/70 px-4 sm:px-6 py-6">
+    <div className="grid gap-4 rounded border border-outline bg-surface/50 px-4 sm:px-6 py-6">
       <div className="rounded shadow-lg overflow-hidden w-full">
         <GatsbyImage alt={alt} image={getImage(thumbnail)} />
       </div>

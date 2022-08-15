@@ -153,7 +153,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       context: {
         id: id
       },
-      defer: type !== 'post' ? true : false
+      defer: true
+      // defer: type !== 'post' || type !== 'demo' ? true : false
     });
   });
 
