@@ -17,7 +17,7 @@ const ThreeGeo = () => {
         ).json();
 
         setIsLoading(false);
-        setResponse(response);
+        setResponse(response.features);
       } catch (error) {
         console.log(error);
       }
@@ -30,7 +30,7 @@ const ThreeGeo = () => {
     <Fragment>
       {isLoading ? null : (
         <Fragment>
-          {response.features.map(({ geometry }, index) => {
+          {response.map(({ geometry }, index) => {
             console.log(geometry);
             return (
               <lineSegments key={index} geometry={new GeoJsonGeometry(geometry, 1)}>
