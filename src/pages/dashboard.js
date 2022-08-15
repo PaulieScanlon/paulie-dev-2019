@@ -39,7 +39,7 @@ const Page = ({
       <h1>{heading}</h1>
       <p className="mb-16">{body}</p>
 
-      <div className="grid gap-24">
+      <div className="grid gap-24 justify-center min-w-full">
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Published by Month</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by month for, Articles, Posts and Streams.</p>
@@ -105,7 +105,7 @@ const Page = ({
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
-            <div className="w-full h-[385px] rounded border border-outline cursor-move">
+            <div className="flex justify-center w-full h-[385px] rounded border border-outline bg-surface cursor-move">
               <ThreeScene locations={lagLongGoogle.data} />
             </div>
             <div className="mt-2 leading-tight">
