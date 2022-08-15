@@ -30,7 +30,7 @@ const Page = () => {
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">404</small>
       <h1>Page Not Found</h1>
       <p>Blast! The page you're looking for can't be found.</p>
-      <div className="w-full h-[36rem] rounded border border-outline">
+      <div className="w-full h-[36rem] rounded border border-outline cursor-move">
         {isLoading ? null : <ThreeScene locations={locations} />}
       </div>
     </div>
