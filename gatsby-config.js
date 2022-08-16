@@ -2,6 +2,15 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV || 'production'}`
 });
 
+const wrapESMPlugin = (name) =>
+  function wrapESM(opts) {
+    return async (...args) => {
+      const mod = await import(name);
+      const plugin = mod.default(opts);
+      return plugin(...args);
+    };
+  };
+
 module.exports = {
   trailingSlash: 'always',
   siteMetadata: {
@@ -39,7 +48,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        rehypePlugins: [require('rehype-slug'), [require('rehype-autolink-headings'), { behavior: 'wrap' }]]
+        rehypePlugins: [wrapESMPlugin('rehype-slug'), [wrapESMPlugin('rehype-autolink-headings'), { behavior: 'wrap' }]]
       }
     },
     {
