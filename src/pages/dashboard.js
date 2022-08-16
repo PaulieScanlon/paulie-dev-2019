@@ -12,7 +12,6 @@ import AllTagsChart from '../components/all-tags-chart';
 import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
 import LatestReactionDom from '../components/latest-reaction-dom';
-import ThreeScene from '../components/three-scene';
 
 const Page = ({
   data: {
@@ -23,7 +22,7 @@ const Page = ({
     }
   },
   serverData: {
-    serverResponse: { reactions, locations, latest, lagLongGoogle }
+    serverResponse: { reactions, locations, latest }
   }
 }) => {
   const [hasJavascript, setHasJavascript] = useState(false);
@@ -100,27 +99,6 @@ const Page = ({
                 </a>
               </div>
               <time className="blog text-slate-400 text-xs">July 1, 2022 | Now</time>
-            </div>
-          </div>
-          <div>
-            <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
-            <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
-            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
-              <ThreeScene locations={lagLongGoogle.data} />
-            </div>
-            <div className="mt-2 leading-tight">
-              <div className="leading-tight">
-                <small className="text-slate-400 text-xs">Data from </small>
-                <a
-                  href="https://developers.google.com/analytics/devguides/reporting/core/v3"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs"
-                >
-                  Google Analytics Core Reporting API V3
-                </a>
-              </div>
-              <time className="blog text-slate-400 text-xs"> October 1, 2019 | July 1, 2022</time>
             </div>
           </div>
         </section>
@@ -203,20 +181,17 @@ export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
   const allLocationsUtil = require('../utils/get-all-locations-util');
   const latestReactionUtil = require('../utils/get-latest-reaction-util');
-  const latLongGoogleUaUtil = require('../utils/get-lat-long-google-ua.util');
 
   const reactions = await allReactionsUtil.get();
   const locations = await allLocationsUtil.get();
   const latest = await latestReactionUtil.get();
-  const lagLongGoogle = await latLongGoogleUaUtil.get();
 
   return {
     props: {
       serverResponse: {
         reactions,
         locations,
-        latest,
-        lagLongGoogle
+        latest
       }
     }
   };
