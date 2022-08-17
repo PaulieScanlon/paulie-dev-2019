@@ -21,13 +21,13 @@ const Page = ({
         childImageSharp: { thumbnail }
       },
       embeddedImages,
-      tableOfContents: { items: toc },
-      body
+      tableOfContents: { items: toc }
     },
     site: {
       siteMetadata: { siteUrl }
     }
-  }
+  },
+  children
 }) => {
   return (
     <Fragment>
@@ -47,7 +47,7 @@ const Page = ({
             })
           : null}
       </ul>
-      <MdxParser embedded={embeddedImages}>{body}</MdxParser>
+      <MdxParser embedded={embeddedImages}>{children}</MdxParser>
       <AddReaction title={title} slug={slug} />
       <UtterancesObserver />
       <AsideElement>
@@ -90,7 +90,6 @@ export const query = graphql`
         }
       }
       tableOfContents
-      body
     }
     site {
       siteMetadata {

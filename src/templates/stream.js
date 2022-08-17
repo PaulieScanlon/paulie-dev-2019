@@ -15,10 +15,10 @@ const Page = ({
     mdx: {
       fields: { slug },
       excerpt,
-      frontmatter: { type, title, date, role, show, tags },
-      body
+      frontmatter: { type, title, date, role, show, tags }
     }
-  }
+  },
+  children
 }) => {
   return (
     <Fragment>
@@ -40,7 +40,7 @@ const Page = ({
             })
           : null}
       </ul>
-      <MdxParser>{body}</MdxParser>
+      <MdxParser>{children}</MdxParser>
       <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
@@ -64,7 +64,6 @@ export const query = graphql`
         show
         tags
       }
-      body
     }
   }
 `;

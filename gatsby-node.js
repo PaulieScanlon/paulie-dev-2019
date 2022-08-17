@@ -149,6 +149,9 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
           frontmatter {
             type
           }
+          internal {
+            contentFilePath
+          }
         }
       }
     }
@@ -161,9 +164,11 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       frontmatter: { type }
     } = node;
 
+    const template = path.resolve(`./src/templates/${type}.js`);
+
     createPage({
       path: slug,
-      component: path.join(__dirname, `./src/templates/${type}.js`),
+      component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
       context: {
         id: id
       },
