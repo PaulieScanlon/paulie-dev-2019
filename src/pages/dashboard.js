@@ -99,14 +99,29 @@ const Page = ({
                   Google Analytics Data API V1 (Beta)
                 </a>
               </div>
-              <time className="blog text-slate-400 text-xs">July 1, 2022 | Now</time>
+              <time className="block text-slate-400 text-xs">July 1, 2022 | Now</time>
             </div>
           </div>
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
             <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
-              <ThreeScene locations={lagLongGoogle.data} />
+              {hasJavascript ? (
+                <ThreeScene locations={lagLongGoogle.data} />
+              ) : (
+                <div className="flex flex-col justify-center items-center p-4 text-center">
+                  <div>
+                    <span role="img" aria-label="Index Pointing Up" className="text-xl">
+                      ☝️
+                    </span>
+                  </div>
+                  <small className="text-yellow text-sm leading-tight">
+                    You need to enable JavaScript
+                    <br />
+                    to view this feature.
+                  </small>
+                </div>
+              )}
             </div>
             <div className="mt-2 leading-tight">
               <div className="leading-tight">
@@ -120,7 +135,7 @@ const Page = ({
                   Google Analytics Core Reporting API V3
                 </a>
               </div>
-              <time className="blog text-slate-400 text-xs"> October 1, 2019 | July 1, 2022</time>
+              <time className="block text-slate-400 text-xs"> October 1, 2019 | July 1, 2022</time>
             </div>
           </div>
         </section>
