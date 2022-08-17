@@ -66,8 +66,8 @@ const LatestArticles = () => {
       <div className="flex justify-center">
         <Link to="/articles" className="flex gap-2 items-center no-underline">
           More Articles{' '}
-          <span role="img" aria-label="pencil">
-            ✏️
+          <span role="img" aria-label="file folder">
+            📁
           </span>
         </Link>
       </div>

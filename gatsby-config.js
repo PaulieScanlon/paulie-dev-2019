@@ -90,6 +90,12 @@ module.exports = {
       options: {
         path: `${__dirname}/content/streams/`
       }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/content/opensource/`
+      }
     }
   ],
   partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]

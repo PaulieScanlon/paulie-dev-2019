@@ -58,8 +58,8 @@ const LatestStreams = () => {
       <div className="flex justify-center">
         <Link to="/streams" className="flex gap-2 items-center no-underline">
           More Streams{' '}
-          <span role="img" aria-label="television">
-            📺
+          <span role="img" aria-label="film projector">
+            📽️
           </span>
         </Link>
       </div>

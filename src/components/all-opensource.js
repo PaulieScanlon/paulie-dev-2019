@@ -1,17 +1,16 @@
-import React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import React, { Fragment } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 
-import DemoCard from '../components/demo-card';
+import OpensourceCard from '../components/opensource-card';
 
-const LatestDemos = () => {
+const AllOpensource = () => {
   const {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "demo" } } }
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "opensource" } } }
         sort: { order: DESC, fields: frontmatter___date }
-        limit: 3
       ) {
         nodes {
           fields {
@@ -25,7 +24,7 @@ const LatestDemos = () => {
           }
           featuredImage {
             childImageSharp {
-              thumbnail: gatsbyImageData(width: 320)
+              thumbnail: gatsbyImageData(width: 180)
             }
           }
         }
@@ -34,10 +33,8 @@ const LatestDemos = () => {
   `);
 
   return (
-    <section>
-      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Demos</h2>
-      <p className="mt-0 mb-8 text-slate-300 text-base">Here's some bigger projects!</p>
-      <ul className="grid gap-8 list-none m-0 mb-8 p-0">
+    <Fragment>
+      <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
             fields: { slug },
@@ -49,7 +46,7 @@ const LatestDemos = () => {
           } = node;
 
           return (
-            <DemoCard
+            <OpensourceCard
               key={index}
               link={slug}
               title={title}
@@ -61,16 +58,8 @@ const LatestDemos = () => {
           );
         })}
       </ul>
-      <div className="flex justify-center">
-        <Link to="/demos" className="flex gap-2 items-center no-underline">
-          More Demos{' '}
-          <span role="img" aria-label="star">
-            ⭐
-          </span>
-        </Link>
-      </div>
-    </section>
+    </Fragment>
   );
 };
 
-export default LatestDemos;
+export default AllOpensource;
