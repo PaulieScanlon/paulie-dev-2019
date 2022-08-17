@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 
 import Loading from '../components/loading';
 
@@ -114,7 +114,8 @@ const RecentGitHubUserEvent = () => {
                 type,
                 created_at,
                 actor: { login },
-                repo: { name }
+                repo: { name },
+                payload: { commits }
               } = event;
 
               return (
@@ -134,6 +135,38 @@ const RecentGitHubUserEvent = () => {
                       <small className="font-normal mt-1 break-all">{name}</small>
                     </strong>
                   </div>
+                  {commits ? (
+                    <Fragment>
+                      <div className="flex gap-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 stroke-secondary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                          />
+                        </svg>
+                        <strong className="text-sm">Commits</strong>
+                      </div>
+                      <ul className="m-0 p-0 list-none">
+                        {commits.map((commit, index) => {
+                          const { message } = commit;
+
+                          return (
+                            <li className="text-xs" key={index}>
+                              {message}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </Fragment>
+                  ) : null}
                 </li>
               );
             })}
