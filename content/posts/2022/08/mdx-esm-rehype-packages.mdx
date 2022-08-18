@@ -1,7 +1,7 @@
 ---
 type: post
-title: MDX and ESM Rehype Packages
-tags: [Gatsby, MDX, Rehype]
+title: MDX and ESM rehype Packages
+tags: [Gatsby, MDX, rehype]
 date: 2022-08-18
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1660808390/paulie.dev/2022/08/mdx-esm-rehyp_duw4ps.jpg
@@ -10,11 +10,10 @@ featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v166080839
 Hey, in this post i'm going to show you how to use the latest ESM [rehype](https://github.com/rehypejs) packages with
 `gatsby-plugin-mdx` **v3**.
 
-## Titus Wooorm
+## Titus Wormer
 
-Before we get started i'd like to introduce Titus Wooorm.
+Before we get started i'd like to introduce Titus ([@wooorm](https://twitter.com/wooorm)).
 
-- Twitter: [@wooorm](https://twitter.com/wooorm)
 - GitHub: [github.com/wooorm](github.com/wooorm)
 - Web: [wooorm.com](https://wooorm.com/)
 
@@ -41,9 +40,9 @@ been hugely involved in the upgrading of a number of popular [remark](https://gi
 - GitHub: [https://github.com/rehypejs/rehype-autolink-headings](https://github.com/rehypejs/rehype-autolink-headings)
 - npm: [https://www.npmjs.com/package/rehype-autolink-headings](https://www.npmjs.com/package/rehype-autolink-headings)
 
-The above two packages are quite commonly used in Gatsby sites to enabled click-able headings in blog posts either
-written in [Markdown](https://www.markdownguide.org/basic-syntax/) or [MDX](https://mdxjs.com/). In ths post i'll be
-talking about how to use them with MDX, but the steps are similar for Markdown.
+The above two packages are quite commonly used in Gatsby sites to enable "click-able" headings. or "jumplinks" in blog
+posts either written in [markdown](https://www.markdownguide.org/basic-syntax/) or [MDX](https://mdxjs.com/). In this
+post i'll be talking about how to use them with MDX, but the steps are similar for markdown.
 
 ## Common Installation
 
@@ -67,7 +66,7 @@ module.exports = {
 
 ### Versions and Errors
 
-_This will work when using the following package versions._
+_The above approach will work when using the following package versions._
 
 ```json
 // package.json
@@ -93,12 +92,13 @@ You'll be able to see the changes in both packages if you comb over the commit m
 
 ## Using ESM only
 
-Currently `gatsby-config.js` doesn't support ESM module syntax out of the box, but there is a way to use ESM modules
-with Gatsby.
+Currently `gatsby-config.js` doesn't support ESM module syntax out of the box, (although, the team are working on it
+[Support ESM usage with Gatsby #31599](https://github.com/gatsbyjs/gatsby/discussions/31599)), but there is a way to use
+ESM modules with Gatsby.
 
 Here's how 👇.
 
-### Upgrade Rehype Packages
+### Upgrade rehype Packages
 
 Upgrade both of the rehype packages to at least `5.0.0`, but depending on when you're reading `@latest` might be a
 better option.
@@ -156,11 +156,11 @@ module.exports = {
 ```
 
 That should just about wrap things up. I know that this method **won't work for all** rehype or remark ESM packages, so
-if you have attempted to use this unsuccessfully, please do drop a comment below and let me know which package and
-version of that package you were using. Thanks in advance!
+if you have attempted to use this approach unsuccessfully, please do drop a comment below and let me know which package
+and version of that package you were using. Thanks in advance!
 
 ## Further Reading
 
-As of Aug 17th 2022 Gatsby released v4 of the MDX Plugin. You can read more about how to migrate from v3 to bv4 in docs.
+As of Aug 17th 2022 Gatsby released v4 of the MDX Plugin. You can read more about how to migrate from v3 to v4 in docs.
 
 - [Migrating from v3 to v4](https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/?=mdx#migrating-from-v3-to-v4)
