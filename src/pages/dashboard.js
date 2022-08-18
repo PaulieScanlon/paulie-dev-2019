@@ -52,17 +52,19 @@ const Page = ({
           <AllDaysChart />
         </section>
 
-        <section className="grid sm:grid-cols-2 gap-8">
+        <section className="grid md:grid-cols-2 gap-8">
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Articles By Publisher</h2>
-            <p className="mt-0 mb-4 text-slate-300 text-base">
+            <p className="mt-0 mb-4 text-slate-300 text-base sm:min-h-[3rem]">
               I mainly write for Gatsby, but occasionally I'll publish elsewhere.
             </p>
             <AllPublisherChart />
           </div>
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Tags By Usage</h2>
-            <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by tag for, Articles, Posts and Streams.</p>
+            <p className="mt-0 mb-4 text-slate-300 text-base sm:min-h-[3rem]">
+              Total counts by tag for, Articles, Posts and Streams.
+            </p>
             <AllTagsChart />
           </div>
         </section>
