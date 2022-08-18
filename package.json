@@ -15,6 +15,7 @@
     "generate": "prisma generate"
   },
   "prisma": {
+    "schema": "./prisma/schema.prisma",
     "seed": "node prisma/seed.js"
   },
   "repository": {

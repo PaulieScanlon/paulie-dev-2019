@@ -3,15 +3,15 @@ import { PrismaClient } from '@prisma/client';
 
 import { formatDatestamp } from '../utils/format-date-stamp';
 
-import prismaSchema from 'raw-loader!../../prisma/schema.prisma';
+// import prismaSchema from 'raw-loader!../../prisma/schema.prisma';
 
 export default async function handler(req, res) {
   const { lat, long, date } = JSON.parse(req.body);
 
-  if (process.env.GATSBY_CLOUD === 'true') {
-    console.log('process.env.GATSBY_CLOUD: ', process.env.GATSBY_CLOUD);
-    fs.writeFileSync('./schema.prisma', prismaSchema);
-  }
+  // if (process.env.GATSBY_CLOUD === 'true') {
+  //   console.log('process.env.GATSBY_CLOUD: ', process.env.GATSBY_CLOUD);
+  //   fs.writeFileSync('./schema.prisma', prismaSchema);
+  // }
 
   const prisma = new PrismaClient({
     datasources: {
