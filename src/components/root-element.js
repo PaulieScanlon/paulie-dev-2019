@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Script } from 'gatsby';
 
 const RootElement = ({ children }) => {
   return (
-    <div className="border border-red-400">
-      <small>RootElement</small>
+    <Fragment>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`}
         strategy="off-main-thread"
@@ -21,7 +20,7 @@ const RootElement = ({ children }) => {
         }}
       />
       {children}
-    </div>
+    </Fragment>
   );
 };
 
