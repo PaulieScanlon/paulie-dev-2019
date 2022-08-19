@@ -42,29 +42,25 @@ const Page = ({
       <div className="grid gap-24 justify-center min-w-full">
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Published by Month</h2>
-          <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by month for, Articles, Posts and Streams.</p>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by month.</p>
           <AllYearsChart />
         </section>
 
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Published by Day</h2>
-          <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by day for, Articles, Posts and Streams.</p>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by day.</p>
           <AllDaysChart />
         </section>
 
         <section className="grid md:grid-cols-2 gap-8">
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Articles By Publisher</h2>
-            <p className="mt-0 mb-4 text-slate-300 text-base sm:min-h-[3rem]">
-              I mainly write for Gatsby, but occasionally I'll publish elsewhere.
-            </p>
+            <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by publisher.</p>
             <AllPublisherChart />
           </div>
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Tags By Usage</h2>
-            <p className="mt-0 mb-4 text-slate-300 text-base sm:min-h-[3rem]">
-              Total counts by tag for, Articles, Posts and Streams.
-            </p>
+            <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by tag.</p>
             <AllTagsChart />
           </div>
         </section>
