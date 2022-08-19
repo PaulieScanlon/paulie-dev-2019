@@ -8,7 +8,7 @@ import Footer from '../components/footer';
 
 import { useNavigation } from '../hooks/use-navigation';
 
-const RootElement = ({ children }) => {
+const PageElement = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const navigation = useNavigation();
@@ -128,4 +128,4 @@ const RootElement = ({ children }) => {
   );
 };
 
-export default RootElement;
+export default PageElement;
