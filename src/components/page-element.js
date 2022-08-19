@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
 
 import Logo from '../components/logo';
@@ -18,7 +18,8 @@ const PageElement = ({ children }) => {
   };
 
   return (
-    <Fragment>
+    <div className="border border-green-400">
+      <small>PageElement</small>
       <div className="sticky top-0 z-40 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
         <div className="max-w-8xl mx-auto">
           <div className="py-4 mx-4 lg:px-8 lg:mx-0">
@@ -108,7 +109,7 @@ const PageElement = ({ children }) => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
