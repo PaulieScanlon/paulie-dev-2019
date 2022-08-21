@@ -27,8 +27,8 @@ export const onRouteUpdate = ({ location }) => {
   }, 100);
 };
 
-export const wrapPageElement = ({ element }) => {
-  return <PageElement>{element}</PageElement>;
+export const wrapPageElement = ({ element, props }) => {
+  return <PageElement {...props}>{element}</PageElement>;
 };
 
 export const wrapRootElement = ({ element }) => {

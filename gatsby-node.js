@@ -72,10 +72,14 @@ exports.onCreateNode = async ({
   if (node.internal.type === 'Mdx' || node.internal.type === 'PagesJson') {
     const path = createFilePath({ node, getNode });
 
+    const {
+      frontmatter: { type }
+    } = node;
+
     await createNodeField({
       node,
       name: 'slug',
-      value: node.frontmatter.type === 'page' ? path : `/${node.frontmatter.type}s${path}`
+      value: type === 'page' ? path : type === 'opensource' ? `/${type}${path}` : `/${type}s${path}`
     });
   }
 

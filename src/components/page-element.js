@@ -8,7 +8,7 @@ import Footer from '../components/footer';
 
 import { useNavigation } from '../hooks/use-navigation';
 
-const PageElement = ({ children }) => {
+const PageElement = ({ children, location: { pathname } }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const navigation = useNavigation();
@@ -62,12 +62,16 @@ const PageElement = ({ children }) => {
                     fields: { slug },
                     frontmatter: { title, icon }
                   } = page;
+
+                  const isIndex = slug === '/' && pathname !== '/' ? true : false;
+
                   return (
                     <li key={index} className="text-lg mb-2">
                       <Link
                         onClick={handleNav}
                         to={slug}
-                        activeClassName="!text-primary"
+                        activeClassName={isIndex ? '' : '!text-primary'}
+                        partiallyActive={true}
                         className="main-navigation text-slate-300"
                       >
                         <NavigationIcon icon={icon} />
