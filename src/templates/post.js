@@ -6,7 +6,7 @@ import AsideElement from '../components/aside-element';
 import DateStamp from '../components/date-stamp';
 import FeaturedImageAside from '../components/featured-image-aside';
 import AddReaction from '../components/add-reaction';
-import UtterancesComments from '../components/utterances-comments';
+import UtterancesObserver from '../components/utterances-observer';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
 import TableOfContents from '../components/table-of-contents';
@@ -49,7 +49,7 @@ const Page = ({
       </ul>
       <MdxParser embedded={embeddedImages}>{body}</MdxParser>
       <AddReaction title={title} slug={slug} />
-      <UtterancesComments repo="PaulieScanlon/paulie-dev-2019-comments-repo" />
+      <UtterancesObserver />
       <AsideElement>
         <FeaturedImageAside alt={title} thumbnail={thumbnail} shareText={`${title}\n ${siteUrl}${slug}`} />
         {toc ? (

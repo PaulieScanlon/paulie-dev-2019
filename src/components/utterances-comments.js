@@ -22,7 +22,7 @@ const UtterancesComments = ({ repo, theme, issueTerm }) => {
 
     setTimeout(() => {
       ref.current.append(script);
-    }, 300);
+    }, 1000);
   }, [repo, theme, issueTerm]);
 
   return (
