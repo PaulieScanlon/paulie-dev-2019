@@ -6,9 +6,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     ignoreWarnings: [
       {
         module: /chevrotain/ // this is ussed by @react-three/drei i think!
-      },
-      {
-        module: /request/ // no idea where this warning comes from
       }
     ]
   });
