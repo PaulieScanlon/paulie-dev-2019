@@ -13,7 +13,6 @@ const ThreeScene = ({ locations }) => {
         fov: 75,
         position: [0, 0, 2.1]
       }}
-      className="max-w-[300px]"
     >
       <OrbitControls enableRotate={true} enableZoom={false} enablePan={false} />
       <ambientLight intensity={2} />
