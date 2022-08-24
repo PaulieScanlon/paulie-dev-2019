@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Points, Point } from '@react-three/drei';
 
 import * as THREE from 'three';
 
@@ -16,12 +15,14 @@ const Cylinder = ({ lat, lng, cap, radius }) => {
 
   const look = getVertex(Math.PI, lng, radius);
 
+  const height = cap / 2;
+  const y = Math.sign(lat) > 0 ? height : -height;
+
   return (
     <mesh
       position={getVertex(lat, lng, radius)}
-      scale={0.01}
-      onUpdate={(self) => (self.geometry.translate(0, cap / 2, 0), self.lookAt(look))}
-      // onUpdate={(self) => self.lookAt(look)}
+      scale={0.009}
+      onUpdate={(self) => [self.geometry.translate(0, y, 0), self.lookAt(look)]}
     >
       <cylinderGeometry args={[0.5, 0.5, cap, 10, 1, false]} />
       <meshBasicMaterial color="#fd417a" />
@@ -30,29 +31,17 @@ const Cylinder = ({ lat, lng, cap, radius }) => {
 };
 
 const ThreeLatLong = ({ locations }) => {
-  const maxCount = 65;
+  const maxCount = 1; // > 1 make the cylinder scale on the y
   return (
     <group>
       {locations
         ? locations.map((data, index) => {
             const { lat, lng, count } = data;
             const cap = count > maxCount ? maxCount : count;
-
             return <Cylinder key={index} lat={lat} lng={lng} cap={cap} radius={1.06} />;
           })
         : null}
     </group>
-    // <group>
-    //   <Points>
-    //     <pointsMaterial vertexColors size={0.013} />
-    //     {locations
-    //       ? locations.map((data, index) => {
-    //           const { lat, lng, count } = data;
-    //           return <Point key={index} position={getVertex(lat, lng, 1.06)} color="#fd417a" />;
-    //         })
-    //       : null}
-    //   </Points>
-    // </group>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 
 import Seo from '../components/seo';
@@ -28,15 +28,27 @@ const Page = () => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">404</small>
       <h1>Page Not Found</h1>
       <p>Blast! The page you're looking for can't be found.</p>
-      <Link to="/">Home</Link>
-      <div className="my-16 flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
-        {isLoading ? null : <ThreeScene locations={locations} />}
+      <Link to="/" className="block mb-16">
+        Home
+      </Link>
+
+      <div className="grid gap-24 min-w-full">
+        <section className="grid sm:grid-cols-2 gap-8">
+          <div className="block overflow-x-scroll">
+            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface" />
+          </div>
+          <div className="block overflow-x-scroll">
+            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
+              {isLoading ? null : <ThreeScene locations={locations} />}
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

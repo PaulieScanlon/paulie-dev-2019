@@ -14,8 +14,9 @@ module.exports.get = async function () {
       auth: jwt,
       ids: `ga:${process.env.GOOGLE_ANALYTICS_VIEW_ID}`,
       'start-date': '2019-10-01',
-      // 'start-date': '7daysAgo',
       'end-date': '2022-07-01',
+      // 'start-date': '2020-02-01',
+      // 'end-date': '2020-02-20',
       metrics: 'ga:pageviews',
       dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode'
     });
