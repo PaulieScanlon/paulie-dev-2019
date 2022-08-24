@@ -35,6 +35,7 @@
     "faunadb": "^4.6.0",
     "gatsby": "^4.21.0",
     "gatsby-plugin-gatsby-cloud": "^4.21.0",
+    "gatsby-plugin-google-analytics": "^4.21.0",
     "gatsby-plugin-image": "^2.21.0",
     "gatsby-plugin-mdx": "^3.20.0",
     "gatsby-plugin-mdx-embed": "^1.0.0",

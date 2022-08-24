@@ -96,6 +96,12 @@ module.exports = {
       options: {
         path: `${__dirname}/content/opensource/`
       }
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-76055934-4'
+      }
     }
   ],
   partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]
