@@ -31,13 +31,13 @@ const Cylinder = ({ lat, lng, cap, radius }) => {
 };
 
 const ThreeLatLong = ({ locations }) => {
-  const maxCount = 1; // > 1 make the cylinder scale on the y
+  const maxY = 1; // > 1 make the cylinder scale on the y
   return (
     <group>
       {locations
         ? locations.map((data, index) => {
             const { lat, lng, count } = data;
-            const cap = count > maxCount ? maxCount : count;
+            const cap = count > maxY ? maxY : count;
             return <Cylinder key={index} lat={lat} lng={lng} cap={cap} radius={1.06} />;
           })
         : null}
