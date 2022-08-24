@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { GradientTexture } from '@react-three/drei';
 
 import * as THREE from 'three';
 
@@ -17,21 +18,27 @@ const Cylinder = ({ lat, lng, cap, radius }) => {
 
   const height = cap / 2;
   const y = Math.sign(lat) > 0 ? height : -height;
+  const colors =
+    Math.sign(lat) > 0
+      ? ['rgba(253, 65, 122, 0.1)', 'rgba(253, 65, 122, 0.5)', 'rgba(253, 65, 122, 1)']
+      : ['rgba(253, 65, 122, 1)', 'rgba(253, 65, 122, 0.5)', 'rgba(253, 65, 122, 0.1)'];
 
   return (
     <mesh
       position={getVertex(lat, lng, radius)}
-      scale={0.009}
+      scale={0.011}
       onUpdate={(self) => [self.geometry.translate(0, y, 0), self.lookAt(look)]}
     >
-      <cylinderGeometry args={[0.5, 0.5, cap, 10, 1, false]} />
-      <meshBasicMaterial color="#fd417a" />
+      <cylinderGeometry args={[0.5, 0.5, cap, 10, 1, true]} />
+      <meshBasicMaterial transparent={true}>
+        <GradientTexture stops={[0.1, 0.5, 0.9]} colors={colors} />
+      </meshBasicMaterial>
     </mesh>
   );
 };
 
 const ThreeLatLong = ({ locations }) => {
-  const maxY = 1; // > 1 make the cylinder scale on the y
+  const maxY = 85; // > 1 make the cylinder scale on the y
   return (
     <group>
       {locations
