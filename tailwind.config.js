@@ -12,6 +12,13 @@ module.exports = {
     'md:grid-cols-1fr-1fr', // this is useded in index.mdx
     'gap-8',
     'gap-32',
+    'text-base',
+    'text-sm',
+    'text-xs',
+    'text-slate-400',
+    'text-slate-300',
+    'text-slate-200',
+    'text-slate-100',
     // <!-- chart colors -->
     'fill-primary',
     'fill-secondary',
@@ -178,7 +185,8 @@ module.exports = {
               }
             },
             blockquote: {
-              color: theme('colors.secondary')
+              fontSize: '1rem!important',
+              color: theme('colors.text')
             }
           }
         }
