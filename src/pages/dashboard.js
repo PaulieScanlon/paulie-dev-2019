@@ -69,9 +69,10 @@ const Page = ({
           <div className="block">
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
-            <ul className="h-[405px] m-0 p-0 rounded border border-outline bg-surface px-4 sm:px-6 py-6">
-              {locations
-                ? locations.data.map((row, index) => {
+            <div className="h-[405px] flex items-center justify-center rounded border border-outline bg-surface px-4 sm:px-6 py-6">
+              {locations ? (
+                <ul className="w-full  m-0 p-0 ">
+                  {locations.data.map((row, index) => {
                     const { flag, name, amount } = row;
                     return (
                       <li key={index} className="m-0 p-0 flex justify-between items-center">
@@ -82,9 +83,19 @@ const Page = ({
                         <span className="font-semibold">{`x${amount}`}</span>
                       </li>
                     );
-                  })
-                : null}
-            </ul>
+                  })}
+                </ul>
+              ) : (
+                <div className="flex flex-col justify-center items-center p-4 text-center">
+                  <div>
+                    <span role="img" aria-label="Firecracker" className="text-xl">
+                      🧨
+                    </span>
+                  </div>
+                  <small className="text-red-500 text-sm leading-tight">Google Analytics Error</small>
+                </div>
+              )}
+            </div>
             <div className="mt-2 leading-tight">
               <div className="leading-tight">
                 <small className="text-slate-400 text-xs">Data from </small>
@@ -105,7 +116,20 @@ const Page = ({
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
             <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
               {hasJavascript ? (
-                <ThreeScene locations={lagLongGoogle.data} />
+                <Fragment>
+                  {lagLongGoogle ? (
+                    <ThreeScene locations={lagLongGoogle.data} />
+                  ) : (
+                    <div className="flex flex-col justify-center items-center p-4 text-center">
+                      <div>
+                        <span role="img" aria-label="Firecracker" className="text-xl">
+                          🧨
+                        </span>
+                      </div>
+                      <small className="text-red-500 text-sm leading-tight">Google Analytics Error</small>
+                    </div>
+                  )}
+                </Fragment>
               ) : (
                 <div className="flex flex-col justify-center items-center p-4 text-center">
                   <div>
@@ -142,14 +166,18 @@ const Page = ({
           {hasJavascript ? (
             <LatestReaction />
           ) : (
-            <LatestReactionDom
-              hasJavascript={false}
-              isLoading={false}
-              title={latest.data.title}
-              reaction={latest.data.reaction}
-              slug={latest.data.slug}
-              date={latest.data.date}
-            />
+            <Fragment>
+              {latest ? (
+                <LatestReactionDom
+                  hasJavascript={false}
+                  isLoading={false}
+                  title={latest.data.title}
+                  reaction={latest.data.reaction}
+                  slug={latest.data.slug}
+                  date={latest.data.date}
+                />
+              ) : null}
+            </Fragment>
           )}
           <div className="mt-2 leading-tight">
             <small className="text-slate-400 text-xs">Powered by </small>
@@ -162,40 +190,47 @@ const Page = ({
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
-          {reactions
-            ? reactions.data
-                .sort((a, b) => b.total - a.total)
-                .map((item, index) => {
-                  const { title, total, posts } = item;
+          {reactions ? (
+            reactions.data
+              .sort((a, b) => b.total - a.total)
+              .map((item, index) => {
+                const { title, total, posts } = item;
 
-                  const arrs = Object.values(posts);
+                const arrs = Object.values(posts);
 
-                  return (
-                    <AccordionItem
-                      key={index}
-                      title={title}
-                      total={total}
-                      index={index}
-                      activeIndex={activeIndex}
-                      setActiveIndex={setActiveIndex}
-                    >
-                      {arrs
-                        .sort((a, b) => b.length - a.length)
-                        .map((item, index) => {
-                          const { slug } = item[0];
-                          return (
-                            <li key={index} className="p-0 m-0 flex gap-2 justify-between">
-                              <Link to={slug} className="text-sm">
-                                {slug}
-                              </Link>
-                              <div className="font-semibold text-sm">{`x${item.length}`}</div>
-                            </li>
-                          );
-                        })}
-                    </AccordionItem>
-                  );
-                })
-            : null}
+                return (
+                  <AccordionItem
+                    key={index}
+                    title={title}
+                    total={total}
+                    index={index}
+                    activeIndex={activeIndex}
+                    setActiveIndex={setActiveIndex}
+                  >
+                    {arrs
+                      .sort((a, b) => b.length - a.length)
+                      .map((item, index) => {
+                        const { slug } = item[0];
+                        return (
+                          <li key={index} className="p-0 m-0 flex gap-2 justify-between">
+                            <Link to={slug} className="text-sm">
+                              {slug}
+                            </Link>
+                            <div className="font-semibold text-sm">{`x${item.length}`}</div>
+                          </li>
+                        );
+                      })}
+                  </AccordionItem>
+                );
+              })
+          ) : (
+            <div className="flex gap-4 items-center p-2">
+              <span role="img" aria-label="Firecracker" className="text-xl">
+                🧨
+              </span>
+              <small className="text-red-500 text-sm leading-tight">Fauna Error</small>
+            </div>
+          )}
           <div className="mt-2 leading-tight">
             <small className="text-slate-400 text-xs">Powered by </small>
             <a href="https://fauna.com/" target="_blank" rel="noreferrer" className="text-xs">
@@ -218,21 +253,32 @@ export async function getServerData() {
   const latestReactionUtil = require('../utils/get-latest-reaction-util');
   const latLongGoogleUaUtil = require('../utils/get-lat-long-google-ua.util');
 
-  const reactions = await allReactionsUtil.get();
-  const locations = await allLocationsUtil.get();
-  const latest = await latestReactionUtil.get();
-  const lagLongGoogle = await latLongGoogleUaUtil.get();
+  try {
+    const reactions = await allReactionsUtil.get();
+    const locations = await allLocationsUtil.get();
+    const latest = await latestReactionUtil.get();
+    const lagLongGoogle = await latLongGoogleUaUtil.get();
 
-  return {
-    props: {
-      serverResponse: {
-        reactions,
-        locations,
-        latest,
-        lagLongGoogle
+    return {
+      props: {
+        serverResponse: {
+          reactions,
+          locations,
+          latest,
+          lagLongGoogle
+        }
       }
-    }
-  };
+    };
+  } catch (error) {
+    return {
+      props: {
+        reactions: null,
+        locations: null,
+        latest: null,
+        lagLongGoogle: null
+      }
+    };
+  }
 }
 
 export const query = graphql`
