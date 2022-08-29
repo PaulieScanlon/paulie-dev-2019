@@ -104,8 +104,5 @@ module.exports = {
       }
     }
   ],
-  partytownProxiedURLs: [
-    `https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`
-    // `https://plausible.io/js/script.js`
-  ]
+  partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]
 };
