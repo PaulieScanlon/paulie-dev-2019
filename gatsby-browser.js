@@ -19,6 +19,7 @@ export const onRouteUpdate = ({ location }) => {
   const pagePath = location ? location.pathname + location.search + location.hash : undefined;
 
   setTimeout(() => {
+    console.log('typeof', typeof window.plausible);
     if (typeof window.plausible === 'function') {
       console.log(window.plausible);
       window.plausible('pageview', { u: pagePath });
