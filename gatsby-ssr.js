@@ -79,7 +79,23 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
           font-display: swap;
           src: url(/fonts/Inconsolata-Black.woff2) format('woff2');
         }
-    `
+        `
+      }}
+    />,
+    <link key="plausible-preconnect" rel="preconnect" href="https://plausibleDomain/paulie.dev" />,
+    <script
+      key="plausible-script"
+      async={true}
+      defer={true}
+      data-domain="paulie.dev"
+      src="https://plausible.io/js/plausible.js"
+    />,
+    <script
+      key="plausible-custom-events"
+      dangerouslySetInnerHTML={{
+        __html: `
+        window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) };
+        `
       }}
     />
   ]);
