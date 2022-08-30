@@ -12,7 +12,7 @@ import AllTagsChart from '../components/all-tags-chart';
 import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
 import LatestReactionDom from '../components/latest-reaction-dom';
-import ThreeScene from '../components/three-scene';
+import ThreeLazy from '../components/three-lazy';
 
 const Page = ({
   data: {
@@ -114,11 +114,11 @@ const Page = ({
           <div className="block overflow-x-scroll">
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
-            <div className="flex justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
+            <div className="flex items-center justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
               {hasJavascript ? (
                 <Fragment>
                   {lagLongGoogle ? (
-                    <ThreeScene locations={lagLongGoogle.data} />
+                    <ThreeLazy locations={lagLongGoogle.data} />
                   ) : (
                     <div className="flex flex-col justify-center items-center p-4 text-center">
                       <div>
