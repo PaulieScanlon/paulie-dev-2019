@@ -23,7 +23,7 @@ const ThreeScene = ({ locations }) => {
 
 ThreeScene.propTypes = {
   /** Geographical Locations */
-  locations: PropTypes.any.isRequired
+  locations: PropTypes.any
 };
 
 export default ThreeScene;

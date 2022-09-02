@@ -12,7 +12,7 @@ import AllTagsChart from '../components/all-tags-chart';
 import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
 import LatestReactionDom from '../components/latest-reaction-dom';
-import ThreeLazy from '../components/three-lazy';
+import ThreeFetch from '../components/three-fetch';
 
 const Page = ({
   data: {
@@ -23,7 +23,7 @@ const Page = ({
     }
   },
   serverData: {
-    serverResponse: { reactions, locations, latest, lagLongGoogle }
+    serverResponse: { reactions, locations, latest }
   }
 }) => {
   const [hasJavascript, setHasJavascript] = useState(false);
@@ -115,35 +115,7 @@ const Page = ({
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
             <div className="flex items-center justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
-              {hasJavascript ? (
-                <Fragment>
-                  {lagLongGoogle ? (
-                    <ThreeLazy locations={lagLongGoogle.data} />
-                  ) : (
-                    <div className="flex flex-col justify-center items-center p-4 text-center">
-                      <div>
-                        <span role="img" aria-label="Firecracker" className="text-xl">
-                          🧨
-                        </span>
-                      </div>
-                      <small className="text-red-500 text-sm leading-tight">Google Analytics Error</small>
-                    </div>
-                  )}
-                </Fragment>
-              ) : (
-                <div className="flex flex-col justify-center items-center p-4 text-center">
-                  <div>
-                    <span role="img" aria-label="Index Pointing Up" className="text-xl">
-                      ☝️
-                    </span>
-                  </div>
-                  <small className="text-yellow text-sm leading-tight">
-                    You need to enable JavaScript
-                    <br />
-                    to view this feature.
-                  </small>
-                </div>
-              )}
+              <ThreeFetch />
             </div>
             <div className="mt-2 leading-tight">
               <div className="leading-tight">
@@ -251,21 +223,18 @@ export async function getServerData() {
   const allReactionsUtil = require('../utils/get-all-reactions-util');
   const allLocationsUtil = require('../utils/get-all-locations-util');
   const latestReactionUtil = require('../utils/get-latest-reaction-util');
-  const latLongGoogleUaUtil = require('../utils/get-lat-long-google-ua.util');
 
   try {
     const reactions = await allReactionsUtil.get();
     const locations = await allLocationsUtil.get();
     const latest = await latestReactionUtil.get();
-    const lagLongGoogle = await latLongGoogleUaUtil.get();
 
     return {
       props: {
         serverResponse: {
           reactions,
           locations,
-          latest,
-          lagLongGoogle
+          latest
         }
       }
     };
@@ -274,8 +243,7 @@ export async function getServerData() {
       props: {
         reactions: null,
         locations: null,
-        latest: null,
-        lagLongGoogle: null
+        latest: null
       }
     };
   }
