@@ -16,7 +16,7 @@ const Page = ({
     mdx: {
       fields: { slug },
       excerpt,
-      frontmatter: { type, title, date, dateModified, author, tags, featuredImage },
+      frontmatter: { type, title, date, dateModified, author, tags },
       featuredImage: {
         childImageSharp: { thumbnail }
       },
@@ -77,11 +77,11 @@ export const query = graphql`
         dateModified(formatString: "MMMM DD, YYYY")
         author
         tags
-        featuredImage
       }
       featuredImage {
         childImageSharp {
           thumbnail: gatsbyImageData(width: 240)
+          og: gatsbyImageData(width: 1200)
         }
       }
       embeddedImages {
@@ -107,9 +107,14 @@ export const Head = ({
     mdx: {
       fields: { slug },
       excerpt,
-      frontmatter: { type, title, tags, featuredImage }
+      frontmatter: { type, title, tags },
+      featuredImage: {
+        childImageSharp: { og }
+      }
     }
   }
 }) => {
-  return <Seo type="article" title={title} description={excerpt} slug={slug} image={featuredImage} tags={tags} />;
+  return (
+    <Seo type="article" title={title} description={excerpt} slug={slug} image={og.images.fallback.src} tags={tags} />
+  );
 };

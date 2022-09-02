@@ -73,9 +73,9 @@ export const Head = ({
     mdx: {
       fields: { slug },
       excerpt,
-      frontmatter: { type, title, tags, featuredImage }
+      frontmatter: { type, title, tags }
     }
   }
 }) => {
-  return <Seo type="article" title={title} description={excerpt} slug={slug} image={featuredImage} tags={tags} />;
+  return <Seo type="article" title={title} description={excerpt} slug={slug} tags={tags} />;
 };

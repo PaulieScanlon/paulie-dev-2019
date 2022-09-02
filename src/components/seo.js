@@ -29,7 +29,7 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
       <title>{htmlTitle}</title>
       <link rel="canonical" href={`${siteUrl}${slug}`} />
       <meta name="description" content={description} />
-      <meta name="image" content={ogImage} />
+      <meta name="image" content={`${siteUrl}${ogImage}`} />
       <meta name="image:alt" content={description} />
       <meta name="keywords" content={seoKeywords.join(', ')} />
 
@@ -38,7 +38,7 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
       <meta property="og:title" content={htmlTitle} />
       <meta property="og:url" content={`${siteUrl}${slug}`} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={`${siteUrl}${ogImage}`} />
       <meta property="og:image:alt" content={description}></meta>
 
       {/* Twitter */}
@@ -46,7 +46,7 @@ const Seo = ({ type, title, description, slug, image, tags }) => {
       <meta name="twitter:title" content={htmlTitle} />
       <meta name="twitter:url" content={`${siteUrl}${slug}`} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
       <meta name="twitter:image:alt" content={description}></meta>
     </Fragment>
   );
