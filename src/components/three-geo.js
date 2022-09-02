@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useRef, useEffect, useState } from 'react';
 import { GeoJsonGeometry } from 'three-geojson-geometry';
 
 const ThreeGeo = () => {
+  const isMounted = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
   const [response, setResponse] = useState(null);
 
@@ -13,14 +14,24 @@ const ThreeGeo = () => {
             method: 'GET'
           })
         ).json();
-        setIsLoading(false);
-        setResponse(response.features);
+
+        if (isMounted) {
+          setIsLoading(false);
+          setResponse(response.features);
+        }
       } catch (error) {
         console.log(error);
       }
     };
 
     getJsonGeomery();
+  }, []);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return (

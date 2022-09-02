@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef, useState, useEffect, Fragment } from 'react';
+import { useFrame } from '@react-three/fiber';
 import PropTypes from 'prop-types';
 import { GradientTexture } from '@react-three/drei';
 
@@ -37,25 +38,61 @@ const Cylinder = ({ lat, lng, cap, radius }) => {
   );
 };
 
-const ThreeLatLong = ({ locations }) => {
+const ThreeLatLong = () => {
   const maxY = 85; // > 1 make the cylinder scale on the y
-  if (!locations) return;
+
+  const mesh = useRef(null);
+  const isMounted = useRef(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [locations, setLocations] = useState(null);
+
+  useFrame(() => {
+    if (!isLoading) return;
+    return (mesh.current.rotation.x += 0.15), (mesh.current.rotation.z += 0.15);
+  });
+
+  useEffect(() => {
+    const getLatLong = async () => {
+      setIsLoading(true);
+      try {
+        const response = await (await fetch('/api/get-lat-long')).json();
+
+        if (isMounted) {
+          setLocations(response.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getLatLong();
+  }, []);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
   return (
-    <group>
-      {locations
-        ? locations.map((data, index) => {
+    <Fragment>
+      {isLoading ? (
+        <mesh scale={0.05} ref={mesh}>
+          <torusGeometry args={[1.2, 0.4, 16, 100]} />
+          <meshPhongMaterial color="#f056c7" />
+        </mesh>
+      ) : (
+        <group>
+          {locations.map((data, index) => {
             const { lat, lng, count } = data;
             const cap = count > maxY ? maxY : count;
             return <Cylinder key={index} lat={lat} lng={lng} cap={cap} radius={1.06} />;
-          })
-        : null}
-    </group>
+          })}
+        </group>
+      )}
+    </Fragment>
   );
-};
-
-ThreeLatLong.propTypes = {
-  /** Geographical Locations */
-  locations: PropTypes.any
 };
 
 export default ThreeLatLong;

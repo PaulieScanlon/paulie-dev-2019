@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useFrame } from '@react-three/fiber';
 
 import ThreeGeo from './three-geo';
@@ -7,7 +6,7 @@ import ThreeGraticule from './three-graticule';
 import ThreeLatLong from './three-lat-long';
 import ThreeSphere from './three-sphere';
 
-const ThreeMesh = ({ locations }) => {
+const ThreeMesh = () => {
   const mesh = useRef(null);
 
   useFrame(() => {
@@ -22,17 +21,12 @@ const ThreeMesh = ({ locations }) => {
 
   return (
     <mesh ref={mesh}>
-      <ThreeLatLong locations={locations} />
+      <ThreeLatLong />
       <ThreeGeo />
       <ThreeGraticule />
       <ThreeSphere />
     </mesh>
   );
-};
-
-ThreeMesh.propTypes = {
-  /** Geographical Locations */
-  locations: PropTypes.any
 };
 
 export default ThreeMesh;

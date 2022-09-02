@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 
 import ThreeMesh from './three-mesh';
 
-const ThreeScene = ({ locations }) => {
+const ThreeScene = () => {
   return (
     <Canvas
       camera={{
@@ -16,14 +15,9 @@ const ThreeScene = ({ locations }) => {
     >
       <OrbitControls enableRotate={true} enableZoom={false} enablePan={false} />
       <ambientLight intensity={2} />
-      <ThreeMesh locations={locations} />
+      <ThreeMesh />
     </Canvas>
   );
-};
-
-ThreeScene.propTypes = {
-  /** Geographical Locations */
-  locations: PropTypes.any
 };
 
 export default ThreeScene;

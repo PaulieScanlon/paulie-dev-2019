@@ -12,7 +12,7 @@ import AllTagsChart from '../components/all-tags-chart';
 import AllPublisherChart from '../components/all-publisher-chart';
 import LatestReaction from '../components/latest-reaction';
 import LatestReactionDom from '../components/latest-reaction-dom';
-import ThreeFetch from '../components/three-fetch';
+import ThreeScene from '../components/three-scene';
 
 const Page = ({
   data: {
@@ -115,7 +115,7 @@ const Page = ({
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
             <div className="flex items-center justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
-              <ThreeFetch />
+              <ThreeScene />
             </div>
             <div className="mt-2 leading-tight">
               <div className="leading-tight">
