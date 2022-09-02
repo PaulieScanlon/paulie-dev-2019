@@ -7,7 +7,7 @@ const jwt = new google.auth.JWT(
   'https://www.googleapis.com/auth/analytics.readonly'
 );
 
-module.exports.get = async function () {
+export default async function handler(req, res) {
   try {
     await jwt.authorize();
     const response = await google.analytics('v3').data.ga.get({
@@ -19,7 +19,7 @@ module.exports.get = async function () {
       dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode'
     });
 
-    return {
+    res.status(200).json({
       message: 'A ok!',
       data: response.data.rows
         .map(([city, lat, lng, country, countryIsoCode, count]) => {
@@ -40,8 +40,8 @@ module.exports.get = async function () {
             return item;
           }
         })
-    };
+    });
   } catch (error) {
-    return { message: error.message };
+    res.status(500).json({ message: error.message });
   }
-};
+}

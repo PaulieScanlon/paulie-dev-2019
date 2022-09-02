@@ -39,6 +39,7 @@ const Cylinder = ({ lat, lng, cap, radius }) => {
 
 const ThreeLatLong = ({ locations }) => {
   const maxY = 85; // > 1 make the cylinder scale on the y
+  if (!locations) return;
   return (
     <group>
       {locations
@@ -54,7 +55,7 @@ const ThreeLatLong = ({ locations }) => {
 
 ThreeLatLong.propTypes = {
   /** Geographical Locations */
-  locations: PropTypes.any.isRequired
+  locations: PropTypes.any
 };
 
 export default ThreeLatLong;
