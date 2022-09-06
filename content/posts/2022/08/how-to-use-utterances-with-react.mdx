@@ -31,7 +31,7 @@ required to get going, it's pretty straightforward.
 <script
   src="https://utteranc.es/client.js"
   repo="[ENTER REPO HERE]"
-  issue-term="title"
+  issue-term="pathname"
   theme="github-light"
   crossorigin="anonymous"
   defer
@@ -100,7 +100,7 @@ const UtterancesComments = () => {
     const config = {
       src: 'https://utteranc.es/client.js',
       repo: '[ENTER REPO HERE]',
-      'issue-term': 'title',
+      'issue-term': 'pathname',
       theme: 'github-light',
       crossOrigin: 'anonymous',
       defer: true
@@ -157,7 +157,7 @@ interactive too, so I won't dive any deeper into that here.
 const config = {
   src: 'https://utteranc.es/client.js',
   repo: '[ENTER REPO HERE]',
-  'issue-term': 'title',
+  'issue-term': 'pathname',
   theme: 'github-light',
   crossOrigin: 'anonymous',
   defer: true
@@ -183,7 +183,7 @@ This would result in something similar to the below.
 ```javascript
 src https://utteranc.es/client.js
 utterances-comments.js:20 repo [ENTER REPO HERE]
-utterances-comments.js:20 issue-term title
+utterances-comments.js:20 issue-term pathname
 utterances-comments.js:20 theme github-light
 utterances-comments.js:20 crossOrigin anonymous
 utterances-comments.js:20 defer true
@@ -198,7 +198,7 @@ The complete `script` element would then look something like this.
 <script
   src="https://utteranc.es/client.js"
   repo="[ENTER REPO HERE]"
-  issue-term="title"
+  issue-term="pathname"
   theme="github-light"
   crossorigin="anonymous"
   defer="true"
@@ -217,10 +217,6 @@ setTimeout(() => {
 ```
 
 I did notice during testing however that if I didn't use a `setTimeout` the code occasionally errored.
-
-This, I imagine, was because in my example I've configured Utterances to use the HTML `<title>` when creating the name
-of the GitHub issue, and React takes just a moment to hydrate the DOM. If Utterances can't find a `<title>` then,
-understandably, it throws an error.
 
 In my example repo I've used Gatsby's new
 [Head API](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/) to set elements in the document
