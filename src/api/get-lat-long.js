@@ -13,7 +13,9 @@ export default async function handler(req, res) {
     const response = await google.analytics('v3').data.ga.get({
       auth: jwt,
       ids: `ga:${process.env.GOOGLE_ANALYTICS_VIEW_ID}`,
-      'start-date': '2019-10-01',
+      // 'start-date': '2019-10-01',
+      // 'end-date': 'today',
+      'start-date': '30daysAgo',
       'end-date': 'today',
       metrics: 'ga:pageviews',
       dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode'

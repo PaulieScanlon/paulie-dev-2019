@@ -5,7 +5,8 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import Seo from '../components/seo';
 import AsideElement from '../components/aside-element';
 import GenericAside from '../components/generic-aside';
-import AccordionItem from '../components/accordion-item';
+
+import Accordion from '../components/accordion';
 import AllDaysChart from '../components/all-days-chart';
 import AllYearsChart from '../components/all-years-chart';
 import AllTagsChart from '../components/all-tags-chart';
@@ -27,7 +28,6 @@ const Page = ({
   }
 }) => {
   const [hasJavascript, setHasJavascript] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
     setHasJavascript(true);
@@ -129,7 +129,7 @@ const Page = ({
                   Google Analytics Core Reporting API V3
                 </a>
               </div>
-              <time className="block text-slate-400 text-xs"> October 1, 2019 | July 1, 2022</time>
+              <time className="block text-slate-400 text-xs">Last 30 Days</time>
             </div>
           </div>
         </section>
@@ -163,38 +163,7 @@ const Page = ({
           <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
           {reactions ? (
-            reactions.data
-              .sort((a, b) => b.total - a.total)
-              .map((item, index) => {
-                const { title, total, posts } = item;
-
-                const arrs = Object.values(posts);
-
-                return (
-                  <AccordionItem
-                    key={index}
-                    title={title}
-                    total={total}
-                    index={index}
-                    activeIndex={activeIndex}
-                    setActiveIndex={setActiveIndex}
-                  >
-                    {arrs
-                      .sort((a, b) => b.length - a.length)
-                      .map((item, index) => {
-                        const { slug } = item[0];
-                        return (
-                          <li key={index} className="p-0 m-0 flex gap-2 justify-between">
-                            <Link to={slug} className="text-sm">
-                              {slug}
-                            </Link>
-                            <div className="font-semibold text-sm">{`x${item.length}`}</div>
-                          </li>
-                        );
-                      })}
-                  </AccordionItem>
-                );
-              })
+            <Accordion reactions={reactions} />
           ) : (
             <div className="flex gap-4 items-center p-2">
               <span role="img" aria-label="Firecracker" className="text-xl">
