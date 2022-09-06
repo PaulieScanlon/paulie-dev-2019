@@ -79,7 +79,7 @@ const ThreeLatLong = () => {
     <Fragment>
       {isLoading ? (
         <mesh scale={0.05} ref={mesh}>
-          <torusGeometry args={[1.2, 0.4, 16, 100]} />
+          <torusGeometry args={[0.8, 0.2, 16, 100]} />
           <meshPhongMaterial color="#f056c7" />
         </mesh>
       ) : (

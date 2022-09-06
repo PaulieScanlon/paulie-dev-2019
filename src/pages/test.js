@@ -42,7 +42,7 @@ const Page = () => {
               Google Analytics Core Reporting API V3
             </a>
           </div>
-          <time className="block text-slate-400 text-xs"> October 1, 2019 | July 1, 2022</time>
+          <time className="block text-slate-400 text-xs">Last 30 Days</time>
         </div>
       </div>
     </section>
