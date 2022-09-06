@@ -34,7 +34,7 @@ const UtterancesComments = ({ repo, theme, issueTerm }) => {
 
 UtterancesComments.defaultProps = {
   theme: 'github-light',
-  issueTerm: 'title'
+  issueTerm: 'pathname'
 };
 
 UtterancesComments.propTypes = {
