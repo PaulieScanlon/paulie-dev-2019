@@ -18,7 +18,8 @@ export default async function handler(req, res) {
       'start-date': '30daysAgo',
       'end-date': 'today',
       metrics: 'ga:pageviews',
-      dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode'
+      dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode',
+      filters: 'ga:city!=Worthing;ga:city!=Hastings'
     });
 
     res.status(200).json({
