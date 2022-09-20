@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, Fragment } from 'react';
 import { useFrame } from '@react-three/fiber';
-import PropTypes from 'prop-types';
 import { GradientTexture } from '@react-three/drei';
 
 import * as THREE from 'three';

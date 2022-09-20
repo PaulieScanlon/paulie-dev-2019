@@ -61,10 +61,10 @@ const AllPublisherChart = ({ size }) => {
     .slice(1)
     .sort((a, b) => a.count - b.count);
 
-  const viewBoxSize = size || 200;
+  const viewBoxSize = size || 180;
   const viewBoxCenter = viewBoxSize * 0.5;
-  const radius = viewBoxSize * 0.47;
-  const rings = new Array(3).fill(null);
+  const radius = viewBoxSize * 0.38;
+  const rings = new Array(5).fill(null);
 
   const calculateEdgePoint = useMemo(() => calculateEdgePointFn(viewBoxCenter, radius), [viewBoxCenter, radius]);
 

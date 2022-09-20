@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
 import Seo from '../components/seo';
