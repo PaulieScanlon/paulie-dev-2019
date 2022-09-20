@@ -27,10 +27,10 @@ const Page = ({
     serverResponse: { reactions, locations, latest }
   }
 }) => {
-  const [hasJavascript, setHasJavascript] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setHasJavascript(true);
+    setIsLoaded(true);
   }, []);
 
   return (
@@ -115,7 +115,7 @@ const Page = ({
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Location</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Latitude / Longitude of site visitors.</p>
             <div className="flex items-center justify-center w-full h-[405px] rounded border border-outline bg-surface cursor-move">
-              <ThreeScene />
+              {isLoaded ? <ThreeScene /> : null}
             </div>
             <div className="mt-2 leading-tight">
               <div className="leading-tight">
@@ -129,19 +129,19 @@ const Page = ({
                   Google Analytics Core Reporting API V3
                 </a>
               </div>
-              <time className="block text-slate-400 text-xs">Last 30 Days</time>
+              <time className="block text-slate-400 text-xs">Last 7 Days</time>
             </div>
           </div>
         </section>
 
         <section>
-          {hasJavascript ? (
+          {isLoaded ? (
             <LatestReaction />
           ) : (
             <Fragment>
               {latest ? (
                 <LatestReactionDom
-                  hasJavascript={false}
+                  isLoaded={false}
                   isLoading={false}
                   title={latest.data.title}
                   reaction={latest.data.reaction}

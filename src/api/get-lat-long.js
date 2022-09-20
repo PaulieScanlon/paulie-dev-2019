@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       ids: `ga:${process.env.GOOGLE_ANALYTICS_VIEW_ID}`,
       // 'start-date': '2019-10-01',
       // 'end-date': 'today',
-      'start-date': '30daysAgo',
+      'start-date': '7daysAgo',
       'end-date': 'today',
       metrics: 'ga:pageviews',
       dimensions: 'ga:city,ga:latitude,ga:longitude,ga:country,ga:countryIsoCode',
