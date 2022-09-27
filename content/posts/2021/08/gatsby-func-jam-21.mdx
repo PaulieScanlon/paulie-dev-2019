@@ -1,7 +1,7 @@
 ---
 type: post
 title: Gatsby FuncJam 21
-tags: [Gatsby, React, TypeScript, JavaScript, Theme UI, Gatsby Functions, Google Analytics]
+tags: [Gatsby, React, TypeScript, JavaScript, Theme UI, Gatsby Serverless Functions, Google Analytics]
 date: 2021-08-18
 dateModified: 2021-08-23
 author: Paul Scanlon
@@ -66,26 +66,26 @@ The idea I have at the moment will be to use both the static and the dynamic off
 ##### Static
 
 The Google Analytics API is rate limited and whilst I could hit the endpoint and request all `pageViews` for the Groovy
-Analytics site and plot the lat/lng locations on the 3D Globe using Gatsby Functions, I fear that the rate limits will
-soon cap out and the request would fail. Instead, I'll be using the power of Gatsby to hit the Google Analytics API at
-build time... It's kinda weird to request data at build time and pump it into a 3D globe because part of the reason
-static data is so cool is because it's baked right into the page, meaning your site is blazing fast, SEO friendly and
-works with JavaScript disabled in the browser. Sadly no such luck when using this data to drive geographical locations
-on a Three.js globe... but, Gatsby if nothing else is totally flexible so why not eh?!
+Analytics site and plot the lat/lng locations on the 3D Globe using Gatsby Serverless Functions, I fear that the rate
+limits will soon cap out and the request would fail. Instead, I'll be using the power of Gatsby to hit the Google
+Analytics API at build time... It's kinda weird to request data at build time and pump it into a 3D globe because part
+of the reason static data is so cool is because it's baked right into the page, meaning your site is blazing fast, SEO
+friendly and works with JavaScript disabled in the browser. Sadly no such luck when using this data to drive
+geographical locations on a Three.js globe... but, Gatsby if nothing else is totally flexible so why not eh?!
 
 There's a problem though.... This is FuncJam and sourcing data at build time using `gatsby-node` isn't making use of
-Gatsby Functions.
+Gatsby Serverless Functions.
 
 ##### Dynamic
 
-To take advantage of Gatsby Functions I plan to add a number of other features that won't succumb to rate limiting.
-These features may include the following:
+To take advantage of Gatsby Serverless Functions I plan to add a number of other features that won't succumb to rate
+limiting. These features may include the following:
 
 - Posting reactions to a backend like Fauna
 - Adding Authentication using Auth0 to authenticate users
 - Allowing authenticated users to leave comments on the site
 - Hitting my own abstracted API: [paulieapi](https://paulieapi.gatsbyjs.io/) to display real time Twitter or GitHub
-  information on the site (that API is also built using Gatsby Functions and hosted on Gatsby Cloud FYI)
+  information on the site (that API is also built using Gatsby Serverless Functions and hosted on Gatsby Cloud FYI)
 - A Newsletter sign up form (gotta have a form in there somewhere right!)
 
 ... or maybe all of the above.
@@ -144,8 +144,8 @@ If a user is authenticated i'm enabling a comment section, comments are tricky b
 users commenting but I figure if their name is attached to the comment they might think twice before posting profanities
 or generally being a tinker. -- but we shall see.
 
-The `comment` text, `user` details and a `date` are posted to the first of many Gatsby Functions in this site. You can
-see the `src` for the `add-comment` function here:
+The `comment` text, `user` details and a `date` are posted to the first of many Gatsby Serverless Functions in this
+site. You can see the `src` for the `add-comment` function here:
 [src/api/add-comment.ts](https://github.com/PaulieScanlon/gatsby-groovy-analytics/blob/main/src/api/add-comment.ts)
 
 This function is extra secure too because I send an access token collected from Auth0 using the `getAccessTokenSilently`
@@ -153,8 +153,8 @@ hook on the client and verify it using [express-jwt](https://www.npmjs.com/packa
 posting to my [Fauna](https://fauna.com/) database.
 
 I've also prepared for Tonight's [Nattermob](https://nattermob.dev/) stream where I'll talk Benedicte through how to
-fetch these comments and display them on a comments page. We'll also be discussing ways in which Gatsby Functions can be
-polled so updates to data can been seen without users needing to refresh the page.
+fetch these comments and display them on a comments page. We'll also be discussing ways in which Gatsby Serverless
+Functions can be polled so updates to data can been seen without users needing to refresh the page.
 
 Here's tonights stream... see you there!
 
