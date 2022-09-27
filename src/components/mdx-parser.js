@@ -36,7 +36,7 @@ const components = {
       <code>{children}</code>
     );
   },
-  GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} />,
+  GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} className="my-16" />,
   MarkdownCtaLink
 };
 
