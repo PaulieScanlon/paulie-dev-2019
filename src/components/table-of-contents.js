@@ -6,19 +6,6 @@ import { Link } from 'gatsby';
 import { stripLeadingSlash } from '../utils/strip-leading-slash';
 
 const TableOfContents = ({ slug, items, depth }) => {
-  const getStyles = (depth) => {
-    const config = {
-      0: ['text-base', 'text-slate-100'],
-      1: ['text-base', 'text-slate-200'],
-      2: ['text-sm', 'text-slate-300'],
-      3: ['text-xs', 'text-slate-400']
-    };
-
-    const styles = [config[depth] ? config[depth].join(' ') : config[3].join(' ')];
-
-    return [...styles];
-  };
-
   return (
     <ul key={items} className="list-none m-0 p-0">
       {items.map((item, index) => {
@@ -30,7 +17,9 @@ const TableOfContents = ({ slug, items, depth }) => {
               <Link
                 id={hash}
                 to={`${slug}${hash}`}
-                className={`inline-flex items-center p-1 no-underline hover:text-white ${getStyles(depth)}`}
+                className={`not-prose text-xs inline-flex items-center p-1 no-underline hover:text-white text-violet-${
+                  depth + 3
+                }00`}
               >
                 {depth > 0 ? (
                   <svg

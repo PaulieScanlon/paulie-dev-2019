@@ -1,1 +1,1 @@
-export const colors = ['teal', 'violet', 'salmon', 'yellow', 'bogey', 'orange', 'blue'];
+export const colors = ['teal', 'mouve', 'salmon', 'yellow', 'bogey', 'blood', 'blue'];

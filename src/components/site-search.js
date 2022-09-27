@@ -85,7 +85,7 @@ const SiteSearch = ({ nodes }) => {
                         key={index}
                         value={title}
                         disabled={true}
-                        className="m-2 border-b-[1px] border-outline hover:bg-purple"
+                        className="m-2 border-b-[1px] border-outline hover:bg-fuchsia"
                         onKeyDown={(event) => handleNavigate(event, slug)}
                       >
                         <Link to={slug} className="group flex flex-col px-4 py-3 text-slate-400 hover:text-white">

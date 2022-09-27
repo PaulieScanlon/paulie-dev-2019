@@ -42,7 +42,7 @@
 }
 
 .event-color-CreateEvent {
-  @apply bg-violet;
+  @apply bg-mouve;
 }
 
 .event-color-PullRequestEvent {

@@ -15,50 +15,9 @@ module.exports = {
     'text-base',
     'text-sm',
     'text-xs',
-    'text-slate-400',
-    'text-slate-300',
-    'text-slate-200',
-    'text-slate-100',
-    // <!-- chart colors -->
-    'fill-primary',
-    'fill-secondary',
-    'fill-salmon',
-    'fill-violet',
-    'fill-teal',
-    'fill-bogey',
-    'fill-yellow',
-    'fill-purple',
-    'fill-orange',
-    'stroke-primary',
-    'stroke-secondary',
-    'stroke-salmon',
-    'stroke-violet',
-    'stroke-teal',
-    'stroke-bogey',
-    'stroke-yellow',
-    'stroke-purple',
-    'stroke-orange',
-    'bg-primary',
-    'bg-secondary',
-    'bg-salmon',
-    'bg-violet',
-    'bg-teal',
-    'bg-bogey',
-    'bg-yellow',
-    'bg-purple',
-    'bg-orange',
-    'border-primary',
-    'border-secondary',
-    'border-salmon',
-    'border-violet',
-    'border-teal',
-    'border-bogey',
-    'border-yellow',
-    'border-purple',
-    'border-orange',
-    // <!-- chart colors -->
     {
-      pattern: /text-(primary|secondary|tertiary|muted|salmon|violet|teal|bogey|yellow|purple|orange)/
+      pattern:
+        /text|border|bg|stroke|fill|-(primary|secondary|tertiary|muted|salmon|mouve|teal|bogey|violet|yellow|purple|orange)/
     }
   ],
   theme: {
@@ -73,12 +32,12 @@ module.exports = {
 
         // these are used for the chart
         salmon: '#ff6090',
-        violet: '#3f51b5',
+        mouve: '#3f51b5',
         teal: '#00bcd4',
         bogey: '#8bc34a',
         yellow: '#ffc107',
-        purple: '#7B1FA2',
-        orange: '#ff5722',
+        fuchsia: '#7B1FA2',
+        blood: '#ff5722',
 
         background: '#131127',
         outline: '#232140',
