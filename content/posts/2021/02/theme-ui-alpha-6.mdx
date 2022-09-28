@@ -1,7 +1,7 @@
 ---
 type: post
 title: 'Understanding Theme UI: 6 - The Hacks'
-tags: ['JavaScript', 'React', 'Theme UI']
+tags: [JavaScript, React, Theme UI]
 date: 2021-02-09
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1612869331/paulie.dev/2021/02/theme-ui-alpha-6_esqykh.jpg
@@ -235,15 +235,15 @@ To target a general sibling by `class` you can do this 👇
 <div className="menu menu-items">...</div>
 ```
 
-I've written a post about how to use "style objects" for use with styled-components but the same approach works with
-Theme UI. You can read more about "style objects" in this post:
-[styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
+I've written a post about how to use "style objects" for use with Styled Components but the same approach works with
+Theme UI. You can read more about "style objects" in this post: [Styled Components Style Objects](/posts/2020/08/Styled
+Components-style-objects/)
 
-## Svg paths
+## SVG paths
 
-One "hack" I used extensively in [BumHub](https://gatsbyjs.com/blog/2020-silly-site-top-20/) was to target the Svg's
+One "hack" I used extensively in [BumHub](https://gatsbyjs.com/blog/2020-silly-site-top-20/) was to target the SVG's
 `<path>` tags via a `className` to set their `fill` to colors defined in the theme. This way if you change any color
-values for use around your site all your Svg's will update the same as any other HTML dom nodes.
+values for use around your site all your SVG's will update the same as any other HTML dom nodes.
 
 _the colors seen below are inherited from the theme used in this blog_
 

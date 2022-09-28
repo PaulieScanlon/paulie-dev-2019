@@ -125,10 +125,10 @@ const AllPublisherChart = ({ size }) => {
           {publisherData.map((data, index) => {
             const { count, logo } = data;
             const edgePoint = calculateEdgePoint(index * 60, count / 3);
-            const labelSize = 9;
+            const labelSize = 8;
             const xPos = edgePoint[0];
             const yPos = edgePoint[1];
-            const imageSize = 18;
+            const imageSize = 14;
 
             return (
               <g key={index}>
@@ -145,13 +145,14 @@ const AllPublisherChart = ({ size }) => {
         {publisherData
           .sort((a, b) => b.count - a.count)
           .map((item, index) => {
-            const { label, logo } = item;
+            const { label, count, logo } = item;
             return (
-              <li key={index} className="grid grid-cols-1fr-auto items-center p-0 m-0">
+              <li key={index} className="grid grid-cols-1fr-auto items-center p-0 m-0 leading-normal">
                 <div className="grid grid-cols-auto-1fr gap-4 items-center">
-                  <p className="m-0">{label}</p>
+                  <img src={logo} className="m-0 w-4 h-4" alt={label} />
+                  <small className="m-0">{label}</small>
                 </div>
-                <img src={logo} className="m-0 w-4 h-4" alt={label} />
+                <div className="font-semibold">{`x${count}`}</div>
               </li>
             );
           })}

@@ -95,10 +95,10 @@ const AllTagsChart = () => {
         {tagData.map((item, index) => {
           const { tag, count } = item;
           return (
-            <li key={index} className="grid grid-cols-1fr-auto items-center p-0 m-0">
+            <li key={index} className="grid grid-cols-1fr-auto items-center p-0 m-0 leading-normal">
               <div className="grid grid-cols-auto-1fr gap-4 items-center">
                 <div className={`bg-${colors[index]} rounded-full w-3 h-3`} />
-                <p className="m-0">{tag}</p>
+                <small className="m-0">{tag}</small>
               </div>
               <div className="font-semibold">{`x${count}`}</div>
             </li>

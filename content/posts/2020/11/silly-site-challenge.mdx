@@ -296,11 +296,11 @@ Further down the page i've started to do the same with the components that ship 
 If you haven't used Theme UI before i'd recommend giving it a go. It is IMO the original and best take yet on CSS-in-Js
 not just because it _thankfully_ moves us away from `class` names... and we all know namings things is hard but because
 it blows my mind the way [Brent Jackson](https://twitter.com/jxnblk) re-imagined style systems... and the best of all
-these new school methods is what I refer to as the
-[Responsive Array Syntax](https://paulie.dev/posts/2020/08/styled-components-responsive-array-syntax/).
+these new school methods is what I refer to as the [Responsive Array Syntax](https://paulie.dev/posts/2020/08/Styled
+Components-responsive-array-syntax/).
 
 With Theme UI you get all this goodness out of the box, in the above blog post I explain how you can achieve a similar
-thing using [styled-components](https://styled-components.com/) but it does seem like a faff to roll your own when Theme
+thing using [Styled Components](https://Styled Components.com/) but it does seem like a faff to roll your own when Theme
 UI gives it up for free.
 
 I'm not sure how popular Theme UI is amongst React Devs, I see a lot of chatter about
@@ -475,7 +475,7 @@ The tone hex reference comes from the tone key in Theme UI's
 for directly referencing the color object in this way means that if I were to add a new tone to the theme the _list_
 would automatically display a Radio button for it's given value... nice ey!
 
-Using a config object like this is great for the Bum Bum Maker page elements but it's a bit verbose to drive the Svg
+Using a config object like this is great for the Bum Bum Maker page elements but it's a bit verbose to drive the SVG
 conditional `<g>` rendering.... allow me to explain.
 
 By using my old chum
@@ -546,13 +546,13 @@ export const MakerBum: FunctionComponent<IMakerBumProps> = ({ config }) => {
 
 ```
 
-For the values contained within the new array I return the Svg `<g>` element(s) and for values that aren't I return
-`null`. This allows me to conditionally render all Svg `<g>` elements that together form the Svg you see in browser.
+For the values contained within the new array I return the SVG `<g>` element(s) and for values that aren't I return
+`null`. This allows me to conditionally render all SVG `<g>` elements that together form the SVG you see in browser.
 
-If you open up your developer tools and find the Svg element, then click around on the Radio buttons you'll see the Svg
+If you open up your developer tools and find the SVG element, then click around on the Radio buttons you'll see the SVG
 re-renders it's child `<g>` elements according to the checked values provided by the Radio buttons. I typically use this
 approach in my day job to build complex web applications for companies that make bazillions that no one cares about but
-here i'm using the same approach to conditionally render an Svg Bum graphic which really puts the _fun_ into Functional
+here i'm using the same approach to conditionally render an SVG Bum graphic which really puts the _fun_ into Functional
 Programming.
 
 The fruits of this labour intensive task result in a fun UI with an added treat for the user allowing them to download

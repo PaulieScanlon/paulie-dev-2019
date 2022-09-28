@@ -1,7 +1,7 @@
 ---
 type: post
-title: Svg Icon Systems
-tags: ['React', 'JavaScript', 'SVG']
+title: SVG Icon Systems
+tags: [React, JavaScript, SVG]
 date: 2020-04-17
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1595915556/paulie.dev/2020/04/svg-icon-systems_e23nav.jpg
@@ -35,7 +35,7 @@ the code base. This approach makes the code base easier to maintain, usually res
 system is created and used correctly it can **dramatically** speed up development time and cut down on development
 costs.
 
-... and my thoughts are, why should Svg icons be any different?
+... and my thoughts are, why should SVG icons be any different?
 
 I've explained this concept numerous times and always end up hunting around an old repo for an `<SvgIcon />` component
 and notes to explain the principles to various members of a team.
@@ -87,14 +87,14 @@ PHEW! The system remains in-tact.
 
 If we look at VS Code you'll notice theres also two paths, one for the settings icon and one for the 24x24 transparent
 rectangle, you can also see that the HTML attributes for `width` and `height` and `viewbox` values for `width` and
-`height` are all `24`. This is what we're after, everything in the Svg has been designed to be consistent and to a fixed
+`height` are all `24`. This is what we're after, everything in the SVG has been designed to be consistent and to a fixed
 value of `24`
 
 If you download any of the icons in the [material icons](https://material.io/resources/icons/?style=baseline) set you'll
 see the same set of rules.
 
 If you can get your designers to follow this consistently you will have all the things you need for a solid and
-re-usable Svg icon System.
+re-usable SVG icon System.
 
 We're now going to create a utils file to store our icon "paths" and build an `SvgIcon` component in React
 
@@ -110,7 +110,7 @@ export const PERSON =
 export const FOLDER = 'M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z';
 ```
 
-To extract the paths from an Svg open it up in VS Code and copy the string. Using material icons it's easy to identify
+To extract the paths from an SVG open it up in VS Code and copy the string. Using material icons it's easy to identify
 which path is the icon and which is the 24x24 transparent rectangle as it's usually the longer one. To help you identify
 which path is which, the 24x24 transparent rectangle looks like this 👇
 
@@ -179,11 +179,11 @@ import SvgIcon from './SvgIcon'
 ```
 
 Naturally you can add more props as per your requirements and you can change the default size and color in default props
-to suit your needs but, using this method you only ever have **ONE** actual Svg in your code base. You can of course
+to suit your needs but, using this method you only ever have **ONE** actual SVG in your code base. You can of course
 pass it any path from `icon-paths.js` and control it's size and color via props.
 
 I've used this method a lot and it's never let me down.
 
 The only watch outs are getting the design team on board. If you go down this road and then later icons are designed
 with different viewbox sizes or on different sized artboards you can't just make a "one off" change to fix just one
-icon, that said if the Svg's themselves follow the rules of our _system_ you shouldn't have any issues.
+icon, that said if the SVG's themselves follow the rules of our _system_ you shouldn't have any issues.

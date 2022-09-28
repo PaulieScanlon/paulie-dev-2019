@@ -1,7 +1,7 @@
 ---
 type: post
 title: How to use Serverless Functions with SSR
-tags: [Gatsby, Gatsby Serverless Functions, React, JavaScript]
+tags: [Gatsby, Gatsby Serverless Functions, React, JavaScript, Tailwind, Google Analytics]
 date: 2022-09-27
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1664353559/paulie.dev/2022/09/gatsby-shared-functions_f4nzzv.jpg
@@ -110,9 +110,6 @@ Analytics API and returning actual page view data for [paulie.dev](https://pauli
 
 Your data may well be different, but the principle is the same.
 
-For reference, here's the
-[shared-function](https://github.com/PaulieScanlon/gatsby-shared-functions/blob/main/src/utils/shared-function.js) used
-in the demo site.
 
 ```javascript
 // src/utils/shared-function.js
@@ -127,6 +124,10 @@ module.exports = function () {
   };
 };
 ```
+
+For reference, here's the
+[shared-function](https://github.com/PaulieScanlon/gatsby-shared-functions/blob/main/src/utils/shared-function.js) used
+in the demo site.
 
 ### Serverless
 
@@ -276,7 +277,7 @@ Also.... go ahead and disable JavaScript in your browser. Notice again, the char
 
 <GatsbyImage image={props.embedded.image1} alt="Serverless Analytics Chart Screenshot" />
 
-These are "hand cranked" created using nothing more than Svg / Svg elements and good ol' mathematics. You can see the
+These are "hand cranked" created using nothing more than SVG / SVG elements and good ol' mathematics. You can see the
 `src` for the Line Chart here:
 [line-chart.js](https://github.com/PaulieScanlon/gatsby-shared-functions/blob/main/src/components/line-chart.js).
 
@@ -286,7 +287,7 @@ I chose to "roll my own charts" because:
 2. Some charting libraries only render the chart in the browser when JavaScript is enabled.
 
 Since the data is available on both the client and the server, I want to make sure the charts can also be rendered on
-the Server. Server-side rendering Svg's means they are statically generated as HTML elements and don't require
+the Server. Server-side rendering SVG's means they are statically generated as HTML elements and don't require
 JavaScript to render.
 
 _The only slight snag is the tooltip. This doesn't work if JavaScript is disabled. The tooltip displays more information
@@ -294,10 +295,10 @@ about each of the plot marks which are kinda important. To overcome this I added
 [checkbox hack](https://css-tricks.com/the-checkbox-hack/) to toggle dates and values in the ticks at the bottom of the
 chart._
 
-I'll be writing a little more about Svg charts soon so stay tuned!
+I'll be writing a little more about SVG charts soon so stay tuned!
 
 ## Further Reading
 
-- [Create an Svg Doughnut Chart from scratch for your Gatsby blog](/posts/2021/01/react-svg-doughnut-chart/)
+- [Create an SVG Doughnut Chart from scratch for your Gatsby blog](/posts/2021/01/react-svg-doughnut-chart/)
 - [Add data to Gatsby's GraphQL layer using sourceNodes](/posts/2021/07/gatsby-source-nodes/)
 - [Become a Data Champion with Gatsby](https://www.gatsbyjs.com/blog/become-a-data-champion-with-gatsby/)

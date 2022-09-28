@@ -1,15 +1,15 @@
 ---
 type: post
-title: styled-components Responsive Array Syntax
-tags: ['React', 'JavaScript', 'styled-components']
+title: Styled Components Responsive Array Syntax
+tags: ['React', 'JavaScript', 'Styled Components']
 date: 2020-08-19
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1597837942/paulie.dev/2020/08/styled-components-responsive-array-syntax_iy5o8k.jpg
 ---
 
-In this post I'm going to discuss a new approach I've adopted when using
-[styled-components](https://styled-components.com/), initially I wasn't sure what this approach was called but I do
-really like this suggestion from [Pedro Duarte](https://twitter.com/peduarte) at [Modulz](https://twitter.com/modulz)
+In this post I'm going to discuss a new approach I've adopted when using [Styled Components](https://Styled
+Components.com/), initially I wasn't sure what this approach was called but I do really like this suggestion from
+[Pedro Duarte](https://twitter.com/peduarte) at [Modulz](https://twitter.com/modulz)
 
 <Tweet tweetLink="peduarte/status/1295998559117074432" />
 
@@ -27,9 +27,9 @@ const breakpoints = ['576px', '768px', '992px'];
 ```
 
 As my Tweet mentions both [Chakra UI](https://chakra-ui.com/responsive-styles) and
-[Theme UI](https://theme-ui.com/sx-prop#responsive-values) come with this kind of functionality built in,
-styled-components does not. That's not a bad thing, styled-components is different in many ways to Chakra UI and Theme
-UI, but rather than try to explain it myself here's the descriptions from each of the projects.
+[Theme UI](https://theme-ui.com/sx-prop#responsive-values) come with this kind of functionality built in, Styled
+Components does not. That's not a bad thing, Styled Components is different in many ways to Chakra UI and Theme UI, but
+rather than try to explain it myself here's the descriptions from each of the projects.
 
 ### Chakra UI
 
@@ -40,24 +40,24 @@ build your React applications"_
 
 _"Theme UI is a library for creating themeable user interfaces based on constraint-based design principles"_
 
-### styled-components
+### Styled Components
 
 "_Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅🏾_"
 
-The way I like to think about this is styled-components gives you the tools you need to build everything yourself where
+The way I like to think about this is Styled Components gives you the tools you need to build everything yourself where
 as Chakra UI and Theme UI give you the tools you need to build everything yourself + a load of stuff that's already
 built for you and can easily be re-themed.
 
-If you're using styled-components and like the look of the **Responsive Array Syntax** I'm going to explain how to write
+If you're using Styled Components and like the look of the **Responsive Array Syntax** I'm going to explain how to write
 a utility function that you can gradually adopt without breaking anything.
 
-Before I go too much further when I use styled-components I don't use template literals which is what you'll see in the
-[docs](https://styled-components.com/docs/basics#getting-started), instead I prefer to use the _style object_ syntax.
+Before I go too much further when I use Styled Components I don't use template literals which is what you'll see in the
+[docs](https://Styled Components.com/docs/basics#getting-started), instead I prefer to use the _style object_ syntax.
 
 There's a PR for the docs site I created in Mar 2019 that attempts to explain the _style object_ syntax which you can
-see [here](https://github.com/styled-components/styled-components-website/pull/444). I think I still need to do some
+see [here](https://github.com/Styled Components/Styled Components-website/pull/444). I think I still need to do some
 work on that 😬 ... so in the meantime I've prepared a short post with the same usage examples:
-[styled-components Style Objects](/posts/2020/08/styled-components-style-objects/)
+[Styled Components Style Objects](/posts/2020/08/styled-components-style-objects/)
 
 Ok, let's start!
 
@@ -67,7 +67,7 @@ Create a test component, I've called mine `<MrButton />` because I'm a laugh.
 
 ```javascript
 // mr-button.js
-import styled from 'styled-components';
+import styled from 'Styled Components';
 
 const MrButton = styled.button({
   backgroundColor: 'hotpink',
@@ -110,7 +110,7 @@ destructure the props and to spread the return of the `createMediaQueries` funct
 ```diff
 ...
 // mr-button.js
-import styled from 'styled-components'
+import styled from 'Styled Components'
 + import { createMediaQueries } from '../utils'
 
 const MrButton = styled.button(
@@ -413,7 +413,7 @@ or suggestions please feel free to find me on Twitter:
 
 [@pauliescanlon](https://twitter.com/PaulieScanlon)
 
-Oh and if you'd like to dig a little deep here's a
-[CodeSandbox](https://codesandbox.io/s/styled-components-responsive-array-syntax-3qxu3)
+Oh and if you'd like to dig a little deep here's a [CodeSandbox](https://codesandbox.io/s/Styled
+Components-responsive-array-syntax-3qxu3)
 
-<CodeSandbox codeSandboxId="/styled-components-responsive-array-syntax-3qxu3" />
+<CodeSandbox codeSandboxId="/Styled Components-responsive-array-syntax-3qxu3" />

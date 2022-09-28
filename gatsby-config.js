@@ -22,7 +22,7 @@ module.exports = {
       'JavaScript',
       'TypeScript',
       'Flow',
-      'styled-components',
+      'Styled Components',
       'Theme UI',
       'Tailwind',
       'Jest',
