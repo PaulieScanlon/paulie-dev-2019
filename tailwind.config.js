@@ -41,7 +41,8 @@ module.exports = {
 
         background: '#131127',
         outline: '#232140',
-        surface: '#18162c'
+        surface: '#18162c',
+        guide: '#2d2a58'
       },
       keyframes: {
         bar: {
