@@ -110,7 +110,7 @@ const Page = ({
                   Google Analytics Data API V1 (Beta)
                 </a>
               </div>
-              <time className="block text-slate-400 text-xs">July 1, 2022 | Now</time>
+              <time className="block text-slate-400 text-xs">Last 30 Days</time>
             </div>
           </div>
           <div className="block overflow-x-scroll">

@@ -14,7 +14,7 @@ module.exports.get = async function () {
       property: `properties/${process.env.GOOGLE_GA4_PROPERTY_ID}`,
       dateRanges: [
         {
-          startDate: '2022-07-01',
+          startDate: '30daysAgo',
           endDate: 'today'
         }
       ],
