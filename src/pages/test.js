@@ -1,8 +1,8 @@
 import React from 'react';
-import AllYearsChart from '../components/all-years-chart';
+import AllDaysChart from '../components/all-days-chart';
 
 const Page = () => {
-  return <AllYearsChart />;
+  return <AllDaysChart />;
 };
 
 export default Page;

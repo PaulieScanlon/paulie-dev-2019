@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { groupBy } from '../utils/group-by';
@@ -11,8 +11,8 @@ const AllDaysChart = () => {
   const defaultValues = () =>
     years.map((year) => {
       return {
-        label: year,
-        y: 0
+        total: 0,
+        label: year
       };
     });
 
@@ -63,8 +63,8 @@ const AllDaysChart = () => {
 
       const realData = Object.keys(groupedByYear).map((abbr) => {
         return {
-          label: abbr,
-          y: groupedByYear[abbr].length
+          total: groupedByYear[abbr].length,
+          label: abbr
         };
       });
 
@@ -82,11 +82,10 @@ const AllDaysChart = () => {
         })
         .sort((a, b) => years.indexOf(a.label) - years.indexOf(b.label))
         .map((data, index) => {
-          const { label, y } = data;
+          const { total, label } = data;
           return {
-            label: label,
-            x: index,
-            y: y
+            total: total,
+            label: label
           };
         });
 
@@ -97,110 +96,118 @@ const AllDaysChart = () => {
     })
     .sort((a, b) => abbreviatedDays.indexOf(a.day) - abbreviatedDays.indexOf(b.day));
 
-  const width = 500;
-  const height = 230;
-  const fontSize = 9;
-  const xLines = 5;
-  const yLines = 9;
-  const xPad = postsByDay.length;
-  const yPad = 8;
-  const color = '#2d2a58';
+  const chartWidth = 600;
+  const chartHeight = 300;
+  const barWidth = 10;
+  const barGap = 3;
+  const offsetY = 40;
+  const paddingX = 50;
+  const paddingY = 50;
+  const maxY = Math.max(...postsByDay.map((arr) => arr.data.map((data) => data.total * 1.2)).flat(1));
+  const guides = [...Array(8).keys()];
 
-  const XGuides = () => {
-    const startX = xPad;
-    const endX = width - xPad;
+  const properties = postsByDay.map((property, index) => {
+    const { data } = property;
 
-    return new Array(xLines + 1).fill(null).map((_, index) => {
-      const ratio = index / xLines;
+    const x = (index / abbreviatedDays.length) * chartWidth + paddingX / 2;
 
-      const yCoordinate = height * ratio + yPad;
-
-      return (
-        <Fragment key={index}>
-          <polyline
-            fill="none"
-            stroke={color}
-            strokeWidth=".5"
-            points={`${startX},${yCoordinate} ${endX},${yCoordinate}`}
-          />
-        </Fragment>
-      );
+    const days = data.map((d, index) => {
+      const { total, label } = d;
+      const height = chartHeight - offsetY - (total / maxY) * (chartHeight - (paddingY + offsetY)) - paddingY + offsetY;
+      return {
+        total: total,
+        label: label,
+        height: total > 0 ? chartHeight - height : 1
+      };
     });
-  };
 
-  const YGuides = () => {
-    const startY = yPad;
-    const endY = height - yPad * 2;
+    return {
+      days: days,
+      x: x
+    };
+  });
 
-    return new Array(yLines + 1).fill(null).map((_, index) => {
-      const ratio = index / yLines;
-
-      const xCoordinate = xPad + ratio * (width - xPad * 2);
-
-      return (
-        <Fragment key={index}>
-          <polyline
-            fill="none"
-            stroke={color}
-            strokeWidth=".5"
-            points={`${xCoordinate},${startY} ${xCoordinate},${endY}`}
-          />
-        </Fragment>
-      );
-    });
-  };
+  const ticks = abbreviatedDays.map((abbr, index) => {
+    const x = (index / abbreviatedDays.length) * chartWidth + paddingX / 2;
+    return {
+      abbr: abbr,
+      x: x
+    };
+  });
 
   return (
     <div>
-      <div className="rounded border border-outline bg-surface p-4">
-        <svg viewBox={`0,0,${width},${height}`}>
-          <XGuides />
-          <YGuides />
-          {postsByDay.map((item, g) => {
-            const { day, data } = item;
-            const barWidth = width / (data.length * postsByDay.length) - xPad;
-            const groupWidth = width / postsByDay.length;
+      <div className="border rounded border-outline bg-surface p-2 pb-4">
+        <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} role="presentation">
+          {guides.map((_, index) => {
+            const ratio = index / guides.length;
+            const y = chartHeight - offsetY - chartHeight * ratio;
 
             return (
-              <g key={g}>
-                <text
-                  x={groupWidth * g + xPad + barWidth * 2 + fontSize / 2}
-                  y={height}
-                  className="fill-muted font-semibold"
-                  style={{ fontSize: fontSize }}
-                >
-                  {day.toUpperCase()}
-                </text>
-                {data.map((year, i) => {
-                  const { y } = year;
-                  const inc = i + 1;
-                  const barHeight = (y + 0.05) * 15;
-                  const xPos = groupWidth * g + barWidth * inc + (xPad / 4) * inc;
-                  const yPos = height - barHeight - yPad * 2;
-                  const labelSize = 7;
+              <polyline
+                key={index}
+                className="stroke-guide"
+                fill="none"
+                strokeWidth={0.6}
+                points={`${paddingX / 2},${y} ${chartWidth - paddingX / 2},${y}`}
+              />
+            );
+          })}
+
+          {properties.map((property, index) => {
+            const { x, days } = property;
+
+            return (
+              <g key={index}>
+                {days.map((d, i) => {
+                  const { height, total } = d;
+
+                  const barX = x + (barWidth + barGap) * i;
+                  const barY = chartHeight - height - offsetY;
+
                   return (
                     <g key={i}>
-                      {y > 0 ? (
-                        <text
-                          x={xPos + labelSize / 4}
-                          y={yPos - 7}
-                          className="fill-white font-semibold"
-                          style={{ fontSize: labelSize }}
-                        >{`x${y}`}</text>
-                      ) : null}
                       <rect
-                        x={xPos}
-                        y={yPos}
+                        x={barX}
+                        y={barY}
                         width={barWidth}
-                        height={barHeight}
+                        height={height}
                         fill="transparent"
-                        className={`stroke-${colors[i]}`}
+                        className={`stroke-${colors[i]} fill-surface`}
                         strokeWidth={1.2}
                       />
+                      {total > 0 ? (
+                        <text
+                          x={barX + 5}
+                          y={barY - 8}
+                          textAnchor="middle"
+                          fontSize={10}
+                          className="fill-white font-semibold select-none"
+                        >
+                          {`x${total}`}
+                        </text>
+                      ) : null}
                     </g>
                   );
                 })}
               </g>
+            );
+          })}
+
+          {ticks.map((tick, index) => {
+            const { abbr, x } = tick;
+
+            return (
+              <text
+                key={index}
+                x={x + barWidth * (properties[0].days.length / 2) + 4}
+                y={chartHeight - (paddingY - offsetY)}
+                textAnchor="middle"
+                fontSize={10}
+                className="fill-muted font-semibold uppercase select-none"
+              >
+                {abbr}
+              </text>
             );
           })}
         </svg>

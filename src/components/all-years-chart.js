@@ -56,7 +56,7 @@ const AllYearsChart = () => {
       return rv;
     }, {});
 
-  const posytsByYear = Object.keys(allMdxYears).map((year) => {
+  const postsByYear = Object.keys(allMdxYears).map((year) => {
     const groupedByMonth = groupBy(allMdxYears[year], 'abbr');
     const emptyData = defaultValues();
 
@@ -99,10 +99,10 @@ const AllYearsChart = () => {
   const offsetY = 40;
   const paddingX = 50;
   const paddingY = 50;
-  const maxY = Math.max(...posytsByYear.map((arr) => arr.data.map((data) => data.total)).flat(1));
+  const maxY = Math.max(...postsByYear.map((arr) => arr.data.map((data) => data.total)).flat(1));
   const guides = [...Array(8).keys()];
 
-  const properties = posytsByYear.map((property) => {
+  const properties = postsByYear.map((property) => {
     const { data } = property;
 
     return data.map((d, index) => {
@@ -133,15 +133,13 @@ const AllYearsChart = () => {
     };
   });
 
-  console.log(ticks);
-
   return (
     <div>
-      <div className="border rounded border-outline bg-surface p-2">
+      <div className="border rounded border-outline bg-surface p-2 pb-4">
         <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} role="presentation">
           {guides.map((_, index) => {
             const ratio = index / guides.length;
-            const y = chartHeight - paddingY - chartHeight * ratio;
+            const y = chartHeight - offsetY - chartHeight * ratio;
 
             return (
               <polyline
@@ -200,23 +198,6 @@ const AllYearsChart = () => {
             );
           })}
         </svg>
-        {/* <LinePlot
-          width={500}
-          height={230}
-          xPad={30}
-          yPad={20}
-          xLines={5}
-          yLines={9}
-          color="#2d2a58"
-          labels={posytsByYear[0].data}
-          maxX={11}
-          maxY={13}
-        >
-          <LinePolyline data={posytsByYear[0].data} showAmt={true} />
-          <LinePolyline data={posytsByYear[1].data} showAmt={true} />
-          <LinePolyline data={posytsByYear[2].data} showAmt={true} />
-          <LinePolyline data={posytsByYear[3].data} showAmt={true} />
-        </LinePlot> */}
       </div>
       <ul className="list-none m-0 p-0 flex text-sm">
         {years.map((year, index) => {
