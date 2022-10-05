@@ -10,6 +10,7 @@ import UtterancesObserver from '../components/utterances-observer';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
 import TableOfContents from '../components/table-of-contents';
+import WebmentionAside from '../components/webmention-aside';
 
 const Page = ({
   data: {
@@ -58,6 +59,7 @@ const Page = ({
             <TableOfContents slug={slug} items={toc} />
           </div>
         ) : null}
+        <WebmentionAside slug={slug} />
       </AsideElement>
     </Fragment>
   );

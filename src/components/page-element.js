@@ -92,7 +92,7 @@ const PageElement = ({ children, location: { pathname } }) => {
                         onClick={handleNav}
                         href={url}
                         target="_blank"
-                        rel={rel}
+                        rel={`noreferrer ${rel}`}
                         className="main-navigation text-slate-400"
                       >
                         <NavigationIcon icon={icon} />
