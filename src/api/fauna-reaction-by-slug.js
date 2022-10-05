@@ -1,9 +1,9 @@
-// not currently used — but keep it around for a while
-
 const faunadb = require('faunadb');
 
 export default async function handler(req, res) {
-  const { slug } = req.body;
+  const { slug } = JSON.parse(req.body);
+
+  console.log('slug: ', slug);
 
   const q = faunadb.query;
 

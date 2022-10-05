@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Loading from '../components/loading';
@@ -6,7 +6,8 @@ import Loading from '../components/loading';
 import { icons } from '../utils/reaction-paths';
 
 const AddReaction = ({ title, slug }) => {
-  const [response, setResponse] = useState('');
+  const [message, setMessage] = useState('');
+  const [reactions, setReactions] = useState(null);
   const [isSubmittig, setIsSubmitting] = useState(false);
   const [currentReaction, setCurrentReaction] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -15,32 +16,55 @@ const AddReaction = ({ title, slug }) => {
     setCurrentReaction(name);
     setIsSubmitting(true);
     try {
-      const response = await (
-        await fetch('/api/add-reaction', {
-          method: 'POST',
-          body: JSON.stringify({
-            title: title,
-            slug: slug,
-            reaction: name,
-            date: new Date()
-          })
+      const response = await fetch('/api/fauna-add-reaction', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: title,
+          slug: slug,
+          reaction: name,
+          date: new Date()
         })
-      ).json();
-      setResponse(response.message);
+      });
+
+      const data = await response.json();
+
+      setMessage(data.message);
       setCurrentReaction(null);
       setIsSubmitting(false);
       setHasSubmitted(true);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    const getReactions = async () => {
+      const response = await fetch('/api/fauna-reaction-by-slug', {
+        method: 'POST',
+        body: JSON.stringify({
+          slug: slug
+        })
+      });
+
+      const data = await response.json();
+
+      setReactions(data.reactions);
+      try {
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getReactions();
+  }, [slug]);
 
   return (
     <section className="mx-auto w-full sm:w-11/12 flex justify-center my-16">
-      <div className="inline-flex justify-center flex-col min-h-[140px] w-full text-center rounded border border-outline bg-surface p-4 sm:px-6">
+      <div className="inline-flex justify-center flex-col min-h-[180px] w-full text-center rounded border border-outline bg-surface p-4 sm:px-6">
         {hasSubmitted ? (
           <Fragment>
             <p className="m-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Thanks</p>
             <p className="mb-5 text-slate-300 text-sm text-center m-0">
-              {response}{' '}
+              {message}{' '}
               <span role="img" aria-label="Party Popper" className="text-center">
                 🎉
               </span>
@@ -66,26 +90,31 @@ const AddReaction = ({ title, slug }) => {
                 const isSubmitted = () => (name === currentReaction && isSubmittig ? true : false);
 
                 return (
-                  <li key={index} className="m-0 p-0 flex items-center">
+                  <li key={index} className="m-0 p-0 flex flex-col gap-1 items-center">
                     {isSubmitted() ? (
-                      <Loading className="w-7 h-7 sm:w-9 sm:h-9" />
+                      <Loading className="w-6 h-6 sm:w-8 sm:h-8" />
                     ) : (
-                      <button
-                        className={`rounded-full p-0.5 ${currentReaction ? pending : active}`}
-                        onClick={() => handleReaction(name)}
-                      >
-                        <svg
-                          aria-labelledby={`reaction-${name}`}
-                          title={name}
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6 sm:w-8 sm:h-8"
-                          fill="currentColor"
-                          viewBox="0 0 32 32"
+                      <Fragment>
+                        <button
+                          className={`rounded-full p-0.5 ${currentReaction ? pending : active}`}
+                          onClick={() => handleReaction(name)}
                         >
-                          <title id={`reaction-${name}`}>{name}</title>
-                          <g key={index} dangerouslySetInnerHTML={{ __html: paths.map((path) => path) }} />
-                        </svg>
-                      </button>
+                          <svg
+                            aria-labelledby={`reaction-${name}`}
+                            title={name}
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 sm:w-8 sm:h-8"
+                            fill="currentColor"
+                            viewBox="0 0 32 32"
+                          >
+                            <title id={`reaction-${name}`}>{name}</title>
+                            <g key={index} dangerouslySetInnerHTML={{ __html: paths.map((path) => path) }} />
+                          </svg>
+                        </button>
+                        <div className="font-bold text-center text-sm">
+                          {reactions && reactions[name] ? <Fragment>{`x${reactions[name]?.count}`}</Fragment> : 'x0'}
+                        </div>
+                      </Fragment>
                     )}
                   </li>
                 );
