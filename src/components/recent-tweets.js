@@ -76,7 +76,7 @@ const RecentTweets = () => {
               <a
                 href={`https://twitter.com/${response.user.username}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer me"
                 className="m-0 p-0 text-white text-base sm:text-lg font-semibold"
               >
                 {`twitter.com/${response.user.username}`}

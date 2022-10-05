@@ -77,7 +77,7 @@ const RecentGitHubUserEvent = () => {
               <a
                 href={response.user.html_url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer me"
                 className="m-0 p-0 text-white text-base sm:text-lg font-semibold"
               >
                 {response.user.html_url.replace(/^https?:\/\//, '')}

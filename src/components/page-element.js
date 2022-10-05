@@ -84,7 +84,7 @@ const PageElement = ({ children, location: { pathname } }) => {
               <hr className="border border-outline my-8" />
               <ul>
                 {navigation.links.map((link, index) => {
-                  const { url, title, icon } = link;
+                  const { url, title, icon, rel } = link;
                   return (
                     <li key={index} className="text-lg mb-2">
                       <a
@@ -92,7 +92,7 @@ const PageElement = ({ children, location: { pathname } }) => {
                         onClick={handleNav}
                         href={url}
                         target="_blank"
-                        rel="noreferrer"
+                        rel={rel}
                         className="main-navigation text-slate-400"
                       >
                         <NavigationIcon icon={icon} />
