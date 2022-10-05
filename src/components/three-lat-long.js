@@ -54,7 +54,7 @@ const ThreeLatLong = () => {
     const getLatLong = async () => {
       setIsLoading(true);
       try {
-        const response = await (await fetch('/api/get-lat-long')).json();
+        const response = await (await fetch('/api/ua-analytics')).json();
 
         if (isMounted) {
           setLocations(response.data);

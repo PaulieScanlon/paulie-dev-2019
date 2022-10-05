@@ -13,7 +13,7 @@ const LatestReaction = () => {
     isMounted.current = true;
     setIsLoading(true);
     try {
-      const response = await (await fetch('/api/get-latest-reaction')).json();
+      const response = await (await fetch('/api/fauna-latest-reaction')).json();
       if (isMounted) {
         setResponse(response.data);
         setTimeout(() => {
