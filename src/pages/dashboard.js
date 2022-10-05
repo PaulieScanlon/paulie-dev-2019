@@ -34,8 +34,6 @@ const Page = ({
     setIsLoaded(true);
   }, []);
 
-  console.log(faunaAllreactions);
-
   return (
     <Fragment>
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
@@ -70,7 +68,7 @@ const Page = ({
           </div>
         </section>
 
-        <section className="grid sm:grid-cols-2 gap-8">
+        <section className="grid md:grid-cols-2 gap-8">
           <div className="block">
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
@@ -148,6 +146,7 @@ const Page = ({
                 <LatestReactionDom
                   isLoaded={false}
                   isLoading={false}
+                  hasJavascript={true}
                   title={faunaLatestReaction.data.title}
                   reaction={faunaLatestReaction.data.reaction}
                   slug={faunaLatestReaction.data.slug}
