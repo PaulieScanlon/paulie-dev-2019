@@ -120,7 +120,7 @@ const SiteViewChart = ({ error, data }) => {
                     strokeWidth={1.6}
                   />
 
-                  <g transform={`translate(${x} ${chartHeight - (paddingY - offsetY / 1.6)})`}>
+                  <g transform={`translate(${x} ${chartHeight - (paddingY - offsetY / 1.7)})`}>
                     <text
                       transform="rotate(45)"
                       textAnchor="start"
@@ -130,7 +130,7 @@ const SiteViewChart = ({ error, data }) => {
                     >
                       {new Date(date).toLocaleDateString(undefined, {
                         year: undefined,
-                        month: '2-digit',
+                        month: 'short',
                         day: '2-digit'
                       })}
                     </text>
