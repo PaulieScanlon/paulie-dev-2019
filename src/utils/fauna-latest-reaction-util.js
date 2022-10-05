@@ -2,7 +2,7 @@ const faunadb = require('faunadb');
 
 const { formatDatestamp } = require('./format-date-stamp');
 
-module.exports.get = async function () {
+module.exports = async function () {
   const q = faunadb.query;
 
   const client = new faunadb.Client({ secret: process.env.FAUNA_KEY });

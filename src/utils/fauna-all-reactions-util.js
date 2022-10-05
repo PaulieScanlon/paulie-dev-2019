@@ -1,7 +1,7 @@
 const faunadb = require('faunadb');
 const { groupBy } = require('./group-by');
 
-module.exports.get = async function () {
+module.exports = async function () {
   const q = faunadb.query;
 
   const client = new faunadb.Client({ secret: process.env.FAUNA_KEY });
@@ -53,7 +53,7 @@ module.exports.get = async function () {
       });
 
     return {
-      message: 'all reactions',
+      message: 'Fauna All Reactions ok!',
       data: grouped
     };
   } catch (error) {

@@ -23,8 +23,9 @@ const Page = ({
       body
     }
   },
+
   serverData: {
-    serverResponse: { reactions, locations, latest }
+    serverResponse: { faunaAllreactions, gaAnalytics, faunaLatestReaction }
   }
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,6 +33,8 @@ const Page = ({
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  console.log(faunaAllreactions);
 
   return (
     <Fragment>
@@ -72,17 +75,17 @@ const Page = ({
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Page view counts for top 10 countries.</p>
             <div className="h-[405px] flex items-center justify-center rounded border border-outline bg-surface px-4 sm:px-6 py-6">
-              {locations ? (
+              {gaAnalytics ? (
                 <ul className="w-full  m-0 p-0 ">
-                  {locations.data.map((row, index) => {
-                    const { flag, name, amount } = row;
+                  {gaAnalytics.data.top10Countries.map((row, index) => {
+                    const { flag, country, totalUsers } = row;
                     return (
                       <li key={index} className="m-0 p-0 flex justify-between items-center">
                         <div className="flex gap-2 items-center">
                           <span className="mt-1">{getUnicodeFlagIcon(flag)}</span>
-                          <span>{name}</span>
+                          <span>{country}</span>
                         </div>
-                        <span className="font-semibold">{`x${amount}`}</span>
+                        <span className="font-semibold">{`x${totalUsers}`}</span>
                       </li>
                     );
                   })}
@@ -141,14 +144,14 @@ const Page = ({
             <LatestReaction />
           ) : (
             <Fragment>
-              {latest ? (
+              {faunaLatestReaction ? (
                 <LatestReactionDom
                   isLoaded={false}
                   isLoading={false}
-                  title={latest.data.title}
-                  reaction={latest.data.reaction}
-                  slug={latest.data.slug}
-                  date={latest.data.date}
+                  title={faunaLatestReaction.data.title}
+                  reaction={faunaLatestReaction.data.reaction}
+                  slug={faunaLatestReaction.data.slug}
+                  date={faunaLatestReaction.data.date}
                 />
               ) : null}
             </Fragment>
@@ -164,8 +167,8 @@ const Page = ({
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
-          {reactions ? (
-            <Accordion reactions={reactions} />
+          {faunaAllreactions ? (
+            <Accordion reactions={faunaAllreactions} />
           ) : (
             <div className="flex gap-4 items-center p-2">
               <span role="img" aria-label="Firecracker" className="text-xl">
@@ -191,21 +194,21 @@ const Page = ({
 };
 
 export async function getServerData() {
-  const allReactionsUtil = require('../utils/get-all-reactions-util');
-  const allLocationsUtil = require('../utils/get-all-locations-util');
-  const latestReactionUtil = require('../utils/get-latest-reaction-util');
+  const faunaAllReactionsUtil = require('../utils/fauna-all-reactions-util');
+  const gaAnalyticsUtil = require('../utils/ga-analytics-util');
+  const faunaLatestReactionUtil = require('../utils/fauna-latest-reaction-util');
 
   try {
-    const reactions = await allReactionsUtil.get();
-    const locations = await allLocationsUtil.get();
-    const latest = await latestReactionUtil.get();
+    const faunaAllreactions = await faunaAllReactionsUtil();
+    const gaAnalytics = await gaAnalyticsUtil();
+    const faunaLatestReaction = await faunaLatestReactionUtil();
 
     return {
       props: {
         serverResponse: {
-          reactions,
-          locations,
-          latest
+          faunaAllreactions,
+          gaAnalytics,
+          faunaLatestReaction
         }
       }
     };
