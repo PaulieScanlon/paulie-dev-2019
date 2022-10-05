@@ -9,6 +9,7 @@ import GenericAside from '../components/generic-aside';
 import AddReaction from '../components/add-reaction';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
+// import WebmentionAside from '../components/webmention-aside';
 
 const Page = ({
   data: {

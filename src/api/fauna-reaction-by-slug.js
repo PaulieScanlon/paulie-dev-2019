@@ -3,8 +3,6 @@ const faunadb = require('faunadb');
 export default async function handler(req, res) {
   const { slug } = JSON.parse(req.body);
 
-  console.log('slug: ', slug);
-
   const q = faunadb.query;
 
   const client = new faunadb.Client({ secret: process.env.FAUNA_KEY });

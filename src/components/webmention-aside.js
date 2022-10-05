@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const WebmentionAside = ({ slug }) => {
+const WebmentionAside = ({ target }) => {
   const [mentions, setMentions] = useState(null);
 
   useEffect(() => {
     const getMentions = async () => {
       try {
-        const response = await fetch(`https://webmention.io/api/mentions.jf2?target=https://paulie.dev${slug}`);
-
-        // All mentions
-        // const response = await fetch(
-        //   `https://webmention.io/api/mentions.jf2?domain=paulie.dev&token=${process.env.GATSBY_WEBMENTION_API_KEY}`
-        // );
-
+        const response = await fetch(`https://webmention.io/api/mentions.jf2?target=${target}`);
         const data = await response.json();
+
         setMentions(data.children);
       } catch (error) {
         console.error(error);
@@ -22,22 +17,48 @@ const WebmentionAside = ({ slug }) => {
     };
 
     getMentions();
-  }, [slug]);
+  }, [target]);
 
-  return null;
+  return (
+    <Fragment>
+      {mentions && mentions.length ? (
+        <div className="grid gap-4  rounded border border-outline bg-surface/50 px-6 py-6">
+          <h5 className="mb-2 text-base text-center leading-6 font-semibold uppercase text-secondary">Webmentions</h5>
+          {mentions ? (
+            <div>
+              <ul className="m-0 p-0 list-none flex flex-wrap gap-3 justify-center">
+                {mentions
+                  .filter((mention) => mention.author.photo)
+                  .map((mention, index) => {
+                    const {
+                      author: { name, photo },
+                      url
+                    } = mention;
 
-  // return (
-  //   <div className="grid gap-4 rounded border border-outline bg-surface/50 px-4 sm:px-6 py-6">
-  //     <div className="mb-4">
-  //       <h5 className="mb-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Webmentions</h5>
-  //     </div>
-  //   </div>
-  // );
+                    return (
+                      <li key={index} className="block m-0 p-0 w-6 h-6">
+                        <a href={url} target="_blank" rel="noreferrer">
+                          <img
+                            alt={name}
+                            src={photo}
+                            className="block w-6 h-6 m-0 rounded-full overflow-hidden ring-2 ring-muted transition-all duration-500 ease-out hover:scale-125 hover:ring-secondary/50"
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </Fragment>
+  );
 };
 
 WebmentionAside.propTypes = {
-  /** The slug URL */
-  slug: PropTypes.string.isRequired
+  /** The target URL */
+  target: PropTypes.string.isRequired
 };
 
 export default WebmentionAside;
