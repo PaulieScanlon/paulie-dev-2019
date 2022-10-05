@@ -17,7 +17,7 @@ module.exports = {
     'text-xs',
     {
       pattern:
-        /text|border|bg|stroke|fill|-(primary|secondary|tertiary|muted|salmon|mouve|teal|bogey|violet|yellow|purple|orange)/
+        /text|border|bg|stroke|fill|-(primary|secondary|tertiary|muted|salmon|background|mouve|teal|bogey|violet|yellow|purple|orange)/
     }
   ],
   theme: {
