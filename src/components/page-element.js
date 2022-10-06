@@ -4,14 +4,17 @@ import { Link } from 'gatsby';
 import Logo from '../components/logo';
 import MenuIcon from '../components/menu-icon';
 import NavigationIcon from '../components/navigation-icon';
+import SiteSearch from '../components/site-search';
 import Footer from '../components/footer';
 
 import { useNavigation } from '../hooks/use-navigation';
+import { useAllMdx } from '../hooks/use-all-mdx';
 
 const PageElement = ({ children, location: { pathname } }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const navigation = useNavigation();
+  const allMdx = useAllMdx();
 
   const handleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -55,7 +58,10 @@ const PageElement = ({ children, location: { pathname } }) => {
             ${isNavOpen ? 'left-[max(0px,calc(50%-45rem))]' : 'left-[-240px] lg:left-[max(0px,calc(50%-45rem))]'} 
             right-auto w-[14.5rem] pb-10 px-6 overflow-y-auto border-r border-r-outline bg-background`}
           >
-            <nav className="relative pt-8">
+            <div className="pt-10 pb-4">
+              <SiteSearch nodes={allMdx} />
+            </div>
+            <nav className="relative">
               <ul>
                 {navigation.pages.map((page, index) => {
                   const {

@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import PostCard from '../components/post-card';
-import SiteSearch from './site-search';
 
 const AllPosts = () => {
   const {
@@ -34,33 +33,30 @@ const AllPosts = () => {
   `);
 
   return (
-    <Fragment>
-      <SiteSearch nodes={nodes} />
-      <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
-        {nodes.map((node, index) => {
-          const {
-            fields: { slug },
-            excerpt,
-            frontmatter: { title, date, dateModified },
-            featuredImage: {
-              childImageSharp: { thumbnail }
-            }
-          } = node;
+    <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
+      {nodes.map((node, index) => {
+        const {
+          fields: { slug },
+          excerpt,
+          frontmatter: { title, date, dateModified },
+          featuredImage: {
+            childImageSharp: { thumbnail }
+          }
+        } = node;
 
-          return (
-            <PostCard
-              key={index}
-              link={slug}
-              title={title}
-              thumbnail={thumbnail}
-              date={date}
-              dateModified={dateModified}
-              excerpt={excerpt}
-            />
-          );
-        })}
-      </ul>
-    </Fragment>
+        return (
+          <PostCard
+            key={index}
+            link={slug}
+            title={title}
+            thumbnail={thumbnail}
+            date={date}
+            dateModified={dateModified}
+            excerpt={excerpt}
+          />
+        );
+      })}
+    </ul>
   );
 };
 
