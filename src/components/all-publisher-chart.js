@@ -63,8 +63,8 @@ const AllPublisherChart = ({ size }) => {
 
   const viewBoxSize = size || 180;
   const viewBoxCenter = viewBoxSize * 0.5;
-  const radius = viewBoxSize * 0.38;
-  const rings = new Array(5).fill(null);
+  const radius = viewBoxSize / 2;
+  const guides = [...Array(publisherData.length).keys()];
 
   const calculateEdgePoint = useMemo(() => calculateEdgePointFn(viewBoxCenter, radius), [viewBoxCenter, radius]);
 
@@ -77,25 +77,15 @@ const AllPublisherChart = ({ size }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
         >
-          <circle
-            cx={viewBoxCenter}
-            cy={viewBoxCenter}
-            r={radius}
-            className="stroke-muted"
-            strokeOpacity="1"
-            strokeWidth="0.2"
-            fill="transparent"
-          />
-          {rings.map((_, index) => {
+          {guides.map((_, index) => {
             return (
               <g key={index}>
                 <circle
                   cx={viewBoxCenter}
                   cy={viewBoxCenter}
-                  r={(index + 1) * radius * 0.25}
-                  className="stroke-muted"
-                  strokeOpacity="1"
-                  strokeWidth="0.2"
+                  r={(index + 1) * radius * 0.2}
+                  className="stroke-guide"
+                  strokeWidth="0.5"
                   fill="transparent"
                 />
                 <line
@@ -103,9 +93,8 @@ const AllPublisherChart = ({ size }) => {
                   y1={calculateEdgePoint(index * 60)[1]}
                   x2={calculateEdgePoint(index * 60 + 180)[0]}
                   y2={calculateEdgePoint(index * 60 + 180)[1]}
-                  className="stroke-muted"
-                  strokeOpacity="0.6"
-                  strokeWidth="0.2"
+                  className="stroke-guide"
+                  strokeWidth="0.5"
                   fill="transparent"
                 />
               </g>
@@ -113,30 +102,30 @@ const AllPublisherChart = ({ size }) => {
           })}
           <polygon
             className="stroke-muted"
-            strokeOpacity="0.9"
-            strokeWidth="0.5"
+            strokeWidth="1"
             fill="transparent"
             points={`${publisherData.map((data, index) => {
               const { count } = data;
-              const edgePoint = calculateEdgePoint(index * 60, count / 3);
+              const edgePoint = calculateEdgePoint(index * 60, count / publisherData.length);
               return `${edgePoint[0]},${edgePoint[1]}`;
             })}`}
           />
           {publisherData.map((data, index) => {
             const { count, logo } = data;
-            const edgePoint = calculateEdgePoint(index * 60, count / 3);
-            const labelSize = 8;
+            const edgePoint = calculateEdgePoint(index * 60, count / publisherData.length);
             const xPos = edgePoint[0];
             const yPos = edgePoint[1];
             const imageSize = 14;
 
             return (
-              <g key={index}>
-                <image href={logo} width={imageSize} height={imageSize} x={xPos - imageSize} y={yPos - imageSize} />
-                <text className="fill-white font-semibold" style={{ fontSize: labelSize }} x={xPos} y={yPos}>
-                  {`x${count}`}
-                </text>
-              </g>
+              <image
+                key={index}
+                href={logo}
+                width={imageSize}
+                height={imageSize}
+                x={xPos - imageSize / 2}
+                y={yPos - imageSize / 2}
+              />
             );
           })}
         </svg>
