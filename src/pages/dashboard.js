@@ -54,7 +54,7 @@ const Page = ({
           <AllDaysChart />
         </section>
 
-        <section className="grid md:grid-cols-2 gap-8">
+        <section className="grid md:grid-cols-2 gap-24 md:gap-8">
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Articles By Publisher</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">
@@ -69,7 +69,7 @@ const Page = ({
           </div>
         </section>
 
-        <section className="grid md:grid-cols-2 gap-8">
+        <section className="grid md:grid-cols-2 gap-24 md:gap-8">
           <div className="block">
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Site view counts for top 10 countries.</p>
