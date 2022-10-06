@@ -24,12 +24,6 @@ export const onRouteUpdate = ({ location }) => {
       window.gtag('event', 'page_view', { page_path: pagePath });
     }
   }, 100);
-
-  setTimeout(() => {
-    if (typeof window.plausible === 'function') {
-      window.plausible('pageview', { u: pagePath });
-    }
-  }, 100);
 };
 
 export const wrapPageElement = ({ element, props }) => {
