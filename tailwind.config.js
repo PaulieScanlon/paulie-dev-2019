@@ -9,16 +9,34 @@ module.exports = {
     '!mt-0', // this is used by the p in index.mdx
     'my-20', // this is used in the grid in index.mdx
     'grid',
-    'md:grid-cols-1fr-1fr', // this is useded in index.mdx
+    'md:grid-cols-1fr-1fr', // this is used in index.mdx
     'gap-8',
     'gap-32',
     'text-base',
     'text-sm',
     'text-xs',
-    {
-      pattern:
-        /text|border|bg|stroke|fill|-(primary|secondary|tertiary|muted|salmon|background|mouve|teal|bogey|violet|yellow|purple|orange)/
-    }
+    // These are for the charts
+    'stroke-teal',
+    'stroke-mouve',
+    'stroke-salmon',
+    'stroke-yellow',
+    'stroke-bogey',
+    'stroke-blood',
+    'stroke-blue',
+    'text-teal',
+    'text-mouve',
+    'text-salmon',
+    'text-yellow',
+    'text-bogey',
+    'text-blood',
+    'text-blue',
+    'bg-teal',
+    'bg-mouve',
+    'bg-salmon',
+    'bg-yellow',
+    'bg-bogey',
+    'bg-blood',
+    'bg-blue'
   ],
   theme: {
     extend: {
