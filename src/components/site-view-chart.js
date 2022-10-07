@@ -17,12 +17,14 @@ const SiteViewChart = ({ error, data }) => {
   const tooltipHeight = 70;
 
   const properties = data.map((property, index) => {
-    const { value, date } = property;
+    const { value, date, tooltip_date, tick_date } = property;
     const x = (index / data.length) * (chartWidth - paddingX) + paddingX / 2;
     const y = chartHeight - offsetY - (value / maxY) * (chartHeight - (paddingY + offsetY)) - paddingY + offsetY;
     return {
       value: value,
       date: date,
+      tooltip_date: tooltip_date,
+      tick_date: tick_date,
       x: x,
       y: y
     };
@@ -33,14 +35,14 @@ const SiteViewChart = ({ error, data }) => {
     return `${x},${y}`;
   });
 
-  const handleClick = ({ value, date, x, y }) => {
+  const handleClick = ({ value, tooltip_date, x, y }) => {
     const bcr = svgRef.current.getBoundingClientRect();
     const safe_x = x > bcr.width / 2 ? x - tooltipWidth : x;
     const safe_y = y < bcr.height / 2 ? y : y - tooltipHeight;
 
     setTooltip({
       value: value,
-      date: date,
+      tooltip_date: tooltip_date,
       x: safe_x,
       y: safe_y
     });
@@ -99,7 +101,7 @@ const SiteViewChart = ({ error, data }) => {
             <polyline fill="none" className="stroke-salmon" strokeWidth={1} points={points} />
 
             {properties.map((property, index) => {
-              const { value, date, x, y } = property;
+              const { value, tooltip_date, tick_date, x, y } = property;
 
               return (
                 <Fragment key={index}>
@@ -109,7 +111,7 @@ const SiteViewChart = ({ error, data }) => {
                     width={barWidth}
                     height={chartHeight - paddingY}
                     className="fill-transparent hover:fill-muted/10 cursor-pointer"
-                    onClick={() => handleClick({ value, date, x, y })}
+                    onClick={() => handleClick({ value, tooltip_date, x, y })}
                   />
 
                   <circle
@@ -128,11 +130,7 @@ const SiteViewChart = ({ error, data }) => {
                       fontSize={10}
                       className="fill-muted select-none"
                     >
-                      {new Date(date).toLocaleDateString(undefined, {
-                        year: undefined,
-                        month: 'short',
-                        day: '2-digit'
-                      })}
+                      {tick_date}
                     </text>
                   </g>
                 </Fragment>
@@ -178,12 +176,7 @@ const SiteViewChart = ({ error, data }) => {
               {tooltip.value}
             </text>
             <text x={tooltipWidth / 2} y={58} textAnchor="middle" className="fill-slate-300 text-[10px]">
-              {new Date(tooltip.date).toLocaleString(undefined, {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                weekday: 'short'
-              })}
+              {tooltip.tooltip_date}
             </text>
           </g>
         ) : null}
@@ -199,6 +192,7 @@ SiteViewChart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       date: PropTypes.string.isRequired,
+      tooltip_date: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired
     })
   )

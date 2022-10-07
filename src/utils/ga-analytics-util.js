@@ -82,8 +82,24 @@ module.exports = async function () {
       .slice(0, 10);
 
     const latestPageViews = pageViews.rows.map((row) => {
+      const date = formatDate(row.dimensionValues[0].value);
       return {
-        date: String(formatDate(row.dimensionValues[0].value)),
+        date: String(date),
+        tooltip_date: String(
+          new Date(date).toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            weekday: 'short'
+          })
+        ),
+        tick_date: String(
+          new Date(date).toLocaleDateString(undefined, {
+            year: undefined,
+            month: 'short',
+            day: '2-digit'
+          })
+        ),
         value: row.metricValues[0].value
       };
     });
