@@ -9,15 +9,17 @@ const ThreeGeo = () => {
   useEffect(() => {
     const getJsonGeomery = async () => {
       try {
-        const response = await (
-          await fetch('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson', {
+        const response = await fetch(
+          'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_0_countries.geojson',
+          {
             method: 'GET'
-          })
-        ).json();
+          }
+        );
+        const results = await response.json();
 
         if (isMounted) {
           setIsLoading(false);
-          setResponse(response.features);
+          setResponse(results.features);
         }
       } catch (error) {
         console.log(error);
