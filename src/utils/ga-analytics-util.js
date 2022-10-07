@@ -83,7 +83,7 @@ module.exports = async function () {
 
     const latestPageViews = pageViews.rows.map((row) => {
       return {
-        date: formatDate(row.dimensionValues[0].value),
+        date: String(formatDate(row.dimensionValues[0].value)),
         value: row.metricValues[0].value
       };
     });
