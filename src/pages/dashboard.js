@@ -57,9 +57,7 @@ const Page = ({
         <section className="grid md:grid-cols-2 gap-24 md:gap-8">
           <div>
             <h2 className="m-0 text-2xl uppercase text-salmon">Articles By Publisher</h2>
-            <p className="mt-0 mb-4 text-slate-300 text-base">
-              Total counts by publisher <small className="text-secondary">(excluding Gatsby)</small>.
-            </p>
+            <p className="mt-0 mb-4 text-slate-300 text-base">Total counts by publisher.</p>
             <AllPublisherChart />
           </div>
           <div>

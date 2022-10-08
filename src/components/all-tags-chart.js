@@ -41,7 +41,7 @@ const AllTagsChart = () => {
       return items;
     }, [])
     .sort((a, b) => b.count - a.count)
-    .slice(0, 5)
+    .slice(0, 6)
     .map((item, index, array) => {
       const { count } = item;
       const countTotal = array.reduce((a, b) => a + b.count, 0);
@@ -87,7 +87,7 @@ const AllTagsChart = () => {
         >
           <p className="m-0 leading-none font-semibold">Tags Analytics</p>
           <Link className="text-sm text-salmon" to="/dashboard">
-            paulie.dev/dashboard
+            /dashboard
           </Link>
         </div>
       </div>

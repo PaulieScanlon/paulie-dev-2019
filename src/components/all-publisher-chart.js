@@ -64,7 +64,7 @@ const AllPublisherChart = ({ size }) => {
   const viewBoxSize = size || 180;
   const viewBoxCenter = viewBoxSize * 0.5;
   const radius = viewBoxSize / 2;
-  const guides = [...Array(publisherData.length).keys()];
+  const guides = [...Array(5).keys()];
 
   const calculateEdgePoint = useMemo(() => calculateEdgePointFn(viewBoxCenter, radius), [viewBoxCenter, radius]);
 
@@ -83,7 +83,7 @@ const AllPublisherChart = ({ size }) => {
                 <circle
                   cx={viewBoxCenter}
                   cy={viewBoxCenter}
-                  r={(index + 1) * radius * 0.2}
+                  r={index * radius * 0.25}
                   className="stroke-guide"
                   strokeWidth="0.5"
                   fill="transparent"
@@ -115,7 +115,7 @@ const AllPublisherChart = ({ size }) => {
             const edgePoint = calculateEdgePoint(index * 60, count / publisherData.length);
             const xPos = edgePoint[0];
             const yPos = edgePoint[1];
-            const imageSize = 14;
+            const imageSize = 12;
 
             return (
               <image
