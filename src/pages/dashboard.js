@@ -35,6 +35,8 @@ const Page = ({
     setIsLoaded(true);
   }, []);
 
+  // console.log(webmentions);
+
   return (
     <Fragment>
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
@@ -217,11 +219,12 @@ const Page = ({
             <div className="mx-auto my-4 sm:max-w-lg">
               <ul className="m-0 p-0 list-none flex flex-wrap gap-4 justify-center">
                 {webmentions.data
-                  .filter((mention) => mention.author.photo)
+                  .filter((mention) => mention.data.author.photo)
                   .map((mention, index) => {
                     const {
-                      author: { name, photo },
-                      url
+                      data: {
+                        author: { name, photo, url }
+                      }
                     } = mention;
 
                     return (
