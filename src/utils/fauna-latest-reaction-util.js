@@ -26,7 +26,7 @@ module.exports = async function () {
     }));
 
     return {
-      message: 'A ok',
+      message: 'Latest Reaction ok!',
       data: result[0]
     };
   } catch (error) {

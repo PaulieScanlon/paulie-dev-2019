@@ -8,6 +8,11 @@ const WebmentionAside = ({ target }) => {
     const getMentions = async () => {
       try {
         const response = await fetch(`https://webmention.io/api/mentions.jf2?target=${target}`);
+
+        if (!response.ok) {
+          throw new Error();
+        }
+
         const data = await response.json();
 
         setMentions(data.children);

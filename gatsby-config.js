@@ -12,6 +12,9 @@ const wrapESMPlugin = (name) =>
   };
 
 module.exports = {
+  flags: {
+    FAST_DEV: true
+  },
   trailingSlash: 'always',
   siteMetadata: {
     name: 'Paul Scanlon',

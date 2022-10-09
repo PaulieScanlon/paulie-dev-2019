@@ -53,7 +53,7 @@ module.exports = async function () {
       });
 
     return {
-      message: 'Fauna All Reactions ok!',
+      message: 'All Reactions ok!',
       data: grouped
     };
   } catch (error) {

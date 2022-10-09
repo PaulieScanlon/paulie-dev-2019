@@ -26,7 +26,7 @@ const Page = ({
   },
 
   serverData: {
-    serverResponse: { faunaAllreactions, gaAnalytics, faunaLatestReaction }
+    serverResponse: { faunaAllreactions, gaAnalytics, faunaLatestReaction, webmentions }
   }
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -72,7 +72,7 @@ const Page = ({
             <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Country</h2>
             <p className="mt-0 mb-4 text-slate-300 text-base">Site view counts for top 10 countries.</p>
             <div className="h-[405px] flex items-center justify-center rounded border border-outline bg-surface px-4 sm:px-6 py-6">
-              {gaAnalytics ? (
+              {gaAnalytics?.data ? (
                 <ul className="w-full  m-0 p-0 ">
                   {gaAnalytics.data.top10Countries.map((row, index) => {
                     const { flag, country, totalUsers } = row;
@@ -139,7 +139,7 @@ const Page = ({
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Amount</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Recent site visit counts.</p>
-          <SiteViewChart data={gaAnalytics.data.latestPageViews} />
+          {gaAnalytics?.data ? <SiteViewChart data={gaAnalytics.data.latestPageViews} /> : null}
           <div className="mt-2 leading-tight">
             <div className="leading-tight">
               <small className="text-slate-400 text-xs">Data from </small>
@@ -161,7 +161,7 @@ const Page = ({
             <LatestReaction />
           ) : (
             <Fragment>
-              {faunaLatestReaction ? (
+              {faunaLatestReaction?.data ? (
                 <LatestReactionDom
                   isLoaded={false}
                   isLoading={false}
@@ -185,7 +185,7 @@ const Page = ({
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
-          {faunaAllreactions ? (
+          {faunaAllreactions?.data ? (
             <Accordion reactions={faunaAllreactions} />
           ) : (
             <div className="flex gap-4 items-center p-2">
@@ -202,6 +202,44 @@ const Page = ({
             </a>
           </div>
         </section>
+
+        <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon text-center">Latest Webmentions</h2>
+          <p className="mt-0 mb-4 text-slate-300 text-base text-center">
+            Webmentions feed for{' '}
+            <a href="https://paulie.dev/" target="_blank" rel="noreferrer" className="text-salmon">
+              paulie.dev
+            </a>
+            .
+          </p>
+
+          {webmentions?.data ? (
+            <div className="mx-auto my-4 sm:max-w-lg">
+              <ul className="m-0 p-0 list-none flex flex-wrap gap-4 justify-center">
+                {webmentions.data
+                  .filter((mention) => mention.author.photo)
+                  .map((mention, index) => {
+                    const {
+                      author: { name, photo },
+                      url
+                    } = mention;
+
+                    return (
+                      <li key={index} className="block m-0 p-0 w-8 h-8">
+                        <a href={url} target="_blank" rel="noreferrer">
+                          <img
+                            alt={name}
+                            src={photo}
+                            className="block w-8 h-8 m-0 rounded-full overflow-hidden ring-2 ring-muted transition-all duration-500 ease-out hover:scale-125 hover:ring-secondary/50"
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          ) : null}
+        </section>
       </div>
 
       <AsideElement>
@@ -215,27 +253,33 @@ export async function getServerData() {
   const faunaAllReactionsUtil = require('../utils/fauna-all-reactions-util');
   const gaAnalyticsUtil = require('../utils/ga-analytics-util');
   const faunaLatestReactionUtil = require('../utils/fauna-latest-reaction-util');
+  const webmentionsUtil = require('../utils/webmentions-util');
 
   try {
     const faunaAllreactions = await faunaAllReactionsUtil();
     const gaAnalytics = await gaAnalyticsUtil();
     const faunaLatestReaction = await faunaLatestReactionUtil();
+    const webmentions = await webmentionsUtil();
 
     return {
       props: {
         serverResponse: {
           faunaAllreactions,
           gaAnalytics,
-          faunaLatestReaction
+          faunaLatestReaction,
+          webmentions
         }
       }
     };
   } catch (error) {
     return {
       props: {
-        reactions: null,
-        locations: null,
-        latest: null
+        serverResponse: {
+          reactions: null,
+          locations: null,
+          latest: null,
+          webmentions: null
+        }
       }
     };
   }
