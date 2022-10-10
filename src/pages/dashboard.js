@@ -219,7 +219,7 @@ const Page = ({
             <div className="mx-auto my-4 sm:max-w-lg">
               <ul className="m-0 p-0 list-none flex flex-wrap gap-4 justify-center">
                 {webmentions.data
-                  .filter((mention) => mention.data.author.photo)
+                  .filter((mention) => mention.data.author)
                   .map((mention, index) => {
                     const {
                       data: {
