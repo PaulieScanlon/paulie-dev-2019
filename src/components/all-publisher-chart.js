@@ -25,7 +25,7 @@ const AllPublisherChart = ({ size }) => {
     {
       allMdx(
         filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "article" } } }
-        sort: { order: DESC, fields: frontmatter___date }
+        sort: { frontmatter: { date: DESC } }
       ) {
         nodes {
           frontmatter {
