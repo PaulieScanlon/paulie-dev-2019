@@ -217,7 +217,7 @@ const Page = ({
 
           {webmentions?.data ? (
             <div className="mx-auto my-4 sm:max-w-lg">
-              <ul className="m-0 p-0 list-none flex flex-wrap gap-4 justify-center">
+              <ul className="m-0 p-0 list-none flex flex-wrap justify-center">
                 {webmentions.data
                   .filter((mention) => mention.data.author)
                   .map((mention, index) => {
@@ -228,12 +228,12 @@ const Page = ({
                     } = mention;
 
                     return (
-                      <li key={index} className="block m-0 p-0 w-8 h-8">
+                      <li key={index} className="m-0 -ml-3 p-0 w-8 h-8">
                         <a href={url} target="_blank" rel="noreferrer">
                           <img
                             alt={name}
                             src={photo}
-                            className="block w-8 h-8 m-0 rounded-full overflow-hidden ring-2 ring-muted transition-all duration-500 ease-out hover:scale-125 hover:ring-secondary/50"
+                            className="block w-8 h-8 m-0 rounded-full overflow-hidden ring-2 ring-muted"
                           />
                         </a>
                       </li>
