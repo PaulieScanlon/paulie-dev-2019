@@ -135,7 +135,7 @@ exports.onCreateNode = async ({
   }
 };
 
-exports.createPages = async ({ graphql, actions: { createPage, createRedirect } }) => {
+exports.createPages = async ({ graphql, actions: { createPage, createRedirect, createSlice } }) => {
   const {
     data: { allMdx }
   } = await graphql(`
@@ -175,5 +175,10 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
   createRedirect({
     fromPath: '/writing/*',
     toPath: '/articles/*'
+  });
+
+  createSlice({
+    id: 'header',
+    component: require.resolve('./src/components/header.js')
   });
 };

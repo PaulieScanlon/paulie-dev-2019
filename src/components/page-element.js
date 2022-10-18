@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, Slice } from 'gatsby';
 
-import Logo from '../components/logo';
-import MenuIcon from '../components/menu-icon';
 import NavigationIcon from '../components/navigation-icon';
+import MenuIcon from '../components/menu-icon';
 import SiteSearch from '../components/site-search';
 import Footer from '../components/footer';
 
@@ -22,24 +21,12 @@ const PageElement = ({ children, location: { pathname } }) => {
 
   return (
     <Fragment>
-      <header className="sticky top-0 z-40 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
-        <div className="max-w-8xl mx-auto">
-          <div className="py-4 mx-4 lg:px-8 lg:mx-0">
-            <div className="relative flex items-center">
-              <Link className="flex items-center" to="/">
-                <span className="sr-only">Paul Scanlon's Site</span>
-                <Logo />
-              </Link>
-              <div className="relative flex lg:hidden items-center ml-auto">
-                <button className="ml-auto flex items-center justify-center" onClick={handleNav}>
-                  <span className="sr-only">Navigation</span>
-                  <MenuIcon isNavOpen={isNavOpen} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Slice alias="header">
+        <button className="ml-auto flex items-center justify-center" onClick={handleNav}>
+          <span className="sr-only">Navigation</span>
+          <MenuIcon isNavOpen={isNavOpen} />
+        </button>
+      </Slice>
       <div className="relative">
         <div
           aria-label="lightbox"
