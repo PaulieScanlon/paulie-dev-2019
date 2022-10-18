@@ -33,7 +33,7 @@
     "country-flag-icons": "^1.5.5",
     "d3-geo": "^3.0.1",
     "faunadb": "^4.6.0",
-    "gatsby": "^4.24.4",
+    "gatsby": "^5.0.0-next.2",
     "gatsby-plugin-gatsby-cloud": "^4.24.0",
     "gatsby-plugin-google-analytics": "^4.24.0",
     "gatsby-plugin-image": "^2.24.0",

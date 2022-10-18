@@ -6,31 +6,30 @@ import StreamCard from '../components/stream-card';
 const AllStreams = () => {
   const {
     allMdx: { nodes }
-  } = useStaticQuery(graphql`
-    {
-      allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "stream" } } }
-        sort: { order: DESC, fields: frontmatter___date }
-      ) {
-        nodes {
-          fields {
-            slug
-          }
-          excerpt(pruneLength: 100)
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            show
-          }
-          logo {
-            childImageSharp {
-              logo: gatsbyImageData(width: 24, quality: 100)
-            }
-          }
+  } = useStaticQuery(graphql`{
+  allMdx(
+    filter: {frontmatter: {status: {ne: "draft"}, type: {eq: "stream"}}}
+    sort: {frontmatter: {date: DESC}}
+  ) {
+    nodes {
+      fields {
+        slug
+      }
+      excerpt(pruneLength: 100)
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        show
+      }
+      logo {
+        childImageSharp {
+          logo: gatsbyImageData(width: 24, quality: 100)
         }
       }
     }
-  `);
+  }
+}
+`);
 
   return (
     <ul className="mt-16 grid gap-8 list-none m-0 mb-8 p-0">

@@ -6,32 +6,31 @@ import StreamCard from '../components/stream-card';
 const LatestStreams = () => {
   const {
     allMdx: { nodes }
-  } = useStaticQuery(graphql`
-    {
-      allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "stream" } } }
-        sort: { order: DESC, fields: frontmatter___date }
-        limit: 3
-      ) {
-        nodes {
-          fields {
-            slug
-          }
-          excerpt(pruneLength: 100)
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            show
-          }
-          logo {
-            childImageSharp {
-              logo: gatsbyImageData(width: 24, quality: 100)
-            }
-          }
+  } = useStaticQuery(graphql`{
+  allMdx(
+    filter: {frontmatter: {status: {ne: "draft"}, type: {eq: "stream"}}}
+    sort: {frontmatter: {date: DESC}}
+    limit: 3
+  ) {
+    nodes {
+      fields {
+        slug
+      }
+      excerpt(pruneLength: 100)
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        show
+      }
+      logo {
+        childImageSharp {
+          logo: gatsbyImageData(width: 24, quality: 100)
         }
       }
     }
-  `);
+  }
+}
+`);
 
   return (
     <section>

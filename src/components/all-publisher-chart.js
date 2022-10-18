@@ -21,21 +21,20 @@ const calculateEdgePointFn =
 const AllPublisherChart = ({ size }) => {
   const {
     allMdx: { nodes }
-  } = useStaticQuery(graphql`
-    {
-      allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "article" } } }
-        sort: { order: DESC, fields: frontmatter___date }
-      ) {
-        nodes {
-          frontmatter {
-            publication
-            logo
-          }
-        }
+  } = useStaticQuery(graphql`{
+  allMdx(
+    filter: {frontmatter: {status: {ne: "draft"}, type: {eq: "article"}}}
+    sort: {frontmatter: {date: DESC}}
+  ) {
+    nodes {
+      frontmatter {
+        publication
+        logo
       }
     }
-  `);
+  }
+}
+`);
 
   const publisherData = nodes
     .reduce((items, item) => {

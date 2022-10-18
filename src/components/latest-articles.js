@@ -6,32 +6,31 @@ import ArticleCard from '../components/article-card';
 const LatestArticles = () => {
   const {
     allMdx: { nodes }
-  } = useStaticQuery(graphql`
-    {
-      allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "article" } } }
-        sort: { order: DESC, fields: frontmatter___date }
-        limit: 3
-      ) {
-        nodes {
-          fields {
-            slug
-          }
-          excerpt(pruneLength: 100)
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            publication
-          }
-          logo {
-            childImageSharp {
-              logo: gatsbyImageData(width: 24, quality: 100)
-            }
-          }
+  } = useStaticQuery(graphql`{
+  allMdx(
+    filter: {frontmatter: {status: {ne: "draft"}, type: {eq: "article"}}}
+    sort: {frontmatter: {date: DESC}}
+    limit: 3
+  ) {
+    nodes {
+      fields {
+        slug
+      }
+      excerpt(pruneLength: 100)
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        publication
+      }
+      logo {
+        childImageSharp {
+          logo: gatsbyImageData(width: 24, quality: 100)
         }
       }
     }
-  `);
+  }
+}
+`);
 
   return (
     <section>

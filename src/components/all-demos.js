@@ -6,31 +6,30 @@ import DemoCard from '../components/demo-card';
 const AllDemos = () => {
   const {
     allMdx: { nodes }
-  } = useStaticQuery(graphql`
-    {
-      allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "demo" } } }
-        sort: { order: DESC, fields: frontmatter___date }
-      ) {
-        nodes {
-          fields {
-            slug
-          }
-          excerpt(pruneLength: 100)
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            dateModified(formatString: "MMMM DD, YYYY")
-          }
-          featuredImage {
-            childImageSharp {
-              thumbnail: gatsbyImageData(width: 320)
-            }
-          }
+  } = useStaticQuery(graphql`{
+  allMdx(
+    filter: {frontmatter: {status: {ne: "draft"}, type: {eq: "demo"}}}
+    sort: {frontmatter: {date: DESC}}
+  ) {
+    nodes {
+      fields {
+        slug
+      }
+      excerpt(pruneLength: 100)
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        dateModified(formatString: "MMMM DD, YYYY")
+      }
+      featuredImage {
+        childImageSharp {
+          thumbnail: gatsbyImageData(width: 320)
         }
       }
     }
-  `);
+  }
+}
+`);
 
   return (
     <Fragment>

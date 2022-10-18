@@ -6,32 +6,31 @@ import PostCard from '../components/post-card';
 const LatestPosts = () => {
   const {
     allMdx: { nodes }
-  } = useStaticQuery(graphql`
-    {
-      allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "post" } } }
-        sort: { order: DESC, fields: frontmatter___date }
-        limit: 3
-      ) {
-        nodes {
-          fields {
-            slug
-          }
-          excerpt(pruneLength: 100)
-          frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
-            dateModified(formatString: "MMMM DD, YYYY")
-          }
-          featuredImage {
-            childImageSharp {
-              thumbnail: gatsbyImageData(width: 180)
-            }
-          }
+  } = useStaticQuery(graphql`{
+  allMdx(
+    filter: {frontmatter: {status: {ne: "draft"}, type: {eq: "post"}}}
+    sort: {frontmatter: {date: DESC}}
+    limit: 3
+  ) {
+    nodes {
+      fields {
+        slug
+      }
+      excerpt(pruneLength: 100)
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        dateModified(formatString: "MMMM DD, YYYY")
+      }
+      featuredImage {
+        childImageSharp {
+          thumbnail: gatsbyImageData(width: 180)
         }
       }
     }
-  `);
+  }
+}
+`);
 
   return (
     <section>
