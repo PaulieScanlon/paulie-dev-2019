@@ -22,7 +22,7 @@ const PageElement = ({ children, location: { pathname } }) => {
 
   return (
     <Fragment>
-      <div className="sticky top-0 z-40 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
+      <header className="sticky top-0 z-40 w-full backdrop-blur border-b border-b-outline flex-none bg-background lg:bg-transparent">
         <div className="max-w-8xl mx-auto">
           <div className="py-4 mx-4 lg:px-8 lg:mx-0">
             <div className="relative flex items-center">
@@ -39,7 +39,7 @@ const PageElement = ({ children, location: { pathname } }) => {
             </div>
           </div>
         </div>
-      </div>
+      </header>
       <div className="relative">
         <div
           aria-label="lightbox"
@@ -53,7 +53,7 @@ const PageElement = ({ children, location: { pathname } }) => {
         />
 
         <div className="site-container max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
-          <div
+          <nav
             className={`site-nav lg:block fixed z-30 inset-0 top-[3.8125rem] transition-all duration-300
             ${isNavOpen ? 'left-[max(0px,calc(50%-45rem))]' : 'left-[-240px] lg:left-[max(0px,calc(50%-45rem))]'} 
             right-auto w-[14.5rem] pb-10 px-6 overflow-y-auto border-r border-r-outline bg-background`}
@@ -61,7 +61,7 @@ const PageElement = ({ children, location: { pathname } }) => {
             <div className="pt-10 pb-4">
               <SiteSearch nodes={allMdx} />
             </div>
-            <nav className="relative">
+            <div className="relative">
               <ul>
                 {navigation.pages.map((page, index) => {
                   const {
@@ -108,14 +108,14 @@ const PageElement = ({ children, location: { pathname } }) => {
                   );
                 })}
               </ul>
-            </nav>
-          </div>
-          <div className="site-body lg:pl-[14.5rem]">
-            <div className="mx-auto pt-6 max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+            </div>
+          </nav>
+          <main className="site-body lg:pl-[14.5rem]">
+            <section className="mx-auto pt-6 max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
               <article className="prose prose-lg max-w-none min-h-[calc(100vh-19rem)]">{children}</article>
               <Footer />
-            </div>
-          </div>
+            </section>
+          </main>
         </div>
       </div>
     </Fragment>
