@@ -100,7 +100,7 @@ const PageElement = ({ children, location: { pathname } }) => {
           <main className="site-body lg:pl-[14.5rem]">
             <section className="mx-auto pt-6 max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
               <article className="prose prose-lg max-w-none min-h-[calc(100vh-19rem)]">{children}</article>
-              <Footer />
+              <Slice alias="footer" />
             </section>
           </main>
         </div>

@@ -181,4 +181,9 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect, c
     id: 'header',
     component: require.resolve('./src/components/header.js')
   });
+
+  createSlice({
+    id: 'footer',
+    component: require.resolve('./src/components/footer.js')
+  });
 };
