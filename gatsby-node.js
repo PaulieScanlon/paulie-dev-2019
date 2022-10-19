@@ -183,6 +183,11 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect, c
   });
 
   createSlice({
+    id: 'sidebar-nav',
+    component: require.resolve('./src/components/sidebar-nav.js')
+  });
+
+  createSlice({
     id: 'footer',
     component: require.resolve('./src/components/footer.js')
   });
