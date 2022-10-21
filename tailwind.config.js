@@ -15,6 +15,11 @@ module.exports = {
     'text-base',
     'text-sm',
     'text-xs',
+    // this is for the toc
+    'text-violet-300',
+    'text-violet-400',
+    'text-violet-500',
+    'rotate-90',
     // These are for the charts
     'stroke-teal',
     'stroke-mouve',

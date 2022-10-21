@@ -21,6 +21,7 @@ If you'd like to code along at home I've prepared a small reproduction repo with
   - [solution/with-suspense](https://github.com/PaulieScanlon/gatsby-react-18-date-locale/pull/7)
   - [solution/hydration-safe-hook](https://github.com/PaulieScanlon/gatsby-react-18-date-locale/pull/8)
   - [solution/hydration-provider](https://github.com/PaulieScanlon/gatsby-react-18-date-locale/pull/9)
+  - [solution/format-string](https://github.com/PaulieScanlon/gatsby-react-18-date-locale/pull/10)
 
 I recently ran into this issue myself when building this [demo](https://gatsbysharedfunctions.gatsbyjs.io/) for the
 following blog post:
@@ -53,10 +54,13 @@ you, initially with an empty element that "pings" into view after hydration.
 
 ## Solutions
 
-As mentioned all of the following "solutions" will only prevent React from surfacing the error, but extra CSS solutions
-will be required to overcome the new problems these solutions create. There are also a couple of things to consider
-before implementing any of the solutions. I've done my best to explain them but feel free to comment if I'm mistaken or
-anything is unclear.
+As mentioned, most of the following "solutions" will only prevent React from surfacing the error, but extra CSS
+solutions will be required to overcome the new problems these solutions create. There are also a couple of things to
+consider before implementing any of the solutions. I've done my best to explain them but feel free to comment if I'm
+mistaken or anything is unclear.
+
+I've also included a bonus / Gatsby recommend method approach to handling dates. This however is dependant on where
+you're souring data and if you're able to query the date using GraphQL.
 
 ### Suspense
 
@@ -225,5 +229,74 @@ export const wrapRootElement = ({ element }) => {
 };
 ```
 
-If you know of any other solutions, or if there's any issues with using the above that I've overlooked please feel free
-to drop a comment below!
+### Format String
+
+If your dates are sourced from local `.md/.mdx` files or a CMS then using GraphQL's built-in method circumvents this
+problem entirely as dates are rendered at build time and statically returned as a string.
+
+Date locales however aren't possible as you need to decide which date format you'd like to use ahead-of-time. There are
+a number of ways you can choose to format dates using GraphQL. I've included x3 three options in this example.
+
+#### md
+
+```javascript
+// content/index.md
+
+---
+date: 2022-10-20
+---
+
+# Page
+```
+
+#### Page
+
+```javascript
+// src/pages/{MarkdownRemark.parent__(File)__name}.js
+
+import React from 'react';
+import { graphql } from 'gatsby';
+
+const Page = ({
+  data: {
+    markdownRemark: {
+      frontmatter: { title, date, dateShort, dateLong }
+    }
+  }
+}) => {
+  return (
+    <main>
+      <h1>{title}</h1>
+      <time>{date}</time>
+      <time>{dateShort}</time>
+      <time>{dateLong}</time>
+    </main>
+  );
+};
+
+export const query = graphql`
+  query ($id: String!) {
+    markdownRemark(id: { eq: $id }) {
+      frontmatter {
+        title
+        date(formatString: "DD/MM/YYYY")
+        dateShort: date(formatString: "MMM DD, YYYY")
+        dateLong: date(formatString: "MMMM DD, YYYY")
+      }
+    }
+  }
+`;
+
+export default Page;
+```
+
+The date output for the x3 formats are as follows.
+
+- `date` = 20/10/2022
+- `dateShort` = Oct 20, 2022
+- `dateLong` = October 20, 2022
+
+## Feedback Welcome!
+
+If you know of any other solutions, or if there's any issues with using the above methods that I've overlooked, please
+feel free to drop a comment below!

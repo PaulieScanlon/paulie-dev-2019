@@ -10,7 +10,7 @@ const TableOfContents = ({ slug, items, depth }) => {
     <ul key={items} className="list-none m-0 p-0">
       {items.map((item, index) => {
         const hash = item.url ? stripLeadingSlash(item.url) : null;
-
+        console.log(depth + 3);
         return (
           <li key={index} className={`m-0 py-0 pl-${depth > 0 ? 3 : 0}`}>
             {item.url ? (
@@ -24,7 +24,7 @@ const TableOfContents = ({ slug, items, depth }) => {
                 {depth > 0 ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="mt-1 mr-1 h-4 w-4 stroke-muted"
+                    className={`mr-1 h-4 w-4 stroke-muted ${depth === 1 ? 'rotate-90' : ''}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="2"
