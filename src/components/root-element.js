@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Script } from 'gatsby';
+
+import { AppProvider } from '../context/app-context';
 
 const RootElement = ({ children }) => {
   return (
-    <Fragment>
+    <AppProvider>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`}
         strategy="off-main-thread"
@@ -20,7 +22,7 @@ const RootElement = ({ children }) => {
         }}
       />
       {children}
-    </Fragment>
+    </AppProvider>
   );
 };
 

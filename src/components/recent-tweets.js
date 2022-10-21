@@ -63,7 +63,7 @@ const RecentTweets = () => {
       <div className="lg:h-16 mb-4">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Loading className="fill-teal" />
+            <Loading className="fill-salmon" />
           </div>
         ) : (
           <div className="grid sm:grid-cols-auto-1fr gap-2 justify-center text-center sm:text-left items-center">
@@ -89,7 +89,7 @@ const RecentTweets = () => {
       <div className="flex items-center ml-1 mb-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="mr-2 h-5 w-5 fill-teal"
+          className="mr-2 h-5 w-5 fill-salmon"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -104,7 +104,7 @@ const RecentTweets = () => {
       <div className="rounded border border-outline bg-surface p-2 sm:p-4 bg-background h-96 overflow-y-hidden">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Loading className="fill-teal" />
+            <Loading className="fill-salmon" />
           </div>
         ) : (
           <ul className="list-none m-0 p-0 overflow-y-auto overflow-x-hidden h-[355px]">

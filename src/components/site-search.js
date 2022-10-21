@@ -44,7 +44,7 @@ const SiteSearch = ({ nodes }) => {
         role="button"
         className="cursor-default fixed z-40 top-0 left-0 w-screen h-screen bg-background/80 backdrop-blur-sm"
       >
-        <div className="flex p-6 w-full h-full justify-center items-center">
+        <div className="flex p-6 w-full h-full justify-center items-start sm:items-center">
           <div className="w-full sm:max-w-[800px] min-h-[500px] p-6 rounded border border-outline bg-surface">
             <Command value={search} onValueChange={setSearch} className="grid gap-6">
               <div className="flex items-center gap-2 pb-4 border-outline border-b-[1px]">
