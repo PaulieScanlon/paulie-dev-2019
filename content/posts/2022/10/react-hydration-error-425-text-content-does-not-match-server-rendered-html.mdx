@@ -43,7 +43,7 @@ therefore the seconds are different. This leads React to believe the "text" is d
 renders, and to be fair to React, it is.
 
 The solutions I'll be discussing will help rid you of the error by waiting for hydration to occur before attempting to
-initialize the date constructor, but all will present you with a new problem.
+initialize the date constructor, but this will likely present you with a new problem.
 
 ## The New Problem
 
@@ -59,8 +59,8 @@ solutions will be required to overcome the new problems these solutions create. 
 consider before implementing any of the solutions. I've done my best to explain them but feel free to comment if I'm
 mistaken or anything is unclear.
 
-I've also included a bonus / Gatsby recommend method approach to handling dates. This however is dependant on where
-you're souring data and if you're able to query the date using GraphQL.
+I've also included a bonus / Gatsby specific approach to handling dates. This however is dependant on where you're
+souring data and if you're able to query the date using GraphQL.
 
 ### Suspense
 
