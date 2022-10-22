@@ -232,7 +232,44 @@ export const wrapRootElement = ({ element }) => {
 ### Format String
 
 If your dates are sourced from local `.md/.mdx` files or a CMS then using GraphQL's built-in method circumvents this
-problem entirely as dates are rendered at build time and statically returned as a string.
+problem entirely as dates are rendered at build time and can be statically returned as a string.
+
+I have however seen folks query a date using GraphQL and then use a `Date()` constructor with `toLocaleDateString()` to
+format the date.
+
+##### Don't do this!
+
+```javascript
+
+import React from 'react';
+import { graphql } from 'gatsby';
+
+const Page = ({
+  data: {
+    markdownRemark: {
+      frontmatter: {  date }
+    }
+  }
+}) => {
+  return <time>{new Date(date).toLocaleDateString()}</time>
+  );
+};
+
+export const query = graphql`
+  query ($id: String!) {
+    markdownRemark(id: { eq: $id }) {
+      frontmatter {
+        date
+      }
+    }
+  }
+`;
+
+export default Page;
+
+```
+
+Instead, you can format the date using GraphQL.
 
 Date locales however aren't possible as you need to decide which date format you'd like to use ahead-of-time. There are
 a number of ways you can choose to format dates using GraphQL. I've included x3 three options in this example.
@@ -295,6 +332,9 @@ The date output for the x3 formats are as follows.
 - `date` = 20/10/2022
 - `dateShort` = Oct 20, 2022
 - `dateLong` = October 20, 2022
+
+As you'll see at the top of this page, my preference is to use the `dateLong` format. I've found this to be the one that
+makes most sense for me. The slight drawback of course is the month name is always in English.
 
 ## Feedback Welcome!
 
