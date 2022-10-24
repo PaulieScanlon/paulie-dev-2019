@@ -10,7 +10,6 @@ const TableOfContents = ({ slug, items, depth }) => {
     <ul key={items} className="list-none m-0 p-0">
       {items.map((item, index) => {
         const hash = item.url ? stripLeadingSlash(item.url) : null;
-        console.log(depth + 3);
         return (
           <li key={index} className={`m-0 py-0 pl-${depth > 0 ? 3 : 0}`}>
             {item.url ? (
