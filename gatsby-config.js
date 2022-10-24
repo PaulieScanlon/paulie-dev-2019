@@ -37,7 +37,7 @@ module.exports = {
       'Component Library',
       'Serverless Functions'
     ],
-    siteUrl: 'https://paulie.dev',
+    siteUrl: process.env.URL,
     defaultImage: '/images/paulie-open-graph-image-2022.jpg'
   },
   plugins: [
@@ -45,9 +45,9 @@ module.exports = {
     'gatsby-plugin-mdx-embed',
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-sitemap',
     'gatsby-plugin-postcss',
     'gatsby-transformer-json',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
