@@ -6,7 +6,7 @@ export const useNavigation = () => {
     allPagesJson: { nodes: json }
   } = useStaticQuery(graphql`
     {
-      allMdx(filter: { frontmatter: { type: { eq: "page" } } }, sort: { order: ASC, fields: fields___slug }) {
+      allMdx(filter: { frontmatter: { type: { eq: "page" } } }, sort: { fields: { slug: ASC } }) {
         nodes {
           fields {
             slug
