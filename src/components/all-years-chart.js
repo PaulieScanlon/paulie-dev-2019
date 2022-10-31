@@ -38,6 +38,7 @@ const AllYearsChart = () => {
     .map((node, index) => {
       const {
         fields: { slug },
+        frontmatter,
         frontmatter: { date }
       } = node;
 

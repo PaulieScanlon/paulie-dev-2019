@@ -26,8 +26,8 @@ exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
         icon: String
         tags: [String]
         url: String
-        date: Date @dateformat
-        dateModified: Date @dateformat
+        date: Date @dateformat(formatString: "MMMM DD, YYYY")
+        dateModified: Date @dateformat(formatString: "MMMM DD, YYYY")
         author: String
         show: String
         role: String
