@@ -10,7 +10,7 @@ const AllOpensource = () => {
     {
       allMdx(
         filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "opensource" } } }
-        sort: { order: DESC, fields: frontmatter___date }
+        sort: { frontmatter: { date: DESC } }
       ) {
         nodes {
           fields {

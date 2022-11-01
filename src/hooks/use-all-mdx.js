@@ -9,7 +9,7 @@ export const useAllMdx = () => {
         filter: {
           frontmatter: { status: { ne: "draft" }, type: { in: ["post", "article", "demo", "stream", "opensource"] } }
         }
-        sort: { order: DESC, fields: frontmatter___date }
+        sort: { frontmatter: { date: DESC } }
       ) {
         nodes {
           fields {
