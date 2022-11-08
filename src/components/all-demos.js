@@ -10,7 +10,7 @@ const AllDemos = () => {
     {
       allMdx(
         filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "demo" } } }
-        sort: { order: DESC, fields: frontmatter___date }
+        sort: { frontmatter: { date: DESC } }
       ) {
         nodes {
           fields {

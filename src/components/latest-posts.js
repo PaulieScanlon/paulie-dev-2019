@@ -10,7 +10,7 @@ const LatestPosts = () => {
     {
       allMdx(
         filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "post" } } }
-        sort: { order: DESC, fields: frontmatter___date }
+        sort: { frontmatter: { date: DESC } }
         limit: 3
       ) {
         nodes {
