@@ -8,7 +8,7 @@
 
 # Paul Scanlon
 
-## Senior Software Engineer / Developer Relations [@GatsbyJS](https://twitter.com/GatsbyJs)
+## Senior Developer Evidence Engineer [@CockroachDB](https://twitter.com/CockroachDB)
 
 You can find out more about me at [https://paulie.dev/](https://paulie.dev/)
 
