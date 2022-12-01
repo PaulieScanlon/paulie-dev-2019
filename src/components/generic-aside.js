@@ -13,7 +13,12 @@ const GenericAside = () => {
       />
       <div className="mb-4">
         <h5 className="mb-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Paul Scanlon</h5>
-        <p className="mb-0 text-slate-300 text-sm text-center m-0">Senior Developer Evidence Engineer <a href='https://twitter.com/CockroachDB' target="_blank" rel="noreferrer">@CockroachDB</a></p>
+        <p className="mb-0 text-slate-300 text-sm text-center m-0">
+          Senior Developer Evidence Engineer{' '}
+          <a href="https://twitter.com/CockroachDB" target="_blank" rel="noreferrer">
+            @CockroachDB
+          </a>
+        </p>
       </div>
       <a
         href="https://twitter.com/PaulieScanlon"
