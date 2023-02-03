@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 
 import { colors } from '../utils/color-class-names';
 
-const AllTagsChart = () => {
+const AllTagsChart = memo(() => {
   const {
     allMdx: { nodes: tags }
   } = useStaticQuery(graphql`
@@ -41,8 +41,8 @@ const AllTagsChart = () => {
       return items;
     }, [])
     .sort((a, b) => b.count - a.count)
-    .slice(0, 6)
-    .map((item, index, array) => {
+    .slice(0, 7)
+    .map((item, _, array) => {
       const { count } = item;
       const countTotal = array.reduce((a, b) => a + b.count, 0);
       const percentage = (count / countTotal) * 100;
@@ -107,6 +107,6 @@ const AllTagsChart = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default AllTagsChart;

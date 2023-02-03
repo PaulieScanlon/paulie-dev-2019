@@ -57,6 +57,10 @@ const ThreeLatLong = () => {
         const response = await fetch('/api/ua-analytics');
         const results = await response.json();
 
+        if (!response.ok) {
+          throw new Error('Bad request');
+        }
+
         if (isMounted) {
           setLocations(results.data);
           setIsLoading(false);

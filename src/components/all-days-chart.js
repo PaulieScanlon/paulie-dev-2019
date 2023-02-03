@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { groupBy } from '../utils/group-by';
@@ -7,7 +7,7 @@ import { colors } from '../utils/color-class-names';
 const abbreviatedDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const years = ['2019', '2020', '2021', '2022'];
 
-const AllDaysChart = () => {
+const AllDaysChart = memo(() => {
   const defaultValues = () =>
     years.map((year) => {
       return {
@@ -111,7 +111,7 @@ const AllDaysChart = () => {
 
     const x = (index / abbreviatedDays.length) * chartWidth + paddingX / 2;
 
-    const days = data.map((d, index) => {
+    const days = data.map((d) => {
       const { total, label } = d;
       const height = chartHeight - offsetY - (total / maxY) * (chartHeight - (paddingY + offsetY)) - paddingY + offsetY;
       return {
@@ -223,6 +223,6 @@ const AllDaysChart = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default AllDaysChart;
