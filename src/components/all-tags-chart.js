@@ -56,7 +56,7 @@ const AllTagsChart = memo(() => {
 
   return (
     <div className="grid gap-8 rounded border border-outline bg-surface py-3 px-4 sm:px-6">
-      <div className="relative max-w-[320px] mx-auto">
+      <div className="relative max-w-[300px] mx-auto">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
           {tagData.map((tag, index) => {
             const { percentage, remainder } = tag;

@@ -71,8 +71,8 @@ const AllPublisherChart = memo(() => {
   });
 
   return (
-    <div className="grid gap-8 rounded border border-outline bg-surface py-3 px-4 sm:px-6">
-      <div className="relative mr-auto">
+    <div className="grid gap-8  rounded border border-outline bg-surface py-3 px-4 sm:px-6">
+      <div className="relative max-w-[300px] mx-auto">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${chartWidth} ${chartHeight}`}>
           {guides.map((_, index) => {
             const ratio = index / guides.length;
