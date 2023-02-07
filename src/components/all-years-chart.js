@@ -5,7 +5,7 @@ import { groupBy } from '../utils/group-by';
 import { colors } from '../utils/color-class-names';
 
 const abbreviatedMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
-const years = ['2019', '2020', '2021', '2022'];
+const years = ['2019', '2020', '2021', '2022', '2023'];
 
 const AllYearsChart = () => {
   const defaultValues = () =>

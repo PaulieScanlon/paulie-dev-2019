@@ -28,7 +28,8 @@ module.exports = {
     'stroke-bogey',
     'stroke-blood',
     'stroke-starfleet',
-    'stroke-purple',
+    'stroke-electric',
+
     'text-teal',
     'text-mouve',
     'text-salmon',
@@ -36,7 +37,8 @@ module.exports = {
     'text-bogey',
     'text-blood',
     'text-starfleet',
-    'text-purple',
+    'text-electric',
+
     'bg-teal',
     'bg-mouve',
     'bg-salmon',
@@ -44,7 +46,7 @@ module.exports = {
     'bg-bogey',
     'bg-blood',
     'bg-starfleet',
-    'bg-purple'
+    'bg-electric'
   ],
   theme: {
     extend: {
@@ -64,7 +66,7 @@ module.exports = {
         yellow: '#ffc107',
         fuchsia: '#7B1FA2',
         blood: '#ff5722',
-        starfleet: '#0496ff',
+        starfleet: '#2990fa',
         electric: '#6933ff',
 
         background: '#131127',
