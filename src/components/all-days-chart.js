@@ -5,7 +5,7 @@ import { groupBy } from '../utils/group-by';
 import { colors } from '../utils/color-class-names';
 
 const abbreviatedDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-const years = ['2019', '2020', '2021', '2022'];
+const years = ['2019', '2020', '2021', '2022', '2023'];
 
 const AllDaysChart = memo(() => {
   const defaultValues = () =>
