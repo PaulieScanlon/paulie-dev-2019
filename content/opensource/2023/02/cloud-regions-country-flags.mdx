@@ -21,35 +21,34 @@ You'll see in the docs that when you make a request using the
 things, a list of regions where the database(s) is/are running. E.g
 
 ```json
-{
-  "clusters": [
-    {
-      "cloud_provider": "GCP",
-      "cockroach_version": "v21.2.4",
-      "config": {
-        "serverless": {
-          "routing_id": "example-cluster-1533",
-          "spend_limit": 0
-        }
-      },
-      "name": "example-cluster",
-      "plan": "SERVERLESS",
-      "regions": [
-        {
-          "name": "eu-north-1",
-          "node_count": 0,
-          "sql_dns": "free-tier7.gcp-us-central1.crdb.io",
-          "ui_dns": ""
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "name": "clever-phantom",
+    "cockroach_version": "v22.2.3",
+    "plan": "SERVERLESS",
+    "cloud_provider": "AWS",
+    "regions": [
+      {
+        "name": "eu-west-1"
+      }
+    ]
+  },
+  {
+    "name": "mellow-stork",
+    "cockroach_version": "v22.2.3",
+    "plan": "SERVERLESS",
+    "cloud_provider": "GCP",
+    "regions": [
+      {
+        "name": "use-east-1"
+      }
+    ]
+  }
+]
 ```
 
 Using this payload I displayed a fancy looking "card" which shows the name, plan, version of CockroachDB and the regions
-the cluster was running in. As you can see from the above, `eu-north-1` isn't an overly attractive thing to show in a
-UI.
+the cluster was running in. As you can see from the above, `eu-west-1` isn't an overly attractive thing to show in a UI.
 
 My requirement was to map this region name to a country flag. Shouldn't be too hard I thought, someone has probably
 published an npm package that can do this — I was wrong.
@@ -68,9 +67,9 @@ You can find the package on npm here:
 ```javascript
 import { getInfo } from 'cloud-regions-country-flags';
 
-getInfo('eu-north-1', 'AWS');
+getInfo('eu-west-1', 'AWS');
 
-// => { location: 'Europe (Stockholm)', flag: '🇸🇪' }
+// => { location: 'Europe (Ireland)', flag: '🇮🇪' }
 ```
 
 With the package installed I can now pass the `region.name` and `cloud_provider` from the Cloud API response as
@@ -85,10 +84,10 @@ response.regions.map((region, index) => {
   return <span key={index}>{getInfo(region, response.cloud_provider).flag}</span>
 }))
 
-// => <span>🇸🇪</span>
+// => <span>🇮🇪</span>
 
 ```
 
-I'm not how many folks out there will ever need this, I did, so I made it. 🕺
+I'm not sure how many folks out there will ever need this, I did, so I made it. 🕺
 
 <MarkdownCtaLink href="https://www.npmjs.com/package/cloud-regions-country-flags">View on npn </MarkdownCtaLink>
