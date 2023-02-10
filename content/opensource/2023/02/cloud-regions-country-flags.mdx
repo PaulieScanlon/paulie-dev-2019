@@ -30,8 +30,10 @@ things, a list of regions where the database(s) is/are running. E.g
     "regions": [
       {
         "name": "eu-west-1"
+        ...
       }
     ]
+    ...
   },
   {
     "name": "mellow-stork",
@@ -41,8 +43,10 @@ things, a list of regions where the database(s) is/are running. E.g
     "regions": [
       {
         "name": "use-east-1"
+        ...
       }
     ]
+    ...
   }
 ]
 ```
@@ -81,7 +85,8 @@ import { getInfo } from 'cloud-regions-country-flags';
 const response = ...
 
 response.regions.map((region, index) => {
-  return <span key={index}>{getInfo(region, response.cloud_provider).flag}</span>
+  const { name } = region
+  return <span key={index}>{getInfo(name, response.cloud_provider).flag}</span>
 }))
 
 // => <span>🇮🇪</span>
