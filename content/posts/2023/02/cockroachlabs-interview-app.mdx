@@ -33,9 +33,10 @@ In more recent years however I've been eager to dust off my Advertising skills. 
 [Gatsby](https://www.gatsbyjs.com/), but working to a release cycle of every two weeks (because that's how often the
 minor framework updates were published), I rarely had more than a few weeks to put something together. That wasn't the
 reason I left though. I left because I'm looking to make a permanent move to the USA, and Gatsby as a fully remote
-company probably wouldn't have been able to offer this. That said, they've just been aquired by Netlify so 🤷‍♂️. Although,
-I'd imagine providing US visa sponsorship to existing employees wouldn't have been at the top of anyone's to do list and
-could have delayed my plans to move. And who know's if I'd have made the cut and kept my job through the aquisition!
+company probably wouldn't have been able to offer this. That said, they've just been acquired by Netlify so 🤷‍♂️.
+Although, I'd imagine providing US visa sponsorship to existing employees wouldn't have been at the top of anyone's to
+do list and could have delayed my plans to move. And who know's if I'd have made the cut and kept my job through the
+acquisition!
 
 Anyway, best of luck to the team, you're all the best! 💜
 
@@ -55,13 +56,15 @@ have a background in Advertising, delivery is everything!
 It's a hybrid role, and probably a temporary title until I prove my worth 😰. I'm part of the Product Marketing
 Management (PMM) Team and am tasked with developing new "go to market" deliverables. To do this I'll need to call on my
 whole skill set, this could be content creation, it could be demo apps, it might be motion graphics — who knows! The
-first two projects I'm working on don't even use the CockroachDB database, but promote the buiness benefits of
+first two projects I'm working on don't even use the CockroachDB database, but promote the business benefits of
 CockroachDB's distributed capabilities... how do you write code to demo that?
 
 In and around the launches I'll be creating what I hope will be creative and imaginative thought provoking projects.
 I'll no longer be focussed on the "how" a developer could do something, but "why" a business should do something.
 
-I will no doubt still make demo applications, I don't wanna stray too far from what I love to do.
+No doubt I'll still make demo applications, and "how to do x..." blog posts, I don't want to stray too far from what I
+enjoying doing and more often than not, when I'm working through a project, lots of little "spin off" content ideas come
+to mind. I do enjoy the little things but what I'm really keen to explore is bigger projects that move the needle.
 
 ## My Interview Demo Application
 
@@ -90,7 +93,7 @@ and of course,
 or more specifically [Cockroach Cloud](https://cockroachlabs.cloud/signup) because I'm using CockroachDB Serverless and
 the app is deployed using [Vercel](https://vercel.com/).
 
-There's a few more dependancies which you can see in the
+There's a few more dependencies which you can see in the
 [package.json](https://github.com/PaulieScanlon/cockroachdb-edge-locations/blob/main/package.json#L31).
 
 ### Lab Data
@@ -101,21 +104,84 @@ to query it and turn it into a page. This is still somewhat of a problem for cre
 need some data in order to query it.
 
 So for [Edge](https://cockroachdb-edge-locations.vercel.app/) I've made something that technically falls under the
-category of "user generated content". But instead of you creating content for my demo, all you have to do is click the
-"submt" button and the code does the rest. I presented the app at each stage of my interview process and asked my
+category of "user generated content". But instead of me or you creating "content", all you have to do is click the
+"submit" button and the code does the rest. I presented the app at each stage of my interview process and asked my
 interviewers to submit their location while we were talking. — I got the job, so I'm assuming they all liked what they
 saw.
 
 ### How Edge Works
 
-Clicking the submit button calls a serverless function, which grabs the `ip` address from the `req` object. It then uses
-the `ip` address to find the geographical location, looks this up to get the latitude and longtitude, and then POSTs
-them to a CockroachDB database ready to be consumed by the app. The locations retrieved aren't actually your location,
-but they are the locations of where the Serverless Function has been deployed. Or to put it another way, they are the
+Clicking the submit button calls a Serverless Function, which grabs the `ip` address from the `req` object. It then uses
+the `ip` address to find the geographical location, looks this up to get the latitude and longitude, and then POSTs them
+to a CockroachDB database ready to be consumed by the app. The locations retrieved aren't actually your location, but
+they are the locations of where the Serverless Function has been deployed. Or to put it another way, they are the
 locations of **Vercel's Global Edge Network**.
 
-To give you some idea about how close the Edge really is, when I submit, the function returns a location that is 28
-miles up the road from me in a different town. So if you wanna **annonomously** submit I/we can start to get a picture
-of where in the world these Edges are.
+To give you some idea about how close the edge really is, when I submit, the function returns a location that is 28
+miles up the road from me in a different town. So if you wanna **anonymously** submit I can start to get a picture of
+where in the world these edges are.
 
-So c'mon, give that "submit" button a click and let's see your [Edge](https://cockroachdb-edge-locations.vercel.app/).
+## Why Edge?
+
+Edges have been been a hot topic in the last few years and if you've not heard the term before, here's loosely what it
+means.
+
+An edge is a geographical location of a server within a Content Delivery Network (CDN). A CDN is a network of computers,
+usually owned by someone like Google, Amazon, or a popular one in the world of [Jamstack](https://jamstack.org/) web
+development, [Fastly](https://www.fastly.com/). Hosting solutions like [Vercel](https://vercel.com/),
+[Netlify](https://www.netlify.com/), [Gatsby Cloud](https://www.gatsbyjs.com/products/cloud/hosting) (and many, many
+more) use these CDN's to deploy a website's static assets, E.g images, CSS, and JavaScript, and the closer these assets
+are to you, the smaller the distance they have to travel down the phone line, and the faster a website will load.
+
+Whilst this is great for static assets there's a problem with dynamic data. This is where Serverless Functions come in.
+Serverless Functions in Jamstack web development are like special mini servers that are deployed the same way static
+assets are and instead of being _always live_ and costing money, they are invoked and started-up when needed.
+
+This is different to the traditional way "servers" work because Serverless Functions aren't running all the time on a
+separate piece of hardware in a [server farm](https://dgtlinfra.com/inside-the-worlds-largest-data-center/) somewhere in
+the Nevada desert, they're right there on the CDN sitting next to the static assets, however.
+
+Serverless Functions are used to make server-side requests to other services, services like a database to retrieve data
+to populate a website or application. For example, your Twitter timeline is made up of data that is stored in a
+database, not static assets distributed globally on a CDN. Databases, typically can't distribute data to hundreds or
+thousands of geographical locations because databases act like a single source of truth and duplicating this data across
+multiple geographical locations to be nearer to you is a very difficult / nearly impossible thing to do.
+
+### Regions
+
+However, CockroachDB is one of only a few databases that is making steps in the right direction and has developed smart
+technology that can manage replication of data and move it around different regions of the world, and thus closing the
+gap between you and the data.
+
+The Edge app is as attempt to map where in the world these edge locations are and, at a later date I plan to
+cross-reference these locations with where in the world you could deploy a CockroachDB Database. Unlike other database
+solutions CockroachDB is "cloud native" which means it can be deployed to multiple cloud providers. For example, with
+CockroachDB you could run your database on both Amazon Web Services (AWS) and Google Cloud Platform (GCP). This can
+result in the faster transfer of data to users. You can see on the following links where the AWS and GCP regions are,
+and with CockroachDB, architects can configure their services to meet customers where they are.
+
+- [AWS Regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
+- [GCP Regions and zones](https://cloud.google.com/compute/docs/regions-zones)
+
+All of this is an attempt to solve the difficult problem of: **distance from data to you**.
+
+The shorter the distance, the faster the data is available and the better it will be for both users and businesses
+alike. This benefit scales up to the giant companies like [Twitter](https://twitter.com/) and
+[NetFlix](https://www.netflix.com/) who are both CockroachDB customers!
+
+Of course, speed isn't the only concern. Data consistency is also a big issue, replicating data around multiple regions
+comes with a risk. For high paced changes like transferring money from one bank account to another can mean, for a short
+while the amount in one bank account might be different to the amount shown in another. CockroachDB's smart technology
+is solving this problem too! And speed vs consistency are somewhat at odds with one another — but that's an explanation
+I'll save for another time.
+
+So, the next time you're watching a junk reality TV show on NetFlix, or doom scrolling on Twitter, spare a thought for
+all those little Cockroaches transferring the data to you in the most efficient way possible!
+
+### Evidence
+
+As you can see, explaining this using only the written word is quite a difficult thing to do, and its my hope that by
+using a **"show, don't tell"** approach to storytelling we'll be better able to explain the complexities and business
+benefits to the technical, and the not-so technical in a more engaging, informative or imaginative way.
+
+So c'mon, give that "submit" button a click and let me see your [Edge](https://cockroachdb-edge-locations.vercel.app/).
