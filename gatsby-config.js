@@ -91,7 +91,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/content/streams/`
+        path: `${__dirname}/content/hobbies/`
       }
     },
     {
