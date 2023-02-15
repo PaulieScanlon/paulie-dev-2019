@@ -111,11 +111,10 @@ saw.
 
 ### How Edge Works
 
-Clicking the submit button calls a Serverless Function, which grabs the `ip` address from the `req` object. It then uses
-the `ip` address to find the geographical location, looks this up to get the latitude and longitude, and then POSTs them
-to a CockroachDB database ready to be consumed by the app. The locations retrieved aren't actually your location, but
-they are the locations of where the Serverless Function has been deployed. Or to put it another way, they are the
-locations of **Vercel's Global Edge Network**.
+Clicking the ["Submit"](https://cockroachdb-edge-locations.vercel.app/) button calls a Serverless Function, which grabs
+the `ip` address from the `req` object. It then uses the `ip` address to find the geographical location, looks this up
+to get the latitude and longitude, and then POSTs them to a CockroachDB database ready to be consumed by the app. The
+locations retrieved aren't actually your location, but they are the locations of **Vercel's Global Edge Network**.
 
 To give you some idea about how close the edge really is, when I submit, the function returns a location that is 28
 miles up the road from me in a different town. So if you wanna **anonymously** submit your "edge" I can start to get a
@@ -129,23 +128,26 @@ means.
 An edge is a geographical location of a server within a Content Delivery Network (CDN). A CDN is a network of computers,
 usually owned by someone like Google, Amazon, or a popular one in the world of [Jamstack](https://jamstack.org/) web
 development, [Fastly](https://www.fastly.com/). Hosting solutions like [Vercel](https://vercel.com/),
-[Netlify](https://www.netlify.com/), [Gatsby Cloud](https://www.gatsbyjs.com/products/cloud/hosting) (and many, many
-more) use these CDN's to deploy a website's static assets, E.g images, CSS, and JavaScript, and the closer these assets
-are to you, the smaller the distance they have to travel down the phone line, and the faster a website will load.
+[Netlify](https://www.netlify.com/), [Gatsby Cloud](https://www.gatsbyjs.com/products/cloud/hosting) (and many, more)
+use these CDN's to deploy a website's static assets, E.g images, HTML, and CSS, and the closer these assets are to you,
+the smaller the distance they have to travel down the phone line, and the faster a website will load.
 
-Whilst this is great for static assets there's a problem with dynamic data. This is where Serverless Functions come in.
-Serverless Functions in Jamstack web development are like special mini servers that are deployed the same way static
-assets are and instead of being _always live_ and costing money, they are invoked and started-up when needed.
+Whilst this is great for static assets there's a problem with JavaScript. Or more specifically, Serverless Functions.
+Serverless Functions in Jamstack web development are like special mini servers but because they are executable they
+can't be deployed in the same way across the CDN. They can however be configured to run in different
+[regions](https://vercel.com/docs/concepts/functions/serverless-functions/regions).
 
-This is different to the traditional way "servers" work because Serverless Functions aren't running all the time on a
-separate piece of hardware in a [server farm](https://dgtlinfra.com/inside-the-worlds-largest-data-center/) somewhere in
-the Nevada desert, they're right there on the CDN sitting next to the static assets, however.
+Serverless Functions differ to the traditional way "servers" work because Serverless Functions aren't running all the
+time which can help significantly reduce operational costs. They can however, in some cases, cause problems with slower
+response times owning to cold starts and / or distances between the user and the region the function is deployed.
 
-Serverless Functions are used to make server-side requests to other services, services like a database to retrieve data
-to populate a website or application. For example, your Twitter timeline is made up of data that is stored in a
-database, not static assets distributed globally on a CDN. Databases, typically can't distribute data to hundreds or
-thousands of geographical locations because databases act like a single source of truth and duplicating this data across
-multiple geographical locations to be nearer to you is a very difficult / nearly impossible thing to do.
+Serverless Functions can be used to make server-side requests to other services, services like a database to retrieve
+data to populate a website or application. For example, your Twitter timeline is made up of data that is stored in a
+database, not static assets distributed globally on a CDN.
+
+Databases, typically can't distribute data to hundreds or thousands of geographical locations because databases act like
+a single source of truth and duplicating or replicating this data across multiple geographical locations to be nearer to
+you is a very difficult thing to do.
 
 ### Regions
 
@@ -153,12 +155,15 @@ However, CockroachDB is one of only a few databases that is making steps in the 
 technology that can manage replication of data and move it around different regions of the world, and thus closing the
 gap between you and the data.
 
-The Edge app is as attempt to map where in the world these edge locations are and, at a later date I plan to
-cross-reference these locations with where in the world you could deploy a CockroachDB Database. Unlike other database
-solutions CockroachDB is "cloud native" which means it can be deployed to multiple cloud providers. For example, with
-CockroachDB you could run your database on both Amazon Web Services (AWS) and Google Cloud Platform (GCP). This can
-result in the faster transfer of data to users. You can see on the following links where the AWS and GCP regions are,
-and with CockroachDB, architects can configure their services to meet customers where they are.
+The Edge app is as attempt to map where in the world these CDN edge locations are and, and at a later date I plan to
+migrate the app to use Vercel's Edge functions which will bring the Function region closer to you then, I can
+cross-reference these locations with where in the world you could deploy a CockroachDB Database.
+
+Unlike other database solutions CockroachDB is "cloud native" which means it can be deployed to multiple cloud providers
+running in multiple regions. For example, with CockroachDB you could run your database on both Amazon Web Services (AWS)
+and Google Cloud Platform (GCP) and take advantage of each of their regions respectively. This can result in the faster
+transfer of data to users. You can see on the following links where the AWS and GCP regions are, and with CockroachDB,
+architects can configure their services to meet their customers where they are.
 
 - [AWS Regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 - [GCP Regions and zones](https://cloud.google.com/compute/docs/regions-zones)
@@ -172,16 +177,16 @@ alike. This benefit scales up for giant companies like [Twitter](https://twitter
 Of course, speed isn't the only concern. Data consistency is also a big issue, replicating data around multiple regions
 comes with a risk. For high paced changes like transferring money from one bank account to another can mean, for a short
 while the amount in one bank account might be different to the amount shown in another. CockroachDB's smart technology
-is solving this problem too! And speed vs consistency are somewhat at odds with one another — but that's an explanation
-I'll save for another time.
+is solving this problem too! However, speed vs consistency are somewhat at odds with one another — but that's an
+explanation I'll save for another time.
 
 So, the next time you're watching a junk reality TV show on NetFlix, or doom scrolling on Twitter, spare a thought for
 all those little Cockroaches transferring the data to you in the most efficient way possible!
 
 ### Evidence
 
-As you can see, explaining this using only the written word is quite a difficult thing to do, and its my hope that by
-using a **"show, don't tell"** approach to storytelling we'll be better able to explain the complexities and business
-benefits to the technical, and the not-so technical in a more engaging, informative or imaginative way.
+As you can see, explaining this using only the written word is quite difficult, and its my hope that by using a **"show,
+don't tell"** approach to storytelling we'll be better able to explain the complexities and business benefits to the
+technical, and the not-so technical in a more engaging, informative or imaginative way.
 
 So c'mon, give that "submit" button a click and let me see your [Edge](https://cockroachdb-edge-locations.vercel.app/).
