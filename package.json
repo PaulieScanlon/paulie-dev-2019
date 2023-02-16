@@ -42,6 +42,7 @@
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-mdx": "^3.20.0",
     "gatsby-plugin-mdx-embed": "^1.0.0",
+    "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-sharp": "^5.0.0",
     "gatsby-plugin-sitemap": "^6.0.0",
     "gatsby-source-filesystem": "^5.0.0",

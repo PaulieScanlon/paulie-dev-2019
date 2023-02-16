@@ -47,6 +47,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-postcss',
     'gatsby-transformer-json',
+    'gatsby-plugin-netlify',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-mdx',
