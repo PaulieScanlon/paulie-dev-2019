@@ -9,9 +9,8 @@ icon:
 import RecentGitHubUserEvent from '../../src/components/recent-github-user-events';
 import RecentTweets from '../../src/components/recent-tweets';
 
-import LatestArticles from '../../src/components/latest-articles';
-import LatestProjects from '../../src/components/latest-projects';
-import LatestHobbies from '../../src/components/latest-hobbies';
+import LatestProjects from '../../src/components/projects/latest-projects';
+import LatestHobbies from '../../src/components/hobbies/latest-hobbies';
 import LatestBlogs from '../../src/components/blogs/latest-blogs';
 
 <h1 className="!mb-0">Paul Scanlon</h1>
@@ -36,7 +35,6 @@ I now work at [Cockroach Labs](https://www.cockroachlabs.com/)
 
 <div className="grid gap-32">
   <LatestBlogs />
-  <LatestArticles />
-  <LatestProjects />
   <LatestHobbies />
+  <LatestProjects />
 </div>

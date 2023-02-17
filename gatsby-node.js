@@ -76,7 +76,7 @@ exports.onCreateNode = async ({
     await createNodeField({
       node,
       name: 'slug',
-      value: type === 'page' ? path : type === 'opensource' ? `/${type}${path}` : `/${type}s${path}`
+      value: type === 'page' ? path : `/${type}s${path}`
     });
   }
 
@@ -167,13 +167,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       context: {
         id: id
       },
-      defer: type !== 'blog' || type !== 'demo' ? false : true
+      defer: type !== 'blog' || type !== 'project' ? false : true
       // defer: index + 1 > 50
     });
-  });
-
-  createRedirect({
-    fromPath: '/writing/*',
-    toPath: '/articles/*'
   });
 };

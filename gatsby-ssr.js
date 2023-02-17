@@ -1,6 +1,6 @@
 import React from 'react';
-import PageElement from './src/components/page-element';
-import RootElement from './src/components/root-element';
+import PageElement from './src/components/page/page-element';
+import RootElement from './src/components/page/root-element';
 
 export const wrapPageElement = ({ element, props }) => {
   return <PageElement {...props}>{element}</PageElement>;

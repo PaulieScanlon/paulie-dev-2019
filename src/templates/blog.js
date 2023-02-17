@@ -2,15 +2,15 @@ import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
 import MdxParser from '../components/mdx-parser';
-import AsideElement from '../components/aside-element';
+import AsideElement from '../components/aside/aside-element';
 import DateStamp from '../components/date-stamp';
-import FeaturedImageAside from '../components/featured-image-aside';
+import FeaturedImageAside from '../components/aside/featured-image-aside';
 import AddReaction from '../components/add-reaction';
 import UtterancesObserver from '../components/utterances-observer';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
-import TableOfContents from '../components/table-of-contents';
-import WebmentionAside from '../components/webmention-aside';
+import TableOfContents from '../components/aside/table-of-contents';
+import WebmentionAside from '../components/aside/webmention-aside';
 
 const Page = ({
   data: {

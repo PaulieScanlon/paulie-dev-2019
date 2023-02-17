@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
 import MdxParser from '../components/mdx-parser';
-import AsideElement from '../components/aside-element';
+import AsideElement from '../components/aside/aside-element';
 import Seo from '../components/seo';
-import GenericAside from '../components/generic-aside';
+import GenericAside from '../components/aside/generic-aside';
 
 const Page = ({
   data: {
