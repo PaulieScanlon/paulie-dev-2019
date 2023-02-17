@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { colors } from '../utils/color-class-names';
+import { publisherColors } from '../utils/color-class-names';
 
 const AllPublisherChart = memo(() => {
   const {
@@ -89,7 +89,9 @@ const AllPublisherChart = memo(() => {
             );
           })}
           {properties.map((property, index) => {
-            const { width, y, total, logo } = property;
+            const { width, y, total, logo, label } = property;
+
+            const color = publisherColors[label.toLowerCase().replace(' ', '-')];
 
             const barX = offsetLeft;
             const barY = y + (barHeight - barGap) * index;
@@ -102,7 +104,8 @@ const AllPublisherChart = memo(() => {
                   width={width}
                   height={barHeight}
                   fill="transparent"
-                  className={`stroke-${colors[index]} fill-surface`}
+                  stroke={color}
+                  className="fill-surface"
                   strokeWidth={1.2}
                 />
                 <text
@@ -131,10 +134,11 @@ const AllPublisherChart = memo(() => {
           .sort((a, b) => b.count - a.count)
           .map((item, index) => {
             const { label, total } = item;
+            const color = publisherColors[label.toLowerCase().replace(' ', '-')];
             return (
               <li key={index} className="grid grid-cols-1fr-auto items-center p-0 m-0 leading-normal">
                 <div className="grid grid-cols-auto-1fr gap-4 items-center">
-                  <div className={`bg-${colors[index]} rounded-full w-3 h-3`} />
+                  <div className="rounded-full w-3 h-3" style={{ backgroundColor: color }} />
                   <small className="m-0">{label}</small>
                 </div>
                 <div className="font-semibold">{`x${total}`}</div>

@@ -41,7 +41,7 @@ const AllTagsChart = memo(() => {
       return items;
     }, [])
     .sort((a, b) => b.count - a.count)
-    .slice(0, 7)
+    .slice(0, 8)
     .map((item, _, array) => {
       const { count } = item;
       const countTotal = array.reduce((a, b) => a + b.count, 0);
