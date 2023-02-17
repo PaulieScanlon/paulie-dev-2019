@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import DateStamp from './date-stamp';
 
-const DemoCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
+const ProjectCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
   return (
     <li className="m-0 p-0 rounded border border-outline bg-surface transition-all shadow-lg hover:shadow-secondary/10 hover:-translate-y-2 ease-in-out duration-500">
       <Link to={link} className="block p-4 cursor-pointer no-underline hover:text-secondary ">
@@ -24,7 +24,7 @@ const DemoCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
   );
 };
 
-DemoCard.propTypes = {
+ProjectCard.propTypes = {
   /** The post to link to */
   link: PropTypes.string.isRequired,
   /** The title to display */
@@ -39,4 +39,4 @@ DemoCard.propTypes = {
   excerpt: PropTypes.string.isRequired
 };
 
-export default DemoCard;
+export default ProjectCard;

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 
-import DemoCard from '../components/demo-card';
+import ProjectCard from './project-card';
 
-const LatestDemos = () => {
+const LatestProjects = () => {
   const {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "demo" } } }
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "project" } } }
         sort: { frontmatter: { date: DESC } }
         limit: 3
       ) {
@@ -35,7 +35,7 @@ const LatestDemos = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Demos</h2>
+      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Projects</h2>
       <p className="mt-0 mb-8 text-slate-300 text-base">Here's some bigger projects!</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
@@ -49,7 +49,7 @@ const LatestDemos = () => {
           } = node;
 
           return (
-            <DemoCard
+            <ProjectCard
               key={index}
               link={slug}
               title={title}
@@ -62,8 +62,8 @@ const LatestDemos = () => {
         })}
       </ul>
       <div className="flex justify-center">
-        <Link to="/demos" className="flex gap-2 items-center no-underline">
-          More Demos{' '}
+        <Link to="/projects" className="flex gap-2 items-center no-underline">
+          More Projects{' '}
           <span role="img" aria-label="star">
             ⭐
           </span>
@@ -73,4 +73,4 @@ const LatestDemos = () => {
   );
 };
 
-export default LatestDemos;
+export default LatestProjects;

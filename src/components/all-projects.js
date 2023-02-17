@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import DemoCard from '../components/demo-card';
+import ProjectCard from '../components/project-card';
 
-const AllDemos = () => {
+const AllProjects = () => {
   const {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "demo" } } }
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "project" } } }
         sort: { frontmatter: { date: DESC } }
       ) {
         nodes {
@@ -46,7 +46,7 @@ const AllDemos = () => {
           } = node;
 
           return (
-            <DemoCard
+            <ProjectCard
               key={index}
               link={slug}
               title={title}
@@ -62,4 +62,4 @@ const AllDemos = () => {
   );
 };
 
-export default AllDemos;
+export default AllProjects;
