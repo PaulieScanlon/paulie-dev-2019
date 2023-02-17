@@ -42,7 +42,7 @@ things, a list of regions where the database(s) is/are running. E.g
     "cloud_provider": "GCP",
     "regions": [
       {
-        "name": "use-east-1"
+        "name": "us-east-1"
         ...
       }
     ]
@@ -85,11 +85,13 @@ import { getInfo } from 'cloud-regions-country-flags';
 const response = ...
 
 response.regions.map((region, index) => {
-  const { name } = region
-  return <span key={index}>{getInfo(name, response.cloud_provider).flag}</span>
+  const details = getInfo(region.name, response.cloud_provider)
+
+  return <span key={index} role="img" aria-label={`${details.country} flag`}>{details.flag}</span>
 }))
 
-// => <span>🇮🇪</span>
+// => <span role='img' aria-label='Ireland flag'>🇮🇪</span>
+// => <span role='img' aria-label='United States of America flag'>🇺🇸</span>
 
 ```
 
