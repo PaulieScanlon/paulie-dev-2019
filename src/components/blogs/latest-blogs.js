@@ -1,15 +1,15 @@
 import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 
-import PostCard from '../components/post-card';
+import BlogCard from './blog-card';
 
-const LatestPosts = () => {
+const LatestBlogs = () => {
   const {
     allMdx: { nodes }
   } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "post" } } }
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "blog" } } }
         sort: { frontmatter: { date: DESC } }
         limit: 3
       ) {
@@ -35,7 +35,7 @@ const LatestPosts = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Posts</h2>
+      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Blog posts</h2>
       <p className="mt-0 mb-8 text-slate-300 text-base">
         Here's the latest posts I've written and published here on my site.
       </p>
@@ -51,7 +51,7 @@ const LatestPosts = () => {
           } = node;
 
           return (
-            <PostCard
+            <BlogCard
               key={index}
               link={slug}
               title={title}
@@ -64,8 +64,8 @@ const LatestPosts = () => {
         })}
       </ul>
       <div className="flex justify-center">
-        <Link to="/posts" className="flex gap-2 items-center no-underline">
-          More Posts{' '}
+        <Link to="/blogs" className="flex gap-2 items-center no-underline">
+          More blogs{' '}
           <span role="img" aria-label="pencil">
             ✏️
           </span>
@@ -75,4 +75,4 @@ const LatestPosts = () => {
   );
 };
 
-export default LatestPosts;
+export default LatestBlogs;
