@@ -9,8 +9,8 @@ featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v167580164
 
 ## Project Overview
 
-In Feburary 2023 I released [cloud-regions-country-flags](https://www.npmjs.com/package/cloud-regions-country-flags)
-because I needed it! I was working on a demo applicaiton for
+In February 2023 I released [cloud-regions-country-flags](https://www.npmjs.com/package/cloud-regions-country-flags)
+because I needed it! I was working on a demo application for
 [CockroachDB's new Cloud API](https://www.cockroachlabs.com/docs/api/cloud/v1#overview) and wanted to show the database
 regions in a more user friendly way.
 
@@ -57,7 +57,7 @@ the cluster was running in. As you can see from the above, `eu-west-1` isn't an 
 My requirement was to map this region name to a country flag. Shouldn't be too hard I thought, someone has probably
 published an npm package that can do this — I was wrong.
 
-Turns out there's absolutely loads of database regions, and their names aren't statndardised between providers. For
+Turns out there's absolutely loads of database regions, and their names aren't standardized between providers. For
 instance Google Cloud Platform (GCP) and Amazon Web Services (AWS) use different names for similar locations.
 
 ## The Solution
@@ -69,23 +69,23 @@ You can find the package on npm here:
 [cloud-regions-country-flags](https://www.npmjs.com/package/cloud-regions-country-flags), and here's how it works.
 
 ```javascript
-import { getInfo } from 'cloud-regions-country-flags';
+import { fromProvider } from 'cloud-regions-country-flags';
 
-getInfo('eu-west-1', 'AWS');
+fromProvider('eu-west-1', 'AWS');
 
-// => { location: 'Europe (Ireland)', flag: '🇮🇪' }
+// => { location: 'Europe (Ireland)', flag: '🇮🇪', country: 'Ireland' }
 ```
 
 With the package installed I can now pass the `region.name` and `cloud_provider` from the Cloud API response as
-parameters to the `getInfo` function which returns the appropriate country flag, E.g
+parameters to the `fromProvider` function which returns the appropriate country flag, E.g
 
 ```javascript
-import { getInfo } from 'cloud-regions-country-flags';
+import { fromProvider } from 'cloud-regions-country-flags';
 
 const response = ...
 
 response.regions.map((region, index) => {
-  const details = getInfo(region.name, response.cloud_provider)
+  const details = fromProvider(region.name, response.cloud_provider)
 
   return <span key={index} role="img" aria-label={`${details.country} flag`}>{details.flag}</span>
 }))
