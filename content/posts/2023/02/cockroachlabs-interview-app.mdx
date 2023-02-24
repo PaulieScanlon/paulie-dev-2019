@@ -6,7 +6,8 @@ date: 2023-02-09
 author: Paul Scanlon
 featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1675897080/paulie.dev/2023/02/edge-open-graph-image_wkhz1c.jpg
 embeddedImages:
-  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1675902519/paulie.dev/2023/02/edge-locations-image-1_kruqgr.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1677264604/paulie.dev/2023/02/edge-locations-image-1_iajbe1.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1677264604/paulie.dev/2023/02/edge-locations-image-2_nxmbpq.jpg
 ---
 
 Hello there! In November 2022 I started a new role at [Cockroach Labs](https://www.cockroachlabs.com/). I'm now what
@@ -113,8 +114,14 @@ saw.
 
 Clicking the ["Submit"](https://cockroachdb-edge-locations.vercel.app/) button calls a Serverless Function, which grabs
 the `ip` address from the `req` object. It then uses the `ip` address to find the geographical location, looks this up
-to get the latitude and longitude, and then POSTs them to a CockroachDB database ready to be consumed by the app. The
-locations retrieved aren't actually your location, but they are the locations of **Vercel's Global Edge Network**.
+to get the latitude and longitude, and then POSTs the details to a CockroachDB database ready to be consumed by the app.
+
+The locations aren't overly accurate and probably won't be you exact location. I wasn't sure where they were coming from
+so asked Vercel. Here's their reply to my question.
+
+> My understanding of this is that we use MaxMind as a database to cross-reference the IP information and get a
+> latitude/longitude for the request and then we output that. Maybe the best way to describe this is just an estimate of
+> a user's location based off of IP information using geolocation services accessed via Vercel — Vercel Sales Engineer
 
 To give you some idea about how close the edge really is, when I submit, the function returns a location that is 28
 miles up the road from me in a different town. So if you wanna **anonymously** submit your "edge" I can start to get a
@@ -156,14 +163,25 @@ technology that can manage replication of data and move it around different regi
 gap between you and the data.
 
 The Edge app is as attempt to map where in the world these CDN edge locations are and, and at a later date I plan to
-migrate the app to use Vercel's Edge functions which will bring the Function region closer to you then, I can
-cross-reference these locations with where in the world you could deploy a CockroachDB Database.
+surface more information for the locations of where Vercel's Edge functions can run. However, and I'll quote Vercel
+verbatim:
+
+> Most Node.js APIs are not available —
+> [Edge Functions Limitations](https://vercel.com/docs/concepts/functions/edge-functions/limitations)
+
+<GatsbyImage image={props.embedded.image2} alt="Edge Functions Limitations" />
+
+These limitation currently mean that you can't use Vercel Edge Functions with most Databases, including CockroachDB.
+
+There is one saving grace though.
 
 Unlike other database solutions CockroachDB is "cloud native" which means it can be deployed to multiple cloud providers
 running in multiple regions. For example, with CockroachDB you could run your database on both Amazon Web Services (AWS)
 and Google Cloud Platform (GCP) and take advantage of each of their regions respectively. This can result in the faster
 transfer of data to users. You can see on the following links where the AWS and GCP regions are, and with CockroachDB,
-architects can configure their services to meet their customers where they are.
+architects can configure their services to meet their customers where they are. If you were to deploy a server or
+Serverless Function to the same geographical locations (which would cost a lot) the end result would likely match, or be
+close to speeds commonly associated with Edge Functions.
 
 - [AWS Regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 - [GCP Regions and zones](https://cloud.google.com/compute/docs/regions-zones)
