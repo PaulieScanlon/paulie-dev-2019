@@ -32,7 +32,7 @@ are with you learning journey and the technology you're familiar with, you can c
 
 Unfortunately for me none of the above suited my needs. The sample app I've created for this guide however, does.
 
-If you're keen to jump ahead you an see the sample app and code on the links below.
+If you're keen to jump ahead you can see the sample app and code on the links below.
 
 - 🚀 Live Preview:
   [https://cockroachdb-pg-promise-nextjs.vercel.app/](https://cockroachdb-pg-promise-nextjs.vercel.app/)
@@ -67,11 +67,10 @@ but, by using Prisma you'll be writing JavaScript and learning Prisma. I wanted 
 ### cockroach sql
 
 There's one other "tool" I think you'll want to be aware of called
-[cockroach sql](https://www.cockroachlabs.com/docs/stable/cockroach-sql.html). I've found this to be super helpful when
-configuring and managing my CockroachDB Clusters and databases. I haven't been using it to **query** or **mutate** data
-stored within the database... that's the bit [pg-promise](https://github.com/vitaly-t/pg-promise) will do. cockroach sql
-is good for performing configuration or management tasks, but when developing an application like this sample app, you
-probably won't need to use it much.
+[cockroach sql](https://www.cockroachlabs.com/docs/stable/cockroach-sql.html). I've found this to be super helpful for
+initial setup of tables and having a quick look at whats in the database. I haven't really been using it to **query**
+specific data or **mutate** data stored within the database... that's the bit
+[pg-promise](https://github.com/vitaly-t/pg-promise) will do through the app interface.
 
 If you don't have
 [cockroach sql](https://www.cockroachlabs.com/docs/stable/cockroach-sql-binary.html#install-cockroach-sql) installed, go
@@ -79,8 +78,8 @@ ahead and do that now.
 
 ## Getting Started With CockroachDB
 
-Before you do anything you'll need a free CockroachDB account, go a head and
-[sign up](https://cockroachlabs.cloud/signup) before continuing.
+Before you do anything you'll need a free CockroachDB account, [sign up](https://cockroachlabs.cloud/signup) before
+continuing.
 
 ### Create a CockroachDB Cluster
 
