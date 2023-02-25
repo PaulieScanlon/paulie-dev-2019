@@ -47,8 +47,8 @@ the past.
 
 Using a framework like [Next.js](https://nextjs.org/) _(there are many others)_ you can develop your frontend code
 alongside your server-side code in the same project. In cases when using
-[getServerSideProps](https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props), you'll not only
-develop your server-side code in the same project, you'll develop your server-side code in the same _page_ as your
+[Next.js getServerSideProps](https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props), you'll not
+only develop your server-side code in the same project, you'll develop your server-side code in the same _page_ as your
 frontend code! Both together can be deployed to a single CDN like Vercel.
 
 Because of this shift I've written this guide to help you get started with
@@ -57,11 +57,11 @@ Because of this shift I've written this guide to help you get started with
 ### SQL / pg-promise
 
 I'm new to SQL. I've somehow managed to avoid learning SQL for almost 20 years but, its now time for me to knuckle down
-and learn it, and for that reason I've chosen [pg-promise](https://github.com/vitaly-t/pg-promise).
+and learn it. For this reason I've chosen to use [pg-promise](https://github.com/vitaly-t/pg-promise).
 
 In my opinion, pg-promise is the closest you can get to writing SQL in a node.js environment and again, just an opinion,
 I find it less confusing to look at than [node-postgres](https://node-postgres.com/). There are JavaScript abstractions
-like [Prisma](https://www.prisma.io/) which will allow you to interact with a SQL database from a node.js environment
+like [Prisma](https://www.prisma.io/) which will allow you to interact with an SQL database from a node.js environment
 but, by using Prisma you'll be writing JavaScript and learning Prisma. I wanted to **write SQL** and **learn SQL**.
 
 ### cockroach sql
@@ -72,7 +72,7 @@ initial setup of tables and having a quick look at whats in the database. I have
 specific data or **mutate** data stored within the database... that's the bit
 [pg-promise](https://github.com/vitaly-t/pg-promise) will do through the app interface.
 
-If you don't have
+I'll be using cockroach sql later in this guide so if you don't have
 [cockroach sql](https://www.cockroachlabs.com/docs/stable/cockroach-sql-binary.html#install-cockroach-sql) installed, go
 ahead and do that now.
 
@@ -390,8 +390,9 @@ I borrowed this setup from an issue on the `pg-promise` repo. You can see the is
 
 The issue relates to using `pg-promise` in instances where the connection might be invoked more than once. In this
 sample app you'll be using the `getDB` function in both a server-side request using `getServerSideProps` and from within
-a Serverless Function (API Routes). You only need to create the `pg-promise` database once so the following singleton
-pattern prevents duplicates from being created when `getDB` is called using the different methods in this sample app.
+a Serverless Function (API Routes). You only need to create the `pg-promise` database instance once. The following
+singleton pattern prevents duplicates from being created when `getDB` is called using the different methods in this
+sample app.
 
 Create a directory at the root of you project called `db`. Inside this directory create a file called `index.js` and add
 the following code snippet.
@@ -508,12 +509,17 @@ Look for `getServerSideProps`. This function runs on the server and can be used 
 `require` and the destructured statement for `db` are the pg-promise you setup earlier. Using `db.` you can now use the
 [pg-promise methods](https://github.com/vitaly-t/pg-promise#methods) to communicate with the database.
 
-In this page `db.any` is used within a try / catch statemetn to run a common SQL query, E.g `SELECT * from locations`
-which, as you might imagine selects everything from the table called locations.
+In this page `db.any` is used within a try / catch statement to run a common SQL query, E.g.
+
+```sql
+SELECT * from locations
+```
+
+This, as you might imagine, selects everything from the table called locations.
 
 - If the response is successful it's returned by `getServerSideProps` to the page and made available via the `data`
   prop.
-- If the response is unsuccessful an error is returned by `getServerSideProps` and is available to the page via the
+- If the response is unsuccessful, an error is returned by `getServerSideProps` and is available to the page via the
   `error` prop.
 
 ☝️ If there is an `error` I return early and display the error using an HTML `<pre>` element.
@@ -581,7 +587,6 @@ Once again there's quite a lot going on in here so I'll talk you through it.
 
 As before, you'll need to `require` the `getDB` function along with two of the dependencies installed earlier.
 `requestIp` and `geoip` are used to convert the IP address from the `req` object into a real geographical location.
-Depending on where you are in the world this will be different.
 
 ☝️ However, when running this on `http://localhost:3000/` there won't be an IP address so there's x3 ternary conditions
 to catch `null` values. When running this locally the function will return details for Greenland.
@@ -593,9 +598,9 @@ These geographical locations and the date are then inserted into the database us
 itself is standard SQL syntax. The only key part I'd like to ensure you notice is where it says `RETURNING id`. This
 ensures the response actually returns the `id` after the row has been inserted into the table.
 
-Following on form that I'm using `res.status(200)` chained with `.json({})` to send the `id` and other properties that
-the function created back to the client. You probably won't need these, but if you want to use a `console.log()` in the
-`fetch` request, which I'll explain next you'd see what's been inserted into the database table.
+Following on from that I'm using `res.status(200)` chained with `.json({})` to send the `id` and the other values
+created by the function back to the client. You probably won't need these, but if you want to use a `console.log()` in
+the `fetch` request, (which I'll explain next), you'd see what's been inserted into the database table.
 
 ### fetch - Insert
 
@@ -661,7 +666,7 @@ refresh the page after the response comes back.
 
 ### Serverless Function - Delete
 
-The delete function is similar to the insert function but a little simpler, it is also made up of to separate.
+The delete function is similar to the insert function but a little simpler, it is also made up of to separate parts.
 
 - Serverless Function created in `/pages/api/`.
 - Client side `fetch` used inside the page.
@@ -719,15 +724,14 @@ const Page = ({ data, error }) => {
 +          id: id,
 +        }),
 +      });
-+
+
 +      const json = await response.json();
 +      console.log(json);
-+
+
 +      if (!response.ok) {
 +        throw new Error(json.message);
 +      }
-+
-+      refreshData();
+
 +    } catch (error) {
 +      console.error(error.message);
 +    }
@@ -781,7 +785,7 @@ export default Page;
 
 ### Final Touches
 
-As mentioned earlier when you insert or delete the page doesn't update to show the data. Only when you manually refresh
+As mentioned earlier when you insert or delete, the page doesn't update to show the data. Only when you manually refresh
 will you notice a difference. Let's fix that!
 
 The reason the page doesn't update is because it's Server-side rendered and doesn't know about any updates that have
@@ -872,11 +876,11 @@ export default Page;
 
 I'm not going to walk you through this as its been really well documented in the
 [Vercel docs](https://vercel.com/docs/frameworks/nextjs). All I'd like to mention is this. Earlier I mentioned creating
-two different Clusters, one for development, one for Production. Use the production connection string when adding the
-environment variable to you Vercel Project.
+two different Clusters, one for development (**dev-**), one for production (**prod-**). Use the production connection
+string when adding the environment variable to you Vercel Project.
 
 ## Finished
 
 This has been quite a journey and I hope you've ended up with something not to dissimilar to my sample app. If you spot
-any mistakes or think there are areas that could be expanded on please feel free to leave a comment or come and find me
-on Twitter: [@PaulieScanlon](https://twitter.com/PaulieScanlon).
+any mistakes, or think there are areas that could be expanded on, please feel free to leave a comment or come and find
+me on Twitter: [@PaulieScanlon](https://twitter.com/PaulieScanlon).
