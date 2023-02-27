@@ -4,7 +4,7 @@ title: Getting Started With CockroachDB, pg-promise and Next.js
 tags: [Next.js, React, pg-promise, CockroachDB]
 date: 2023-02-24
 author: Paul Scanlon
-featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1677258978/paulie.dev/2023/02/open-graph-image_xuxbnp.jpg
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1677502114/paulie.dev/2023/02/open-graph-image_qkecxd.jpg
 embeddedImages:
   - https://res.cloudinary.com/www-paulie-dev/image/upload/v1677231525/paulie.dev/2023/02/1-empty-cluster_yk1xuq.jpg
   - https://res.cloudinary.com/www-paulie-dev/image/upload/v1677231525/paulie.dev/2023/02/2-choose-serverless_soccaf.jpg
@@ -56,13 +56,12 @@ Because of this shift I've written this guide to help you get started with
 
 ### SQL / pg-promise
 
-I'm new to SQL. I've somehow managed to avoid learning SQL for almost 20 years but, its now time for me to knuckle down
-and learn it. For this reason I've chosen to use [pg-promise](https://github.com/vitaly-t/pg-promise).
+In my opinion, [node-postgres](https://node-postgres.com/) and [pg-promise](https://github.com/vitaly-t/pg-promise) are
+the closest you can get to writing SQL in a node.js environment. In this post I'll be using pg-promise.
 
-In my opinion, pg-promise is the closest you can get to writing SQL in a node.js environment and again, just an opinion,
-I find it less confusing to look at than [node-postgres](https://node-postgres.com/). There are JavaScript abstractions
-like [Prisma](https://www.prisma.io/) which will allow you to interact with an SQL database from a node.js environment
-but, by using Prisma you'll be writing JavaScript and learning Prisma. I wanted to **write SQL** and **learn SQL**.
+There are JavaScript abstractions like [Prisma](https://www.prisma.io/) which will allow you to interact with an SQL
+database from a node.js environment but, by using Prisma you'll be writing Prisma specific JavaScript syntax rather than
+SQL.
 
 ### cockroach sql
 
@@ -389,10 +388,10 @@ I borrowed this setup from an issue on the `pg-promise` repo. You can see the is
 [Question re: WARNING: Creating a duplicate database object for the same connection #175](https://github.com/vitaly-t/pg-promise/issues/175)
 
 The issue relates to using `pg-promise` in instances where the connection might be invoked more than once. In this
-sample app you'll be using the `getDB` function in both a server-side request using `getServerSideProps` and from within
-a Serverless Function (API Routes). You only need to create the `pg-promise` database instance once. The following
-singleton pattern prevents duplicates from being created when `getDB` is called using the different methods in this
-sample app.
+sample app you'll be using the `client` function in both a server-side request using `getServerSideProps` and from
+within a Serverless Function (API Routes). You only need to create the `pg-promise` database instance once. The
+following singleton pattern prevents duplicates from being created when `client` is called using the different methods
+in this sample app.
 
 Create a directory at the root of you project called `db`. Inside this directory create a file called `index.js` and add
 the following code snippet.
@@ -414,14 +413,7 @@ const createSingleton = (name, create) => {
   return scope;
 };
 
-export const getDB = () => {
-  return createSingleton('my-app-db-space', () => {
-    return {
-      db: pgp(process.env.DATABASE_URL),
-      pgp
-    };
-  });
-};
+export const client = () => createSingleton('my-app-db-space', () => pgp(process.env.DATABASE_URL));
 ```
 
 ### Create A Page
@@ -468,8 +460,8 @@ const Page = ({ data, error }) => {
 };
 
 export const getServerSideProps = async () => {
-  const { getDB } = require('../db');
-  const { db } = getDB();
+  const { client } = require('../db');
+  const db = client();
 
   try {
     const response = await db.any('SELECT * from locations');
@@ -481,7 +473,7 @@ export const getServerSideProps = async () => {
             const { id, date, city, lat, lng, runtime } = res;
             return {
               id,
-              date: String(new Date(date * 1000)),
+              date: JSON.parse(JSON.stringify(date)),
               city,
               lat,
               lng,
@@ -540,12 +532,12 @@ new file called `insert-location.js` and add the following code snippet.
 ```javascript
 // pages/api/insert-location.js
 
-const { getDB } = require('../../db');
+const { client } = require('../../db');
 const requestIp = require('request-ip');
 const geoip = require('fast-geoip');
 
 export default async function handler(req, res) {
-  const { db } = getDB();
+  const db = client();
   const { date } = JSON.parse(req.body);
 
   try {
@@ -585,7 +577,7 @@ export default async function handler(req, res) {
 
 Once again there's quite a lot going on in here so I'll talk you through it.
 
-As before, you'll need to `require` the `getDB` function along with two of the dependencies installed earlier.
+As before, you'll need to `require` the `client` function along with two of the dependencies installed earlier.
 `requestIp` and `geoip` are used to convert the IP address from the `req` object into a real geographical location.
 
 ☝️ However, when running this on `http://localhost:3000/` there won't be an IP address so there's x3 ternary conditions
@@ -677,10 +669,10 @@ following code snippet.
 ```javascript
 // pages/api/delete-location.js
 
-const { getDB } = require('../../db');
+const { client } = require('../../db');
 
 export default async function handler(req, res) {
-  const { db } = getDB();
+  const db = client();
   const { id } = JSON.parse(req.body);
 
   try {
@@ -760,7 +752,7 @@ const Page = ({ data, error }) => {
 +              <span>{id}</span> <button onClick={() => handleDelete(id)}>delete</button>
 +            </dd>
 +            <dt>Date</dt>
-+            <dd>{date}</dd>
++             <dd>{new Date(date).toDateString()}</dd>
 +            <dt>City</dt>
 +            <dd>{city}</dd>
 +            <dt>Latitude</dt>
