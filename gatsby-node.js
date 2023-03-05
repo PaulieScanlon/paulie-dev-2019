@@ -29,7 +29,7 @@ exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
         date: Date @dateformat(formatString: "MMMM DD, YYYY")
         dateModified: Date @dateformat(formatString: "MMMM DD, YYYY")
         author: String
-        show: String
+        category: String
         role: String
         publication: String
         status: String

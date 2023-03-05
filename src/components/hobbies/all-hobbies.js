@@ -45,7 +45,15 @@ const AllHobbies = () => {
         } = node;
 
         return (
-          <HobbyCard key={index} link={slug} title={title} logo={logo} category={category} date={date} excerpt={excerpt} />
+          <HobbyCard
+            key={index}
+            link={slug}
+            title={title}
+            logo={logo}
+            category={category}
+            date={date}
+            excerpt={excerpt}
+          />
         );
       })}
     </ul>
