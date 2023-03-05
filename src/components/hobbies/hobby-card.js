@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import DateStamp from '../date-stamp';
 
-const HobbyCard = ({ link, title, logo, show, date, excerpt }) => {
+const HobbyCard = ({ link, title, logo, category, date, excerpt }) => {
   return (
     <li className="m-0 p-0 rounded border border-outline bg-surface transition-all shadow-lg hover:shadow-secondary/10 hover:-translate-y-2 ease-in-out duration-500">
       <Link to={link} className="block p-4 cursor-pointer no-underline hover:text-secondary ">
@@ -14,7 +14,7 @@ const HobbyCard = ({ link, title, logo, show, date, excerpt }) => {
           <div className="flex items-center gap-2">
             <GatsbyImage alt={title} image={getImage(logo)} />
             <strong className="flex text-sm">
-              {show} <span className="hidden sm:block ml-2 ">&bull;</span>
+              {category} <span className="hidden sm:block ml-2 ">&bull;</span>
             </strong>
           </div>
           <DateStamp date={date} />
@@ -33,8 +33,8 @@ HobbyCard.propTypes = {
   title: PropTypes.string.isRequired,
   /** Gatsby Image Data */
   logo: PropTypes.any.isRequired,
-  /** The show to display */
-  show: PropTypes.string.isRequired,
+  /** The category to display */
+  category: PropTypes.string.isRequired,
   /** The date to display */
   date: PropTypes.string.isRequired,
   /** The excerpt to display */

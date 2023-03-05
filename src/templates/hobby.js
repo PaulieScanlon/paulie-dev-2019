@@ -15,7 +15,7 @@ const Page = ({
     mdx: {
       fields: { slug },
       excerpt,
-      frontmatter: { type, title, date, role, show, tags },
+      frontmatter: { type, title, date, role, category, tags },
       body
     }
   }
@@ -25,7 +25,7 @@ const Page = ({
       <div className="grid lg:grid-cols-1fr-auto">
         <DateStamp date={date} />
         <small className="leading-6 font-semibold text-secondary">
-          Role &bull; {role} &#124; {show}
+          Role &bull; {role} &#124; {category}
         </small>
       </div>
       <h1 className="my-12 text-3xl sm:text-5xl">{title}</h1>
@@ -61,7 +61,7 @@ export const query = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         role
-        show
+        category
         tags
       }
       body

@@ -20,7 +20,7 @@ const AllHobbies = () => {
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
-            show
+            category
           }
           logo {
             childImageSharp {
@@ -38,14 +38,14 @@ const AllHobbies = () => {
         const {
           fields: { slug },
           excerpt,
-          frontmatter: { title, date, show },
+          frontmatter: { title, date, category },
           logo: {
             childImageSharp: { logo }
           }
         } = node;
 
         return (
-          <HobbyCard key={index} link={slug} title={title} logo={logo} show={show} date={date} excerpt={excerpt} />
+          <HobbyCard key={index} link={slug} title={title} logo={logo} category={category} date={date} excerpt={excerpt} />
         );
       })}
     </ul>
