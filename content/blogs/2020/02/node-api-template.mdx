@@ -1,0 +1,59 @@
+---
+type: blog
+title: Node.js Restful API template with TypeScript, Fastify and MongoDB
+tags: [Node.js, TypeScript, Fastify, MongoDB]
+date: 2020-02-20
+author: Georgi Marokov
+featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1678046777/Blogs/fav-vscode-extensions/extensions-popular_bl3ktt.png
+embeddedImages:
+  - https://res.cloudinary.com/marokovdevapp/image/upload/v1678046262/Blogs/station-on-linux/Screenshot-from-2018-10-16-10-01-24-1024x576_gsslmf.png
+---
+
+# Why
+
+Have you recently started a new Node.js API project? Did you use some template or started the project from scratch? I
+was asking the same questions myself and I was looking for minimal boilerplate for a while. There were so many options
+that it was hard to pick one. Most of them are using Express.js, others are using ES5 or lack test setup. So I decided
+to spin one on my own and reuse it in the future. Here is
+[the repo at GitHub](https://github.com/gmarokov/node-fastify-mongo-api).
+
+# How
+
+My setup has the following characteristics:
+
+## API
+
+- Node version 10 or later
+- TypeScript for obvious reasons
+- Fastify for its asynchronous nature and being faster than Express or Restify
+- Nodemon in development for watching for changes and restart the server
+
+## Data
+
+- MongoDB with Mongoose
+- Docker for MongoDB service
+
+## Tests
+
+- Jest for being the de facto in Node testing
+- In memory Mongod server for easily mock the DB
+- Coverall for coverage collector after Jest report is generated
+
+## Code formatting and static analysis
+
+- ESLint config
+- Prettier config attached to the linter
+- Editor config
+
+## Documentation
+
+- Swagger UI for API documentation
+- Postman collections attached from testing the endpoints
+
+## CI
+
+- Continuous integration in Travis CI. Steps:
+
+1. Install dependencies
+2. Run tests
+3. Collect coverage and pass it to Coverall
