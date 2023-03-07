@@ -30,11 +30,11 @@ look.
   [https://github.com/PaulieScanlon/cockroachdb-custom-marketo-forms-with-react](https://github.com/PaulieScanlon/cockroachdb-custom-marketo-forms-with-react)
 
 There is however a problem. At [Cockroach Labs](https://www.cockroachlabs.com/) we use
-[Marketo](https://www.marketo.com/) for data capture and lead management, and Marketo forms aren't the easiest to work
-with. Marketo typically requires you load scripts that inject styled forms directly into the
-[DOM](https://en.wikipedia.org/wiki/Document_Object_Model), and as you may already know, directly mutating the DOM when
-using React is an anti-pattern, not to mention then needing to _"hack"_ styles over the top of the injected styles to
-ensure your forms look and feel like part of the surrounding site.
+[Marketo](https://business.adobe.com/products/marketo/adobe-marketo.html) for data capture and lead management, and
+Marketo forms aren't the easiest to work with. Marketo typically requires you load scripts that inject styled forms
+directly into the [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), and as you may already know, directly
+mutating the DOM when using React is an anti-pattern, not to mention then needing to _"hack"_ styles over the top of the
+injected styles to ensure your forms look and feel like part of the surrounding site.
 
 In this post I'd like to explain one way I've implemented Marketo and you'll see from the demo site that the forms, as
 promised, are styled the way I want them.
