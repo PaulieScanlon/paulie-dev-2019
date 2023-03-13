@@ -15,7 +15,7 @@ const Header = () => {
               <div className="py-4 mx-4 lg:px-8 lg:mx-0">
                 <div className="relative flex items-center">
                   <Link className="flex items-center" to="/">
-                    <span className="sr-only">Paul Scanlon's Site</span>
+                    <span className="sr-only">Georgi Marokov's Site</span>
                     <Logo />
                   </Link>
                   <div className="relative flex lg:hidden items-center ml-auto">

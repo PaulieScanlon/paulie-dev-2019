@@ -1,9 +1,5 @@
 module.exports = async function () {
   try {
-    // const response = await fetch(
-    //   `https://webmention.io/api/mentions.jf2?domain=paulie.dev&token=${process.env.WEBMENTION_API_KEY}`
-    // );
-
     const response = await fetch(`https://webmention.io/api/mentions?token=${process.env.WEBMENTION_API_KEY}`);
 
     if (!response.status === 200) {

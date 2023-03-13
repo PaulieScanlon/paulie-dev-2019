@@ -8,20 +8,20 @@ const GenericAside = () => {
     <div className="grid gap-4 rounded border border-outline bg-surface/50 px-4 sm:px-6 py-6">
       <StaticImage
         alt="Introducing Gatsby 4"
-        src="../../static/images/aside-paul.png"
+        src="../../static/images/aside-georgi.png"
         className="block rounded-full border-2 border-white h-16 w-16 m-0 mx-auto"
       />
       <div className="mb-4">
-        <h5 className="mb-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Paul Scanlon</h5>
+        <h5 className="mb-0 text-base text-center leading-6 font-semibold uppercase text-secondary">Georgi Marokov</h5>
         <p className="mb-0 text-slate-300 text-sm text-center m-0">
-          Senior Developer Evidence Engineer{' '}
-          <a href="https://twitter.com/CockroachDB" target="_blank" rel="noreferrer">
-            @CockroachDB
+          Software Engineer{' '}
+          <a href="https://twitter.com/GoModeshift" target="_blank" rel="noreferrer">
+            @Modeshift
           </a>
         </p>
       </div>
       <a
-        href="https://twitter.com/PaulieScanlon"
+        href="https://twitter.com/MarokovGeorgi"
         target="_blank"
         rel="noreferrer"
         className="flex items-center gap-4 no-underline text-sm text-center py-2 px-4 transition-all duration-300 rounded border border-outline bg-surface hover:text-white hover:bg-muted/20"

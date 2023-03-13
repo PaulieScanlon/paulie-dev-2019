@@ -17,8 +17,8 @@ module.exports = {
   // },
   trailingSlash: 'always',
   siteMetadata: {
-    name: 'Paul Scanlon',
-    description: 'Senior Software Engineer / Developer Relations',
+    name: 'Georgi Marokov',
+    description: 'Senior Software Engineer / JavaScript and .NET Ecosystem',
     keywords: [
       'React',
       'Gatsby',
@@ -38,7 +38,7 @@ module.exports = {
       'Serverless Functions'
     ],
     siteUrl: process.env.URL,
-    defaultImage: '/images/paulie-open-graph-image-2022.jpg'
+    defaultImage: '/static/images/aside-georgi.png'
   },
   plugins: [
     'gatsby-plugin-gatsby-cloud',

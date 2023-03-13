@@ -1,7 +1,7 @@
 {
-  "name": "paulie-dev-2019",
+  "name": "worldwildweb.dev",
   "version": "1.0.0",
-  "description": "Paul Scanlon's Blog",
+  "description": "Georgi Marokov's Blog",
   "main": "index.js",
   "scripts": {
     "develop": "gatsby develop",
@@ -18,13 +18,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PaulieScanlon/paulie-dev-2019.git"
+    "url": "git+https://github.com/gmarokov/marokov.dev.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PaulieScanlon/paulie-dev-2019-issues"
+    "url": "https://github.com/gmarokov/marokov.dev.git"
   },
   "dependencies": {
     "@google-analytics/data": "^3.0.0",

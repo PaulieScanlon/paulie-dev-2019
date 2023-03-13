@@ -26,7 +26,7 @@ const RecentTweets = () => {
           await fetch('https://paulieapi.gatsbyjs.io/api/get-twitter-user', {
             method: 'POST',
             body: JSON.stringify({
-              username: 'PaulieScanlon'
+              username: 'MarokovGeorgi'
             })
           })
         ).json();
@@ -52,12 +52,7 @@ const RecentTweets = () => {
       isMounted.current = false;
     };
   }, []);
-
-  // if (!isLoading) {
-  // console.log(response.tweets);
-  // console.log(response.user);
-  // }
-
+  
   return (
     <div className="flex flex-col items-stretch rounded border border-outline bg-surface p-4">
       <div className="lg:h-16 mb-4">

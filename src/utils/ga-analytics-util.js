@@ -1,9 +1,9 @@
 const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 
 const analyticsDataClient = new BetaAnalyticsDataClient({
-  projectId: 'paulie-dev',
+  projectId: 'worldwilwdweb-dev',
   credentials: {
-    client_email: 'google-analytics@paulie-dev.iam.gserviceaccount.com',
+    client_email: 'google-analytics@worldwilwdweb-dev.iam.gserviceaccount.com',
     private_key: process.env.GOOGLE_APPLICATION_CREDENTIALS.replace(/\\n/gm, '\n')
   }
 });

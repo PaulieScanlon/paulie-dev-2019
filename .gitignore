@@ -83,7 +83,6 @@ public
 .env.production
 refs.md
 .DS_Store
-paulie-dev-541568ac1566.json
 
 
 # vuepress build output

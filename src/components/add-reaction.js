@@ -47,12 +47,7 @@ const AddReaction = ({ title, slug }) => {
       });
 
       const data = await response.json();
-
       setReactions(data.reactions);
-      try {
-      } catch (error) {
-        console.error(error);
-      }
     };
     getReactions();
   }, [slug]);

@@ -59,7 +59,7 @@ const Page = ({
             <TableOfContents slug={slug} items={toc} />
           </div>
         ) : null}
-        <WebmentionAside target={`https://paulie.dev${slug}`} />
+        <WebmentionAside target={`https://worldwildweb.dev${slug}`} />
       </AsideElement>
     </Fragment>
   );
