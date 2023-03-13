@@ -52,7 +52,7 @@ const RecentTweets = () => {
       isMounted.current = false;
     };
   }, []);
-  
+
   return (
     <div className="flex flex-col items-stretch rounded border border-outline bg-surface p-4">
       <div className="lg:h-16 mb-4">
