@@ -1,0 +1,60 @@
+---
+type: demo
+title: Edge
+tags: [Next.js, React, three.js, react-three-fiber, React Query, Tailwind, NextAuth, pg-promise, CockroachDB]
+date: 2023-03-19
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1679390489/paulie.dev/2023/03/edge-demo-featured-image.jpg
+embeddedImages:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1679405341/paulie.dev/2023/03/edge-demo-full-screen_qd4o9u.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1679413308/paulie.dev/2023/03/edge-demo-serverless_nvhedb.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1679413308/paulie.dev/2023/03/edge-demo-lambda_ptykp6.jpg
+---
+
+## Project Overview
+
+In this demo I set out to show how data transfer works between the browser, the server, and the database. You may be
+surprised to learn how far data has to travel!
+
+<MarkdownCtaLink href="https://cockroachdb-edge-locations.vercel.app/">Visit Edge</MarkdownCtaLink>
+
+The [Edge](https://cockroachdb-edge-locations.vercel.app/) actually started life as
+[My Cockroach Labs Interview App](/posts/2023/02/cockroachlabs-interview-app/) but with the upcoming launch of
+CockroachDB Multi-Region Serverless I thought I'd add a few more features to better demonstrate the advantages of a
+distributed SQL database when combined with Multi-Region application architecture.
+
+## The Distance from Data to You in Edge Computing
+
+It can be a tricky concept to grasp so I wrote about the project for The New Stack. You can read that post here:
+[The Distance from Data to You in Edge Computing](https://thenewstack.io/the-distance-from-data-to-you-in-edge-computing/).
+
+<GatsbyImage alt="Edge - full screen globe" image={props.embedded.image1} />
+
+Another nice part of this demo was investigating the limitations of Vercel Serverless Functions. This led me on to
+discovering what could be achieved by developing directly using AWS.
+
+The demo app is built using Next.js and deployed to Vercel and contains one single region Serverless Function. I also
+developed a multi-region geographically aware AWS API and deployed x3 Lambda Functions to the same regions as the
+CockroachDB multi-region databases.
+
+### Vercel Single Region Serverless Function
+
+<GatsbyImage alt="Vercel Single Region Serverless Function" image={props.embedded.image2} />
+
+### AWS Multi-Region Lambda Function
+
+<GatsbyImage alt="AWS Multi-Region Lambda Function" image={props.embedded.image3} />
+
+You can see the distances data travels by toggling between the single region Vercel Serverless Function and the
+multi-region AWS Lambda Functions — spoiler alert, distances will likely be shorter when routed through AWS.
+
+Each user's location, Serverless Function, Lambda Function and CockroachDB Database is plotted around an interactive 3D
+globe so you can explore these distance using a more familiar method.
+
+All user locations are approximate and anonymous, so go head, click submit and lemme see your
+[Edge](https://cockroachdb-edge-locations.vercel.app/)!
+
+## Further Reading
+
+- [The Distance from Data to You in Edge Computing](https://thenewstack.io/the-distance-from-data-to-you-in-edge-computing/)
+- [My Cockroach Labs Interview App](/posts/2023/02/cockroachlabs-interview-app/)
