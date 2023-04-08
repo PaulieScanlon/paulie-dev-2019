@@ -1,0 +1,93 @@
+---
+type: demo
+title: CockroachDB Cloud API
+tags: [Next.js, React, React Query, Tailwind, NextAuth, CockroachDB, CockroachDB Cloud API]
+date: 2023-04-06
+author: Paul Scanlon
+featuredImage: https://res.cloudinary.com/www-paulie-dev/image/upload/v1680892146/paulie.dev/2023/04/cloud-api-demo-open-graph-image_qr0smk.jpg
+embeddedImages:
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1680939345/paulie.dev/2023/04/cloud-api-demo-demo-application-home-screen_50_voryx3.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1680939480/paulie.dev/2023/04/cloud-api-demo-demo-application-signed-in_50_idycwi.jpg
+  - https://res.cloudinary.com/www-paulie-dev/image/upload/v1680939500/paulie.dev/2023/04/cloud-api-demo-demo-application-not-signed-in_50_of1u2k.jpg
+---
+
+## Project Overview
+
+My first task after joining [Cockroach Labs](https://www.cockroachlabs.com/product/) was to design and build something
+that demonstrates the capabilities of the new
+[CockroachDB Cloud API](https://www.cockroachlabs.com/docs/api/cloud/v1.html#get-/api/v1/cluster-versions). I read the
+docs, tested out some endpoints and my mind went immediately to, "Dashboard".
+
+<MarkdownCtaLink href="https://www.cockroachlabs.com/demos/demo-cloud-api">Visit Dashboard</MarkdownCtaLink>
+
+The snag however is, CockroachDB already has the [Cockroach Cloud Console](https://cockroachlabs.cloud/signup) which can
+be used to create new Clusters and perform a number of operational tasks. So, I needed an angle.
+
+### Problem
+
+Like most, if not all Cloud UI interfaces they cater for customer's most common needs and often require user
+authentication. User authentication typically comes in the form of "paid for seats" which means there's usually only a
+few folks who can access what might actually be some super helpful information.
+
+### Solution
+
+The solution to this is of course, make this information publicly available, **and** without authorization. By using the
+CockroachDB Cloud API you can authorize the application, rather than the user, and choose which information to surface
+publicly. Creating an app that lives on a [live URL](https://www.cockroachlabs.com/demos/demo-cloud-api) means anyone
+with the link can see what's going on with your database infrastructure, (without first needing to navigate the painful
+internal processes of requesting access).
+
+### Insight
+
+When thinking about database infrastructure it's fair to assume only the super technical would ever need to know the
+details but, when you introduce FinOps (folks in charge of spend budgets etc) it becomes crystal clear that the cost of
+infrastructure would absolutely be something that decision makers would want to be aware of!
+
+## The Idea
+
+Using Next.js I securely make server-side requests to the CockroachDB Cloud API, retrieve the required information then,
+display it in user friendly way. I also mutate one of the endpoints and add up the total spend for each cluster to
+provide a quick way for FinOps to determine monthly costs.
+
+<GatsbyImage alt="Dashboard" image={props.embedded.image1} />
+
+... but wait there's more.
+
+Using [NextAuth](https://next-auth.js.org/) I created what I'm calling _conditional authorization_. NextAuth is free
+(Open Source) and can be hooked up via GitHub's oAuth apps (also free) and can be used to determine levels of access
+based on a users email address.
+
+### Admin Access
+
+In this demo app I gave myself and Rob the role of Admin. With Admin access to the app we can perform operational
+updates to the infrastructure right there in the same UI. An Admin user could be given control to increase or decrease
+spend limits or, the ability to create or delete databases.
+
+<GatsbyImage alt="Admin Access" image={props.embedded.image2} />
+
+### User Access
+
+A non Admin user isn't permitted the same level of access but can still see all this information, they just can't change
+it.
+
+<GatsbyImage alt="User Access" image={props.embedded.image3} />
+
+## Video Walk through
+
+Here's a short video by my colleague [Rob Reid](https://twitter.com/robreid_io) that explains a little more about how
+this works.
+
+<YouTube youTubeId="5EDqH-Gri0I" />
+
+<Tweet tweetLink="cockroachdb/status/1643964578483646465" />
+
+## Blog
+
+Or, if you'd prefer, here's a full write up about the project:
+[What is the CockroachDB Cloud API and why should you use It?](https://www.cockroachlabs.com/blog/what-is-the-cockroachdb-cloud-api/)
+
+## Further Reading
+
+- [What is the CockroachDB Cloud API and why should you use It?](https://www.cockroachlabs.com/blog/what-is-the-cockroachdb-cloud-api/)
+- [CockroachDB Cloud API Documentation](https://www.cockroachlabs.com/docs/api/cloud/v1.html#get-/api/v1/cluster-versions)
+- [Cockroach Labs](https://www.cockroachlabs.com/)
