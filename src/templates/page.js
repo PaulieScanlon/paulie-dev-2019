@@ -5,6 +5,7 @@ import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
 import Seo from '../components/seo';
 import GenericAside from '../components/generic-aside';
+import LocationAside from '../components/location-aside';
 
 const Page = ({
   data: {
@@ -20,7 +21,10 @@ const Page = ({
       <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
       <MdxParser>{body}</MdxParser>
       <AsideElement>
-        <GenericAside />
+        <div className="flex flex-col gap-4">
+          <GenericAside />
+          <LocationAside />
+        </div>
       </AsideElement>
     </Fragment>
   );

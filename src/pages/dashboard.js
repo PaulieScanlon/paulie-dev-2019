@@ -5,6 +5,7 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import Seo from '../components/seo';
 import AsideElement from '../components/aside-element';
 import GenericAside from '../components/generic-aside';
+import LocationAside from '../components/location-aside';
 
 import Accordion from '../components/accordion';
 import AllDaysChart from '../components/all-days-chart';
@@ -246,7 +247,10 @@ const Page = ({
       </div>
 
       <AsideElement>
-        <GenericAside />
+        <div className="flex flex-col gap-4">
+          <GenericAside />
+          <LocationAside />
+        </div>
       </AsideElement>
     </Fragment>
   );

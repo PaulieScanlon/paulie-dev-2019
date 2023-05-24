@@ -26,7 +26,7 @@ const Loading = ({ className }) => {
 };
 
 Loading.defaultProps = {
-  className: 'fill-salmon'
+  className: 'fill-muted'
 };
 
 Loading.propTypes = {

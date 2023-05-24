@@ -64,7 +64,7 @@ const RecentGitHubUserEvent = () => {
       <div className="lg:h-16 mb-4">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Loading className="fill-salmon" />
+            <Loading />
           </div>
         ) : (
           <div className="grid sm:grid-cols-auto-1fr gap-2 justify-center text-center sm:text-left items-center">
@@ -105,7 +105,7 @@ const RecentGitHubUserEvent = () => {
       <div className="rounded border border-outline bg-surface p-2 sm:p-4 bg-background h-96 overflow-y-hidden">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Loading className="fill-salmon" />
+            <Loading />
           </div>
         ) : (
           <ul className="list-none m-0 p-0 overflow-y-auto overflow-x-hidden h-[355px]">
