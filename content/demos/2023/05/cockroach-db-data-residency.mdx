@@ -16,19 +16,19 @@ embeddedImages:
 
 This is to be my second project since joining [Cockroach Labs](https://www.cockroachlabs.com/product/) but the first
 project that fully aligned with a product launch and was even featured on the
-[product launch landing page](https://www.cockroachlabs.com/whatsnew/).
+[product launch page](https://www.cockroachlabs.com/whatsnew/).
 
 <MarkdownCtaLink href="https://www.cockroachlabs.com/demos/demo-data-residency/">
   Visit Data Residency Demo
 </MarkdownCtaLink>
 
-This project was hard! and required my entire skill set. I came up with an idea and pitched the concept, designed the
-whole application, built the front-end and developed a multi-region Node.js Lambda API and deployed it to AWS. Then
-wrote about the poroject for the Cockroach Labs blog:
+This project was hard! and required my entire skill set. I came up with an idea, scamped it up and pitched it to the PMM
+team. I then designed the whole application, built the front-end **and** developed a multi-region Node.js Lambda API
+which was deployed using AWS. And finally, I wrote about the project for the Cockroach Labs blog:
 [The Art of Data Residency and Application Architecture](https://www.cockroachlabs.com/blog/multi-region-serverless-data-residency/).
 
-I didn't do this alone though. [Rob Reid](https://twitter.com/robreid_io) helped with the CockroachDB config and with
-fleshing out the idea to test it was technically possible. Thanks Rob, it was great working with you!
+I didn't do this alone though, [Rob Reid](https://twitter.com/robreid_io) helped with the CockroachDB config and with
+fleshing out the idea to check it was technically possible. Thanks Rob, it was great working with you!
 
 <GatsbyImage alt="Scamps" image={props.embedded.image1} />
 
@@ -38,29 +38,29 @@ I wrote about this before on The New Stack:
 [The Distance from Data to You in Edge Computing](https://thenewstack.io/the-distance-from-data-to-you-in-edge-computing/)
 but the _short(er)_ version is as follows:
 
-When an end user logs in, or uses an application to perform a task, the data has to be requested or posted to and from a
+When an end user logs in, or uses an application to perform a task, the data has to be transferred to and from a
 database.
 
-The distance the data travels contributes to the time it takes for the transfer. The greater the distance, the longer
-the end user will likely see a "loading" state. But wait, there's more...
+The distance the data travels contributes to the time it takes for the transfer to complete. The greater the distance,
+the longer the end user will likely see a "loading" state. But wait, there's more...
 
 <GatsbyImage alt="Single region diagram" image={props.embedded.image2} />
 
 When end users request or posts data, they're not directly interacting with the database (because it's not secure),
 these requests are instead, routed via a server (which is secure). The location of the server in relation to the
-database and the end user all contributes to the total distance traveled. Get this architecture right and you've got a
-very snappy application, get this wrong and, well, end users won't like it.
+database and the end user all contributes to the total distance traveled. Get this architecture right and you've got an
+application that feels snappy, get this wrong and you've got end users that aren't happy.
 
 ### Solution
 
-The solution is to shorten the distance between end user, server and database. Or to put it another way. Multi-region
-applicaton architecture.
+The solution to this problem is to shorten the distance between end user, server and database. Or to put it another way.
+Multi-region application architecture.
 
 <GatsbyImage alt="Multi-region diagram" image={props.embedded.image3} />
 
-In this launch campaign CockroachDB
+In this launch CockroachDB
 [released multi-region serverless](https://www.cockroachlabs.com/blog/cockroachdb-23-1-release/) and, (if you know what
-you're doing), is super simple to setup (~10 seconds) and just as easy to configure (~10 minutes) but unfortunately, as
+you're doing), its super simple to setup (~10 seconds) and just as easy to configure (~10 minutes) but unfortunately, as
 I mentioned above, the database is only **one** part of a **two** part puzzle. To create a truly multi-region
 application, developers need to configure multi-region servers, this is nowhere near as easy.
 
@@ -73,12 +73,13 @@ completely understood.
 ## The Idea
 
 To demonstrate how both a multi-region server and database setup can work together I had to build the real thing. There
-are a few concepts that are demonstrated in this app.
+are a few concepts that are demonstrated in the [Silo](https://www.cockroachlabs.com/demos/demo-data-residency/)
+application.
 
 The first requirement was a general awareness of multi-region serverless. To achieve this I wanted to build an
-application where users could interact and create something. The hope being they share and thus help spread the word. I
+application where users could interact and create something. The hope being they share and thus, help spread the word. I
 chose Art. Using the [Silo](https://www.cockroachlabs.com/demos/demo-data-residency/) application users can create and
-save their own unique artwork to share... but there's a catch.
+save their own unique artwork to share... but there's a catch, i'll explain that in a moment.
 
 <GatsbyImage alt="Multi-region diagram" image={props.embedded.image4} />
 
@@ -88,20 +89,24 @@ describe the general approach using AWS.
 The third requirement was to demonstrate one of the benefits of a multi-region setup. We chose to focus on Data
 Residency. This configuration, or topology refers to a method by which data can be pinned to any one of the regions
 where the database has been deployed. This has two main benefits. The data is stored closer to the server and the user,
-resulting in faster data transfer and it can also be used to domicile data.
+resulting in faster data transfer and it can also be used to domicile data preventing it from leaking over to regions
+where it shouldn't reside.
 
-... and here's the catch. when users create artwork using the app, artwork created using US imagery and colors from the
-US flag are saved in the US. Artwork that is created using EU imagery and colors from European flags is saved in Europe.
+... and here's the catch.
+
+When users create artwork using the app, artwork created using US imagery and colors from the US flag are saved in the
+US. Artwork that is created using EU imagery and colors from European flags is saved in Europe.
+
 Users of [Silo](https://www.cockroachlabs.com/demos/demo-data-residency/) can see both when they're creating the artwork
 but when they [preview](https://www.cockroachlabs.com/demos/demo-data-residency/preview/1465706/) their artwork or visit
 the [gallery](https://www.cockroachlabs.com/demos/demo-data-residency/gallery/) they'll only see data that has been
-stored in their "local" region. This is what I've been reffering to as:
+stored in their "local" region. This is what I've been referring to as:
 [The Art of Data Residency and Application Architecture](https://www.cockroachlabs.com/blog/multi-region-serverless-data-residency/).
 
 ## Video Walk through
 
 Here's a short video by [Rob Reid](https://twitter.com/robreid_io) that explains a little more about how the app works,
-and how we route requests via an AWS Route 53 Hosted Zone.
+and how we used CockroachDB regional-by-row topology and route requests via an AWS Route 53 Hosted Zone.
 
 <YouTube youTubeId="a7PbyoOAAAk" />
 
