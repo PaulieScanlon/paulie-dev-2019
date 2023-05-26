@@ -8,7 +8,7 @@ module.exports = async function () {
 
   try {
     const response = await client.query(
-      q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 1000 })
+      q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 2000 })
     );
 
     const result = response.data.map(([ref, slug, reaction, date]) => ({
@@ -18,7 +18,7 @@ module.exports = async function () {
       date
     }));
 
-    const format = (array) => {
+    const format = (result) => {
       return result
         .filter((item) => {
           if (item.slug !== null) {
