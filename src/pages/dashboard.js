@@ -142,7 +142,20 @@ const Page = ({
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">Visitors By Amount</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Recent site visit counts.</p>
-          {gaAnalytics?.data ? <SiteViewChart data={gaAnalytics.data.latestPageViews} /> : null}
+          {gaAnalytics?.data ? (
+            <SiteViewChart data={gaAnalytics.data.latestPageViews} />
+          ) : (
+            <div className="bg-surface p-4 border border-outline rounded">
+              <div className="flex flex-col justify-center items-center p-4 text-center">
+                <div>
+                  <span role="img" aria-label="Firecracker" className="text-xl">
+                    🧨
+                  </span>
+                </div>
+                <small className="text-red-500 text-sm leading-tight">Google Analytics Error</small>
+              </div>
+            </div>
+          )}
           <div className="mt-2 leading-tight">
             <div className="leading-tight">
               <small className="text-slate-400 text-xs">Data from </small>
