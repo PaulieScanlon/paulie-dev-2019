@@ -8,7 +8,7 @@
 
 # Paul Scanlon
 
-## Senior Developer Evidence Engineer [@CockroachDB](https://twitter.com/CockroachDB)
+## Senior Technical Evidence Engineer [@CockroachDB](https://twitter.com/CockroachDB)
 
 You can find out more about me at [https://paulie.dev/](https://paulie.dev/)
 

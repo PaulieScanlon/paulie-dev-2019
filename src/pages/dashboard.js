@@ -15,6 +15,7 @@ import LatestReaction from '../components/latest-reaction';
 import LatestReactionDom from '../components/latest-reaction-dom';
 import ThreeScene from '../components/three-scene';
 import SiteViewChart from '../components/site-view-chart';
+import RecentGitHubUserEvent from '../components/recent-github-user-events';
 
 const Page = ({
   data: {
@@ -195,6 +196,12 @@ const Page = ({
               Fauna
             </a>
           </div>
+        </section>
+
+        <section>
+          <h2 className="m-0 text-2xl uppercase text-salmon">GitHub Activity</h2>
+          <p className="mt-0 mb-4 text-slate-300 text-base">Recent GitHub Activity.</p>
+          <RecentGitHubUserEvent />
         </section>
 
         <section>
