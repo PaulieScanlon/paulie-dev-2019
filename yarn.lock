@@ -6374,11 +6374,6 @@ gatsby-plugin-image@^3.0.0:
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
 
-gatsby-plugin-mdx-embed@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx-embed/-/gatsby-plugin-mdx-embed-1.0.0.tgz#aee5e3c7329e5ec21a9df790ddadcc5258538737"
-  integrity sha512-1lvnxkwQtrdBk0nwp+ms+HGbWS5ANxaimipOIhgFMOc4lG/hUWoSIBajiuMGbcOEsXkVyKnEjamWUqqDFgJv4A==
-
 gatsby-plugin-mdx@^3.20.0:
   version "3.20.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.20.0.tgz#0dff5bc2812fa9ed5aa4e1ecf660d9bc5bc1abfa"
@@ -8650,11 +8645,6 @@ mdurl@^1.0.0, mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
   integrity sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==
-
-mdx-embed@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/mdx-embed/-/mdx-embed-1.0.0.tgz#b1d6ae7fe8d27299769430b2ea7df280ae85c539"
-  integrity sha512-Ey2TqM7EA+EKHXUheD4me1rfxYvd633ZqoRIFv1shsfSxUQ+5776hUtPYm5g8WMZAKOkzta7cZKZ/ipUWCNoXQ==
 
 meant@^1.0.3:
   version "1.0.3"

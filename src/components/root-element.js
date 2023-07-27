@@ -21,6 +21,7 @@ const RootElement = ({ children }) => {
           gtag('config', '${process.env.GATSBY_GA_MEASUREMENT_ID}', { send_page_view: false })`
         }}
       />
+      <Script src={`https://platform.twitter.com/widgets.js`} />
       {children}
     </AppProvider>
   );

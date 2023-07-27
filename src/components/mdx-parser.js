@@ -11,6 +11,8 @@ import PrismSyntaxHighlight from './prism-syntax-highlight.js';
 
 import { transformImages } from '../utils/transform-images';
 import { stripLeadingSlash } from '../utils/strip-leading-slash';
+import Tweet from '../components/tweet';
+import YouTube from '../components/youtube';
 
 const components = {
   a: ({ href, children }) => {
@@ -37,7 +39,9 @@ const components = {
     );
   },
   GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} className="my-16" />,
-  MarkdownCtaLink
+  MarkdownCtaLink,
+  Tweet,
+  YouTube
 };
 
 const MdxParser = ({ children, embedded }) => {
