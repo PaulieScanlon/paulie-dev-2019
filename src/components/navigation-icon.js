@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const NavigationIcon = ({ icon }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" d={icon} />
     </svg>
   );

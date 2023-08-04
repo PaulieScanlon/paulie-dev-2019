@@ -21,13 +21,13 @@ const GenericAside = () => {
         </p>
       </div>
       <a
-        href="https://twitter.com/PaulieScanlon"
+        href="https://x.com/PaulieScanlon"
         target="_blank"
         rel="noreferrer"
-        className="flex items-center gap-4 no-underline text-sm text-center py-2 px-4 transition-all duration-300 rounded border border-outline bg-surface hover:text-white hover:bg-muted/20"
+        className="flex items-center justify-center gap-4 no-underline text-sm text-center py-2 px-2 transition-all duration-300 rounded border border-outline bg-surface hover:text-white hover:bg-muted/20"
       >
-        <NavigationIcon icon="M19.3,4.2c-0.7,0.3-1.4,0.5-2.2,0.6c0.8-0.5,1.4-1.2,1.7-2.1c-0.7,0.4-1.6,0.8-2.4,0.9c-0.7-0.7-1.7-1.2-2.8-1.2c-2.1,0-3.8,1.7-3.8,3.8c0,0.3,0,0.6,0.1,0.9C6.7,7,3.9,5.4,2,3.1C1.7,3.7,1.5,4.4,1.5,5.1c0,1.3,0.7,2.5,1.7,3.2C2.5,8.2,2,8,1.4,7.8c0,0,0,0,0,0c0,1.9,1.3,3.4,3.1,3.7c-0.3,0.1-0.7,0.1-1,0.1c-0.2,0-0.5,0-0.7-0.1c0.5,1.5,1.9,2.6,3.6,2.7c-1.3,1-3,1.6-4.7,1.6c-0.3,0-0.6,0-0.9-0.1c1.7,1.1,3.7,1.7,5.9,1.7c7,0,10.9-5.8,10.9-10.9c0-0.2,0-0.3,0-0.5C18.1,5.7,18.8,5,19.3,4.2z" />
-        Follow on Twitter
+        <NavigationIcon icon="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        Follow on X
       </a>
     </div>
   );
