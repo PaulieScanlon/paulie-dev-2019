@@ -14,12 +14,16 @@ const Tweet = ({ tweetLink, theme = 'light', align = 'center' }) => {
         clearInterval(loadTweet);
         setLoading(false);
         // https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-parameter-reference
-        window.twttr.widgets.createTweet(tweetLink.split('/').pop(), document.getElementsByClassName('mdx-embed')[0], {
-          conversation: 'none',
-          theme: theme,
-          align: align,
-          dnt: true
-        });
+        window.twttr.widgets.createTweet(
+          tweetLink.split('/').pop(),
+          document.getElementsByClassName('tweet-mdx-embed')[0],
+          {
+            conversation: 'none',
+            theme: theme,
+            align: align,
+            dnt: true
+          }
+        );
       }
     }, 100);
 
@@ -27,7 +31,7 @@ const Tweet = ({ tweetLink, theme = 'light', align = 'center' }) => {
   }, [theme, align]);
 
   return (
-    <div className="mdx-embed">
+    <div className="tweet-mdx-embed my-16">
       {loading ? (
         <blockquote className="w-full text-center">
           <a href={`https://twitter.com/${tweetLink}?ref_src=twsrc%5Etfw`}>Loading</a>

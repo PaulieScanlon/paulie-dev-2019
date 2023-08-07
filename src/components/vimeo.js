@@ -3,22 +3,12 @@ import PropTypes from 'prop-types';
 
 import GeneralObserver from './general-observer';
 
-import { getPadding } from '../utils/get-padding';
-
 const Vimeo = ({ vimeoId, autoPlay = false, skipTo = { h: 0, m: 0, s: 0 } }) => {
   const { h, m, s } = skipTo;
 
   return (
     <GeneralObserver>
-      <div
-        data-testid="vimeo"
-        className="vimeo-mdx-embed"
-        style={{
-          position: 'relative',
-          width: '100%',
-          ...getPadding('16:9')
-        }}
-      >
+      <div className="relative aspect-video my-16">
         <iframe
           title={`vimeo-${vimeoId}`}
           src={`https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay}#t=${h}h${m}m${s}s`}

@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 
 import GeneralObserver from './general-observer';
 
-import { getPadding } from '../utils/get-padding';
-
 const YouTube = ({
   youTubeId,
   youTubePlaylistId,
-  aspectRatio = '16:9',
   autoPlay = false,
   skipTo = { h: 0, m: 0, s: 0 },
   noCookie = false
@@ -28,19 +25,10 @@ const YouTube = ({
 
   return (
     <GeneralObserver>
-      <div
-        className="youtube-mdx-embed"
-        style={{
-          position: 'relative',
-          width: '100%',
-          ...getPadding(aspectRatio)
-        }}
-      >
+      <div className="relative aspect-video my-16">
         <iframe
-          data-testid="youtube"
           title={`youTube-${youTubeId ? youTubeId : youTubePlaylistId}`}
           src={src}
-          frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           style={{
@@ -61,8 +49,6 @@ YouTube.propTypes = {
   youTubeId: PropTypes.string,
   /** YouTube Playlist id */
   youTubePlaylistId: PropTypes.string,
-  /** Aspect ratio of YouTube video */
-  aspectRatio: '1:1' | '16:9' | '4:3' | '3:2' | '8:5',
   /** Skip to a time in the video */
   skipTo: PropTypes.shape({
     h: PropTypes.number,
