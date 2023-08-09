@@ -8,8 +8,5 @@
 
 # Paul Scanlon
 
-## Senior Technical Evidence Engineer [@CockroachDB](https://twitter.com/CockroachDB)
-
-You can find out more about me at [https://paulie.dev/](https://paulie.dev/)
-
-Or come find me on Twitter and say hi: [@PaulieScanlon](https://twitter.com/PaulieScanlon)
+- [https://paulie.dev/](https://paulie.dev/)
+- [@PaulieScanlon](https://twitter.com/PaulieScanlon)
