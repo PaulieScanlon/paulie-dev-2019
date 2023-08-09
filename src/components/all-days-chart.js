@@ -101,7 +101,7 @@ const AllDaysChart = memo(() => {
   const barWidth = 10;
   const barGap = 3;
   const offsetY = 40;
-  const paddingX = 50;
+  const paddingX = 30;
   const paddingY = 50;
   const maxY = Math.max(...postsByDay.map((arr) => arr.data.map((data) => data.total * 1.2)).flat(1));
   const guides = [...Array(8).keys()];
