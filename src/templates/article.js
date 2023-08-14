@@ -6,7 +6,7 @@ import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
 import DateStamp from '../components/date-stamp';
 import GenericAside from '../components/generic-aside';
-import AddReaction from '../components/add-reaction';
+// import AddReaction from '../components/add-reaction';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
 // import WebmentionAside from '../components/webmention-aside';
@@ -40,7 +40,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser>{body}</MdxParser>
-      <AddReaction title={title} slug={slug} />
+      {/* <AddReaction title={title} slug={slug} /> */}
       <AsideElement>
         <GenericAside />
       </AsideElement>

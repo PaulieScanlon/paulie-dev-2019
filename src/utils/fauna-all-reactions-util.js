@@ -8,7 +8,8 @@ module.exports = async function () {
 
   try {
     const response = await client.query(
-      q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 2000 })
+      // q.Paginate(q.Match(q.Index(`all_reactions_${process.env.NODE_ENV}`)), { size: 2000 })
+      q.Paginate(q.Match(q.Index(`all_reactions_production`)), { size: 2000 })
     );
 
     const result = response.data.map(([ref, slug, reaction, date]) => ({
@@ -53,7 +54,8 @@ module.exports = async function () {
 
     return {
       message: 'All Reactions ok!',
-      data: grouped
+      data: grouped,
+      test: result
     };
   } catch (error) {
     return { message: error.message };

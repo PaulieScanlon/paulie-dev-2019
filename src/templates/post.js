@@ -5,7 +5,7 @@ import MdxParser from '../components/mdx-parser';
 import AsideElement from '../components/aside-element';
 import DateStamp from '../components/date-stamp';
 import FeaturedImageAside from '../components/featured-image-aside';
-import AddReaction from '../components/add-reaction';
+// import AddReaction from '../components/add-reaction';
 import UtterancesObserver from '../components/utterances-observer';
 import Tag from '../components/tag';
 import Seo from '../components/seo';
@@ -49,7 +49,7 @@ const Page = ({
           : null}
       </ul>
       <MdxParser embedded={embeddedImages}>{body}</MdxParser>
-      <AddReaction title={title} slug={slug} />
+      {/* <AddReaction title={title} slug={slug} /> */}
       <UtterancesObserver />
       <AsideElement>
         <FeaturedImageAside alt={title} thumbnail={thumbnail} shareText={`${title}\n ${siteUrl}${slug}`} />

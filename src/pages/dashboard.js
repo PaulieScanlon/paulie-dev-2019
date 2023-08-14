@@ -27,7 +27,7 @@ const Page = ({
   },
 
   serverData: {
-    serverResponse: { faunaAllreactions, gaAnalytics, faunaLatestReaction, webmentions }
+    serverResponse: { gaAnalytics, webmentions }
   }
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,6 +37,8 @@ const Page = ({
   }, []);
 
   // console.log(webmentions);
+
+  // console.log(JSON.stringify(all));
 
   return (
     <Fragment>
@@ -172,7 +174,7 @@ const Page = ({
           </div>
         </section>
 
-        <section>
+        {/* <section>
           {isLoaded ? (
             <LatestReaction />
           ) : (
@@ -196,7 +198,7 @@ const Page = ({
               Fauna
             </a>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">GitHub Activity</h2>
@@ -204,7 +206,7 @@ const Page = ({
           <RecentGitHubUserEvent />
         </section>
 
-        <section>
+        {/* <section>
           <h2 className="m-0 text-2xl uppercase text-salmon">All Reactions</h2>
           <p className="mt-0 mb-4 text-slate-300 text-base">Total reaction counts collected from around the site.</p>
           {faunaAllreactions?.data ? (
@@ -223,7 +225,7 @@ const Page = ({
               Fauna
             </a>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <h2 className="m-0 text-2xl uppercase text-salmon text-center">Latest Webmentions</h2>
@@ -275,24 +277,25 @@ const Page = ({
 };
 
 export async function getServerData() {
-  const faunaAllReactionsUtil = require('../utils/fauna-all-reactions-util');
+  // const faunaAllReactionsUtil = require('../utils/fauna-all-reactions-util');
   const gaAnalyticsUtil = require('../utils/ga-analytics-util');
-  const faunaLatestReactionUtil = require('../utils/fauna-latest-reaction-util');
+  // const faunaLatestReactionUtil = require('../utils/fauna-latest-reaction-util');
   const webmentionsUtil = require('../utils/webmentions-util');
 
   try {
-    const faunaAllreactions = await faunaAllReactionsUtil();
+    // const faunaAllreactions = await faunaAllReactionsUtil();
     const gaAnalytics = await gaAnalyticsUtil();
-    const faunaLatestReaction = await faunaLatestReactionUtil();
+    // const faunaLatestReaction = await faunaLatestReactionUtil();
     const webmentions = await webmentionsUtil();
 
     return {
       props: {
         serverResponse: {
-          faunaAllreactions,
+          // faunaAllreactions,
           gaAnalytics,
-          faunaLatestReaction,
+          // faunaLatestReaction,
           webmentions
+          // all: faunaAllreactions.test
         }
       }
     };
